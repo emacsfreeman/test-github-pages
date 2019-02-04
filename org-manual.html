@@ -1,0 +1,1745 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Traduction française du manuel Org</title>
+<!-- 2019-02-04 Mon 16:21 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+<meta name="author" content="Laurent Garnier">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* org mode styles on top of twbs */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-size: 18px;
+    margin-bottom: 105px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 101px;
+    background-color: #f5f5f5;
+}
+
+footer > div {
+    padding: 10px;
+}
+
+footer p {
+    margin: 0 0 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#table-of-contents {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+blockquote p {
+    font-size: 18px;
+}
+
+pre {
+    font-size: 16px;
+}
+
+.footpara {
+    display: inline-block;
+}
+
+figcaption {
+  font-size: 16px;
+  color: #666;
+  font-style: italic;
+  padding-bottom: 15px;
+}
+
+/* from twbs docs */
+
+.bs-docs-sidebar.affix {
+    position: static;
+}
+@media (min-width: 768px) {
+    .bs-docs-sidebar {
+        padding-left: 20px;
+    }
+}
+
+/* All levels of nav */
+.bs-docs-sidebar .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+}
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li > a:focus {
+    padding-left: 19px;
+    color: #A1283B;
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 1px solid #A1283B;
+}
+.bs-docs-sidebar .nav > .active > a,
+.bs-docs-sidebar .nav > .active:hover > a,
+.bs-docs-sidebar .nav > .active:focus > a {
+    padding-left: 18px;
+    font-weight: bold;
+    color: #A1283B;
+    background-color: transparent;
+    border-left: 2px solid #A1283B;
+}
+
+/* Nav: second level (shown on .active) */
+.bs-docs-sidebar .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav > li > a:focus {
+    padding-left: 29px;
+}
+.bs-docs-sidebar .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav > .active:focus > a {
+    padding-left: 28px;
+    font-weight: 500;
+}
+
+/* Nav: third level (shown on .active) */
+.bs-docs-sidebar .nav .nav .nav {
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 40px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav .nav > li > a:focus {
+    padding-left: 39px;
+}
+.bs-docs-sidebar .nav .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav .nav > .active:focus > a {
+    padding-left: 38px;
+    font-weight: 500;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+    .bs-docs-sidebar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix-bottom {
+        width: 213px;
+    }
+    .bs-docs-sidebar.affix {
+        position: fixed; /* Undo the static from mobile first approach */
+        top: 20px;
+    }
+    .bs-docs-sidebar.affix-bottom {
+        position: absolute; /* Undo the static from mobile first approach */
+    }
+    .bs-docs-sidebar.affix .bs-docs-sidenav,.bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0
+    }
+}
+@media (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .bs-docs-sidebar.affix-bottom,
+    .bs-docs-sidebar.affix {
+        width: 263px;
+    }
+}
+</style>
+<script type="text/javascript">
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  displayAlign: "center",
+  displayIndent: "2em",
+  messageStyle: "none",
+  "HTML-CSS": {
+    scale: 100,
+    styles: {
+      ".MathJax_Display": {
+        "font-size": "100%"
+      }
+    }
+  },
+  "SVG": {
+    scale: 100,
+    styles: {
+      ".MathJax_SVG_Display": {
+        "font-size": "100%",
+        "margin-left": "-2.281em"
+      }
+    }
+  }
+});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_SVG"></script>
+</head>
+<body>
+<div id="content" class="container">
+<div class="row"><div class="col-md-9"><h1 class="title">Traduction française du manuel Org</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Résumé</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Org est un mode pour prendre des notes, gérer des listes de choses
+à faire, et plannifier des projets avec un système de texte brut
+rapide et efficace. C'est aussi un système pour écrire avec un
+soutien unique pour la programmation littérale et la recherche
+reproductible. 
+</p>
+
+<p>
+Org est implémenté par dessus le mode Outline (contour), ce qui
+rend possible de conserver des fichiers de grande taille bien
+structurés. La visibilité des cycles et la structure d'édition
+aident à travailler avec des arbres. Les tableaux sont facilement
+créés avec un éditeur de table intégré. Les liens en texte brut du
+style URL connectent aux sites web, emails, messages Usenet,
+entrées BBDB, et tout fichier relié aux projets. 
+</p>
+
+<p>
+Org développe l'organisation des tâches autour des fichiers de
+notes qui contiennent des listes ou des informations à propos des
+projets comme texte brut. La plannification de projet et la gestion
+de tâche font usage de méta-données qui font partie d'un noeud de
+contour. Basées sur ces données, des entrées spécifiques peuvent
+être extraites en requêtes et créer des <i>vues d'agenda</i> dynamiques
+qui intègrent également le calendrier Emacs et le quotidien. Org
+peut être utilisé pour implémenter de nombreux schémas de projets
+différents, tels que le système GTD de David Allen.
+</p>
+
+<p>
+Les fichiers Org peuvent servir de simple système d'écriture avec
+l'exportation en de nombreux formats tels que HTML, \LaTeX, Open
+Document, et Markdown. De nouvelles options d'exportations peuvent
+être dérivées de celles existantes, ou définies à partir de zéro.
+</p>
+
+<p>
+Les fichiers Org peuvent inclure des blocs de code source, ce qui
+rend Org parfaitement adapté pour l'écriture de documents
+techniques avec des exemples de codes. Les blocs de code source Org
+sont pleinement fonctionnels, ils peuvent être évalués en place et
+leurs résultats peuvent être capturés dans le fichier. Cela rend
+possible de créer un simple fichier de recherche reproductible
+compendium.
+</p>
+
+<p>
+Org garde les choses simples. Lorsque découvert pour la première
+fois, il devrait sembler comme un contourneur direct et facile à
+utiliser. La complexité n'est pas imposée, mais une foison
+d'options est disponible si besoin. Org est une boîte à outils. De
+nombreux utilisateurs exécutent seulement une fraction (très
+personnelle) des capacités de Org, et savent qu'il y a plus s'ils
+en ont besoin. 
+</p>
+
+<p>
+Tout cela est réalisé avec des fichiers de texte brut, le format de
+fichier le plus portable. Org tourne dans Emacs. Emacs est l'un des
+programmes les plus largement portés, de sorte que le mode Org est
+disponible sur toutes les plateformes majeures. 
+</p>
+
+<p>
+Il y a un site web sur Org qui fournit des liens pour les nouvelles
+versions de Org, autant que des informations supplémentaires, FAQ,
+des liens vers des tutoriels, etc. Cette page est située à
+<a href="https://orgmode.org">https://orgmode.org</a>
+</p>
+
+<p>
+Une version antérieur (7.3) de ce manuel est disponible en version
+papier depuis Network Theory Ltd.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Installation</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Org fait partie des récentes distributions de GNU Emacs, donc
+normalement vous n'avez pas besoin de l'installer.
+</p>
+
+<p>
+Si, pour une raison ou pour une autre, vous voulez installer Org
+par-dessus cette version pré-paquetée, il y a trois façons de le
+faire :
+</p>
+<ul class="org-ul">
+<li>En utilisant le système de paquets Emacs.
+</li>
+<li>En téléchargeant Org comme une archive.
+</li>
+<li>En utilisant le dépôt git Org.
+</li>
+</ul>
+
+<p>
+Nous <b>recommandons fortement</b> de s'en tenir à une seule méthode
+d'installation. 
+</p>
+</div>
+
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Utiliser le système de paquetage Emacs</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+Les distributions Emacs récentes incluent un système de paquetage
+qui vous laisse installer des bibliothèques Elisp.
+</p>
+
+<p>
+Vous pouvez installer Org avec <code>M-x package-install RET org</code>.
+</p>
+
+<p>
+<b>Important</b> : vous devez faire ça dans une session durant laquelle
+ aucun fichier <code>.org</code> n'a été visité, i.e, où aucune fonction
+ intégrée Org n'a été chargée. Autrement les fonctions Org
+ d'autochargement ficheront l'installation en l'air. 
+</p>
+
+<p>
+Ensuite, pour être sûr que votre configuration Org est prise en
+compte, initialiser le système de paquets avec
+<code>(package-initialize)</code> dans votre fichier init Emacs avant de
+configurer n'importe quelle option Org. Si vous souhaitez
+utiliser le paquet Org du dépôt, vérifiez la page Org ELPA.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Télécharger Org comme une archive</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+Vous pouvez télécharger la dernière version Org depuis le site web
+de Org. Dans ce cas, assurez-vous d'avoir configuré correctement
+le chemin de chargement dans votre fichier init :
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'load-path "~/path/to/orgdir/lisp")
+</pre>
+</div>
+
+<p>
+L'archive téléchargée contient des bibliothèques contribuées qui
+ne sont pas inclues dans Emacs. 
+</p>
+
+<p>
+Si vous voulez les utiliser, ajouter le répertoire <code>contrib</code> à
+votre chemin de chargement :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'load-path "~/path/to/orgdir/contrib/lisp" t)
+</pre>
+</div>
+
+<p>
+Optionnellement, vous pouvez compiler les fichiers et/ou les
+installer sur votre système. Lancez <code>make help</code> pour lister les
+options de compilation et d'installation.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Utiliser le dépôt git de Org</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+Vous pouvez cloner le dépôt de Org et installer Org comme ça :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">cd ~/src/
+git clone https://code.orgmode.org/bzg/org-mode.git
+cd org-mode/
+make autoloads
+</pre>
+</div>
+
+<p>
+Notez que dans ce cas, <code>make autoloads</code> est requis : cela définit
+la version de Org dans <code>org-version.el</code> et l'auto-chargement de
+Org dans <code>org-loaddefs.el</code>.
+</p>
+
+<p>
+Rappelez-vous d'ajouter le bon chemin de chargement comme décrit
+dans la méthode ci-dessus.
+</p>
+
+<p>
+Vous pouvez aussi compiler avec <code>make</code>, générer la documentation
+avec <code>make doc</code>, créer une configuration locale avec <code>make config</code>
+et installer Org avec <code>make install</code>. Prière de lancer <code>make help</code>
+pour obtenir la liste des options de compilation/installation.
+</p>
+
+<p>
+Pour plus d'explications détaillées sur le système de construction
+Org, merci de vérifier la page Org Build System sur Worg.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Activation</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Les tampons du mode Org nécessitent que le verrouillage de police
+soit activé : c'est le cas par défaut dans Emacs<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>. 
+</p>
+
+<p>
+Il y a des problèmes de compatibilité entre le mode Org et d'autres
+paquets Elisp, merci de prendre le temps de vérifier la liste (voir
+Section 15.10.2 [Conflicts], page 239).
+</p>
+
+<p>
+Les quatres commandes Org <code>org-store-link</code>, <code>org-capture</code>,
+<code>org-agenda</code>, et <code>org-switchb</code> devraient être accessible via les
+touches globales (i.e, n'importe où dans Emacs, pas seulement dans
+les tampons Org). 
+</p>
+
+<p>
+Voici quelques suggestions de combinaisons pour ces touches, merci de
+modifier les touches avec vos propres liaisons :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cb" 'org-switchb)
+</pre>
+</div>
+
+<p>
+Les fichiers avec l'extension <code>.org</code> utilisent le mode Org par
+défaut. Pour déclencher le mode Org dans un fichier qui n'a pas
+l'extension <code>.org</code>, faire en sorte que la première ligne du fichier
+ressemble à ça :
+<code>MY PROJECTS     -*- mode: org; -*-</code>
+ce qui sélectionnera le mode Org pour ce tampon peu importe le nom
+du fichier. Voir aussi la variable
+<code>org-insert-mode-line-in-empty-file</code>.
+</p>
+
+<p>
+De nombreuses commandes dans Org fonctionnent sur la région si la
+région est <i>active</i>. Pour faire usage de cela, vous devez avoir
+activé <code>transient-mark-mode</code>, ce qui est le cas par défaut. Si vous
+n'aimez pas <code>transient-mark-mode</code>, vous pouvez créer une région
+active en utilisant la souris pour sélectionner une région, ou en
+pressant <code>C-SPC</code> deux fois avant de déplacer le curseur.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Retours (Feedback)</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Si vous rencontrez des problèmes avec Org, ou si vous avez des
+questions, remarques, ou idées à son propos, merci d'écrire à la
+liste de diffusion de Org <code>[[emacs-orgmode@gnu.org]]</code>. Vous pouvez vous
+inscrire à la liste sur cette page. Si vous n'êtes pas un membre de
+la liste de diffusion, votre courrier sera transmis après qu'un
+modérateur l'ait approuvé<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>.
+</p>
+
+<p>
+Pour reporter des bugs, merci d'essayer d'abord de reproduire le
+bug avec la dernière version de Org disponible&#x2013;si vous lancez une
+version périmée, c'est très possible que le bug ait déjà été
+résolu. Si le bug persiste, préparez un rapport et fournissez
+autant d'information que possible, incluant les informations de
+version de Emacs (<code>M-x emacs-version RET</code>) et Org (<code>M-x org-version
+   RET</code>), autant que la configuration Org reliée au fichier init
+Emacs. La façon la plus simple de faire ça est d'utiliser la
+commande <code>M-x org-submit-bug-report RET</code> qui mettra toute cette
+information dans un tampon mail Emacs de sorte que vous n'avez qu'à
+ajouter votre description. Si vous n'envoyez pas d'e-mail depuis
+Emacs, merci de copier-coller le contenu dans votre programme
+d'e-mail.
+</p>
+
+<p>
+Parfois vous pourriez faire face à un problème dû à une erreur dans
+votre configuration Emacs ou Org. Avant de reporter un bug, c'est
+très utile de démarrer Emacs avec des personnalisations minimales
+et de reproduire le problème. Faire cela aide souvent à déterminer
+si le problème vient de votre personnalisation ou du mode Org
+lui-même. Vous pouvez démarrer une session minimale typique avec
+une commande comme l'exemple ci-dessous :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">emacs -Q -l /path/to/minimal-org.el
+</pre>
+</div>
+<p>
+Cependant si vous utilisez le mode Org tel que distribué avec
+Emacs, une configuration minimale n'est pas nécessaire. Dans ce cas
+c'est suffisant de démarrer Emacs avec <code>emacs -Q</code>. Le fichier de
+configuration <code>minimal-org.el</code> peut avoir des contenus comme montré
+ci-dessous :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;;; Minimal setup to load latest 'org-mode'
+
+;; activate debugging
+(setq debug-on-error t
+      debug-on-signal nil
+      debug-on-quit nil)
+
+;; add latest org-mode to load path
+(add-to-list 'load-path "/path/to/org-mode/lisp")
+(add-to-list 'load-path "/path/to/org-mode/contrib/lisp" t)
+</pre>
+</div>
+
+<p>
+Si une erreur survient, un <i>backtrace</i> peut être très utile (voir
+ci-dessous pour comment en créer un). Souvent un petit fichier
+d'exemple aide, avec des informations claires à propos de :
+</p>
+<ol class="org-ol">
+<li>Qu'avez-vous fait exactement ?
+</li>
+<li>Qu'attendiez-vous qu'il se produise ?
+</li>
+<li>Que s'est-il produit à la place ?
+</li>
+</ol>
+
+<p>
+Merci d'aider à améliorer ce programme.
+</p>
+</div>
+
+
+<div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Comment créer un backtrace</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+Si travailler avec Org produit une erreur avec un message que vous
+ne comprenez pas, vous avez peut-être tapé un bug. La meilleure
+façon de reporter ça c'est en fournissant, en plus de ce qui a été
+mentionné au-dessus, un <i>backtrace</i>. C'est de l'information depuis
+le débogueur intégré à propos de où et comment l'erreur est
+apparue. Voici comment produire un backtrace utile :
+</p>
+<ol class="org-ol">
+<li>Recharger les versions non compilées de tous les fichiers Lisp
+en mode Org. Le backtrace contient beaucoup plus d'informations
+s'il est produit avec du code non compilé. Pour faire ça,
+utiliser : <code>C-u M-x org-reload RET</code> ou sélectionnez 
+<code>Org -&gt; Refresh/Reload -&gt; Reload Org uncompiled</code> depuis le menu
+</li>
+<li>Aller dans le menu <code>Options</code> et sélectionnez <code>Enter Debugger on
+       Error</code>
+</li>
+<li>Faites tout ce que vous avez à faire pour taper
+l'erreur. N'oubliez pas de documenter les étapes que vous
+suivez.
+</li>
+<li>Lorsque vous tapez l'erreur, un tampon <code>*Backtrace*</code> apparaîtra
+à l'écran. Enregistrez ce tampon dans un fichier (par exemple
+en utilisant <code>C-x C-w</code>) et attachez-le à votre report de bug.
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Conventions typographiques utilisées dans ce manuel</h3>
+<div class="outline-text-3" id="text-1-5">
+</div><div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> Mots-clés TODO, balises, propriétés, etc.</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+Org utilise principalement trois types de mots-clés : mots-clés
+TODO, noms de balises et noms de propriétés. Dans ce manuel nous
+utilisons les conventions suivantes :
+</p>
+
+<dl class="org-dl">
+<dt> TODO WAITING </dt><dd>les mots-clés TODO sont écrits en capitales,
+même si ils sont définis par l'utilisateur. 
+</dd>
+<dt> boss ARCHIVE </dt><dd>les balises définies par l'utilisateur sont
+écrites en minuscule; les balises intégrées avec
+un sens spécial sont écrites en capitales.
+</dd>
+<dt> Release PRIORITY </dt><dd>les propriétés définies par l'utilisateur
+sont en capitales; les propriétés intégrées avec une
+signification spéciale sont écrites en capitales.
+</dd>
+</dl>
+
+
+
+<p>
+De plus, Org utilise des mots-clés optionnels (comme <code>#+TITLE</code>
+pour configurer le titre) et des mots-clés environnement (comme
+<code>#+BEGIN_EXPORT html</code> pour démarrer un environnement HTML). Ils
+sont écrits en majuscules dans le manuel pour améliorer leur
+lisibilité, mais vous pouvez utiliser des minuscules dans votre
+fichier Org.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> Combinaisons de touches et commandes</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+Le manuel suggère quelques combinaisons de touches globales, en
+particulier <code>C-c</code> pour <code>org-agenda</code> et <code>C-c c</code> pour
+<code>org-capture</code>. Ce sont seulement des suggestions, mais le reste du
+manuel suppose que ces combinaisons de touches sont en place afin
+de lister les commandes par accès de touches. 
+</p>
+
+<p>
+Aussi, le manuel liste à la fois les touches et les commandes
+correspondantes pour accéder aux fonctionnalités. Le mode Org
+utilise souvent la même touche pour différentes fonctions, selon
+le contexte. La commande qui est liée à de telles touches a un nom
+générique, comme <code>org-metaright</code>. Dans le manuel nous donnerons, à
+chaque fois que possible, la fonction qui est appelée en interne
+par la commande générique. Par exemple, dans le chapitre sur la
+structure du document, <code>M-RIGHT</code> sera listée pour appeler
+<code>org-to-demote</code>, alors que dans le chapitre sur les tableaux, elle
+sera listée pour appeler <code>org-table-move-column-right</code>. Si vous
+préférez, vous pouvez compiler le manuel sans les noms de
+commandes en déconfigurant le drapeau <code>cmdnames</code> dans <code>org.texi</code>.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Structure du document</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Org est basé sur le mode Outline et fournit des commandes pour
+éditer la structure du document. 
+</p>
+</div>
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Outlines (contours)</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Org est implémenté par-dessus le mode Outline. Les contours
+permettent à un document d'être organisé selon une structure
+hiérarchique, ce qui est (au moins pour moi), la meilleure
+représentation de notes et de pensées. Un aperçu de cette structure
+est obtenu en pliant (cachant) de grandes parties du document pour
+montrer uniquement la structure générale du document les parties en
+cours de travail. Org simplifie grandement l'usage de contours en
+compressant l'entière fonctionnalité montrer/cacher en une seule
+commande, <code>org-cycle</code>, qui est liée à la touche <code>TAB</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Headlines (en-têtes, rubriques)</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Les rubriques définissent la structure du contour d'un arbre. Les
+rubriques dans Org démarrent avec une ou plusieurs étoiles, sur la
+marge de gauche<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>. Par exemple :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">* Top level headline
+** Second level
+*** 3rd level
+    some text
+*** 3rd level
+    more text
+
+
+* Another top level headline
+</pre>
+</div>
+
+<p>
+Notez qu'une rubrique nommée après <code>org-footnote-section</code>, qui est
+par défaut reliée à <code>'Foonotes'</code>, est considérée comme spéciale. Un
+sous-arbre avec cette rubrique sera silencieusement ignoré par les
+fonctions d'exportation.
+</p>
+
+<p>
+Certaines personnes trouvent les nombreuses étoiles trop ennuyantes
+et préféreraient un contour avec des espaces blancs suivis d'une
+seule étoile comme début de rubrique. La section 15.8 [Clean view],
+page 235, décrit une configuration pour réaliser cela.
+</p>
+
+<p>
+Une ligne vide après la fin d'un sous-arbre est considéré comme en
+faisant partie et sera cachée lorsque le sous-arbre sera
+plié. Cependant, si vous laissez au moins deux lignes vierges, une
+ligne vierge restera visible après avoir plié le sous-arbre, afin
+de structurer la vue écrasée. Voir la variable
+<code>org-cycle-separator-lines</code> pour modifier ce comportement. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Cycle de visibilité</h3>
+<div class="outline-text-3" id="text-2-3">
+</div><div id="outline-container-sec-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Cycle local et cycle global</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<p>
+Les contours rendent possible de cacher des parties de texte dans
+le tampon. Org utilise juste deux commandes, liées à <code>TAB</code> et
+<code>S-TAB</code> pour changer la visibilité dans le tampon.
+</p>
+
+<dl class="org-dl">
+<dt> TAB </dt><dd><code>(org-cycle)</code> cycle du sous-arbre : tourne le sous-arbre
+actuel selon les états <code>FOLDED -&gt; CHILDREN -&gt;
+             SUBTREE</code>. Le point doit être sur la rubrique pour que
+ça marche<sup><a id="fnr.4" name="fnr.4" class="footref" href="#fn.4">4</a></sup>.
+</dd>
+<dt> S-TAB C-u TAB </dt><dd><code>(org-global-cycle)</code> cycle global : tourne le
+tampon entier selon les états <code>OVERVIEW -&gt;
+                       CONTENTS -&gt; SHOW ALL</code> 
+Lorsque <code>S-TAB</code> est appelé avec un argument
+numérique N préfixé, le du contenu à la
+rubrique de niveau N devient visible. Notez que
+dans les tableaux, <code>S-TAB</code> saute au champ
+précédent. 
+
+<p>
+Vous pouvez lancer le cycle global en utilisant
+<code>TAB</code> seulement si le point est au tout début
+du tampon, mais pas sur une rubrique, et
+<code>org-cycle-global-at-bob</code> est configuré à une
+valeur non-<code>nil</code>.
+</p>
+</dd>
+<dt> C-u C-u TAB </dt><dd><code>(org-set-startup-visibility)</code> revient à la
+visibilité du début du tampon (voir Section 2.3.2
+[Initial visibility], page 8).
+</dd>
+<dt> C-u C-u C-u TAB </dt><dd><code>(outline-show-all)</code> Montre tout, y compris
+les tiroirs.
+</dd>
+<dt> C-c C-r </dt><dd><code>(org-reveal)</code> Révèle le contexte autour du point,
+montrant l'entrée en cours, l'en-tête suivant et la
+hiérarchie au-dessus. Utile pour travailler près d'un
+emplacement qui a exposé à la commande d'arbre épars
+(voir Section 2.6 [Sparse trees], page 11) ou une
+commande d'agenda (voir Section 10.5 [Agenda
+commands], page 115). Avec un argument préfixé
+montre, sur chaque niveau, toutes les en-têtes
+filles. Avec un argument préfixé double, montre aussi
+le sous-arbre entier du parent. 
+</dd>
+<dt> C-c C-k </dt><dd><code>(outline-show-branches)</code> Expose toutes les en-têtes
+du sous-arbre, la vue du contenu d'un seul
+sous-arbre.
+</dd>
+<dt> C-c TAB </dt><dd><code>(outline-show-children)</code> Expose tous les enfants
+directs du sous-arbre. Avec un argument numérique N
+préfixé, expose tous les enfants jusqu'au niveau N.
+</dd>
+<dt> C-c C-x b </dt><dd><code>(org-tree-to-indirect-buffer)</code> Montre le
+sous-arbre actuel dans un tampon indirect<sup><a id="fnr.5" name="fnr.5" class="footref" href="#fn.5">5</a></sup>. Avec un
+argument numérique N préfixé, va au niveau N et
+ensuite prend cet arbre. Si N est négatif alors
+remonte de N niveaux. Avec un préfixe <code>C-u</code>, ne pas
+retirer le tampon précédent indirectement utilisé.
+</dd>
+<dt> C-c C-x v </dt><dd><code>(org-copy-visible)</code> Copie le texte <i>visible</i> dans
+la région dans le cycle du presse-papier.
+</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-sec-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Visibilité initiale</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<p>
+Lorsque Emacs visite un fichier Org pour la première fois, l'état
+global est configuré sur OVERVIEW, i.e, seulement les rubriques top
+niveau sont visibles<sup><a id="fnr.6" name="fnr.6" class="footref" href="#fn.6">6</a></sup>. Cela peut être configuré via la variable
+<code>org-startup-folded</code>, sur la base d'un fichier-per en ajoutant
+l'une des lignes suivantes n'importe où dans le tampon :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">#+STARTUP: overview
+#+STARTUP: content
+#+STARTUP: showall
+#+STARTUP: showeverything
+</pre>
+</div>
+
+<p>
+De plus, n'importe quelles entrées avec une propriété VISIBILITY
+(voir Chapter 7 [Properties and columns], page 64) verront leur
+visibilité adapté en conséquence. Les valeurs autorisées par cette
+propriétés sont <code>folded, children, content</code> et <code>all</code>.
+</p>
+
+<dl class="org-dl">
+<dt> C-u C-u TAB </dt><dd><code>(org-set-startup-visibility)</code> Reviens à la
+visibilité du tampon, i.e, quoique ce soit qui
+est requis par les options de démarrage les propriétés
+VISIBILITY dans les entrées individuelles.
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3-3" class="outline-4">
+<h4 id="sec-2-3-3"><span class="section-number-4">2.3.3</span> Attraper des éditions invisibles</h4>
+<div class="outline-text-4" id="text-2-3-3">
+<p>
+Parfois vous pouvez par inadvertance éditer éditer une partie
+invisible du tampon et être confus sur ce qui a été édité et comme
+annuler l'erreur. Configurer <code>org-catch-invisible-edits</code> à
+non-<code>edit</code> empêchera cela. Voir la docstring de cette option sur
+comment Org devrait attraper les édits invisible.  
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Déplacement</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Les commandes suivantes sautent vers d'autres rubriques dans le
+tampon
+</p>
+
+<dl class="org-dl">
+<dt> <code>C-c C-n</code> (<code>org-next-visible-heading</code>) </dt><dd>prochaine rubrique
+</dd>
+<dt> <code>C-c C-p</code> (<code>org-previous-visible-heading</code>) </dt><dd>rubrique précédente
+</dd>
+<dt> <code>C-c C-f</code> (<code>org-forward-same-level</code>) </dt><dd>prochaine rubrique de
+même niveau
+</dd>
+<dt> <code>C-c C-u</code> (<code>outline-up-heading</code>) </dt><dd>retour vers une rubrique de
+niveau supérieur
+</dd>
+<dt> <code>C-c C-j</code> (<code>org-goto</code>) </dt><dd>saut vers un endroit différent sans
+modifier la visibilité du contour actuel. Montre la structure
+du document dans un tampon temporaire, où vous pouvez utiliser
+les touches suivantes pour trouver votre destination :
+<dl class="org-dl">
+<dt> <code>TAB</code> </dt><dd>visibilité du cycle
+</dd>
+<dt> <code>DOWN / UP</code> </dt><dd>prochaine/précédente rubrique visible
+</dd>
+<dt> <code>RET</code> </dt><dd>choisir cet emplacement
+</dd>
+<dt> <code>/</code> </dt><dd>faire une recherche d'arbre épars
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+<p>
+Les touches suivantes fonctionnent si vous désactivez
+<code>org-goto-auto-isearch</code>
+</p>
+
+<dl class="org-dl">
+<dt> <code>n / p</code> </dt><dd>prochaine / précédente rubrique visible
+</dd>
+<dt> <code>f / b</code> </dt><dd>prochaine / précédente rubrique de même niveau
+</dd>
+<dt> <code>u</code> </dt><dd>un niveau plus haut
+</dd>
+<dt> <code>0-9</code> </dt><dd>argument numérique
+</dd>
+<dt> <code>q</code> </dt><dd>quitter 
+</dd>
+</dl>
+
+
+<p>
+Voir aussi l'option <code>org-goto-interface</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Edition de la structure</h3>
+<div class="outline-text-3" id="text-2-5">
+<dl class="org-dl">
+<dt> <code>M-RET</code> (<code>org-meta-return</code>) </dt><dd>insère une nouvelle rubrique 
+
+<p>
+Si la commande est utilisée en début de ligne, et s'il y a une
+   rubrique ou un élément de liste (voir Section 2.7 [Plain
+   lists], page 12) au point, la nouvelle rubrique/élément est
+   créée avant la ligne actuelle. Lorsqu'utilisé au début d'une
+   ligne régulière d'un texte, transforme cette ligne en entête.
+   Lorsque cette commande est utilisée au milieu d'une ligne, la
+   ligne se sépare en deux et le reste de la ligne devient la
+   nouvelle ligne d'entête. Si vous ne voulez pas que la ligne se
+   sépare, personnalisez <code>org-M-RET-may-split-line</code>. 
+</p>
+
+<p>
+Appeler la commande avec un préfixe <code>C-u</code> insère une nouvelle
+rubrique à la fin de la sous-arborescence courante, tout en
+préservant son contenu. Avec un double préfixe <code>C-u C-u</code>, la
+nouvelle rubrique est créée à la fin du parent de la
+sous-arborescence à la place.
+</p>
+</dd>
+<dt> <code>C-RET</code> (<code>org-insert-heading-respect-content</code>) </dt><dd>insère une
+nouvelle rubrique à la fin de la sous-arborescence actuelle. 
+</dd>
+<dt> <code>M-S-RET</code> (<code>org-insert-todo-heading</code>) </dt><dd>insère une nouvelle
+entrée TODO de même niveau que la rubrique en cours. Voir
+aussi la variable
+<code>org-treat-insert-todo-heading-as-state-change</code>.
+</dd>
+<dt> <code>C-S-RET</code> (<code>org-insert-todo-heading-respect-content</code>) </dt><dd>insère
+une nouvelle entrée TODO au même niveau que la rubrique en
+cours. Comme <code>C-RET</code>, la nouvelle rubrique est insérée après
+la sous-arboresence actuelle.
+</dd>
+<dt> <code>TAB</code> (<code>org-cycle</code>) </dt><dd>Dans une nouvelle entrée sans texte
+encore, le premier <code>TAB</code> rétrograde l'entrée pour en faire un
+enfant de la précédente. Le <code>TAB</code> suivant en fait un parent,
+et ainsi de suite, jusqu'au top niveau. Encore un autre <code>TAB</code>,
+et vous revenez au niveau initial.
+</dd>
+<dt> <code>M-LEFT</code> (<code>org-do-promote</code>) </dt><dd>Promeut la rubrique courante d'un
+niveau.
+</dd>
+<dt> <code>M-RIGHT</code> (<code>org-do-demote</code>) </dt><dd>Rétrograde la rubrique courante
+d'un niveau.
+</dd>
+<dt> <code>M-S-LEFT</code> (<code>org-promote-subtree</code>) </dt><dd>Promeut la
+sous-arborescence courante d'un niveau.
+</dd>
+<dt> <code>M-S-RIGHT</code> (<code>org-demote-subtree</code>) </dt><dd>Rétrograde la
+sous-arborescence courante d'un niveau.
+</dd>
+<dt> <code>M-UP</code> (<code>org-move-subtree-up</code>) </dt><dd>Remonte la sous-arborescence,
+<i>i.e</i>, échange avec la sous-arborescence précédente de même
+niveau.
+</dd>
+<dt> <code>M-DOWN</code> (<code>org-move-subtree-down</code>) </dt><dd>Descends la
+sous-arborescence, <i>i.e</i>, échange avec la sous-arborescence
+suivante de même niveau.
+</dd>
+<dt> <code>C-c @</code> (<code>org-mark-subtree</code>) </dt><dd>Marque la sous-arborescence au
+point. Tapé à plusieurs reprises marque les sous-arbres
+suivants de même niveau que la sous-arborescence marquée.
+</dd>
+<dt> <code>C-c C-x C-w</code> (<code>org-cut-subtree</code>) </dt><dd>Détruit la
+sous-arborescence, <i>i.e</i>, l'efface du tampon mais l'enregistre
+dans le cycle de destruction (kill ring). Avec un argument
+numérique préfixé N, détruit N sous-arborescences
+séquentiellement. 
+</dd>
+<dt> <code>C-c C-x M-w</code> (<code>org-copy-subtree</code>) </dt><dd>Copie la sous-arborescence
+dans le cycle de destruction (kill ring). Avec un argument
+numérique préfixé N, copie les N sous-arborescences
+séquentiellement. 
+</dd>
+<dt> <code>C-c C-x C-y</code> (<code>org-paste-subtree</code>) </dt><dd>Colle la sous-arborescence
+depuis le cycle de destruction (kill ring). Cela modifie le
+niveau de la sous-arborescence pour s'assurer que l'arbre
+rentre proprement à la position de colle. Le niveau de collage
+peut aussi être spécifiée avec un argument numérique préfixé,
+ou par collage après un marqueur de rubrique comme '<code>****</code>'. 
+</dd>
+<dt> <code>C-y</code> (<code>org-yank</code>) </dt><dd>Selon les variables
+<code>org-yank-adjusted-subtrees</code> et <code>org-yank-folded-subtrees</code>, la
+commande interne Org <code>yank</code> colle les sous-arborescences
+pliées et d'une façon intelligente, utilise la même commande
+que <code>C-c C-x C-y</code>. Avec les paramétrages par défaut, aucun
+niveau d'ajustement n'a lieu, mais l'arbre collé est plié à
+moins que ce faisant ça avalerait du texte précédemment
+visible. Tout argument préfixé à cette commande force un
+<code>yank</code> normal à s'exécuter, avec le préfixe transmis. Une
+bonne façon de forcer un yank normal est <code>C-u C-y</code>. Si vous
+utilisez <code>yank-pop</code> après un yank, cela colle totalement les
+éléments détruit précédemment, sans ajustement ni pliage.
+</dd>
+<dt> <code>C-c C-x c</code> (<code>org-clone-subtree-with-time-shift</code>) </dt><dd>Clone un
+sous-arbre en en faisant plusieurs copies. Vous êtes invité à
+indiquer le nombre de copies à effectuer et vous pouvez
+également spécifier si des horodatages de l'entrée doivent
+être décalés.  Cela peut être utile, par exemple, pour créer
+un certain nombre de tâches liées à une série de conférences à
+préparer. Pour plus de détails, voir la documentation de la
+commande <code>org-clone-subtree-with-time-shift</code>.
+</dd>
+<dt> <code>C-c C-w</code> (<code>org-refile</code>) </dt><dd>Reclasse l'entrée ou la région à un
+endroit différent. Voir Section 9.5 [Refile and Copy]
+</dd>
+<dt> <code>C-c ^</code> (<code>org-sort</code>) </dt><dd>Tri les entrées de même
+niveau. Lorsqu'une région est activée, toutes les entrées dans
+la région sont triées. Autrement les enfants de la rubrique
+courante sont triés. La commande attend la méthode de tri, qui
+peut être alphabétiquement, numériquement, par date&#x2014;premier
+horodatage avec actif préféré, date de création, date
+programmée, date de délai&#x2014;par priorité, par mots-clés
+TODO&#x2014;dans la suite les mots-clés ont été défini dans la
+configuration&#x2014;ou par la valeur d'une propriété. Le tri
+inversé est possible aussi. Vous pouvez fournir votre propre
+fonction pour extraire la clé de tri. Avec un préfix <code>C-x</code>, le
+tri est sensible à la casse (majuscule, minuscule). 
+</dd>
+<dt> <code>C-x n s</code> (<code>org-narrow-to-subtree</code>) </dt><dd>Réduis le tampon à la
+sous-arborescence actuelle.
+</dd>
+<dt> <code>C-x n b</code> (<code>org-narrow-to-block</code>) </dt><dd>Réduis le tampon au bloc
+courant. 
+</dd>
+<dt> <code>C-x n w</code> (<code>widen</code>) </dt><dd>Elargit le tampon pour effacer la
+réduction.
+</dd>
+<dt> <code>C-c *</code> (<code>org-toggle-heading</code>) </dt><dd>Transforme une ligne normale ou
+une liste d'éléments en une rubrique&#x2014;de sorte qu'il devienne
+une sous-rubrique à son emplacement. Transforme aussi une
+rubrique en une ligne normale en enlevant l'étoile. S'il y a
+une région active, transforme toutes les lignes dans la région
+en rubriques. Finalement, si la première ligne est une
+rubrique, efface les étoiles de toutes les rubriques dans la
+région. 
+</dd>
+</dl>
+
+
+<p>
+Lorsqu'il y a une région active---<i>i.e</i>, lorsque le mode Transient
+Mark est actif&#x2014;la promotion et la relégation marchent sur toutes les
+rubriques de la région. Pour choisir une région de rubriques, c'est
+mieux de placer à la fois le point et la marque au début d'une ligne,
+la marque au début de la première rubrique, et le point à la ligne
+juste après la dernière rubrique à changer. Notez que lorsque le point
+est à l'intérieur d'un tableau (voir Chapitre 3 [Tableaux]), les
+touches méta-curseur ont des fonctionnalités différentes. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Arbres clairsemés</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+Une caractéristique importante du mode Org est la possibilité de
+construire des <i>arbres clairsemés</i> pour les informations
+sélectionnées dans un arbre hiérarchique, de sorte que tout le
+document soit plié autant que possible, mais les informations
+sélectionnées sont rendues visibles avec la structure de titre
+au-dessus<sup><a id="fnr.7" name="fnr.7" class="footref" href="#fn.7">7</a></sup>. Essayez-le juste et vous verrez comment ça
+marche. 
+</p>
+
+<p>
+Le mode Org contient plusieurs commandes pour créer de tels arbres,
+toutes ces commandes sont accessibles depuis un répartiteur :
+</p>
+<dl class="org-dl">
+<dt> <code>C-c /</code> (<code>org-sparse-tree</code>) </dt><dd>Cela demande une touche
+supplémentaire pour sélectionner une commande de création
+d'arbre clairsemé. 
+</dd>
+<dt> <code>C-c / r</code> ou <code>C-c / /</code> (<code>org-occur</code>) </dt><dd>Demande une expression
+rationnelle (regexp) et affiche un arbre fragmenté avec toutes les
+correspondances. Si la correspondance est dans un titre, le
+titre est rendu visible. Si la correspondance est dans le
+corps d'une entrée, le titre et le corps sont rendus
+visibles. Afin de fournir un contexte minimal, la hiérarchie
+complète des titres au-dessus de la correspondance est
+affichée, ainsi que le titre suivant la correspondance. Chaque
+correspondance est également mise en évidence. les surbrillances
+disparaissent lorsque le tampon est modifié par une commande
+d'édition ou en appuyant sur <code>C-c C-c</code><sup><a id="fnr.8" name="fnr.8" class="footref" href="#fn.8">8</a></sup>. Lorsque appelée
+avec un argument préfixé <code>C-u</code>, les surbrillances précédentes
+sont conservées, ce qui permet d'empiler plusieurs appels à
+cette commande.
+</dd>
+<dt> <code>M-g n</code> ou <code>M-g M-n</code> (<code>next-error</code>) </dt><dd>Saute à la prochaine
+correspondance d'arbre clairsemé dans ce tampon. 
+</dd>
+<dt> <code>M-g p</code> ou <code>M-g M-p</code> (<code>previous-error</code>) </dt><dd>Saute à la précédente
+correspondance d'arbre dans ce tampon.
+</dd>
+</dl>
+
+
+<p>
+Pour les arborescences éparses fréquemment utilisées de chaînes de
+recherche spécifiques, vous pouvez utiliser la variable
+<code>org-agenda-custom-custom-commands</code> pour définir un accès rapide au
+clavier à des arborescences éparses spécifiques. Ces commandes
+seront alors accessibles via le répartiteur de l'agenda (voir
+Section 10.2 [Agenda Dispatcher]). Par exemple :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-agenda-custom-commands
+      '(("f" occur-tree "FIXME")))
+</pre>
+</div>
+<p>
+définit la touche <code>f</code> comme un raccourci pour la création d'abre
+clairsemé correspondant à la chaîne '<code>FIXME</code>'. 
+</p>
+
+<p>
+Les autres commandes d'arbres épars sélectionnent des rubriques
+basées sur les mots-clés TODO, des balises (tags), ou des
+propriétés et seront discutées plus tard dans ce manuel.
+</p>
+
+<p>
+Pour afficher un arbre épars, vous pouvez utiliser la commande
+Emacs <code>ps-print-buffer-with-faces</code> qui n'affiche pas les parties
+inivsibles du document. Ou vous pouvez utiliser la commande <code>C-c
+   C-e v</code> pour exporter uniquement la partie visible du document et
+afficher le fichier résultant.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Listes</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+Dans une entrée de l'arborescence, des listes formatées à la main
+peuvent fournir une structure supplémentaire. Elles fournissent
+également un moyen de créer des listes de cases à cocher (voir
+Section 5.6 [Checkboxes]). Org soutient l'édition de telles listes,
+et chaque exportateur (voir Chapitre 12 [Exporting]) peut les
+analyser et les formater.
+</p>
+
+<p>
+Org connaît les listes ordonnées, les listes non-ordonnées, et les
+listes descriptives. 
+</p>
+<ul class="org-ul">
+<li>Les éléments des listes non-ordonnées commencent par '<code>-</code>', '<code>+</code>', ou
+'<code>*</code>'<sup><a id="fnr.9" name="fnr.9" class="footref" href="#fn.9">9</a></sup> en tant que puces.
+</li>
+<li>Les éléments des listes ordonnées commencent par un nombre suivi
+par soit un point ou une parenthèse droite<sup><a id="fnr.10" name="fnr.10" class="footref" href="#fn.10">10</a></sup>, tels que
+'<code>1.</code>', ou '<code>1)</code>'<sup><a id="fnr.11" name="fnr.11" class="footref" href="#fn.11">11</a></sup>. Si vous voulez
+qu'une liste commence avec une valeur différente&#x2014;par exemple,
+20&#x2014;commencez le texte avec '<code>[@20]</code>'<sup><a id="fnr.12" name="fnr.12" class="footref" href="#fn.12">12</a></sup>. Ces constructions
+peuvent être utilisées dans n'importe quel élément de la liste
+afin de renforcer une numérotation particulière. 
+</li>
+<li>Les éléments des listes descriptives des éléments de listes
+non-ordonnées, et contiennent le séparateur '<code>::</code>' pour le
+<i>terme</i> de description de la description.
+</li>
+</ul>
+
+
+<p>
+Les éléments appartenant à la même liste doivent avoir la même
+indentation sur la première ligne. En particulier, si une liste
+ordonnée atteint le nombre '<code>10.</code>', alors les nombres à 2 chiffres
+doivent être écrits alignés à gauche avec les autres nombres de la
+liste. Un élément finit avant la prohcaine ligne qui est moins ou
+également indentée que sa puce/son nombre.
+</p>
+
+<p>
+Une liste finit chaque fois que tous les éléments sont finis, ce
+qui signifie avant toute ligne moins ou également indentée que les
+éléments top niveau. Elle finit aussi avant deux lignes
+blanches. Dans ce cas, tous les éléments sont fermés. Voici un
+exemple :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">* Le seigneur des anneaux
+Mes scènes favorites sont (dans cet ordre)
+1. L'attaque de Rohirrim
+2. Le combat d'Eowyn avec le roi sorcier
+   + c'était déjà ma scène favorite dans le livre
+   + J'aime vraiment Miranda Otto. 
+3. Peter Jackson tiré par Legolas
+   - dans le DVD seulement
+   Il fait une tête vraiment amusante quand ça arrive.
+Mais au final, aucune scène individuelle ne compte mais le film dans
+son ensemble. 
+Acteurs majeurs dans ce film :
+- Elijah Wood :: Il joue Frodon
+- Sean Astin :: Il joue Sam, l'ami de Frodon. Je me rappelle encore
+		très bien de lui dans son rôle de Mikey Walsh dans
+		/les Goonies/.
+</pre>
+</div>
+<p>
+Org prend en charge ces listes en ajustant les commandes de
+remplissage et d'habillage pour les traiter correctement et en les
+exportant correctement (voir Chapitre 12 [Exporting]). Puisque
+l'indentation est ce qui gouverne la structure de ces listes,
+beaucoup de constructions structurelles comme les blocs
+'<code>#+BEGIN_</code>' peuvent être indentés pour signaler leur appartenance
+à un élément particulier.
+</p>
+
+<p>
+Si vous trouvez qu'utiliser une puce différente pour une
+sous-liste&#x2014;que celle utilisée pour le niveau de la liste
+courante&#x2014;améliore la lisibilité, personnalisez la variable
+<code>org-list-demote-modify-bullet</code>.  Pour obtenir une différence plus
+importante d'indentation entre éléments et sous-éléments,
+personnaliser <code>org-list-indent-offset</code>.
+</p>
+
+<p>
+Les commandes suivantes agissent sur les éléments lorsque le point
+est dans la première ligne d'un élément&#x2014;la ligne avec la puce ou
+le nombre. Certaines d'entre elles impliquent l'application de
+règles automatiques pour conserver la structure de la liste
+intacte. Si certaines de ces actions vous gênent, configurez
+<code>org-list-automatic-rules</code> pour les désactiver individuellement. 
+</p>
+
+<dl class="org-dl">
+<dt> <code>TAB</code> (<code>org-cycle</code>) </dt><dd>Les éléments peuvent être pliés comme les
+rubriques de niveaux. Normalement cela fonctionne uniquement
+si le point est sur un élément de liste brute. Pour plus de détails,
+voir la variable <code>org-cycle-include-plain-lists</code>. Si cette
+variable est configurée à <code>integrate</code>, les éléments de liste
+brute sont traités comme des rubriques de bas niveau. Le
+niveau d'un élément est alors donné par l'indentation de la
+puce/du nombre. Les éléments sont toujours subordonnés aux
+réelles rubriques, toutefois; les hiérarchies restent
+totalement séparées. Dans un nouvel élément sans encore de
+texte, le premier <code>TAB</code> rélègue l'élément à devenir un enfant
+du précédent. Les =TAB=s suivants déplacent l'élément aux
+niveaux significatifs dans la liste le remettant
+éventuellement à sa place initiale.
+</dd>
+<dt> <code>M-RET</code> (<code>org-insert-heading</code>) </dt><dd>Insère un nouvel élément dans
+le niveau courant. Avec un argument préfixé, force un nouvelle
+rubrique (voir Section 2.5 [Structure Editing]). Si cette
+commande est utilisée au milieu d'un élément, cet élément est
+<i>éclaté</i> en deux, et la seconde partie devient le nouvel
+élément<sup><a id="fnr.13" name="fnr.13" class="footref" href="#fn.13">13</a></sup>. Si cette commande est exécutée <i>avant le corps de l'élément</i>, le nouvel élément est créé <i>avant</i> l'actuel. 
+</dd>
+<dt> <code>M-S-RET</code> </dt><dd>Insère un nouvel élément avec une case à cocher
+(voir Section 5.6 [Checkboxes]).
+</dd>
+<dt> <code>S-UP</code> / <code>S-DOWN</code> </dt><dd>Saute à l'élément précédent/suivant dans la
+liste en cours, mais seulement si <code>org-support-shift-select</code>
+est désactivé<sup><a id="fnr.14" name="fnr.14" class="footref" href="#fn.14">14</a></sup>. Sinon, vous pouvez encore utiliser les
+commande de saut de paragraphe comme <code>C-UP</code> et <code>C-DOWN</code> pour
+des effets assez similaires. 
+</dd>
+<dt> <code>M-UP</code> / <code>M-DOWN</code> </dt><dd>Déplace l'élément incluant les sous-éléments
+haut/bas<sup><a id="fnr.15" name="fnr.15" class="footref" href="#fn.15">15</a></sup>, i.e, échanger avec l'élément
+précédent/suivant de même indentation. Si la liste est
+ordonnée, renumérote automatiquement. 
+</dd>
+<dt> <code>M-LEFT</code> / <code>M-RIGHT</code> </dt><dd>Diminue/augmente l'indentation d'un
+élément, laissant tranquille les enfants. 
+</dd>
+<dt> <code>M-S=LEFT</code> / <code>M-S-RIGHT</code> </dt><dd>Diminue/augmente l'indentation de
+l'élément, incluant les sous-éléments. Initialement, l'élément
+arbre est sélectionné sur la base de l'indentation
+courante. Lorsque ces commandes sont exécutées plusieurs fois
+consécutivement, la région initialement sélectionnée est
+utilisée, même si la nouvelle indentation impliquerait une
+hiérarchie différente. Pour utiliser la nouvelle hiérarchie,
+casser la chaîne de commande en déplaçant le point.
+
+<p>
+Comme un cas spécial, utiliser cette commande sur le tout
+premier élément d'une liste déplace la liste entière. Ce
+comportement peut être désactivé en configurant
+<code>org-list-automatic-rules</code>. L'indentation globale d'une liste
+n'a pas d'influence sur le texte <i>après</i> la liste. 
+</p>
+</dd>
+<dt> <code>C-c C-c</code> </dt><dd>S'il y a une case à cocher (voir Section 5.6
+[Checkboxes]) dans la ligne de l'élément, bascule
+l'état de la cse à cocher. Dans tous les cas,
+vérifie la cohérence des puces et de l'indentation
+dans la liste entière. 
+</dd>
+<dt> <code>C-c -</code> </dt><dd>Parcourt (cycle) le niveau entier de la liste via les
+différents éléments/puces ('<code>-</code>', '<code>+</code>', '<code>*</code>',
+'<code>1.</code>', '<code>1)</code>') ou un sous-ensemble d'entre eux, selon
+<code>org-plain-list-ordered-item-terminator</code>, le type de
+liste, et son indentation. Avec un argument numérique
+préfixé N, sélectionne la Nème puce de cette
+liste. S'il y a une région active lors de cet appel,
+le texte sélectionné est modifié en un élément. Avec
+un argument préfixé, toutes les lignes sont converties
+en éléments de liste. Si la première ligne est déjà un
+élément de liste, tous les marqueurs sont effacés de
+la liste. Finalement, même sans une région active, une
+ligne normale est convertie en un élément de liste. 
+</dd>
+<dt> <code>C-c *</code> </dt><dd>Transforme un élément de liste brute en une
+rubrique&#x2014;de sorte que ça devient une sous-rubrique à
+son emplacement. Voir Section 2.5 [Structure Editing],
+pour une explication plus détaillée.
+</dd>
+<dt> <code>C-c C-*</code> </dt><dd>Transforme la liste brute entière en un sous-arbre
+de la rubrique en cours. Les cases à cocher (voir
+Section 5.6 [Checkboxes]) deviennent des mots-clés
+TODO, et DONE respectivement, lorsque non cochées,
+et respectivement lorsque cochées. 
+</dd>
+<dt> <code>S-LEFT</code> / <code>S-RIGHT</code> </dt><dd>Cette commande parcourt les styles de
+puce lorsque le point est sur la puce ou n'importe où dans
+une ligne d'un élément, les détails dépendent de
+<code>org-support-shift-select</code>. 
+</dd>
+<dt> <code>C-c ^</code> </dt><dd>Tri la liste brute. Attend la méthode de tri :
+numériquement, alphabétiquement, par date, ou par une
+fonction personnalisée.
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-8" class="outline-3">
+<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Tiroirs</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+Parfois vous voulez garder l'information associée à une entrée,
+mais usuellement vous ne voulez pas la voir. Pour ça, le mode Org a
+les <i>tiroirs</i>. Ils peuvent contenir n'importe quoi sauf une
+rubrique ou un autre tiroir. Les tiroirs ressemblent à ça :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">** Ceci est une rubrique
+Toujours à l'extérieur du tiroir
+:DRAWERNAME:
+Ceci est l'intérieur du tiroir.
+:END:
+Après le tiroir.
+</pre>
+</div>
+<p>
+Vous pouvez insérer interactivement un tiroir au point en appelant
+<code>org-insert-drawer</code>, qui lié à <code>C-c C-x d</code>. Avec une région active,
+cette commande met la région à l'intérieur du tiroir. Avec un
+argument préfixé, cette commande appelle
+<code>org-insert-property-drawer</code>, qui crée un tiroir '<code>PROPERTIES</code>'
+juste en dessous de la ligne courante.L Le mode Org utilise ce
+tiroir spécial pour trier les propriétés (voir Chapitre 7
+[Properties and Columns]). Vous ne pouvez pas l'utiliser pour autre
+chose. 
+</p>
+
+<p>
+La complétion sur les mots-clés du tiroir est aussi possible en
+utilisant <code>M-TAB</code><sup><a id="fnr.16" name="fnr.16" class="footref" href="#fn.16">16</a></sup>. 
+</p>
+
+<p>
+Le cycle de visibilité (voir Section 2.3 [Visibility Cycling]) sur
+la rubrique cache et montre l'entrée, mais garde le tiroir éclaté
+sur une seule ligne. Afin de regarder à l'intérieur du tiroir, vous
+devez déplacer le point sur la ligne du tiroir et y presser <code>TAB</code>.
+</p>
+
+<p>
+Vous pouvez également organiser des notes de changement d'état
+(voir Section 5.3.2 [Tracking TODO state changes]) et des horaires
+(voir Section 8.4 [Clocking Work Time]) pour être stocké dans un
+tiroir '<code>LOGBOOK</code>'. Si vous voulez stocker une note brève là, de
+façon similaire au changement d'état, utilisez
+</p>
+<dl class="org-dl">
+<dt> <code>C-c C-z</code> </dt><dd>Ajoutez une note d'horodatage au tiroir
+'<code>LOGBOOK</code>'. 
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-9" class="outline-3">
+<h3 id="sec-2-9"><span class="section-number-3">2.9</span> Blocs</h3>
+<div class="outline-text-3" id="text-2-9">
+<p>
+Le mode Org utilise des blocs '<code>#+BEGIN</code>' &#x2026; '<code>#+END</code>' pour des
+buts variés de l'inclusion d'exemples de codes sources (voir
+Section 11.6 [Literal Examples]) à la capture de l'heure
+d'enregistrement d'information (voir Section 8.4 [Clocking Work
+Time]). Ces blocs peuvent être pliés et dépliés en pressant <code>TAB</code>
+dans la ligne '<code>#+BEGIN</code>'. Vous pouvez aussi obtenir tous les blocs
+pliés à startup en configurant la variable <code>org-hide-block-startup</code>
+ou sur une base de fichier pair en utilisant 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">#+STARTUP: hideblocks
+#+STARTUP: nohideblocks
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-10" class="outline-3">
+<h3 id="sec-2-10"><span class="section-number-3">2.10</span> Création de notes de pied de page</h3>
+<div class="outline-text-3" id="text-2-10">
+<p>
+Le mode Org supporte la création de notes de pied de page.
+</p>
+
+<p>
+Une note de pied de page est commencée par un marqueur de note de
+pied de page dans entre crochets en colonne 0, aucune indentation n'est
+acceptée. Elle finit à la définition de la prochaine définition
+note de pied de page, rubrique, ou après deux lignes blanches
+consécutives. La référence de la note de pied de page est
+simplement le marqueur entre crochets, à l'intérieur du texte. Les
+marqueurs commencent toujours avec '<code>fn:</code>'. Par exemple :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">La page d'accueil Org[fn:1] a l'air beaucoup mieux maintenant
+qu'avant.
+...
+[fn:1] Le lien est : https://orgmode.org
+</pre>
+</div>
+<p>
+Le mode Org étend la syntaxe basée sur les numéros aux notes de
+pied de page <i>nommées</i> et aux définitions optionnelles en
+ligne. Voici des références valides :
+</p>
+<dl class="org-dl">
+<dt> '<code>[fn:NAME]</code>' </dt><dd>Une référence de note de pied de page nommée, où
+NAME est un mot étiquette unique, ou, par
+simplicité de la création automatique, un
+nombre.
+</dd>
+<dt> '<code>[fn:: Ceci est une définition en ligne de cette note]</code>' </dt><dd>Une
+note anonyme à la \LaTeX où la définition est donnée
+directement à la référence du point.
+</dd>
+<dt> '<code>[fn:NAME: une définition]</code>' </dt><dd>Une définition en ligne d'une
+note de pied de page, qui spécifie aussi un nom de la
+note. Puisque Org autorise les références multiples à la même
+note, vous pouvez alors utiliser '<code>[fn:NAME]</code>' pour créer des
+références supplémentaires. 
+</dd>
+</dl>
+
+
+<p>
+Les étiquettes de note de pied de page peuvent être créées
+automatiquement, ou vous pouvez créer des noms vous-même. C'est
+géré par la variable <code>org-footnote-auto-label</code> et ses mots-clés
+'<code>STARTUPT</code>' correspondants. Voir la documentation pour plus de
+détails. 
+</p>
+
+<p>
+Les commandes suivantes manipulent les notes de pied de page :
+</p>
+<dl class="org-dl">
+<dt> <code>C-c C-x f</code> </dt><dd>La commande d'action de note.
+
+<p>
+Lorsque le point est sur une référence de note,
+saute jusqu'à la définition. Lorsque c'est à la
+définition, saute jusqu'à
+la&#x2014;première&#x2014;référence.
+</p>
+
+<p>
+Autrement, crée une nouvelle note. Selon la
+variable <code>org-footnote-define-inline</code><sup><a id="fnr.17" name="fnr.17" class="footref" href="#fn.17">17</a></sup>, la
+définition est placée juste dans le texte comme
+partie de la référence, ou séparément dans
+l'emplacement réservé par la variable
+<code>org-footnote-section</code>. 
+</p>
+
+<p>
+Lorsque cette commande est appelée avec un
+argument préfixé, un menu supplémentaire est
+offert :
+</p>
+<dl class="org-dl">
+<dt> <code>s</code> </dt><dd>Tri les définitions de note par suite de
+référence. 
+</dd>
+<dt> <code>r</code> </dt><dd>Renumérote les notes simples '<code>fn:N</code>'
+</dd>
+<dt> <code>S</code> </dt><dd>Raccourci pour les actions <code>r</code> en
+premier, puis <code>s</code>
+</dd>
+<dt> <code>n</code> </dt><dd>Renomme toutes les notes dans une suite
+'<code>fn:1</code>' &#x2026; '<code>fn:n</code>'
+</dd>
+<dt> <code>d</code> </dt><dd>Efface la note au point, incluant la
+définition et les références.
+</dd>
+</dl>
+
+<p>
+Selon la variable
+<code>org-footnote-auto-adjust</code><sup><a id="fnr.18" name="fnr.18" class="footref" href="#fn.18">18</a></sup>, la renumérotation et
+le tri des notes peut être automique après chaque
+insertion ou suppression.
+</p>
+</dd>
+<dt> <code>C-c C-c</code> </dt><dd>Si le point est référence de note, saute à la
+définition. S'il est à la définition, retourne à la
+référence. Lorsqu'appelée à l'emplacement d'une note
+avec un argument préfixé, offre le même menu que
+<code>C-c C-x f</code>.
+</dd>
+<dt> <code>C-c C-o</code> ou <code>mouse-1/2</code> </dt><dd>Des étiquettes de notes sont aussi
+liées aux définitions ou références correspondantes, et vous
+pouvez utiliser les commandes usuelles pour suivre ces liens. 
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+Si vous n'utilisez pas le verrouillage de police de façon
+permanente, activez-le dans le tampon Org avec '(<code>add-hook 'org-mode-hook 'turn-on-font-lock</code>)'.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+Prière de considérer de souscrire à la liste de diffusion afin
+de minimiser le travail que les modérateurs de la liste ont à faire. 
+</p></div>
+
+<div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
+Voir les variables <code>org-special-ctrl-a/e</code>,
+<code>org-special-ctrl-k</code>, et <code>org-ctrl-k-protect-subtree</code> pour configurer
+un comportement spécial de <code>C-a</code>, <code>C-e</code>, et <code>C-k</code> dans les
+rubriques. Noter également que le pointage ne fonctionne qu'avec des
+rubriques indentées de moins de 30 étoiles.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.4" name="fn.4" class="footnum" href="#fnr.4">4</a></sup> <p class="footpara">
+Voir, toutefois, l'option <code>org-cycle-emulate-tab</code>
+</p></div>
+
+<div class="footdef"><sup><a id="fn.5" name="fn.5" class="footnum" href="#fnr.5">5</a></sup> <p class="footpara">
+Le tampon indirect contient le tampon entier, mais est réduit à
+l'arborescence actuelle. Editer le tampon indirect change aussi le
+tampon originel, mais sans affecter la visibilité dans le tampon. Pour
+plus d'information à propos des tampons indirects, voir Section
+"Indirect Buffers" dans emacs.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.6" name="fn.6" class="footnum" href="#fnr.6">6</a></sup> <p class="footpara">
+Lorsque <code>org-agenda-inhibit-startup</code> est non-<code>nil</code>, Org
+n'honore pas l'état de visibilité par défaut lors de la première
+ouverture d'un fichier de l'agenda (voir Section A.8 [Speeding Up
+Your Agendas]).
+</p></div>
+
+<div class="footdef"><sup><a id="fn.7" name="fn.7" class="footnum" href="#fnr.7">7</a></sup> <p class="footpara">
+Voir aussi la variable <code>org-show-context-detail</code> pour décider combien
+de contexte est montré autour de chaque correspondance. 
+</p></div>
+
+<div class="footdef"><sup><a id="fn.8" name="fn.8" class="footnum" href="#fnr.8">8</a></sup> <p class="footpara">
+Cela dépend de l'option <code>org-remove-highlights-with-change</code>.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.9" name="fn.9" class="footnum" href="#fnr.9">9</a></sup> <p class="footpara">
+Lors de l'utilisation de '<code>*</code>' comme puce, les lignes doivent
+être indentées de sorte qu'elles ne soient pas interprétées comme des
+rubriques. Aussi, lorsque vous cachez les étoiles dirigeantes pour
+obtenir une vue de contour propre, les listes d'éléments commençant
+par des étoiles peuvent être difficile à distinguer des vraies
+rubriques. En clair : même si '<code>*</code>' est supporté, il serait préférable
+de ne pas l'utiliser pour les listes. 
+</p></div>
+
+<div class="footdef"><sup><a id="fn.10" name="fn.10" class="footnum" href="#fnr.10">10</a></sup> <p class="footpara">
+Vous pouvez aussi obtenir '<code>a.</code>', '<code>A.</code>', '<code>a)</code>' et '<code>A)</code>' en
+configurant <code>org-list-allow-alphabetical</code>. Pour minimiser la confusion
+avec le texte normal, ils sont limités à un caractère. Au-delà de
+cette limite, les puces deviennent automatiquement des nombres.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.11" name="fn.11" class="footnum" href="#fnr.11">11</a></sup> <p class="footpara">
+Vous pouvez filtrer l'un d'eux en configurant
+<code>org-plain-list-ordered-item-terminator</code>
+</p></div>
+
+<div class="footdef"><sup><a id="fn.12" name="fn.12" class="footnum" href="#fnr.12">12</a></sup> <p class="footpara">
+S'il y a une case à cocher dans l'élément, le cookie doit être
+mis <i>avant</i> la case à cocher. Si vous avez activé les listes
+alphabétiques, vous pouvez aussi utiliser des compteurs comme '<code>[@b]</code>'.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.13" name="fn.13" class="footnum" href="#fnr.13">13</a></sup> <p class="footpara">
+Si vous voulez que l'élément soit éclaté, personnalisez la
+variable <code>org-M-RET-may-split-line</code>.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.14" name="fn.14" class="footnum" href="#fnr.14">14</a></sup> <p class="footpara">
+Si vous voulez parcourir les éléments de cette façon, vous
+pouvez personnaliser <code>org-list-use-circular-motion</code>.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.15" name="fn.15" class="footnum" href="#fnr.15">15</a></sup> <p class="footpara">
+Voir <code>org-list-use-circular-motion</code> pour un comportement
+cyclique. 
+</p></div>
+
+<div class="footdef"><sup><a id="fn.16" name="fn.16" class="footnum" href="#fnr.16">16</a></sup> <p class="footpara">
+De nombreuses interfaces de bureau utilisent <code>M-TAB</code> pour
+basculer entre les fenêtres. Utiliser <code>C-M-i</code> ou <code>ESC TAB</code> à la place.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.17" name="fn.17" class="footnum" href="#fnr.17">17</a></sup> <p class="footpara">
+La configuration correspondante dans le tampon est :
+'<code>#+STARTUP: fninline</code>' ou '<code>#+STARTUP: nofninline</code>'.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.18" name="fn.18" class="footnum" href="#fnr.18">18</a></sup> <p class="footpara">
+La configuration correspondante dans le tampon est :
+'<code>#+STARTUP: fnadjust</code>' ou '<code>#+STARTUP: nofnadjust</code>'.
+</p></div>
+
+
+</div>
+</div></div><div class="col-md-3"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#sec-1">1. Introduction</a>
+<ul class="nav">
+<li><a href="#sec-1-1">1.1. Résumé</a></li>
+<li><a href="#sec-1-2">1.2. Installation</a>
+<ul class="nav">
+<li><a href="#sec-1-2-1">1.2.1. Utiliser le système de paquetage Emacs</a></li>
+<li><a href="#sec-1-2-2">1.2.2. Télécharger Org comme une archive</a></li>
+<li><a href="#sec-1-2-3">1.2.3. Utiliser le dépôt git de Org</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">1.3. Activation</a></li>
+<li><a href="#sec-1-4">1.4. Retours (Feedback)</a>
+<ul class="nav">
+<li><a href="#sec-1-4-1">1.4.1. Comment créer un backtrace</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5. Conventions typographiques utilisées dans ce manuel</a>
+<ul class="nav">
+<li><a href="#sec-1-5-1">1.5.1. Mots-clés TODO, balises, propriétés, etc.</a></li>
+<li><a href="#sec-1-5-2">1.5.2. Combinaisons de touches et commandes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Structure du document</a>
+<ul class="nav">
+<li><a href="#sec-2-1">2.1. Outlines (contours)</a></li>
+<li><a href="#sec-2-2">2.2. Headlines (en-têtes, rubriques)</a></li>
+<li><a href="#sec-2-3">2.3. Cycle de visibilité</a>
+<ul class="nav">
+<li><a href="#sec-2-3-1">2.3.1. Cycle local et cycle global</a></li>
+<li><a href="#sec-2-3-2">2.3.2. Visibilité initiale</a></li>
+<li><a href="#sec-2-3-3">2.3.3. Attraper des éditions invisibles</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-4">2.4. Déplacement</a></li>
+<li><a href="#sec-2-5">2.5. Edition de la structure</a></li>
+<li><a href="#sec-2-6">2.6. Arbres clairsemés</a></li>
+<li><a href="#sec-2-7">2.7. Listes</a></li>
+<li><a href="#sec-2-8">2.8. Tiroirs</a></li>
+<li><a href="#sec-2-9">2.9. Blocs</a></li>
+<li><a href="#sec-2-10">2.10. Création de notes de pied de page</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+</div></div></div>
+<footer id="postamble" class="">
+<div><p class="author">Author: Laurent Garnier</p>
+<p class="date">Created: 2019-02-04 Mon 16:21</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.1 (<a href="http://orgmode.org">Org-mode</a> 9.1.13)</p>
+</div>
+</footer>
+</body>
+</html>

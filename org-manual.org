@@ -1,0 +1,1010 @@
+#+TITLE: Traduction française du manuel Org
+#+AUTHOR: Laurent Garnier
+
+#+OPTIONS: toc:t h:3 num:t
+* Introduction 
+** Résumé
+
+   Org est un mode pour prendre des notes, gérer des listes de choses
+   à faire, et plannifier des projets avec un système de texte brut
+   rapide et efficace. C'est aussi un système pour écrire avec un
+   soutien unique pour la programmation littérale et la recherche
+   reproductible. 
+
+   Org est implémenté par dessus le mode Outline (contour), ce qui
+   rend possible de conserver des fichiers de grande taille bien
+   structurés. La visibilité des cycles et la structure d'édition
+   aident à travailler avec des arbres. Les tableaux sont facilement
+   créés avec un éditeur de table intégré. Les liens en texte brut du
+   style URL connectent aux sites web, emails, messages Usenet,
+   entrées BBDB, et tout fichier relié aux projets. 
+
+   Org développe l'organisation des tâches autour des fichiers de
+   notes qui contiennent des listes ou des informations à propos des
+   projets comme texte brut. La plannification de projet et la gestion
+   de tâche font usage de méta-données qui font partie d'un noeud de
+   contour. Basées sur ces données, des entrées spécifiques peuvent
+   être extraites en requêtes et créer des /vues d'agenda/ dynamiques
+   qui intègrent également le calendrier Emacs et le quotidien. Org
+   peut être utilisé pour implémenter de nombreux schémas de projets
+   différents, tels que le système GTD de David Allen.
+
+   Les fichiers Org peuvent servir de simple système d'écriture avec
+   l'exportation en de nombreux formats tels que HTML, \LaTeX, Open
+   Document, et Markdown. De nouvelles options d'exportations peuvent
+   être dérivées de celles existantes, ou définies à partir de zéro.
+
+   Les fichiers Org peuvent inclure des blocs de code source, ce qui
+   rend Org parfaitement adapté pour l'écriture de documents
+   techniques avec des exemples de codes. Les blocs de code source Org
+   sont pleinement fonctionnels, ils peuvent être évalués en place et
+   leurs résultats peuvent être capturés dans le fichier. Cela rend
+   possible de créer un simple fichier de recherche reproductible
+   compendium.
+
+   Org garde les choses simples. Lorsque découvert pour la première
+   fois, il devrait sembler comme un contourneur direct et facile à
+   utiliser. La complexité n'est pas imposée, mais une foison
+   d'options est disponible si besoin. Org est une boîte à outils. De
+   nombreux utilisateurs exécutent seulement une fraction (très
+   personnelle) des capacités de Org, et savent qu'il y a plus s'ils
+   en ont besoin. 
+
+   Tout cela est réalisé avec des fichiers de texte brut, le format de
+   fichier le plus portable. Org tourne dans Emacs. Emacs est l'un des
+   programmes les plus largement portés, de sorte que le mode Org est
+   disponible sur toutes les plateformes majeures. 
+
+   Il y a un site web sur Org qui fournit des liens pour les nouvelles
+   versions de Org, autant que des informations supplémentaires, FAQ,
+   des liens vers des tutoriels, etc. Cette page est située à
+   [[https://orgmode.org]]
+
+   Une version antérieur (7.3) de ce manuel est disponible en version
+   papier depuis Network Theory Ltd.
+
+** Installation
+   Org fait partie des récentes distributions de GNU Emacs, donc
+   normalement vous n'avez pas besoin de l'installer.
+
+   Si, pour une raison ou pour une autre, vous voulez installer Org
+   par-dessus cette version pré-paquetée, il y a trois façons de le
+   faire :
+   + En utilisant le système de paquets Emacs.
+   + En téléchargeant Org comme une archive.
+   + En utilisant le dépôt git Org.
+
+   Nous *recommandons fortement* de s'en tenir à une seule méthode
+   d'installation. 
+
+*** Utiliser le système de paquetage Emacs   
+
+    Les distributions Emacs récentes incluent un système de paquetage
+    qui vous laisse installer des bibliothèques Elisp.
+
+    Vous pouvez installer Org avec =M-x package-install RET org=.
+
+    *Important* : vous devez faire ça dans une session durant laquelle
+     aucun fichier =.org= n'a été visité, i.e, où aucune fonction
+     intégrée Org n'a été chargée. Autrement les fonctions Org
+     d'autochargement ficheront l'installation en l'air. 
+
+     Ensuite, pour être sûr que votre configuration Org est prise en
+     compte, initialiser le système de paquets avec
+     =(package-initialize)= dans votre fichier init Emacs avant de
+     configurer n'importe quelle option Org. Si vous souhaitez
+     utiliser le paquet Org du dépôt, vérifiez la page Org ELPA.
+
+*** Télécharger Org comme une archive
+
+    Vous pouvez télécharger la dernière version Org depuis le site web
+    de Org. Dans ce cas, assurez-vous d'avoir configuré correctement
+    le chemin de chargement dans votre fichier init :
+
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'load-path "~/path/to/orgdir/lisp")
+    #+END_SRC
+
+    L'archive téléchargée contient des bibliothèques contribuées qui
+    ne sont pas inclues dans Emacs. 
+
+    Si vous voulez les utiliser, ajouter le répertoire =contrib= à
+    votre chemin de chargement :
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'load-path "~/path/to/orgdir/contrib/lisp" t)
+    #+END_SRC
+
+    Optionnellement, vous pouvez compiler les fichiers et/ou les
+    installer sur votre système. Lancez =make help= pour lister les
+    options de compilation et d'installation.
+
+*** Utiliser le dépôt git de Org
+    
+    Vous pouvez cloner le dépôt de Org et installer Org comme ça :
+    #+BEGIN_SRC sh
+      cd ~/src/
+      git clone https://code.orgmode.org/bzg/org-mode.git
+      cd org-mode/
+      make autoloads
+    #+END_SRC
+
+    Notez que dans ce cas, =make autoloads= est requis : cela définit
+    la version de Org dans =org-version.el= et l'auto-chargement de
+    Org dans =org-loaddefs.el=.
+
+    Rappelez-vous d'ajouter le bon chemin de chargement comme décrit
+    dans la méthode ci-dessus.
+    
+    Vous pouvez aussi compiler avec =make=, générer la documentation
+    avec =make doc=, créer une configuration locale avec =make config=
+    et installer Org avec =make install=. Prière de lancer =make help=
+    pour obtenir la liste des options de compilation/installation.
+
+    Pour plus d'explications détaillées sur le système de construction
+    Org, merci de vérifier la page Org Build System sur Worg.
+** Activation
+   
+   Les tampons du mode Org nécessitent que le verrouillage de police
+   soit activé : c'est le cas par défaut dans Emacs[fn:1]. 
+
+   Il y a des problèmes de compatibilité entre le mode Org et d'autres
+   paquets Elisp, merci de prendre le temps de vérifier la liste (voir
+   Section 15.10.2 [Conflicts], page 239).
+
+   Les quatres commandes Org =org-store-link=, =org-capture=,
+   =org-agenda=, et =org-switchb= devraient être accessible via les
+   touches globales (i.e, n'importe où dans Emacs, pas seulement dans
+   les tampons Org). 
+
+   Voici quelques suggestions de combinaisons pour ces touches, merci de
+   modifier les touches avec vos propres liaisons :
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key "\C-cl" 'org-store-link)
+     (global-set-key "\C-ca" 'org-agenda)
+     (global-set-key "\C-cc" 'org-capture)
+     (global-set-key "\C-cb" 'org-switchb)
+   #+END_SRC
+
+   Les fichiers avec l'extension =.org= utilisent le mode Org par
+   défaut. Pour déclencher le mode Org dans un fichier qui n'a pas
+   l'extension =.org=, faire en sorte que la première ligne du fichier
+   ressemble à ça :
+   =MY PROJECTS     -*- mode: org; -*-=
+   ce qui sélectionnera le mode Org pour ce tampon peu importe le nom
+   du fichier. Voir aussi la variable
+   =org-insert-mode-line-in-empty-file=.
+
+   De nombreuses commandes dans Org fonctionnent sur la région si la
+   région est /active/. Pour faire usage de cela, vous devez avoir
+   activé =transient-mark-mode=, ce qui est le cas par défaut. Si vous
+   n'aimez pas =transient-mark-mode=, vous pouvez créer une région
+   active en utilisant la souris pour sélectionner une région, ou en
+   pressant =C-SPC= deux fois avant de déplacer le curseur.
+** Retours (Feedback)
+   
+   Si vous rencontrez des problèmes avec Org, ou si vous avez des
+   questions, remarques, ou idées à son propos, merci d'écrire à la
+   liste de diffusion de Org =[[emacs-orgmode@gnu.org]]=. Vous pouvez vous
+   inscrire à la liste sur cette page. Si vous n'êtes pas un membre de
+   la liste de diffusion, votre courrier sera transmis après qu'un
+   modérateur l'ait approuvé[fn:2].
+
+   Pour reporter des bugs, merci d'essayer d'abord de reproduire le
+   bug avec la dernière version de Org disponible--si vous lancez une
+   version périmée, c'est très possible que le bug ait déjà été
+   résolu. Si le bug persiste, préparez un rapport et fournissez
+   autant d'information que possible, incluant les informations de
+   version de Emacs (=M-x emacs-version RET=) et Org (=M-x org-version
+   RET=), autant que la configuration Org reliée au fichier init
+   Emacs. La façon la plus simple de faire ça est d'utiliser la
+   commande =M-x org-submit-bug-report RET= qui mettra toute cette
+   information dans un tampon mail Emacs de sorte que vous n'avez qu'à
+   ajouter votre description. Si vous n'envoyez pas d'e-mail depuis
+   Emacs, merci de copier-coller le contenu dans votre programme
+   d'e-mail.
+
+   Parfois vous pourriez faire face à un problème dû à une erreur dans
+   votre configuration Emacs ou Org. Avant de reporter un bug, c'est
+   très utile de démarrer Emacs avec des personnalisations minimales
+   et de reproduire le problème. Faire cela aide souvent à déterminer
+   si le problème vient de votre personnalisation ou du mode Org
+   lui-même. Vous pouvez démarrer une session minimale typique avec
+   une commande comme l'exemple ci-dessous :
+   #+BEGIN_SRC sh
+     emacs -Q -l /path/to/minimal-org.el
+   #+END_SRC
+   Cependant si vous utilisez le mode Org tel que distribué avec
+   Emacs, une configuration minimale n'est pas nécessaire. Dans ce cas
+   c'est suffisant de démarrer Emacs avec =emacs -Q=. Le fichier de
+   configuration =minimal-org.el= peut avoir des contenus comme montré
+   ci-dessous :
+   #+BEGIN_SRC emacs-lisp
+     ;;; Minimal setup to load latest 'org-mode'
+
+     ;; activate debugging
+     (setq debug-on-error t
+	   debug-on-signal nil
+	   debug-on-quit nil)
+
+     ;; add latest org-mode to load path
+     (add-to-list 'load-path "/path/to/org-mode/lisp")
+     (add-to-list 'load-path "/path/to/org-mode/contrib/lisp" t)
+   #+END_SRC
+
+   Si une erreur survient, un /backtrace/ peut être très utile (voir
+   ci-dessous pour comment en créer un). Souvent un petit fichier
+   d'exemple aide, avec des informations claires à propos de :
+   1. Qu'avez-vous fait exactement ?
+   2. Qu'attendiez-vous qu'il se produise ?
+   3. Que s'est-il produit à la place ?
+
+   Merci d'aider à améliorer ce programme.
+   
+   
+*** Comment créer un backtrace
+
+    Si travailler avec Org produit une erreur avec un message que vous
+    ne comprenez pas, vous avez peut-être tapé un bug. La meilleure
+    façon de reporter ça c'est en fournissant, en plus de ce qui a été
+    mentionné au-dessus, un /backtrace/. C'est de l'information depuis
+    le débogueur intégré à propos de où et comment l'erreur est
+    apparue. Voici comment produire un backtrace utile :
+    1. Recharger les versions non compilées de tous les fichiers Lisp
+       en mode Org. Le backtrace contient beaucoup plus d'informations
+       s'il est produit avec du code non compilé. Pour faire ça,
+       utiliser : =C-u M-x org-reload RET= ou sélectionnez 
+       =Org -> Refresh/Reload -> Reload Org uncompiled= depuis le menu
+    2. Aller dans le menu =Options= et sélectionnez =Enter Debugger on
+       Error=
+    3. Faites tout ce que vous avez à faire pour taper
+       l'erreur. N'oubliez pas de documenter les étapes que vous
+       suivez.
+    4. Lorsque vous tapez l'erreur, un tampon =*Backtrace*= apparaîtra
+       à l'écran. Enregistrez ce tampon dans un fichier (par exemple
+       en utilisant =C-x C-w=) et attachez-le à votre report de bug.
+
+** Conventions typographiques utilisées dans ce manuel
+*** Mots-clés TODO, balises, propriétés, etc.   
+    Org utilise principalement trois types de mots-clés : mots-clés
+    TODO, noms de balises et noms de propriétés. Dans ce manuel nous
+    utilisons les conventions suivantes :
+
+    + TODO WAITING :: les mots-clés TODO sont écrits en capitales,
+                      même si ils sont définis par l'utilisateur. 
+    + boss ARCHIVE :: les balises définies par l'utilisateur sont
+                      écrites en minuscule; les balises intégrées avec
+                      un sens spécial sont écrites en capitales.
+    + Release PRIORITY :: les propriétés définies par l'utilisateur
+         sont en capitales; les propriétés intégrées avec une
+         signification spéciale sont écrites en capitales.
+
+	 
+
+    De plus, Org utilise des mots-clés optionnels (comme =#+TITLE=
+    pour configurer le titre) et des mots-clés environnement (comme
+    =#+BEGIN_EXPORT html= pour démarrer un environnement HTML). Ils
+    sont écrits en majuscules dans le manuel pour améliorer leur
+    lisibilité, mais vous pouvez utiliser des minuscules dans votre
+    fichier Org.
+*** Combinaisons de touches et commandes
+    Le manuel suggère quelques combinaisons de touches globales, en
+    particulier =C-c= pour =org-agenda= et =C-c c= pour
+    =org-capture=. Ce sont seulement des suggestions, mais le reste du
+    manuel suppose que ces combinaisons de touches sont en place afin
+    de lister les commandes par accès de touches. 
+
+    Aussi, le manuel liste à la fois les touches et les commandes
+    correspondantes pour accéder aux fonctionnalités. Le mode Org
+    utilise souvent la même touche pour différentes fonctions, selon
+    le contexte. La commande qui est liée à de telles touches a un nom
+    générique, comme =org-metaright=. Dans le manuel nous donnerons, à
+    chaque fois que possible, la fonction qui est appelée en interne
+    par la commande générique. Par exemple, dans le chapitre sur la
+    structure du document, =M-RIGHT= sera listée pour appeler
+    =org-to-demote=, alors que dans le chapitre sur les tableaux, elle
+    sera listée pour appeler =org-table-move-column-right=. Si vous
+    préférez, vous pouvez compiler le manuel sans les noms de
+    commandes en déconfigurant le drapeau =cmdnames= dans =org.texi=.
+* Structure du document
+  Org est basé sur le mode Outline et fournit des commandes pour
+  éditer la structure du document. 
+** Outlines (contours)
+
+   Org est implémenté par-dessus le mode Outline. Les contours
+   permettent à un document d'être organisé selon une structure
+   hiérarchique, ce qui est (au moins pour moi), la meilleure
+   représentation de notes et de pensées. Un aperçu de cette structure
+   est obtenu en pliant (cachant) de grandes parties du document pour
+   montrer uniquement la structure générale du document les parties en
+   cours de travail. Org simplifie grandement l'usage de contours en
+   compressant l'entière fonctionnalité montrer/cacher en une seule
+   commande, =org-cycle=, qui est liée à la touche =TAB=.
+** Headlines (en-têtes, rubriques)
+   Les rubriques définissent la structure du contour d'un arbre. Les
+   rubriques dans Org démarrent avec une ou plusieurs étoiles, sur la
+   marge de gauche[fn:3]. Par exemple :
+   #+BEGIN_SRC org
+     ,* Top level headline
+     ,** Second level
+     ,*** 3rd level
+	 some text
+     ,*** 3rd level
+	 more text
+
+
+     ,* Another top level headline
+   #+END_SRC
+
+   Notez qu'une rubrique nommée après =org-footnote-section=, qui est
+   par défaut reliée à ='Foonotes'=, est considérée comme spéciale. Un
+   sous-arbre avec cette rubrique sera silencieusement ignoré par les
+   fonctions d'exportation.
+
+   Certaines personnes trouvent les nombreuses étoiles trop ennuyantes
+   et préféreraient un contour avec des espaces blancs suivis d'une
+   seule étoile comme début de rubrique. La section 15.8 [Clean view],
+   page 235, décrit une configuration pour réaliser cela.
+
+   Une ligne vide après la fin d'un sous-arbre est considéré comme en
+   faisant partie et sera cachée lorsque le sous-arbre sera
+   plié. Cependant, si vous laissez au moins deux lignes vierges, une
+   ligne vierge restera visible après avoir plié le sous-arbre, afin
+   de structurer la vue écrasée. Voir la variable
+   =org-cycle-separator-lines= pour modifier ce comportement. 
+
+** Cycle de visibilité
+*** Cycle local et cycle global
+    Les contours rendent possible de cacher des parties de texte dans
+    le tampon. Org utilise juste deux commandes, liées à =TAB= et
+    =S-TAB= pour changer la visibilité dans le tampon.
+
+    + TAB :: =(org-cycle)= cycle du sous-arbre : tourne le sous-arbre
+             actuel selon les états =FOLDED -> CHILDREN ->
+             SUBTREE=. Le point doit être sur la rubrique pour que
+             ça marche[fn:4].
+    + S-TAB C-u TAB :: =(org-global-cycle)= cycle global : tourne le
+                       tampon entier selon les états =OVERVIEW ->
+                       CONTENTS -> SHOW ALL= 
+                       Lorsque =S-TAB= est appelé avec un argument
+                       numérique N préfixé, le du contenu à la
+                       rubrique de niveau N devient visible. Notez que
+                       dans les tableaux, =S-TAB= saute au champ
+                       précédent. 
+
+		       Vous pouvez lancer le cycle global en utilisant
+                       =TAB= seulement si le point est au tout début
+                       du tampon, mais pas sur une rubrique, et
+                       =org-cycle-global-at-bob= est configuré à une
+                       valeur non-=nil=.
+    + C-u C-u TAB :: =(org-set-startup-visibility)= revient à la
+                     visibilité du début du tampon (voir Section 2.3.2
+                     [Initial visibility], page 8).
+    + C-u C-u C-u TAB :: =(outline-show-all)= Montre tout, y compris
+         les tiroirs.
+    + C-c C-r :: =(org-reveal)= Révèle le contexte autour du point,
+                 montrant l'entrée en cours, l'en-tête suivant et la
+                 hiérarchie au-dessus. Utile pour travailler près d'un
+                 emplacement qui a exposé à la commande d'arbre épars
+                 (voir Section 2.6 [Sparse trees], page 11) ou une
+                 commande d'agenda (voir Section 10.5 [Agenda
+                 commands], page 115). Avec un argument préfixé
+                 montre, sur chaque niveau, toutes les en-têtes
+                 filles. Avec un argument préfixé double, montre aussi
+                 le sous-arbre entier du parent. 
+    + C-c C-k :: =(outline-show-branches)= Expose toutes les en-têtes
+                 du sous-arbre, la vue du contenu d'un seul
+                 sous-arbre.
+    + C-c TAB :: =(outline-show-children)= Expose tous les enfants
+                 directs du sous-arbre. Avec un argument numérique N
+                 préfixé, expose tous les enfants jusqu'au niveau N.
+    + C-c C-x b :: =(org-tree-to-indirect-buffer)= Montre le
+                   sous-arbre actuel dans un tampon indirect[fn:5]. Avec un
+                   argument numérique N préfixé, va au niveau N et
+                   ensuite prend cet arbre. Si N est négatif alors
+                   remonte de N niveaux. Avec un préfixe =C-u=, ne pas
+                   retirer le tampon précédent indirectement utilisé.
+    + C-c C-x v :: =(org-copy-visible)= Copie le texte /visible/ dans
+                   la région dans le cycle du presse-papier.
+*** Visibilité initiale
+    Lorsque Emacs visite un fichier Org pour la première fois, l'état
+    global est configuré sur OVERVIEW, i.e, seulement les rubriques top
+    niveau sont visibles[fn:6]. Cela peut être configuré via la variable
+    =org-startup-folded=, sur la base d'un fichier-per en ajoutant
+    l'une des lignes suivantes n'importe où dans le tampon :
+    #+BEGIN_SRC org
+      ,#+STARTUP: overview
+      ,#+STARTUP: content
+      ,#+STARTUP: showall
+      ,#+STARTUP: showeverything
+    #+END_SRC
+
+    De plus, n'importe quelles entrées avec une propriété VISIBILITY
+    (voir Chapter 7 [Properties and columns], page 64) verront leur
+    visibilité adapté en conséquence. Les valeurs autorisées par cette
+    propriétés sont =folded, children, content= et =all=.
+
+    + C-u C-u TAB :: =(org-set-startup-visibility)= Reviens à la
+                     visibilité du tampon, i.e, quoique ce soit qui
+                     est requis par les options de démarrage les propriétés
+                     VISIBILITY dans les entrées individuelles.
+
+*** Attraper des éditions invisibles
+    Parfois vous pouvez par inadvertance éditer éditer une partie
+    invisible du tampon et être confus sur ce qui a été édité et comme
+    annuler l'erreur. Configurer =org-catch-invisible-edits= à
+    non-=edit= empêchera cela. Voir la docstring de cette option sur
+    comment Org devrait attraper les édits invisible.  
+
+** Déplacement
+   Les commandes suivantes sautent vers d'autres rubriques dans le
+   tampon
+
+   + =C-c C-n= (=org-next-visible-heading=) :: prochaine rubrique
+   + =C-c C-p= (=org-previous-visible-heading=) :: rubrique précédente
+   + =C-c C-f= (=org-forward-same-level=) :: prochaine rubrique de
+        même niveau
+   + =C-c C-u= (=outline-up-heading=) :: retour vers une rubrique de
+        niveau supérieur
+   + =C-c C-j= (=org-goto=) :: saut vers un endroit différent sans
+        modifier la visibilité du contour actuel. Montre la structure
+        du document dans un tampon temporaire, où vous pouvez utiliser
+        les touches suivantes pour trouver votre destination :
+	+ =TAB= :: visibilité du cycle
+        + =DOWN / UP= :: prochaine/précédente rubrique visible
+        + =RET= :: choisir cet emplacement
+        + =/= :: faire une recherche d'arbre épars
+        
+		 
+        Les touches suivantes fonctionnent si vous désactivez
+        =org-goto-auto-isearch=
+
+        + =n / p= :: prochaine / précédente rubrique visible
+        + =f / b= :: prochaine / précédente rubrique de même niveau
+        + =u= :: un niveau plus haut
+        + =0-9= :: argument numérique
+        + =q= :: quitter 
+
+        
+        Voir aussi l'option =org-goto-interface=
+          
+** Edition de la structure
+   + =M-RET= (=org-meta-return=) :: insère une nouvelle rubrique 
+
+     Si la commande est utilisée en début de ligne, et s'il y a une
+        rubrique ou un élément de liste (voir Section 2.7 [Plain
+        lists], page 12) au point, la nouvelle rubrique/élément est
+        créée avant la ligne actuelle. Lorsqu'utilisé au début d'une
+        ligne régulière d'un texte, transforme cette ligne en entête.
+	Lorsque cette commande est utilisée au milieu d'une ligne, la
+        ligne se sépare en deux et le reste de la ligne devient la
+        nouvelle ligne d'entête. Si vous ne voulez pas que la ligne se
+        sépare, personnalisez =org-M-RET-may-split-line=. 
+	
+	Appeler la commande avec un préfixe =C-u= insère une nouvelle
+        rubrique à la fin de la sous-arborescence courante, tout en
+        préservant son contenu. Avec un double préfixe =C-u C-u=, la
+        nouvelle rubrique est créée à la fin du parent de la
+        sous-arborescence à la place.
+   + =C-RET= (=org-insert-heading-respect-content=) :: insère une
+        nouvelle rubrique à la fin de la sous-arborescence actuelle. 
+   + =M-S-RET= (=org-insert-todo-heading=) :: insère une nouvelle
+        entrée TODO de même niveau que la rubrique en cours. Voir
+        aussi la variable
+        =org-treat-insert-todo-heading-as-state-change=.
+   + =C-S-RET= (=org-insert-todo-heading-respect-content=) :: insère
+        une nouvelle entrée TODO au même niveau que la rubrique en
+        cours. Comme =C-RET=, la nouvelle rubrique est insérée après
+        la sous-arboresence actuelle.
+   + =TAB= (=org-cycle=) :: Dans une nouvelle entrée sans texte
+        encore, le premier =TAB= rétrograde l'entrée pour en faire un
+        enfant de la précédente. Le =TAB= suivant en fait un parent,
+        et ainsi de suite, jusqu'au top niveau. Encore un autre =TAB=,
+        et vous revenez au niveau initial.
+   + =M-LEFT= (=org-do-promote=) :: Promeut la rubrique courante d'un
+        niveau.
+   + =M-RIGHT= (=org-do-demote=) :: Rétrograde la rubrique courante
+        d'un niveau.
+   + =M-S-LEFT= (=org-promote-subtree=) :: Promeut la
+        sous-arborescence courante d'un niveau.
+   + =M-S-RIGHT= (=org-demote-subtree=) :: Rétrograde la
+        sous-arborescence courante d'un niveau.
+   + =M-UP= (=org-move-subtree-up=) :: Remonte la sous-arborescence,
+        /i.e/, échange avec la sous-arborescence précédente de même
+        niveau.
+   + =M-DOWN= (=org-move-subtree-down=) :: Descends la
+        sous-arborescence, /i.e/, échange avec la sous-arborescence
+        suivante de même niveau.
+   + =C-c @= (=org-mark-subtree=) :: Marque la sous-arborescence au
+        point. Tapé à plusieurs reprises marque les sous-arbres
+        suivants de même niveau que la sous-arborescence marquée.
+   + =C-c C-x C-w= (=org-cut-subtree=) :: Détruit la
+        sous-arborescence, /i.e/, l'efface du tampon mais l'enregistre
+        dans le cycle de destruction (kill ring). Avec un argument
+        numérique préfixé N, détruit N sous-arborescences
+        séquentiellement. 
+   + =C-c C-x M-w= (=org-copy-subtree=) :: Copie la sous-arborescence
+        dans le cycle de destruction (kill ring). Avec un argument
+        numérique préfixé N, copie les N sous-arborescences
+        séquentiellement. 
+   + =C-c C-x C-y= (=org-paste-subtree=) :: Colle la sous-arborescence
+        depuis le cycle de destruction (kill ring). Cela modifie le
+        niveau de la sous-arborescence pour s'assurer que l'arbre
+        rentre proprement à la position de colle. Le niveau de collage
+        peut aussi être spécifiée avec un argument numérique préfixé,
+        ou par collage après un marqueur de rubrique comme '=****='. 
+   + =C-y= (=org-yank=) :: Selon les variables
+        =org-yank-adjusted-subtrees= et =org-yank-folded-subtrees=, la
+        commande interne Org =yank= colle les sous-arborescences
+        pliées et d'une façon intelligente, utilise la même commande
+        que =C-c C-x C-y=. Avec les paramétrages par défaut, aucun
+        niveau d'ajustement n'a lieu, mais l'arbre collé est plié à
+        moins que ce faisant ça avalerait du texte précédemment
+        visible. Tout argument préfixé à cette commande force un
+        =yank= normal à s'exécuter, avec le préfixe transmis. Une
+        bonne façon de forcer un yank normal est =C-u C-y=. Si vous
+        utilisez =yank-pop= après un yank, cela colle totalement les
+        éléments détruit précédemment, sans ajustement ni pliage.
+   + =C-c C-x c= (=org-clone-subtree-with-time-shift=) :: Clone un
+        sous-arbre en en faisant plusieurs copies. Vous êtes invité à
+        indiquer le nombre de copies à effectuer et vous pouvez
+        également spécifier si des horodatages de l'entrée doivent
+        être décalés.  Cela peut être utile, par exemple, pour créer
+        un certain nombre de tâches liées à une série de conférences à
+        préparer. Pour plus de détails, voir la documentation de la
+        commande =org-clone-subtree-with-time-shift=.
+   + =C-c C-w= (=org-refile=) :: Reclasse l'entrée ou la région à un
+        endroit différent. Voir Section 9.5 [Refile and Copy]
+   + =C-c ^= (=org-sort=) :: Tri les entrées de même
+        niveau. Lorsqu'une région est activée, toutes les entrées dans
+        la région sont triées. Autrement les enfants de la rubrique
+        courante sont triés. La commande attend la méthode de tri, qui
+        peut être alphabétiquement, numériquement, par date---premier
+        horodatage avec actif préféré, date de création, date
+        programmée, date de délai---par priorité, par mots-clés
+        TODO---dans la suite les mots-clés ont été défini dans la
+        configuration---ou par la valeur d'une propriété. Le tri
+        inversé est possible aussi. Vous pouvez fournir votre propre
+        fonction pour extraire la clé de tri. Avec un préfix =C-x=, le
+        tri est sensible à la casse (majuscule, minuscule). 
+   + =C-x n s= (=org-narrow-to-subtree=) :: Réduis le tampon à la
+        sous-arborescence actuelle.
+   + =C-x n b= (=org-narrow-to-block=) :: Réduis le tampon au bloc
+        courant. 
+   + =C-x n w= (=widen=) :: Elargit le tampon pour effacer la
+        réduction.
+   + =C-c *= (=org-toggle-heading=) :: Transforme une ligne normale ou
+        une liste d'éléments en une rubrique---de sorte qu'il devienne
+        une sous-rubrique à son emplacement. Transforme aussi une
+        rubrique en une ligne normale en enlevant l'étoile. S'il y a
+        une région active, transforme toutes les lignes dans la région
+        en rubriques. Finalement, si la première ligne est une
+        rubrique, efface les étoiles de toutes les rubriques dans la
+        région. 
+
+
+Lorsqu'il y a une région active---/i.e/, lorsque le mode Transient
+Mark est actif---la promotion et la relégation marchent sur toutes les
+rubriques de la région. Pour choisir une région de rubriques, c'est
+mieux de placer à la fois le point et la marque au début d'une ligne,
+la marque au début de la première rubrique, et le point à la ligne
+juste après la dernière rubrique à changer. Notez que lorsque le point
+est à l'intérieur d'un tableau (voir Chapitre 3 [Tableaux]), les
+touches méta-curseur ont des fonctionnalités différentes. 
+** Arbres clairsemés
+   Une caractéristique importante du mode Org est la possibilité de
+   construire des /arbres clairsemés/ pour les informations
+   sélectionnées dans un arbre hiérarchique, de sorte que tout le
+   document soit plié autant que possible, mais les informations
+   sélectionnées sont rendues visibles avec la structure de titre
+   au-dessus[fn:7]. Essayez-le juste et vous verrez comment ça
+   marche. 
+
+   Le mode Org contient plusieurs commandes pour créer de tels arbres,
+   toutes ces commandes sont accessibles depuis un répartiteur :
+   + =C-c /= (=org-sparse-tree=) :: Cela demande une touche
+        supplémentaire pour sélectionner une commande de création
+        d'arbre clairsemé. 
+   + =C-c / r= ou =C-c / /= (=org-occur=) :: Demande une expression
+        rationnelle (regexp) et affiche un arbre fragmenté avec toutes les
+        correspondances. Si la correspondance est dans un titre, le
+        titre est rendu visible. Si la correspondance est dans le
+        corps d'une entrée, le titre et le corps sont rendus
+        visibles. Afin de fournir un contexte minimal, la hiérarchie
+        complète des titres au-dessus de la correspondance est
+        affichée, ainsi que le titre suivant la correspondance. Chaque
+        correspondance est également mise en évidence. les surbrillances
+        disparaissent lorsque le tampon est modifié par une commande
+        d'édition ou en appuyant sur =C-c C-c=[fn:8]. Lorsque appelée
+        avec un argument préfixé =C-u=, les surbrillances précédentes
+        sont conservées, ce qui permet d'empiler plusieurs appels à
+        cette commande.
+   + =M-g n= ou =M-g M-n= (=next-error=) :: Saute à la prochaine
+        correspondance d'arbre clairsemé dans ce tampon. 
+   + =M-g p= ou =M-g M-p= (=previous-error=) :: Saute à la précédente
+        correspondance d'arbre dans ce tampon.
+
+	
+   Pour les arborescences éparses fréquemment utilisées de chaînes de
+   recherche spécifiques, vous pouvez utiliser la variable
+   =org-agenda-custom-custom-commands= pour définir un accès rapide au
+   clavier à des arborescences éparses spécifiques. Ces commandes
+   seront alors accessibles via le répartiteur de l'agenda (voir
+   Section 10.2 [Agenda Dispatcher]). Par exemple :
+   #+BEGIN_SRC emacs-lisp
+     (setq org-agenda-custom-commands
+	   '(("f" occur-tree "FIXME")))
+   #+END_SRC
+   définit la touche =f= comme un raccourci pour la création d'abre
+   clairsemé correspondant à la chaîne '=FIXME='. 
+   
+   Les autres commandes d'arbres épars sélectionnent des rubriques
+   basées sur les mots-clés TODO, des balises (tags), ou des
+   propriétés et seront discutées plus tard dans ce manuel.
+
+   Pour afficher un arbre épars, vous pouvez utiliser la commande
+   Emacs =ps-print-buffer-with-faces= qui n'affiche pas les parties
+   inivsibles du document. Ou vous pouvez utiliser la commande =C-c
+   C-e v= pour exporter uniquement la partie visible du document et
+   afficher le fichier résultant.
+
+** Listes
+   Dans une entrée de l'arborescence, des listes formatées à la main
+   peuvent fournir une structure supplémentaire. Elles fournissent
+   également un moyen de créer des listes de cases à cocher (voir
+   Section 5.6 [Checkboxes]). Org soutient l'édition de telles listes,
+   et chaque exportateur (voir Chapitre 12 [Exporting]) peut les
+   analyser et les formater.
+
+   Org connaît les listes ordonnées, les listes non-ordonnées, et les
+   listes descriptives. 
+   + Les éléments des listes non-ordonnées commencent par '=-=', '=+=', ou
+     '=*='[fn:9] en tant que puces.
+   + Les éléments des listes ordonnées commencent par un nombre suivi
+     par soit un point ou une parenthèse droite[fn:10], tels que
+     '=1.=', ou '=1)='[fn:11]. Si vous voulez
+     qu'une liste commence avec une valeur différente---par exemple,
+     20---commencez le texte avec '=[@20]='[fn:12]. Ces constructions
+     peuvent être utilisées dans n'importe quel élément de la liste
+     afin de renforcer une numérotation particulière. 
+   + Les éléments des listes descriptives des éléments de listes
+     non-ordonnées, et contiennent le séparateur '=::=' pour le
+     /terme/ de description de la description.
+
+     
+   Les éléments appartenant à la même liste doivent avoir la même
+   indentation sur la première ligne. En particulier, si une liste
+   ordonnée atteint le nombre '=10.=', alors les nombres à 2 chiffres
+   doivent être écrits alignés à gauche avec les autres nombres de la
+   liste. Un élément finit avant la prohcaine ligne qui est moins ou
+   également indentée que sa puce/son nombre.
+
+   Une liste finit chaque fois que tous les éléments sont finis, ce
+   qui signifie avant toute ligne moins ou également indentée que les
+   éléments top niveau. Elle finit aussi avant deux lignes
+   blanches. Dans ce cas, tous les éléments sont fermés. Voici un
+   exemple :
+   #+BEGIN_SRC org
+     ,* Le seigneur des anneaux
+     Mes scènes favorites sont (dans cet ordre)
+     1. L'attaque de Rohirrim
+     2. Le combat d'Eowyn avec le roi sorcier
+	+ c'était déjà ma scène favorite dans le livre
+	+ J'aime vraiment Miranda Otto. 
+     3. Peter Jackson tiré par Legolas
+	- dans le DVD seulement
+	Il fait une tête vraiment amusante quand ça arrive.
+     Mais au final, aucune scène individuelle ne compte mais le film dans
+     son ensemble. 
+     Acteurs majeurs dans ce film :
+     - Elijah Wood :: Il joue Frodon
+     - Sean Astin :: Il joue Sam, l'ami de Frodon. Je me rappelle encore
+		     très bien de lui dans son rôle de Mikey Walsh dans
+		     /les Goonies/.
+   #+END_SRC
+   Org prend en charge ces listes en ajustant les commandes de
+   remplissage et d'habillage pour les traiter correctement et en les
+   exportant correctement (voir Chapitre 12 [Exporting]). Puisque
+   l'indentation est ce qui gouverne la structure de ces listes,
+   beaucoup de constructions structurelles comme les blocs
+   '=#+BEGIN_=' peuvent être indentés pour signaler leur appartenance
+   à un élément particulier.
+
+   Si vous trouvez qu'utiliser une puce différente pour une
+   sous-liste---que celle utilisée pour le niveau de la liste
+   courante---améliore la lisibilité, personnalisez la variable
+   =org-list-demote-modify-bullet=.  Pour obtenir une différence plus
+   importante d'indentation entre éléments et sous-éléments,
+   personnaliser =org-list-indent-offset=.
+
+   Les commandes suivantes agissent sur les éléments lorsque le point
+   est dans la première ligne d'un élément---la ligne avec la puce ou
+   le nombre. Certaines d'entre elles impliquent l'application de
+   règles automatiques pour conserver la structure de la liste
+   intacte. Si certaines de ces actions vous gênent, configurez
+   =org-list-automatic-rules= pour les désactiver individuellement. 
+
+   + =TAB= (=org-cycle=) :: Les éléments peuvent être pliés comme les
+        rubriques de niveaux. Normalement cela fonctionne uniquement
+        si le point est sur un élément de liste brute. Pour plus de détails,
+        voir la variable =org-cycle-include-plain-lists=. Si cette
+        variable est configurée à =integrate=, les éléments de liste
+        brute sont traités comme des rubriques de bas niveau. Le
+        niveau d'un élément est alors donné par l'indentation de la
+        puce/du nombre. Les éléments sont toujours subordonnés aux
+        réelles rubriques, toutefois; les hiérarchies restent
+        totalement séparées. Dans un nouvel élément sans encore de
+        texte, le premier =TAB= rélègue l'élément à devenir un enfant
+        du précédent. Les =TAB=s suivants déplacent l'élément aux
+        niveaux significatifs dans la liste le remettant
+        éventuellement à sa place initiale.
+   + =M-RET= (=org-insert-heading=) :: Insère un nouvel élément dans
+        le niveau courant. Avec un argument préfixé, force un nouvelle
+        rubrique (voir Section 2.5 [Structure Editing]). Si cette
+        commande est utilisée au milieu d'un élément, cet élément est
+        /éclaté/ en deux, et la seconde partie devient le nouvel
+        élément[fn:13]. Si cette commande est exécutée /avant le corps de l'élément/, le nouvel élément est créé /avant/ l'actuel. 
+   + =M-S-RET= :: Insère un nouvel élément avec une case à cocher
+                  (voir Section 5.6 [Checkboxes]).
+   + =S-UP= / =S-DOWN= :: Saute à l'élément précédent/suivant dans la
+        liste en cours, mais seulement si =org-support-shift-select=
+        est désactivé[fn:14]. Sinon, vous pouvez encore utiliser les
+        commande de saut de paragraphe comme =C-UP= et =C-DOWN= pour
+        des effets assez similaires. 
+   + =M-UP= / =M-DOWN= :: Déplace l'élément incluant les sous-éléments
+        haut/bas[fn:15], i.e, échanger avec l'élément
+        précédent/suivant de même indentation. Si la liste est
+        ordonnée, renumérote automatiquement. 
+   + =M-LEFT= / =M-RIGHT= :: Diminue/augmente l'indentation d'un
+        élément, laissant tranquille les enfants. 
+   + =M-S=LEFT= / =M-S-RIGHT= :: Diminue/augmente l'indentation de
+        l'élément, incluant les sous-éléments. Initialement, l'élément
+        arbre est sélectionné sur la base de l'indentation
+        courante. Lorsque ces commandes sont exécutées plusieurs fois
+        consécutivement, la région initialement sélectionnée est
+        utilisée, même si la nouvelle indentation impliquerait une
+        hiérarchie différente. Pour utiliser la nouvelle hiérarchie,
+        casser la chaîne de commande en déplaçant le point.
+	
+	Comme un cas spécial, utiliser cette commande sur le tout
+        premier élément d'une liste déplace la liste entière. Ce
+        comportement peut être désactivé en configurant
+        =org-list-automatic-rules=. L'indentation globale d'une liste
+        n'a pas d'influence sur le texte /après/ la liste. 
+   + =C-c C-c= :: S'il y a une case à cocher (voir Section 5.6
+                  [Checkboxes]) dans la ligne de l'élément, bascule
+                  l'état de la cse à cocher. Dans tous les cas,
+                  vérifie la cohérence des puces et de l'indentation
+                  dans la liste entière. 
+   + =C-c -= :: Parcourt (cycle) le niveau entier de la liste via les
+                différents éléments/puces ('=-=', '=+=', '=*=',
+                '=1.=', '=1)=') ou un sous-ensemble d'entre eux, selon
+                =org-plain-list-ordered-item-terminator=, le type de
+                liste, et son indentation. Avec un argument numérique
+                préfixé N, sélectionne la Nème puce de cette
+                liste. S'il y a une région active lors de cet appel,
+                le texte sélectionné est modifié en un élément. Avec
+                un argument préfixé, toutes les lignes sont converties
+                en éléments de liste. Si la première ligne est déjà un
+                élément de liste, tous les marqueurs sont effacés de
+                la liste. Finalement, même sans une région active, une
+                ligne normale est convertie en un élément de liste. 
+   + =C-c *= :: Transforme un élément de liste brute en une
+                rubrique---de sorte que ça devient une sous-rubrique à
+                son emplacement. Voir Section 2.5 [Structure Editing],
+                pour une explication plus détaillée.
+   + =C-c C-*= :: Transforme la liste brute entière en un sous-arbre
+                  de la rubrique en cours. Les cases à cocher (voir
+                  Section 5.6 [Checkboxes]) deviennent des mots-clés
+                  TODO, et DONE respectivement, lorsque non cochées,
+                  et respectivement lorsque cochées. 
+   + =S-LEFT= / =S-RIGHT= :: Cette commande parcourt les styles de
+        puce lorsque le point est sur la puce ou n'importe où dans
+        une ligne d'un élément, les détails dépendent de
+        =org-support-shift-select=. 
+   + =C-c ^= :: Tri la liste brute. Attend la méthode de tri :
+                numériquement, alphabétiquement, par date, ou par une
+                fonction personnalisée.
+
+** Tiroirs
+   Parfois vous voulez garder l'information associée à une entrée,
+   mais usuellement vous ne voulez pas la voir. Pour ça, le mode Org a
+   les /tiroirs/. Ils peuvent contenir n'importe quoi sauf une
+   rubrique ou un autre tiroir. Les tiroirs ressemblent à ça :
+   #+BEGIN_SRC org
+     ,** Ceci est une rubrique
+     Toujours à l'extérieur du tiroir
+     :DRAWERNAME:
+     Ceci est l'intérieur du tiroir.
+     :END:
+     Après le tiroir.
+   #+END_SRC
+   Vous pouvez insérer interactivement un tiroir au point en appelant
+   =org-insert-drawer=, qui lié à =C-c C-x d=. Avec une région active,
+   cette commande met la région à l'intérieur du tiroir. Avec un
+   argument préfixé, cette commande appelle
+   =org-insert-property-drawer=, qui crée un tiroir '=PROPERTIES='
+   juste en dessous de la ligne courante.L Le mode Org utilise ce
+   tiroir spécial pour trier les propriétés (voir Chapitre 7
+   [Properties and Columns]). Vous ne pouvez pas l'utiliser pour autre
+   chose. 
+
+   La complétion sur les mots-clés du tiroir est aussi possible en
+   utilisant =M-TAB=[fn:16]. 
+
+   Le cycle de visibilité (voir Section 2.3 [Visibility Cycling]) sur
+   la rubrique cache et montre l'entrée, mais garde le tiroir éclaté
+   sur une seule ligne. Afin de regarder à l'intérieur du tiroir, vous
+   devez déplacer le point sur la ligne du tiroir et y presser =TAB=.
+
+   Vous pouvez également organiser des notes de changement d'état
+   (voir Section 5.3.2 [Tracking TODO state changes]) et des horaires
+   (voir Section 8.4 [Clocking Work Time]) pour être stocké dans un
+   tiroir '=LOGBOOK='. Si vous voulez stocker une note brève là, de
+   façon similaire au changement d'état, utilisez
+   + =C-c C-z= :: Ajoutez une note d'horodatage au tiroir
+                  '=LOGBOOK='. 
+
+** Blocs
+   Le mode Org utilise des blocs '=#+BEGIN=' ... '=#+END=' pour des
+   buts variés de l'inclusion d'exemples de codes sources (voir
+   Section 11.6 [Literal Examples]) à la capture de l'heure
+   d'enregistrement d'information (voir Section 8.4 [Clocking Work
+   Time]). Ces blocs peuvent être pliés et dépliés en pressant =TAB=
+   dans la ligne '=#+BEGIN='. Vous pouvez aussi obtenir tous les blocs
+   pliés à startup en configurant la variable =org-hide-block-startup=
+   ou sur une base de fichier pair en utilisant 
+   #+BEGIN_SRC org
+     ,#+STARTUP: hideblocks
+     ,#+STARTUP: nohideblocks
+   #+END_SRC
+** Création de notes de pied de page   
+   Le mode Org supporte la création de notes de pied de page.
+
+   Une note de pied de page est commencée par un marqueur de note de
+   pied de page dans entre crochets en colonne 0, aucune indentation n'est
+   acceptée. Elle finit à la définition de la prochaine définition
+   note de pied de page, rubrique, ou après deux lignes blanches
+   consécutives. La référence de la note de pied de page est
+   simplement le marqueur entre crochets, à l'intérieur du texte. Les
+   marqueurs commencent toujours avec '=fn:='. Par exemple :
+   #+BEGIN_SRC org
+     La page d'accueil Org[fn:1] a l'air beaucoup mieux maintenant
+     qu'avant.
+     ...
+     [fn:1] Le lien est : https://orgmode.org
+   #+END_SRC
+   Le mode Org étend la syntaxe basée sur les numéros aux notes de
+   pied de page /nommées/ et aux définitions optionnelles en
+   ligne. Voici des références valides :
+   + '=[fn:NAME]=' :: Une référence de note de pied de page nommée, où
+                      NAME est un mot étiquette unique, ou, par
+                      simplicité de la création automatique, un
+                      nombre.
+   + '=[fn:: Ceci est une définition en ligne de cette note]=' :: Une
+        note anonyme à la \LaTeX où la définition est donnée
+        directement à la référence du point.
+   + '=[fn:NAME: une définition]=' :: Une définition en ligne d'une
+        note de pied de page, qui spécifie aussi un nom de la
+        note. Puisque Org autorise les références multiples à la même
+        note, vous pouvez alors utiliser '=[fn:NAME]=' pour créer des
+        références supplémentaires. 
+
+    
+   Les étiquettes de note de pied de page peuvent être créées
+   automatiquement, ou vous pouvez créer des noms vous-même. C'est
+   géré par la variable =org-footnote-auto-label= et ses mots-clés
+   '=STARTUPT=' correspondants. Voir la documentation pour plus de
+   détails. 
+
+   Les commandes suivantes manipulent les notes de pied de page :
+   + =C-c C-x f= :: La commande d'action de note.
+		    
+		    Lorsque le point est sur une référence de note,
+                    saute jusqu'à la définition. Lorsque c'est à la
+                    définition, saute jusqu'à
+                    la---première---référence.
+
+		    Autrement, crée une nouvelle note. Selon la
+                    variable =org-footnote-define-inline=[fn:17], la
+                    définition est placée juste dans le texte comme
+                    partie de la référence, ou séparément dans
+                    l'emplacement réservé par la variable
+                    =org-footnote-section=. 
+
+		    Lorsque cette commande est appelée avec un
+                    argument préfixé, un menu supplémentaire est
+                    offert :
+		    + =s= :: Tri les définitions de note par suite de
+		             référence. 
+	            + =r= :: Renumérote les notes simples '=fn:N='
+                    + =S= :: Raccourci pour les actions =r= en
+                             premier, puis =s=
+                    + =n= :: Renomme toutes les notes dans une suite
+                             '=fn:1=' ... '=fn:n='
+                    + =d= :: Efface la note au point, incluant la
+                             définition et les références.
+
+		    Selon la variable
+                    =org-footnote-auto-adjust=[fn:18], la renumérotation et
+                    le tri des notes peut être automique après chaque
+                    insertion ou suppression.
+   + =C-c C-c= :: Si le point est référence de note, saute à la
+                  définition. S'il est à la définition, retourne à la
+                  référence. Lorsqu'appelée à l'emplacement d'une note
+                  avec un argument préfixé, offre le même menu que
+                  =C-c C-x f=.
+   + =C-c C-o= ou =mouse-1/2= :: Des étiquettes de notes sont aussi
+        liées aux définitions ou références correspondantes, et vous
+        pouvez utiliser les commandes usuelles pour suivre ces liens. 
+
+
+* Footnotes
+
+[fn:18] La configuration correspondante dans le tampon est :
+'=#+STARTUP: fnadjust=' ou '=#+STARTUP: nofnadjust='.
+
+[fn:17] La configuration correspondante dans le tampon est :
+'=#+STARTUP: fninline=' ou '=#+STARTUP: nofninline='.
+
+[fn:16] De nombreuses interfaces de bureau utilisent =M-TAB= pour
+basculer entre les fenêtres. Utiliser =C-M-i= ou =ESC TAB= à la place.
+
+[fn:15] Voir =org-list-use-circular-motion= pour un comportement
+cyclique. 
+
+[fn:14] Si vous voulez parcourir les éléments de cette façon, vous
+pouvez personnaliser =org-list-use-circular-motion=.
+
+[fn:13] Si vous voulez que l'élément soit éclaté, personnalisez la
+variable =org-M-RET-may-split-line=.
+
+[fn:12] S'il y a une case à cocher dans l'élément, le cookie doit être
+mis /avant/ la case à cocher. Si vous avez activé les listes
+alphabétiques, vous pouvez aussi utiliser des compteurs comme '=[@b]='.
+
+[fn:11] Vous pouvez filtrer l'un d'eux en configurant
+=org-plain-list-ordered-item-terminator=
+
+[fn:10] Vous pouvez aussi obtenir '=a.=', '=A.=', '=a)=' et '=A)=' en
+configurant =org-list-allow-alphabetical=. Pour minimiser la confusion
+avec le texte normal, ils sont limités à un caractère. Au-delà de
+cette limite, les puces deviennent automatiquement des nombres.
+
+[fn:9] Lors de l'utilisation de '=*=' comme puce, les lignes doivent
+être indentées de sorte qu'elles ne soient pas interprétées comme des
+rubriques. Aussi, lorsque vous cachez les étoiles dirigeantes pour
+obtenir une vue de contour propre, les listes d'éléments commençant
+par des étoiles peuvent être difficile à distinguer des vraies
+rubriques. En clair : même si '=*=' est supporté, il serait préférable
+de ne pas l'utiliser pour les listes. 
+
+[fn:8] Cela dépend de l'option =org-remove-highlights-with-change=.
+
+[fn:7] Voir aussi la variable =org-show-context-detail= pour décider combien
+de contexte est montré autour de chaque correspondance. 
+
+[fn:6] Lorsque =org-agenda-inhibit-startup= est non-=nil=, Org
+n'honore pas l'état de visibilité par défaut lors de la première
+ouverture d'un fichier de l'agenda (voir Section A.8 [Speeding Up
+Your Agendas]).
+
+[fn:5] Le tampon indirect contient le tampon entier, mais est réduit à
+l'arborescence actuelle. Editer le tampon indirect change aussi le
+tampon originel, mais sans affecter la visibilité dans le tampon. Pour
+plus d'information à propos des tampons indirects, voir Section
+"Indirect Buffers" dans emacs.
+
+[fn:4] Voir, toutefois, l'option =org-cycle-emulate-tab=
+
+[fn:3] Voir les variables =org-special-ctrl-a/e=,
+=org-special-ctrl-k=, et =org-ctrl-k-protect-subtree= pour configurer
+un comportement spécial de =C-a=, =C-e=, et =C-k= dans les
+rubriques. Noter également que le pointage ne fonctionne qu'avec des
+rubriques indentées de moins de 30 étoiles.
+
+[fn:2] Prière de considérer de souscrire à la liste de diffusion afin
+de minimiser le travail que les modérateurs de la liste ont à faire. 
+
+[fn:1] Si vous n'utilisez pas le verrouillage de police de façon
+permanente, activez-le dans le tampon Org avec '(=add-hook 'org-mode-hook 'turn-on-font-lock=)'.
+ 
