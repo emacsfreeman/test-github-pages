@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Traduction française du manuel Org</title>
-<!-- 2019-02-04 Mon 16:21 -->
+<!-- 2019-02-04 Mon 19:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -1574,6 +1574,299 @@ pouvez utiliser les commandes usuelles pour suivre ces liens.
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Tableaux</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Org vient avec un éditeur de tableau rapide et intuitif. Les calculs
+de type tableur sont possibles en utilisant le paquet Emacs Calc
+(voir calc). 
+</p>
+</div>
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Editeur de tableau intégré</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Org rend cela facile de formater des tableaux en ASCII brut. Toute
+ligne avec '<code>|</code>' comme le premier caractère non-espace est
+considéré comme partie du tableau.L '<code>|</code>' est aussi le séparateur
+de colonne<sup><a id="fnr.19" name="fnr.19" class="footref" href="#fn.19">19</a></sup>. De plus, une ligne commençant par '<code>|-</code>' est une
+ligne horizontale. Cela sépare explicitement les rangées. Les
+rangées avant la ligne horizontale sont des en-tête de ligne. Un
+tableau pourrait ressembler à ça :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">| Nom   | Téléphone | Âge |
+|-------+-----------+-----|
+| Peter |      1234 |  17 |
+| Anna  |      4321 | 25  |
+</pre>
+</div>
+<p>
+Un tableau est ré-aligné automatiquement chaque fois que vous
+pressez <code>TAB</code>, <code>RET</code> ou <code>C-c C-c</code> dans le tableau. <code>TAB</code> déplace
+aussi vers le prochain champ---<code>RET</code> vers la prochaine rangée&#x2014;et
+crée de nouvelles rangées de tableau à la fin du tableau ou avant
+les lignes horizontales. L'indentation du tableau est définie par
+la première ligne. Les lignes horizontales sont automatiquement
+étendue sur chaque ré-alignement pour couvrir toute la largeur du
+tableau. Donc, pour créer le tableau ci-dessous vous taperiez :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">| Nom | Téléphone | Âge |
+|-
+</pre>
+</div>
+<p>
+et ensuite presserez <code>TAB</code> pour aligner le tableau et le début du
+remplissage des champs. Même encore plus vite
+'<code>|Nom|Téléphone|Âge</code>' suivi par <code>C-c RET</code>.
+</p>
+
+<p>
+Lorsque vous tapez du texte dans un champ, Org traite <code>DEL</code>,
+<code>Backspace</code>, et toutes les touches de caractères d'une façon
+spéciale, de sorte que ça insère et supprime évitant de décaler les
+autres champs. Aussi, lorsque vous tapez <i>immédiatement</i> après que le
+point ait été déplacé dans un nouveau champ avec <code>TAB</code>, <code>S-TAB</code> ou
+<code>RET</code>, le champ est automatiquement rendu vierge. Si ce
+comportement est trop imprédictible pour vous, configurez l'option
+<code>org-table-auto-blank-field</code>. 
+</p>
+</div>
+<div id="outline-container-sec-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Création et conversion</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<dl class="org-dl">
+<dt> <code>C-c |</code> (<code>org-table-create-or-convert-from-region</code>) </dt><dd>Convertit
+la région active en tableau. Si chaque ligne contient au
+moins un caractère <code>TAB</code>, la fonction suppose que le matériel
+est séparé par des tab. Si chaque ligne contient une virgule,
+Comma-Seperated-Value (CSV) est supposé. Sinon, les lignes
+sont éclatées en espaces blancs dans les champs. Vous pouvez
+utiliser un argument préfixé pour forcer un séparateur
+spécifique : <code>C-u</code> force CSV, <code>C-u C-u</code> force <code>TAB</code>, <code>C-u C-u
+         C-u</code> invite à saisir une expression régulière pour
+correspondre au séparateur, et un argument numérique N
+indique que le séparateur sera au moins N espaces
+consécutifs, ou alternativement une <code>TAB</code>. 
+
+<p>
+S'il n'y a pas de région active, cette commande crée un
+tableau Org vide. Mais il est plus facile de commencer à
+taper, comme <code>|Name|Phone|Age RET|- TAB</code>.
+</p>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> Réalignement et déplacement de champ</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<dl class="org-dl">
+<dt> <code>C-c C-c</code> (<code>org-table-align</code>) </dt><dd>Ré-aligne le tableau sans
+déplacer le point.
+</dd>
+<dt> <code>TAB</code> (<code>org-table-next-field</code>) </dt><dd>Ré-aligne le tableau, bouge
+vers le champ suivant. Crée une nouvelle rangée si
+nécessaire.
+</dd>
+<dt> <code>C-c SPC</code> (<code>org-table-blank-field</code>) </dt><dd>Rend le champ vide au
+point.  
+</dd>
+<dt> <code>S-TAB</code> (<code>org-table-previous-field</code>) </dt><dd>Ré-aligne, bouge au
+champ précédent. 
+</dd>
+<dt> <code>RET</code> (<code>org-table-next-row</code>) </dt><dd>Ré-aligne le tableau et descend
+d'une rangée. Crée une nouvelle rangée si nécessaire. Au
+début ou à la fin d'une ligne, <code>RET</code> insère encore une ligne,
+donc ça peut être utilisé pour diviser un tableau.
+</dd>
+<dt> <code>M-a</code> (<code>org-table-beginning-of-field</code>) </dt><dd>Bouge au début du
+champ courant, ou vers le champ précédent. 
+</dd>
+<dt> <code>M-e</code> (<code>org-table-end-of-field</code>) </dt><dd>Bouge à la fin du champ
+courant, ou vers le champ suivant.
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-3" class="outline-4">
+<h4 id="sec-3-1-3"><span class="section-number-4">3.1.3</span> Edition de ligne et colonne</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<dl class="org-dl">
+<dt> <code>M-LEFT</code> (<code>org-table-move-column-left</code>) </dt><dd>Déplace la colonne
+courante vers la gauche.
+</dd>
+<dt> <code>M-RIGHT</code> (<code>org-table-move-column-right</code>) </dt><dd>Déplace la colonne
+courante vers la droite.
+</dd>
+<dt> <code>M-S-LEFT</code> (<code>org-table-delete-column</code>) </dt><dd>Détruit la colonne
+courante. 
+</dd>
+<dt> <code>M-S-RIGHT</code> (<code>org-table-insert-column</code>) </dt><dd>Insère une nouvelle
+colonne à la gauche de la position du point.
+</dd>
+<dt> <code>M-UP</code> (<code>org-table-move-row-up</code>) </dt><dd>Déplace la ligne courante
+vers le haut.
+</dd>
+<dt> <code>M-DOWN</code> (<code>org-table-move-row-down</code>) </dt><dd>Déplace la ligne
+courante vers le bas.
+</dd>
+<dt> <code>M-S-UP</code> (<code>org-table-kill-row</code>) </dt><dd>Détruit la ligne courante ou
+la ligne horizontale (le filet)
+</dd>
+<dt> <code>M-S-DOWN</code> (<code>org-table-insert-row</code>) </dt><dd>Insère une nouvelle ligne
+au-dessus de l'actuelle. Avec un argument préfixé, la ligne
+est créée au dessous de l'actuelle. 
+</dd>
+<dt> <code>C-c -</code> (<code>org-table-insert-hline</code>) </dt><dd>Insère une ligne
+horizontale sous l'actuelle. Avec un argument préfixé, la
+ligne est créée au-dessus de l'actuelle. 
+</dd>
+<dt> <code>C-c RET</code> (<code>org-table-hline-and-move</code>) </dt><dd>Insère une ligne
+horizontale sous l'actuelle, et déplace le point dans la
+ligne sous le filet.
+</dd>
+<dt> <code>C-c ^</code> (<code>org-table-sort-lines</code>) </dt><dd>Tri les lignes du tableau
+dans la région. La position du point indique la colonne à
+utiliser pour le tri, et l'étendue de lignes est l'étendue
+entre le séparteur de ligne le plus proche, ou le tableau
+entier. S'il n'y a pas de région active, la marque spécifie
+la première ligne et la colonne de tri, alors que le point
+devrait être dans la dernière ligne à être inclus dans le
+tri. La commande invite à saisir le type de tri,
+alphabétiquement, numériquement, ou par date. Vous pouvez
+trier dans l'ordre croissant ou décroissant. Vous pouvez
+aussi fournir votre propre clé d'extraction et fonction de
+comparaison. Lorsqu'appelée avec un argument préfixé, le tri
+alphabétique est sensible à la casse.
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-4" class="outline-4">
+<h4 id="sec-3-1-4"><span class="section-number-4">3.1.4</span> Régions</h4>
+<div class="outline-text-4" id="text-3-1-4">
+<dl class="org-dl">
+<dt> <code>C-c C-x M-w</code> (<code>org-table-copy-region</code>) </dt><dd>Copie une région
+rectangulaire depuis un tableau vers un presse-papier
+spécial. Le point et la marque déterminent les bords des
+champs du rectangle. S'il n'y a pas de région active, copie
+juste le champ courant. Le processus ignore les séparateurs
+de lignes horizontales.
+</dd>
+<dt> <code>C-c C-x C-w</code> (<code>org-table-cut-region</code>) </dt><dd>Copie une région
+rectangulaire depuis un tableau vers un presse-papier
+spécial, et efface tous les champs dans le rectangle. Donc
+c'est l'opération "couper".
+</dd>
+<dt> <code>C-c C-x C-y</code> (<code>org-table-paste-rectangle</code>) </dt><dd>Colle une région
+rectangulaire dans un tableau. Le coin supérieur gauche finit
+dans le champ courant. Tous les champs impliqués sont
+écrasés. Si le rectangle ne rentre pas dans le présent
+tableau, le tableau est élargi autant que nécessaire. Le
+processus ignore les séparateurs de lignes horizontales.
+</dd>
+<dt> <code>M-RET</code> (<code>org-table-wrap-region</code>) </dt><dd>Divise le champ courant à
+la position du point et déplace le reste vers la ligne du
+dessous. S'il n'y a pas de région active, et le point et la
+marque dans la même colonne, le texte dans la colonne est
+enroulé dans la largeur minimale pour le nombre donné de
+lignes. Un argument numérique préfixé peut être utilisé pour
+changer le nombre de lignes désirées. S'il n'y a pas de
+région active, mais que vous spécifiez un argument préfixé,
+le champ courant est rendu vierge, et le contenu et ajouté au
+champ au dessus.  
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-5" class="outline-4">
+<h4 id="sec-3-1-5"><span class="section-number-4">3.1.5</span> Calculs</h4>
+<div class="outline-text-4" id="text-3-1-5">
+<dl class="org-dl">
+<dt> <code>C-c +</code> (<code>org-table-sum</code>) </dt><dd>Somme les nombres dans la colonne
+courante, ou dans le rectangle défini par la région
+active. Le résultat est montré dans la zone d'écho et peut
+être inséré avec <code>C-y</code>.
+</dd>
+<dt> <code>S-RET</code> (<code>org-table-copy-down</code>) </dt><dd>Lorsque le champ actuel est
+vide, copiez le premier champ non vide ci-dessus. Lorsqu'il
+n'est pas vide, copiez le champ actuel dans la rangée
+suivante et déplacez le point avec lui. Selon la variable
+<code>org-table-copy-increment</code>, des champs de valeurs entières
+peuvent être incrémentés durant la copie. Les entiers trop
+grand ne sont pas incrémentés toutefois. Aussi, un argument
+préfixé 0 désactive temporairement l'incrément. Cette touche
+est aussi utilisée par décalage de sélection et les modes
+reliés (voir Section 15.12.2 [Conflicts]). 
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-6" class="outline-4">
+<h4 id="sec-3-1-6"><span class="section-number-4">3.1.6</span> Divers</h4>
+<div class="outline-text-4" id="text-3-1-6">
+<dl class="org-dl">
+<dt> <code>C-c `</code> (<code>org-table-edit-field</code>) </dt><dd>Edite le champ courant dans
+une fenêtre séparée. Ceci est utile pour des champs qui ne
+sont pas pleinement visibles (voir Section 3.2 [Column Width
+and Alignment]). Lorsqu'appelée avec un préfixe <code>C-u</code>, fait
+la fenêtre de l'éditeur suivre le point à travers le tableau
+et montre toujours le champ courant. Le mode suivi sort
+automatiquement lorsque le point quitte le tableau, ou quand
+vous répétez la command avec <code>C-u C-u C-c `</code>.
+</dd>
+<dt> <code>M-x org-table-import</code> </dt><dd>Importe un fichier en tant que
+tableau. Le tableau devrait être <code>TAB</code> ou séparé avec des
+espaces blancs. Utilisez par exemple, pour importer un
+tableau excel ou des données depuis une base de données,
+parce ces programmes peuvent généralement écrire des fichiers
+de texte séparés par des tabulations. Cette commande
+fonctionne par insertion du fichier dans le tampon et ensuite
+convertit la région en un tableau. Tout argument préfixé
+est passé au convertisseur, qui l'utilise pour déterminer le
+séparateur.  
+</dd>
+<dt> <code>C-c |</code> (<code>org-table-create-or-convert-from-region</code>) </dt><dd>Les
+tableaux peuvent aussi être importés en collant des tableaux
+de texte dans le tampon Org, sélectionnant le texte collé
+avec <code>C-x C-x</code> et ensuite en utilisant la commande <code>C-c |</code>
+(voir [Creation and conversion]). 
+</dd>
+<dt> <code>M-x org-table-export</code> </dt><dd>Exporte le tableau, par défaut comme
+un fichier séparé par des tabulations. Utiliser pour échanger
+des données avec, par exemple, un tableur ou des programmes
+de base de données. Le format utilisé pour exporter le
+fichier peut être configuré dans la variable
+<code>org-table-export-default-format</code>. Vous pouvez aussi utiliser
+'<code>TABLE_EXPORT_FILE</code>' et '<code>TABLE_EXPORT_FORMAT</code>' pour
+spécifier le nom de fichier et le format exporter un tableau
+dans une sous-arborescence.Org supporte les formats généraux
+pour les tableaux exportés. Le format de l'exportateur est le
+même que celui utilisé par les tableaux radio Orgtbl, voir
+Section A.5.3 [Translator functions], pour une description
+détaillée.    
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Largeur de colonne et alignement</h3>
+</div>
+</div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
@@ -1682,6 +1975,11 @@ La configuration correspondante dans le tampon est :
 '<code>#+STARTUP: fnadjust</code>' ou '<code>#+STARTUP: nofnadjust</code>'.
 </p></div>
 
+<div class="footdef"><sup><a id="fn.19" name="fn.19" class="footnum" href="#fnr.19">19</a></sup> <p class="footpara">
+Pour insérer une barre verticale dans le champ, utiliser
+'<code>\vert</code>' ou, à l'intérieur d'un mot '<code>abc\vert{}def</code>'.
+</p></div>
+
 
 </div>
 </div></div><div class="col-md-3"><nav id="table-of-contents">
@@ -1731,13 +2029,28 @@ La configuration correspondante dans le tampon est :
 <li><a href="#sec-2-10">2.10. Création de notes de pied de page</a></li>
 </ul>
 </li>
+<li><a href="#sec-3">3. Tableaux</a>
+<ul class="nav">
+<li><a href="#sec-3-1">3.1. Editeur de tableau intégré</a>
+<ul class="nav">
+<li><a href="#sec-3-1-1">3.1.1. Création et conversion</a></li>
+<li><a href="#sec-3-1-2">3.1.2. Réalignement et déplacement de champ</a></li>
+<li><a href="#sec-3-1-3">3.1.3. Edition de ligne et colonne</a></li>
+<li><a href="#sec-3-1-4">3.1.4. Régions</a></li>
+<li><a href="#sec-3-1-5">3.1.5. Calculs</a></li>
+<li><a href="#sec-3-1-6">3.1.6. Divers</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-2">3.2. Largeur de colonne et alignement</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav>
 </div></div></div>
 <footer id="postamble" class="">
 <div><p class="author">Author: Laurent Garnier</p>
-<p class="date">Created: 2019-02-04 Mon 16:21</p>
+<p class="date">Created: 2019-02-04 Mon 19:14</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.1 (<a href="http://orgmode.org">Org-mode</a> 9.1.13)</p>
 </div>
 </footer>
