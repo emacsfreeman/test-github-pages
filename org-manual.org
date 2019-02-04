@@ -937,8 +937,213 @@ touches méta-curseur ont des fonctionnalités différentes.
         liées aux définitions ou références correspondantes, et vous
         pouvez utiliser les commandes usuelles pour suivre ces liens. 
 
+* Tableaux
+  Org vient avec un éditeur de tableau rapide et intuitif. Les calculs
+  de type tableur sont possibles en utilisant le paquet Emacs Calc
+  (voir calc). 
+** Editeur de tableau intégré
+   Org rend cela facile de formater des tableaux en ASCII brut. Toute
+   ligne avec '=|=' comme le premier caractère non-espace est
+   considéré comme partie du tableau.L '=|=' est aussi le séparateur
+   de colonne[fn:19]. De plus, une ligne commençant par '=|-=' est une
+   ligne horizontale. Cela sépare explicitement les rangées. Les
+   rangées avant la ligne horizontale sont des en-tête de ligne. Un
+   tableau pourrait ressembler à ça :
+   #+BEGIN_SRC org
+     | Nom   | Téléphone | Âge |
+     |-------+-----------+-----|
+     | Peter |      1234 |  17 |
+     | Anna  |      4321 | 25  |
+   #+END_SRC
+   Un tableau est ré-aligné automatiquement chaque fois que vous
+   pressez =TAB=, =RET= ou =C-c C-c= dans le tableau. =TAB= déplace
+   aussi vers le prochain champ---=RET= vers la prochaine rangée---et
+   crée de nouvelles rangées de tableau à la fin du tableau ou avant
+   les lignes horizontales. L'indentation du tableau est définie par
+   la première ligne. Les lignes horizontales sont automatiquement
+   étendue sur chaque ré-alignement pour couvrir toute la largeur du
+   tableau. Donc, pour créer le tableau ci-dessous vous taperiez :
+   #+BEGIN_SRC org
+     | Nom | Téléphone | Âge |
+     |-
+   #+END_SRC
+   et ensuite presserez =TAB= pour aligner le tableau et le début du
+   remplissage des champs. Même encore plus vite
+   '=|Nom|Téléphone|Âge=' suivi par =C-c RET=.
+
+   Lorsque vous tapez du texte dans un champ, Org traite =DEL=,
+   =Backspace=, et toutes les touches de caractères d'une façon
+   spéciale, de sorte que ça insère et supprime évitant de décaler les
+   autres champs. Aussi, lorsque vous tapez /immédiatement/ après que le
+   point ait été déplacé dans un nouveau champ avec =TAB=, =S-TAB= ou
+   =RET=, le champ est automatiquement rendu vierge. Si ce
+   comportement est trop imprédictible pour vous, configurez l'option
+   =org-table-auto-blank-field=. 
+*** Création et conversion
+    + =C-c |= (=org-table-create-or-convert-from-region=) :: Convertit
+         la région active en tableau. Si chaque ligne contient au
+         moins un caractère =TAB=, la fonction suppose que le matériel
+         est séparé par des tab. Si chaque ligne contient une virgule,
+         Comma-Seperated-Value (CSV) est supposé. Sinon, les lignes
+         sont éclatées en espaces blancs dans les champs. Vous pouvez
+         utiliser un argument préfixé pour forcer un séparateur
+         spécifique : =C-u= force CSV, =C-u C-u= force =TAB=, =C-u C-u
+         C-u= invite à saisir une expression régulière pour
+         correspondre au séparateur, et un argument numérique N
+         indique que le séparateur sera au moins N espaces
+         consécutifs, ou alternativement une =TAB=. 
+
+	 S'il n'y a pas de région active, cette commande crée un
+         tableau Org vide. Mais il est plus facile de commencer à
+         taper, comme =|Name|Phone|Age RET|- TAB=.
+
+*** Réalignement et déplacement de champ
+    + =C-c C-c= (=org-table-align=) :: Ré-aligne le tableau sans
+         déplacer le point.
+    + =TAB= (=org-table-next-field=) :: Ré-aligne le tableau, bouge
+         vers le champ suivant. Crée une nouvelle rangée si
+         nécessaire.
+    + =C-c SPC= (=org-table-blank-field=) :: Rend le champ vide au
+         point.  
+    + =S-TAB= (=org-table-previous-field=) :: Ré-aligne, bouge au
+         champ précédent. 
+    + =RET= (=org-table-next-row=) :: Ré-aligne le tableau et descend
+         d'une rangée. Crée une nouvelle rangée si nécessaire. Au
+         début ou à la fin d'une ligne, =RET= insère encore une ligne,
+         donc ça peut être utilisé pour diviser un tableau.
+    + =M-a= (=org-table-beginning-of-field=) :: Bouge au début du
+         champ courant, ou vers le champ précédent. 
+    + =M-e= (=org-table-end-of-field=) :: Bouge à la fin du champ
+         courant, ou vers le champ suivant.
+	 
+*** Edition de ligne et colonne
+    + =M-LEFT= (=org-table-move-column-left=) :: Déplace la colonne
+         courante vers la gauche.
+    + =M-RIGHT= (=org-table-move-column-right=) :: Déplace la colonne
+         courante vers la droite.
+    + =M-S-LEFT= (=org-table-delete-column=) :: Détruit la colonne
+         courante. 
+    + =M-S-RIGHT= (=org-table-insert-column=) :: Insère une nouvelle
+         colonne à la gauche de la position du point.
+    + =M-UP= (=org-table-move-row-up=) :: Déplace la ligne courante
+         vers le haut.
+    + =M-DOWN= (=org-table-move-row-down=) :: Déplace la ligne
+         courante vers le bas.
+    + =M-S-UP= (=org-table-kill-row=) :: Détruit la ligne courante ou
+         la ligne horizontale (le filet)
+    + =M-S-DOWN= (=org-table-insert-row=) :: Insère une nouvelle ligne
+         au-dessus de l'actuelle. Avec un argument préfixé, la ligne
+         est créée au dessous de l'actuelle. 
+    + =C-c -= (=org-table-insert-hline=) :: Insère une ligne
+         horizontale sous l'actuelle. Avec un argument préfixé, la
+         ligne est créée au-dessus de l'actuelle. 
+    + =C-c RET= (=org-table-hline-and-move=) :: Insère une ligne
+         horizontale sous l'actuelle, et déplace le point dans la
+         ligne sous le filet.
+    + =C-c ^= (=org-table-sort-lines=) :: Tri les lignes du tableau
+         dans la région. La position du point indique la colonne à
+         utiliser pour le tri, et l'étendue de lignes est l'étendue
+         entre le séparteur de ligne le plus proche, ou le tableau
+         entier. S'il n'y a pas de région active, la marque spécifie
+         la première ligne et la colonne de tri, alors que le point
+         devrait être dans la dernière ligne à être inclus dans le
+         tri. La commande invite à saisir le type de tri,
+         alphabétiquement, numériquement, ou par date. Vous pouvez
+         trier dans l'ordre croissant ou décroissant. Vous pouvez
+         aussi fournir votre propre clé d'extraction et fonction de
+         comparaison. Lorsqu'appelée avec un argument préfixé, le tri
+         alphabétique est sensible à la casse.
+
+*** Régions
+    + =C-c C-x M-w= (=org-table-copy-region=) :: Copie une région
+         rectangulaire depuis un tableau vers un presse-papier
+         spécial. Le point et la marque déterminent les bords des
+         champs du rectangle. S'il n'y a pas de région active, copie
+         juste le champ courant. Le processus ignore les séparateurs
+         de lignes horizontales.
+    + =C-c C-x C-w= (=org-table-cut-region=) :: Copie une région
+         rectangulaire depuis un tableau vers un presse-papier
+         spécial, et efface tous les champs dans le rectangle. Donc
+         c'est l'opération "couper".
+    + =C-c C-x C-y= (=org-table-paste-rectangle=) :: Colle une région
+         rectangulaire dans un tableau. Le coin supérieur gauche finit
+         dans le champ courant. Tous les champs impliqués sont
+         écrasés. Si le rectangle ne rentre pas dans le présent
+         tableau, le tableau est élargi autant que nécessaire. Le
+         processus ignore les séparateurs de lignes horizontales.
+    + =M-RET= (=org-table-wrap-region=) :: Divise le champ courant à
+         la position du point et déplace le reste vers la ligne du
+         dessous. S'il n'y a pas de région active, et le point et la
+         marque dans la même colonne, le texte dans la colonne est
+         enroulé dans la largeur minimale pour le nombre donné de
+         lignes. Un argument numérique préfixé peut être utilisé pour
+         changer le nombre de lignes désirées. S'il n'y a pas de
+         région active, mais que vous spécifiez un argument préfixé,
+         le champ courant est rendu vierge, et le contenu et ajouté au
+         champ au dessus.  
+
+*** Calculs
+    + =C-c += (=org-table-sum=) :: Somme les nombres dans la colonne
+         courante, ou dans le rectangle défini par la région
+         active. Le résultat est montré dans la zone d'écho et peut
+         être inséré avec =C-y=.
+    + =S-RET= (=org-table-copy-down=) :: Lorsque le champ actuel est
+         vide, copiez le premier champ non vide ci-dessus. Lorsqu'il
+         n'est pas vide, copiez le champ actuel dans la rangée
+         suivante et déplacez le point avec lui. Selon la variable
+         =org-table-copy-increment=, des champs de valeurs entières
+         peuvent être incrémentés durant la copie. Les entiers trop
+         grand ne sont pas incrémentés toutefois. Aussi, un argument
+         préfixé 0 désactive temporairement l'incrément. Cette touche
+         est aussi utilisée par décalage de sélection et les modes
+         reliés (voir Section 15.12.2 [Conflicts]). 
+
+*** Divers 
+    + =C-c `= (=org-table-edit-field=) :: Edite le champ courant dans
+         une fenêtre séparée. Ceci est utile pour des champs qui ne
+         sont pas pleinement visibles (voir Section 3.2 [Column Width
+         and Alignment]). Lorsqu'appelée avec un préfixe =C-u=, fait
+         la fenêtre de l'éditeur suivre le point à travers le tableau
+         et montre toujours le champ courant. Le mode suivi sort
+         automatiquement lorsque le point quitte le tableau, ou quand
+         vous répétez la command avec =C-u C-u C-c `=.
+    + =M-x org-table-import= :: Importe un fichier en tant que
+         tableau. Le tableau devrait être =TAB= ou séparé avec des
+         espaces blancs. Utilisez par exemple, pour importer un
+         tableau excel ou des données depuis une base de données,
+         parce ces programmes peuvent généralement écrire des fichiers
+         de texte séparés par des tabulations. Cette commande
+         fonctionne par insertion du fichier dans le tampon et ensuite
+         convertit la région en un tableau. Tout argument préfixé
+         est passé au convertisseur, qui l'utilise pour déterminer le
+         séparateur.  
+    + =C-c |= (=org-table-create-or-convert-from-region=) :: Les
+         tableaux peuvent aussi être importés en collant des tableaux
+         de texte dans le tampon Org, sélectionnant le texte collé
+         avec =C-x C-x= et ensuite en utilisant la commande =C-c |=
+         (voir [Creation and conversion]). 
+    + =M-x org-table-export= :: Exporte le tableau, par défaut comme
+         un fichier séparé par des tabulations. Utiliser pour échanger
+         des données avec, par exemple, un tableur ou des programmes
+         de base de données. Le format utilisé pour exporter le
+         fichier peut être configuré dans la variable
+         =org-table-export-default-format=. Vous pouvez aussi utiliser
+         '=TABLE_EXPORT_FILE=' et '=TABLE_EXPORT_FORMAT=' pour
+         spécifier le nom de fichier et le format exporter un tableau
+         dans une sous-arborescence.Org supporte les formats généraux
+         pour les tableaux exportés. Le format de l'exportateur est le
+         même que celui utilisé par les tableaux radio Orgtbl, voir
+         Section A.5.3 [Translator functions], pour une description
+         détaillée.    
+
+
+** Largeur de colonne et alignement
+
 
 * Footnotes
+
+[fn:19] Pour insérer une barre verticale dans le champ, utiliser
+'=\vert=' ou, à l'intérieur d'un mot '=abc\vert{}def='.
 
 [fn:18] La configuration correspondante dans le tampon est :
 '=#+STARTUP: fnadjust=' ou '=#+STARTUP: nofnadjust='.
