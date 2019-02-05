@@ -852,7 +852,7 @@ touches méta-curseur ont des fonctionnalités différentes.
    Time]). Ces blocs peuvent être pliés et dépliés en pressant =TAB=
    dans la ligne '=#+BEGIN='. Vous pouvez aussi obtenir tous les blocs
    pliés à startup en configurant la variable =org-hide-block-startup=
-   ou sur une base de fichier pair en utilisant 
+   ou par fichier en utilisant :
    #+BEGIN_SRC org
      ,#+STARTUP: hideblocks
      ,#+STARTUP: nohideblocks
@@ -1138,9 +1138,303 @@ touches méta-curseur ont des fonctionnalités différentes.
 
 
 ** Largeur de colonne et alignement
+   La largeur des colonnes est automatiquement déterminée par
+   l'éditeur de tableau. L'alignement d'une colonne est déterminé
+   automatiquement à partir de la fraction de champs numériques ou non
+   numériques de la colonne. 
 
+   Editer un champ peut modifier l'alignement du tableau. Déplacer une
+   ligne ou une colonne contigue---i.e, utiliser =TAB= ou =RET=---le
+   ré-aligne automatiquement. Si vous voulez désactiver ce
+   comportement, configurer =org-table-automatic-realign= à
+   =nil=. Dans tous les cas, vous pouvez toujours aligner manuellement
+   un tableau :
+   + =C-c C-c= (=org-table-align=) :: Aligne le tableau courant. 
+
+
+   Configurer l'option =org-startup-align-all-tables= ré-aligne tous
+   les tableaux dans un fichier lors de sa visite. Vous pouvez aussi
+   configurer cette option par fichier avec : 	
+   #+BEGIN_SRC org
+     ,#+STARTUP: align
+     ,#+STARTUP: noalign
+   #+END_SRC
+   Parfois, un seul champ ou quelques champs doivent contenir plus de
+   texte, ce qui entraîne des colonnes trop larges. Peut-être vous
+   voulez cacher plusieurs colonnes ou les afficher avec une largeur
+   fixée, peu importe le contenu, comme montré dans l'exemple. 
+   #+BEGIN_SRC org
+     |---+--------+----------|
+     |   | <6>    |          |
+     | 1 | un     | peu      |
+     | 2 | deux   | ennuyeux |
+     | 3 | Ceci est un long texte | colonne  |
+   #+END_SRC
+   Pour configurer la largeur d'une colonne, un champ n'importe où
+   dans la colonne peut contenir juste la chaîne '=<N>=' où N spécifie
+   la largeur comme nombre de caractères. Vous pouvez contrôler la
+   largeur d'affichée des colonnes avec les outils suivants :
+   + =C-c TAB= (=org-table-toggle-column-width=) :: Réduis ou agrandis
+        la colonne actuelle. 
+
+	Si la largeur d'un cookie spécifie une largeur W pour la
+        colonne, la réduire affiche les W premiers caractères visibles
+        uniquement. Autrement, la colonne est réduite à un seul
+        caractère. 
+
+	Lorsqu'appelée avant la première colonne ou après la dernière,
+        demande une liste de plages de colonnes sur lesquelles opérer.
+   + =C-u C-c TAB= (=org-table-shrink=) :: Réduis toutes les colonnes
+        avec une largeur de colonne. Etend les autres. 
+   + =C-u C-u C-c TAB= (=org-table-expand=) :: Etend toutes les
+        colonnes.
+
+
+   Pour voir le texte plein d'un champ réduit, maintenir la souris
+   au-dessus de lui : une info-bulle montre alors le contenu complet
+   du champ. Alternativement, =C-h .= (=display-local-help=) les
+   révèle aussi. Par confort, toute modification proche de la partie
+   réduite d'une colonne l'étend. 
+
+   Configurer l'option =org-startup-shrink-all-tables= réduit toutes
+   les colonnes contenant un large cookie dans un fichier lors de sa
+   visite. Vous pouvez aussi configurer cette option par fichier
+   avec : 
+   =#+STARTUP: shrink=
+   Si vous souhaitez remplacer l'alignement automatique des colonnes
+   riches en nombres à droite et des colonnes riches en chaînes à
+   gauche, vous pouvez utiliser '=<r>=', '=<c>=', ou '=<l>=' de façon
+   similaire. Vous pouvez aussi combiner alignement et largeur de
+   champ comme ça : '=<r10>='.
+
+   Les lignes qui contiennent uniquement ces formatages de cookie sont
+   automatiquement effacées lors de l'exportation du document. 
+
+** Groupes de colonnes
+   Lorsque Org exporte des tableaux, il le fait par défaut sans lignes
+   verticales parce que c'est plus satisfaisant visuellement en
+   général. Occasionnellement toutefois, des lignes verticales peuvent
+   être utiles pour structurer un tableau en groupes de colonnes, plus
+   comme des lignes horizontales peuvent le faire pour des groupes de
+   rangées. Afin de spécifier des groupes de colonnes, vous pouvez
+   utiliser une rangée spéciale où le premier champ contient
+   uniquement '=/='. Les autres champs peuvent contenir soit '=<='
+   pour indiquer que cette colonne devrait commencer un groupe, '=>='
+   pour indiquer la fin d'une colonne, ou '=<>=' (pas d'espace entre
+   '=>=' et '=>=') pour faire un groupe de colonne en soi. Lors de
+   l'exportation, les limites entre groupes de colonnes sont marquées
+   avec des lignes verticales. Voici un exemple :
+   #+BEGIN_SRC org
+     | N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
+     |---+-----+-----+-----+---------+------------|
+     | / |   < |     |   > |       < |          > |
+     | 1 |   1 |   1 |   1 |       1 |          1 |
+     | 2 |   4 |   8 |  16 |  1.4142 |     1.1892 |
+     | 3 |   9 |  27 |  81 |  1.7321 |     1.3161 |
+     |---+-----+-----+-----+---------+------------|
+     ,#+TBLFM: $2=$1^2::$3=$1^3::$4=$1^4::$5=sqrt($1)::$6=sqrt(sqrt(($1)))
+   #+END_SRC
+   C'est aussi suffisant de juste insérer le groupe de colonnes après
+   chaque ligne verticale que vous souhaiteriez avoir :
+   #+BEGIN_SRC org
+     | N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
+     |---+-----+-----+-----+---------+------------|
+     | / | <   |     |     | <       |            |
+   #+END_SRC
+   
+
+** Le mode mineur Orgtbl
+   Si vous aimez la façon intuitive dont l'éditeur de tableau Org
+   marche, vous pourriez vouloir l'utiliser dans d'autres modes comme
+   dans le mode Text ou Mail. Le mode mineur Orgtbl rend cela
+   possible. Vous pouvez toujours basculer le mode avec =M-x
+   orgtbl-mode=. Pour l'activer par défaut par exemple dans le mode
+   Message, utiliser :
+   =(add-hook 'message-mode-hook 'turn-on-orgtbl)=
+
+   En outre, avec une certaine configuration spéciale, il est possible
+   de maintenir les tableaux dans une syntaxe arbitraire avec le mode
+   Orgtbl. Par exemple, il est possible de construire des tableaux
+   \LaTeX avec la facilité et la puissance sous-jacente du mode
+   Orgtbl, incluant les capacités de tableur. Pour les détails, voir
+   Section A.5 [Tables in Arbitrary Syntax]. 
+
+** Le tableur
+   L'éditeur de tableau fait usage du paquet Emacs Calc pour
+   implémenter des capacités de tableur. Il peut aussi évaluer des
+   formules Emacs Lisp pour dériver des champs d'autres champs. Bien
+   que plein d'options, l'implémentation Org n'est pas identiques aux
+   autres tableurs. Par exemple, Org connaît le concept de /formule de
+   colonne/ qui sera appliquée à tous les champs hors en-tête dans une
+   colonne sans avoir à copier la formule pour chaque champ
+   pertinent. Il y a aussi une formule de débogage, et un éditeur de
+   formule, déplaçant ces références avec les touches flèches. 
+*** Références
+    Pour calculer les champs dans le tableau à partir d'autres champs,
+    les formules doivent faire référence à d'autres champs ou
+    plages. Dans Org, des champs peuvent être référencées par nom, par
+    coordonnées absolues, et par coordonnées relatives. Pour découvrir
+    queles sont les coordonnées d'un champ, pressez =C-c ?= dans ce
+    champ, ou pressez =C-c —}= pour basculer l'affichage d'une grille.
+**** Références de champ 
+     Les formules peuvent référencer la valeur d'un autre champs de
+     deux façons. Comme dans tout autre tableur, vous pouvez
+     référencer les champs par des combinaisons lettre/nombre comme
+     '=B3=', signifiant le second champ dans la troisième
+     ligne. Néanmoins, Org préfère utiliser une autre représentation
+     plus générale qui ressemble à[fn:20] :
+     
+     =@ROW$COLUMN=
+     
+     Les spécifications de colonnes peuvent être absolues comme
+     '=$1=', '=$2=', ..., '=$N=', ou relative à la colonne courante,
+     i.e, la colonne du champ qui est calculé, comme '=$+1=' ou
+     '=$-2='. '=$<=' et '=$>=' sont des références immuables pour la
+     1ère et la dernière colonne, respectivement, et vous pouvez
+     utiliser '=$>>>=' pour indiquer la 3ème colonne depuis la droite.
+
+     La spécification de rangée compte uniquement les lignes avec des
+     données et ignore les séparateurs horizontaux, ou "hlines". Comme
+     avec les colonnes, vous pouvez utiliser des numéros absolus de
+     rangées '=@1=', '=@2=', ..., '=@N=', et des numéros relatifs à la
+     rangée en cours comme '=@+3=' ou '=@-1='. '=@<=' et '=@>=' sont
+     des références immuables à la 1ère et dernière rangée dans le
+     tableau, respectivement. Vous pouvez aussi spécifier la rangée
+     relative à une des hlines : '=@I=' se réfère à la 1ère hline,
+     '=@II=' à la seconde, etc. '=@-I=' se réfère à la 1ère telle
+     ligne au dessus de la ligne actuelle, '=@+I=' à la 1ère telle
+     ligne au dessous de la ligne actuelle. Vous pouvez aussi écrire
+     '=@III+2=' qui est la seconde ligne de donnée après la 3ème hline
+     dans le tableau. 
+
+     '=@0=' et '=$0=' se réfèrent à la ligne et la colonne actuelles,
+     respectivement, i.e, à la ligne/colonne du champ qui est
+     calculé. Aussi, si vous omettez soit la colonne soit la ligne de
+     la référence, l'actuelle ligne/colonne est impliquée.
+
+     Les références Org utilisent des nombres /non signés/ qui sont
+     des références fixées dans le sens où si vous utilisez la même
+     référence dans la formule pour deux champs différents, le même
+     champ est référencé à chaque fois. Les références Org avec des
+     nombres /signés/ sont des références flottantes parce que le même
+     opérateur de référence peut référencer différent champ selon le
+     chaque qui est calculé par la formule.
+
+     Voici quelques exemples :
+
+     | '=@2$3='   | 2e ligne, 3e colonne (idem que '=C2=')                           |
+     | '=$5='     | colonne 5 dans la ligne actuelle (idem que '=E&=')               |
+     | '=@2'=     | colonne actuelle, ligne 2                                        |
+     | '=@-1$-3=' | champ une ligne au dessus, trois colonnes à gauche               |
+     | '=@-I$2='  | champ juste sous hline au dessus de la ligne actuelle, colonne 2 |
+     | '=@>$5='   | champ dans la dernière ligne, colonne 5                          |
+
+**** Références de plages
+     Vous pouvez référencer une plage rectangulaire de champs en
+     spécifiant deux champs de références connectées par deux points
+     '=..='. Si les deux champs sont dans la ligne en cours, vous
+     pouvez simplement utiliser '=$2..$7=', mais si au moins un champ
+     est dans une ligne différente, vous devez utiliser le format
+     général '=@ROW$COLUMN=' au moins pour le premier champ, i.e, la
+     référence doit démarrer avec '=@=' afin d'être interprétée
+     correctement. Exemples :
+     | '=$1..$3='      | premier trois champs dans la ligne courante                       |
+     | '=$P..$Q='      | plage, utilisant noms de colonnes                                 |
+     | '=$<<<..$>>='   | démarre en colonne 3, continue jusqu'à la dernière                |
+     | '=@2$1..@4$3='  | 6 champs entre ces 2 (idem que '=A2..C4=')                        |
+     | '=@-1$-2..@-1=' | 3 champs dans la rangée au dessus, commençant 2 colonnes à gauche |
+     | '=@I..II='      | entre la 1ère et la 2de hline, raccourci pour '=@I..@II='         |
+
+     La plage de références renvoie un vecteur de valeurs qui peuvent
+     être introduites en vecteur de fonctions Calc. Les champs libres
+     dans les plages sont normalement supprimés, de sorte que le
+     vecteur contienne uniquement des champs non-vides. Pour d'autres
+     options avec le switche '=E=', '=N=' et des exemples, voir
+     Section 3.5.2 [Formula syntax for Calc].
+
+**** Coordonnées des champs dans les formules
+     L'une des toutes premières actions durant l'évaluation des
+     formules Calc et des formules Lisp et de substituer '=@#=' et
+     '=$#=' dans la formule avec le numéro de ligne ou colonne du
+     champ où le résultat ira. Les formules Lisp traditionnelles
+     équivalentes sont =org-table-current-dline= et
+     =org-table-current-column=. Exemples :
+     + '=if(@# % 2, $#, string(""))=' :: insère un numéro de colonne
+          sur les lignes impaires, configure le champ à vide même sur
+          les lignes paires.
+     + '~$2 = '(identity remote(FOO, @@#$1))~' :: copie le texte ou
+          les valeurs de chaque rangée de la colonne 1 du tableau
+          nommé FOO dans la colonne 2 du tableau courant.
+     + '~@3 = * remote(FOO, @@1$$#)~' :: insère la valeur doublée de
+          chaque colonne de la ligne 1 du tableau nommé FOO dans la
+          rangée 3 du tableau courant. 
+
+  
+     Pour les 2e et 3e exemples, le tableau FOO doit avoir au moins
+     autant de lignes ou colonnes que le tableau actuel. Noter que
+     c'est inefficace[fn:21] pour un grand nombre de lignes.
+
+**** Références nommées
+     '=$name=' est interprété comme le nom d'une colonne, paramètre ou
+     constante. Les constantes sont définies globalement via la
+     variable =org-table-formula-constants=, et localement---pour le
+     fichier---via une ligne comme cet exemple :
+
+     =#+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6=
+
+     Aussi, les propriétés (voir Chapitre 7 [Properties and Columns])
+     peuvent être utilisées comme constantes dans des formules de
+     tableaux : pour une propriété '=Xyz=' utiliser le nom
+     '=$PROP_Xyz=', et la propriété sera cherchée dans l'entrée
+     hiérarchique actuelle et dans la hiérarchie au dessus. Si vous
+     avez le paquet '=constants.el=', il sera aussi utilisé pour
+     résoudre les constantes, incluant des constantes naturelles comme
+     '=$h=' pour la constante de Planck, et des unités comme '=$km='
+     pour les kilomètres[fn:22]. Les noms de colonnes et les
+     paramètres peuvent être spécifié dans des lignes spéciales de
+     tableau. Elles sont décrites plus bas, voir Section 3.5.10
+     [Advanced features]. Tous les noms doivent commencer par une
+     lettre, et les autres constitué de lettres et de nombres.
+
+**** Références distantes
+     Vous pouvez aussi référencer des constantes, des champs et des
+     plages depuis différents tableaux, soit dans le fichier actuel ou
+     même dans un fichier différent. La syntaxe est
+
+     =remote(NAME, REF)=
+
+     où NAME peut être le nom d'un tableau dans le fichier actuel
+     comme défini par une ligne '=#+NAME:=' avant le tableau. Cela
+     peut aussi être l'ID d'une entrée, même dans un fichier
+     différent, et la référence se réfère à l'entrée dans le premier
+     tableau. REF est une référence absolue de champ ou plage comme
+     décrit au dessus par exemple '=@3$3=' ou '=$somename=', valide
+     dans le tableau référencé. 
+
+     Lorsque NAME le format '=@ROW$COLUMN=', il est remplacé par le
+     nom et l'ID trouvé dans ce champ du tableau actuel. Par exemple
+     '=remote($1, @@>$2)=' \Rightarrow '=remote(year_2013,
+     @@>$1)='. Le format '=B3=' n'est pas supporté parce qu'il ne peut
+     pas être distingué d'un nom ou ID brut. 
+*** Syntaxe des formules pour Calc
+    
 
 * Footnotes
+
+[fn:22] Le fichier '=constants.el=' peut fournir les valeurs de
+constantes dans deux systèmes d'unités différents, '=SI=' et
+'=cgs='. Celui utilisé dépend de la valeur de la variable
+=constants-unit-system=. Vous pouvez utiliser les options '=constSI='
+et '=constcgs=' de '=STARTUP=' pour configurer cette valeur pour le
+tampon actuel. 
+
+[fn:21] La complexité du calcul est de l'ordre de O(N^2) parce que le
+tableau FOO est analysée pour chaque champ copié.
+
+[fn:20] Org comprend les références tapées par l'utilisateur comme
+'=B4=', mais il n'utilise pas cette syntaxe lorsqu'il offre une
+formule pour l'édition. Vous pouvez personnaliser ce comportement en
+utilisant la variable =org-table-use-standard-references=.
 
 [fn:19] Pour insérer une barre verticale dans le champ, utiliser
 '=\vert=' ou, à l'intérieur d'un mot '=abc\vert{}def='.
