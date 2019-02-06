@@ -1,6 +1,7 @@
 #+TITLE: Traduction française du manuel Org
 #+AUTHOR: Laurent Garnier
 
+#+LANGUAGE: FR
 #+OPTIONS: toc:t h:3 num:t
 * Introduction 
 ** Résumé
@@ -1136,7 +1137,6 @@ touches méta-curseur ont des fonctionnalités différentes.
          Section A.5.3 [Translator functions], pour une description
          détaillée.    
 
-
 ** Largeur de colonne et alignement
    La largeur des colonnes est automatiquement déterminée par
    l'éditeur de tableau. L'alignement d'une colonne est déterminé
@@ -1242,7 +1242,6 @@ touches méta-curseur ont des fonctionnalités différentes.
      | / | <   |     |     | <       |            |
    #+END_SRC
    
-
 ** Le mode mineur Orgtbl
    Si vous aimez la façon intuitive dont l'éditeur de tableau Org
    marche, vous pourriez vouloir l'utiliser dans d'autres modes comme
@@ -1417,9 +1416,135 @@ touches méta-curseur ont des fonctionnalités différentes.
      @@>$1)='. Le format '=B3=' n'est pas supporté parce qu'il ne peut
      pas être distingué d'un nom ou ID brut. 
 *** Syntaxe des formules pour Calc
+    Une formule peut être n'importe quelle expression algébrique
+    comprise par le paquet Emacs Calc. Noter que Calc a la convention
+    non standard que '=/=' a une priorité plus faible que '=*=', de
+    sorte que '=a/b*c=' est interprété comme '=(a/(b*c))='. Avant
+    évaluation par =calc-eval= (voir Section "Calling Calc from Your
+    Programs' dans [[https://www.gnu.org/software/emacs/manual/html_node/calc/index.html][calc]]), le changement de variable a lieu selon les
+    règles décrites plus haut.
+
+    La plage de vecteurs peut être directement remplie dans les
+    fonctions Calc comme =vmean= et =vsum=. Une formule peut contenir
+    un mode optionnel chaîne après un point-virgule. Cette chaîne
+    est composée d'indicateurs pour influencer Calc et d'autres modes
+    durant l'exécution. Par défaut, Org utilise les modes Calc
+    standard (précision 12, unités des angles degrés, modes fraction
+    et symbolic off). Le format d'affichage, toutefois, a été modifié
+    en '=(float 8)=' pour garder les tableaux compacts. Les réglages
+    par défaut peuvent être configurés en utilisant la variable
+    =org-calc-default-modes=. 
+
+    + '=p20=' :: Configure les calculs internes de Calc avec une
+                 précision de 20 chiffres.
+    + '=n3=', '=s3=', '=e2=', '=f4=' :: Format normal, scientifique,
+         ingénieur, ou fixé du résultat de Calc passé à Org. Le
+         formatage de Calc est illimité tant que la précision du
+         calcul de Calc est supérieure.
+    + '=D=', '=R=' :: modes degrés et radians de Calc.
+    + '=F=', '=S=' :: modes fraction et symbolique de Calc.
+    + '=T=', '=t=', '=U=' :: calculs de durées dans Calc ou Lisp,
+         Section 3.5.4 [Durations and times values]
+    + '=E=' :: Si et comment considérer les champs vides. Sans '=E='
+               les champs vides des références de plage sont
+               supprimés, de sorte que le vecteur Calc ou la liste
+               Lisp ne contient que les champs non vides. Avec '=E=',
+               les champs vides sont conservés. Pour les champs vides
+               dans les plages ou les références de champ vides, la
+               valeur '=nan=' (pas un nombre, /not a number/) est
+               utilisée dans les formules Calc et la chaîne vide est
+               utilisée pour les formules Lisp. Ajoutez "N" pour
+               utiliser 0 à la place des deux types de formules. Pour
+               la valeur d’un champ, le mode '=N=' a une priorité
+               supérieure à '=E='.
+    + '=N=' :: Interprète tous les champs comme des nombres, utilise 0
+               pour les non-nombres. Voir la prochaine section pour
+               voir comment c'est essentiel pour les calculs avec les
+               formules Lisp. Dans les formules Calc, c'est utilisé
+               occasionnellement, car les chaînes de nombres sont déjà
+               interprétées comme des nombres sans '=N='.
+    + '=L=' :: Littéral, pour les formules Lisp uniquement. Voir la
+               section suivante. 
+
+
+
+    À moins que vous n'utilisiez de grands nombres entiers ou des
+    calculs de haute précision  et affichez des nombres à virgule
+    flottante vous pouvez alternativement fournir un spécificateur de
+    format à =printf= pour reformater le résultat de Calc après qu'il
+    ait été passé à Org au lieu de laisser Calc faire le
+    formatage[fn:23]. Quelques exemples : 
+
+    + '=$1+$2=' :: Somme des premier et second champs.
+    + '=$1+$2;%.2f=' :: Idem, formatage du résultat à 2 décimales.
+    + '=exp($2)+exp($1)=' :: Des fonctions mathématiques peuvent être
+         utilisées. 
+    + '=$0;%.1f=' :: Reformate les cellules courantes à 1 décimales.
+    + '=($3-32)*5/9=' :: Conversion degrés F \rightarrow C 
+    + '=$c/$1/$cm=' :: Conversion Hz \rightarrow cm, utilisant
+                       '=constants.el='
+    + '=tan($1);Dp3s1=' :: Calculs en degrés, précision 3, affichage
+         SCI 1
+    + '=sin($1);Dp3%.1e=' :: Idem, mais usage du spécificateur
+         =printf= pour l'affichage.
+    + '=vean($2..$7)=' :: Calcul de la plage de colonne, utilisant une
+         fonction vectorielle
+    + '=vmean($2..$7);EN=' :: Idem, mais traite les champs vides comme
+         0
+    + '=taylor($3,x=7,2)=' :: Série de Taylor de $3, à x = 7, second
+         degré
+
+
+
+    Calc contient aussi un ensemble complet d'opérations logiques
+    (voir Section "Logical Operations dans [[https://www.gnu.org/software/emacs/manual/html_node/calc/index.html][calc]]). Par exemple
+
+    + '=if($1 < 20, teen, string(""))=' :: '="teen"=' si age '=$1='
+         est moins que 20, sinon le champ résultat du tableau Org est
+         configuré à vide avec la chaîne vide.
+    + '~if("$1" == "nan" || "$2" == "nan", string(""), $1 + $2); E f-1~' :: Somme les deux premières colonnes. Lorsqu'au moins
+      un des champs de saisie est vide le champ résultat du tableau
+      Org est configuré à vide. '=E=' est requis pour ne pas convertir
+      les champs vides en 0. '=f-1=' est un format de chaîen Calc
+      optionnel similaire à '=%.1f=' mais laisse vide les résultats
+      vides.
+    + '~if(typeof(vmean($1..$7)) == 12, string(""), vmean($1..$7); E~'
+         :: Valeur moyenne d'une plage à moins qu'il n'y ait un champ
+      vide. Chaque champ dans la plage qui est vide est remplacé par
+      '=nan=' ce qui laisse le résultat de '=vmean=' à '=nan='. Alors
+      '~typeof =~' 12= détecte le '=nan=' depuis '=vmean=' et le champ
+      résultat du tableau Org est configuré à vide. Utilise ça
+      lorsque l'échantillon est supposé n'avoir aucune valeur
+      manquante. 
+    + '~if("$1..$7" == "[]", string(""), vmean($1..$7))~' :: Valeur
+         moyenne d'une plage avec des champs vides zappés. Chaque
+         champ dans la plage qui est vide est zappé. Lorsque tous les
+         champs dans la plage sont vides la valeur moyenne n'est pas
+         définie et le résultat du tableau Org est réglé à
+         vide. Utilise ça lorsque l'échantillon a une taille
+         variable. 
+    + '=vmean($1..$7); EN=' :: Pour compléter l'exemple précédent :
+         valeur moyenne d'une plage avec des champs vides comptant
+         comme échantillons avec valeur 0. Utilise uniquement lorsque
+         des échantillons incomplets devraient être comblés par
+         des 0. 
     
 
+    Vous pouvez ajouter vos propres fonctions Calc définies en Emacs
+    Lisp avec =defmath= et utilisez-les dans la syntaxe de formule
+    pour Calc.
+
+*** Les formules Emacs Lisp en tant que formules
+
+
 * Footnotes
+
+[fn:23] Le reformatage de printf est limité en précision parce que la
+valeur qui lui est passée est convertie en "integer" (entier) ou
+"double" (approximation de réel). Le "integer" est limité en taille
+par troncature de la valeur du signe à 32 bits. Le "double" est limité
+en précision à 64 bits au total, ce qui laisse environ 16 chiffres
+décimaux significatifs.
 
 [fn:22] Le fichier '=constants.el=' peut fournir les valeurs de
 constantes dans deux systèmes d'unités différents, '=SI=' et
