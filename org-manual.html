@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="FR">
 <head>
 <title>Traduction française du manuel Org</title>
-<!-- 2019-02-05 Tue 13:02 -->
+<!-- 2019-02-06 Wed 11:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -1862,7 +1862,6 @@ détaillée.
 </div>
 </div>
 
-
 <div id="outline-container-sec-3-2" class="outline-3">
 <h3 id="sec-3-2"><span class="section-number-3">3.2</span> Largeur de colonne et alignement</h3>
 <div class="outline-text-3" id="text-3-2">
@@ -2015,7 +2014,6 @@ chaque ligne verticale que vous souhaiteriez avoir :
 </div>
 </div>
 </div>
-
 
 <div id="outline-container-sec-3-4" class="outline-3">
 <h3 id="sec-3-4"><span class="section-number-3">3.4</span> Le mode mineur Orgtbl</h3>
@@ -2330,6 +2328,169 @@ pas être distingué d'un nom ou ID brut.
 </div>
 <div id="outline-container-sec-3-5-2" class="outline-4">
 <h4 id="sec-3-5-2"><span class="section-number-4">3.5.2</span> Syntaxe des formules pour Calc</h4>
+<div class="outline-text-4" id="text-3-5-2">
+<p>
+Une formule peut être n'importe quelle expression algébrique
+comprise par le paquet Emacs Calc. Noter que Calc a la convention
+non standard que '<code>/</code>' a une priorité plus faible que '<code>*</code>', de
+sorte que '<code>a/b*c</code>' est interprété comme '<code>(a/(b*c))</code>'. Avant
+évaluation par <code>calc-eval</code> (voir Section "Calling Calc from Your
+Programs' dans <a href="https://www.gnu.org/software/emacs/manual/html_node/calc/index.html">calc</a>), le changement de variable a lieu selon les
+règles décrites plus haut.
+</p>
+
+<p>
+La plage de vecteurs peut être directement remplie dans les
+fonctions Calc comme <code>vmean</code> et <code>vsum</code>. Une formule peut contenir
+un mode optionnel chaîne après un point-virgule. Cette chaîne
+est composée d'indicateurs pour influencer Calc et d'autres modes
+durant l'exécution. Par défaut, Org utilise les modes Calc
+standard (précision 12, unités des angles degrés, modes fraction
+et symbolic off). Le format d'affichage, toutefois, a été modifié
+en '<code>(float 8)</code>' pour garder les tableaux compacts. Les réglages
+par défaut peuvent être configurés en utilisant la variable
+<code>org-calc-default-modes</code>. 
+</p>
+
+<dl class="org-dl">
+<dt> '<code>p20</code>' </dt><dd>Configure les calculs internes de Calc avec une
+précision de 20 chiffres.
+</dd>
+<dt> '<code>n3</code>', '<code>s3</code>', '<code>e2</code>', '<code>f4</code>' </dt><dd>Format normal, scientifique,
+ingénieur, ou fixé du résultat de Calc passé à Org. Le
+formatage de Calc est illimité tant que la précision du
+calcul de Calc est supérieure.
+</dd>
+<dt> '<code>D</code>', '<code>R</code>' </dt><dd>modes degrés et radians de Calc.
+</dd>
+<dt> '<code>F</code>', '<code>S</code>' </dt><dd>modes fraction et symbolique de Calc.
+</dd>
+<dt> '<code>T</code>', '<code>t</code>', '<code>U</code>' </dt><dd>calculs de durées dans Calc ou Lisp,
+Section 3.5.4 [Durations and times values]
+</dd>
+<dt> '<code>E</code>' </dt><dd>Si et comment considérer les champs vides. Sans '<code>E</code>'
+les champs vides des références de plage sont
+supprimés, de sorte que le vecteur Calc ou la liste
+Lisp ne contient que les champs non vides. Avec '<code>E</code>',
+les champs vides sont conservés. Pour les champs vides
+dans les plages ou les références de champ vides, la
+valeur '<code>nan</code>' (pas un nombre, <i>not a number</i>) est
+utilisée dans les formules Calc et la chaîne vide est
+utilisée pour les formules Lisp. Ajoutez "N" pour
+utiliser 0 à la place des deux types de formules. Pour
+la valeur d’un champ, le mode '<code>N</code>' a une priorité
+supérieure à '<code>E</code>'.
+</dd>
+<dt> '<code>N</code>' </dt><dd>Interprète tous les champs comme des nombres, utilise 0
+pour les non-nombres. Voir la prochaine section pour
+voir comment c'est essentiel pour les calculs avec les
+formules Lisp. Dans les formules Calc, c'est utilisé
+occasionnellement, car les chaînes de nombres sont déjà
+interprétées comme des nombres sans '<code>N</code>'.
+</dd>
+<dt> '<code>L</code>' </dt><dd>Littéral, pour les formules Lisp uniquement. Voir la
+section suivante. 
+</dd>
+</dl>
+
+
+
+<p>
+À moins que vous n'utilisiez de grands nombres entiers ou des
+calculs de haute précision  et affichez des nombres à virgule
+flottante vous pouvez alternativement fournir un spécificateur de
+format à <code>printf</code> pour reformater le résultat de Calc après qu'il
+ait été passé à Org au lieu de laisser Calc faire le
+formatage<sup><a id="fnr.23" name="fnr.23" class="footref" href="#fn.23">23</a></sup>. Quelques exemples : 
+</p>
+
+<dl class="org-dl">
+<dt> '<code>$1+$2</code>' </dt><dd>Somme des premier et second champs.
+</dd>
+<dt> '<code>$1+$2;%.2f</code>' </dt><dd>Idem, formatage du résultat à 2 décimales.
+</dd>
+<dt> '<code>exp($2)+exp($1)</code>' </dt><dd>Des fonctions mathématiques peuvent être
+utilisées. 
+</dd>
+<dt> '<code>$0;%.1f</code>' </dt><dd>Reformate les cellules courantes à 1 décimales.
+</dd>
+<dt> '<code>($3-32)*5/9</code>' </dt><dd>Conversion degrés F &rarr; C 
+</dd>
+<dt> '<code>$c/$1/$cm</code>' </dt><dd>Conversion Hz &rarr; cm, utilisant
+'<code>constants.el</code>'
+</dd>
+<dt> '<code>tan($1);Dp3s1</code>' </dt><dd>Calculs en degrés, précision 3, affichage
+SCI 1
+</dd>
+<dt> '<code>sin($1);Dp3%.1e</code>' </dt><dd>Idem, mais usage du spécificateur
+<code>printf</code> pour l'affichage.
+</dd>
+<dt> '<code>vean($2..$7)</code>' </dt><dd>Calcul de la plage de colonne, utilisant une
+fonction vectorielle
+</dd>
+<dt> '<code>vmean($2..$7);EN</code>' </dt><dd>Idem, mais traite les champs vides comme
+0
+</dd>
+<dt> '<code>taylor($3,x=7,2)</code>' </dt><dd>Série de Taylor de $3, à x = 7, second
+degré
+</dd>
+</dl>
+
+
+
+<p>
+Calc contient aussi un ensemble complet d'opérations logiques
+(voir Section "Logical Operations dans <a href="https://www.gnu.org/software/emacs/manual/html_node/calc/index.html">calc</a>). Par exemple
+</p>
+
+<dl class="org-dl">
+<dt> '<code>if($1 &lt; 20, teen, string(""))</code>' </dt><dd>'<code>"teen"</code>' si age '<code>$1</code>'
+est moins que 20, sinon le champ résultat du tableau Org est
+configuré à vide avec la chaîne vide.
+</dd>
+<dt> '<code>if("$1" == "nan" || "$2" == "nan", string(""), $1 + $2); E f-1</code>' </dt><dd>Somme les deux premières colonnes. Lorsqu'au moins
+un des champs de saisie est vide le champ résultat du tableau
+Org est configuré à vide. '<code>E</code>' est requis pour ne pas convertir
+les champs vides en 0. '<code>f-1</code>' est un format de chaîen Calc
+optionnel similaire à '<code>%.1f</code>' mais laisse vide les résultats
+vides.
+</dd>
+<dt> (no term) </dt><dd>'<code>if(typeof(vmean($1..$7)) == 12, string(""), vmean($1..$7); E</code>'
+   :: Valeur moyenne d'une plage à moins qu'il n'y ait un champ
+vide. Chaque champ dans la plage qui est vide est remplacé par
+'<code>nan</code>' ce qui laisse le résultat de '<code>vmean</code>' à '<code>nan</code>'. Alors
+'<code>typeof =</code>' 12= détecte le '<code>nan</code>' depuis '<code>vmean</code>' et le champ
+résultat du tableau Org est configuré à vide. Utilise ça
+lorsque l'échantillon est supposé n'avoir aucune valeur
+manquante. 
+</dd>
+<dt> '<code>if("$1..$7" == "[]", string(""), vmean($1..$7))</code>' </dt><dd>Valeur
+moyenne d'une plage avec des champs vides zappés. Chaque
+champ dans la plage qui est vide est zappé. Lorsque tous les
+champs dans la plage sont vides la valeur moyenne n'est pas
+définie et le résultat du tableau Org est réglé à
+vide. Utilise ça lorsque l'échantillon a une taille
+variable. 
+</dd>
+<dt> '<code>vmean($1..$7); EN</code>' </dt><dd>Pour compléter l'exemple précédent :
+valeur moyenne d'une plage avec des champs vides comptant
+comme échantillons avec valeur 0. Utilise uniquement lorsque
+des échantillons incomplets devraient être comblés par
+des 0. 
+</dd>
+</dl>
+
+
+<p>
+Vous pouvez ajouter vos propres fonctions Calc définies en Emacs
+Lisp avec <code>defmath</code> et utilisez-les dans la syntaxe de formule
+pour Calc.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5-3" class="outline-4">
+<h4 id="sec-3-5-3"><span class="section-number-4">3.5.3</span> Les formules Emacs Lisp en tant que formules</h4>
 </div>
 </div>
 </div>
@@ -2467,6 +2628,15 @@ et '<code>constcgs</code>' de '<code>STARTUP</code>' pour configurer cette valeu
 tampon actuel. 
 </p></div>
 
+<div class="footdef"><sup><a id="fn.23" name="fn.23" class="footnum" href="#fnr.23">23</a></sup> <p class="footpara">
+Le reformatage de printf est limité en précision parce que la
+valeur qui lui est passée est convertie en "integer" (entier) ou
+"double" (approximation de réel). Le "integer" est limité en taille
+par troncature de la valeur du signe à 32 bits. Le "double" est limité
+en précision à 64 bits au total, ce qui laisse environ 16 chiffres
+décimaux significatifs.
+</p></div>
+
 
 </div>
 </div></div><div class="col-md-3"><nav id="table-of-contents">
@@ -2535,6 +2705,7 @@ tampon actuel.
 <ul class="nav">
 <li><a href="#sec-3-5-1">3.5.1. Références</a></li>
 <li><a href="#sec-3-5-2">3.5.2. Syntaxe des formules pour Calc</a></li>
+<li><a href="#sec-3-5-3">3.5.3. Les formules Emacs Lisp en tant que formules</a></li>
 </ul>
 </li>
 </ul>
@@ -2545,7 +2716,7 @@ tampon actuel.
 </div></div></div>
 <footer id="postamble" class="">
 <div><p class="author">Author: Laurent Garnier</p>
-<p class="date">Created: 2019-02-05 Tue 13:02</p>
+<p class="date">Created: 2019-02-06 Wed 11:14</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.1 (<a href="http://orgmode.org">Org-mode</a> 9.1.13)</p>
 </div>
 </footer>
