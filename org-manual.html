@@ -2,7 +2,7 @@
 <html lang="FR">
 <head>
 <title>Traduction française du manuel Org</title>
-<!-- 2019-02-06 Wed 11:14 -->
+<!-- 2019-02-07 Thu 10:40 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -2491,6 +2491,262 @@ pour Calc.
 
 <div id="outline-container-sec-3-5-3" class="outline-4">
 <h4 id="sec-3-5-3"><span class="section-number-4">3.5.3</span> Les formules Emacs Lisp en tant que formules</h4>
+<div class="outline-text-4" id="text-3-5-3">
+<p>
+Il est aussi possible d'écrire une formule en Emacs Lisp. Cela
+peut être utile pour la manipulation de chaîne et de structures de
+contrôle, si les fonctionnalités de Calc ne sont pas suffisantes.
+</p>
+
+<p>
+Si une formule commence avec une apostrophe suivie par une
+parenthèse ouvrante, alors c'est évalué comme une formule
+Lisp. L'évaluation devrait renvoyer soit une chaîne soit un
+nombre. Comme avec une formule Calc, vous pouvez spécifier les
+modes et un format <code>printf</code> après un point-virgule. 
+</p>
+
+<p>
+Avec des formules Emacs Lisp, vous devez être conscient de la
+façon dont les références de champ sont interpolées dans la
+formule. Par défaut, une référence est interpolée comme une chaîne
+Lisp (entre guillemets) contenant le champ. Si vous fournissez le
+mode '<code>N</code>' switch, tous les éléments référencés sont des champs
+numériques&#x2014;non-numériques seront zéro&#x2014;et interpolé comme
+nombres Lisp, sans apostrophe. Si vous fournissez le drapeau
+'<code>L</code>', tous les champs sont interpolés littéralement, sans
+apostrophe. Par exemple, si vous voulez qu'une référence soit
+interprétée comme une chaîne par la formule Lisp, encapsulez
+l'opérateur de référence lui-même entre guillemets, comme
+'<code>"$3"</code>'. Les plages sont insérées comme des champs d'espace
+séparés, de sorte que vous pouvez les embarquer dans une syntaxe
+de liste ou de vecteur. 
+</p>
+
+<p>
+Voici quelques exemples&#x2014;noter comment le mode '<code>N</code>' est utilisé
+lorsque nous faisons des calculs en Lisp :
+</p>
+<dl class="org-dl">
+<dt> '<code>'(concat (substring $1 1 2) (substring $1 0 1) (substring $1 2))'</code> </dt><dd>Echange les deux premiers caractères du contenu de la
+colonne 1
+</dd>
+<dt> '<code>'(+ $1 $2);N'</code>' </dt><dd>Ajoute les colonnes 1 et 2, équivalent à
+'<code>$1 + $2</code>' en Calc.
+</dd>
+<dt> '<code>'(apply '+ '($1..$4));N</code>' </dt><dd>Calcule la somme des colonnes 1 à
+4, comme '<code>vsum($1..$4)</code>' avec Calc
+</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3-5-4" class="outline-4">
+<h4 id="sec-3-5-4"><span class="section-number-4">3.5.4</span> Valeurs de temps et de durées</h4>
+<div class="outline-text-4" id="text-3-5-4">
+<p>
+Si vous voulez calculer des valeurs de temps utilisez les drapeaux
+'<code>T</code>', '<code>t</code>', ou '<code>U</code>', soit dans des formules Calc ou dans des
+formules Elisp :
+</p>
+
+<table class="table table-striped table-bordered table-hover table-condensed">
+
+
+<colgroup>
+<col  class="right">
+
+<col  class="right">
+
+<col  class="right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="text-right">Tâche 1</th>
+<th scope="col" class="text-right">Tâche 2</th>
+<th scope="col" class="text-right">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="text-right">2:12</td>
+<td class="text-right">1:47</td>
+<td class="text-right">03:59:00</td>
+</tr>
+
+<tr>
+<td class="text-right">2:12</td>
+<td class="text-right">1:47</td>
+<td class="text-right">03:59</td>
+</tr>
+
+<tr>
+<td class="text-right">3:02:20</td>
+<td class="text-right">-2:07:00</td>
+<td class="text-right">0.92</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+L'introduction de valeurs de durées doit être sous la form
+'<code>HH:MM[:SS]</code>', où les secondes sont optionnelles. 
+</p>
+
+<p>
+Avec le drapeau '<code>T</code>', les durées calculées sont affichées comme
+'<code>HH:MM:SS</code>' (voir la première formule ci-dessus). Avec le drapeau
+'<code>U</code>', les secondes sont omises de sorte que le résultat est
+seulement '<code>HH:MM</code>' (voir la seconde formule ci-dessus). La mise à
+zéro du champ des heure dépend de la valeur de la variable
+<code>org-table-duration-hour-zero-padding</code>.
+</p>
+
+<p>
+Avec le drapeau '<code>t</code>', les durées calculées sont affichées selon
+la valeur de l'option <code>org-table-duration-custom-format</code>, qui par
+défaut est <code>hours</code> et affiche le résultat comme une fraction
+d'heures (voir la troisième formule dans l'exemple ci-dessus). 
+</p>
+
+<p>
+Les valeurs de durées négatives peuvent aussi bien être
+manipulées, et les entiers sont considérés comme des secondes en
+addition comme en soustraction. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5-5" class="outline-4">
+<h4 id="sec-3-5-5"><span class="section-number-4">3.5.5</span> Champ et plage de formules</h4>
+<div class="outline-text-4" id="text-3-5-5">
+<p>
+Pour assigner une formule à un champ particulier, tapez-le
+directement dans le champ, précédé par '<code>:=</code>', par exemple
+'<code>vsum(@II...III)</code>'. Lorsque vous pressez <code>TAB</code> ou <code>RET</code> ou <code>C-c C-c</code> avec le point toujours dans le champ, la formule est stockée
+comme la formule pour ce champ, évaluée, et le champ actuel est
+remplacé par le résultat. 
+</p>
+
+<p>
+Les formules sont stockées dans un mot-clé spécial '<code>TBLFM</code>' situé
+directement sous le tableau. Si vous tapez l'équation dans le
+quatrième champ de la troisième ligne de donnée dans le tableau,
+la formule ressemble à '<code>@3$4=$1+$2</code>'. Lorsque vous
+insérez/supprimez/échangez des colonnes ou des lignes avec les
+commandes appropriées, les <i>références absolues</i> (mais pas les
+relatives) dans les formules stockées sont modifiées afin de
+référencer encore le même champ. Pour éviter que cela n'arrive, en
+particulier dans les plages de références, ancrer les plages aux bords
+tableau (utilisant '<code>@&lt;</code>', '<code>@&gt;</code>', '<code>$&lt;</code>', '<code>$&gt;</code>'), ou aux hlines
+utilisant la notation '<code>@I</code>'. L'adaptation automatique aux
+références de champ ne se produit pas si vous éditez la structure
+du tableau avec des commandes d'éditions normales&#x2014;vous devez
+régler les formules vous-même. 
+</p>
+
+<p>
+Au lieu de taper une équation dans le champ, vous pouvez aussi
+utiliser la commande suivante :
+</p>
+<dl class="org-dl">
+<dt> <code>C-u C-c =</code> (<code>org-table-eval-formula</code>) </dt><dd>Installe une nouvelle
+formule dans le champ courant. La commande invite à saisir
+une formule avec par défaut le mot-clé '<code>TBLFM</code>', l'applique
+au champ courant, et la stocke.
+</dd>
+</dl>
+
+
+<p>
+Le membre de gauche de la formule peut aussi être une expression
+spéciale afin d'assigner la formule à un nombre de champs
+différents. Il n'y a pas de raccourci clavier pour entrer une
+telle plage de formules. Pour les ajouter, utiliser l'éditeur de
+formule (voir Section 3.5.8 [Editing and debugging formulas]) ou
+éditer directement le mot-clé '<code>TBLFM</code>'.
+</p>
+
+<dl class="org-dl">
+<dt> '<code>$2</code>' </dt><dd>Formule de colonne, valide pour la colonne
+entière. C'est si commun qu'Org traite ces formules
+d'une façon spéciale, voir Section 3.5.6 [Column
+formulas]
+</dd>
+<dt> '<code>@3</code>' </dt><dd>Formule de ligne, s'applique à tous les champs d'une
+ligne spécifique. '<code>@&gt;=</code>' signifie la dernière ligne. 
+</dd>
+<dt> '<code>@1$2..@4$3</code>' </dt><dd>Plage de formule, s'applique à tous les champs
+dans la plage rectangulaire donnée. Cela peut
+aussi être utilisée pour assigner une formule
+à certains champs mais pas tous dans une
+ligne.
+</dd>
+<dt> '<code>$NAME=</code>' </dt><dd>Champ nommé, voir Section 3.5.10 [Advanced
+features]
+</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3-5-6" class="outline-4">
+<h4 id="sec-3-5-6"><span class="section-number-4">3.5.6</span> Formules de colonnes</h4>
+<div class="outline-text-4" id="text-3-5-6">
+<p>
+Lorsque vous assignez une formule à une simple référence de
+colonne comme '<code>$3</code>', la même formule est utilisée dans tous les
+champs pour cette colonne, avec les exceptions très pratiques
+suivantes : (i) Si le tableau contient des séparateurs horizontaux
+hlines avec des lignes au dessus et au dessous, tout avant la
+première telle hline est considéré comme partie de la <i>tête</i> du
+tableau et n'est pas modifié par les formules de colonnes. Ainsi
+une tête est requise lorsque vous utilisez des formules de
+colonnes et voulez ajouter des hlines à des groupes de lignes,
+comme par exemple pour séparer un total de ligne en bas des lignes
+sommées au dessus. (ii) Les champs qui ont déjà une valeur depuis
+une formule de champ/plage sont laissées tranquilles par les
+formules de colonnes. Ces conditions rendent les formules de
+colonnes très faciles à utiliser. 
+</p>
+
+<p>
+Pour assigner une formule à une colonne, tapez la directement dans
+n'importe quel champ de la colonne, précédée par un signe égal,
+comme '<code>=$1+$2</code>'. Lorsque vous pressez <code>TAB</code> ou <code>RET</code> ou <code>C-c C-c</code>
+avec le point encore dans le champ, la formule est stockée comme
+formule pour la colonne courante, évaluée et le champ courant est
+remplacé par le résultat. Si le champ contient uniquement '<code>=</code>',
+la forumule précédemment stockée est utilisée. Pour chaque
+colonne, Org se rappelle uniquement la formule utilisée la plus
+récente. Dans le mot-clé '<code>TBLFM</code>', des formules de colonnes
+ressemblent à '<code>$4=$1+$2</code>'. Le membre de gauche d'une formule de
+colonne peut être le nom de colonne, ce doit être la référence
+numérique de la colonne ou '<code>$&gt;</code>'. 
+</p>
+
+<p>
+Au lieu de taper une équation dans le champ, vous pouvez aussi
+utiliser la commande suivante :
+</p>
+
+<dl class="org-dl">
+<dt> <code>C-c =</code> (<code>org-table-eval-formula</code>) </dt><dd>Installe une nouvelle
+formule dans la colonne courante et remplace le champ courant
+avec le résultat de la formule. La commande invite à saisir
+une formule, avec par défaut le mot-clé '<code>TBLFM</code>', l'applique
+au champ courante et la stocke. Avec un argument préfixé, par
+exemple, <code>C-5 C-c =</code>, la commande l'applique à ces champs
+consécutifs dans la colonne courante. 
+</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3-5-7" class="outline-4">
+<h4 id="sec-3-5-7"><span class="section-number-4">3.5.7</span> Fonctions de recherche</h4>
 </div>
 </div>
 </div>
@@ -2706,6 +2962,10 @@ décimaux significatifs.
 <li><a href="#sec-3-5-1">3.5.1. Références</a></li>
 <li><a href="#sec-3-5-2">3.5.2. Syntaxe des formules pour Calc</a></li>
 <li><a href="#sec-3-5-3">3.5.3. Les formules Emacs Lisp en tant que formules</a></li>
+<li><a href="#sec-3-5-4">3.5.4. Valeurs de temps et de durées</a></li>
+<li><a href="#sec-3-5-5">3.5.5. Champ et plage de formules</a></li>
+<li><a href="#sec-3-5-6">3.5.6. Formules de colonnes</a></li>
+<li><a href="#sec-3-5-7">3.5.7. Fonctions de recherche</a></li>
 </ul>
 </li>
 </ul>
@@ -2716,7 +2976,7 @@ décimaux significatifs.
 </div></div></div>
 <footer id="postamble" class="">
 <div><p class="author">Author: Laurent Garnier</p>
-<p class="date">Created: 2019-02-06 Wed 11:14</p>
+<p class="date">Created: 2019-02-07 Thu 10:40</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.1 (<a href="http://orgmode.org">Org-mode</a> 9.1.13)</p>
 </div>
 </footer>
