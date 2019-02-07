@@ -1536,7 +1536,169 @@ touches méta-curseur ont des fonctionnalités différentes.
 
 *** Les formules Emacs Lisp en tant que formules
 
+    Il est aussi possible d'écrire une formule en Emacs Lisp. Cela
+    peut être utile pour la manipulation de chaîne et de structures de
+    contrôle, si les fonctionnalités de Calc ne sont pas suffisantes.
 
+    Si une formule commence avec une apostrophe suivie par une
+    parenthèse ouvrante, alors c'est évalué comme une formule
+    Lisp. L'évaluation devrait renvoyer soit une chaîne soit un
+    nombre. Comme avec une formule Calc, vous pouvez spécifier les
+    modes et un format =printf= après un point-virgule. 
+
+    Avec des formules Emacs Lisp, vous devez être conscient de la
+    façon dont les références de champ sont interpolées dans la
+    formule. Par défaut, une référence est interpolée comme une chaîne
+    Lisp (entre guillemets) contenant le champ. Si vous fournissez le
+    mode '=N=' switch, tous les éléments référencés sont des champs
+    numériques---non-numériques seront zéro---et interpolé comme
+    nombres Lisp, sans apostrophe. Si vous fournissez le drapeau
+    '=L=', tous les champs sont interpolés littéralement, sans
+    apostrophe. Par exemple, si vous voulez qu'une référence soit
+    interprétée comme une chaîne par la formule Lisp, encapsulez
+    l'opérateur de référence lui-même entre guillemets, comme
+    '="$3"='. Les plages sont insérées comme des champs d'espace
+    séparés, de sorte que vous pouvez les embarquer dans une syntaxe
+    de liste ou de vecteur. 
+
+    Voici quelques exemples---noter comment le mode '=N=' est utilisé
+    lorsque nous faisons des calculs en Lisp :
+    + '='(concat (substring $1 1 2) (substring $1 0 1) (substring $1 2))'= :: Echange les deux premiers caractères du contenu de la
+      colonne 1
+    + '='(+ $1 $2);N'=' :: Ajoute les colonnes 1 et 2, équivalent à
+         '=$1 + $2=' en Calc.
+    + '='(apply '+ '($1..$4));N=' :: Calcule la somme des colonnes 1 à
+         4, comme '=vsum($1..$4)=' avec Calc
+
+
+*** Valeurs de temps et de durées
+    Si vous voulez calculer des valeurs de temps utilisez les drapeaux
+    '=T=', '=t=', ou '=U=', soit dans des formules Calc ou dans des
+    formules Elisp :
+
+    | Tâche 1 |  Tâche 2 |    Total |
+    |---------+----------+----------|
+    |    2:12 |     1:47 | 03:59:00 |
+    |    2:12 |     1:47 |    03:59 |
+    | 3:02:20 | -2:07:00 |     0.92 |
+    #+TBLFM: @2$3=$1+$2;T::@3$3=$1+$2;U::@4$3=$1+$2;t
+
+    L'introduction de valeurs de durées doit être sous la form
+    '=HH:MM[:SS]=', où les secondes sont optionnelles. 
+
+    Avec le drapeau '=T=', les durées calculées sont affichées comme
+    '=HH:MM:SS=' (voir la première formule ci-dessus). Avec le drapeau
+    '=U=', les secondes sont omises de sorte que le résultat est
+    seulement '=HH:MM=' (voir la seconde formule ci-dessus). La mise à
+    zéro du champ des heure dépend de la valeur de la variable
+    =org-table-duration-hour-zero-padding=.
+
+    Avec le drapeau '=t=', les durées calculées sont affichées selon
+    la valeur de l'option =org-table-duration-custom-format=, qui par
+    défaut est =hours= et affiche le résultat comme une fraction
+    d'heures (voir la troisième formule dans l'exemple ci-dessus). 
+
+    Les valeurs de durées négatives peuvent aussi bien être
+    manipulées, et les entiers sont considérés comme des secondes en
+    addition comme en soustraction. 
+
+*** Champ et plage de formules
+    Pour assigner une formule à un champ particulier, tapez-le
+    directement dans le champ, précédé par '~:=~', par exemple
+    '=vsum(@II...III)='. Lorsque vous pressez =TAB= ou =RET= ou =C-c C-c= avec le point toujours dans le champ, la formule est stockée
+    comme la formule pour ce champ, évaluée, et le champ actuel est
+    remplacé par le résultat. 
+
+    Les formules sont stockées dans un mot-clé spécial '=TBLFM=' situé
+    directement sous le tableau. Si vous tapez l'équation dans le
+    quatrième champ de la troisième ligne de donnée dans le tableau,
+    la formule ressemble à '=@3$4=$1+$2='. Lorsque vous
+    insérez/supprimez/échangez des colonnes ou des lignes avec les
+    commandes appropriées, les /références absolues/ (mais pas les
+    relatives) dans les formules stockées sont modifiées afin de
+    référencer encore le même champ. Pour éviter que cela n'arrive, en
+    particulier dans les plages de références, ancrer les plages aux bords
+    tableau (utilisant '=@<=', '=@>=', '=$<=', '=$>='), ou aux hlines
+    utilisant la notation '=@I='. L'adaptation automatique aux
+    références de champ ne se produit pas si vous éditez la structure
+    du tableau avec des commandes d'éditions normales---vous devez
+    régler les formules vous-même. 
+
+    Au lieu de taper une équation dans le champ, vous pouvez aussi
+    utiliser la commande suivante :
+    + ~C-u C-c =~ (=org-table-eval-formula=) :: Installe une nouvelle
+         formule dans le champ courant. La commande invite à saisir
+         une formule avec par défaut le mot-clé '=TBLFM=', l'applique
+         au champ courant, et la stocke.
+    
+
+    Le membre de gauche de la formule peut aussi être une expression
+    spéciale afin d'assigner la formule à un nombre de champs
+    différents. Il n'y a pas de raccourci clavier pour entrer une
+    telle plage de formules. Pour les ajouter, utiliser l'éditeur de
+    formule (voir Section 3.5.8 [Editing and debugging formulas]) ou
+    éditer directement le mot-clé '=TBLFM='.
+
+    + '=$2=' :: Formule de colonne, valide pour la colonne
+                entière. C'est si commun qu'Org traite ces formules
+                d'une façon spéciale, voir Section 3.5.6 [Column
+                formulas]
+    + '=@3=' :: Formule de ligne, s'applique à tous les champs d'une
+                ligne spécifique. '~@>=~' signifie la dernière ligne. 
+    + '=@1$2..@4$3=' :: Plage de formule, s'applique à tous les champs
+                        dans la plage rectangulaire donnée. Cela peut
+                        aussi être utilisée pour assigner une formule
+                        à certains champs mais pas tous dans une
+                        ligne.
+    + '~$NAME=~' :: Champ nommé, voir Section 3.5.10 [Advanced
+                    features]
+ 
+
+*** Formules de colonnes
+
+    Lorsque vous assignez une formule à une simple référence de
+    colonne comme '=$3=', la même formule est utilisée dans tous les
+    champs pour cette colonne, avec les exceptions très pratiques
+    suivantes : (i) Si le tableau contient des séparateurs horizontaux
+    hlines avec des lignes au dessus et au dessous, tout avant la
+    première telle hline est considéré comme partie de la /tête/ du
+    tableau et n'est pas modifié par les formules de colonnes. Ainsi
+    une tête est requise lorsque vous utilisez des formules de
+    colonnes et voulez ajouter des hlines à des groupes de lignes,
+    comme par exemple pour séparer un total de ligne en bas des lignes
+    sommées au dessus. (ii) Les champs qui ont déjà une valeur depuis
+    une formule de champ/plage sont laissées tranquilles par les
+    formules de colonnes. Ces conditions rendent les formules de
+    colonnes très faciles à utiliser. 
+
+    Pour assigner une formule à une colonne, tapez la directement dans
+    n'importe quel champ de la colonne, précédée par un signe égal,
+    comme '~=$1+$2~'. Lorsque vous pressez =TAB= ou =RET= ou =C-c C-c=
+    avec le point encore dans le champ, la formule est stockée comme
+    formule pour la colonne courante, évaluée et le champ courant est
+    remplacé par le résultat. Si le champ contient uniquement '~=~',
+    la forumule précédemment stockée est utilisée. Pour chaque
+    colonne, Org se rappelle uniquement la formule utilisée la plus
+    récente. Dans le mot-clé '=TBLFM=', des formules de colonnes
+    ressemblent à '~$4=$1+$2~'. Le membre de gauche d'une formule de
+    colonne peut être le nom de colonne, ce doit être la référence
+    numérique de la colonne ou '=$>='. 
+
+    Au lieu de taper une équation dans le champ, vous pouvez aussi
+    utiliser la commande suivante :
+
+    + ~C-c =~ (=org-table-eval-formula=) :: Installe une nouvelle
+         formule dans la colonne courante et remplace le champ courant
+         avec le résultat de la formule. La commande invite à saisir
+         une formule, avec par défaut le mot-clé '=TBLFM=', l'applique
+         au champ courante et la stocke. Avec un argument préfixé, par
+         exemple, ~C-5 C-c =~, la commande l'applique à ces champs
+         consécutifs dans la colonne courante. 
+
+
+*** Fonctions de recherche
+
+    
 * Footnotes
 
 [fn:23] Le reformatage de printf est limité en précision parce que la
