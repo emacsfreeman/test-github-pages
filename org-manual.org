@@ -1,4 +1,4 @@
-#+TITLE: Traduction française du manuel Org
+#+TITLE: Traduction française du [[https://orgmode.org/org.pdf][manuel Org]]
 #+AUTHOR: Laurent Garnier
 
 #+LANGUAGE: FR
@@ -1697,8 +1697,41 @@ touches méta-curseur ont des fonctionnalités différentes.
 
 
 *** Fonctions de recherche
+    Org a trois fonctions Emacs Lisp prédéfinies pour rechercher dans
+    des tableaux.
+    + ='(org-lookup-first VAL S-LIST R-LIST &optional PREDICATE)'= ::
+         Cherche le premier élément S dans S-LIST pour lequel
+         =(PREDICATE VAL S)= est non-=nil=; renvoie la valeur depuis
+         la position correspondante dans R-LIST. Le PREDICATE par
+         défaut est =equal=. Noter que les paramètres VAL et S sont
+         passés à PREDICATE dans le même ordre que les paramètres
+         correspondants dans l'appel à =org-lookup-first=, où VAL est
+         prioritaire sur S-LIST. Si R-LIST est =nil=, l'élément
+         correspondant S de S-LIST est renvoyé.
+    + ='(org-lookup-last VAL S-LIST R-LIST &optional PREDICATE)'= ::
+         Similaire à =org-lookup-first= au-dessus, mais cherche le
+         /dernier/ élément pour lequel PREDICATE est non-=nil=.    
+    + ='(org-lookup-all VALL S-LIST R-LIST &optional PREDICATE)'= ::
+         Similaire à =org-lookup-first=, mais cherche /toutes/ les
+         valeurs correspondantes. Cette fonction peut ne pas être
+         utilisée dans une formule, parce qu'elle renvoie une liste de
+         valeurs. Cependant de puissantes fonctions de recherche
+         peuvent être bâties lorsque cette fonction est combinée avec
+         d'autres fonctions Emacs Lisp.
 
-    
+
+    Si les plages utilisées dans ces fonctions contiennent des champs
+    vides, le mode '=E=' pour les formules devrait être spécifié :
+    autrement des champs vides ne sont pas inclus dans S-LIST et/ou
+    R-LIST lesquelles peuvent, par exemple, résulter en une
+    correspondance incorrecte entre un élément de S-LIST et un élément
+    de R-LIST.
+
+    Ces trois fonctions peuvent être utilisées pour implémenter des
+    tableaux associatifs, compter des cellules correspondantes, des
+    classements, des groupes de données, etc. Pour des exemples
+    pratiques voir [[https://orgmode.org/worg/org-tutorials/org-lookups.html][ce tutoriel sur Worg]].
+
 * Footnotes
 
 [fn:23] Le reformatage de printf est limité en précision parce que la
