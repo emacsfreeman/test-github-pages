@@ -1732,6 +1732,161 @@ touches méta-curseur ont des fonctionnalités différentes.
     classements, des groupes de données, etc. Pour des exemples
     pratiques voir [[https://orgmode.org/worg/org-tutorials/org-lookups.html][ce tutoriel sur Worg]].
 
+*** Edition et débogage de formules
+    Vous pouvez éditer des formules individuelles dans le mini-tampon
+    ou directement dans le champ. Org peut aussi préparer un tampon
+    spécial avec toutes les formules actives d'un tableau. Lors de la
+    proposition d'une formule pour l'édition, Org convertit les
+    références au format standard (comme '=B3=' ou '=D&=') si
+    possible. Si vous préférez travailler uniquement avec le format
+    interne (comme '=@3$2=' ou '=$4='), configurez la variable
+    =org-table-use-standard-references=. 
+
+    + ~C-c =~ ou ~C-c =~ (=org-table-eval-formula=) :: Edite la
+         formule associée la colonne/le champ actuel dans le
+         mini-tampon. Voir Section 3.5.6 [Column formulas], et Section
+         3.5.5 [Field and range formulas]. 
+    + ~C-u C-u C-c =~ (=org-table-eval-formula=) :: Ré-insère la
+         formule active (soit une formule de champ, soit une formule
+         de colonne) dans le champ courant, de sorte que vous pouvez
+         directement l'éditer dans le champ. L'avantage de l'édition
+         dans le mini-tampon est que vous pouvez utiliser la commande
+         =C-c ?=. 
+    + =C-c ?= (=org-table-field-info=) :: Lors de l'édition d'une
+         formule dans un champ de tableau, souligne les champs
+         référencés par référence à la position du point dans la
+         formule. 
+    + =C-c }= (=org-table-toggle-coordinate-overlays=) :: Bascule
+         l'affichage d'un numéro de ligne et de colonne d'un tableau,
+         utilisant des superpositions. Ils sont mis à jour chaque fois
+         que le tableau est aligné ; vous pouvez le forcer avec =C-c
+         C-c=. 
+    + =C-c {= (=org-tablea-toggle-formula-debugger=) :: Bascule le
+         débogueur de formule on et off. Voir plus bas.
+    + =C-c '= (=org-table-edit-formulas=) :: Edite toutes les formules
+         pour le tableau actuel dans un tampon spécial, où les
+         formules sont affichées ligne par ligne. Si le champ actuel a
+         une formule active, le point dans l'éditeur de formule la
+         marque. Alors que dans le tampon spécial, Org surligne
+         automatiquement tout champ ou plage de référence à la
+         position du point. Vous pouvez éditer, effacer et ajouter des
+         formules, et utiliser les commandes suivantes :
+    + =C-c C-c= ou =C-x C-s= (=org-table-fedit-finish=) :: Sort
+              de l'éditeur de formule et stocke les formules
+              modifiées. Avec un préfixe =C-u=, applique aussi les
+              nouvelles formules au tableau entier. 
+    + =C-c C-q= (=org-table-fedit-abort=) :: Sort de l'éditeur de
+              formule sans installer de changement. 
+    + =C-c C-r= (=org-table-fedit-toggle-ref-type=) :: Bascule
+              toutes les références dans l'éditeur de tableaux entre
+              standard (comme '=B3=') et interne (comme '=@3$2='). 
+    + =TAB= (=org-table-fedit-lisp-indent=) :: Affiche joliment
+              ou indente une formule Lisp au point. Lorsque dans une
+              ligne contenant une formule Lisp, formate la formule
+              selon les règles Emacs Lisp. Une autre =TAB= explose à
+              nouveau la formule. Dans la formule ouverte, =TAB=
+              ré-indente juste comme en mode Emacs Lisp.
+    + =M-TAB= (=lisp-complete-symbol=) :: Complète les symboles Lisp,
+         juste comme en mode Emacs Lisp.
+    + =S-UP=, =S-DOWN=, =S-LEFT=, =S-RIGHT= :: Décale la référence au
+         point. Par exemple, si la référence est '=B3=' et vous
+         pressez =S-RIGHT=, ça devient '=C3='. Cela marche aussi pour
+         les références relatives et pour les références hline.
+    + =M-S-UP= (=org-table-fedit-line-up=) :: Déplace la ligne de
+         test pour les formules de colonnes en haut dans le tampon
+         Org.
+    + =M-S-DOWN= (=org-table-fedit-line-down=) :: Déplace la ligne de
+         test pour les formules de colonnes en bas dans le tampon Org.
+    + =M-UP= (=org-table-fedit-scroll-up=) :: Défile la fenêtre vers
+         le haut affichant le tableau.
+    + =M-DOWN= (=org-table-fedit-scroll-down=) :: Défile la fenêtre
+         vers le bas affichant le tableau
+    + =C-c }= Bascule les coordonnées de la grille du tableau on et
+      off.
+
+
+
+    Faire un champ de table vide ne supprime pas la formule associée
+    au champ, car elle est stockée sur une autre ligne---la ligne
+    '=TBLFM='. Lors du prochain recalcul, le champ sera rempli à
+    nouveau. Pour supprimer une formule d’un champ, vous devez donner
+    une réponse vide lorsque vous y êtes invité ou modifier le mot-clé
+    '=TBLFM='. 
+
+    Vous pouvez éditer le mot-clé '=TBLFM=' directement et
+    ré-appliquer les équations modifiées avec =C-c C-c= dans cette
+    ligne ou avec des commandes de recalcul normal dans le tableau. 
+**** Utiliser plusieurs lignes '=TBLFM='
+     Vous pouvez appliquer la formule temporairement. C'est très utile
+     lorsque vous souhaitez basculer la formule appliquée au
+     tableau. Placez plusieurs mots-clés '=TBLFM=' juste après le
+     tableau, et ensuite pressez =C-c C-c= sur la formule à
+     appliquer. Voici un exemple :
+     
+     #+BEGIN_SRC org
+       | x | y |
+       |---+---|
+       | 1 |   |
+       | 2 |   |
+       ,#+TBLFM: $2=$1*1
+       ,#+TBLFM: $2=$1*2
+     #+END_SRC
+
+     Presser =C-c C-c= dans la ligne de '=#+TBLFM: $2=$1*2=' fournit : 
+
+     #+BEGIN_SRC org
+       | x | y |
+       |---+---|
+       | 1 | 2 |
+       | 2 | 4 |
+       ,#+TBLFM: $2=$1*1
+       ,#+TBLFM: $2=$1*2
+     #+END_SRC
+     Si vous recalculez le tableau, avec =C-u C-c *=, par exemple,
+     vous obtenez le résultat suivant en appliquant uniquement le
+     premier mot-clé '=TBLFM=' :
+     #+BEGIN_SRC org
+	 | x | y |
+	 |---+---|
+	 | 1 | 1 |
+	 | 2 | 2 |
+	 ,#+TBLFM: $2=$1*1
+	 ,#+TBLFM: $2=$1*2
+     #+END_SRC
+**** Débogage de formules
+     Lorsque l'évaluation d'une formule conduit à une erreur, le
+     contenu du champ devient la chaîne '=#ERROR='. Si vous voulez
+     voir ce qui se passe lors d'un changement de variable et du
+     calcul afin de trouver un bug, activer un débogage de formule
+     dans le menu Tbl et répéter le calcul, par exemple en pressant
+     ~C-u C-u C-c = RET~ dans un champ. Des informations détaillées
+     sont affichées. 
+*** Mettre le tableau à jour
+    Le recalcul d'un tableau n'est normalement pas automatique, mais a
+    besoin d'être déclenché par une commande. Pour rendre le recalcul
+    au moins semi-automatique, voir Section 3.5.10 [Advanced
+    features]. 
+    
+    Afin de recalculer une ligne d'un tableau ou le tableau entier,
+    utiliser les commandes suivantes : 
+
+    + =C-c *= (=org-table-recalculate=) :: Recalcule la ligne courante
+         en appliquant d'abord les formules de colonne stockées de la
+         gauche vers la droite, et toutes les formules de champ/plage
+         dans la ligne actuelle. 
+    + =C-u C-c *= ou =C-u C-c C-c= :: recalcule le tableau entier,
+         ligne par ligne. Toute ligne avant la première hline est
+         laissée seule, supposant qu'elle fait partie de l'en-tête.
+    + =C-u C-u C-c *= ou =C-u C-u C-c C-c= (=org-table-iterate=) ::
+         Itère le tableau en le recalculant jusqu'à ce que plus aucun
+         changement ne se produise. Cela peut être nécessaire si
+         certain champs calculés utilisent la valeur d'autres champs
+         qui seront calculés plus tard dans la suite de calculs.
+    + =M-x org-table-recalculate-buffer-tables= :: Recalcule tous les
+         tableaux dans le tampon courant. 
+    + =M-x org-table-iterate-buffer-tables= :: Itère tous les tableaux
+         dans le tampon courant, afin de convertir les dépendences de
+         tableau en tableau.
 * Footnotes
 
 [fn:23] Le reformatage de printf est limité en précision parce que la
