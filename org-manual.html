@@ -2,7 +2,7 @@
 <html lang="FR">
 <head>
 <title>Traduction française du <a href="https://orgmode.org/org.pdf">manuel Org</a></title>
-<!-- 2019-02-11 Mon 08:20 -->
+<!-- 2019-02-15 Fri 07:37 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -2792,6 +2792,223 @@ pratiques voir <a href="https://orgmode.org/worg/org-tutorials/org-lookups.html"
 </p>
 </div>
 </div>
+
+<div id="outline-container-sec-3-5-8" class="outline-4">
+<h4 id="sec-3-5-8"><span class="section-number-4">3.5.8</span> Edition et débogage de formules</h4>
+<div class="outline-text-4" id="text-3-5-8">
+<p>
+Vous pouvez éditer des formules individuelles dans le mini-tampon
+ou directement dans le champ. Org peut aussi préparer un tampon
+spécial avec toutes les formules actives d'un tableau. Lors de la
+proposition d'une formule pour l'édition, Org convertit les
+références au format standard (comme '<code>B3</code>' ou '<code>D&amp;</code>') si
+possible. Si vous préférez travailler uniquement avec le format
+interne (comme '<code>@3$2</code>' ou '<code>$4</code>'), configurez la variable
+<code>org-table-use-standard-references</code>. 
+</p>
+
+<dl class="org-dl">
+<dt> <code>C-c =</code> ou <code>C-c =</code> (<code>org-table-eval-formula</code>) </dt><dd>Edite la
+formule associée la colonne/le champ actuel dans le
+mini-tampon. Voir Section 3.5.6 [Column formulas], et Section
+3.5.5 [Field and range formulas]. 
+</dd>
+<dt> <code>C-u C-u C-c =</code> (<code>org-table-eval-formula</code>) </dt><dd>Ré-insère la
+formule active (soit une formule de champ, soit une formule
+de colonne) dans le champ courant, de sorte que vous pouvez
+directement l'éditer dans le champ. L'avantage de l'édition
+dans le mini-tampon est que vous pouvez utiliser la commande
+<code>C-c ?</code>. 
+</dd>
+<dt> <code>C-c ?</code> (<code>org-table-field-info</code>) </dt><dd>Lors de l'édition d'une
+formule dans un champ de tableau, souligne les champs
+référencés par référence à la position du point dans la
+formule. 
+</dd>
+<dt> <code>C-c }</code> (<code>org-table-toggle-coordinate-overlays</code>) </dt><dd>Bascule
+l'affichage d'un numéro de ligne et de colonne d'un tableau,
+utilisant des superpositions. Ils sont mis à jour chaque fois
+que le tableau est aligné ; vous pouvez le forcer avec <code>C-c
+         C-c</code>. 
+</dd>
+<dt> <code>C-c {</code> (<code>org-tablea-toggle-formula-debugger</code>) </dt><dd>Bascule le
+débogueur de formule on et off. Voir plus bas.
+</dd>
+<dt> <code>C-c '</code> (<code>org-table-edit-formulas</code>) </dt><dd>Edite toutes les formules
+pour le tableau actuel dans un tampon spécial, où les
+formules sont affichées ligne par ligne. Si le champ actuel a
+une formule active, le point dans l'éditeur de formule la
+marque. Alors que dans le tampon spécial, Org surligne
+automatiquement tout champ ou plage de référence à la
+position du point. Vous pouvez éditer, effacer et ajouter des
+formules, et utiliser les commandes suivantes :
+</dd>
+<dt> <code>C-c C-c</code> ou <code>C-x C-s</code> (<code>org-table-fedit-finish</code>) </dt><dd>Sort
+de l'éditeur de formule et stocke les formules
+modifiées. Avec un préfixe <code>C-u</code>, applique aussi les
+nouvelles formules au tableau entier. 
+</dd>
+<dt> <code>C-c C-q</code> (<code>org-table-fedit-abort</code>) </dt><dd>Sort de l'éditeur de
+formule sans installer de changement. 
+</dd>
+<dt> <code>C-c C-r</code> (<code>org-table-fedit-toggle-ref-type</code>) </dt><dd>Bascule
+toutes les références dans l'éditeur de tableaux entre
+standard (comme '<code>B3</code>') et interne (comme '<code>@3$2</code>'). 
+</dd>
+<dt> <code>TAB</code> (<code>org-table-fedit-lisp-indent</code>) </dt><dd>Affiche joliment
+ou indente une formule Lisp au point. Lorsque dans une
+ligne contenant une formule Lisp, formate la formule
+selon les règles Emacs Lisp. Une autre <code>TAB</code> explose à
+nouveau la formule. Dans la formule ouverte, <code>TAB</code>
+ré-indente juste comme en mode Emacs Lisp.
+</dd>
+<dt> <code>M-TAB</code> (<code>lisp-complete-symbol</code>) </dt><dd>Complète les symboles Lisp,
+juste comme en mode Emacs Lisp.
+</dd>
+<dt> <code>S-UP</code>, <code>S-DOWN</code>, <code>S-LEFT</code>, <code>S-RIGHT</code> </dt><dd>Décale la référence au
+point. Par exemple, si la référence est '<code>B3</code>' et vous
+pressez <code>S-RIGHT</code>, ça devient '<code>C3</code>'. Cela marche aussi pour
+les références relatives et pour les références hline.
+</dd>
+<dt> <code>M-S-UP</code> (<code>org-table-fedit-line-up</code>) </dt><dd>Déplace la ligne de
+test pour les formules de colonnes en haut dans le tampon
+Org.
+</dd>
+<dt> <code>M-S-DOWN</code> (<code>org-table-fedit-line-down</code>) </dt><dd>Déplace la ligne de
+test pour les formules de colonnes en bas dans le tampon Org.
+</dd>
+<dt> <code>M-UP</code> (<code>org-table-fedit-scroll-up</code>) </dt><dd>Défile la fenêtre vers
+le haut affichant le tableau.
+</dd>
+<dt> <code>M-DOWN</code> (<code>org-table-fedit-scroll-down</code>) </dt><dd>Défile la fenêtre
+vers le bas affichant le tableau
+</dd>
+<dt> (no term) </dt><dd><code>C-c }</code> Bascule les coordonnées de la grille du tableau on et
+off.
+</dd>
+</dl>
+
+
+
+<p>
+Faire un champ de table vide ne supprime pas la formule associée
+au champ, car elle est stockée sur une autre ligne&#x2014;la ligne
+'<code>TBLFM</code>'. Lors du prochain recalcul, le champ sera rempli à
+nouveau. Pour supprimer une formule d’un champ, vous devez donner
+une réponse vide lorsque vous y êtes invité ou modifier le mot-clé
+'<code>TBLFM</code>'. 
+</p>
+
+<p>
+Vous pouvez éditer le mot-clé '<code>TBLFM</code>' directement et
+ré-appliquer les équations modifiées avec <code>C-c C-c</code> dans cette
+ligne ou avec des commandes de recalcul normal dans le tableau. 
+</p>
+</div>
+<ol class="org-ol"><li><a id="sec-3-5-8-1" name="sec-3-5-8-1"></a>Utiliser plusieurs lignes '<code>TBLFM</code>'<br ><div class="outline-text-5" id="text-3-5-8-1">
+<p>
+Vous pouvez appliquer la formule temporairement. C'est très utile
+lorsque vous souhaitez basculer la formule appliquée au
+tableau. Placez plusieurs mots-clés '<code>TBLFM</code>' juste après le
+tableau, et ensuite pressez <code>C-c C-c</code> sur la formule à
+appliquer. Voici un exemple :
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org">| x | y |
+|---+---|
+| 1 |   |
+| 2 |   |
+#+TBLFM: $2=$1*1
+#+TBLFM: $2=$1*2
+</pre>
+</div>
+
+<p>
+Presser <code>C-c C-c</code> dans la ligne de '<code>#+TBLFM: $2=$1*2</code>' fournit : 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org">| x | y |
+|---+---|
+| 1 | 2 |
+| 2 | 4 |
+#+TBLFM: $2=$1*1
+#+TBLFM: $2=$1*2
+</pre>
+</div>
+<p>
+Si vous recalculez le tableau, avec <code>C-u C-c *</code>, par exemple,
+vous obtenez le résultat suivant en appliquant uniquement le
+premier mot-clé '<code>TBLFM</code>' :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">| x | y |
+|---+---|
+| 1 | 1 |
+| 2 | 2 |
+#+TBLFM: $2=$1*1
+#+TBLFM: $2=$1*2
+</pre>
+</div>
+</div>
+</li>
+<li><a id="sec-3-5-8-2" name="sec-3-5-8-2"></a>Débogage de formules<br ><div class="outline-text-5" id="text-3-5-8-2">
+<p>
+Lorsque l'évaluation d'une formule conduit à une erreur, le
+contenu du champ devient la chaîne '<code>#ERROR</code>'. Si vous voulez
+voir ce qui se passe lors d'un changement de variable et du
+calcul afin de trouver un bug, activer un débogage de formule
+dans le menu Tbl et répéter le calcul, par exemple en pressant
+<code>C-u C-u C-c = RET</code> dans un champ. Des informations détaillées
+sont affichées. 
+</p>
+</div>
+</li></ol>
+</div>
+<div id="outline-container-sec-3-5-9" class="outline-4">
+<h4 id="sec-3-5-9"><span class="section-number-4">3.5.9</span> Mettre le tableau à jour</h4>
+<div class="outline-text-4" id="text-3-5-9">
+<p>
+Le recalcul d'un tableau n'est normalement pas automatique, mais a
+besoin d'être déclenché par une commande. Pour rendre le recalcul
+au moins semi-automatique, voir Section 3.5.10 [Advanced
+features]. 
+</p>
+
+<p>
+Afin de recalculer une ligne d'un tableau ou le tableau entier,
+utiliser les commandes suivantes : 
+</p>
+
+<dl class="org-dl">
+<dt> <code>C-c *</code> (<code>org-table-recalculate</code>) </dt><dd>Recalcule la ligne courante
+en appliquant d'abord les formules de colonne stockées de la
+gauche vers la droite, et toutes les formules de champ/plage
+dans la ligne actuelle. 
+</dd>
+<dt> <code>C-u C-c *</code> ou <code>C-u C-c C-c</code> </dt><dd>recalcule le tableau entier,
+ligne par ligne. Toute ligne avant la première hline est
+laissée seule, supposant qu'elle fait partie de l'en-tête.
+</dd>
+<dt> <code>C-u C-u C-c *</code> ou <code>C-u C-u C-c C-c</code> (<code>org-table-iterate</code>) </dt><dd>         Itère le tableau en le recalculant jusqu'à ce que plus aucun
+changement ne se produise. Cela peut être nécessaire si
+certain champs calculés utilisent la valeur d'autres champs
+qui seront calculés plus tard dans la suite de calculs.
+</dd>
+<dt> <code>M-x org-table-recalculate-buffer-tables</code> </dt><dd>Recalcule tous les
+tableaux dans le tampon courant. 
+</dd>
+<dt> <code>M-x org-table-iterate-buffer-tables</code> </dt><dd>Itère tous les tableaux
+dans le tampon courant, afin de convertir les dépendences de
+tableau en tableau.
+</dd>
+</dl>
+</div>
+</div>
 </div>
 </div>
 <div id="footnotes">
@@ -3010,6 +3227,8 @@ décimaux significatifs.
 <li><a href="#sec-3-5-5">3.5.5. Champ et plage de formules</a></li>
 <li><a href="#sec-3-5-6">3.5.6. Formules de colonnes</a></li>
 <li><a href="#sec-3-5-7">3.5.7. Fonctions de recherche</a></li>
+<li><a href="#sec-3-5-8">3.5.8. Edition et débogage de formules</a></li>
+<li><a href="#sec-3-5-9">3.5.9. Mettre le tableau à jour</a></li>
 </ul>
 </li>
 </ul>
@@ -3020,7 +3239,7 @@ décimaux significatifs.
 </div></div></div>
 <footer id="postamble" class="">
 <div><p class="author">Author: Laurent Garnier</p>
-<p class="date">Created: 2019-02-11 Mon 08:20</p>
+<p class="date">Created: 2019-02-15 Fri 07:37</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.1 (<a href="http://orgmode.org">Org-mode</a> 9.1.13)</p>
 </div>
 </footer>
