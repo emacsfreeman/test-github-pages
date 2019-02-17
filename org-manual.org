@@ -1570,7 +1570,6 @@ touches méta-curseur ont des fonctionnalités différentes.
     + '='(apply '+ '($1..$4));N=' :: Calcule la somme des colonnes 1 à
          4, comme '=vsum($1..$4)=' avec Calc
 
-
 *** Valeurs de temps et de durées
     Si vous voulez calculer des valeurs de temps utilisez les drapeaux
     '=T=', '=t=', ou '=U=', soit dans des formules Calc ou dans des
@@ -1653,7 +1652,6 @@ touches méta-curseur ont des fonctionnalités différentes.
     + '~$NAME=~' :: Champ nommé, voir Section 3.5.10 [Advanced
                     features]
  
-
 *** Formules de colonnes
 
     Lorsque vous assignez une formule à une simple référence de
@@ -1694,7 +1692,6 @@ touches méta-curseur ont des fonctionnalités différentes.
          au champ courante et la stocke. Avec un argument préfixé, par
          exemple, ~C-5 C-c =~, la commande l'applique à ces champs
          consécutifs dans la colonne courante. 
-
 
 *** Fonctions de recherche
     Org a trois fonctions Emacs Lisp prédéfinies pour rechercher dans
@@ -1887,7 +1884,97 @@ touches méta-curseur ont des fonctionnalités différentes.
     + =M-x org-table-iterate-buffer-tables= :: Itère tous les tableaux
          dans le tampon courant, afin de convertir les dépendences de
          tableau en tableau.
+*** Fonctionnalités avancées
+    Si vous voulez que le recalcul des champs arrive automatiquement,
+    ou si vous voulez être capable d'attribuer des noms[fn:24] aux
+    champs et aux colonnes, vous devez réserver la première colonne du
+    tableau pour le marquage des caractères spéciaux. 
+    + =C-#= (=org-table-rotate-recalc-marks=) :: Bascule la marque de
+         calcul dans la première colonne via les états '=#=', '=*=',
+         '=!=', '=$='. Lorsqu'il y a une région active, modifie toutes
+         les marques de la région.
+
+
+    Voici un exemple d'un tableau qui collecte des résultats d'examens
+    d'étudiants et qui fait usage des ces fonctionnalités :
+    #+BEGIN_SRC org 
+      |   | Etudiant | Prob 1 | Prob 2 | Prob 3 | Total | Note |
+      |---+----------+--------+--------+--------+-------+------|
+      | ! |          |     P1 |     P2 |     P3 |   Tot |      |
+      | # | Maximum  |     10 |     15 |     25 |    50 | 10.0 |
+      | ^ |          |     m1 |     m2 |     m3 |    mt |      |
+      |---+----------+--------+--------+--------+-------+------|
+      | # | Peter    |     10 |      8 |     23 |    41 |  8.2 |
+      | # | Sam      |      2 |      4 |      3 |     9 |  1.8 |
+      |---+----------+--------+--------+--------+-------+------|
+      |   | Average  |        |        |        |  25.0 |      |
+      | ^ |          |        |        |        |    at |      |
+      | $ | max=50   |        |        |        |       |      |
+      |---+----------+--------+--------+--------+-------+------|
+      ,#+TBLFM: $6=vsum($P1..$P3)::$7=10*$Tot/$max;%.1f::$at=vmean(@-II..@-I);%.1f
+    #+END_SRC
+    *Important :* Veuillez noter que pour ces tableaux spéciaux, le
+     recalcul du tableau avec =C-u C-c *= affecte uniquement les
+     lignes qui sont marquées '=#=' ou '=*=', et les champs qui ont
+     des formules assignées au champ lui-même. Les formules de colonne
+     ne sont pas appliquées dans les lignes avec le premier champ
+     vide. 
+
+     Les caractères de marquages ont les significations suivantes : 
+     + '=!=' :: Les champs dans cette ligne définissent des noms pour
+                les colonnes, de sorte que vous pouvez vous référer à
+                une colonne comme '=$Tot=' au lieu de '=$6='.
+     + '=^=' :: Cette ligne définit des noms pour les champs
+                /au-dessus/ de la ligne. Avec une telle définition,
+                toute formule dans le tableau peut utiliser '=$m1='
+                pour se référer à la valeur '=10='. Aussi, si vous
+                assignez une formule à un nom de champ, elle sera
+                stockée dans '~$name =  ...~'
+     + '=-=' :: Similaire à '=^=', mais définit des noms pour les
+                champs dans la ligne /en-dessous/.
+     + '=$=' :: Des champs dans cette ligne peuvent définir des
+                /paramètres/ pour des formules. Par exemple, si un
+                champ dans une ligne '=$=' contient '=max=50=', alors
+                des formules dans ce tableau peut référer à la valeur
+                50 en utilisant '=$max='. Des paramètres fonctionnent
+                exactement comme des constantes, seulement ils
+                peuvent être définis sur une base individuelle.
+     + '=#=' :: Des champs dans cette ligne sont automatiquement
+                recalculés en pressant =TAB= ou =RET= ou =S-TAB= dans
+                cette ligne. Aussi, cette ligne est sélectionnée pour
+                un recalcul global avec =C-u C-c *=. Les lignes non
+                marquées sont laissés tranquille par cette commande. 
+     + '=*=' :: Sélectionne cette ligne pour un recalcul global avec
+                =C-u C-c *=, mais pas pour un recalcul
+                automatique. Utiliser cela lorsque le recalcul
+                automatique ralentit trop l'édition.
+     + '=/=' :: N'exporte pas cette ligne. Utile pour des lignes qui
+                contiennent des marqueurs '=<N>=' de réduction  ou des
+                marqueurs de groupes de colonnes.
+		
+
+     Enfin, juste pour vous mettre en appétit pour ce qui peut être
+     fait avec le fantastique package Calc, voici un tableau qui
+     calcule la série de degrés n de Taylor à l’emplacement x pour
+     quelques fonctions.
+
+     #+BEGIN_SRC org
+       |---+-------------+---+-----+--------------------------------------|
+       |   | Fonction    | n | x   | Résultat                             |
+       |---+-------------+---+-----+--------------------------------------|
+       | # | exp(x)      | 1 | x   | 1 + x                                |
+       | # | exp(x)      | 2 | x   | 1 + x + x^2 / 2                      |
+       | # | exp(x)      | 3 | x   | 1 + x + x^2 / 2 + x^3 / 6            |
+       | # | x^2+sqrt(x) | 2 | x=0 | x*(0.5 / 0) + x^2 (2 - 0.25 / 0) / 2 |
+       | # | x^2+sqrt(x) | 2 | x=1 | 2 + 2.5 x - 2.5 + 0.875 (x - 1)^2    |
+       | * | tan(x)      | 3 | x   | x pi / 180 + 5.72e-8 x^3 pi^3        |
+       ,#+TBLFM: $5=taylor($2,$4,$3);n3
+     #+END_SRC
+
 * Footnotes
+
+[fn:24] De tels noms doivent démarrer par un caractère alphabétique et
+utiliser uniquement des caractères alpha-numérique/tiret du bas.
 
 [fn:23] Le reformatage de printf est limité en précision parce que la
 valeur qui lui est passée est convertie en "integer" (entier) ou
