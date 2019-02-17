@@ -2,7 +2,7 @@
 <html lang="FR">
 <head>
 <title>Traduction française du <a href="https://orgmode.org/org.pdf">manuel Org</a></title>
-<!-- 2019-02-15 Fri 07:37 -->
+<!-- 2019-02-17 Sun 21:46 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -2541,7 +2541,6 @@ colonne 1
 </div>
 </div>
 
-
 <div id="outline-container-sec-3-5-4" class="outline-4">
 <h4 id="sec-3-5-4"><span class="section-number-4">3.5.4</span> Valeurs de temps et de durées</h4>
 <div class="outline-text-4" id="text-3-5-4">
@@ -2690,7 +2689,6 @@ features]
 </div>
 </div>
 
-
 <div id="outline-container-sec-3-5-6" class="outline-4">
 <h4 id="sec-3-5-6"><span class="section-number-4">3.5.6</span> Formules de colonnes</h4>
 <div class="outline-text-4" id="text-3-5-6">
@@ -2743,7 +2741,6 @@ consécutifs dans la colonne courante.
 </dl>
 </div>
 </div>
-
 
 <div id="outline-container-sec-3-5-7" class="outline-4">
 <h4 id="sec-3-5-7"><span class="section-number-4">3.5.7</span> Fonctions de recherche</h4>
@@ -3009,6 +3006,122 @@ tableau en tableau.
 </dl>
 </div>
 </div>
+<div id="outline-container-sec-3-5-10" class="outline-4">
+<h4 id="sec-3-5-10"><span class="section-number-4">3.5.10</span> Fonctionnalités avancées</h4>
+<div class="outline-text-4" id="text-3-5-10">
+<p>
+Si vous voulez que le recalcul des champs arrive automatiquement,
+ou si vous voulez être capable d'attribuer des noms<sup><a id="fnr.24" name="fnr.24" class="footref" href="#fn.24">24</a></sup> aux
+champs et aux colonnes, vous devez réserver la première colonne du
+tableau pour le marquage des caractères spéciaux. 
+</p>
+<dl class="org-dl">
+<dt> <code>C-#</code> (<code>org-table-rotate-recalc-marks</code>) </dt><dd>Bascule la marque de
+calcul dans la première colonne via les états '<code>#</code>', '<code>*</code>',
+'<code>!</code>', '<code>$</code>'. Lorsqu'il y a une région active, modifie toutes
+les marques de la région.
+</dd>
+</dl>
+
+
+<p>
+Voici un exemple d'un tableau qui collecte des résultats d'examens
+d'étudiants et qui fait usage des ces fonctionnalités :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">|   | Etudiant | Prob 1 | Prob 2 | Prob 3 | Total | Note |
+|---+----------+--------+--------+--------+-------+------|
+| ! |          |     P1 |     P2 |     P3 |   Tot |      |
+| # | Maximum  |     10 |     15 |     25 |    50 | 10.0 |
+| ^ |          |     m1 |     m2 |     m3 |    mt |      |
+|---+----------+--------+--------+--------+-------+------|
+| # | Peter    |     10 |      8 |     23 |    41 |  8.2 |
+| # | Sam      |      2 |      4 |      3 |     9 |  1.8 |
+|---+----------+--------+--------+--------+-------+------|
+|   | Average  |        |        |        |  25.0 |      |
+| ^ |          |        |        |        |    at |      |
+| $ | max=50   |        |        |        |       |      |
+|---+----------+--------+--------+--------+-------+------|
+#+TBLFM: $6=vsum($P1..$P3)::$7=10*$Tot/$max;%.1f::$at=vmean(@-II..@-I);%.1f
+</pre>
+</div>
+<p>
+<b>Important :</b> Veuillez noter que pour ces tableaux spéciaux, le
+ recalcul du tableau avec <code>C-u C-c *</code> affecte uniquement les
+ lignes qui sont marquées '<code>#</code>' ou '<code>*</code>', et les champs qui ont
+ des formules assignées au champ lui-même. Les formules de colonne
+ ne sont pas appliquées dans les lignes avec le premier champ
+ vide. 
+</p>
+
+<p>
+Les caractères de marquages ont les significations suivantes : 
+</p>
+<dl class="org-dl">
+<dt> '<code>!</code>' </dt><dd>Les champs dans cette ligne définissent des noms pour
+les colonnes, de sorte que vous pouvez vous référer à
+une colonne comme '<code>$Tot</code>' au lieu de '<code>$6</code>'.
+</dd>
+<dt> '<code>^</code>' </dt><dd>Cette ligne définit des noms pour les champs
+<i>au-dessus</i> de la ligne. Avec une telle définition,
+toute formule dans le tableau peut utiliser '<code>$m1</code>'
+pour se référer à la valeur '<code>10</code>'. Aussi, si vous
+assignez une formule à un nom de champ, elle sera
+stockée dans '<code>$name =  ...</code>'
+</dd>
+<dt> '<code>-</code>' </dt><dd>Similaire à '<code>^</code>', mais définit des noms pour les
+champs dans la ligne <i>en-dessous</i>.
+</dd>
+<dt> '<code>$</code>' </dt><dd>Des champs dans cette ligne peuvent définir des
+<i>paramètres</i> pour des formules. Par exemple, si un
+champ dans une ligne '<code>$</code>' contient '<code>max=50</code>', alors
+des formules dans ce tableau peut référer à la valeur
+50 en utilisant '<code>$max</code>'. Des paramètres fonctionnent
+exactement comme des constantes, seulement ils
+peuvent être définis sur une base individuelle.
+</dd>
+<dt> '<code>#</code>' </dt><dd>Des champs dans cette ligne sont automatiquement
+recalculés en pressant <code>TAB</code> ou <code>RET</code> ou <code>S-TAB</code> dans
+cette ligne. Aussi, cette ligne est sélectionnée pour
+un recalcul global avec <code>C-u C-c *</code>. Les lignes non
+marquées sont laissés tranquille par cette commande. 
+</dd>
+<dt> '<code>*</code>' </dt><dd>Sélectionne cette ligne pour un recalcul global avec
+<code>C-u C-c *</code>, mais pas pour un recalcul
+automatique. Utiliser cela lorsque le recalcul
+automatique ralentit trop l'édition.
+</dd>
+<dt> '<code>/</code>' </dt><dd>N'exporte pas cette ligne. Utile pour des lignes qui
+contiennent des marqueurs '<code>&lt;N&gt;</code>' de réduction  ou des
+marqueurs de groupes de colonnes.
+</dd>
+</dl>
+
+
+<p>
+Enfin, juste pour vous mettre en appétit pour ce qui peut être
+fait avec le fantastique package Calc, voici un tableau qui
+calcule la série de degrés n de Taylor à l’emplacement x pour
+quelques fonctions.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org">|---+-------------+---+-----+--------------------------------------|
+|   | Fonction    | n | x   | Résultat                             |
+|---+-------------+---+-----+--------------------------------------|
+| # | exp(x)      | 1 | x   | 1 + x                                |
+| # | exp(x)      | 2 | x   | 1 + x + x^2 / 2                      |
+| # | exp(x)      | 3 | x   | 1 + x + x^2 / 2 + x^3 / 6            |
+| # | x^2+sqrt(x) | 2 | x=0 | x*(0.5 / 0) + x^2 (2 - 0.25 / 0) / 2 |
+| # | x^2+sqrt(x) | 2 | x=1 | 2 + 2.5 x - 2.5 + 0.875 (x - 1)^2    |
+| * | tan(x)      | 3 | x   | x pi / 180 + 5.72e-8 x^3 pi^3        |
+#+TBLFM: $5=taylor($2,$4,$3);n3
+</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="footnotes">
@@ -3154,6 +3267,11 @@ en précision à 64 bits au total, ce qui laisse environ 16 chiffres
 décimaux significatifs.
 </p></div>
 
+<div class="footdef"><sup><a id="fn.24" name="fn.24" class="footnum" href="#fnr.24">24</a></sup> <p class="footpara">
+De tels noms doivent démarrer par un caractère alphabétique et
+utiliser uniquement des caractères alpha-numérique/tiret du bas.
+</p></div>
+
 
 </div>
 </div></div><div class="col-md-3"><nav id="table-of-contents">
@@ -3229,6 +3347,7 @@ décimaux significatifs.
 <li><a href="#sec-3-5-7">3.5.7. Fonctions de recherche</a></li>
 <li><a href="#sec-3-5-8">3.5.8. Edition et débogage de formules</a></li>
 <li><a href="#sec-3-5-9">3.5.9. Mettre le tableau à jour</a></li>
+<li><a href="#sec-3-5-10">3.5.10. Fonctionnalités avancées</a></li>
 </ul>
 </li>
 </ul>
@@ -3239,7 +3358,7 @@ décimaux significatifs.
 </div></div></div>
 <footer id="postamble" class="">
 <div><p class="author">Author: Laurent Garnier</p>
-<p class="date">Created: 2019-02-15 Fri 07:37</p>
+<p class="date">Created: 2019-02-17 Sun 21:46</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.1 (<a href="http://orgmode.org">Org-mode</a> 9.1.13)</p>
 </div>
 </footer>
