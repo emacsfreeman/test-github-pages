@@ -2,7 +2,7 @@
 <html lang="FR">
 <head>
 <title>Traduction française du <a href="https://orgmode.org/org.pdf">manuel Org</a></title>
-<!-- 2019-02-17 Sun 21:46 -->
+<!-- 2019-02-18 Mon 09:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -3123,6 +3123,241 @@ quelques fonctions.
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Org Plot</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+Org Plot peut produire des graphiques d'informations stockées dans
+des tableaux Org, soit graphiquement soit sous forme d'art ASCII.
+</p>
+</div>
+<div id="outline-container-sec-3-6-1" class="outline-4">
+<h4 id="sec-3-6-1"><span class="section-number-4">3.6.1</span> Graphiques utilisant Gnuplot</h4>
+<div class="outline-text-4" id="text-3-6-1">
+<p>
+Org Plot peut produire des graphiques 2D et 3D avec des
+informations stockées dans des tableaux Org utilisant <a href="http://www.gnuplot.info/">Gnuplot</a> et
+Gnuplot mode. Pour voir ça en action, assurez-vous que vous avez
+Gnuplot et Gnuplot mode installé sur votre système, puis appelez
+<code>C-c " g</code> ou <code>M-x org-plot/gnuplot</code> sur le tableau suivant.
+</p>
+<table class="table table-striped table-bordered table-hover table-condensed">
+
+
+<colgroup>
+<col  class="left">
+
+<col  class="right">
+
+<col  class="right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="text-left">Sede</th>
+<th scope="col" class="text-right">Max cites</th>
+<th scope="col" class="text-right">H-index</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="text-left">Chile</td>
+<td class="text-right">257.72</td>
+<td class="text-right">21.39</td>
+</tr>
+
+<tr>
+<td class="text-left">Leeds</td>
+<td class="text-right">165.77</td>
+<td class="text-right">19.68</td>
+</tr>
+
+<tr>
+<td class="text-left">Sao Paolo</td>
+<td class="text-right">71.00</td>
+<td class="text-right">11.50</td>
+</tr>
+
+<tr>
+<td class="text-left">Stockholm</td>
+<td class="text-right">134.19</td>
+<td class="text-right">14.33</td>
+</tr>
+
+<tr>
+<td class="text-left">Morelia</td>
+<td class="text-right">257.56</td>
+<td class="text-right">17.67</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Noter que Org Plot est suffisamment intelligent pour appliquer
+pour considérer les en-tête de tableau comme des étiquettes. Des
+contrôles supplémentaires sur les étiquettes, le type, le contenu,
+et l'apparence des graphiques peuvent être exercé via le mot-clé
+'<code>PLOT</code>' précédant le tableau. Voir ci-dessous pour une liste
+complète des options de Org Plot. Pour plus d'information et
+exemples voir le <a href="https://orgmode.org/worg/org-tutorials/org-plot.html">tutoriel Org Plot</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-6-2" class="outline-4">
+<h4 id="sec-3-6-2"><span class="section-number-4">3.6.2</span> Options Plot</h4>
+<div class="outline-text-4" id="text-3-6-2">
+<dl class="org-dl">
+<dt> '<code>set</code>' </dt><dd>Spécifiez toute option Gnuplot à définir lors de la
+représentation graphique.
+</dd>
+<dt> '<code>title</code>' </dt><dd>Spécifiez le titre du graphe.
+</dd>
+<dt> '<code>ind</code>' </dt><dd>Spécifiez quelle colonne du tableau utiliser pour
+l'axe des '<code>x</code>'.
+</dd>
+<dt> '<code>deps</code>' </dt><dd>Spécifiez les colonnes à représenter sous forme de
+liste de styles Lisp, entourées de parenthèses et
+séparées par des espaces, par exemple, '<code>dep: (3 4)</code>'
+pour représenter graphiquement les troisième et
+quatrième colonnes. La valeur par défaut est de
+représenter graphiquement toutes les autres colonnes
+en dehors de la colonne ‘=ind=’.
+</dd>
+<dt> '<code>type</code>' </dt><dd>Spécifiez si le graphe est '<code>2d</code>', '<code>3d</code>', ou
+'<code>grid</code>' (quadrillage)
+</dd>
+<dt> '<code>with</code>' </dt><dd>Spécifiez une option '<code>with</code>' à insérer pour toutes
+les colonnes représentées, par exemple, '<code>lines</code>',
+'<code>points</code>', '<code>boxes</code>', '<code>impulses</code>'. Par défaut
+'<code>lines</code>'.
+</dd>
+<dt> '<code>file</code>' </dt><dd>Si vous voulez tracer le graphe d'un fichier,
+spécifiez '<code>"path/to/desired/output-file"</code>'.
+</dd>
+<dt> '<code>labels</code>' </dt><dd>Liste d'étiquettes à utiliser pour le
+'<code>deps</code>'. Par défaut des en-tête de colonnes si
+elles existent.
+</dd>
+<dt> '<code>line</code>' </dt><dd>Spécifiez une ligne entière à insérer dans le script
+Gnuplot.
+</dd>
+<dt> '<code>map</code>' </dt><dd>Lors du tracé de types '<code>3d</code>' ou '<code>grid</code>',
+l'initialise à '<code>t</code>' pour tracer une carte plate
+plutôt qu'en '<code>3d</code>'.
+</dd>
+<dt> '<code>timefmt</code>' </dt><dd>Spécifiez le format des horodatages du mode Org
+comme s'ils étaient analysés par Gnuplot. Par
+défaut '=%Y-%m-%d-%H:%M:%S'.
+</dd>
+<dt> '<code>script</code>' </dt><dd>Si vous voulez le contrôle total, vous pouvez
+spécifier un fichier de script&#x2014;placer le nom de
+fichier entre guillemets&#x2014;ce qui sera utilisé
+pour tracer le graphe. Avant le traçage, toutes
+les instance de '<code>$datafile</code>' dans le script
+spécifié seront remplacés par le chemin du fichier
+de données généré. Note : même si vous configurez
+cette option, vous pouvez encore vouloir spécifier
+le type de tracé, puisque ça peut avoir un impact
+sur le contenu du fichier de données.
+</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-sec-3-6-3" class="outline-4">
+<h4 id="sec-3-6-3"><span class="section-number-4">3.6.3</span> Les diagrammes en barre ASCII</h4>
+<div class="outline-text-4" id="text-3-6-3">
+<p>
+Lorsque le point est sur une colonne, taper <code>C-c `` a</code> ou <code>M-x
+    orgtbl-ascii-plot</code> crée une nouvelle colonne contenant un
+diagramme en barre ASCII. Le diagramme est implémenté via une
+formule de colonne rectangulaire. Lorsque le source de colonne
+change, le diagramme en barre peut être mis à jour en
+rafraichissant le tableau, par exemple en tapant <code>C-u C-c *</code>.
+</p>
+
+<table class="table table-striped table-bordered table-hover table-condensed">
+
+
+<colgroup>
+<col  class="left">
+
+<col  class="right">
+
+<col  class="left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="text-left">Sede</th>
+<th scope="col" class="text-right">Max cites</th>
+<th scope="col" class="text-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="text-left">Chile</td>
+<td class="text-right">257.72</td>
+<td class="text-left">WWWWWWWWWWWW</td>
+</tr>
+
+<tr>
+<td class="text-left">Leeds</td>
+<td class="text-right">165.77</td>
+<td class="text-left">WWWWWWWh</td>
+</tr>
+
+<tr>
+<td class="text-left">Sao Paolo</td>
+<td class="text-right">71.00</td>
+<td class="text-left">WWW;</td>
+</tr>
+
+<tr>
+<td class="text-left">Stockholm</td>
+<td class="text-right">134.19</td>
+<td class="text-left">WWWWWW:</td>
+</tr>
+
+<tr>
+<td class="text-left">Morelia</td>
+<td class="text-right">257.56</td>
+<td class="text-left">WWWWWWWWWWWW</td>
+</tr>
+
+<tr>
+<td class="text-left">Rochefourchat</td>
+<td class="text-right">0.00</td>
+<td class="text-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+La formule est un appel Elisp.
+</p>
+
+<p>
+<code>orgtbl-ascii-draw</code> valeur min max &amp;optional width
+</p>
+
+<p>
+Dessine un diagrame en barre ASCII dans un tableau.
+</p>
+
+<p>
+VALUE est la valeur du diagramme.
+MIN est la valeur affichée comme une barre vide. MAX est la valeur
+remplissant tous les WIDTH.
+Les valeurs sources en dehors de cette plage sont affichées comme
+'<code>too small</code>' ou '<code>too large</code>'. 
+WIDTH est le nombre de caractères du diagramme en barre. Par
+défaut '<code>12</code>'.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Hyperliens</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -3350,15 +3585,23 @@ utiliser uniquement des caractères alpha-numérique/tiret du bas.
 <li><a href="#sec-3-5-10">3.5.10. Fonctionnalités avancées</a></li>
 </ul>
 </li>
+<li><a href="#sec-3-6">3.6. Org Plot</a>
+<ul class="nav">
+<li><a href="#sec-3-6-1">3.6.1. Graphiques utilisant Gnuplot</a></li>
+<li><a href="#sec-3-6-2">3.6.2. Options Plot</a></li>
+<li><a href="#sec-3-6-3">3.6.3. Les diagrammes en barre ASCII</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Hyperliens</a></li>
 </ul>
 </div>
 </nav>
 </div></div></div>
 <footer id="postamble" class="">
 <div><p class="author">Author: Laurent Garnier</p>
-<p class="date">Created: 2019-02-17 Sun 21:46</p>
+<p class="date">Created: 2019-02-18 Mon 09:53</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.1 (<a href="http://orgmode.org">Org-mode</a> 9.1.13)</p>
 </div>
 </footer>
