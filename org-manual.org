@@ -1971,6 +1971,105 @@ touches méta-curseur ont des fonctionnalités différentes.
        ,#+TBLFM: $5=taylor($2,$4,$3);n3
      #+END_SRC
 
+** Org Plot
+   Org Plot peut produire des graphiques d'informations stockées dans
+   des tableaux Org, soit graphiquement soit sous forme d'art ASCII.
+*** Graphiques utilisant Gnuplot   
+    Org Plot peut produire des graphiques 2D et 3D avec des
+    informations stockées dans des tableaux Org utilisant [[http://www.gnuplot.info/][Gnuplot]] et
+    Gnuplot mode. Pour voir ça en action, assurez-vous que vous avez
+    Gnuplot et Gnuplot mode installé sur votre système, puis appelez
+    =C-c " g= ou =M-x org-plot/gnuplot= sur le tableau suivant.
+    #+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]"
+    | Sede      | Max cites | H-index |
+    |-----------+-----------+---------|
+    | Chile     |    257.72 |   21.39 |
+    | Leeds     |    165.77 |   19.68 |
+    | Sao Paolo |     71.00 |   11.50 |
+    | Stockholm |    134.19 |   14.33 |
+    | Morelia   |    257.56 |   17.67 |
+    
+    Noter que Org Plot est suffisamment intelligent pour appliquer
+    pour considérer les en-tête de tableau comme des étiquettes. Des
+    contrôles supplémentaires sur les étiquettes, le type, le contenu,
+    et l'apparence des graphiques peuvent être exercé via le mot-clé
+    '=PLOT=' précédant le tableau. Voir ci-dessous pour une liste
+    complète des options de Org Plot. Pour plus d'information et
+    exemples voir le [[https://orgmode.org/worg/org-tutorials/org-plot.html][tutoriel Org Plot]].
+*** Options Plot
+    + '=set=' :: Spécifiez toute option Gnuplot à définir lors de la
+                 représentation graphique.
+    + '=title=' :: Spécifiez le titre du graphe.
+    + '=ind=' :: Spécifiez quelle colonne du tableau utiliser pour
+                 l'axe des '=x='.
+    + '=deps=' :: Spécifiez les colonnes à représenter sous forme de
+                  liste de styles Lisp, entourées de parenthèses et
+                  séparées par des espaces, par exemple, '=dep: (3 4)='
+                  pour représenter graphiquement les troisième et
+                  quatrième colonnes. La valeur par défaut est de
+                  représenter graphiquement toutes les autres colonnes
+                  en dehors de la colonne ‘=ind=’.
+    + '=type=' :: Spécifiez si le graphe est '=2d=', '=3d=', ou
+                  '=grid=' (quadrillage)
+    + '=with=' :: Spécifiez une option '=with=' à insérer pour toutes
+                  les colonnes représentées, par exemple, '=lines=',
+                  '=points=', '=boxes=', '=impulses='. Par défaut
+                  '=lines='.
+    + '=file=' :: Si vous voulez tracer le graphe d'un fichier,
+                  spécifiez '="path/to/desired/output-file"='.
+    + '=labels=' :: Liste d'étiquettes à utiliser pour le
+                    '=deps='. Par défaut des en-tête de colonnes si
+                    elles existent.
+    + '=line=' :: Spécifiez une ligne entière à insérer dans le script
+                  Gnuplot.
+    + '=map=' :: Lors du tracé de types '=3d=' ou '=grid=',
+                 l'initialise à '=t=' pour tracer une carte plate
+                 plutôt qu'en '=3d='.
+    + '=timefmt=' :: Spécifiez le format des horodatages du mode Org
+                     comme s'ils étaient analysés par Gnuplot. Par
+                     défaut '=%Y-%m-%d-%H:%M:%S'.
+    + '=script=' :: Si vous voulez le contrôle total, vous pouvez
+                    spécifier un fichier de script---placer le nom de
+                    fichier entre guillemets---ce qui sera utilisé
+                    pour tracer le graphe. Avant le traçage, toutes
+                    les instance de '=$datafile=' dans le script
+                    spécifié seront remplacés par le chemin du fichier
+                    de données généré. Note : même si vous configurez
+                    cette option, vous pouvez encore vouloir spécifier
+                    le type de tracé, puisque ça peut avoir un impact
+                    sur le contenu du fichier de données.
+*** Les diagrammes en barre ASCII
+    Lorsque le point est sur une colonne, taper =C-c `` a= ou =M-x
+    orgtbl-ascii-plot= crée une nouvelle colonne contenant un
+    diagramme en barre ASCII. Le diagramme est implémenté via une
+    formule de colonne rectangulaire. Lorsque le source de colonne
+    change, le diagramme en barre peut être mis à jour en
+    rafraichissant le tableau, par exemple en tapant =C-u C-c *=.
+    
+    | Sede          | Max cites |              |
+    |---------------+-----------+--------------|
+    | Chile         |    257.72 | WWWWWWWWWWWW |
+    | Leeds         |    165.77 | WWWWWWWh     |
+    | Sao Paolo     |     71.00 | WWW;         |
+    | Stockholm     |    134.19 | WWWWWW:      |
+    | Morelia       |    257.56 | WWWWWWWWWWWW |
+    | Rochefourchat |      0.00 |              |
+    #+TBLFM: $3='(orgtbl-ascii-draw $2 0.0 257.72 12)
+
+    La formule est un appel Elisp.
+   
+    =orgtbl-ascii-draw= valeur min max &optional width
+
+    Dessine un diagrame en barre ASCII dans un tableau.
+
+    VALUE est la valeur du diagramme.
+    MIN est la valeur affichée comme une barre vide. MAX est la valeur
+    remplissant tous les WIDTH.
+    Les valeurs sources en dehors de cette plage sont affichées comme
+    '=too small=' ou '=too large='. 
+    WIDTH est le nombre de caractères du diagramme en barre. Par
+    défaut '=12='.
+* Hyperliens
 * Footnotes
 
 [fn:24] De tels noms doivent démarrer par un caractère alphabétique et
