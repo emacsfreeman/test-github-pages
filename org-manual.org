@@ -2070,7 +2070,235 @@ touches méta-curseur ont des fonctionnalités différentes.
     WIDTH est le nombre de caractères du diagramme en barre. Par
     défaut '=12='.
 * Hyperliens
+  Comme HTML, Org fournit des liens à l'intérieur d'un document, des
+  liens externes vers d'autres fichiers, articles Usenet, emails, et
+  bien plus.
+** Format de lien
+   Org reconnaîtra les liens URL bruts et les activera comme des liens
+   cliquables. Le format général des liens, toutefois, ressemble à
+   ça : 
+   #+BEGIN_SRC org
+     [[lien][description] ] ou [[lien] ]
+   #+END_SRC
+   Une fois qu'un lien dans le tampon est complet (tous les crochets
+   sont présent), Org modifiera l'affichage de sorte que
+   '=description=' est affiché au lieu de '=[[lien][description] ]='
+   et '=lien=' est affiché au lieu de '=[[lien] ]='. Les liens seront
+   surlignés avec la face =org-link=, qui par défaut est soit la
+   partie '=lien=' (s'il n'y a pas de description) soit la partie
+   '=description='. Pour éditer aussi la partie '=lien=' invisible,
+   utiliser =C-c C-l= avec le curseur sur le lien. 
+
+   Si vous placez le curseur au début ou avant la fin du texte affiché
+   et pressez BACKSPACE, vous effacerez le crochet (invisible) à cet
+   endroit. Cela rend le lien incomplet et l'intérieur est à nouveau
+   affiché comme texte brut. Insérer le crochet manquant cache à
+   nouveau le lien interne. Pour montrer la structure interne de tous
+   les liens, utiliser le menu d'entrée =Org->Hyperlinks->Literal
+   links=.
+** Liens internes
+  Si le lien ne ressemble pas à une URL, il est considéré comme étant
+  un lien interne dans le fichier actuel. Le cas le plus important est
+  un lien comme '=[[#my-custom-id] ]=' qui liera l'entrée avec la
+  propriété CUSTOM_ID '=my-custom-id='. Vous êtes responsable de vous
+  assurer que ces identifiants personnalisés soient unique dans un
+  fichier. 
+
+  Des liens tels que '=[[Ma cible] ]=' ou '=[[Ma cible][Trouve ma
+  cible] ]=' mènent à une recherche textuelle dans le fichier actuel. 
+
+  Le lien peut être suivi avec =C-c C-o= lorsque le curseur est sur le
+  lien, ou avec un clic de souris (voir Section 4.4 [Handling
+  links]). Les liens vers des identifiants personnalisés pointeront
+  vers la rubrique correspondante. La correspondance préférée pour un
+  lien textuel est une /cible dédiée/ : la même chaîne entre double
+  chevrons, comme '=<<Ma cible>>='.
+
+  Si aucune cible dédiée n'existe, le lien essaiera de correspondre
+  avec le nom exact d'un élément dans le tampon. Le nommage est fait
+  avec le mot-clé =#+NAME=, qui doit être mis dans la ligne avant
+  l'élément auquel il se réfère, comme dans l'exemple suivant :
+  #+BEGIN_SRC org
+    ,#+NAME: Ma cible
+    | un | tableau         |
+    |----+-----------------|
+    | de | quatre cellules |
+  #+END_SRC
+  Si aucun de ceux ci-dessus n'ont de succès, Org cherchera une
+  rubrique qui est exactement le lien textuel mais peut aussi inclure
+  un mot-clé TODO et des balises[fn:25].
+
+  Durant l'exportation, les liens internes seront utilisés pour
+  marquer les objets et leur assigner un nombre. 
+
+  Les objets marqués seront alors référencés par les liens pointant
+  vers eux. En particulier, des liens sans une description
+  apparaîtront comme nombre assigné à l'objet marqué[fn:26]. Dans
+  l'extrait suivant depuis un tampon Org
+  #+BEGIN_SRC org
+    - un élément
+    - <<cible>>un autre élément
+    Ici nous nous référons à l'élément [[cible] ]
+  #+END_SRC
+  La dernière phrase apparaîtra comme '=Ici nous nous référons à
+  l'élément 2=' lorsqu'elle sera exportée. 
+
+  Dans les fichiers non-Org, la recherche cherchera les mots dans le
+  lien textuel. Dans l'exmple ci-dessus la recherche serait pour '=ma
+  cible='. 
+  
+  Suivant un lien poussant une marque dans la chaîne Org. Vous pouvez
+  retourner à la position précédente avec =C-c &=. Utilisant cette
+  commande plusieurs fois en succession directe renvoie aux positions
+  enregistrées plus tôt.
+*** Cibles radio
+  Org peut automatiquement transformer toute occurrence de certains
+  noms de cible en texte normal en un lien. Donc sans créer un lien
+  explicite, le texte se connecte à la cible radioant sa position. Les
+  cibles radio sont encapsulées entre trois chevrons. Par exemple, une
+  cible '=<<<Ma cible>>>=' force toute occurrence de '=ma cible=' en
+  texte normal à devenir activé comme un lien. Le fichier Org est
+  automatiquement scanné pour les cibles radio uniquement lorsque le
+  fichier est chargé en premier dans Emacs. Pour mettre à jour la
+  liste des cibles durant l'édition, pressez =C-c C-c= avec le curseur
+  sur ou à une cible. 
+** Liens externes
+   Org supporte les liens vers des fichiers, des sites web, Usenet et
+   des messages email, des entrées de base de données BBDB et des
+   liens vers à la fois des conversations IRC et leur logs. Les liens
+   externes sont comme des localisateurss URL. Ils commencent avec une
+   courte chaîne identifiante suivie d'un point. La liste suivante
+   montre des exemples de chaque type de lien.
+
+   + =http://www.astro.uva.nl/~dominik= :: sur le web
+   + =doi:10.1000/182= :: DOI pour une ressource électronnique
+   + =file:/home/dominik/images/jupiter.jpg= :: file, absolute path
+   + =/home/dominik/images/jupiter.jpg= :: pareil qu'au-dessus
+   + =file:papers/last.pdf= :: fichier, chemin relatif
+   + =./papers/last.pdf= :: pareil qu'au-dessus
+   + =file:/ssh:myself@some.where:papers/last.pdf= :: fichier, chemin
+        sur une machine distante
+   + =/ssh:myself@some.where:papers/last.pdf= :: pareil qu'au-dessus
+   + =file:sometextfile::NNN= :: fichier, saute au numéro de ligne
+        indiqué 
+   + =file:projects.org= :: un autre fichier Org
+   + =file:projects.org::some words= :: recherche textuelle dans un
+        fichier Org[fn:27]
+   + =file:projects.org::*task title= :: recherche une rubrique dans
+        un fichier Org[fn:28]
+   + =docview:papers/last.pdf:NNN= :: ouvre en mode doc-view à la page
+   + =id:B7423F4D-2E8A-471B-8810-C40F074717E9= :: lien vers rubrique
+        par ID
+   + =news:comp.emacs= :: lien Usenet
+   + =mailto:adent@galaxy.net= :: lien mail
+   + =mhe:folder= :: lien du dossier MH-E 
+   + =mhe:folder#id= :: lien du message MH-E
+   + =rmail:folder= :: lien du dossier RMAIL
+   + =rmail:folder#id= :: lien du message RMAIL
+   + =gnus:group= :: lien de groupe Gnus
+   + =gnus:group#id= :: lien d'article Gnus
+   + =bbdb:R.*Stallman= :: lien BBDB (avec regexp)
+   + =irc:/irc.com/#emacs/bob= :: lien IRC
+   + =info:org#External links= :: Noeud d'info ou lien d'index
+   + =shell:ls *.org= :: Une commande shell
+   + =elisp:org-agenda= :: Commande interactive Elisp
+   + =elisp:(find-file-other-frame "Elisp.org")= :: Forme Elisp à
+        évaluer
+   
+   Par dessus ces types de liens intégrés, certains sont disponibles via
+   le répertoire =contrib/= (voir Section 1.2 [Installation]). Par
+   exemple, ces liens ver VM ou des messages Wanderlust sont disponibles
+   lorsque vous chargez les bibliothèques correspondantes depuis le
+   répertoire =contrib/= :
+
+   + =vm:folder= lien de dossier VM
+   + =vm:folder#id= lien de message VM
+   + =vm://myself@some.where.org/folder#id= :: VM sur une machine à
+        distance
+   + =vm-imap:account:folder= :: lien de dossier IMAP VM
+   + =vm-imap:account:folder#id= :: lien de message IMAP VM
+   + =wl:folder= :: lien de dossier WANDERLUST
+   + =wl:folder#id= :: lien de message WANDERLUST
+
+		       
+   Pour personnaliser Org pour ajouter de nouveaux types de lien
+   Section A.3 [Adding hyperlink types].
+
+   Un lien devrait être encapsulé entre deux paires de crochets et
+   peut contenir un texte descriptif pour être affiché au lieu de
+   l'URL (voir Section 4.1 [Link format]), par exemple : 
+   =[[https://www.gnu.org/software/emacs/][GNU Emacs] ]=
+
+   Si la description est un nom de fichier ou une URL qui pointe vers
+   une image, une exportation HTML (voir Section 12.9 [HTML export])
+   transformera l'image en un bouton cliquable. S'il n'y a pas de
+   description et que le lien pointe vers une image, cette image sera
+   mises en ligne dans le fichier HTML exporté. 
+
+
+   Org trouve aussi les liens externes dans le texte normal et les
+   active comme liens. Si les espaces doivent faire partie du lien
+   (par exemple dans '=bbdb:Richard Stallman='), ou si vous devez
+   supprimer les ambiguïtés à propos de la fin du lien, encapsulez-les
+   avec des crochets. 
+** Manipulation de liens 
+   Org fournit des méthodes pour créer un lien avec la bonne syntaxe,
+   pour l'insérer dans un fichier Org, et suivre le lien :
+   + =C-c l= ou =org-store-link= :: stocke un lien à l'emplacement
+        actuel. Cette commande est /globale/ (vous devez créer la
+        liaison vous-même) qui peut être utilisée dans tout tampon
+        pour créer un lien. Le lien sera stocké pour des insertions
+        ultérieures dans un tampon Org (voir en dessous). Quel genre
+        de lien sera créé dépend du tampon actuel :
+
+	*Tampons du mode Org*
+
+	Pour des fichiers Org, s'il y a une '=<<cible>>=' au curseur,
+        le lien pointe vers une cible. Autrement il pointe vers la
+        rubrique actuelle, qui sera aussi la description[fn:29].
+
+	Si la rubrique a une propriété CUSTOM_ID, un lien vers ce
+        CUSTOM ID sera stocké. De plus ou alternativement (selon la
+        valeur de =org-id-link-to-org-use-id=), un unique ID global de
+        propriété sera créé et/ou utilisé pour construire un
+        lien[fn:30]. Donc utiliser cette commande dans des tampons Org
+        créera potentiellement deux liens : un lisible depuis le
+        custom ID, et un globalement unique et qui fonctionne même si
+        l'entrée est déplacée dans le fichier. Ensuite, lorsqu'insérer
+        le lien vous devez décider lequel utiliser.
+
 * Footnotes
+
+[fn:30] La bibliothèque =org-id.el= doit d'abord être chargée, soit
+via =org-customize= en activant =org-id= dans org-modules, ou en
+ajoutant (=require 'org-id=) dans votre fichier init Emacs.
+
+[fn:29] Si la rubrique contient un horodatage, il sera effacé du lien
+et résultera un mauvais lien--vous devriez éviter de mettre un
+horodatage dans une rubrique.
+
+[fn:28] Les recherches de rubriques correspondent toujours avec la
+rubrique exacte, ignorant les espaces et cookies. Si la rubrique n'est
+pas trouvée et que la valeur de l'option
+=org-link-search-must-match-exact-headline= est =query-to-create=,
+alors l'utilisateur sera invité à la créer.
+
+[fn:27] Le réel comportement de la recherche dépendra de la valeur de
+l'option =org-link-search-must-match-exact-headline=. Si sa valeur
+est =nil=, alors une recherche de texte floue sera faite. Si c'est
+=t=, alors uniquement la rubrique exacte sera mise en correspondance,
+ignorant les espaces et cookies. Si la valeur est =query-to-create=,
+alors une rubrique exacte sera cherchée; si elle n'est pas trouvée,
+alors l'utilisateur sera invité à la créer.
+
+[fn:26] Lorsque ciblant un mot-clé =#+NAME=, un mot-clé =#+CAPTION=
+est requis afin d'obtenir une bonne numérotation (voir Section 11.4
+[Images and tables]).
+
+[fn:25] Pour insérer un lien ciblant une rubrique, la complétion peut
+être utilisée. Taper juste une étoile suivie par quelques lettres
+optionnelles dans le tampon et pressez =M-TAB=. Toutes les rubriques
+dans le tampon actuel seront proposées comme complétions.
 
 [fn:24] De tels noms doivent démarrer par un caractère alphabétique et
 utiliser uniquement des caractères alpha-numérique/tiret du bas.
