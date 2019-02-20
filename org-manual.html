@@ -2,7 +2,7 @@
 <html lang="FR">
 <head>
 <title>Traduction française du <a href="https://orgmode.org/org.pdf">manuel Org</a></title>
-<!-- 2019-02-18 Mon 09:53 -->
+<!-- 2019-02-20 Wed 18:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -3358,6 +3358,322 @@ défaut '<code>12</code>'.
 </div>
 <div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4"><span class="section-number-2">4</span> Hyperliens</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Comme HTML, Org fournit des liens à l'intérieur d'un document, des
+liens externes vers d'autres fichiers, articles Usenet, emails, et
+bien plus.
+</p>
+</div>
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Format de lien</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Org reconnaîtra les liens URL bruts et les activera comme des liens
+cliquables. Le format général des liens, toutefois, ressemble à
+ça : 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">[[lien][description] ] ou [[lien] ]
+</pre>
+</div>
+<p>
+Une fois qu'un lien dans le tampon est complet (tous les crochets
+sont présent), Org modifiera l'affichage de sorte que
+'<code>description</code>' est affiché au lieu de '<code>[[lien][description] ]</code>'
+et '<code>lien</code>' est affiché au lieu de '<code>[[lien] ]</code>'. Les liens seront
+surlignés avec la face <code>org-link</code>, qui par défaut est soit la
+partie '<code>lien</code>' (s'il n'y a pas de description) soit la partie
+'<code>description</code>'. Pour éditer aussi la partie '<code>lien</code>' invisible,
+utiliser <code>C-c C-l</code> avec le curseur sur le lien. 
+</p>
+
+<p>
+Si vous placez le curseur au début ou avant la fin du texte affiché
+et pressez BACKSPACE, vous effacerez le crochet (invisible) à cet
+endroit. Cela rend le lien incomplet et l'intérieur est à nouveau
+affiché comme texte brut. Insérer le crochet manquant cache à
+nouveau le lien interne. Pour montrer la structure interne de tous
+les liens, utiliser le menu d'entrée <code>Org-&gt;Hyperlinks-&gt;Literal
+   links</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Liens internes</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Si le lien ne ressemble pas à une URL, il est considéré comme étant
+un lien interne dans le fichier actuel. Le cas le plus important est
+un lien comme '<code>[[#my-custom-id] ]</code>' qui liera l'entrée avec la
+propriété CUSTOM<sub>ID</sub> '<code>my-custom-id</code>'. Vous êtes responsable de vous
+assurer que ces identifiants personnalisés soient unique dans un
+fichier. 
+</p>
+
+<p>
+Des liens tels que '<code>[[Ma cible] ]</code>' ou '<code>[[Ma cible][Trouve ma
+  cible] ]</code>' mènent à une recherche textuelle dans le fichier actuel. 
+</p>
+
+<p>
+Le lien peut être suivi avec <code>C-c C-o</code> lorsque le curseur est sur le
+lien, ou avec un clic de souris (voir Section 4.4 [Handling
+links]). Les liens vers des identifiants personnalisés pointeront
+vers la rubrique correspondante. La correspondance préférée pour un
+lien textuel est une <i>cible dédiée</i> : la même chaîne entre double
+chevrons, comme '<code>&lt;&lt;Ma cible&gt;&gt;</code>'.
+</p>
+
+<p>
+Si aucune cible dédiée n'existe, le lien essaiera de correspondre
+avec le nom exact d'un élément dans le tampon. Le nommage est fait
+avec le mot-clé <code>#+NAME</code>, qui doit être mis dans la ligne avant
+l'élément auquel il se réfère, comme dans l'exemple suivant :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">#+NAME: Ma cible
+| un | tableau         |
+|----+-----------------|
+| de | quatre cellules |
+</pre>
+</div>
+<p>
+Si aucun de ceux ci-dessus n'ont de succès, Org cherchera une
+rubrique qui est exactement le lien textuel mais peut aussi inclure
+un mot-clé TODO et des balises<sup><a id="fnr.25" name="fnr.25" class="footref" href="#fn.25">25</a></sup>.
+</p>
+
+<p>
+Durant l'exportation, les liens internes seront utilisés pour
+marquer les objets et leur assigner un nombre. 
+</p>
+
+<p>
+Les objets marqués seront alors référencés par les liens pointant
+vers eux. En particulier, des liens sans une description
+apparaîtront comme nombre assigné à l'objet marqué<sup><a id="fnr.26" name="fnr.26" class="footref" href="#fn.26">26</a></sup>. Dans
+l'extrait suivant depuis un tampon Org
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org">- un élément
+- &lt;&lt;cible&gt;&gt;un autre élément
+Ici nous nous référons à l'élément [[cible] ]
+</pre>
+</div>
+<p>
+La dernière phrase apparaîtra comme '<code>Ici nous nous référons à
+  l'élément 2</code>' lorsqu'elle sera exportée. 
+</p>
+
+<p>
+Dans les fichiers non-Org, la recherche cherchera les mots dans le
+lien textuel. Dans l'exmple ci-dessus la recherche serait pour '<code>ma
+  cible</code>'. 
+</p>
+
+<p>
+Suivant un lien poussant une marque dans la chaîne Org. Vous pouvez
+retourner à la position précédente avec <code>C-c &amp;</code>. Utilisant cette
+commande plusieurs fois en succession directe renvoie aux positions
+enregistrées plus tôt.
+</p>
+</div>
+<div id="outline-container-sec-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> Cibles radio</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<p>
+Org peut automatiquement transformer toute occurrence de certains
+noms de cible en texte normal en un lien. Donc sans créer un lien
+explicite, le texte se connecte à la cible radioant sa position. Les
+cibles radio sont encapsulées entre trois chevrons. Par exemple, une
+cible '<code>&lt;&lt;&lt;Ma cible&gt;&gt;&gt;</code>' force toute occurrence de '<code>ma cible</code>' en
+texte normal à devenir activé comme un lien. Le fichier Org est
+automatiquement scanné pour les cibles radio uniquement lorsque le
+fichier est chargé en premier dans Emacs. Pour mettre à jour la
+liste des cibles durant l'édition, pressez <code>C-c C-c</code> avec le curseur
+sur ou à une cible. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Liens externes</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Org supporte les liens vers des fichiers, des sites web, Usenet et
+des messages email, des entrées de base de données BBDB et des
+liens vers à la fois des conversations IRC et leur logs. Les liens
+externes sont comme des localisateurss URL. Ils commencent avec une
+courte chaîne identifiante suivie d'un point. La liste suivante
+montre des exemples de chaque type de lien.
+</p>
+
+<dl class="org-dl">
+<dt> <code>http://www.astro.uva.nl/~dominik</code> </dt><dd>sur le web
+</dd>
+<dt> <code>doi:10.1000/182</code> </dt><dd>DOI pour une ressource électronnique
+</dd>
+<dt> <code>file:/home/dominik/images/jupiter.jpg</code> </dt><dd>file, absolute path
+</dd>
+<dt> <code>/home/dominik/images/jupiter.jpg</code> </dt><dd>pareil qu'au-dessus
+</dd>
+<dt> <code>file:papers/last.pdf</code> </dt><dd>fichier, chemin relatif
+</dd>
+<dt> <code>./papers/last.pdf</code> </dt><dd>pareil qu'au-dessus
+</dd>
+<dt> <code>file:/ssh:myself@some.where:papers/last.pdf</code> </dt><dd>fichier, chemin
+sur une machine distante
+</dd>
+<dt> <code>/ssh:myself@some.where:papers/last.pdf</code> </dt><dd>pareil qu'au-dessus
+</dd>
+<dt> <code>file:sometextfile::NNN</code> </dt><dd>fichier, saute au numéro de ligne
+indiqué 
+</dd>
+<dt> <code>file:projects.org</code> </dt><dd>un autre fichier Org
+</dd>
+<dt> <code>file:projects.org::some words</code> </dt><dd>recherche textuelle dans un
+fichier Org<sup><a id="fnr.27" name="fnr.27" class="footref" href="#fn.27">27</a></sup>
+</dd>
+<dt> <code>file:projects.org::*task title</code> </dt><dd>recherche une rubrique dans
+un fichier Org<sup><a id="fnr.28" name="fnr.28" class="footref" href="#fn.28">28</a></sup>
+</dd>
+<dt> <code>docview:papers/last.pdf:NNN</code> </dt><dd>ouvre en mode doc-view à la page
+</dd>
+<dt> <code>id:B7423F4D-2E8A-471B-8810-C40F074717E9</code> </dt><dd>lien vers rubrique
+par ID
+</dd>
+<dt> <code>news:comp.emacs</code> </dt><dd>lien Usenet
+</dd>
+<dt> <code>mailto:adent@galaxy.net</code> </dt><dd>lien mail
+</dd>
+<dt> <code>mhe:folder</code> </dt><dd>lien du dossier MH-E 
+</dd>
+<dt> <code>mhe:folder#id</code> </dt><dd>lien du message MH-E
+</dd>
+<dt> <code>rmail:folder</code> </dt><dd>lien du dossier RMAIL
+</dd>
+<dt> <code>rmail:folder#id</code> </dt><dd>lien du message RMAIL
+</dd>
+<dt> <code>gnus:group</code> </dt><dd>lien de groupe Gnus
+</dd>
+<dt> <code>gnus:group#id</code> </dt><dd>lien d'article Gnus
+</dd>
+<dt> <code>bbdb:R.*Stallman</code> </dt><dd>lien BBDB (avec regexp)
+</dd>
+<dt> <code>irc:/irc.com/#emacs/bob</code> </dt><dd>lien IRC
+</dd>
+<dt> <code>info:org#External links</code> </dt><dd>Noeud d'info ou lien d'index
+</dd>
+<dt> <code>shell:ls *.org</code> </dt><dd>Une commande shell
+</dd>
+<dt> <code>elisp:org-agenda</code> </dt><dd>Commande interactive Elisp
+</dd>
+<dt> <code>elisp:(find-file-other-frame "Elisp.org")</code> </dt><dd>Forme Elisp à
+évaluer
+</dd>
+</dl>
+
+<p>
+Par dessus ces types de liens intégrés, certains sont disponibles via
+le répertoire <code>contrib/</code> (voir Section 1.2 [Installation]). Par
+exemple, ces liens ver VM ou des messages Wanderlust sont disponibles
+lorsque vous chargez les bibliothèques correspondantes depuis le
+répertoire <code>contrib/</code> :
+</p>
+
+<ul class="org-ul">
+<li><code>vm:folder</code> lien de dossier VM
+</li>
+<li><code>vm:folder#id</code> lien de message VM
+</li>
+<li id="<code>vm://myself@some.where.org/folder#id</code>">VM sur une machine à
+distance
+</li>
+<li id="<code>vm-imap:account:folder</code>">lien de dossier IMAP VM
+</li>
+<li id="<code>vm-imap:account:folder#id</code>">lien de message IMAP VM
+</li>
+<li id="<code>wl:folder</code>">lien de dossier WANDERLUST
+</li>
+<li id="<code>wl:folder#id</code>">lien de message WANDERLUST
+</li>
+</ul>
+
+
+<p>
+Pour personnaliser Org pour ajouter de nouveaux types de lien
+Section A.3 [Adding hyperlink types].
+</p>
+
+<p>
+Un lien devrait être encapsulé entre deux paires de crochets et
+peut contenir un texte descriptif pour être affiché au lieu de
+l'URL (voir Section 4.1 [Link format]), par exemple : 
+<code>[[https://www.gnu.org/software/emacs/][GNU Emacs] ]</code>
+</p>
+
+<p>
+Si la description est un nom de fichier ou une URL qui pointe vers
+une image, une exportation HTML (voir Section 12.9 [HTML export])
+transformera l'image en un bouton cliquable. S'il n'y a pas de
+description et que le lien pointe vers une image, cette image sera
+mises en ligne dans le fichier HTML exporté. 
+</p>
+
+
+<p>
+Org trouve aussi les liens externes dans le texte normal et les
+active comme liens. Si les espaces doivent faire partie du lien
+(par exemple dans '<code>bbdb:Richard Stallman</code>'), ou si vous devez
+supprimer les ambiguïtés à propos de la fin du lien, encapsulez-les
+avec des crochets. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Manipulation de liens</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+Org fournit des méthodes pour créer un lien avec la bonne syntaxe,
+pour l'insérer dans un fichier Org, et suivre le lien :
+</p>
+<dl class="org-dl">
+<dt> <code>C-c l</code> ou <code>org-store-link</code> </dt><dd>stocke un lien à l'emplacement
+actuel. Cette commande est <i>globale</i> (vous devez créer la
+liaison vous-même) qui peut être utilisée dans tout tampon
+pour créer un lien. Le lien sera stocké pour des insertions
+ultérieures dans un tampon Org (voir en dessous). Quel genre
+de lien sera créé dépend du tampon actuel :
+
+<p>
+<b>Tampons du mode Org</b>
+</p>
+
+<p>
+Pour des fichiers Org, s'il y a une '<code>&lt;&lt;cible&gt;&gt;</code>' au curseur,
+le lien pointe vers une cible. Autrement il pointe vers la
+rubrique actuelle, qui sera aussi la description<sup><a id="fnr.29" name="fnr.29" class="footref" href="#fn.29">29</a></sup>.
+</p>
+
+<p>
+Si la rubrique a une propriété CUSTOM<sub>ID</sub>, un lien vers ce
+CUSTOM ID sera stocké. De plus ou alternativement (selon la
+valeur de <code>org-id-link-to-org-use-id</code>), un unique ID global de
+propriété sera créé et/ou utilisé pour construire un
+lien<sup><a id="fnr.30" name="fnr.30" class="footref" href="#fn.30">30</a></sup>. Donc utiliser cette commande dans des tampons Org
+créera potentiellement deux liens : un lisible depuis le
+custom ID, et un globalement unique et qui fonctionne même si
+l'entrée est déplacée dans le fichier. Ensuite, lorsqu'insérer
+le lien vous devez décider lequel utiliser.
+</p>
+</dd>
+</dl>
+</div>
+</div>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -3507,6 +3823,49 @@ De tels noms doivent démarrer par un caractère alphabétique et
 utiliser uniquement des caractères alpha-numérique/tiret du bas.
 </p></div>
 
+<div class="footdef"><sup><a id="fn.25" name="fn.25" class="footnum" href="#fnr.25">25</a></sup> <p class="footpara">
+Pour insérer un lien ciblant une rubrique, la complétion peut
+être utilisée. Taper juste une étoile suivie par quelques lettres
+optionnelles dans le tampon et pressez <code>M-TAB</code>. Toutes les rubriques
+dans le tampon actuel seront proposées comme complétions.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.26" name="fn.26" class="footnum" href="#fnr.26">26</a></sup> <p class="footpara">
+Lorsque ciblant un mot-clé <code>#+NAME</code>, un mot-clé <code>#+CAPTION</code>
+est requis afin d'obtenir une bonne numérotation (voir Section 11.4
+[Images and tables]).
+</p></div>
+
+<div class="footdef"><sup><a id="fn.27" name="fn.27" class="footnum" href="#fnr.27">27</a></sup> <p class="footpara">
+Le réel comportement de la recherche dépendra de la valeur de
+l'option <code>org-link-search-must-match-exact-headline</code>. Si sa valeur
+est <code>nil</code>, alors une recherche de texte floue sera faite. Si c'est
+<code>t</code>, alors uniquement la rubrique exacte sera mise en correspondance,
+ignorant les espaces et cookies. Si la valeur est <code>query-to-create</code>,
+alors une rubrique exacte sera cherchée; si elle n'est pas trouvée,
+alors l'utilisateur sera invité à la créer.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.28" name="fn.28" class="footnum" href="#fnr.28">28</a></sup> <p class="footpara">
+Les recherches de rubriques correspondent toujours avec la
+rubrique exacte, ignorant les espaces et cookies. Si la rubrique n'est
+pas trouvée et que la valeur de l'option
+<code>org-link-search-must-match-exact-headline</code> est <code>query-to-create</code>,
+alors l'utilisateur sera invité à la créer.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.29" name="fn.29" class="footnum" href="#fnr.29">29</a></sup> <p class="footpara">
+Si la rubrique contient un horodatage, il sera effacé du lien
+et résultera un mauvais lien&#x2013;vous devriez éviter de mettre un
+horodatage dans une rubrique.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.30" name="fn.30" class="footnum" href="#fnr.30">30</a></sup> <p class="footpara">
+La bibliothèque <code>org-id.el</code> doit d'abord être chargée, soit
+via <code>org-customize</code> en activant <code>org-id</code> dans org-modules, ou en
+ajoutant (<code>require 'org-id</code>) dans votre fichier init Emacs.
+</p></div>
+
 
 </div>
 </div></div><div class="col-md-3"><nav id="table-of-contents">
@@ -3594,14 +3953,25 @@ utiliser uniquement des caractères alpha-numérique/tiret du bas.
 </li>
 </ul>
 </li>
-<li><a href="#sec-4">4. Hyperliens</a></li>
+<li><a href="#sec-4">4. Hyperliens</a>
+<ul class="nav">
+<li><a href="#sec-4-1">4.1. Format de lien</a></li>
+<li><a href="#sec-4-2">4.2. Liens internes</a>
+<ul class="nav">
+<li><a href="#sec-4-2-1">4.2.1. Cibles radio</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-3">4.3. Liens externes</a></li>
+<li><a href="#sec-4-4">4.4. Manipulation de liens</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav>
 </div></div></div>
 <footer id="postamble" class="">
 <div><p class="author">Author: Laurent Garnier</p>
-<p class="date">Created: 2019-02-18 Mon 09:53</p>
+<p class="date">Created: 2019-02-20 Wed 18:53</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.1 (<a href="http://orgmode.org">Org-mode</a> 9.1.13)</p>
 </div>
 </footer>
