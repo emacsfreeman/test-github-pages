@@ -2,7 +2,7 @@
 <html lang="FR">
 <head>
 <title>Traduction française du <a href="https://orgmode.org/org.pdf">manuel Org</a></title>
-<!-- 2019-02-20 Wed 18:53 -->
+<!-- 2019-02-22 Fri 19:17 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -3639,38 +3639,38 @@ avec des crochets.
 <div class="outline-text-3" id="text-4-4">
 <p>
 Org fournit des méthodes pour créer un lien avec la bonne syntaxe,
-pour l'insérer dans un fichier Org, et suivre le lien :
+pour l'insérer dans un fichier Org, et suivre le lien.
 </p>
+
+<p>
+La fonction principale est ou <code>org-store-link</code>, appelée avec <code>M-x
+   org-store-link</code>. À cause de son importance, nous suggérons la lier
+à un grand nombre de touches (voir Section 1.3 [Activation]). Elle
+stocke un lien à l'emplacement actuel. Le lien est stocké pour une
+insertion ultérieure dans un tampon Org&#x2013;voir plus bas. Le lien est
+stocké dans le tampon actuel : 
+</p>
+
 <dl class="org-dl">
-<dt> <code>C-c l</code> ou <code>org-store-link</code> </dt><dd>stocke un lien à l'emplacement
-actuel. Cette commande est <i>globale</i> (vous devez créer la
-liaison vous-même) qui peut être utilisée dans tout tampon
-pour créer un lien. Le lien sera stocké pour des insertions
-ultérieures dans un tampon Org (voir en dessous). Quel genre
-de lien sera créé dépend du tampon actuel :
+<dt> Tampons Org mode </dt><dd>Pour les fichiers Org mode, s'il y a une
+'<code>&lt;&lt;cible&gt;&gt;</code>' au point, le lien pointe vers la
+cible. Autrement il pointe vers la rubrique actuelle, qui est
+aussi la description<sup><a id="fnr.29" name="fnr.29" class="footref" href="#fn.29">29</a></sup>. 
 
 <p>
-<b>Tampons du mode Org</b>
-</p>
-
-<p>
-Pour des fichiers Org, s'il y a une '<code>&lt;&lt;cible&gt;&gt;</code>' au curseur,
-le lien pointe vers une cible. Autrement il pointe vers la
-rubrique actuelle, qui sera aussi la description<sup><a id="fnr.29" name="fnr.29" class="footref" href="#fn.29">29</a></sup>.
-</p>
-
-<p>
-Si la rubrique a une propriété CUSTOM<sub>ID</sub>, un lien vers ce
-CUSTOM ID sera stocké. De plus ou alternativement (selon la
-valeur de <code>org-id-link-to-org-use-id</code>), un unique ID global de
-propriété sera créé et/ou utilisé pour construire un
-lien<sup><a id="fnr.30" name="fnr.30" class="footref" href="#fn.30">30</a></sup>. Donc utiliser cette commande dans des tampons Org
-créera potentiellement deux liens : un lisible depuis le
-custom ID, et un globalement unique et qui fonctionne même si
-l'entrée est déplacée dans le fichier. Ensuite, lorsqu'insérer
-le lien vous devez décider lequel utiliser.
+Si la rubrique a une propriété '<code>CUSTOM_ID</code>', stocke un lien
+vers cet identifiant personnalisé. De plus ou alternativement,
+selon la valeur de <code>org-link-to-org-use-id</code>, crée et/ou
+utilise une propriété globale unique '<code>ID</code>' pour le
+lien<sup><a id="fnr.30" name="fnr.30" class="footref" href="#fn.30">30</a></sup>. Donc en utiliser cette commande dans des tampons
+Org crée potentiellement deux liens : un lien lisible depuis
+le ID personnalisé, et l'un d'entre eux est globalement unique
+et fonctionne même si l'entrée est déplacée de fichier à
+fichier. Plus tard, lors de l'insertion de lien, vous devez
+décider lequel utilisé. 
 </p>
 </dd>
+<dt> Email/News clients : VM, Rmail, Wanderlust, MH-E, Gnus </dt><dd></dd>
 </dl>
 </div>
 </div>
@@ -3861,9 +3861,9 @@ horodatage dans une rubrique.
 </p></div>
 
 <div class="footdef"><sup><a id="fn.30" name="fn.30" class="footnum" href="#fnr.30">30</a></sup> <p class="footpara">
-La bibliothèque <code>org-id.el</code> doit d'abord être chargée, soit
-via <code>org-customize</code> en activant <code>org-id</code> dans org-modules, ou en
-ajoutant (<code>require 'org-id</code>) dans votre fichier init Emacs.
+La bibliothèque Org Id doit d'abord être chargée, soit via
+<code>org-customize</code>, soit en activant <code>id</code> dans <code>org-modules</code>, ou en
+ajoutant '<code>(require 'org-id)</code>' dans votre fichier init dans Emacs.
 </p></div>
 
 
@@ -3971,7 +3971,7 @@ ajoutant (<code>require 'org-id</code>) dans votre fichier init Emacs.
 </div></div></div>
 <footer id="postamble" class="">
 <div><p class="author">Author: Laurent Garnier</p>
-<p class="date">Created: 2019-02-20 Wed 18:53</p>
+<p class="date">Created: 2019-02-22 Fri 19:17</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.1 (<a href="http://orgmode.org">Org-mode</a> 9.1.13)</p>
 </div>
 </footer>
