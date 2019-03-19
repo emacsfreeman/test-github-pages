@@ -1,0 +1,188 @@
+#+TITLE: Tutoriel JavaScript [3/30] : Tableaux
+#+AUTHOR: Laurent Garnier
+
+* Pourquoi créer des tableaux ?
+** Listons des crypto-monnaies intéressantes
+
+   #+BEGIN_SRC javascript
+     var btc = 'Bitcoin'
+     var eth = 'Ethereum'
+     var ltc = 'Litecoin'
+     var xrp = 'Ripple'
+     var waves = 'Waves'
+     var wlo = 'Wello'
+     var dai = 'Dai'
+     var nano = 'Nano'
+   #+END_SRC
+
+** Créons un tableau à la place
+
+   #+BEGIN_SRC javascript
+     var cryptosWirex = [btc, eth, ltc, xrp, waves, wlo, dai, nano]
+   #+END_SRC
+
+** Accédons aux éléments du tableau
+
+   #+BEGIN_SRC javascript
+     cryptosWirex[0];
+     cryptosWirex[1];
+     cryptosWirex[2];
+   #+END_SRC
+
+** Modifions le tableau
+
+   #+BEGIN_SRC javascript
+     cryptosWirex[0] = 'Euros'
+   #+END_SRC
+
+** Mélangeons les données   
+
+   #+BEGIN_SRC javascript
+     var cryptosWirex = [
+	 ['BTC', 'Bitcoin', 35556.31],
+	 ['ETH', 'Ethereum', 124.26],
+	 ['LTC', 'Litecoin', 54.31]
+	 ]
+   #+END_SRC
+
+* Travailler avec les tableaux
+** Trouver la taille
+
+   #+BEGIN_SRC javascript
+     var cryptosWirex = [
+	 ['BTC', 'Bitcoin', 35556.31],
+	 ['ETH', 'Ethereum', 124.26],
+	 ['LTC', 'Litecoin', 54.31],
+	 ['XRP', 'Ripple', 0.28],
+	 ['WAVES', 'Waves', 2.46],
+	 ['WLO', 'WOLLO', 0.039],
+	 ['DAI', 'Dai', 0.88],
+	 ['NANO', 'Nano', 0.91]
+     ];
+     cryptosWirex.length;
+     cryptosWirex[0].length;
+   #+END_SRC
+
+** Ajouter des éléments au tableau
+
+   #+BEGIN_SRC javascript
+     var jaxxLiberty = ['BTC', 'ETH', 'BCH', 'LTC'];
+     jaxxLiberty.push('DASH'); // ajoute à la suite
+     jaxxLiberty;
+     jaxxLiberty.unshift('ZEC'); // ajoute au début
+     jaxxLiberty.length;
+   #+END_SRC
+
+** Retirer des éléments
+
+   #+BEGIN_SRC javascript
+     jaxxLiberty;
+     var lastCrypto = jaxxLiberty.pop(); // retire le dernier
+     lastCrypto;
+     var firstCrypto = jaxxLiberty.shift(); // retire le premier
+     firstCrypto;
+   #+END_SRC
+
+** Ajouter des tableaux entre eux
+
+   #+BEGIN_SRC javascript
+     var jaxx = ['ZEC', 'BTC', 'ETH', 'BCH'];
+     var wirex = ['WLO', 'WAVES', 'NANO'];
+     var jaxxEtWirex = jaxx.concat(wirex);
+     jaxxEtWirex;
+     jaxx;
+     wirex;
+     var autre = ['DASH', 'BAT'];
+     var jaxxWirexAutre = jaxx.concat(wirex, autre);
+     jaxxWirexAutre;
+   #+END_SRC
+
+** Trouver l'indice d'un élément
+
+   #+BEGIN_SRC javascript
+     jaxx.indexOf('BTC');
+     jaxxWirexAutre.indexOf('BCH');
+   #+END_SRC
+
+** Convertir un tableau en chaîne
+
+   #+BEGIN_SRC javascript
+     jaxx.join();
+     jaxx = ['BTC', 'ETH', 'LTC'];
+     jaxx.join(' - ');
+     jaxx.join('*');
+     jaxx.join(' devant ');
+   #+END_SRC
+* Choses utiles à faire avec les tableaux
+** Trouver son chemin de retour
+*** Aller
+
+   #+BEGIN_SRC javascript
+     var landmarks = [];
+     landmarks.push("My house");
+     landmarks.push("Front path");
+     landmarks.push("Flickering streetlamp");
+     landmarks.push("Leaky fire hydrant");
+     landmarks.push("Fire station");
+     landmarks.push("Cat rescue center");
+     landmarks.push("My old school");
+     landmarks.push("My friend's house");
+   #+END_SRC
+
+*** Retour
+
+    #+BEGIN_SRC javascript
+      landmarks.pop();
+      landmarks.pop();
+      landmarks.pop();
+      landmarks.pop();
+      landmarks.pop();
+      landmarks.pop();
+      landmarks.pop();
+      landmarks.pop();
+    #+END_SRC
+
+** Preneur de décision
+*** Générer des nombres aléatoires
+
+    #+BEGIN_SRC javascript
+      Math.random();
+      Math.random();
+      Math.random();
+      Math.random() * 10;
+      Math.random() * 10;
+      Math.random() * 10;
+    #+END_SRC
+
+*** Prendre l'arrondi par défaut
+
+    #+BEGIN_SRC javascript
+      Math.floor(3.14);
+      Math.floor(1.73);
+      Math.floor(Math.random() * 10);
+      var randomIndex = Math.floor(Math.random() * jaxx.length);
+      var randomJaxxCrypto = jaxx[randomIndex];
+    #+END_SRC
+
+*** Le preneur de décision
+
+    #+BEGIN_SRC javascript
+      var phrases = [
+	  "ça a l'air pas mal",
+	  "Oui, tu devrais vraiment faire ça",
+	  "Je ne suis pas sûr que ça soit une bonne idée",
+	  "Peut-être pas aujourd'hui ?",
+	  "L'ordinateur dit non."
+      ];
+      // Devrais-je continuer à coder en JavaScript ?
+      phrases[Math.floor(Math.random() * phrases.length)];
+      // Devrais-je aller prendre l'air ?
+      phrases[Math.floor(Math.random() * phrases.length)];
+      // Devrais-je la rappeler ?
+      phrases[Math.floor(Math.random() * phrases.length)];
+      // Devrais-je accepter cette invitation ?
+      phrases[Math.floor(Math.random() * phrases.length)];
+    #+END_SRC
+
+
+   

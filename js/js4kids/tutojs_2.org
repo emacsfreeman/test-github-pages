@@ -1,0 +1,256 @@
+#+TITLE: Tutoriel JavaScript [2/30] : Types de données
+#+AUTHOR: Laurent Garnier
+
+* Nombre de secondes 
+** Camel case
+   Les noms de variables ne peuvent contenir d'espaces ni de
+   caractères accentués.
+   
+   Alors pour que les choses soient lisibles et compréhensibles on
+   aura tendance à mettre en majuscule la première lettre de chaque
+   mot sauf le premier
+
+** Nombre de secondes dans une heure
+
+   #+BEGIN_SRC javascript
+     var secondesDans1Minute = 60;
+     var minutesDans1Heure = 60;
+     var secondesDans1Heure = secondesDans1Minute * minutesDans1Heure;
+     secondesDans1Heure;
+   #+END_SRC
+
+** Nombre de secondes dans une journée
+
+   #+BEGIN_SRC javascript
+     var heuresDans1Jour = 24;
+     var secondesDans1Jour = heuresDans1Jour * secondesDans1Jour;
+     secondesDans1Jour;
+   #+END_SRC
+
+** Nombre secondes dans une année
+
+   #+BEGIN_SRC javascript
+     var joursDans1An = 365;
+     var secondesDans1An = secondesDans1Jour * joursDans1An;
+     secondesDans1An;
+   #+END_SRC
+
+** Âge en secondes
+
+   #+BEGIN_SRC javascript
+     var age = prompt('Quel est votre âge ? ');
+     age * secondesDans1An;
+   #+END_SRC
+* Incrémentation et décrémentation
+  Imaginons que l'on compte le nombre d'abonnés à une chaîne YouTube
+** Avant
+
+  #+BEGIN_SRC javascript
+    var nombreAbonnes = 345;
+    ++nombreAbonnes; // incrémentation
+    ++nombreAbonnes;
+    --nombreAbonnes; // décrémentation
+  #+END_SRC
+
+** Après
+
+   #+BEGIN_SRC javascript
+     nombreAbonnes++;
+     nombreAbonnes;
+     nombreAbonnes--;
+     nombreAbonnes;
+   #+END_SRC
+* Raccourcis de notations
+** Plus ou moins
+   #+BEGIN_SRC javascript
+     var x = 1;
+     x = x + 2;
+     x;
+     var y = 1;
+     y += 2;
+     y;
+     var u = 10;
+     u = u - 2;
+     u;
+     var v = 10;
+     v -= 2;
+     v;
+   #+END_SRC
+** Multiplier et diviser
+   #+BEGIN_SRC javascript
+     var pains = 5;
+     pains *= 10;
+     var gateau = 100;
+     gateau /= 10;
+   #+END_SRC
+* Chaînes de caractères
+** Hello world
+
+   #+BEGIN_SRC javascript
+     "Hello World";
+     "En informatique on commence toujours un nouveau langage par Hello World";
+   #+END_SRC
+
+** Simple ou double ?
+
+   #+BEGIN_SRC javascript
+     'Simple';
+     "T'as vu ça ?"
+   #+END_SRC
+
+** String ou nombre ?
+
+   #+BEGIN_SRC javascript
+     var unString = '1';
+     unString + unString;
+     var unNombre = 1;
+     unNombre + unNombre;
+   #+END_SRC
+
+** Concaténation
+
+   #+BEGIN_SRC javascript
+     var con = 'con';
+     var cat = 'caté';
+     var nation = 'nation';
+     con + cat + nation;
+     var tontons = "Les cons ça osent tout, c'est même à ça qu'on les r'connaît !";
+     tontons;
+   #+END_SRC
+
+** Longueur
+
+   #+BEGIN_SRC javascript
+     var langage = 'JavaScript';
+     langage.length;
+     'Hello world'.length;
+   #+END_SRC
+** Extraire un caractère d'une chaîne
+
+   #+BEGIN_SRC javascript
+     var greet = 'Hello World';
+     greet.length;
+     greet[0];
+     greet[1];
+     greet[-1];
+     greet[greet.length - 1];
+     greet[greet.length];
+     greet[greet.length-3]+greet[4]+greet[3]+greet[1];
+   #+END_SRC
+** Avec les chaînes, comme au tennis, on peut faire des slices
+
+   #+BEGIN_SRC javascript
+     var tontons = "Les cons ça osent tout !";
+     var flingueurs = "C'est même à ça qu'on les r'connaît !";
+     "Oh le " + tontons.slice(4,7) + " !";
+     tontons + flingueurs;
+   #+END_SRC
+** Attention à la casse !
+
+   #+BEGIN_SRC javascript
+     var ministre = "Bonjour Madame la ministre.";
+     ministre.toLowerCase();
+     ministre.toUpperCase();
+     ministre[0].toLowerCase();
+     ministre[1].toUpperCase();
+   #+END_SRC
+* Booléens
+** Soyons binaires  
+   
+   #+BEGIN_SRC javascript
+     true;
+     false;
+   #+END_SRC
+** Opérateur logique (ET) &&
+
+   #+BEGIN_SRC javascript
+     var regardeYouTube = true;
+     var regardeNetflix = false;
+     var estGratuit = true;
+     regardeYouTube && estGratuit;
+     regardeNetflix && estGratuit;
+   #+END_SRC
+
+** Opérateur logique (OU) ||
+
+   #+BEGIN_SRC javascript
+     var estEnCouple = false;
+     estEnCouple || regardeNetflix;
+     estEnCouple || regardeYouTube;
+   #+END_SRC
+
+** Opérateur unaire (NON) !
+
+   #+BEGIN_SRC javascript
+     regardeYouTube;
+     !regardeYouTube;
+   #+END_SRC
+
+** Combo
+
+   #+BEGIN_SRC javascript
+     (regardeYouTube && estGratuit) || regardeNetflix;
+   #+END_SRC
+* Comparaisons de nombres
+** Plus grand que
+   
+   #+BEGIN_SRC javascript
+     var ageMin = 18;
+     var age = prompt('Quel est votre âge ? ');
+     age > ageMin;
+     age = 18;
+     age > ageMin;
+     age >= ageMin;
+   #+END_SRC
+
+** Plus petit que
+   
+   #+BEGIN_SRC javascript
+     var ageMin = 18;
+     var age = prompt('Quel est votre âge ? ');
+     age < ageMin;
+     age = 18;
+     age < ageMin;
+     age <= ageMin;
+   #+END_SRC
+
+
+
+** Strictement égal à
+
+   #+BEGIN_SRC javascript
+     var nombreMystere = 3;
+     var monChoix = 5;
+     nombreMystere === monChoix;
+     monChoix = 3;
+     nombreMystere === monChoix;
+   #+END_SRC
+
+** Presque égal à 
+
+   #+BEGIN_SRC javascript
+     var uneChaine = '5';
+     var unNombre = 5;
+     uneChaine === unNombre;
+     uneChaine == unNombre;
+   #+END_SRC
+* Undefined et null sont sur un bateau
+** Undefined
+
+   Lorsque vous déclarez une variable sans lui donner de valeur alors
+   JS lui attribue la valeur undefined
+
+   #+BEGIN_SRC javascript
+     var maVariable;
+     maVariable;
+   #+END_SRC
+
+** Null
+
+   La valeur null est la valeur vide que l'on choisit délibérément
+   d'attribuer à une variable pour signifier qu'elle est vide.
+
+   #+BEGIN_SRC javascript
+     var maVariableNull = null;
+     maVariableNull;
+   #+END_SRC
