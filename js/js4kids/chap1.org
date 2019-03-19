@@ -1,0 +1,50 @@
+#+TITLE: Tutoriel JavaScript [1/30]
+#+AUTHOR: Laurent Garnier
+
+* Pourquoi apprendre JavaScript (JS) ?
+** Parce que !
+
+   Il existe une infinité de raison d'apprendre à coder en JavaScript
+   alors je vais uniquement en lister quelques unes :
+
+   1. Tout d'abord il n'y a rien à installer à part un navigateur
+      web... et ça je pense que vous l'avez déjà installé sinon il
+      suffit d'aller sur [[https://www.google.com/intl/fr_ALL/chrome/][Google]].
+   2. Ensuite, puisque JS est LE langage lu et interprété par TOUS les
+      navigateurs web alors il est utilisable PARTOUT.
+   3. De nombreux sites et applications web l'utilisent (Gmail,
+      Twitter, Facebook...)
+** Quelques exemples concrets
+
+   Voici une courte sélection de site web utilisant JS
+
+   + [[http://fantasynth.com/]] qui propose des musiques animées
+   + [[https://www.cubeslam.com/eumsvk]] un jeu vidéo assez amusant
+
+* Passons à la pratique
+** Au commencement était le navigateur  
+   1. Ouvrir Chrome
+   2. Ctrl + Shift + J (PC) ou CMD + Alt + J (Mac) pour ouvrir la
+      console JS
+
+   3. Taper les lignes de code suivantes (shift + enter pour créer de
+      nouvelles lignes)
+
+      #+BEGIN_SRC javascript
+	1 + 2
+	// Dessinez des chat
+	var dessineChat = function (nbFois) {
+	    for (var i = 0; i < nbFois; i++) {
+		console.log(i + " =^.^=");
+	    }
+	};
+
+	dessineChat(10); // mettre le nombre que vous voulez
+      #+END_SRC
+
+** Autres navigateurs
+
+   Pour ouvrir la console sur :
+   + Safari :: CMD + ALT + C
+   + Firefox :: CTRL + SHIFT + J (PC) ou CMD + SHIFT + J (MAC)
+   
