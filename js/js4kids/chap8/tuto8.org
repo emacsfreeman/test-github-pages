@@ -1,0 +1,160 @@
+#+TITLE: Fonctions
+#+AUTHOR: Laurent Garnier
+
+* L'anatomie de base d'une fonction
+  
+  #+BEGIN_SRC javascript
+    function () {
+	console.log("Fais quelque chose");
+    }
+  #+END_SRC
+
+* Créer une fonction simple
+
+  #+BEGIN_SRC javascript
+    var ourFirstFunction = function () {
+	console.log("Hello world!");
+    };
+  #+END_SRC
+
+* Appeler une fonction
+
+  #+BEGIN_SRC javascript
+    ourFirstFunction();
+  #+END_SRC
+
+* Passer des arguments dans les fonctions
+
+  #+BEGIN_SRC javascript
+    var sayHelloTo = function (name) {
+	console.log("Hello " + name + "!");
+    };
+  #+END_SRC
+
+* Afficher des visages de chats
+
+  #+BEGIN_SRC javascript
+    var drawCats = function (howManyTimes) {
+	for (var i = 0; i < howManyTimes; i++) {
+	    console.log(i + " =^.^=");
+	}
+    };
+  #+END_SRC
+
+* Passer plusieurs arguments à une fonction
+
+  #+BEGIN_SRC javascript
+    var printMultipleTimes = function (howManyTimes, whatToDraw) {
+	for (var i = 0; i < howManyTimes; i++) {
+	    console.log(i + " " + whatToDraw);
+	}
+    };
+  #+END_SRC
+
+* Renvoyer des valeurs depuis une fonction
+
+  #+BEGIN_SRC javascript
+    var double = function (number) {
+	return number * 2;
+    };
+  #+END_SRC
+
+* Utiliser des appels de fonction comme valeurss
+
+  #+BEGIN_SRC javascript
+    double(double(3));
+  #+END_SRC
+
+* Utiliser des fonctions pour simplifier du code 
+** Une fonction pour choisir un mot aléatoire
+
+   #+BEGIN_SRC javascript
+     var pickRandomWord = function (words) {
+	 return words[Math.floor(Math.random() * randomWords.length)];
+     };
+
+     var randomWords = ["Planet", "Worm", "Flower", "Computer"];
+
+     pickRandomWord(randomWords);
+     pickRandomWord(['Bitcoin', 'Ethereum', 'Litecoin', 'Waves']);
+   #+END_SRC
+
+** Un générateur d'insulte aléatoire
+
+   #+BEGIN_SRC javascript
+     var randomBodyParts = ["Face", "Nose", "Hair"];
+     var randomAdjectives = ["Smelly", "Boring", "Stupid"];
+     var randomWords = ["Fly", "Marmot", "Stick", "Monkey", "Rat"];
+
+     // Pick a random body part from the randomBodyParts array:
+     var randomBodyPart = randomBodyParts[Math.floor(Math.random() * 3)];
+     // Pick a random adjective from the randomAdjectives array:
+     var randomAdjective = randomAdjectives[Math.floor(Math.random() * 3)];
+     // Pick a random word from the randomWords array:
+     var randomWord = randomWords[Math.floor(Math.random() * 5)];
+     // Join all the random strings into a sentence:
+     var randomString = "Your " + randomBodyPart + " is like a " + randomAdjective + " " + randomWord + "!!!";
+     randomString;
+   #+END_SRC
+
+   Evitons les répétitions
+
+   #+BEGIN_SRC javascript
+     var randomBodyParts = ["Face", "Nose", "Hair"];
+     var randomAdjectives = ["Smelly", "Boring", "Stupid"];
+     var randomWords = ["Fly", "Marmot", "Stick", "Monkey", "Rat"];
+
+     // Join all the random strings into a sentence:
+     var randomString = "Your " + pickRandomWord(randomBodyParts) + " is like a " + pickRandomWord(randomAdjectives) + " " + pickRandomWord(randomWords) + "!!!";
+     randomString;
+   #+END_SRC
+
+** Transformer le générateur d'insulte aléatoire en fonction
+
+   #+BEGIN_SRC javascript
+     generateRandomInsult = function () {
+	 var randomBodyParts = ["Face", "Nose", "Hair"];
+	 var randomAdjectives = ["Smelly", "Boring", "Stupid"];
+	 var randomWords = ["Fly", "Marmot", "Stick", "Monkey", "Rat"];
+
+	 // Join all the random strings into a sentence:
+	 var randomString = "Your " + pickRandomWord(randomBodyParts) + " " + pickRandomWord(randomWords) + "!!!";
+
+	 return randomString;
+     };
+
+     generateRandomInsult();
+     generateRandomInsult();
+     generateRandomInsult();
+   #+END_SRC
+
+* Quitter une fonction plus tôt avec return 
+
+  #+BEGIN_SRC javascript
+    var fifthLetter = function (name) {
+	if (name.length < 5) {
+	    return;
+	}
+
+	return "The fifth letter of your name is " + name[4] + ".";
+    };
+
+    fifthLetter('Nicholas');
+  #+END_SRC
+
+
+* Utiliser return plusieurs fois au lieu des déclarations if else
+
+  #+BEGIN_SRC javascript
+    var medalForScore = function (score) {
+	if (score < 3) {
+	    return "Bronze";
+	}
+
+	if (score < 7) {
+	    return "Silver";
+	}
+
+	return "Gold";
+    };
+  #+END_SRC
