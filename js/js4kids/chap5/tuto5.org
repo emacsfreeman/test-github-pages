@@ -2,12 +2,12 @@
 #+AUTHOR: Laurent Garnier
 
 * Editeurs de texte
-#+BEGIN_QUOTE
+#+BEGIN_SOURCE org
   /\_/\
 =( owo )=
   )   ( //
  (___ )//
-#+END_QUOTE
+#+END_SOURCE
 
 ** À installer
   + Sublime Text :: [[https://www.sublimetext.com/3]]
