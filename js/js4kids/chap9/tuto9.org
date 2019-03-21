@@ -1,0 +1,115 @@
+#+TITLE: Le DOM et Jquery
+#+AUTHOR: Laurent Garnier
+
+* Sélectionner des éléments du DOM
+** Utilisation des ID pour identifier des éléments
+   
+   #+BEGIN_SRC html
+     <h1 id="titre-principal">Salut tout le monde !</h1>
+   #+END_SRC
+** Sélectionner un élément en utilisant getelementbyid
+
+   #+BEGIN_SRC javascript
+     var headingElement = document.getElementById("titre-principal");
+     headingElement.innerHTML;
+   #+END_SRC
+** Remplacer le texte du titre en utilisant le DOM
+
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html>
+       <head>
+	 <title>Jouons avec le DOM</title>
+       </head>
+
+       <body>
+	 <h1 id="titre-principal">Salut tout le monde !</h1>
+
+	 <script>
+	   var headingElement = document.getElementById("titre-principal");
+	   console.log(headingElement.innerHTML);
+	   var newHeadingText = prompt("Merci de fournir un nouveau titre :
+	   ");
+	   headingElement.innerHTML = newHeadingText;
+	 </script>
+       </body>
+     </html>
+   #+END_SRC
+
+* Utiliser jQuery pour travailler avec l'arborescence du DOM
+  
+  Les méthodes intégrées du DOM sont géniales, mais elles ne sont pas
+  faciles à utiliser. À cause de cela, beaucoup de développeurs
+  utilisent un ensemble d'outils appelé jQuery pour accéder et
+  manipuler l'arborescence du DOM. jQuery est une bibliothèque
+  JavaScript---une collection d'outils reliés (pour la plupart des
+  fonctions) qui nous donnent, dans ce cas, une façon plus simple de
+  travailler avec les éléments du DOM. Une fois chargé dans notre page
+  web, nous pouvons utiliser ses fonctions et méthodes en plus de
+  celle construites en JavaScript et celles fournies par le
+  navigateur.
+
+** Charger jQuery sur votre page HTML
+
+   #+BEGIN_SRC html
+     <script
+       src="https://code.jquery.com/jquery-3.3.1.min.js"
+       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+       crossorigin="anonymous"></script>
+   #+END_SRC
+
+   Remarquez que la balise =<script>= n'a pas de contenu, et elle a un
+   attribut =src=. L'attribut =src= nous permet d'insérer un fichier
+   JavaScript dans notre page web.
+
+** Remplacer le texte du titre en utilisant jQuery
+
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html>
+       <head>
+	 <title>Jouons avec le DOM grâce à jQuery</title>
+       </head>
+
+       <body>
+	 <h1 id="titre-principal">Salut tout le monde</h1>
+
+	 <script
+       src="https://code.jquery.com/jquery-3.3.1.min.js"
+       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+       crossorigin="anonymous"></script>
+
+	 <script>
+	   var newHeadingText = prompt("Merci de fournir un nouveau titre :
+	   ");
+	   $("#titre-principal").text(newHeadingText);
+	 </script>
+       </body>
+     </html>
+   #+END_SRC
+
+* Créer de nouveaux éléments avec jQuery
+
+  #+BEGIN_SRC javascript
+    $("body").append("<p>Ceci est un nouveau paragraphe</p>");
+
+    for (var i = 0; i < 3; i++) {
+	var hobby = prompt("Dis-moi l'un de tes hobbies !");
+	$("body").append("<p>" + hobby + "</p>");
+    }
+  #+END_SRC
+
+* Animer des éléments avec jQuery
+
+  #+BEGIN_SRC javascript
+    $("h1").fadeOut(3000);
+  #+END_SRC
+
+* Enchaîner les animations avec jQuery
+
+  #+BEGIN_SRC javascript
+    $("h1").text("This will fade out").fadeOut(3000);
+    $("h1").fadeOut(3000).fadeIn(2000);
+    $("h1").slideUp(3000).slideDown(2000);
+  #+END_SRC
+
