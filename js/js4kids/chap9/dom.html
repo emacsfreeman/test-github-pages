@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jouons avec le DOM</title>
+  </head>
+
+  <body>
+    <h1 id="titre-principal">Salut tout le monde !</h1>
+
+    <script>
+      var headingElement = document.getElementById("titre-principal");
+      console.log(headingElement.innerHTML);
+      var newHeadingText = prompt("Merci de fournir un nouveau titre : ");
+      headingElement.innerHTML = newHeadingText;
+    </script>
+  </body>
+</html>
