@@ -1,0 +1,132 @@
+#+TITLE: Interactive programming
+#+AUTHOR: Laurent Garnier
+
+* Différer le code avec =setTimeout=
+
+  #+BEGIN_SRC javascript
+    var timeUp = function () {
+	alert("Time's up!");
+    };
+
+    setTimeout(timeUp, 3000);
+  #+END_SRC
+
+
+* Annuler un timeout
+  
+  #+BEGIN_SRC javascript
+    var doHomeworkAlarm = function () {
+	alert("Tu dois faire tes devoirs !");
+    };
+
+    var timeoutId = setTimeout(doHomeworkAlarm, 60000);
+    clearTimeout(timeoutId); // annule le timeout
+  #+END_SRC
+
+* Appeler du code plusieurs fois avec =setInterval=
+
+  #+BEGIN_SRC javascript
+    var counter = 1;
+
+    var printMessage = function () {
+	console.log("Tu es devant ta console depuis " + counter + " secondes");
+    };
+
+    var intervalId = setInterval(printMessage, 1000);
+    clearInterval(intervalId);
+  #+END_SRC
+
+* Animer des éléments avec =setInterval=
+
+  #+BEGIN_SRC html
+    <!DOCTYPE html>
+    <html lang="fr">
+      <head>
+	<meta charset="utf-8">
+	<title>Interactive programming</title>
+      </head>
+      <body>
+	<h1 id="heading">Hello world!</h1>
+
+	<script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+
+      <script>
+	var leftOffset = 0;
+
+	var moveHeading = function () {
+	  $("#heading").offset({left: leftOffset });
+
+	  leftOffset++;
+
+	  if (leftOffset > 200) {
+	    leftOffset = 0;
+	  };
+	};
+
+	setInterval(moveHeading, 30);
+      </script>
+      </body>
+    </html>
+  #+END_SRC
+
+* Répondre aux actions des utilisateurs
+** Répondre aux clics
+
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html lang="fr">
+       <head>
+	 <meta charset="utf-8">
+	 <title>Interactive programming</title>
+       </head>
+       <body>
+	 <h1 id="heading">Hello world!</h1>
+
+	 <script
+       src="https://code.jquery.com/jquery-3.3.1.min.js"
+       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+       crossorigin="anonymous"></script>
+
+       <script>
+	 var clickHandler = function (event) {
+	   console.log("Click! " + event.pageX + " " + event.pageY);
+	 };
+	 $("h1").click(clickHandler);
+       </script>
+       </body>
+     </html>
+   #+END_SRC
+
+** L'événement =mousemove=
+
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html lang="fr">
+       <head>
+	 <meta charset="utf-8">
+	 <title>Mousemove</title>
+       </head>
+       <body>
+	 <h1 id="heading">Hello world!</h1>
+
+	 <script
+       src="https://code.jquery.com/jquery-3.3.1.min.js"
+       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+       crossorigin="anonymous"></script>
+
+       <script>
+	 $("html").mousemove(function (event) {
+	   $("#heading").offset({
+	     left: event.pageX,
+	     top: event.pageY
+	   });
+	 });
+       </script>
+       </body>
+     </html>
+   #+END_SRC
+
+
