@@ -1,0 +1,198 @@
+#+TITLE: Find the buried treasure
+#+AUTHOR: Laurent Garnier
+
+* Concevoir le jeu
+
+  1. Créer une page web avec une image (la carte au trésor) et un
+     endroit pour afficher les messages au joueur.
+  2. Choisir un emplacement aléatoire sur la carte pour cacher le
+     trésor.
+  3. Créer un manipulateur de clic. Chaque fois que le joueur clique
+     sur la carte, le manipulateur de clic fera les choses suivantes :
+     a. Ajouter 1 au compteur de clic
+     b. Calculer l'éloignement par rapport au trésor
+     c. Afficher un message sur la page web pour dire au joueur s'il
+     est chaud ou froid
+     d. Féliciter le joueur si il clique sur le trésor ou très proche,
+     et lui dire combien de clic ça lui a pris pour trouver le trésor
+
+* Créer la page web avec HTML
+
+  #+BEGIN_SRC html
+    <!DOCTYPE html>
+    <html lang="fr">
+      <head>
+	<meta charset="utf-8">
+	<title>Find the buried treasure!</title>
+      </head>
+      <body>
+	<h1 id="heading">Find the buried treasure!</h1>
+
+	<img id="map" width=400 height=400
+	src="https://nostarch.com/images/treasuremap.png" alt="carte">
+
+	<p id="distance"></p>
+
+	<script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+
+      <script>
+	// Game code goes here
+      </script>
+      </body>
+    </html>
+  #+END_SRC
+
+* Choisir un emplacement aléatoire pour le trésor
+** Choisir un nombre aléatoire  
+
+   #+BEGIN_SRC javascript
+     var getRandomNumber = function (size) {
+	 return Math.floor(Math.random() * size);
+     };
+   #+END_SRC
+
+** Configurer les coordonnées du trésor
+
+   #+BEGIN_SRC javascript
+     var width = 400;
+     var height = 400;
+
+     var target = {
+	 x: getRandomNumber(width),
+	 y: getRandomNumber(height)
+     };
+   #+END_SRC
+
+* Le manipulateur de clic
+
+  #+BEGIN_SRC javascript
+    $("#map").click(function (event) {
+	// Click handler code goes here
+    });
+  #+END_SRC
+
+** Compter les clics  
+
+   #+BEGIN_SRC javascript
+     var clicks = 0;
+   #+END_SRC
+
+** Calculer la distance entre le clic et le trésor
+
+   #+BEGIN_SRC javascript
+     var getDistance = function (event, target) {
+	 var diffX = event.offsetX - target.x;
+	 var diffY = event.offsetY - target.y;
+	 return Math.sqrt((diffX * diffX) + (diffY * diffY));
+     };
+   #+END_SRC
+
+** Utiliser le théorème de Pythagore
+
+   #+BEGIN_SRC javascript
+     Math.sqrt((diffX * diffX) + (diffY * diffY));
+   #+END_SRC
+
+** Dire le rapprochement du joueur
+
+   #+BEGIN_SRC javascript
+     var getDistanceHint = function (distance) {
+	 if (distance < 10) {
+	     return "Boiling hot!";
+	 } else if (distance < 20) {
+	     return "Really hot";
+	 } else if (distance < 40) {
+	     return "Hot";
+	 } else if (distance < 80) {
+	     return "Warm";
+	 } else if (distance < 160) {
+	     return "Cold";
+	 } else if (distance < 320) {
+	     return "Really cold";
+	 } else {
+	     return "Freezing!";
+	 }
+     };
+   #+END_SRC
+
+   À ajouter dans notre manipulateur de clic
+
+   #+BEGIN_SRC javascript
+     var distance = getDistance(event, target);
+     var distanceHint = getDistanceHint(distance);
+     $("#distance").text(distanceHint);
+   #+END_SRC
+
+** Vérifier si le joueur a gagné
+
+   #+BEGIN_SRC javascript
+     if (distance < 8) {
+	 alert("Found the treasure in " + clicks + " clicks!");
+     }
+   #+END_SRC
+
+* Mettre tout ensemble
+
+  #+BEGIN_SRC javascript
+    // Get a random number from 0 to size
+    var getRandomNumber = function (size) {
+	return Math.floor(Math.random() * size);
+    };
+
+    // Calculate distance between click event and target
+    var getDistance = function (event, target) {
+	var diffX = event.offsetX - target.x;
+	var diffY = event.offsetY - target.y;
+    };
+
+    // Get a string representing the distance
+    var getDistanceHint = function (distance) {
+	if (distance < 10) {
+	    return "Boiling hot!";
+	} else if (distance < 20) {
+	    return "Really hot";
+	} else if (distance < 40) {
+	    return "Hot";
+	} else if (distance < 80) {
+	    return "Warm";
+	} else if (distance < 160) {
+	    return "Cold"; 
+	} else if (distance < 320) {
+	    return "Really cold";
+	} else {
+	    return "Freezing!";
+	}
+    };
+
+    // Set up our variables
+    var width = 400;
+    var height = 400;
+    var clicks = 0;
+
+    // Create a random target location
+    var target = {
+	x: getRandomNumber(width),
+	y: getRandomNumber(height)
+    };
+
+    // Add a click handler to the img element
+    $("#map").click(function (event) {
+	clicks++;
+
+	// Get distance between click event and target
+	var distance = getDistance(event, target);
+	// Convert distance to a hint
+	var distanceHint = getDistanceHint(distance);
+
+	// Update the #distance element with the new hint
+	$("#distance").text(distanceHint);
+
+	// If the click was close enough, tell them they won
+	if (distance < 8) {
+	    alert("Found the treasure in " + clicks + " clicks!");
+	}
+    });
+  #+END_SRC
