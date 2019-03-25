@@ -188,11 +188,11 @@
 	<script>
 	  // Créer un tableau de mots
 	  var words = [
-	  "javascript",
-	  "monkey",
-	  "amazing",
-	  "pancake"
-	  ];
+	 	"javascript",
+	 	"bitcoin",
+	 	"ethereum",
+	 	"wirex"
+     	  ];
 
 	  // Choisir un mot aléatoire
 	  var word = words[Math.floor(Math.random() * words.length)];
