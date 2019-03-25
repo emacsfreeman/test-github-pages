@@ -73,30 +73,28 @@
 
 ** Utiliser le pseudocode pour concevoir le jeu
 
-   #+BEGIN_SRC javascript
-     Pick a random word
+   #+BEGIN_QUOTE
+     Choisir un mot aléatoire
 
-     While the word has not been guessed {
-	 Show the player their current progress
-	 Get a guess from the player
+     Tant que le mot n'a pas été deviné 
+	 Montrer au joueur sa progression
+	 Récupérer une tentative du joueur
 
-	 If the player wants to quit the game {
-	     Quit the game
-	 }
-	 Else If the guess is not a single letter {
-	     Tell the player to pick a single letter
-	 }
-	 Else {
-	     If the guess is in the word {
-		 Update the player's progress with the guess
-	     }
-	 }
-     }
+	 Si le joueur souhaite quitter le jeu 
+	     Quitter le jeu
+	 
+	 Sinon si la tentative n'est pas une lettre unique 
+	     Dire au joueur de choisir une seule lettre
+	 
+	 Sinon
+	     Si la tentative est dans le mot 
+		 Mettre à jour la progression du joueur
+	 
 
-     Congratulate the player on guessing the word
-   #+END_SRC
+     Féliciter le joueur pour avoir trouvé le mot
+   #+END_QUOTE
    
-** Tracer l'état du mot    
+** Suivre l'état du mot    
 
 ** Concevoir la boucle du jeu   
 
@@ -110,9 +108,9 @@
    #+BEGIN_SRC javascript
      var words = [
 	 "javascript",
-	 "monkey",
-	 "amazing",
-	 "pancake"
+	 "bitcoin",
+	 "ethereum",
+	 "wirex"
      ];
 
      var word = words[Math.floor(Math.random() * words.length)];
@@ -202,13 +200,13 @@
 	  // Set up the answer array
 	  var answerArray = [];
 	  for (var i = 0; i < word.length; i++) {
-			      answerArray[i] = "_";
-			      }
+	  	answerArray[i] = "_";
+	  }
 
-			      var remainingLetters = word.length;
+	  var remainingLetters = word.length;
 
-			      // The game loop
-			      while (remainingLetters > 0) {
+	  // The game loop
+	  while (remainingLetters > 0) {
 
 	    // Show the player their progress
 	    alert(answerArray.join(" "));
@@ -222,21 +220,20 @@
 	    } else if (guess.length !== 1) {
 	    alert("Entrer 1 seule lettre s'il vous plaît.");
 	    } else {
-	    // Update the game state with the guess
-	    for (var j = 0; j < word.length; j++) {
-				if (word[j] === guess) {
+	    	// Update the game state with the guess
+	    	for (var j = 0; j < word.length; j++) {
+	    		if (word[j] === guess) {
 				answerArray[j] = guess;
 				remainingLetters--;
-				}
-				}
-				}
-				// The end of the game loop
-				}
+			}
+	    	}
+	    }
+	    // The end of the game loop
+	}
 
-				// Show the answer and congratulate the
-				player
-				alert(answerArray.join(" "));
-				alert("Bien joué ! La réponse était " + word);
+	// Show the answer and congratulate the player
+	alert(answerArray.join(" "));
+	alert("Bien joué ! La réponse était " + word);
 	</script>
       </body>
     </html>
