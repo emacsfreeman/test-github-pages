@@ -212,13 +212,12 @@
 	    alert(answerArray.join(" "));
 
 	    // Get a guess from the player
-	    var guess = prompt("Deviner une lettre, ou cliquez sur Annuler
-	    pour arrêter.");
+	    var guess = prompt("Deviner une lettre, ou cliquez sur Annuler pour arrêter.");
 	    if (guess === null) {
-	    // Exit the game loop
-	    break;
+	    	// Exit the game loop
+	    	break;
 	    } else if (guess.length !== 1) {
-	    alert("Entrer 1 seule lettre s'il vous plaît.");
+	    	alert("Entrer 1 seule lettre s'il vous plaît.");
 	    } else {
 	    	// Update the game state with the guess
 	    	for (var j = 0; j < word.length; j++) {
@@ -226,14 +225,14 @@
 				answerArray[j] = guess;
 				remainingLetters--;
 			}
-	    	}
+	      }
 	    }
 	    // The end of the game loop
-	}
+	  }
 
-	// Show the answer and congratulate the player
-	alert(answerArray.join(" "));
-	alert("Bien joué ! La réponse était " + word);
+	  // Show the answer and congratulate the player
+	  alert(answerArray.join(" "));
+	  alert("Bien joué ! La réponse était " + word);
 	</script>
       </body>
     </html>
