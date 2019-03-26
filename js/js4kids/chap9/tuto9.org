@@ -28,8 +28,7 @@
 	 <script>
 	   var headingElement = document.getElementById("titre-principal");
 	   console.log(headingElement.innerHTML);
-	   var newHeadingText = prompt("Merci de fournir un nouveau titre :
-	   ");
+	   var newHeadingText = prompt("Merci de fournir un nouveau titre : ");
 	   headingElement.innerHTML = newHeadingText;
 	 </script>
        </body>
@@ -80,8 +79,7 @@
        crossorigin="anonymous"></script>
 
 	 <script>
-	   var newHeadingText = prompt("Merci de fournir un nouveau titre :
-	   ");
+	   var newHeadingText = prompt("Merci de fournir un nouveau titre : ");
 	   $("#titre-principal").text(newHeadingText);
 	 </script>
        </body>
