@@ -5,29 +5,29 @@
   
   #+BEGIN_SRC javascript
     function () {
-	console.log("Fais quelque chose");
+	console.log("Je fais quelque chose à l'intérieur d'une fonction");
     }
   #+END_SRC
 
 * Créer une fonction simple
 
   #+BEGIN_SRC javascript
-    var ourFirstFunction = function () {
-	console.log("Hello world!");
+    var maPremiereFonction = function () {
+	console.log("Ceci est ma première fonction");
     };
   #+END_SRC
 
 * Appeler une fonction
 
   #+BEGIN_SRC javascript
-    ourFirstFunction();
+    maPremiereFonction();
   #+END_SRC
 
 * Passer des arguments dans les fonctions
 
   #+BEGIN_SRC javascript
-    var sayHelloTo = function (name) {
-	console.log("Hello " + name + "!");
+    var disBonjour = function (nom) {
+	console.log("Bonjour " + nom + "!");
     };
   #+END_SRC
 
@@ -79,53 +79,86 @@
      pickRandomWord(['Bitcoin', 'Ethereum', 'Litecoin', 'Waves']);
    #+END_SRC
 
-** Un générateur d'insulte aléatoire
+** Un générateur de cryptos aléatoire
 
    #+BEGIN_SRC javascript
-     var randomBodyParts = ["Face", "Nose", "Hair"];
-     var randomAdjectives = ["Smelly", "Boring", "Stupid"];
-     var randomWords = ["Fly", "Marmot", "Stick", "Monkey", "Rat"];
+     var randomWirex = ["Bitcoin", "Ethereum", "Litecoin", "XRP", "Waves", "Nano", "DAI", "Wollo"];
+     var randomJaxxLiberty = ["BAT", "DASH", "Zcash", "Civic", "Bitcoin Cash"];
+     var randomWallet = ["Wirex", "JaxxLiberty"];
+     var randomFiat = ["USD", "GBP", "EUR"];
 
-     // Pick a random body part from the randomBodyParts array:
-     var randomBodyPart = randomBodyParts[Math.floor(Math.random() * 3)];
-     // Pick a random adjective from the randomAdjectives array:
-     var randomAdjective = randomAdjectives[Math.floor(Math.random() * 3)];
-     // Pick a random word from the randomWords array:
-     var randomWord = randomWords[Math.floor(Math.random() * 5)];
+     // Pick a random wallet from the randomWallet array:
+     var randomWalletPicked = randomWallet[Math.floor(Math.random() * randomWallet.length)];
+     
+     if (randomWalletPicked === randomWallet[0]) {
+     	console.log("You have a Wirex wallet");
+	var wirexCrypto = randomWirex[Math.floor(Math.random() * randomWirex.length)];
+	console.log("You have picked " + wirexCrypto);
+     } else if (randomWalletPicked === randomWallet[1]) {
+     	console.log("You have a JaxxLiberty wallet");
+	var jaxxCrypto = randomJaxxLiberty[Math.floor(Math.random() * randomJaxxLiberty.length)];
+	console.log("You have picked " + jaxxCrypto);
+     }
+     
+     // Pick a random Fiat currency from the randomFiat array:
+     var randomFiatCurrency = randomFiat[Math.floor(Math.random() * randomFiat.length)];
+     
+     if (randomFiatCurrency === randomFiat[0]) {
+     	console.log("You have US dollars");
+     } else if (randomFiatCurrency === randomFiat[1]) {
+     	console.log("You have Great Britain pounds");
+     } else if (randomFiatCurrency === randomFiat[2]) {
+     	console.log("You have euros");
+     }
+     
      // Join all the random strings into a sentence:
-     var randomString = "Your " + randomBodyPart + " is like a " + randomAdjective + " " + randomWord + "!!!";
+     var randomString = "Your wallet is " + randomWalletPicked + " and your Fiat currency is " + randomFiatCurrency;
      randomString;
    #+END_SRC
 
-   Evitons les répétitions
+
+** Transformer le générateur de en fonction
 
    #+BEGIN_SRC javascript
-     var randomBodyParts = ["Face", "Nose", "Hair"];
-     var randomAdjectives = ["Smelly", "Boring", "Stupid"];
-     var randomWords = ["Fly", "Marmot", "Stick", "Monkey", "Rat"];
+     generateRandomCrypto = function () {
+     	var randomWirex = ["Bitcoin", "Ethereum", "Litecoin", "XRP", "Waves", "Nano", "DAI", "Wollo"];
+	var randomJaxxLiberty = ["BAT", "DASH", "Zcash", "Civic", "Bitcoin Cash"];
+	var randomWallet = ["Wirex", "JaxxLiberty"];
+	var randomFiat = ["USD", "GBP", "EUR"];
 
-     // Join all the random strings into a sentence:
-     var randomString = "Your " + pickRandomWord(randomBodyParts) + " is like a " + pickRandomWord(randomAdjectives) + " " + pickRandomWord(randomWords) + "!!!";
-     randomString;
-   #+END_SRC
+	// Pick a random wallet from the randomWallet array:
+	var randomWalletPicked = randomWallet[Math.floor(Math.random() * randomWallet.length)];
 
-** Transformer le générateur d'insulte aléatoire en fonction
+	if (randomWalletPicked === randomWallet[0]) {
+		console.log("You have a Wirex wallet");
+		var wirexCrypto = randomWirex[Math.floor(Math.random() * randomWirex.length)];
+		console.log("You have picked " + wirexCrypto);
+	} else if (randomWalletPicked === randomWallet[1]) {
+		console.log("You have a JaxxLiberty wallet");
+		var jaxxCrypto = randomJaxxLiberty[Math.floor(Math.random() * randomJaxxLiberty.length)];
+		console.log("You have picked " + jaxxCrypto);
+	}
 
-   #+BEGIN_SRC javascript
-     generateRandomInsult = function () {
-	 var randomBodyParts = ["Face", "Nose", "Hair"];
-	 var randomAdjectives = ["Smelly", "Boring", "Stupid"];
-	 var randomWords = ["Fly", "Marmot", "Stick", "Monkey", "Rat"];
+	// Pick a random Fiat currency from the randomFiat array:
+	var randomFiatCurrency = randomFiat[Math.floor(Math.random() * randomFiat.length)];
 
-	 // Join all the random strings into a sentence:
-	 var randomString = "Your " + pickRandomWord(randomBodyParts) + " " + pickRandomWord(randomWords) + "!!!";
+	if (randomFiatCurrency === randomFiat[0]) {
+		console.log("You have US dollars");
+	} else if (randomFiatCurrency === randomFiat[1]) {
+		console.log("You have Great Britain pounds");
+	} else if (randomFiatCurrency === randomFiat[2]) {
+		console.log("You have euros");
+	}
+	
+	// Join all the random strings into a sentence:
+	var randomString = "Your wallet is " + randomWalletPicked + " and your Fiat currency is " + randomFiatCurrency;
 
-	 return randomString;
+	return randomString;
      };
 
-     generateRandomInsult();
-     generateRandomInsult();
-     generateRandomInsult();
+     generateRandomCrypto();
+     generateRandomCrypto();
+     generateRandomCrypto();
    #+END_SRC
 
 * Quitter une fonction plus tôt avec return 
@@ -139,7 +172,7 @@
 	return "The fifth letter of your name is " + name[4] + ".";
     };
 
-    fifthLetter('Nicholas');
+    fifthLetter('Laurent');
   #+END_SRC
 
 
