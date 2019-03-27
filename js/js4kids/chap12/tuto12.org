@@ -1,0 +1,341 @@
+#+TITLE: POO (Programmation Orientée Objet)
+#+AUTHOR: Laurent Garnier
+
+* Un objet simple
+
+  
+  #+BEGIN_SRC javascript
+    var digitalGold = {
+	name: "Bitcoin",
+	value: 3618.71,
+	isLegal: true
+    };
+
+    digitalGold.name;
+    digitalGold.url = "https://bitcoin.org/fr/";
+    digitalGold;
+  #+END_SRC
+
+* Ajouter des méthodes aux objets
+
+  #+BEGIN_SRC javascript
+    digitalGold.coinmarketcap = function () {
+	console.log(this.name + " is available on https://coinmarketcap.com");
+    };
+
+    digitalGold.coinmarketcap();
+  #+END_SRC
+
+** Utiliser le mot-clé =this=
+
+   Vous pouvez utiliser le mot-clé this à l'intérieur d'une méthode
+   pour vous référer à l'objet sur lequel la méthode est actuellement
+   appelée. Par exemple, lorsque vous appelez la méthode =coinmarketcap= sur
+   l'objet =digitalGold=, =this= réfère à l'objet =digitalGold=, donc =this.name=
+   réfère à =digitalGold.name=. Cela rend les méthodes plus versatile et donc
+   adaptable pour plusieurs objets.
+
+** Partager une méthode entre plusieurs objets
+
+   #+BEGIN_SRC javascript
+     var speak = function () {
+	 console.log(this.sound + " ! Je m'appelle " + this.name + " !");
+     };
+
+     var man = {
+	 sound: "J'adore coder parce que ça me détend",
+	 name: "Emacsfreeman",
+	 speak: speak
+     };
+
+     man.speak()
+   #+END_SRC
+
+   De la même manière :
+
+   #+BEGIN_SRC javascript
+     var woman = {
+	 sound: "Je suis strop sexy",
+	 name: "Kelly",
+	 speak: speak
+     };
+
+     var boy = {
+	 sound: "Quand je serais grand je veux coder des jeux",
+	 name: "Tom",
+	 speak: speak
+     };
+
+     var girl = {
+	 sound: "Quand je serais grande je veux devenir féministe",
+	 name: "Anna",
+	 speak: speak
+     };
+
+     man.speak();
+     woman.speak();
+     boy.speak();
+     girl.speak();
+   #+END_SRC
+
+* Créer des objets en utilisant des constructeurs
+** Anatomie du constructeur
+
+   #+BEGIN_SRC javascript
+     var car = new Car(100, 200)
+   #+END_SRC
+
+** Création d'un constructeur de voiture   
+*** Le document HTML   
+
+    #+BEGIN_SRC html
+      <!DOCTYPE html>
+      <html>
+	<head>
+	  <title>Voitures</title>
+	</head>
+	<body>
+	  <script
+	    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	    integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+	    crossorigin="anonymous"></script>
+
+	  <script>
+	    // Code goes here
+	  </script>
+	</body>
+      </html>
+    #+END_SRC
+   
+*** Le constructeur de voiture
+
+    #+BEGIN_SRC javascript
+      var Car = function (x, y) {
+	  this.x = x;
+	  this.y = y;
+      };
+    #+END_SRC
+
+*** Appel du constructeur
+
+    #+BEGIN_SRC javascript
+      var tesla = new Car(10, 20);
+      tesla;
+      Car {x: 10, y: 20}
+    #+END_SRC
+
+* Dessiner les voitures
+
+  #+BEGIN_SRC javascript
+    var drawCar = function (car) {
+	var carHtml = '<img src="https://nostarch.com/images/car.png">';
+
+	var carElement = $(carHtml);
+
+	carElement.css({
+	    position: "absolute",
+	    left: car.x,
+	    top: car.y
+	});
+
+	$("body").append(carElement);
+    };
+  #+END_SRC
+
+* Tester la fonction =drawCar=
+
+  #+BEGIN_SRC javascript
+    var tesla = new Car(20, 20);
+    var nissan = new Car(100, 200);
+
+    drawCar(tesla);
+    drawCar(nissan);
+  #+END_SRC
+
+* Personnaliser les objets grâce aux prototypes
+
+  #+BEGIN_SRC javascript
+    Car.prototype.draw = function () {
+	// The body of the method
+    }
+  #+END_SRC
+
+** Ajouter une méthode dessiner au prototype de l'objet voiture
+
+   #+BEGIN_SRC javascript
+     var Car = function (x, y) {
+	 this.x = x;
+	 this.y = y;
+     };
+
+     Car.prototype.draw = function () {
+	 var carHtml = '<img src="https://nostarch.com/images/car.png">';
+
+	 this.carElement = $(carHtml);
+
+	 this.carElement.css({
+	     position: "absolute",
+	     left: this.x,
+	     top: this.y
+	 });
+
+	 $("body").append(this.carElement);
+     };
+
+     var tesla = new Car(20, 20);
+     var nissan = new Car(100, 200);
+
+     tesla.draw();
+     nissan.draw();
+   #+END_SRC
+
+** Ajouter une méthode =moveright=
+
+   #+BEGIN_SRC javascript
+     Car.prototype.moveRight = function () {
+	 this.x += 5;
+
+	 this.carElement.css({
+	     left: this.x,
+	     top: this.y
+	 });
+     };
+   #+END_SRC
+
+** Ajouter les méthodes pour se déplacer à gauche, en haut et en bas
+
+   #+BEGIN_SRC javascript
+     Car.prototype.moveLeft = function () {
+	 this.x -= 5;
+
+	 this.carElement.css({
+	     left: this.x,
+	     top: this.y
+	 });
+     };
+
+     Car.prototype.moveUp = function () {
+	 this.y -= 5;
+
+	 this.carElement.css({
+	     left: this.x,
+	     top: this.y
+	 });
+     };
+
+     Car.prototype.moveDown = function () {
+	 this.y += 5;
+
+	 this.carElement.css({
+	     left: this.x,
+	     top: this.y
+	 });
+     };
+   #+END_SRC
+
+* Le programme complet
+
+  #+BEGIN_SRC html
+    <!DOCTYPE html>
+    <html lang="fr" dir="ltr">
+      <head>
+	<meta charset="utf-8">
+	<title>Constructeur de voiture</title>
+      </head>
+      <body>
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+	  crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+	  var Car = function (x, y) {
+	    this.x = x;
+	    this.y = y;
+	  };
+
+	  var drawCar = function (car) {
+	    var carHtml = '<img src="https://nostarch.com/images/car.png">';
+
+	    var carElement = $(carHtml);
+
+	    carElement.css({
+		     position: "absolute",
+		     left: car.x,
+		     top: car.y
+	       });
+
+	    $("body").append(carElement);
+	  };
+
+	  var tesla = new Car(20, 20);
+	  var nissan = new Car(100, 200);
+
+	  drawCar(tesla);
+	  drawCar(nissan);
+
+	  var Car = function (x, y) {
+	    this.x = x;
+	    this.y = y;
+	  };
+
+	  Car.prototype.draw = function () {
+	    var carHtml = '<img src="https://nostarch.com/images/car.png">';
+
+	    this.carElement = $(carHtml);
+
+	    this.carElement.css({
+		     position: "absolute",
+		     left: this.x,
+		     top: this.y
+	     });
+
+	    $("body").append(this.carElement);
+	  };
+
+	  var tesla = new Car(20, 20);
+	  var nissan = new Car(100, 200);
+
+	  tesla.draw();
+	  nissan.draw();
+
+	  Car.prototype.moveRight = function () {
+	    this.x += 5;
+
+	    this.carElement.css({
+		     left: this.x,
+		     top: this.y
+	     });
+	   };
+
+	   Car.prototype.moveLeft = function () {
+	     this.x -= 5;
+
+	     this.carElement.css({
+		      left: this.x,
+		      top: this.y
+	      });
+	    };
+
+	    Car.prototype.moveUp = function () {
+	      this.y -= 5;
+
+	      this.carElement.css({
+		       left: this.x,
+		       top: this.y
+	       });
+	     };
+
+	     Car.prototype.moveDown = function () {
+	       this.y += 5;
+
+	       this.carElement.css({
+			left: this.x,
+			top: this.y
+		});
+	      };
+
+	</script>
+      </body>
+    </html>
+  #+END_SRC
