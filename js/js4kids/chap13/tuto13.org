@@ -1,0 +1,209 @@
+#+TITLE: L'élément canvas
+#+AUTHOR: Laurent Garnier
+
+* Créer un canvas basique
+
+  #+BEGIN_SRC html
+    <!DOCTYPE html>
+    <html lang="fr" dir="ltr">
+      <head>
+	<meta charset="utf-8">
+	<title>Canvas</title>
+      </head>
+      <body>
+	<canvas id="canvas" width="300" height="300"></canvas>
+
+	<<script type="text/javascript">
+	  // Code goes here
+	</script>
+      </body>
+    </html>
+  #+END_SRC
+
+* Dessiner dans le canvas
+
+  #+BEGIN_SRC javascript
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.fillRect(0, 0, 10, 10);
+  #+END_SRC
+
+** Sélectionner et enregistrer l'élément canvas
+
+   Grâce à l'instruction 
+
+   #+BEGIN_SRC javascript
+     var canvas = document.getElementById("canvas");
+   #+END_SRC
+
+** Récupérer l'environnement de dessin
+
+   #+BEGIN_SRC javascript
+     var ctx = canvas.getContext("2d");
+   #+END_SRC
+
+** Dessiner un carré
+
+   La méthode fillRect permet de construire un rectangle
+
+** Dessiner plusieurs carrés
+   
+   #+BEGIN_SRC javascript
+     var canvas = document.getElementById("canvas");
+     var ctx = canvas.getContext("2d");
+     for (var i = 0; i < 8; i++) {
+	 ctx.fillRect(i * 10, i * 10, 10, 10);
+     }
+   #+END_SRC
+
+* Changer la couleur du dessin
+
+  #+BEGIN_SRC javascript
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = "Red";
+    ctx.fillRect(0, 0, 100, 100);
+  #+END_SRC
+
+* Dessiner les contours d'un rectangle
+
+  #+BEGIN_SRC javascript
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.strokeRect(10, 10, 100, 20);
+  #+END_SRC
+
+  Stroke remplace fill
+
+  #+BEGIN_SRC javascript
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "DeepPink";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(10, 10, 100, 20);
+  #+END_SRC
+
+* Dessiner des lignes ou tracés
+
+  #+BEGIN_SRC javascript
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "Turquoise";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(10, 10);
+    ctx.lineTo(60, 60);
+    ctx.moveTo(60, 10);
+    ctx.lineTo(10, 60);
+    ctx.stroke();
+  #+END_SRC
+
+* Remplir des tracés
+
+  #+BEGIN_SRC javascript
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "SkyBlue";
+    ctx.beginPath();
+    ctx.moveTo(100, 100);
+    ctx.lineTo(100, 60);
+    ctx.lineTo(130, 30);
+    ctx.lineTo(160, 60);
+    ctx.lineTo(160, 100);
+    ctx.lineTo(100, 100);
+    ctx.fill();
+  #+END_SRC
+
+* Dessiner des cercles
+
+  #+BEGIN_SRC javascript
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "Green";
+
+    ctx.beginPath();
+    ctx.arc(50, 50, 20, 0, Math.PI / 2, false);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(100, 50, 20, 0, Math.PI, false);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(150, 50, 20, 0, Math.PI * 2, false);
+    ctx.stroke();
+  #+END_SRC
+
+** Dessiner un quart de cercle ou un arc
+
+  + Le centre est le point de coordonnées (50, 50)
+  + Le rayon vaut 20 pixels
+  + On part de zéro et on tourne sur 90°
+
+  #+BEGIN_SRC javascript
+    ctx.beginPath();
+    ctx.arc(50, 50, 20, 0, Math.PI / 2, false);
+    ctx.stroke();
+  #+END_SRC
+
+** Dessiner un demi-cercle 
+
+   + Le centre a pour coordonnées (100, 50) et est à 50 pixels du
+     premier arc
+   + Le rayon vaut 20 pixels
+   + On part de zéro et on tourne de 180°
+
+   #+BEGIN_SRC javascript
+     ctx.beginPath();
+     ctx.arc(100, 50, 20, 0, Math.PI, false);
+     ctx.stroke();
+   #+END_SRC
+
+** Dessiner un cercle complet 
+
+   + Le centre a pour coordonnées (150, 50)
+   + Le rayon vaut 50 pixels
+   + On part de zéro et on tourne de 360°
+
+   #+BEGIN_SRC javascript
+     ctx.beginPath();
+     ctx.arc(150, 50, 20, 0, Math.PI * 2, false);
+     ctx.stroke();
+   #+END_SRC
+   
+
+* Dessiner beaucoup de cercles avec une fonction
+
+  #+BEGIN_SRC javascript
+    var circle = function (x, y, radius) {
+	ctx.beginPath();
+	ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+	ctx.stroke();
+    };
+
+    ctx.lineWidth = 4;
+
+    ctx.strokeStyle = "Red";
+    circle(100, 100, 10);
+
+    ctx.strokeStyle = "Orange";
+    circle(100, 100, 20);
+
+    ctx.strokeStyle = "Yellow";
+    circle(100, 100, 30);
+
+    ctx.strokeStyle = "Green";
+    circle(100, 100, 40);
+
+    ctx.strokeStyle = "Blue";
+    circle(100, 100, 50);
+
+    ctx.strokeStyle = "Purple";
+    circle(100, 100, 60);
+  #+END_SRC
+
+  
+  
