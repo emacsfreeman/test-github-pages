@@ -1,0 +1,243 @@
+#+TITLE: Déplacer des objets dans le canvas
+#+AUTHOR: Laurent Garnier
+
+* Déplacement dans la page
+
+  #+BEGIN_SRC html
+    <!DOCTYPE html>
+    <html lang="fr" dir="ltr">
+      <head>
+	<meta charset="utf-8">
+	<title>Animation du canvas</title>
+      </head>
+      <body>
+	<canvas id="canvas" width="300" height="300"></canvas>
+
+	<script type="text/javascript">
+	  var canvas = document.getElementById("canvas");
+	  var ctx = canvas.getContext("2d");
+
+	  var position = 0;
+
+	  setInterval(function () {
+	    ctx.clearRect(0, 0, 300, 300);
+	    ctx.fillRect(position, 0, 20, 20);
+
+	    position++;
+	    if (position > 200) {
+	      position = 0;
+	    }
+	  }, 30);
+	</script>
+      </body>
+    </html>
+  #+END_SRC
+
+** Effacer le canvas
+
+   #+BEGIN_SRC javascript
+     ctx.clearRect(0, 0, 300, 300)
+   #+END_SRC
+
+** Dessiner le rectangle
+
+   #+BEGIN_SRC javascript
+     ctx.fillRect(position, 0, 20, 20)
+   #+END_SRC
+
+** Changer de position
+
+   #+BEGIN_SRC javascript
+     if (position > 200)
+   #+END_SRC
+
+** Visualiser l'animation dans le navigateur
+
+   #+BEGIN_SRC javascript
+     setInterval
+   #+END_SRC
+
+* Animer la taille d'un carré
+
+  #+BEGIN_SRC javascript
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    var size = 0;
+
+    setInterval(function () {
+	ctx.clearRect(0, 0, 300, 300);
+	ctx.fillRect(0, 0, size, size);
+
+	size++;
+	if (size > 200) {
+	    size = 0;
+	}
+    }, 30);
+  #+END_SRC
+
+* Une abeille aléatoire
+** Une nouvelle fonction cercle
+
+   #+BEGIN_SRC javascript
+     var circle = function (x, y, radius, fillCircle) {
+	 ctx.beginPath();
+	 ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+	 if (fillCircle) {
+	     ctx.fill();
+	 } else {
+	     ctx.stroke();
+	 }
+     };
+   #+END_SRC
+
+** Dessiner l'abeille
+
+   #+BEGIN_SRC javascript
+     var drawBee = function (x, y) {
+	 ctx.lineWidth = 2;
+	 ctx.strokeStyle = "Black";
+	 ctx.fillStyle = "Gold";
+
+	 circle(x, y, 8, true);
+	 circle(x, y, 8, false);
+	 circle(x - 5, y - 11, 5, false);
+	 circle(x + 5, y - 11, 5, false);
+	 circle(x - 2, y - 1, 2, false);
+	 circle(x + 2, y - 1, 2, false);
+     }
+   #+END_SRC
+
+** Mettre à jour la position de l'abeille
+
+   #+BEGIN_SRC javascript
+     var update = function (coordinate) {
+	 var offsset = Math.random() * 4 - 2;
+	 coordinate += offset;
+
+	 if (coordinate > 300) {
+	     coordinate = 300;
+	 }
+	 if (coordinate < 0) {
+	     coordinate = 0;
+	 }
+
+	 return coordinate;
+     };
+   #+END_SRC
+
+*** Renvoyer les nouvelles coordonnées
+
+    #+BEGIN_SRC javascript
+      x = update(x);
+      y = update(y);
+    #+END_SRC
+
+** Animer l'abeille bourdonnante
+
+   #+BEGIN_SRC javascript
+     var canvas = document.getElementById("canvas");
+     var ctx = canvas.getContext("2d");
+
+     var x = 100;
+     var y = 100;
+
+     setInterval(function () {
+	 ctx.clearRect(0, 0, 300, 300);
+
+	 drawBee(x, y);
+	 x = update(x);
+	 y = update(y);
+
+	 ctx.strokeRect(0, 0, 300, 300);
+     }, 30);
+   #+END_SRC
+
+    
+* Faire rebondir une balle
+
+  #+BEGIN_SRC html
+    <!DOCTYPE html>
+    <html lang="fr" dir="ltr">
+      <head>
+	<meta charset="utf-8">
+	<title>Bouncing Ball</title>
+      </head>
+      <body>
+	<canvas id="canvas" width="300" height="300"></canvas>
+	<script type="text/javascript">
+	  // Code goes here
+	</script>
+      </body>
+    </html>
+  #+END_SRC
+
+** Le constructeur de balle
+
+   #+BEGIN_SRC javascript
+     var Ball = function () {
+	 this.x = 100;
+	 this.y = 100;
+	 this.xSpeed = -2;
+	 this.ySpeed = 3;
+     };
+   #+END_SRC
+
+** Dessiner la balle
+
+   #+BEGIN_SRC javascript
+     var circle = function (x, y, radius, fillCircle) {
+	 ctx.beginPath();
+	 ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+	 if (fillCircle) {
+	     ctx.fill();
+	 } else {
+	     ctx.stroke();
+	 }
+     };
+
+     Ball.prototype.draw = function () {
+	 circle(this.x, this.y, 3, true);
+     };
+   #+END_SRC
+
+** Déplacer la balle
+
+   #+BEGIN_SRC javascript
+     Ball.prototype.move = function () {
+	 this.x += this.xSpeed;
+	 this.y += this.ySpeed;
+     };
+   #+END_SRC
+
+** Faire rebondir la balle
+
+   #+BEGIN_SRC javascript
+     Ball.prototype.checkCollision = function () {
+	 if (this.x < 0 || this.x > 300) {
+	     this.xSpeed = -this.xSpeed;
+	 }
+	 if (this.y < 0 || this.y > 300) {
+	     this.ySpeed = -this.ySpeed;
+	 }
+     };
+   #+END_SRC
+
+** Animer la balle
+
+   #+BEGIN_SRC javascript
+     var canvas = document.getElementById("canvas");
+     var ctx = canvas.getContext("2d");
+
+     var ball = new Ball();
+
+     setInterval(function () {
+	 ctx.clearRect(0, 0, 300, 300);
+
+	 ball.draw();
+	 ball.move();
+	 ball.checkCollision();
+
+	 ctx.strokeRect(0, 0, 300, 300);
+     }, 30);
+   #+END_SRC
