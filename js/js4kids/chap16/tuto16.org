@@ -1,0 +1,181 @@
+#+TITLE: Le jeu du serpent partie [1/2]
+#+AUTHOR: Laurent Garnier
+
+* La structure du jeu
+
+  1. Mettre en place le canvas
+  2. Mettre le score à zéro
+  3. Créer un serpent
+  4. Créer une pomme
+  5. Toutes les 100 millisecondes
+     + Effacer complètement le canvas
+     + Afficher le score actuel à l'écran
+     + Déplacer le serpent dans la direction courante
+
+     + Si le serpent heurte un mur ou son corps
+       - Terminer la partie
+     + Sinon si le serpent mange une pomme
+       - Augmenter le score de 1
+       - Déplacer la pomme vers sa nouvelle position
+       - Allonger le corps du serpent
+     
+     + Pour chaque segment du serpent
+       - Dessiner le segment
+    
+     + Dessiner la pomme
+     + Dessiner les murs
+  6. Quand l'utilisateur presse une touche de son clavier
+     + Si la touche est une flèche 
+       - Modifier la direction du serpent
+
+* Animer le jeu avec =setInterval=
+
+  #+BEGIN_SRC javascript
+    var intervalId = setInterval(function () {
+	ctx.clearRect(0, 0, width, height);
+	drawScore();
+	snake.move();
+	snake.draw();
+	apple.draw();
+	drawBorder();
+    }, 100);
+  #+END_SRC
+
+** Créer les objets du jeu
+
+   Le programme du jeu est écrit dans le style de la programmation
+   orientée objet du cours 12. Les deux principaux éléments du jeu, le
+   serpent et la pomme, sont représentés par des objets. Chacun
+   possède un constructeur (=Snake= et =Apple=). Nous attribuerons des
+   méthodes (telles que =move= et =draw=) au prototype des
+   constructeurs.
+
+   En ce qui concerne le plateau de jeu, il est représenté par une
+   grille. Nous créerons donc un troisième constructeur appelé =Block=
+   dont le rôle est de construire les carreaux de la grille. Plusieurs
+   objets =block= seront nécessaires pour représenter la position des
+   segments du serpent, contrairement à la position de la pomme qui
+   n'aura besoin que d'un seul bloc pour être enregistrée. Les objets
+   =block= doivent posséder des méthodes afin de dessiner non
+   seulement les segments du serpent mais aussi la pomme.
+
+** Mettre en place les contrôles au clavier
+
+   Une partie du pseudo-code est dédiée à la gestion des événements du
+   clavier déclenchés par l'utilisateur. Dans le code du jeu, c'est
+   jQuery qui permet cette gestion. Ainsi, le joueur pourra contrôler
+   le serpent avec les flèches de son clavier. Nous identifierons la
+   touche pressée par le joueur à l'aide de son code numérique et, en
+   fonction de celle-ci, nous déterminerons la direction du serpent.
+
+* Préparation du jeu
+** Créer le html
+
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html lang="fr" dir="ltr">
+       <head>
+	 <meta charset="utf-8">
+	 <title>Snake</title>
+       </head>
+       <body>
+	 <canvas id="canvas" width="400" height="400"></canvas>
+
+	 <script
+	   src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	   integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+	   crossorigin="anonymous"></script>
+
+	   <script type="text/javascript">
+	     // Code goes here
+	   </script>
+       </body>
+     </html>
+   #+END_SRC
+
+** Définir les variables canvas, ctx, width, height
+
+   #+BEGIN_SRC javascript
+     var canvas = document.getElementById("canvas");
+     var ctx = canvas.getContext("2d");
+
+     var width = canvas.width;
+     var height = canvas.height;
+   #+END_SRC
+
+** Diviser le canvas en blocs
+
+   #+BEGIN_SRC javascript
+     var blockSize = 10;
+     var widthInBlocks = width / blockSize;
+     var heightInBlocks = height / blockSize;
+   #+END_SRC
+
+** Définir la variable score
+
+   #+BEGIN_SRC javascript
+     var score = 0;
+   #+END_SRC
+
+* Dessiner les murs
+
+  #+BEGIN_SRC javascript
+    var drawBorder = function () {
+	ctx.fillStyle = "Gray";
+	ctx.fillRect(0, 0, width, blockSize);
+	ctx.fillRect(0, height - blockSize, width, blockSize);
+	ctx.fillRect(0, 0, blockSize, height);
+	ctx.fillRect(width - blockSize, 0, blockSize, height);
+    };
+  #+END_SRC
+
+* Afficher le score
+
+  #+BEGIN_SRC javascript
+    ctx.fillText("Hello world!", 50, 50);
+  #+END_SRC
+
+** Fixer la ligne de base du texte
+
+   #+BEGIN_SRC javascript
+     ctx.textBaseline = "top";
+     ctx.fillText("Hello world!", 50, 50);
+   #+END_SRC
+
+** Définir la taille et la police
+
+   #+BEGIN_SRC javascript
+     ctx.font = "20px Courier";
+     ctx.fillText("Courier", 50, 50);
+
+     ctx.font = "24px Comic Sans MS";
+     ctx.fillText("Comic Sans", 50, 100);
+
+     ctx.font = "18px Arial";
+     ctx.fillText("Arial", 50, 150);
+   #+END_SRC
+
+** Régler la taille et la police du texte
+
+   #+BEGIN_SRC javascript
+     var drawScore = function () {
+	 ctx.font = "20px Courier";
+	 ctx.fillStyle = "Black";
+	 ctx.textAlign = "left";
+	 ctx.textBaseline = "top";
+	 ctx.fillText("Score: " + score, blockSize, blockSize);
+     };
+   #+END_SRC
+
+* Finir le jeu
+
+  #+BEGIN_SRC javascript
+    var gameOver = function () {
+	clearInterval(intervalId);
+	ctx.font = "60px Courier";
+	ctx.fillStyle = "Black";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
+	ctx.fillText("Game Over", width / 2, height / 2);
+    };
+  #+END_SRC
