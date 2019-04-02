@@ -1,0 +1,74 @@
+#+TITLE: Rails#2 : les variables en Ruby
+#+AUTHOR: Laurent Garnier
+
+
+* Exemple
+** Pour faire mumuse
+  #+BEGIN_SRC ruby
+    maVariable = "Hello World"
+    puts maVariable
+
+    monNombre = 53
+    puts monNombre
+
+    puts "Comment t'appelles-tu ?"
+    nom = "Laurent"
+    puts "Tu t'appelles #{nom}"
+    puts "Salut " + nom + ", comment va ?"
+    humeur = gets.chomp
+    puts humeur
+  #+END_SRC
+
+* Types
+** Integer (entiers)
+
+   #+BEGIN_SRC ruby
+     # affectation
+     x = 1
+     puts x
+
+     # affectation parallèle
+     x = y = 2
+     puts x
+     puts y
+
+     # type
+     puts x.class
+
+     y = 2*x + 1
+
+     # opérations arithmétiques
+     puts x + y
+     puts x - y
+     puts x * y
+     puts x / y
+     puts x % y
+     puts x ** y
+   #+END_SRC
+
+** String (chaîne)
+
+   #+BEGIN_SRC ruby
+     hw = "Hello World"
+     puts hw
+     puts hw.class
+
+     snake_case = "Ruby uses snake_case wheras JavaScript uses camelCase"
+     puts snake_case
+
+     puts hw + ', ' + snake_case
+     puts "En programmation on commence toujours par '#{hw}'"
+   #+END_SRC
+** Booléens
+   
+   #+BEGIN_SRC ruby
+     # le ET
+     puts true && true
+     puts true && false
+     puts false && false
+
+     # le OU
+     puts true || true
+     puts true || false
+     puts false || false
+   #+END_SRC
