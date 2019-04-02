@@ -1,0 +1,124 @@
+#+TITLE: Présentation de PHP 
+#+AUTHOR: Laurent Garnier
+
+
+#+OPTIONS: toc:t h:2 num:t date:nil
+#+LATEX_HEADER: \usepackage[francais]{babel}
+#+LATEX_HEADER: \hypersetup{colorlinks = true}
+
+* PHP
+** Qu'est-ce que PHP ?
+
+  C'est un langage de programmation côté serveur utilisé pour bâtir
+  des applications web comme par exemple WordPress
+
+  + Il est directement inclus dans le code HTML entre les balises
+    =<?php ?>=
+  + Il est exécuté sur le serveur qui génère du HTML à envoyer au
+    client
+  + C'est un langage simple avec des fonctionnalités avancées
+  + C'est un langage interprété pas de compilation
+ 
+** Pré-requis
+
+  + Avoir un ordinateur et une connexion internet
+  + Avoir un serveur ou utiliser un outil comme XAMPP
+  + Avoir un outil de base de données comme MySQL ou PostgreSQL
+
+** Pourquoi utiliser PHP ?
+
+  + C'est gratuit et le code est ouvert
+  + C'est relativement simple à apprendre
+  + ça marche sur toutes les plateformes
+  + C'est populaire, très utilisé et très documenté
+  + Multi-paradigme (fonctionnel, POO....)
+  + Il y a des tonnes de frameworks (Laravel, CakePHP, Codeigniter,
+    Symfony...) 
+
+** Comment ça marche ?
+
+  + Créer un fichier sur le serveur avec l'extension =.php=
+  + =<?php // Code goes here ?>=
+  + Enregistrer le fichier et l'ouvrir dans un navigateur
+
+* Exemples
+** Bout de code
+  #+BEGIN_SRC html
+    <html>
+      <head>
+	<title>Ma première page PHP</title>
+      </head>
+      <body>
+	<?php echo 'Hello World'; ?>
+      </body>
+    </html>
+  #+END_SRC
+
+** Variables
+
+  + Doivent toujours être précédées d'un signe =$=
+  + Leur nom doit commencer par une lettre ou un souligné (underscore)
+  
+  #+BEGIN_SRC html
+    <?php
+     $maVar = 'Hello World';
+     $_monNombre = 7;
+     ?>
+  #+END_SRC
+
+** Tableaux
+
+  Les tableaux sont des variables qui peuvent contenir plusieurs
+  valeurs
+
+  #+BEGIN_SRC html
+    <?php 
+     $monTab = Array('val1', 'val2', 'val3');
+
+     $monTab = Array();
+     $monTab[0] = 'val1';
+     $monTab[1] = 'val2';
+     $monTab[2] = 'val3';
+
+     echo $monTab[0];
+    ?>
+  #+END_SRC
+
+** Fonctions
+
+   Ce sont des blocs de code
+
+   #+BEGIN_SRC html
+     <?php 
+      // Déclaration de la fonction
+      function salut() {
+	  echo 'Salut la compagnie';
+      }
+
+      // Appel de la fonction
+      salut();
+
+      // Avec paramètre
+      function greet($greeting) {
+	echo $greeting;
+      }
+
+      greet();
+     ?>
+   #+END_SRC
+
+** Soumettre des données depuis un formulaire
+
+   #+BEGIN_SRC html
+     <form method="POST" action="script.php">
+       <input type="text" name="name">
+       <input type="text" name="email">
+       <button type="submit">Soumettre</button>
+     </form>
+
+     <?php 
+      echo $_POST['name'];
+      echo $_POST['email'];
+     ?>
+   #+END_SRC
+
