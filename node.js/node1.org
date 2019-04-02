@@ -1,0 +1,23 @@
+#+TITLE: Node#1
+#+AUTHOR: Laurent Garnier
+
+* Node.js
+** Qu'est-ce que Node.js ?
+   
+   C'est une plateforme construite sur un moteur JavaScript
+
+* Différence
+
+  #+BEGIN_SRC javascript
+    // node
+    global
+
+    // browser
+    window
+
+    // node
+    process
+
+    // browser
+    document
+  #+END_SRC
