@@ -1,0 +1,36 @@
+#+TITLE: Présentation de Ruby on Rails
+#+AUTHOR: Laurent Garnier
+
+
+#+OPTIONS: toc:t h:2 num:t date:nil
+#+LATEX_HEADER: \usepackage[francais]{babel}
+#+LATEX_HEADER: \hypersetup{colorlinks = true}
+
+* Ruby
+** Qu'est-ce que Ruby ?
+
+   + Ruby est un langage de programmation orienté objet créé par un
+     développeur japonais nommé Matz
+     
+   + 
+
+* Exemples
+** Bout de code 
+
+   #+BEGIN_SRC ruby
+     class Greeter
+       def initialize(name)
+	 @name = name.capitalize
+       end
+
+       def salute
+	 puts "Hello #{@name}!"
+       end
+     end
+
+     # Create a new object
+     g = Greeter.new("world")
+
+     # Output "Hello World!"
+     g.salute
+   #+END_SRC
