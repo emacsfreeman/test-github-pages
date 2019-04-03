@@ -44,9 +44,9 @@
      print("-" * 50)
      for i in range(len(mot)):
        if (i == 1-len(mot)):
-	 print(str(len(mot) - i) + "ère lettre : " + mot[- i])
+	 print(str(len(mot) - i) + "ère lettre : " + mot[-i-1])
        else:
-	 print(str(len(mot) - i) + "ème lettre : " + mot[- i])
+	 print(str(len(mot) - i) + "ème lettre : " + mot[-i-1])
    #+END_SRC
 
    On remarquera que contrairement à JavaScript, Python permet de
