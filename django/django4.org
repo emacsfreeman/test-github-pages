@@ -9,7 +9,7 @@
 * Le code
 
   #+BEGIN_SRC python
-    maListe = [1, 2, 3]
+maListe = [1, 2, 3]
 print(maListe)
 maListe = ['hello', 3.5, True, maListe]
 print(maListe)
