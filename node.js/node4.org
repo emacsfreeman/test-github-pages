@@ -1,0 +1,31 @@
+#+TITLE: Node#4
+#+AUTHOR: Laurent Garnier
+
+* Vérification des versions et installation des paquets
+
+  #+BEGIN_SRC shell
+    node -v
+    npm -v
+    npm init
+  #+END_SRC
+
+  [[https://www.npmjs.com/]] > validator
+
+  #+BEGIN_SRC shell
+    npm install validator
+  #+END_SRC
+
+* Code source
+
+  #+BEGIN_SRC javascript
+    const validator = require('validator');
+    const getNotes = require('./notes.js');
+
+    const msg = getNotes();
+
+    console.log(msg);
+
+    // console.log(validator.isEmail('mailpourtutosgmail.com'));
+    console.log(validator.isURL('https://computercode.fr'));
+  #+END_SRC
+
