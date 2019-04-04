@@ -1,0 +1,38 @@
+#+TITLE: Comment envoyer des emails via Python et Gmail
+#+AUTHOR: Laurent Garnier
+
+* Les outils
+
+  Pour suivre ce tutoriel tu auras besoin de :
+  1. Créer un compte Gmail 
+  2. [[https://www.youtube.com/redirect?q=https%253A%252F%252Fmyaccount.google.com%252Flesssecureapps%253Fpli%253D1&redir_token=Omd7goaSkodkIwPg1HeeVwAXeuZ8MTU1NDQ1MDY2NkAxNTU0MzY0MjY2&v=YPiHBtddefI&event=video_description][Autoriser l'accès moins sécurisé à des apps]]
+  3. [[https://www.python.org/][Python 3]] sur ta machine ou d'aller sur [[https://repl.it/languages/python3][repl.it]]
+
+* Le code
+
+  #+BEGIN_SRC python
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+
+    email = 'mailpourtutos@gmail.com'
+    password = 'mailpourtutos2019;'
+    send_to_email = 'emacsfreeman@gmail.com'
+    subject = 'Email avec Python depuis Gmail'
+    message = 'Ceci est un message généré depuis Python'
+
+    msg = MIMEMultipart()
+    msg['From'] = email
+    msg['To'] = send_to_email
+    msg['Subject'] = subject
+
+    msg.attach(MIMEText(message, 'plain'))
+
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(email, password)
+    text = msg.as_string()
+    server.sendmail(email, send_to_email, text)
+    server.quit()
+  #+END_SRC
