@@ -5,7 +5,7 @@
 
   Pour suivre ce tutoriel tu auras besoin de :
   1. Créer un compte Gmail 
-  2. [[https://www.youtube.com/redirect?q=https%253A%252F%252Fmyaccount.google.com%252Flesssecureapps%253Fpli%253D1&redir_token=Omd7goaSkodkIwPg1HeeVwAXeuZ8MTU1NDQ1MDY2NkAxNTU0MzY0MjY2&v=YPiHBtddefI&event=video_description][Autoriser l'accès moins sécurisé à des apps]]
+  2. [[https://myaccount.google.com/lesssecureapps?pli=1][Autoriser l'accès moins sécurisé à des apps]]
   3. [[https://www.python.org/][Python 3]] sur ta machine ou d'aller sur [[https://repl.it/languages/python3][repl.it]]
 
 * Le code
