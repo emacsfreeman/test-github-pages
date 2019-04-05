@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+	<meta charset="utf-8">
+	<title>FSD#05 : Listes et tableaux</title>
+</head>
+<body>
+	<h1>Les listes</h1>
+	<h2>Les listes simples</h2>
+	<h3>Les listes ordonnées</h3>
+		<ol>
+			<li>Ceci est le 1er élément de ma liste</li>
+			<li>Ceci est le 2ème élément de ma liste</li>
+			<li>Ceci est le 3ème élément de ma liste</li>
+		</ol>
+	<h3>Les listes non ordonnées</h3>
+		<ul>
+			<li>Bleu</li>
+			<li>Blanc</li>
+			<li>Rouge</li>
+		</ul>
+	<h3>Les listes descriptives</h3>
+		<dl>
+			<dt>HTML</dt>
+				<dd>HyperText Markup Language</dd>
+			<dt>WWW</dt>
+				<dd>World Wide Web</dd>
+			<dt>HTTP</dt>
+				<dd>HyperText Transfer Protocol</dd>
+		</dl>
+	<h2>Les listes imbriquées</h2>
+	<h3>Listes imbriquées et homogènes</h3>
+		<ol>
+			<li>Ceci est ma 1ère liste ordonnée, de listes ordonnées :
+				<ol>
+					<li>Elément n°1 de la liste 1</li>
+					<li>Elément n°2 de la liste 1</li>
+					<li>Elément n°3 de la liste 1</li>
+				</ol>
+			</li>
+			<li>Ceci est ma 2ème liste ordonnée, de listes ordonnées :
+				<ol>
+					<li>Elément n°1 de la liste 2</li>
+					<li>Elément n°2 de la liste 2</li>
+					<li>Elément n°3 de la liste 2</li>
+				</ol>
+			</li>
+			<li>Ceci est ma 3ème liste ordonnée, de listes ordonnées :
+				<ol>
+					<li>Elément n°1 de la liste 3</li>
+					<li>Elément n°2 de la liste 3</li>
+					<li>Elément n°3 de la liste 3</li>
+				</ol>
+			</li>
+		</ol>
+	<h3>Listes imbriquées et hétérogènes</h3>
+		<ol>
+			<li>Ceci est ma 1ère liste ordonnée, de listes hétérogènes :
+				<ol>
+					<li>Elément n°1 de la liste 1</li>
+					<li>Elément n°2 de la liste 1</li>
+					<li>Elément n°3 de la liste 1</li>
+				</ol>
+			</li>
+			<li>Ceci est ma 2ème liste ordonnée, de listes hétérogènes :
+				<ul>
+					<li>Elément n°1 de la liste 2</li>
+					<li>Elément n°2 de la liste 2</li>
+					<li>Elément n°3 de la liste 2</li>
+				</ul>
+			</li>
+			<li>Ceci est ma 3ème liste ordonnée, de listes hétérogènes :
+				<dl>
+					<dt>Elément n°1 de la liste 3</dt>
+						<dd>En anglais on dit item qui veut aussi dire article, passer à un article de votre liste de course par exemple
+						</dd>
+					<dt>Elément n°2 de la liste 3</dt>
+						<dd>Même si on n'est pas suédois il est parfois utile de savoir meubler.
+						</dd>
+					<dt>Elément n°3 de la liste 3</dt>
+						<dd>Certains disent qu'on peut rire de tout mais pas avec n'importe qui ce qui entraîne les questions naturelles : 
+							<ol>
+								<li>Qui fait la liste ?</li>
+								<li>Est-ce une liste simple ou imbriquée ?</li>
+								<li>Si elle est imbriquée alors est-elle homogène ou hétérogène ?</li>
+							</ol>
+						</dd>
+				</dl>
+			</li>
+		</ol>
+	<h2>Les tableaux</h2>
+	<h3>Brut de chez brut</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Email</th>
+				<th>Mobile</th>
+			</tr>
+			<tr>
+				<td>Garnier</td>
+				<td>Laurent</td>
+				<td>laurent@garnier.fr</td>
+				<td>10-01-10-01-10</td>
+			</tr>
+			<tr>
+				<td>Dupont</td>
+				<td>Lajoie</td>
+				<td>lajoie@dupont.fr</td>
+				<td>01-10-01-10-01</td>
+			</tr>
+			<tr>
+				<td>Durand</td>
+				<td>Martin</td>
+				<td>martin@durand.fr</td>
+				<td>11-00-11-00-11</td>
+			</tr>
+		</thead>
+	</table>
+	<h3>Avec un peu de fioriture</h3>
+	<p>Attention ceci est une mauvaise pratique c'est ce qu'on appelle du CSS inline. Nous en parlerons plus en détail plus tard dans cette formation lorsqu'on abordera le CSS. L'idée était juste de montrer la différence entre un squelette HTML brut et un peu d'enrobage CSS pour donner du style (très basique j'en conviens).</p>
+	<table>
+		<thead>
+			<tr align="left" bgcolor="green">
+				<th width="250">Nom</th>
+				<th width="250">Prénom</th>
+				<th width="250">Email</th>
+				<th width="250">Mobile</th>
+			</tr>
+			<tr align="left" bgcolor="blue">
+				<td>Garnier</td>
+				<td>Laurent</td>
+				<td>laurent@garnier.fr</td>
+				<td>10-01-10-01-10</td>
+			</tr>
+			<tr align="center" bgcolor="white">
+				<td>Dupont</td>
+				<td>Lajoie</td>
+				<td>lajoie@dupont.fr</td>
+				<td>01-10-01-10-01</td>
+			</tr>
+			<tr align="right" bgcolor="red">
+				<td>Durand</td>
+				<td>Martin</td>
+				<td>martin@durand.fr</td>
+				<td>11-00-11-00-11</td>
+			</tr>
+		</thead>
+	</table>
+</body>
+</html>
