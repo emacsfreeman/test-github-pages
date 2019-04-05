@@ -1,0 +1,56 @@
+
+
+<!DOCTYPE html>
+<html lang='fr'>
+	<head>
+		<meta charset="utf-8">
+		<title>Formulaires</title>
+	</head>
+	<body>
+		<h1>Formulaire d'enregistrement</h1>
+		<form action="POST" action="index.php">
+			<fieldset>
+				<legend>Compte</legend>
+				<label>Nom</label><br>
+				<input type="text" name="name" required>
+				<br><br>
+
+				<label>Email</label><br>
+				<input type="email" name="email">
+				<br><br>
+
+				<label>Mot de passe</label><br>
+				<input type="password" name="password">
+				<br><br>
+			</fieldset>
+			<br><br>
+			<fieldset>
+				<legend>Infos utilisateur</legend>
+				<label>Localisation</label><br>
+				<select name="location">
+					<option value="Europe" selected>Europe</option>
+					<option value="America">Amérique</option>
+					<option value="Africa">Afrique</option>
+					<option value="Asia">Asie</option>
+					<option value="Oceania">Océanie</option>
+				</select>
+				<br><br>
+
+				<label>Genre</label><br>
+				<input type="radio" name="gender" value="Male" checked> Masculin
+				<input type="radio" name="gender" value="Female"> Féminin
+				<br><br>
+
+				<label>Centres d'intérêts</label><br>
+				<input type="checkbox" name="interests" value="Books" checked> Livres
+				<input type="checkbox" name="interests" value="Movies"> Films
+				<input type="checkbox" name="interests" value="Music" checked> Musique
+				<input type="checkbox" name="interests" value="Sports"> Sports
+				<input type="checkbox" name="interests" value="Art"> Art
+				<br><br>
+			</fieldset>
+			<br>
+			<input type="submit" value="Soumettre">
+		</form>
+	</body>
+</html>
