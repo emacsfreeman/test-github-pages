@@ -1,0 +1,28 @@
+#+TITLE: Apprends à Coder 1 Blockchain avec JavaScript
+#+AUTHOR: Laurent Garnier
+
+* Les instructions dans le terminal
+
+  #+BEGIN_SRC shell
+    npm install --save crypto-js
+  #+END_SRC
+
+* Le code Node.js
+
+  #+BEGIN_SRC javascript
+    const SHA256 = require('crypto-js/sha256');
+
+    class Block{
+	constructor(index, timestamp, data, previousHash = ''){
+	    this.index = index;
+	    this.timestamp = timestamp;
+	    this.data = data;
+	    this.previousHash = previousHash;
+	    this.hash = '';
+	}
+
+	calculateHash(){
+
+	}
+    }
+  #+END_SRC
