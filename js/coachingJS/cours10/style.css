@@ -1,0 +1,74 @@
+body {
+    font-family: Arial;
+}
+p {
+    font-size: 1em;
+}
+.oeil {
+    background-color:blue;
+    width:20%;
+    height:20%;
+    border-radius: 50%;
+}
+.bras {
+    background-color: #cacaca;
+    position: absolute;
+    top: 35%;
+    width: 5%;
+    height: 40%;
+}
+
+#tete {
+    width:30%;
+    height:30%;
+    border-radius: 15%;
+    background-color: #dadada;
+    position: absolute;
+    left: 33%;
+    top: 5%;
+}
+#oeilDroit {
+    position: absolute;
+    left: 20%;
+    top: 20%;
+}
+#oeilGauche {
+    position: absolute;
+    left: 60%;
+    top: 20%;
+}
+#nez {
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    width: 10%;
+    height: 10%;
+    background-color: black;
+}
+#bouche {
+    position: absolute;
+    width: 65%;
+    height: 15%;
+    left: 20%;
+    top: 70%;
+    background-color: red;
+}
+#tronc {
+    position: absolute;
+    left: 25%;
+    top: 35%;
+    width: 45%;
+    height: 55%;
+    background-color: #dadada;
+    text-align:center;
+    padding-top: 30px;
+}
+
+#brasDroit {
+    position:absolute;
+    left:20%;
+}
+#brasGauche {
+    position: absolute;
+    left: 70%;
+}
