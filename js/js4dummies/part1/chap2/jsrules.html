@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Quelques règles sur JavaScript</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <h1>JavaScript est sensible à la casse</h1>
+    <h2>Font-family cursive</h2>
+    <p id="cursiv">En d'autres termes, JavaScript fait la différence entre les majuscules et les minuscules. C'est là un point essentiel. Ainsi les mots <em>JAVASCRIPT</em>, <em>JavaScript</em> et <em>javascript</em> sont différents pour JavaScript.</p>
+
+    <h1>JavaScript n'est pas sensible aux espaces blancs</h1>
+    <h2>Font-family fantasy</h2>
+    <p id="fantasy">La notion d'<em>espace blanc</em> concerne aussi bien les espaces proprement dites que les tabulations et les sauts de ligne. Dans du code JavaScript, vous pouvez très bien insérer une espace, plusieurs, une tabulation ou même un saut de ligne (du moins dans la plupart des cas). JavaScript les ignorera. La seule exception concerne les textes que vous voulez faire afficher à l'écran. Je recommande d'adopter une indentation de type Python.</p>
+
+    <h1>Faites attention aux mots réservés</h1>
+    <h2>Font-family inherit</h2>
+    <p id="inherit">JavaScript est un langage, et donc il contient un ensemble de mots qui lui sont propres et qu'il est capable de comprendre. Par exemple <em>function</em>, <em>for</em>, <em>while</em> ou encore <em>with</em> sont réservés.</p>
+
+    <h1>JavaScript aime les points-virgules</h1>
+    <h2>Font-family Gilles Sans</h2>
+    <p id="gilles">Le code JavaScript est constitué d'instructions. Une instruction, c'est un peu comme une phrase. Vous pouvez vous la représenter comme un bloc de base du code JavaScript, de même qu'une phrase est un bloc de base dans un paragraphe de texte. En JavaScript, les instructions se terminent par un point-virgule (de même qu'une se termine par un point).</p>
+
+    <p class="warning">Si vous oubliez d'insérer un point-virgule à la fin d'une instruction, JavaScript le fera à votre place. Cependant, cela peut produire des résultats imprévisibles. Il est hautement préférable de prendre la bonne habitude de toujours terminer une instruction en tapant un point-virgule. C'est un réflexe à acquérir.</p>
+
+    <h1>Où placer le code JavaScript</h1>
+    <ul>
+      <li><a href="#direct">Directement dans un attribut d'événement HTML</a></li>
+      <li><a href="#balise">Entre des balises script</a></li>
+      <li><a href="#apart">Dans un fichier séparé</a></li>
+    </ul>
+
+    <h1 id="direct">Utiliser JavaScript dans un attribut d'événement HTML</h1>
+    <p>HTML possède plusieurs attributs spéciaux qui sont conçus pour déclencher du code JavaScript lorsque quelque chose de particulier se passe dans la fenêtre du navigateur, ou lorsque l'utilisateur effectue une certaine action. Voici un exemple qui montre un bouton HTML possédant un attribut d'événement capable de répondre à des clics de souris :</p>
+    <button id="bigButton" onclick="alert('Bonjour, le Monde !');">Cliquez ici</button>
+    <p>Lorsque l'utilisateur clique sur le bouton créé par cet élément HTML, une fenêtre pop-up affichant le message spécifié apparaît.</p>
+
+    <TABLE BORDER="0">
+      <CAPTION> Les attributs HTML les plus utilisés </CAPTION>
+      <colgroup>
+        <col style="width: 20%; font-family: 'sans serif';">
+      </colgroup>
+      <TR>
+        <TH> Attribut </TH>
+        <TH> Description </TH>
+      </TR>
+      <TR>
+        <TD class="attr"> onload </TD>
+        <TD class="desc"> Exécute le script une fois le chargement des pages terminé. </TD>
+      </TR>
+      <TR>
+        <TD class="attr"> onfocus </TD>
+        <TD class="desc"> Exécute le script lorsque l'événement concerné a le focus (par exemple lorsqu'un champ de texte est acitf).</TD>
+      </TR>
+      <TR>
+        <TD class="attr"> onblur </TD>
+        <TD class="desc"> Exécute le script lorsque l'événement concerné perd le focus (par exemple lorsque l'utilisateur clique sur un nouveau champ de texte dans un formulaire).</TD>
+      </TR>
+      <TR>
+        <TD class="attr"> onchange </TD>
+        <TD class="desc"> Exécute le script lorsque la valeur d'un élément change.</TD>
+      </TR>
+    </TABLE>
+
+    <p class="warning">Même si cette technique est simple à utiliser, elle est mal considérée par la plupart des programmeurs JavaScript. Pour autant, si nous y faisons référence dans ce livre, c'est parce qu'elle est à la fois très largement employée et qu'elle est simple à apprendre.</p>
+
+    <h1 id="balise">Utiliser JavaScript dans un élément de script</h1>
+    <p>Les éléments HTML vous permettent d'incorporer du code JavaScript dans vos documents. Bien souvent, les éléments de script sont placés dans l'en-tête (la balise <span class="ttype">head</span>). En fait, il s'agit généralement d'une obligation. Mais, pour autant, dans les navigateurs modernes, les éléments de script peuvent aussi bien être insérés dans l'en-tête que dans le corps des pages Web.</p>
+    <h2>Comptons jusqu'à 10 avec JavaScript</h2>
+    <p id="theCount"></p>
+    <script type="text/javascript">
+      var count = 0;
+      while (count < 10) {
+        count++;
+        document.getElementById("theCount").innerHTML += count + "<br>";
+      }
+    </script>
+
+    <h2>Insertion du script et exécution de JavaScript</h2>
+    <p>Normalement, les navigateurs Web chargent et exécutent les scripts au cours du chargement des pages Web. Une page Web est toujours lue de haut en bas, exactement comme si vous lisiez une page de texte. Mais il peut aussi arriver que vous vouliez qu'une certaine page soit totalement chargée avant qu'un script ne soit exécuté.</p>
+
+    <h2>Limitations de JavaScript dans les éléments <span class="ttype">&lt;script&gt;</span></h2>
+    <p>Même si cette méthode est couramment utilisée et plus facilement acceptée que l'intégration dite en ligne de JavaScript (en plaçant le code dans des attributs d'événements), incorporer du code JavaScript dans un élément de script induit un certain nombre de limitations.</p>
+    <p>La limite la plus importante est que ce type d'intégration ne fonctionne que dans des pages Web où ce type de code se trouve. En d'autres termes, si vous placez votre code JavaScript dans un élément <span class="ttype">script</span>, vous devrez copier et coller ce code dans chacune des pages où il doit être exécuté. Dans le cas de sites Web qui peuvent contenir des centaines et des centaines de pages, cette technique peut devenir un véritable cauchemar.</p>
+
+    <h2>Quand convient-il d'utiliser JavaScript dans des éléments <span class="ttype">&lt;script&gt;</span></h2>
+    <p>Cette méthode d'incorporation a ses propres usages. Dans le cas de petits codes qui se contentent d'appeler d'autres morceaux de codes JavaScript et qui changent rarement (si ce n'est jamais), il est tout à fait acceptable, et même plus rapide, pour le chargement et l'affichage des pages Web, de faire appel à cette technique pour faire en sorte que les requêtes au serveur soient limitées au maximum.</p>
+    <p>Dans le cas de sites qui ne comportent qu'une seule page, ce type de script est également une très bonne méthode, puisque toute évolution ne sera faite que sur cette page.</p>
+    <p>Pour autant, et en tant que règle d'ordre général, vous devriez toujours tenter de minimiser la quantité de code JavaScript que vous incorporez directement dans un document HTML. La maintenance du code en sera plus facile à gérer, et l'organisation de celui-ci en sera facilitée.</p>
+
+
+    <h1 id="apart">Inclure des fichiers JavaScript externes</h1>
+
+    <p>La troisième, mais aussi la plus populaire, méthode pour inclure du code JavaScript dans un document HTML consiste à utiliser l'attribut <span class="ttype">src</span> dans l'élément de script.</p>
+
+    <p>Un élément de script contenant un attribut <span class="ttype">src</span> fonctionne exactement comme si le code était inclus à l'intérieur de balises, si ce n'est que le code est chargé, <em>via</em> cet attribut <span class="ttype">src</span>, à partir d'un fichier distinct. La ligne qui suit montre un exemple d'élément de script associé à un attribut <span class="ttype">src</span> :</p>
+    <p><span class="ttype">&lt;script src="monScript.js"&gt;&lt;/script&gt;</span></p>
+    <p>Ici, vous devez disposer d'un fichier appelé <span class="ttype">monScript.js</span>. Dans ce cas, ce fichier doit se trouver dans le même dossier que votre document HTML. Cette méthode comporte plusieurs avantages :</p>
+    <ul>
+      <li>Vos fichiers sont plus propres et plus clairs.</li>
+      <li>Vous vous facilitez l'existence, car toute modification du code JavaScript ne doit être effectuée que dans un endroit unique, qu'il s'agisse de le faire évoluer ou de corriger des erreurs.</li>
+    </ul>
+    
+
+  </body>
+</html>
