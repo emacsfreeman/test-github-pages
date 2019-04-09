@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Programmation Web</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    <h1>Les technologies Front End</h1>
+
+    <ul>
+      <li>
+        Les fondamentaux
+        <ol>
+          <li>HTML 5 pour HyperText Markup Language ou langage de balisage hypertexte en français dans le texte avec le <a href="http://bit.ly/2OZcZBe" target="_blank">logo</a> :
+            <img src="http://bit.ly/2UoK7s1" />
+          </li>
+          <li>CSS 3 pour Cascading Style Sheet ou feuilles de style en cascades en français dans le texte avec le <a href="http://bit.ly/2Iaz0w8" target="_blank">logo</a> : 
+            <img src="http://bit.ly/2U8OUJ0" />
+          </li>
+          <li>
+            JavaScript ou JS pour les intimes avec le <a href="http://bit.ly/2GdsPW4" target="_blank">logo</a> :
+            <img src="http://bit.ly/2uSNt7q" />
+          </li>
+        </ol>
+      </li>
+      <li>
+        Les frameworks ou bibliothèques de code
+        <ol>
+          <li>
+            <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> avec le <a href="https://bilalamjad.net/1-installing-bootstrap/" target="_blank">logo</a> :
+            <img src="http://bit.ly/2X0Xcoh" />
+          </li>
+          <li>
+            <a href="" target="_blank">jQuery</a> avec le <a href="http://bit.ly/2G2yQUl" target="_blank">logo</a> :
+            <img src="http://bit.ly/2I9eex2" />
+          </li>
+        </ol>
+      </li>
+    </ul>    
+
+    <h1>Amusons-nous avec les listes</h1>
+
+    <h2>Listes non ordonnées</h2>
+
+    <h3>Avec des puces rondes remplies</h3>
+    <ul id="full">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ul>
+
+    <h3>Avec des puces rondes vides</h3>
+    <ul id="empty">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ul>
+
+    <h3>Avec des carrés remplies</h3>
+    <ul id="square">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ul>
+
+    <h3>Avec rien du tout</h3>
+    <ul id="null">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ul>
+
+    <h2>Listes ordonnées (ou énumérations)</h2> 
+    
+    <h3>Avec les chiffres indo-arabes</h3>
+    <ol id="arabic">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les chiffres indo-arabes et le zéro devant</h3>
+    <ol id="zero">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+    
+    <h3>Avec les chiffres hébreux</h3>
+    <ol id="hebrew">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les chiffres arméniens</h3>
+    <ol id="armenian">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les chiffres géorgiens</h3>
+    <ol id="georgian">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+
+    <h3>Avec les hiragana</h3>
+    <ol id="hiragana">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les katakana</h3>
+    <ol id="katakana">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les hiragana-iroha</h3>
+    <ol id="hiragana-iroha">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les katakana-iroha</h3>
+    <ol id="katakana-iroha">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h2>Listes ordonnées alphabétiques</h2>
+
+    <h3>Avec les chiffres romains en minuscules</h3>
+    <ol id="lower-roman">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les chiffres romains en majuscules</h3>
+    <ol id="upper-roman">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les chiffres grecs en minuscules</h3>
+    <ol id="lower-greek">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les lettres en minuscules</h3>
+    <ol id="lower-alpha">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les lettres en majuscules</h3>
+    <ol id="upper-alpha">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les lettres latines en minuscules</h3>
+    <ol id="lower-latin">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h3>Avec les lettres latines en majuscules</h3>
+    <ol id="upper-latin">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ol>
+
+    <h2>Listes non ordonnées (le retour)</h2>
+
+    <p>Images disponibles sur ce <a href="http://createafreewebsite.net/free_bullets.html" target="_blank">site</a></p>
+
+    <h3>Avec des petites sphères violettes</h3>
+    <ul id="purple-sphere">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ul>
+
+    <h3>Avec des petites flèches bleues</h3>
+    <ul id="blue-arrow">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ul>
+
+    <h3>Avec des check verts</h3>
+    <ul id="green-check">
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+      <li>List Item (élément de liste)</li>
+    </ul>
+
+  <h1>Police</h1>
+
+  <h2 class="arial">Arial</h2>
+
+  <h2 class="times">Times New Roman</h2>
+
+  <h2 class="courier">Courier New</h2>
+
+  <h2 class="trebuchet">Trebuchet MS</h2>
+
+  <h2 class="georgia">Georgia</h2>
+
+  <h2 class="century">century gothic</h2>
+
+  <h2 class="lucida">lucida sans unicode</h2>
+
+  <h2 class="palatino">palatino</h2>
+
+  <h2 class="comic">Comic Sans MS</h2>  
+
+  <h1>Couleurs</h1>
+
+  <h2>En dur</h2>
+
+  <ul>
+    <li style="color: red;">Red = Rouge</li>
+    <li style="color: green;">Green = Vert</li>
+    <li style="color: blue;">Blue = Bleu</li>
+  </ul>
+
+  <h2>En hexadécimal</h2>
+
+  <ul>
+    <li style="color: #FF0000;">#FF0000 = Rouge</li>
+    <li style="color: #008000;">#008000 = Vert</li>
+    <li style="color: #0000FF;">#0000FF = Bleu</li>
+  </ul>
+
+  <h2>En RGBA pour Red Green Blue Alpha (opacité)</h2>
+
+  <ul>
+    <li style="color: rgba(255, 0, 0, 0.95);">rgba(255, 0, 0, 0.95) = Rouge (opacité 95%)</li>
+    <li style="color: rgba(0, 255, 0, 0.9);">rgba(0, 255, 0, 0.9) = Vert (opacité 90%)</li>
+    <li style="color: rgba(0, 0, 255, 0.85);">rgba(0, 0, 255, 0.85) = Bleu (opacité 85%)</li>
+  </ul>
+
+
+
+  </body>
+</html>
