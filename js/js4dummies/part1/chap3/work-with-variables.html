@@ -61,9 +61,204 @@
       <li>
         <strong>Sans le mot-clé</strong> <span class="ttype">var</span> :
         <p class="ttype">monNom = "Laurent";</p>
-
+        <p>Lorsque vous définissez ainsi une variable, elle devient une variable <em>globale</em> (nous allons définir ce mot dans la prochaine section).</p>
       </li>
     </ul>
+
+    <p>Notez l'emploi de guillemets ou d'apostrophes autour de nom dans les exemples. Elles indiquent que la variable doit être traitée comme du texte, et non comme un nombre, un mot-clé JavaScript ou une autre variable.</p>
+
+    <h1>Comprendre la portée des variables</h1>
+
+    <p>Comment et quand vous déclarez une variable détermine comment et où votre programme pourra l'utiliser. Ce concept est appelé la <em>portée de la variable</em>.</p>
+
+    <p>Dans JavaScript, il existe deux types de portée :</p>
+    <ul>
+      <li>Les <em>variables globales</em> peuvent être utilisées partout à l'intérieur d'un programme.</li>
+      <li>Les <em>variables locales</em> sont créées à l'intérieur d'une section protégée qui est contenue dans le programme, ce que l'on appelle une <em>fonction</em>.</li>
+    </ul>
+
+    <h1>Nommer les variables</h1>
+    <p>Les noms des variables peuvent débuter par les caractères suivants :</p>
+    <ul>
+      <li>Une lettre minuscule ou majuscule</li>
+      <li>Un trait de soulignement (_)</li>
+      <li>Un signe dollar ($)</li>
+    </ul>
+
+    <p>Même si les deux dernières options sont parfaitement licites, il est tout de même préférable de commencer par une lettre. L'emploi de caractères spéciaux rend souvent le code plus difficile à lire et à comprendre, surtout si vous débutez en JavaScript. Après le premier caractère, vous pouvez utiliser n'importe quelle lettre ou n'importe quel chiffre dans le nom de votre variable. Par contre, les espaces sont interdites, de même que les opérateurs mathématiques ou les signes de ponctuation (le trait de soulignement mis à part).</p>
+
+    <p>Les noms des variables sont en réalité des <em>identificateurs</em>. Vous devriez donc les nommer systématiquement d'une manière qui soit à la fois précise et significative. Les conventions que définissent les programmeurs peuvent parfois se traduire par des noms très longs. Mais, au final, un nom long qui définit clairement une variable est toujours préférable à un nom court dont la signification reste vague.</p>
+
+    <h1>Créer des constantes avec le mot-clé const</h1>
+
+    <p>Dans certains cas, votre programme peut avoir besoin de variables dont le contenu ne doit pas être changé. On parle alors de <em>constantes</em>. Une constante est définie à l'aide du mot-clé <span class="ttype">const</span>. Par exemple :</p>
+    <p class="ttype">const heightOfTheEmpireStateBuilding = 1454;</p>
+    <p class="ttype">const speedOfLight = 299792458;</p>
+    <p class="ttype">const numberOfProblems = 99;</p>
+    <p class="ttype">const meanNumberOfBooksReadIn2014 = 12;</p>
+
+    <p>Les constantes suivent les mêmes règles que les autres variables. En revanche, leur contenu ne peut pas être modifié au cours de leur durée de vie (c'est-à-dire, celle du script où elles sont définies).</p>
+
+    <h1>Travailler avec les types de données</h1>
+    <p>Le <em>type de donnée</em> d'une variable est le genre d'information qu'elle contient, ce qui détermine également les opérations que cette variable est susceptible de se voir appliquer. Par exemple, le nombre 2, placé dans une phrase, est très différent du même nombre utilisé dans une équation. Les types de données correspondent donc à la manière dont JavaScript interprète ce qui doit être pris pour un mot, de ce qui peut être traité dans une expression mathématiques.</p>
+
+    <p>Si vous réfléchissez à tous les types de données que vous rencontrez dans votre vie quotidienne, vous comprendrez vite qu'il s'agit d'un sujet très compliqué. Par exemple, quel est le rapport entre un graphique, une recette, une histoire, un article de presse, et ainsi de suite. La plupart relèvent du langage courant, mais comment leur donner un sens, une cohérence ? Les créateurs de JavaScript ont été généreux, et ils ont décidé de vous simplifier l'existence. En fait, JavaScript se contente de cinq types de données de base.</p>
+
+    <p>Au-delà, JavaScript est aussi appelé <em>langage pauvrement typé</em>. Autrement dit, vous n'avez même pas besoin de savoir à l'avance si la variable que vous créez va contenir un mot, un paragraphe, un nombre, ou encore un autre type de donnée.</p>
+
+    <p>Cela ne signifie en rien que JavaScript n'est pas capable d'effectuer la distinction entre les mots et les nombres. JavaScript se débrouille très bien avec les uns et avec les autres, et il est capable de se représenter le type de donnée que vous enregistrez dans vos variables bien en amont de la scène.</p>
+
+    <p>JavaScript reconnaît cinq types de données, dits primitifs.</p>
+
+    <h2>Les données numériques</h2>
+
+    <p>En JavaScript, les nombres sont enregistrés sous la forme de valeurs en virgule flottante sur 64 bits. Cela signifie que les nombres peuvent valoir de 5e(-234) (soit 5 précédé de 324 zéros) [(Bitcoin &#8383; ou plutôt &#579; ou encore &#x243;)] jusqu'à 1.7976931348623157e(308). Tout nombre peut posséder ou non un point décimal (les langages de programmation ne reconnaissent pas nos virgules). Contrairement à d'autres langages de programmation, JavaScript ne fait pas la différence entre les nombres entiers et les nombres décimaux.</p>
+
+    <h3>Fonction Number</h3>
+
+    <p>JavaScript dispose d'une fonction appelée <span class="ttype">Number</span> pour convertir des valeurs en nombres. Pour utiliser cette fonction, vous placez simplement la valeur que vous voulez convertir (ou une variable qui contient cette valeur) entre parenthèses à la suite du nom de la fonction.</p>
+
+    <p>La fonction <span class="ttype">Number</span> produit quatre type de sorties :</p>
+    <ul>
+      <li>
+        Les nombres qui sont formatés sous la forme d'une chaîne de caractères sont convertis en valeurs numériques qui peuvent être utilisées dans des calculs, comme ceci :
+        <p class="ttype">Number("42") // renvoie un nombre</p>
+      </li>
+      <li>
+        Les chaînes de caractères qui ne peuvent pas être converties en nombres renvoient la valeur <span class="ttype">NaN</span>, comme ceci :
+        <p class="ttype">Number("oeufs") // renvoie NaN</p>
+      </li>
+      <li>
+        La valeur booléenne <span class="ttype">true</span> (vrai) renvoie le nombre 1, comme ceci :
+        <p class="ttype">Number(true) // renvoie 1</p>
+      </li>
+      <li>
+        La valeur booléenne <span class="ttype">false</span> (faux) renvoie le nombre 0, comme ceci :
+        <p class="ttype">Number(false) // renvoie 0</p>
+      </li>
+    </ul>
+
+    <h3>Fonction parseInt()</h3>
+
+    <p>Du point de vue de JavaScript, tous les nombres sont des valeurs en virgule flottante. Cependant, vous pouvez faire appel à la fonction <span class="ttype">parseInt()</span> pour demander à JavaScript de ne prendre en compte que la partie entière de la valeur numérique (ce qui se trouve avant le point décimal), et donc d'éliminer le reste du nombre. Par exemple :</p>
+    <p class="ttype">parseInt(100.33); // renvoie 100</p>
+
+    <h3>Fonction parseFloat()</h3>
+    <p>La fonction <span class="ttype">parseFloat()</span> demande à JavaScript de traiter un nombre comme étant décimal. Vous pouvez même vous en servir pour convertir une chaîne en nombre. Par exemple :</p>
+    <p class="ttype">parseFloat("10"); // renvoie 10</p>
+    <p class="ttype">parseFloat(100.00); // renvoie 100.00</p>
+    <p class="ttype">parseFloat("10"); // renvoie 10</p>
+
+    <h2>Les données de type chaîne</h2>
+
+    <p>Les chaînes peuvent être constitués de n'importe quels caractères :</p>
+    <ul>
+      <li>lettres</li>
+      <li>chiffres</li>
+      <li>signes de ponctuation (comme des virgules ou des points)</li>
+      <li>caractères spéciaux qui seront alors précédés d'une barre oblique inverse</li>
+    </ul>
+
+    <p>Certains caractères, comme les guillemets ou les apostrophes, ont une signification particulière en JavaScript, ou nécessitent une combinaison spécifique de caractères pour pouvoir être représentés dans une chaîne (comme une tabulation ou un saut de ligne).</p>
+
+    <h3>Fonctions de chaîne</h3>
+
+    <ul>
+      <li>
+        <span class="ttype">charAt()</span> : renvoie le caractère qui se trouve à la position spécifiée.
+        <script type="text/javascript">
+          var uneChaine = 'JavaScript est génial !';
+          console.log(uneChaine.charAt(3));
+        </script>
+      </li>
+      <li>
+        <span class="ttype">concat()</span> : combine deux chaînes
+        <script type="text/javascript">
+          var uneChaine = 'JavaScript est génial !';
+          console.log(uneChaine.concat(' Nous aimons JavaScript !'));
+        </script>
+      </li>
+      <li>
+        <span class="ttype">indexOf()</span> : Recherche et renvoie la position de la 1ère occurrence du caractère recherché, ou d'une sous-chaîne à l'intérieur de la chaîne.
+        <script type="text/javascript">
+          var uneChaine = "JavaScript est génial !";
+          console.log(uneChaine.indexOf('génial'));
+        </script>
+      </li>
+      <li>
+        <span class="ttype">split()</span> : Partage une chaîne en un tableau de sous-chaînes.
+        <script type="text/javascript">
+          var uneChaine = 'JavaScript est génial !';
+          console.log(uneChaine.split('g'));
+        </script>
+      </li>
+      <li>
+        <span class="ttype">substr()</span> : Extrait une partie de la chaîne commençant à la position indiquée et possédant la longueur spécifiée.
+        <script type="text/javascript">
+          var uneChaine = 'JavaScript est génial !';
+          console.log(uneChaine.substr(2, 5));
+        </script>
+      </li>
+      <li>
+        <span class="ttype">substring()</span> : Extrait les caractères de la chaîne compris entre deux positions spécifiées.
+        <script type="text/javascript">
+          var uneChaine = 'JavaScript est génial !';
+          console.log(uneChaine.substring(2, 5));
+        </script>
+      </li>
+      <li>
+        <span class="ttype">toLowerCase()</span> : Convertit tous les caractères de la chaîne en minuscules.
+        <script type="text/javascript">
+          var uneChaine = 'JavaScript est génial';
+          console.log(uneChaine.toLowerCase());
+        </script>
+      </li>
+      <li>
+        <span class="ttype">toUpperCase()</span> : Convertit tous les caractères de la chaîne en majuscules.
+        <script type="text/javascript">
+          var uneChaine = 'JavaScript est génial';
+          console.log(uneChaine.toUpperCase());
+        </script>
+      </li>
+    </ul>
+
+    <h2>Type de donnée booléen</h2>
+
+    <p>Les variables booléennes ne peuvent contenir que l'une des deux valeurs <span class="ttype">true</span> (vrai) ou <span class="ttype">false</span> (faux).</p>
+
+    <p>Le résultat produit par la conversion en JavaScript d'une certaine valeur en une valeur booléenne dépend de son contenu :</p>
+
+    <ul>
+      <li>
+        Les valeurs suivantes sont toujours évaluées comme false par la fonction <span class="ttype">Boolean()</span>
+        <ul>
+          <li>NaN</li>
+          <li>indéfini</li>
+          <li>0</li>
+          <li>""</li>
+          <li> <span class="ttype">false</span> </li>
+        </ul>
+      </li>
+      <li>
+        Tout ce qui ne relève pas des cas précédents est évalué avec la valeur booléenne <span class="ttype">true</span>. Par exemple :
+        <ul>
+          <li>74</li>
+          <li>"Eva"</li>
+          <li>"10"</li>
+          <li>"NaN"</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>La chaîne "0" est différente de la valeur numérique 0. Cette dernière donne une valeur booléenne <span class="ttype">false</span>, tandis que la première renvoie une valeur booléenne <span class="ttype">true</span>.</p>
+
+    <h2>Le type de donnée NaN</h2>
+
+    <p>NaN est l'abréviation de <em>Not A Number</em> (pas un nombre). C'est le résultat que vous obtenez si vous essayez de faire des calculs avec une chaîne, ou bien si un calcul échoue ou ne peut pas être effectué. Tenter de le faire produira comme résultat NaN.</p>
+
+    <h2>Le type de donnée indéfini</h2>
+
+    <p>Même si vous créez une variable JavaScript sans iren lui affecter, elle possède tout de même une valeur par défaut. Cette valeur est "<span class="ttype">undefined</span>" (indéfini).</p>
 
   </body>
 </html>
