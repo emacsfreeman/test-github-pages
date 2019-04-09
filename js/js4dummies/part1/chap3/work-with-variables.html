@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Travailler avec les variables</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Comprendre les variables</h1>
+    <p>Les variables sont des noms qui représentent quelque chose dans un programme. De la même manière que x désigne en algèbre une valeur inconnue, ou même l'endroit où est caché le trésor sur une vieille carte de pirate, les variables sont utilisées dans les programmes pour représenter quelque chose d'autre.</p>
+
+    <p>Vous pouvez vous figurer les variables comme des conteneurs dans lesquels se trouvent des données. Vous attribuez un nom à ses conteneurs, et vous pouvez ensuite vous servir de ce nom pour récupérer le contenu du conteneur correspondant, ou encore pour y mettre autre chose.</p>
+
+    <p>Sans ces variables, un programme informatique ne servirait pas à grand-chose, disons uniquement à effectuer toujours le même calcul ou afficher le même texte.</p>
+
+    <p>Prenons l'exemple suivant :</p>
+
+      <p><span class="ttype">alert(1 + 2);</span></p>
+
+    <p>  Pas de variable ici. Cette ligne de code additionne les chiffres 1 et 2, puis affiche le résultat dans le navigateur.
+    </p>
+
+    <p>Si vous n'avez pas besoin d'additionner régulièrement 1 et 2 (ce qui poserait un sérieux problème quant à vos souvenirs d'école primaire, et donc aussi quant à votre capacité à programmer), ce programme n'a aucun intérêt. Grâce aux variables, vous pouvez créer un programme bien plus généraliste qui additionnera deux nombres et affichera le résultat.</p>
+
+    <p>Par exemple : </p>
+
+    <p><span class="ttype">var firstNumber = 1;</span></p>
+    <p><span class="ttype">var secondNumber = 2;</span></p>
+    <p><span class="ttype">var total = Number(firstNumber) + Number(secondNumber);</span></p>
+    <p><span class="ttype">alert(total);</span></p>
+
+    <p>D'abord. Ici, l'ajout de variables n'apporte pas grand-chose, puisque les nombres restent les mêmes. Pour aller plus loin, il conviendrait de demander à l'utilisateur de coopérer en lui demandant de saisir les deux valeurs qu'il veut additionner, comme dans l'exemple suivant :</p>
+    <p><span class="ttype">var firstNumber = prompt("Entrez le premier nombre");</span></p>
+    <p><span class="ttype">var secondNumber = prompt("Entrez le second nombre");</span></p>
+    <p><span class="ttype">var total = Number(firstNumber) + Number(secondNumber);</span></p>
+    <p><span class="ttype">alert("Le résultat est : "+total);</span></p>
+
+    <h3>Testons ce code !</h3>
+    <!--
+    <script type="text/javascript">
+      var firstNumber = prompt("Entrez le premier nombre");
+      var secondNumber = prompt("Entrez le second nombre");
+      var total = Number(firstNumber) + Number(secondNumber);
+      alert("Le résultat est : "+total);
+    </script>
+    -->
+
+    <h1>Déclarer des variables</h1>
+
+    <p><em>Déclarer une variable</em>, est un terme technique qui est utilisé pour décrire le processus consistant à créer une nouvelle variable dans un programme. Vous pourriez d'ailleurs aussi l'appeler <em>initialisation</em>. Créer une variable, déclarer une variable ou initialiser une variable, tout cela veut dire la même chose.</p>
+
+    <p>Les variables peuvent être créées de deux manières dans JavaScript :</p>
+
+    <ul>
+      <li>
+        <strong>En utilisant le mot-clé</strong> <span class="ttype">var</span> :
+        <p class="ttype">var maVariable;</p>
+        <p>Une variable déclarée de cette manière aura une valeur initiale non définie, à moins de spécifier explicitement celle-ci, comme dans :</p>
+        <p class="ttype">var monNom = "Laurent";</p>
+      </li>
+      <li>
+        <strong>Sans le mot-clé</strong> <span class="ttype">var</span> :
+        <p class="ttype">monNom = "Laurent";</p>
+
+      </li>
+    </ul>
+
+  </body>
+</html>
