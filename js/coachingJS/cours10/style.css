@@ -1,0 +1,171 @@
+#full 
+{
+  list-style-type: disc;
+}
+
+#empty 
+{
+  list-style-type: circle;
+}
+
+#square 
+{
+  list-style-type: square;
+}
+
+#null 
+{
+  list-style-type: none;
+}
+
+#arabic 
+{
+  list-style-type: decimal;
+}
+
+#zero 
+{
+  list-style-type: decimal-leading-zero;
+}
+
+#hebrew 
+{
+  list-style-type: hebrew;
+}
+
+#armenian {
+  list-style-type: armenian;
+}
+
+#georgian 
+{
+  list-style-type: georgian;
+}
+
+#hiragana 
+{
+  list-style-type: hiragana;
+}
+
+#katakana 
+{
+  list-style-type: katakana;
+}
+
+
+#hiragana-iroha 
+{
+  list-style-type: hiragana-iroha;
+}
+
+#katakana-iroha 
+{
+  list-style-type: katakana-iroha;
+}
+
+#lower-roman 
+{
+  list-style-type: lower-roman;
+}
+
+#upper-roman 
+{
+  list-style-type: upper-roman;
+}
+
+#lower-greek 
+{
+  list-style-type: lower-greek;
+}
+
+#lower-alpha 
+{
+  list-style-type: lower-alpha;
+}
+
+#upper-alpha 
+{
+  list-style-type: upper-alpha;
+}
+
+#lower-latin 
+{
+  list-style-type: lower-latin;
+}
+
+#upper-latin 
+{
+  list-style-type: upper-latin;
+}
+
+#purple-sphere 
+{
+  list-style-image: url('http://createafreewebsite.net/bullets/pinkball.gif');
+}
+
+#blue-arrow 
+{
+  list-style-image: url('http://createafreewebsite.net/bullets/arrowbluer.gif');
+}
+
+#green-check 
+{
+  list-style-image: url('http://createafreewebsite.net/bullets/check-green.gif');
+}
+
+.arial 
+{
+  font-family: Arial, Sans-Serif;
+}
+
+.times
+{
+  font-family: "Times New Roman", Sans-Serif;
+}
+      
+      
+.courier
+{
+  font-family: "Courier New",Sans-Serif;
+}
+      
+.verenda
+{
+  font-family: Verdana, Sans-Serif;
+}
+      
+.trebuchet
+{
+  font-family: "Trebuchet MS", Sans-Serif
+}
+
+     
+.georgia
+{
+  font-family: Georgia, Sans-Serif;
+}
+
+      
+.century
+{
+  font-family: "century gothic", Sans-Serif
+}
+
+      
+.lucida
+{
+  font-family: "lucida sans unicode",Sans-Serif;
+}
+
+      
+.palatino
+{
+  font-family: "palatino", Sans-Serif;
+}
+
+      
+.comic
+{
+  font-family: "Comic Sans MS",Sans-Serif;
+}
+
