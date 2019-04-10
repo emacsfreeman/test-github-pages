@@ -1,0 +1,208 @@
+body {
+  margin: 3%;
+  background-color: #F5FFFA;
+}
+
+
+
+#cursiv {
+  font-family: cursive;
+}
+#fantasy {
+  font-family: fantasy;
+}
+#inherit {
+  font-family: inherit;
+}
+#gilles {
+  font-family: "Gilles Sans";
+}
+.warning {
+  background-color: lime;
+  color: #8B0000;
+  font-size: 2em;
+  font-weight: bold;
+  font-style: italic;
+  font-family: monospace;
+  padding: 2%;
+  margin: 5%;
+  border-radius: 30px;
+}
+#bigButton {
+  width: 200px;
+  height: 50px;
+  color: lime;
+  background-color: blue;
+  margin-left: 45%;
+  padding-left: 1%;
+  font-size: 1.5em;
+  border-radius: 50%;
+}
+
+
+p {
+  font-size: 1.5em;
+}
+h1 {
+  font-family: monospace;
+  color: #00008B;
+  font-size: 3em;
+}
+h2 {
+  font-family: Futura;
+  font-size: 2.25em;
+  color: #6495ED;
+}
+
+h3 {
+  font-family: "Comic Sans MS";
+  font-size: 2.15em;
+  color: #9370DB;
+}
+
+h4 {
+  font-family: Arial;
+  font-size: 2em;
+  color: #6495ED;
+}
+
+li {
+  font-size: 1.5em;
+}
+
+table {
+  text-align: justify;
+  margin-left: 15%;
+  margin-right: 15%;
+  padding: 2%;
+  border-collapse: collapse;
+}
+
+caption {
+  font-size: 2em;
+  font-family: monospace;
+  color: #008080;
+  margin: 0.5%;
+}
+
+th {
+  background-color: #2F4F4F;
+  color: #FFFAF0;
+  font-size: 1.5em;
+  font-family: fantasy;
+  text-align: justify;
+  padding: 2%;
+}
+
+td {
+  text-align: left;
+  padding: 2%;
+  font-size: 1.5em;
+}
+
+.desc {
+  background-color: #F5DEB3;
+  font-family: monospace;
+  color: #4682B4;
+  font-weight: bold;
+}
+
+
+.attr {
+  font-weight: bold;
+  background-color: #C0C0C0;
+  font-family: sans-serif;
+}
+
+.ttype {
+  font-family: sans-serif;
+  color: black;
+  font-weight: normal;
+  font-size: 1em;
+}
+
+#theCount {
+  font-family: cursive;
+  color: #FF8C00;
+}
+
+#green-check
+{
+  list-style-image: url('http://createafreewebsite.net/bullets/check-green.gif');
+}
+
+table {
+  text-align: left;
+  margin-left: 2.5%;
+  margin-right: 1.5%;
+  padding: 1%;
+  border-collapse: collapse;
+}
+
+caption {
+  font-size: 2em;
+  font-family: monospace;
+  color: #008080;
+  margin: 0.5%;
+}
+
+th {
+  background-color: #2F4F4F;
+  color: #FFFAF0;
+  font-size: 1.2em;
+  font-family: fantasy;
+  text-align: justify;
+  padding: 2%;
+}
+
+td {
+  text-align: left;
+  margin: 2%;
+  padding: 2%;
+  font-size: 1em;
+}
+
+.meth {
+  /*background-color: #F5DEB3;*/
+  font-family: monospace;
+  /* color: #4682B4; */
+  font-weight: bold;
+}
+
+
+.retour {
+  /*font-weight: bold;*/
+  /*background-color: #C0C0C0;*/
+  font-family: sans-serif;
+}
+
+.apparte {
+  background-color: #FF4500;
+  color: #7FFF00;
+  font-family: monospace;
+  padding: 2%;
+  padding-top: 1%;
+  margin: 2%;
+  border-radius: 30px;
+  font-size: 1.5em;
+}
+
+.bitcoin {
+    list-style-type: none;
+}
+
+.bitcoin li::before {
+  /*color: #FFA500;*/
+  content:'\243 \ (Bitcoin) \ → ';
+}
+
+.columns2
+{
+  -webkit-column-count: 2; // Chrome, Safari, Opera
+  -moz-column-count: 2; // Firefox
+  column-count: 2;
+  margin: 2.5%;
+  padding: 2.5%;
+  font-size: 1em;
+  font-family: monospace;
+}
