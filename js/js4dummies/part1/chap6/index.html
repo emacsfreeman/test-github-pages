@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Rester dans le flux avec les boucles et les branchements</title>
+    <link rel="stylesheet" href="style.css">
+    <style media="screen">
+      .columns {
+        -webkit-column-count: 5; // Chrome, Safari, Opera
+        -moz-column-count: 5; // Firefox
+        column-count: 5;
+        padding-right: 4.5%;
+        font-size: 1.085em;
+        font-family: monospace;
+      }
+      .columns2 {
+        -webkit-column-count: 2; // Chrome, Safari, Opera
+        -moz-column-count: 2; // Firefox
+        column-count: 2;
+        padding-right: 4.5%;
+        font-size: 1.085em;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <h1> <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/bitcoin-symbol.svg" alt="btc symbol"> Soyez branché <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-circular-plain-accepted.svg" alt="btc accepted"> </h1>
+
+    <p>Les instructions de <em>boucles</em> et de <em>branchement</em> sont appelés aussi <em>instructions de contrôle</em> parce qu'elles permettent de contrôler l'ordre dans lequel JavaScript exéute les programmes. Vous pouvez utiliser des instructions de branchement pour décider des voies à emprunter dans votre code JavaScript. Les <em>boucles</em> sont la méthode la plus simple pour regrouper des instructions JavaScript dans un programme.</p>
+
+    <p>La logique des programmes JavaScript réside souvent en un point où un certain choix doit être effectué, ce qui fait ensuite toute la différence.</p>
+
+    <p>Les instructions <span class="ttype">if</span> et <span class="ttype">else</span> travaillent conjointement pour évaluer une expression logique et exécuter différentes instructions en fonction du résultat. Bien souvent, l'instruction <span class="ttype">if</span> est exécutée seule. Par contre, <span class="ttype">else</span> ne peut pas exister sans son <span class="ttype">if</span>.</p>
+
+    <div class="ttype">
+      if (condition) { </br>
+        ...</br>
+      }</br>
+    </div>
+
+    <p>La condition est une expression quelconque qui peut être évaluée comme étant une valeur booléenne (donc vraie ou fausse). Si le résultat de cette expression est <span class="ttype">true</span> (vrai), alors les instructions comprises entre les accolades sont exécutées. Dans le cas contraire, elles sont ignorées.</p>
+
+    <p>L'instruction <span class="ttype">else</span> intervient dans le cas où le <span class="ttype">if</span> est évalué comme étant de valeur <span class="ttype">false</span>.</p>
+
+    <div class="ttype">
+      var age = 19; </br>
+      if (age < 24) { </br>
+        document.write("Vous êtes trop jeune pour être sénateur en France !");</br>
+      } else { </br>
+        document.write("Présentez-vous aux élections. Vous avez peut-être votre chance."); </br>
+      } </br>
+    </div>
+
+    <p>De nombreux autres langages de programmation possèdent une instruction appelé <span class="ttype">elseif</span>, qui peut être utilisée de multiples fois à l'intérieur d'une instruction <span class="ttype">if...else</span> jusqu'à ce que le programme renvoie une valeur <span class="ttype">true</span>. Mais ce n'est pas le cas de JavaScript.</p>
+
+    <p>Cependant, vous pouvez reproduire la même fonctionnalité en plaçant un espace entre le <span class="ttype">if</span> et le <span class="ttype">else</span>.</p>
+
+    <div class="ttype">
+      if (heure < 12) { </br>
+        document.write("Bon matin !"); </br>
+      } else if (heure < 17) { </br>
+        document.write("Bon après-midi !");</br>
+      } else if (heure < 20) { </br>
+        document.write("Bonne soirée !"); </br>
+      } else { </br>
+        document.write("Bonne nuit !"); </br>
+      } </br>
+    </div>
+
+    <div class="apparte">
+      <h2> <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-circular-gold-accepted.svg" alt="btc accepted"> L'instruction if...else en raccourci <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-doorsticker-accepted.svg" alt="btc accepted"> </h2>
+      <p>L'instruction <span class="ttype">if...else</span> peut être raccourcie. La première méthode consiste à utiliser un opérateur ternaire à la place du <span class="ttype">if...else</span>. Cela rend cependant le code un peu plus difficile à lire, comme dans : </p>
+      <div class="ttype">
+        var formuleDePolitesse = (heure < </br>
+        12 ? </br>
+            "Bon matin !" : </br>
+            "Bonjour."); </br>
+      </div>
+      <p>Dans ce cas, la valeur de formuleDePolitesse est égale à "Bon matin !" avant midi, et à "Bonjour." sinon.</p>
+
+      <p>Une autre technique consiste à faire appel à l'opérateur && (AND, ou <em>et</em> logique). Rappelez-vous que le second opérande ne sera évalué que si le premier est vrai. Les programmeurs appellent souvent cela un court-circuit, car le second opérande n'a pas besoin d'être évalué si le premier renvoie <span class="ttype">false</span>.</p>
+      <div class="ttype">
+        heure < 12 && document.write("Bon matin !");</br>
+      </div>
+      <p>Dans cet exemple, l'instruction && regarde si l'heure courante est inférieure à midi. Dans ce cas elle affiche "Bon matin !". Sinon, il ne va rien se passer, du fait de l'effet de bord de l'opérateur &&.</p>
+      <p>Cette méthode n'est pas courante, en particulier parce qu'elle n'est pas simple à comprendre, et donc source de confusion. Cependant, elle pourrait peut-être vous rendre service un jour, et mérite donc à ce titre d'être connue.</p>
+    </div>
+
+    <h1> <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-doorsticker-accepted-horizontal.svg" alt="btc accepted"> Switch <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-flag-support.svg" alt="btc accepted"> </h1>
+
+    <p>L'instruction <span class="ttype">switch</span> fait un choix parmi une série de lignes de code en fonction de la valeur d'une certaine expression. Chaque valeur dans une instruction <span class="ttype">switch</span> est appelée une <em>valise</em> (ou <span class="ttype">case</span>, que l'on pourrait aussi traduire par coffret, ou tout autre contenant du même genre).  Disons <em>cas</em> pour faire simple (on dit aussi <em>clause</em> <span class="ttype">case</span>)...</p>
+
+    <div class="ttype">
+      switch (expression) { </br>
+        case valeur1: </br>
+        // Instructions </br>
+        break; </br>
+        case valeur2: </br>
+        // Instructions </br>
+        break; </br>
+        case valeur3: </br>
+        // Instructions </br>
+        break; </br>
+        default: </br>
+        // Instructions </br>
+        break; </br>
+      } </br>
+    </div>
+
+    <p>Notez en particulier l'emploi de l'instruction <span class="ttype">break</span> à la suite de chaque cas. Elle demande à l'instruction <span class="ttype">switch</span> de s'interrompre et de terminer son exécution. Sans cela, <span class="ttype">switch</span> continuerait à s'exécuter, et évaluerait donc toutes les expressions qui suivent, sans savoir si l'expression vérifie encore la condition posée.</p>
+
+    <p class="warning">L'oubli d'une instruction <span class="ttype">break</span> dans une structure <span class="ttype">switch</span> peut engendrer de gros problèmes. N'oubliez donc jamais de la spécifier. Du fait que l'instruction <span class="ttype">switch</span> exécute tout ce qui suit une fois que la condition initiale a été évaluée comme étant vrai (<span class="ttype">true</span>) les résultats produits par le code pourraient bien devenir totalement imprévisibles si vous oubliez une seule instruction <span class="ttype">break</span>. Ces problèmes sont généralement difficiles à identifier, car ils ne produisent pas forcément des erreurs détectables, mais plutôt des résultats incorrects.</p>
+
+    <p>Si aucune des clauses <span class="ttype">case</span> n'est satisfaite, l'instruction <span class="ttype">switch</span> va rechercher une clause <span class="ttype">default</span> et exécuter les instructions qu'elle contient.</p>
+
+    <p>La clause <span class="ttype">default</span> est l'exception à la règle qui dit que vous devriez toujours utiliser une instruction <span class="ttype">break</span> entre les clauses <span class="ttype">case</span>. Du fait que <span class="ttype">default</span> est (normalement) ce qui termine l'instruction <span class="ttype">switch</span>, l'exécution de celle-ci se terminera mécaniquement une fois la clause <span class="ttype">default</span> rencontrée.</p>
+
+    <div class="ttype">
+      var languagePreference = "Espagnol"; </br>
+      switch (languagePreference) { </br>
+        case "Anglais": </br>
+          console.log("Hello"); </br>
+          break; </br>
+        case "Espagnol": </br>
+          console.log("Hola"); </br>
+          break; </br>
+        case "Allemand": </br>
+          console.log("Guten Tag"); </br>
+          break; </br>
+        case "Français": </br>
+          console.log("Bonjour"); </br>
+          break; </br>
+        default: </br>
+          console.log("Désolé, je ne parle pas " + languagePreference + "!");</br>
+      } </br>
+    </div>
+
+    <h1> <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-love-heartonly.svg" alt="love btc"> Boucler les boucles <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-rounded-accepted.svg" alt="btc accepted"> </h1>
+
+    <p>Une <em>boucle</em> exécute les mêmes instructions un certain nombre de fois. JavaScript propose plusieurs types de boucles :</p>
+
+    <ul style="list-style-image: url('http://createafreewebsite.net/bullets/folder-black.gif');">
+      <li class="ttype">for</li>
+      <li class="ttype">for...in</li>
+      <li class="ttype">do...while</li>
+      <li class="ttype">while</li>
+    </ul>
+
+    <h2> <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-smart-paywith.svg" alt="pay with btc"> La boucle for <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-fun-paywith.svg" alt="pay with btc"> </h2>
+
+    <p>L'instruction <span class="ttype">for</span> (pour) produit une boucle en utilisant trois expressions :</p>
+
+    <p>Aller voir Alsacréation pour <a href="https://www.alsacreations.com/article/lire/1210-donnez-du-style-a-vos-listes.html" target="_blank">la modification des puces de liste</a> et <a href="https://bitcoinsymbol.org/" target="_blank">bitcoinsymbol</a> pour le symbole &#x243;</p>
+
+    <ul class="bitcoin">
+      <li><strong>Initialisation</strong> : la valeur initiale de la variable servant de <em>compteur</em> de boucle.</li>
+      <li><strong>Condition</strong> : une expression booléenne qui doit être évaluée à chaque itération de la boucle pour déterminer si celle-ci doit ou non se poursuivre.</li>
+      <li><strong>Expression finale</strong> : une expression qui doit être évaluée après chaque itération.</li>
+    </ul>
+
+    <p>Même si la présence de ces trois expressions n'est pas une obligation statuaire elles sont virtuellement toujours présentes. Les boucles <span class="ttype">for</span> sont généralement utilisées pour exécuter du code un nombre prédéterminé de fois. Prenons un exemple simple :</p>
+
+    <div class="ttype">
+      for (var x = 1; x < 10; x++) { </br>
+        console.log(x); </br>
+      } </br>
+    </div>
+
+    <h2> <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-pirate-support.svg" alt="support btc"> Parcourir un tableau <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-ribbon-love.svg" alt="love btc"> </h2>
+
+    <p>Vous pouvez utiliser des boucles <span class="ttype">for</span> pour lister le contenu d'un tableau en comparant la valeur du compteur avec la propriété <span class="ttype">length</span> du tableau. N'oubliez pas cependant que, dans un tableau JavaScript, le premier indice est 0, et donc que la propriété <span class="ttype">array.length</span> est supérieure d'une unité au dernier indice du tableau.</p>
+
+    <script type="text/javascript">
+      var wirex = ["BTC", "ETH", "LTC", "XRP", "NANO", "WAVES", "DAI", "WOLLO"];
+      document.write('<ol>');
+      for (var i = 0; i < wirex.length - 1; i++) {
+        document.write("<li>Cryptomonnaie disponible sur le wallet Wirex : " + wirex[i] + "</li>");
+      }
+      document.write('</ol>');
+    </script>
+
+    <h2> <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/3D/gold-coin-front.png" alt="btc gold"> La boucle for...in <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/3D/white-coin-side.png" alt="btc silver"> </h2>
+
+    <p>Les instructions <span class="ttype">for...in</span> servent notamment à parcourir les propriétés d'un objet. Mais vous pouvez également y faire appel pour parcourir les valeurs d'un tableau.</p>
+
+    <p class="warning">La boucle <span class="ttype">for...in</span> a son talon d'Achille. Elle ne tient en effet pas compte de l'ordre des propriétés ou des éléments qu'elle parcourt. Pour cette raison, mais aussi parce que l'exécution de <span class="ttype">for...in</span> est lente, il est nettement préférable de s'en tenir à la boucle <span class="ttype">for</span> pour balayer le contenu d'un tableau.</p>
+
+    <p>Les objets sont des conteneurs de données qui possèdent des propriétés (ce sont ces données) et des méthodes (ce qu'elles font). Les navigateurs Web possèdent un ensemble d'objets intégrés que les programmeurs peuvent utiliser pour contrôler leur fonctionnement. Le plus basique de tous est l'objet <span class="ttype">Document</span>. La méthode <span class="ttype">write</span> de cet objet, par exemple, demande à votre navigateur d'insérer la valeur spécifiée dans le document HTML.</p>
+
+    <p>L'objet <span class="ttype">Document</span> possède également des propriétés dont il se sert pour obtenir des informations sur le document courant, et éventuellement les retourner aux programmeurs. Par exemple, la collection <span class="ttype">Document.images</span> contient toutes les balises <span class="ttype">img</span> du document HTML courant.</p>
+
+    <h3>Propriétés de l'objet Document</h3>
+
+    <div class="columns">
+      <script type="text/javascript">
+        for (var prop in document) {
+          document.write(prop + '<br>');
+        }
+      </script>
+    </div>
+
+    <h3>Propriétés de l'objet Document avec valeurs</h3>
+
+    <div class="columns2">
+      <script type="text/javascript">
+        for (var prop in document) {
+          document.write(prop + ': ' + document[prop] + '<br>');
+        }
+      </script>
+    </div>
+
+    <h1>Boucles while</h1>
+
+    <p>L'instruction <span class="ttype">while</span> (tant que) produit une boucle qui est exécutée tant qu'une certaine condition reste vérifiée (<span class="ttype">true</span>).</p>
+
+<!--
+    <h2>Trouvez le mot !</h2>
+
+    <script type="text/javascript">
+      var guessedWord = prompt("Quel est le mot auquel je pense ?");
+      while (guessedWord != "sandwich") {
+        guessedWord = prompt("Non. C'est faux. Essayez encore.");
+      }
+      alert("Félicitations ! Vous avez trouvé !");
+    </script>
+ -->
+
+  <h2><img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-circular-silver-accepted.svg"/> Boucles do...while <img src="https://bitcoinsymbol.org/bitcoinsymbol-pack/2D/label-circular-accepted.svg" alt="btc accepted"> </h2>
+
+  <p>La boucle <span class="ttype">do..while</span> est semblable à <span class="ttype">while</span>, si ce n'est que les instructions sont exécutés avant que l'expression de condition ne soit testée. La conséquence est qu'une boucle <span class="ttype">do...while</span> est exécutée au moins une fois, tandis qu'une boucle <span>while</span> peut très bien ne jamais l'être si la condition est fausse dès le départ.</p>
+
+  <h3>Comptons</h3>
+
+  <script type="text/javascript">
+    var i = 0;
+    do {
+      i++;
+      document.write(i + "<br>");
+    } while (i < 10);
+  </script>
+
+  <h2>Break et continue</h2>
+
+  <p>Vous pouvez utiliser les instructions <span class="ttype">break</span> et <span class="ttype">continue</span> pour interrompre l'exécution normale d'une boucle. Nous avons déjà rencontré l'instruction <span class="ttype">break</span> dans le contexte d'une instruction <span class="ttype">switch</span>, où elle permet de quitter la séquence à la suite d'une correspondance infructueuse.</p>
+
+  <h3>Comptons les nombres pairs</h3>
+
+  <script type="text/javascript">
+    for (var i = 0; i <= 20; i++) {
+      if (i % 2 != 0) {
+        continue;
+      }
+      document.write(i + " est un nombre pair.</br>");
+    }
+  </script>
+
+  
+
+  </body>
+</html>
