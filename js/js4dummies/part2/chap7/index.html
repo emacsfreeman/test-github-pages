@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Devenir fonctionnel</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <h1>Comprendre la fonction des fonctions</h1>
+
+    <p>Les <em>fonctions</em> sont comme des miniprogrammes à l'intérieur de vos programmes. Elles servent à prendre en charge des tâches particulières qui devraient sinon être recopiées manuellement plusieurs fois, voire de multiples fois, en différents endroits du code.</p>
+
+    <div class="ttype">
+      function addZ(aString) { <br>
+        aString += "z"; <br>
+        return aString; <br>
+      }<br>
+    </div>
+
+    <h3>Testons la fonction qui ajoute un z</h3>
+
+    <script type="text/javascript">
+      function addZ(aString) {
+        aString += "z";
+        return aString;
+      }
+      var aString = "Vive le jaz";
+      document.write('<h4>Avant l\'appel de la fonction</h4>');
+      document.write('<p>' + aString + '</p>');
+      document.write('<h4>Après l\'appel de la fonction</h4>');
+      document.write('<p>' + addZ(aString) + '</p>');
+    </script>
+
+    <h1>Utiliser la terminologie des fonctions</h1>
+
+    <p>Les programmeurs utilisent des tas de mots qu'il est important de comprendre lorsqu'il s'agit de fonctions. Nous allons employer ces mots de manière intensive.</p>
+
+    <h2>Définir une fonction</h2>
+
+    <p>Lorsqu'une fonction apparaît dans du code JavaScript, elle ne s'exécute pas. Elle est simplement créée, et est disponible pour répondre présent lorsqu'on a besoin d'y faire appel. Le fait de &laquo; poser &raquo; cette sorte de brique de construction s'appelle <em>définir</em> une fonction.</p>
+
+    <p>Vous n'avez pas besoin de définir une fonction dans un programme ou une page Web qu'une seule fois. Si vous le faisiez une seconde fois, cependant, JavaScript ne se plaindrait pas. Il utiliserait simplement la version dont la définition est la plus récente.</p>
+
+    <h2>Définir l'en-tête de la fonction</h2>
+
+    <p>Il s'agit de la partie de la définition de la fonction qui contient le mot-clé <span class="ttype">function</span>, le nom de la fonction et des parenthèses. Par exemple :</p>
+
+    <div class="ttype">
+      function maFonction() <br>
+    </div>
+
+    <h2>Le corps de la fonction</h2>
+
+    <p>Le <em>corps de la fonction</em> est constitué des instructions qui sont placées entre les accolades. Par exemple :</p>
+
+    <div class="ttype">
+      { <br>
+        // corps de la fonction <br>
+      } <br>
+    </div>
+
+    <h1>Appeler une fonction</h1>
+
+    <p>Pour utiliser une fonction, vous l'<em>appelez</em>. Cet appel provoque l'exécution des instructions qui se trouvent dans le corps de la fonction. Par exemple :</p>
+
+    <p class="ttype">maFonction;</p>
+
+    <h2>Définir des paramètres et passer des arguments</h2>
+
+    <p>Les <em>paramètres</em> sont les noms des morceaux de données qui sont fournis à une fonction lorsque vous l'appelez. Les <em>arguments</em> sont les valeurs que vous comuniquez aux fonctions. Lorsqu'une fonction est appelée avec des arguments (d'une manière cohérente avec les paramètres spécifiés pour celle-ci), ceux-ci sont dits être <em>passés</em> à la fonction.</p>
+
+    <p>La syntaxe servant à définir un paramètre se présente ainsi :</p>
+    <p class="ttype">function maFonction(parameter) {}</p>
+    <p>La syntaxe servant à passer un argument lors de l'appel de la fonction est : </p>
+    <p class="ttype">maFonction(monArgument);</p>
+
+    <h2>Renvoyer une valeur</h2>
+
+    <p>En plus de pouvoir accepter des entrées provenant du monde extérieur, les fonctions peuvent aussi renvoyer des valeurs lorsque leur exécution se termine. Dans ce cas, on dit que la fonction <em>renvoie</em> une valeur.</p>
+
+    <p>Pour qu'une fonction communique un résultat au monde extérieur, vous utilisez le mot-clé <em>return</em>. Par exemple :</p>
+    <p class="ttype">return maValeur;</p>
+
+    <h1>Les fonctions, c'est tout bénéfice !</h1>
+
+    <h2>Testons</h2>
+
+    <script type="text/javascript">
+      /**
+      * Ajoute les éléments dans un tableau et renvoie le total
+      * @param {Array.<number>}  numbersToAdd
+      * @return {Number} sum
+      */
+      function addNumbers(numbersToAdd) {
+        var sum = 0;
+        for (oneNumber in numbersToAdd) {
+          sum += numbersToAdd[oneNumber];
+        }
+        return sum;
+      }
+
+      var myNumbers = [2, 3, 4, 5];
+      var myNumbers2 = [5, 7, 3, 5];
+      var myNumbers3 = [7, 3, 5, 2];
+      var sum1 = addNumbers(myNumbers);
+      var sum2 = addNumbers(myNumbers2);
+      var sum3 = addNumbers(myNumbers3);
+
+      document.write(sum1 + "<br>");
+      document.write(sum2 + "<br>");
+      document.write(sum3 + "<br>");
+    </script>
+
+    <div class="apparte">
+      <h2>Documenter JavaScript avec JSDoc</h2>
+      <div class="columns2">
+        <p>Une bonne pratique consiste à toujours documenter votre code JavaScript en utilisant un système standardisé. Le système le plus utilisé, et qui est donc, <em>de facto</em>, un standard, s'appelle JSDoc.</p>
+
+        <p>JSDoc est un langage de balises simple qui peut être inséré dans les fichiers JavaScript. <a href="http://usejsdoc.org/" target="_blank">JSDoc</a> en est actuellement à sa version 3, et il est basé sur le système JavaDoc qui sert à documenter le code écrit dans le langage de programmation Java.</p>
+
+        <p>Une fois que vous avez annoté votre code JavaScript avec JSDoc, vous pouvez utiliser un générateur, par exemple jsdoc-toolkit, pour produire des fichiers de documentation HTML.</p>
+
+        <p>JSDoc place ses balises dans des blocs de commentaires spéciaux. En fait, la seule différence avec le code JavaScript standard est que ces commentaires commence par /** et se terminent par */ (JavaScript se contente, lui d'un seul astérisque au début du commentaire). Cela vous permet donc d'insérer des notes ordinaires, sans que celles-ci soient reprises dans la documentation générée.</p>
+
+        <p>Les balises spéciales de JSDoc se reconnaissent en particulier à la présence du caractère @ devant un mot-clé. Les balises les plus courantes sont listées ci-après :</p>
+
+        <TABLE BORDER="0">
+         <colgroup>
+           <col style="width: 30%; margin: 1%; padding: 1%;">
+           <col style="width: 70%; margin: 1%; padding: 1%;">
+         </colgroup>
+         <TR>
+           <TD> @author </TD>
+           <TD> Nom du développeur </TD>
+         </TR>
+         <TR>
+           <TD> @constructor </TD>
+           <TD> Indique qu'une fonction est un constructeur </TD>
+         </TR>
+         <TR>
+           <TD> @deprecated </TD>
+           <TD> Indique que la méthode est périmée </TD>
+         </TR>
+         <TR>
+           <TD> @exception </TD>
+           <TD> Décrit une exception lancée par une méthode. Synonyme de @throws </TD>
+         </TR>
+         <TR>
+           <TD> @exports </TD>
+           <TD> Spécifie un membre qui est exporté par le module </TD>
+         </TR>
+         <TR>
+           <TD> @param </TD>
+           <TD> Décrit un paramètre de la méthode </TD>
+         </TR>
+         <TR>
+           <TD> @private </TD>
+           <TD> Indique qu'un membre est privé </TD>
+         </TR>
+         <TR>
+           <TD> @return </TD>
+           <TD> Décrit une valeur renvoyée. Synonyme de @returns </TD>
+         </TR>
+         <TR>
+           <TD> @returns </TD>
+           <TD> Voir @return </TD>
+         </TR>
+         <TR>
+           <TD> @see </TD>
+           <TD> Enregistre une association avec un autre objet </TD>
+         </TR>
+         <TR>
+           <TD> @this </TD>
+           <TD> Spécifie les types de l'objet auxquels le mot-clé this fait référence à l'intérieur d'une fonction </TD>
+         </TR>
+         <TR>
+           <TD> @throws </TD>
+           <TD> Synonyme de @exception </TD>
+         </TR>
+         <TR>
+           <TD> @version </TD>
+           <TD> Indique le numéro de version d'une bibliothèque </TD>
+         </TR>
+        </TABLE>
+      </div>
+    </div>
+
+    <h1>Ecrire des fonctions</h1>
+
+    
+
+  </body>
+</html>
