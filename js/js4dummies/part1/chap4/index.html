@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Comprendre les tableaux</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Faire une liste</h1>
+    <p>Considérons les types de listes suivants :</p>
+    <ul id="green-check">
+      <li>Une liste de vos artistes préférés</li>
+      <li>Un programme qui sélectionne et affiche une citation choisie dans une liste chaque fois qu'il est exécuté</li>
+      <li>Une liste d'adresses pour envoyer des cartes de voeux</li>
+      <li>Une liste des dates d'anniversaire des membres de votre famille et de vos amis</li>
+      <li>Une liste de vos cryptomonnaies préférées</li>
+      <li>Une liste de tâches à accomplir</li>
+      <li>Une liste des bonnes résolutions que vous allez prendre pour la nouvelle année</li>
+    </ul>
+
+    <p>Avec des variables comme celles que nous avons rencontrés précédemment vous devriez créer et gérer de multiples dénominations pour arriver à stocker les informations voulues. Par exemple :</p>
+    <div class="ttype">
+      var artist1 = "Alphonse Mucha";</br>
+      var artist2 = "Chiara Bautista";</br>
+      var artist3 = "Claude Monet";</br>
+      var artist4 = "Sandro Botticelli";</br>
+      var artist5 = "Andy Warhol";</br>
+      var artist6 = "Wassily Kadinski";</br>
+      var artist7 = "Vincent Van Gogh";</br>
+      var artist8 = "Paul Klee";</br>
+      var artist9 = "William Blake";</br>
+      var artist10 = "Paul Cézanne";</br>
+      var artist11 = "Diego Rivera";</br>
+      var artist12 = "Salvador Dali";</br>
+      var artist13 = "Egon Schiele";</br>
+      var artist14 = "Pablo Picasso";</br>
+    </div>
+
+    <p>Cette approche pourrait peut-être suffire à court terme, mais elle va très rapidement vous poser bien des problèmes. Supposons ainsi que vous vouliez trier cette liste dans l'ordre alphabétique, et placer chaque artiste dans le nom de variable correspondant à sa position... ça serait une belle galère !</p>
+
+    <p>Heureusement, JavaScript (comme tous les langages de programmation qui se respectent) prend en charge la création de variables contenant des valeurs multiples, ce qu'on appelle des <em>tableaux</em>.</p>
+
+    <p>Les tableaux constituent un moyen permettant d'enregistrer des groupes de donées censées présenter une certaine cohérence à l'intérieur d'une unique variable. Avec eux, vous pouvez créer des listes contenant ausi bien des chaînes que des nombres, des valeurs booléennes, de même que tout autre type de donnée, et même d'autres tableaux !</p>
+
+    <h1>Notions de base sur les tableaux</h1>
+
+    <p>Un tableau contient des <em>éléments de tableau</em>. Un élément de tableau est formé à partir du nom du tableau lui-même, suivi d'un numéro d'indice qui est placé entre des crochets. Ce sont ces valeurs individuelles qui constituent les éléments du tableau. Les tableaux utilisent des nombres (les <em>indices</em>) pour accéder à ces éléments. L'exemple qui suit illustre ces notions :</p>
+
+    <div class="ttype">
+      monTableau[0] = "Bitcoin";</br>
+      monTableau[1] = "Ethereum";</br>
+      monTableau[2] = "Litecoin";</br>
+      monTableau[3] = "Zcash";</br>
+      monTableau[4] = "Waves";</br>
+      monTableau[5] = "Steem";</br>
+      monTableau[6] = "BAT";</br>
+    </div>
+
+    <h2>L'indice de base d'un tableau, c'est 0</h2>
+
+    <p>JavaScript n'a pas de doigts. Par conséquent, il n'a pas besoin de dénombrer les choses en partant de 1. Comme pour le bouton de volume sonore.</p>
+
+    <h2>Les tableaux peuvent contenir n'importe quel type de donnée</h2>
+
+    <p>Chaque élément d'un tableau peut stocker un type de donnée quelconque, mais aussi un autre tableau. Plus largement encore, ces éléments acceptent des fonctions et des objets JavaScript.</p>
+
+    <div class="ttype">
+      item[0] = "Bitcoin"; </br>
+      item[1] = 5251.80; </br>
+      item[2] = 88.21; </br>
+      item[3] = item[1] + item[2]; </br>
+    </div>
+
+    <h1>Créer des tableaux</h1>
+
+    <p>JavaScript fournit deux méthodes pour la création de nouveaux tableaux :</p>
+    <ul>
+      <li>le mot-clé <span class="ttype">new</span>;</li>
+      <li>la notation littérale</li>
+    </ul>
+
+    <h2>Utiliser le mot-clé new</h2>
+
+    <p>Cette méthode utilise le mot-clé <span class="ttype">new</span> placé devant <span class="ttype">Array</span> (tableau) pour créer un nouveau tableau et y ajouter des valeurs, comme ceci :</p>
+
+    <p class="ttype">var nomsCryptos = new Array("Bitcoin", "Ethereum", "Litecoin");</p>
+
+    <p>Cette méthode de création est parfaitement valable, et vous la rencontrerez forcément au cours de votre carrière de programmeur.</p>
+
+    <p class="warning">De nombreux experts en JavaScript déconseillent pourtant l'utilisation du mot-clé <span class="ttype">new</span>. Le principal problème avec cette méthode, c'est tout simplement d'oublier de spécifier ce mot-clé, ce qui peut changer dramatiquement la façon dont votre programme se comporte.</p>
+
+    <h2>La méthode littérale</h2>
+
+    <p>Une manière plus simple et plus sûre pour créer des tableaux consiste à employer ce qu'on appelle la méthode littérale de notation.</p>
+
+    <p class="ttype">var mesCryptosWirex = ["BTC", "ETH", "LTC", "XRP", "DAI", "WAVES", "NANO"];</p>
+
+    <h1>Remplir les tableaux</h1>
+
+    <p>Vous pouvez ajouter des valeurs à un tableau au moment de sa création, ou simplement effectuer cette création, puis ajouter ultérieurement les éléments en fonction de vos besoins. En fait, le processus est le même que pour la création d'une variable quelconque.</p>
+
+    <div class="ttype">
+      var myJazz = []; </br>
+      myJazz[0] = "Duke Ellington"; </br>
+      myJazz[1] = "Charlie Parker"; </br>
+      myJazz[2] = "Miles Davis"; </br>
+    </div>
+
+    <p>Il n'est pas obligatoire d'ajouter les éléments dans l'ordre des indices. En d'autres termes, il est parfaitement légal en JavaScript de créer un élément ayant une position quelconque dans le tableau. En repartant de l'exemple précédent, nous pourrions tout à fait poursuivre la série en écrivant :</p>
+
+    <p class="ttype">myJazz[99] = "John Coltrane";</p>
+
+    <h1>Comprendre les tableaux multidimensionnels</h1>
+
+    <p>Vous pouvez placer des tableaux dans d'autres tableaux. Mais l'histoire ne s'arrête pas là. JavaScript vous permet aussi de créer des tableaux de tableaux, ou encore des tableaux de tableaux de tableaux, et ainsi de suite. C'est ce qu'on appelle des <em>tableaux multidimensionnels</em>.</p>
+
+    <div class="ttype">
+      var meilleursAlbumsParGenre = []; </br>
+      meilleursAlbumsParGenre[0] = "Country"; </br>
+      meilleursAlbumsParGenre[0][0] = "Johny Cash: Live at Folsom Prison"; </br>
+      meilleursAlbumsParGenre[0][1] = "Patsy Cline: Sentimentally Yours"; </br>
+      meilleursAlbumsParGenre[0][2] = "Hank Williams: I'm Blue Inside"; </br>
+      meilleursAlbumsParGenre[1] = "Rock"; </br>
+      meilleursAlbumsParGenre[1][0] = "T-Rex: Slider"; </br>
+      meilleursAlbumsParGenre[1][1] = "Nirvana: Nevermind"; </br>
+      meilleursAlbumsParGenre[1][2] = "Lou Reed: Transformer"; </br>
+      meilleursAlbumsParGenre[2] = "Punk"; </br>
+      meilleursAlbumsParGenre[2][0] = "Flipper: Generic"; </br>
+      meilleursAlbumsParGenre[2][1] = "The Dead Milkmen: Big Lizard in my Backyard"; </br>
+      meilleursAlbumsParGenre[2][2] = "Patti Smith: Easter"; </br>
+    </div>
+
+    <h1>Accéder aux éléments d'un tableau</h1>
+
+    <p>Vous pouvez accéder aux éléments d'un tableau exactement de la même manière que vous définissez celui-ci, autrement dit en spécifiant un indice placé entre les crochets droits. Par exemple, l'instruction suivante accède à l'élément de rang 2 d'un tableau appelé <span class="ttype">monTableau;</span> :</p>
+    <p class="ttype">monTableau[2];</p>
+
+    <h3>Méthodes pour les tableaux</h3>
+
+    <TABLE BORDER="0">
+      <CAPTION> Méthodes dédiées aux tableaux dans JavaScript </CAPTION>
+      <colgroup>
+        <col style="width: 20%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="background-color: #DEB887;">
+      </colgroup>
+      <TR>
+        <TH> Méthode </TH>
+        <TH> Retour </TH>
+      </TR>
+      <TR>
+        <TD class="meth"> concat() </TD>
+        <TD class="retour"> Un nouveau tableau formé du tableau courant concaténé avec un ou plusieurs autres tableaux, et/ou valeurs. </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> every() </TD>
+        <TD class="retour"> Revoie <span class="ttype">true</span> si chaque élément du tableau satisfait aux conditions de la fonction de test spécifiée.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> filter() </TD>
+        <TD class="retour"> Un nouveau tableau contenant tous les éléments du tableau courant testés comme valant <span class="ttype">true</span> par la fonction spécifiée.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> forEach() </TD>
+        <TD class="retour"> Exécute la fonction spécifiée pour chaque élément du tableau.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> indexOf() </TD>
+        <TD class="retour"> La première occurrence de la valeur spécifiée à l'intérieur du tableau. Renvoie -1 si la valeur n'est pas trouvée.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> join() </TD>
+        <TD class="retour"> Joint tous les éléments du tableau en une seule chaîne.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> lastIndexOf() </TD>
+        <TD class="retour"> La dernière occurrence de la valeur spécifiée à l'intérieur du tableau. Renvoie -1 si la valeur n'est pas trouvée.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> map() </TD>
+        <TD class="retour"> Un nouveau tableau contenant le résultat produit sur chaque élément du tableau courant par la fonction spécifiée.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> pop() </TD>
+        <TD class="retour"> Supprime le dernier élément d'un tableau.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> push() </TD>
+        <TD class="retour"> Ajoute de nouveaux éléments à la fin d'un tableau.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> reduce() </TD>
+        <TD class="retour"> Réduit deux valeurs d'un tableau en une seule valeur en leur appliquant la fonction spécifiée (de gauche à droite).</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> reduceRight() </TD>
+        <TD class="retour"> Réduit deux valeurs d'un tableau en une seule valeur en leur appliquant la fonction spécifiée (de droite à gauche).</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> reverse() </TD>
+        <TD class="retour"> Inverse l'ordre des éléments d'un tableau.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> shift() </TD>
+        <TD class="retour"> Supprime le premier élément d'un tableau et retourne cet élément, la longueur du tableau étant modifiée en conséquence.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> slice() </TD>
+        <TD class="retour"> Sélectionne une partie d'un tableau et retourne le résultat dans un nouveau tableau.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> some() </TD>
+        <TD class="retour"> Retourne <span class="ttype">true</span> si un ou plusieurs éléments du tableau courant satisfont à la fonction de test spécifiée.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> sort() </TD>
+        <TD class="retour"> Retourne un tableau une fois les éléments du tableau courant triés (le tri par défaut est alphabétique ascendant).</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> splice() </TD>
+        <TD class="retour"> Retourne un nouveau tableau formé des éléments qui ont été ajoutés ou supprimés d'un tableau donné.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> toString() </TD>
+        <TD class="retour"> Convertit un tableau en chaîne de caractères.</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> unShift() </TD>
+        <TD class="retour"> Retourne un nouveau tableau avec une nouvelle longueur par ajout d'un ou plusieurs éléments.</TD>
+      </TR>
+    </TABLE>
+
+    <h3>Application</h3>
+
+    <script type="text/javascript">
+      var cryptosWirex = ["Bitcoin", "Ethereum", "Litecoin", "XRP", "Waves", "Nano", "Dai", "Wollo"];
+      var prices = [' $5251.80', ' $180.53', ' $0.355494', ' $88.21', ' $2.84', ' $1.66', ' $0.958922', ' $0.029553'];
+      var coinMarketCap = [
+        "https://coinmarketcap.com/currencies/bitcoin/",
+        "https://coinmarketcap.com/currencies/ethereum/",
+        "https://coinmarketcap.com/currencies/litecoin/",
+        "https://coinmarketcap.com/currencies/ripple/",
+        "https://coinmarketcap.com/currencies/waves/",
+        "https://coinmarketcap.com/currencies/nano/",
+        "https://coinmarketcap.com/currencies/dai/",
+        "https://coinmarketcap.com/currencies/wollo/"
+      ];
+      document.write('<h4>Cryptos dispos sur le wallet <a href="https://bit.ly/2QgCLRH" target="_blank">Wirex</a></h4>')
+      document.write('<ul>');
+      for (var i = 0; i < prices.length; i++) {
+        document.write('<li>'+ '<a href="' + coinMarketCap[i] + '" target="_blank">' + cryptosWirex[i].concat(prices[i])+'</a></li>');
+      }
+      document.write('</ul>');
+    </script>
+
+  </body>
+</html>
