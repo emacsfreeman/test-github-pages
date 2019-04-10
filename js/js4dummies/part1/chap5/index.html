@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Travailler avec les opérateurs, les expressions et les instructions</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Exprimez-vous</h1>
+
+    <p>Une <em>expression</em> est un morceau de code qui fournit une valeur. Les expressions peuvent servir à affecter une valeur à une variable, ou simplement avoir une valeur. Par exemple, les deux expressions suivantes sont parfaitement valides :</p>
+    <div class="ttype">
+      1 + 1 </br>
+      a = 1;</br>
+    </div>
+
+    <p>Les expressions peuvent être très courtes et très simples, comme dans l'exemple ci-dessus, ou être extrêmement complexes. Les morceaux de données qui servent à former une expression (comme le chiffre 1 ou la lettre a dans l'exemple précédent) sont appelés des <em>opérandes</em>.</p>
+
+    <h1>Bonjour, opérateur</h1>
+
+    <p>Un <em>opérateur</em>, c'est ce qui permet aux expressions de faire leur travail. Comme leur nom l'indique, les opérateurs opèrent sur les données pour fournir différents résultats. Dans les exemples ci-dessus, les signes + ou = sont des opérateurs.</p>
+
+    <h2>Priorité des opérateurs</h2>
+
+    <p>Une même expression contient bien souvent plusieurs opérateurs. Prenons un exemple :</p>
+
+    <p class="ttype">a = 1 + 2 * 3 / 4;</p>
+
+    <p>Selon l'ordre dans lequel les calculs sont effectués, la valeur finale pourrait être l'une des trois suivantes :</p>
+
+    <div class="ttype">
+      a = 1.75 </br>
+      a = 2.5 </br>
+      a = 2.25 </br>
+    </div>
+
+    <p>Et la bonne réponse est ... 2.5 ! L'ordre de priorité est le même qu'en maths !</p>
+
+    <TABLE BORDER="0">
+      <CAPTION> Méthodes dédiées aux tableaux dans JavaScript </CAPTION>
+      <colgroup>
+        <col style="width: 17%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="width: 28%; background-color: #DEB887;">
+        <col style="width: 17%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="width: 17%; background-color: #DEB887;">
+        <col style="width: 21%; font-family: 'sans serif'; background-color: #FFF8DC;">
+      </colgroup>
+      <TR>
+        <TH> Opérateur </TH>
+        <TH> Utilisation </TH>
+        <TH> Associativité de l'opérateur </TH>
+        <TH> Priorité </TH>
+        <TH> Exemple </TH>
+      </TR>
+      <TR>
+        <TD class="meth"> (...) </TD>
+        <TD class="retour"> Regroupement. </TD>
+        <TD class="meth"> n/a </TD>
+        <TD class="retour"> 0 (priorité la plus élevée). </TD>
+        <TD class="meth"> (1 + 3) </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> .. . .. </TD>
+        <TD class="retour"> Accès aux propriétés de l'opérateur. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 1 </TD>
+        <TD class="meth"> maVoiture.color </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> [..] </TD>
+        <TD class="retour"> Accès à un tableau. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 1 </TD>
+        <TD class="meth"> chosesAFaire[4] </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> new ...() </TD>
+        <TD class="retour"> Crée un objet (avec une liste d'arguments). </TD>
+        <TD class="meth"> n/a </TD>
+        <TD class="retour"> 1 </TD>
+        <TD class="meth"> new Voiture("rouge") </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> function ...() </TD>
+        <TD class="retour"> Appel de fonction. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 2 </TD>
+        <TD class="meth"> function addNumbers(1,2) </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> new ... </TD>
+        <TD class="retour"> Crée un objet (sans liste d'arguments). </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 2 </TD>
+        <TD class="meth"> new Voiture </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...++ </TD>
+        <TD class="retour"> Incrémentation postfixée. </TD>
+        <TD class="meth"> n/a </TD>
+        <TD class="retour"> 3 </TD>
+        <TD class="meth"> nombre++ </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...-- </TD>
+        <TD class="retour"> Décrémentation postfixée. </TD>
+        <TD class="meth"> n/a </TD>
+        <TD class="retour"> 3 </TD>
+        <TD class="meth"> nombre-- </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> !... </TD>
+        <TD class="retour"> Négation logique. </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 4 </TD>
+        <TD class="meth"> !maValeur </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ~... </TD>
+        <TD class="retour"> Négation au niveau du bit. </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 4 </TD>
+        <TD class="meth"> ~maValeur </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> -... </TD>
+        <TD class="retour"> Négation. </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 4 </TD>
+        <TD class="meth"> -unNombre </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> typeof... </TD>
+        <TD class="retour"> Type de l'élément. </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 4 </TD>
+        <TD class="meth"> typeof maVar </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> void... </TD>
+        <TD class="retour"> Vide. </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 4 </TD>
+        <TD class="meth"> void(0) </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> delete... </TD>
+        <TD class="retour"> Suppression. </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 4 </TD>
+        <TD class="meth"> delete objet propriété </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...*... </TD>
+        <TD class="retour"> Multiplication. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 5 </TD>
+        <TD class="meth"> result = 2 * 3 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> .../... </TD>
+        <TD class="retour"> Division. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 5 </TD>
+        <TD class="meth"> result = 3 / 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...%... </TD>
+        <TD class="retour"> Modulo (reste de la division euclidienne). </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 5 </TD>
+        <TD class="meth"> result = 7 % 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...+... </TD>
+        <TD class="retour"> Addition. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 6 </TD>
+        <TD class="meth"> result = 2 + 3 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...-... </TD>
+        <TD class="retour"> Soustraction. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 6 </TD>
+        <TD class="meth"> result = 3 - 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...<<... </TD>
+        <TD class="retour"> Décalage de bit à gauche. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 7 </TD>
+        <TD class="meth"> result = 3 << 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...>>... </TD>
+        <TD class="retour"> Décalage de bit à droite. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 7 </TD>
+        <TD class="meth"> result = 3 >> 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...>>>... </TD>
+        <TD class="retour"> Décalage de bit à gauche. </TD>
+        <TD class="meth"> de gauche à droite (non signé) </TD>
+        <TD class="retour"> 7 </TD>
+        <TD class="meth"> result = 3 >>> 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...<... </TD>
+        <TD class="retour"> Plus petit que. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 8 </TD>
+        <TD class="meth"> 2 < 3 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...<=... </TD>
+        <TD class="retour"> Plus petit ou égal à. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 8 </TD>
+        <TD class="meth"> 2 <= 3 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...>... </TD>
+        <TD class="retour"> Plus grand que. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 8 </TD>
+        <TD class="meth"> 3 > 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...>=... </TD>
+        <TD class="retour"> Plus grand ou égal à. </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 8 </TD>
+        <TD class="meth"> 3 >= 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...in... </TD>
+        <TD class="retour"> dans </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 8 </TD>
+        <TD class="meth"> valeur in valeurs </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...instanceof.. </TD>
+        <TD class="retour"> Instance de </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 8 </TD>
+        <TD class="meth"> maVoiture instanceof Voiture </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...==... </TD>
+        <TD class="retour"> égalité </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 9 </TD>
+        <TD class="meth"> 3 == "3" // true </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...!=... </TD>
+        <TD class="retour"> inégalité </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 9 </TD>
+        <TD class="meth"> 3 != "3" // false </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...===... </TD>
+        <TD class="retour"> égalité stricte </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 9 </TD>
+        <TD class="meth"> 3 === "3" // false </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...!==... </TD>
+        <TD class="retour"> inégalité stricte </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 9 </TD>
+        <TD class="meth"> 3 !== "3" // true </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...&... </TD>
+        <TD class="retour"> et (and) au niveau du bit </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 10 </TD>
+        <TD class="meth"> result = a & b </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...^... </TD>
+        <TD class="retour"> ou exclusif (xor) au niveau du bit </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 11 </TD>
+        <TD class="meth"> result = a ^ b </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...|... </TD>
+        <TD class="retour"> ou (or) au niveau du bit </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 12 </TD>
+        <TD class="meth"> a | b </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...&&... </TD>
+        <TD class="retour"> et (and) logique </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 13 </TD>
+        <TD class="meth"> a && b </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...||... </TD>
+        <TD class="retour"> ou (or) logique </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 14 </TD>
+        <TD class="meth"> a || b </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...?... </TD>
+        <TD class="retour"> conditionnelle </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 15 </TD>
+        <TD class="meth"> a ? 3 : 7 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a = 3 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...+=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a += 3 // idem que a = a + 3</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...-=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a -= 3 // idem que a = a - 3</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...*=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a *= 3 // idem que a = a * 3</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> .../=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a /= 3 // idem que a = a / 3</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...%=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a %= 3 // idem que a = a % 3</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...<<=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a <<= 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...>>=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a >>= 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...>>>=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a >>>= 2 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...&=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a &= 3 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...^=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a ^= 3 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...|=... </TD>
+        <TD class="retour"> affectation </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 16 </TD>
+        <TD class="meth"> a |= 3 </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> yield... </TD>
+        <TD class="retour"> expression renvoyant un objet itérable </TD>
+        <TD class="meth"> de droite à gauche </TD>
+        <TD class="retour"> 17 </TD>
+        <TD class="meth"> yield[expression] </TD>
+      </TR>
+      <TR>
+        <TD class="meth"> ...,... </TD>
+        <TD class="retour"> virgule/séquence </TD>
+        <TD class="meth"> de gauche à droite </TD>
+        <TD class="retour"> 18 </TD>
+        <TD class="meth"> a + b, c + d </TD>
+      </TR>
+    </TABLE>
+
+    <p>L'opérateur qui porte le plus petit numéro est dit avoir la plus haute priorité. Cela peut sembler étrange, mais si vous vous figurez être la première personne d'une file d'attente (celle qui a le rang 0 en l'occurrence), et donc que vous allez être le premier à recevoir votre sandwich ou café, vous comprendrez mieux ce qui se passe.</p>
+
+    <p>Lorsqu'une expression contient deux opérateurs, ou plus, ayant la même priorité, ceux-ci sont évalués selon leur <em>associativité</em>. Cette associativité détermine si les opérateurs sont évalués en allant de la gauche vers la droite, ou de la droite vers la gauche.</p>
+
+    <h1>Utiliser des parenthèses</h1>
+
+    <p>Les parenthèses représentent l'opérateur qui a le plus haut niveau de priorité. Dans la plupart des cas, vous pouvez ignorer les règles décrites dans le tableau ci-dessus en regroupant simplement les opérations à l'aide de parenthèses. Par exemple, l'expression proposée vers le début <span class="ttype">(a + 1 + 2 * 3 / 4);</span> pourrait être clarifiée de différentes manières</p>
+
+    <div class="ttype">
+      a = (1 + 2) * (3 / 4); // résultat : 2.25 </br>
+      a = (1 + (2 * 3)) / 4); // résultat : 1.75 </br>
+      a = ((1 + 2) * 3) / 4; // résultat : 2.25 </br>
+      a = 1 + ((2 * 3) / 4); // résultat : 2.5 </br>
+    </div>
+
+    <h1>Types d'opérateurs</h1>
+
+    <h2>Opérateurs d'affectation</h2>
+
+    <p>Un <span class="ttype">opérateur d'affectation</span>, comme son nom l'indique, affecte la valeur de l'opérande placé à droite de gauche. Exemple : </p>
+
+    <p class="ttype">a = 5;</p>
+
+    <p>Une fois cette expression exécutée, la variable <span class="ttype">a</span> possède comme valeur 5. Mais vous pouvez également enchaîner plusieurs opérateurs d'affectation afin de définir un contenu identique pour plusieurs variables dans une même instruction, comme dans cet exemple :</p>
+
+    <p class="ttype">a = b = c = 5;</p>
+
+    <p>Du fait que l'associativité de cet opérateur s'établit de la droite vers
+      la gauche, 5 est d'abord assigné à la variable <span class="ttype">c</span>,
+      puis la valeur de <span class="ttype">c</span> est recopiée dans
+      <span class="ttype">b</span>, et enfin le contenu de
+      <span class="ttype">b</span> est affecté à <span class="ttype">a</span>.
+      Les trois variables <span class="ttype">a</span>,
+      <span class="ttype">b</span> et enfin le contenu de <span class="ttype">b</span>
+     est affecté à <span class="ttype">a</span>. Les trois variables
+     <span class="ttype">a</span>, <span class="ttype">b</span> et
+     <span class="ttype">c</span> possèdent toutes la même valeur, 5.</p>
+
+     <p>Essayez maintenant de deviner la valeur finale de <span class="ttype">a</span>
+     une fois ces expressions évaluées :</p>
+
+     <div class="ttype">
+       var b = 1;</br>
+       var a = b += c = 5;</br>
+     </div>
+
+     <p>Si vous ne trouvez pas la réponse, ouvrez la console JavaScript et testez par vous-même !</p>
+
+     <h2>Opérateurs de comparaison</h2>
+
+     <p>Les <em>opérateurs de comparaison</em> testent l'égalité, ou la non-égalité, entre les opérandes.
+       Ils retournent ensuite une valeur <span class="ttype">true</span> (vrai)
+     ou <span class="ttype">false</span> (faux).</p>
+
+     <TABLE BORDER="0">
+       <CAPTION> Les opérateurs de comparaison de JavaScript </CAPTION>
+       <colgroup>
+         <col style="width: 15%; font-family: 'sans serif'; background-color: #FFF8DC;">
+         <col style="width: 42%; background-color: #DEB887;">
+         <col style="width: 43%; font-family: 'sans serif'; background-color: #FFF8DC;">
+       </colgroup>
+       <TR>
+         <TH> Opérateur </TH>
+         <TH> Description </TH>
+         <TH> Exemple </TH>
+       </TR>
+       <TR>
+         <TD class="meth"> == </TD>
+         <TD class="retour"> Egalité </TD>
+         <TD class="meth"> 3 == "3" // true </TD>
+       </TR>
+       <TR>
+         <TD class="meth"> != </TD>
+         <TD class="retour"> Inégalité </TD>
+         <TD class="meth"> 3 != "3" // false </TD>
+       </TR>
+       <TR>
+         <TD class="meth"> === </TD>
+         <TD class="retour"> Egalité stricte </TD>
+         <TD class="meth"> 3 === "3" // false </TD>
+       </TR>
+       <TR>
+         <TD class="meth"> !== </TD>
+         <TD class="retour"> Inégalité stricte </TD>
+         <TD class="meth"> 3 !== "3" // true </TD>
+       </TR>
+       <TR>
+         <TD class="meth"> > </TD>
+         <TD class="retour"> Plus grand que </TD>
+         <TD class="meth"> 3 > 1 // true </TD>
+       </TR>
+       <TR>
+         <TD class="meth"> >= </TD>
+         <TD class="retour"> Plus grand que ou égal à </TD>
+         <TD class="meth"> 3 >= 1 // true </TD>
+       </TR>
+       <TR>
+         <TD class="meth"> < </TD>
+         <TD class="retour"> Plus petit que </TD>
+         <TD class="meth"> 3 < 15 // true </TD>
+       </TR>
+       <TR>
+         <TD class="meth"> <= </TD>
+         <TD class="retour"> Plus petit que ou égal à </TD>
+         <TD class="meth"> 3 <= 15 // true </TD>
+       </TR>
+    </TABLE>
+
+    <h2>Opérateurs arithmétiques</h2>
+
+    <p>Les <em>opérateurs arithmétiques</em> effectuent des calculs mathématiques
+      sur leurs opérandes.</p>
+
+      <TABLE BORDER="0">
+        <CAPTION> Les opérateurs arithmétiques de JavaScript </CAPTION>
+        <colgroup>
+          <col style="width: 15%; font-family: 'sans serif'; background-color: #FFF8DC;">
+          <col style="width: 42%; background-color: #DEB887;">
+          <col style="width: 43%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        </colgroup>
+        <TR>
+          <TH> Opérateur </TH>
+          <TH> Description </TH>
+          <TH> Exemple </TH>
+        </TR>
+        <TR>
+          <TD class="meth"> + </TD>
+          <TD class="retour"> Addition </TD>
+          <TD class="meth"> a = 1 + 1 </TD>
+        </TR>
+        <TR>
+          <TD class="meth"> - </TD>
+          <TD class="retour"> Soustraction </TD>
+          <TD class="meth"> a = 10 - 1 </TD>
+        </TR>
+        <TR>
+          <TD class="meth"> * </TD>
+          <TD class="retour"> Multiplication </TD>
+          <TD class="meth"> a = 2 * 2 </TD>
+        </TR>
+        <TR>
+          <TD class="meth"> / </TD>
+          <TD class="retour"> Division </TD>
+          <TD class="meth"> a = 8 / 2 </TD>
+        </TR>
+        <TR>
+          <TD class="meth"> % </TD>
+          <TD class="retour"> Modulo </TD>
+          <TD class="meth"> 7 % 5 </TD>
+        </TR>
+        <TR>
+          <TD class="meth"> ++ </TD>
+          <TD class="retour"> Incrémentation préfixée </TD>
+          <TD class="meth"> a = ++b </TD>
+        </TR>
+        <TR>
+          <TD class="meth"> ++ </TD>
+          <TD class="retour"> Incrémentation postfixée </TD>
+          <TD class="meth"> a = b++ </TD>
+        </TR>
+        <TR>
+          <TD class="meth"> -- </TD>
+          <TD class="retour"> Décrémentation préfixée </TD>
+          <TD class="meth"> a = --b </TD>
+        </TR>
+        <TR>
+          <TD class="meth"> -- </TD>
+          <TD class="retour"> Décrémentation postfixée </TD>
+          <TD class="meth"> a = b-- </TD>
+        </TR>
+     </TABLE>
+
+     <h3>Application</h3>
+
+     <h4>Jeu de l'anniversaire dévoilé</h4>
+
+     <p>
+       <ul>
+         <li>Entrez le nombre 7</li>
+         <li>Multipliez par le jour de votre naissance</li>
+         <li>Soustrayez 1</li>
+         <li>Multipliez par 13</li>
+         <li>Ajoutez le mois de votre naissance</li>
+         <li>Ajoutez 3</li>
+         <li>Multipliez par 11</li>
+         <li>Soustrayez le jour de votre naissance</li>
+         <li>Soustrayez le mois de votre naissance</li>
+         <li>Divisez par 10</li>
+         <li>Ajoutez 11</li>
+         <li>Divisez par 100</li>
+       </ul>
+     </p>
+     <!--
+     <script type="text/javascript">
+       var numberSeven = Number(prompt('Entrez le nombre 7'));
+       var birthDay = Number(prompt('Entrez le jour de votre naissance'));
+       var calculation = numberSeven * birthDay;
+       calculation -= 1;
+       calculation *= 13;
+       var birhtMonth = Number(prompt('Entrez le mois de votre naissance'));
+       calculation += birhtMonth;
+       calculation *= 11;
+       calculation -= birthDay;
+       calculation -= birhtMonth;
+       calculation /= 10;
+       calculation += 11;
+       calculation /= 100;
+
+       document.write("Voici votre date d'anniversaire : " + calculation);
+     </script>
+   -->
+
+     <h2>Opérateur de chaîne</h2>
+
+     <p>L'opérateur chaîne effectue des opérations en utilisant deux chaînes de caractères.
+       Lorsqu'il est utilisé avec des chaînes, l'opérateur + devient <em>l'opérateur de concaténation</em>.
+     Il sert alors à fusionner deux chaînes en une seule, en les mettant bout à bout.
+     Notez que, dans ce cas, aucune espace n'est ajoutée. Il est donc très courant
+     de voir des instructions comme celle qui suit, où des chaînes ne contenant rien
+     d'autre qu'une espace blanche sont concaténées avec d'autres de manière à effectuer
+     une séparation pour que la phrase soit cohérente : </p>
+
+     <p class="ttype">var salut = "Bonjour, " + Prenom + ". Je suis" + " " + Humeur + " de vous voir.";</p>
+
+     <h2>Opérateurs au niveau du bit</h2>
+
+     <p>Les <em>opérateurs au niveau du bit</em> traitent les opérandes comme des
+       représentations binaires signées sur 32 bits dans le format dit de
+       complément à 2. </p>
+
+       <TABLE BORDER="0">
+         <CAPTION> Les opérateurs au niveau du bit de JavaScript </CAPTION>
+         <colgroup>
+           <col style="width: 25%; font-family: 'sans serif'; background-color: #FFF8DC;">
+           <col style="width: 20%; background-color: #DEB887;">
+           <col style="width: 55%; font-family: 'sans serif'; background-color: #FFF8DC;">
+         </colgroup>
+         <TR>
+           <TH> Opérateur binaire</TH>
+           <TH> Utilisation </TH>
+           <TH> Description </TH>
+         </TR>
+         <TR>
+           <TD class="meth"> AND </TD>
+           <TD class="retour"> a & b </TD>
+           <TD class="meth"> Renvoie un 1 pour chaque position où les bits correspondants des deux opérandes sont égaux à 1 </TD>
+         </TR>
+         <TR>
+           <TD class="meth"> OR </TD>
+           <TD class="retour"> a | b </TD>
+           <TD class="meth"> Renvoie un 1 pour chaque position où les bits correspondants de l'un au moins des deux opérandes sont égaux à 1 </TD>
+         </TR>
+         <TR>
+           <TD class="meth"> XOR </TD>
+           <TD class="retour"> a ^ b </TD>
+           <TD class="meth"> Renvoie un 1 pour chaque position où les bits correspondants de l'un des deux opérandes, mais pas des deux, sont égaux à 1 </TD>
+         </TR>
+         <TR>
+           <TD class="meth"> NOT </TD>
+           <TD class="retour"> ~a </TD>
+           <TD class="meth"> Inverse les bits de son opérande </TD>
+         </TR>
+         <TR>
+           <TD class="meth"> Décalage à gauche </TD>
+           <TD class="retour"> a << b </TD>
+           <TD class="meth"> Décale a en représentation binaire de b (< 32) bits vers la gauche, les bits perdus étant éliminés </TD>
+         </TR>
+         <TR>
+           <TD class="meth"> Décalage à droite avec propagation de signe </TD>
+           <TD class="retour"> a >> b </TD>
+           <TD class="meth"> Décale a en représentation binaire de b (< 32) bits vers la droite, les bits perdus étant éliminés </TD>
+         </TR>
+         <TR>
+           <TD class="meth"> Décalage à droite avec remplissage par des 0 </TD>
+           <TD class="retour"> a >>> b </TD>
+           <TD class="meth"> Décale a en représentation binaire de b (< 32) bits vers la droite, les bits perdus sur la gauche étant remplacés par des 0 </TD>
+         </TR>
+      </TABLE>
+
+      <h2>Opérateurs logiques</h2>
+
+      <p>Les <em>opérateurs logiques</em> évaluent une expression (également logique !) comme étant vraie ou fausse. Il en existe trois, qui sont décrits dans le tableau ci-dessous :</p>
+
+      <TABLE BORDER="0">
+        <CAPTION> Les opérateurs logiques </CAPTION>
+        <colgroup>
+          <col style="width: 20%; font-family: 'sans serif'; background-color: #FFF8DC;">
+          <col style="width: 20%; background-color: #DEB887;">
+          <col style="width: 60%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        </colgroup>
+        <TR>
+          <TH> Opérateur</TH>
+          <TH> Signification </TH>
+          <TH> Description </TH>
+        </TR>
+        <TR>
+          <TD class="meth"> && </TD>
+          <TD class="retour"> || </TD>
+          <TD class="meth"> Renvoie <span class="ttype">true</span> (vrai) si les deux opérandes sont <span class="ttype">true</span>. Sinon, retourne <span class="ttype">false</span>.</TD>
+        </TR>
+        <TR>
+          <TD class="meth"> || </TD>
+          <TD class="retour"> OR (ou) </TD>
+          <TD class="meth"> Renvoie <span class="ttype">false</span> (faux) si les deux opérandes sont <span class="ttype">false</span>. Sinon, renvoie <span class="ttype">true</span>.</TD>
+        </TR>
+        <TR>
+          <TD class="meth"> ! </TD>
+          <TD class="retour"> Not (non) </TD>
+          <TD class="meth"> Inverse la valeur logique d'une unique opérande.</TD>
+        </TR>
+     </TABLE>
+
+     <h1>Opérateurs spéciaux</h1>
+
+     <h2>Opérateur conditionnel</h2>
+
+     <p>L'<em>opérateur conditonnel</em> (également appelé <em>opérateur ternaire</em>) utilise trois opérandes. Il évalue une valeur logique, puis renvoie une valeur basée sur le résultat vrai ou faux de l'expression. Il s'agit du seul opérateur qui nécessite trois opérandes. Par exemple :</p>
+
+     <p class="ttype"> var estPlusGrandQueDix = (valeur > 10) ? "plus grand que 10" : "pas plus grand que 10";</p>
+
+     <h2>Opérateur virgule</h2>
+
+     <p>L'<em>opérateur virgule</em> évalue deux opérandes et renvoie la valeur du second. Il est le plus souvent utilisé pour réaliser des affectations multiples, ou encore d'autres opérations à l'intérieur de boucles. Il peut également servir de raccourci pour initialiser des variables. Par exemple :</p>
+
+     <p class="ttype">var a = 10 , b = 0;</p>
+
+     <p>Du fait que la virgule a le plus bas niveau de priorité parmi tous les opérateurs, ses opérateurs sont toujours évalués séparément.</p>
+
+     <h2>Opérateur de suppression</h2>
+
+     <p>L'<em>opérateur de suppression</em> (<span class="ttype">delete</span>) retire une propriété d'un objet, ou un élément d'un tableau.</p>
+
+     <p class="warning">Lorsque vous utilisez cet opérateur pour supprimer un élément d'un tableau, la longueur de ce tableau ne change pas. L'élément qui a été enlevé prendra simplement la valeur <span class="ttype">undefined</span> (non défini).</p>
+
+     <div class="ttype">
+       var cryptos = ["BAT", "Zcash", "Neo", "EOS", "NEM"]; </br>
+       console.log(cryptos[4]); // renvoie "NEM"; </br>
+       delete cryptos[4]; </br>
+       console.log(cryptos[4]); // renvoie "undefined" </br>
+     </div>
+
+     <h2>Opérateur in</h2>
+
+     <p>L'<em>opérateur</em> <span class="ttype">in</span> (dans) renvoie vrai (<span class="ttype">true</span>) si la valeur spécifiée existe dans un tableau ou dans un objet.</p>
+
+     <div class="ttype">
+       var cryptos = ["BAT", "Zcash", "Neo", "EOS", "NEM"]; </br>
+       if (4 in cryptos) { console.log("Il est bien là !"); }</br>
+     </div>
+
+    <h2>Opérateur instanceof</h2>
+
+    <p>L'<em>opérateur</em> <span class="ttype">instanceof</span> renvoie <span class="ttype">true</span> si l'objet que vous spécifiez est bien du type demandé.</p>
+
+    <div class="ttype">
+      var maChaine = new String(); </br>
+      if (maChaine instanceof String) { </br>
+        console.log("Mais oui, c'est une chaîne !"); </br>
+      }</br>
+    </div>
+
+    <h2>Opérateur new</h2>
+
+    <p>L'<em>opérateur</em> <span class="ttype">new</span> crée une instance d'un objet.</p>
+
+    <div class="ttype">
+      var today = new Date(); </br>
+      var bird = new Animal(); </br>
+      var marguerite = new Fleur(); </br>
+    </div>
+
+    <h2>Opérateur this</h2>
+
+    <p>L'<em>opérateur</em> <span class="ttype">this</span> fait référence à l'objet courant. Il est fréquemment utilisé pour retrouver les propriétés d'un objet sans avoir à saisir le nom de celui-ci.</p>
+
+    <h2>Opérateur typeof</h2>
+
+    <p>L'<em>opérateur</em> <span class="ttype">typeof</span> renvoie une chaîne contenant le type de l'opérande</p>
+
+    <div class="ttype">
+      var maPetiteEntreprise = "ne connaît pas la crise"; </br>
+      console.log(typeof maPetiteEntreprise); // renvoie "string" </br>
+    </div>
+
+    <h2>Opérateur void</h2>
+
+    <p>L'<em>opérateur</em> <span class="ttype">void</span> (vide) évalue l'expression dans l'opérande sans retourner de valeur. L'usage le plus fréquent de cet opérateur se voit dans des documents HTML lorsqu'un lien est nécessaire, mais que le créateur de ce lien veut en annuler le comportement par défaut <em>via</em> JavaScript.</p>
+
+    <p class="ttype"> <a href="javascript:void(0);">C'est un lien, mais il ne fait rien</a></p>
+
+    <h1>Combiner les opérateurs</h1>
+
+    <p>Vous pouvez combiner les opérateurs d'affectation avec d'autres, ce qui permet de créer un raccourci lors de l'affectation du résultat à une variable.</p>
+
+    <TABLE BORDER="0">
+      <CAPTION> Les opérateurs logiques </CAPTION>
+      <colgroup>
+        <col style="width: 40%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="width: 20%; background-color: #DEB887;">
+        <col style="width: 40%; font-family: 'sans serif'; background-color: #FFF8DC;">
+      </colgroup>
+      <TR>
+        <TH> Nom</TH>
+        <TH> Raccourci </TH>
+        <TH> Opérateur standard </TH>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation </TD>
+        <TD class="retour"> x = y </TD>
+        <TD class="meth"> x = y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec addition </TD>
+        <TD class="retour"> x += y </TD>
+        <TD class="meth"> x = x + y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec soustraction </TD>
+        <TD class="retour"> x -= y </TD>
+        <TD class="meth"> x = x - y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec multiplication </TD>
+        <TD class="retour"> x *= y </TD>
+        <TD class="meth"> x = x * y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec division </TD>
+        <TD class="retour"> x /= y </TD>
+        <TD class="meth"> x = x / y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec reste entier </TD>
+        <TD class="retour"> x %= y </TD>
+        <TD class="meth"> x = x % y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec décalage à gauche </TD>
+        <TD class="retour"> x <<= y </TD>
+        <TD class="meth"> x = x << y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec décalage à droite </TD>
+        <TD class="retour"> x >>= y </TD>
+        <TD class="meth"> x = x >> y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec décalage à droite non signé </TD>
+        <TD class="retour"> x >>>= y </TD>
+        <TD class="meth"> x = x >>> y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec AND (au niveau du bit) </TD>
+        <TD class="retour"> x &= y </TD>
+        <TD class="meth"> x = x & y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec XOR (au niveau du bit) </TD>
+        <TD class="retour"> x ^= y </TD>
+        <TD class="meth"> x = x ^ y</TD>
+      </TR>
+      <TR>
+        <TD class="meth"> Affectation avec OR (au niveau du bit) </TD>
+        <TD class="retour"> x |= y </TD>
+        <TD class="meth"> x = x | y</TD>
+      </TR>
+   </TABLE>
+
+  </body>
+</html>
