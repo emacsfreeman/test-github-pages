@@ -6,6 +6,48 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <h1>L'obscur objet de mon désir...</h1>
+    <p>En plus de ses cinq types de données primitifs JavaScript possède également un type particulier appelé <em>objet</em>. Les objets de JavaScript servent à <em>encapsuler</em> des données et des fonctionnalités qui font de ces objets des composants réutilisables.</p>
+
+    <p>Pour comprendre ce que sont les objets et comment ils travaillent, il est intéressnt de faire un parallèle entre objets JavaScript et objets du monde réel. Prenons par exemple une guitare.</p>
+
+    <p>Une guitare se définit par des matériaux qui font qu'elle est ce qu'elle est, et il y a aussi des choses qu'elle est capable de faire. Voici quelques faits concernant la guitare que nous allons utiliser pour cet exemple :</p>
+    <ul>
+      <li>Elle a six cordes</li>
+      <li>Elle est noire et blanche</li>
+      <li>Elle est électrique</li>
+      <li>Son corps est compact</li>
+    </ul>
+
+    <p>Parmi ce que la guitare est capable de faire (ou plutôt de ce qu'on peut lui faire faire), il y a ceci :</p>
+    <ul>
+      <li>Gratter les cordes</li>
+      <li>Augmenter le volume</li>
+      <li>Baisser le volume</li>
+      <li>Retendre les cordes</li>
+      <li>Ajuster la tonalité</li>
+      <li>Changer les cordes</li>
+    </ul>
+
+    <p>Si cette guitare était un objet JavaScript plutôt qu'une véritable guitare du monde réel, les choses qu'elle fait s'appelleraient des <em>méthodes</em>, et ses caractéristiques physiques seraient ses <em>propriétés</em>.</p>
+
+    <p>Les méthodes et les propriétés des objets s'écrivent de la même manière, c'est-à-dire sous la forme d'un couple nom/valeur, les deux étant séparés par le caractère :. Lorsqu'une propriété est définie par une fonction, on dit qu'il s'agit d'une méthode.</p>
+
+    <p>En réalité, tout ce qui définit un objet est une propriété. La notion de méthode sert à distinguer les propriétés qui sont définies à l'aide d'une fonction.</p>
+
+    <div class="ttype">
+      var guitare = { <br>
+        couleurCorps: "noir", <br>
+        couleurPlateau: "blanc", <br>
+        nombreDeCordes: 6, <br>
+        marque: "Yamaha", <br>
+        typeCorps: "compact", <br>
+        gratter: function() { ... }, <br>
+        tonalite: function() { ... } <br>
+      }; <br>
+    </div>
+
+    <h1>Créer des objets</h1>
 
   </body>
 </html>
