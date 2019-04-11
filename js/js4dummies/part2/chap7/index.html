@@ -188,7 +188,414 @@
 
     <h1>Ecrire des fonctions</h1>
 
-    
+    <p>Une fonction doit être déclarée en suivant un ordre précis, de cette manière :</p>
+
+    <ul>
+      <li>Le mot-clé Function</li>
+      <li>Le nom de la fonction</li>
+      <li>Des parenthèses qui peuvent contenir un ou plusieurs paramètres</li>
+      <li>Une paire d'accolades contenant les instructions que la fonction doit exécuter</li>
+    </ul>
+
+    <p>Parfois, le seul rôle d'une fonction consiste à envoyer un message à l'écran dans une page Web. Un exemple typique est l'affichage de la date courante, comme ceci :</p>
+
+    <div class="ttype">
+      function laDate() { <br>
+        var maintenant = new Date(); <br>
+        document.write(maintenant.toDateString()); <br>
+      } <br>
+    </div>
+
+    <h4>Testons la fonction</h4>
+
+    <script type="text/javascript">
+      function laDate() {
+        var maintenant = new Date();
+        document.write(maintenant.toDateString());
+      }
+      laDate();
+    </script>
+
+    <h1>Renvoyer des valeurs</h1>
+
+    <p>Dans l'exemple de la section précédente, nous avons créé une fonction qui se contente d'afficher un message dans la fenêtre du navigateur Web. Une fois l'instruction <span class="ttype">.write</span> exécutée, il n'y a plus rien de spécial à faire, et la fonction se termine à ce stade. Le programme principal, de son côté, reprend son cours normal au niveau de l'instruction qui suit l'appel à la fonction.</p>
+
+    <p>La plupart des fonctions sont conçues pour renvoyer une valeur (autre que <span class="ttype">undefined</span>) une fois leur travail terminé. Cette valeur peut alors être utilisée dans la suite du programme.</p>
+
+    <div class="ttype">
+      function getHello() { <br>
+        return "Hello!"; <br>
+      } <br>
+    </div>
+
+    <h4>Testons la fonction</h4>
+
+    <script type="text/javascript">
+      function getHello() {
+        return "Hello!";
+      }
+      document.write('<p>' + getHello() + '</p>');
+    </script>
+
+    <p>Dans une fonction, l'instruction <span class="ttype">return</span> est généralement la dernière. Lorsqu'elle est rencontrée, l'exécution de la fonction se termine. Vous pouvez utiliser l'instruction <span class="ttype">return</span> aussi bien pour renvoyer un littéral (comme <q lang="en">Hello!</q> ou 3) que la valeur d'une variable ou d'une expression, un tableau ou un objet, et même une autre fonction.</p>
+
+    <div class="apparte">
+      <h4>Petite apparté</h4>
+      <p>Pour l'usage de plusieurs langues au sein d'un même document HTML je vous recommande cette page web <a href="https://www.nomensa.com/blog/2010/7-tips-for-multi-lingual-website-accessibility" target="_blank">nomensa</a> et notamment l'usage de l'attribut <span class="ttype">lang</span>.</p>
+    </div>
+
+    <div class="ttype">
+      function getCircumference() { <br>
+        var radius = 12; <br>
+        return 2 * Math.PI * radius; <br>
+      } <br>
+    </div>
+
+    <h4>Testons la fonction</h4>
+
+    <script type="text/javascript">
+      function getCircumference() {
+        var radius = 12;
+        return 2 * Math.PI * radius;
+      }
+      document.write("<p>Pour un rayon de 12 la circonférence vaut : " + getCircumference() + "</p>");
+    </script>
+
+    <h4>Avec un argument c'est mieux</h4>
+
+    <div class="ttype">
+      function getCircumference(radius) { <br>
+        return 2 * Math.PI * radius; <br>
+      } <br>
+    </div>
+
+    <script type="text/javascript">
+      function getCircumference(radius) {
+        return 2 * Math.PI * radius;
+      }
+      document.write("<p>Pour un rayon de 12 la circonférence vaut : " + getCircumference(12) + "</p>");
+    </script>
+
+    <h1>Passer et utiliser des arguments</h1>
+
+    <p>Pour que les fonctions soient capables d'effectuer un certain travail avec différentes entrées, il faut que le programmeur dispose d'un moyen de spécifier celles-ci. Nous en avons d'ailleurs déjà rencontré un exemple. Pour cela, les parenthèses qui suivent le nom de la fonction dans la définition de celle-ci peuvent contenir un ou plusieurs paramètres.</p>
+
+    <p>La différence entre <span class="ttype">paramètres</span> et <span class="ttype">arguments</span> peut sembler un peu confuse au départ. Voici comment les choses fonctionnent :</p>
+    <ul>
+      <li>Les <span class="ttype">paramètres</span> sont les noms que vous spécifiez dans la définition de la fonction</li>
+      <li>Les <span class="ttype">arguments</span> sont les valeurs que vous passez à cette fonction. Ils prennent alors le nom des paramètres correspondants.</li>
+    </ul>
+
+    <p>Lorsque vous appelez une fonction, vous incluez des données (les arguments) là où la définition de la fonction contient des paramètres.</p>
+
+    <p>L'ordre dans lequel les arguments sont passés doit être conforme à celui des paramètres dans la définition de la fonction.</p>
+
+    <div class="ttype">
+      function myTacos(meat, produce) { <br>
+        ... <br>
+      } <br>
+    </div>
+
+    <p>Lorsque vous appelez cette fonction, vous devez inclure vos arguments dans le même ordre, et avec le même type, que les paramètres qui ont été définis, comme ceci :</p>
+    <p class="ttype">myTacos("boeuf", "oignons");</p>
+
+    <p>Ces valeurs deviennent celles de variables locales à la fonction, donc des paramètres. C'est le nom de ceux-ci qui sont ensuite utilisés dans le corps de la fonction.</p>
+
+    <div class="ttype">
+      function myTacos(meat, produce) { <br>
+        console.log(meat); // écrit "boeuf" <br>
+        console.log(produce); // écrit "oignons" <br>
+      } <br>
+    </div>
+
+    <p>Vous pouvez spécifier jusqu'à 255 paramètres dans la définition d'une fonction. Mais, bien entendu, atteindre ou même seulement approcher cette limite serait très inhabituel ! Rien que pour des raisons de clarté et de compréhension, il vaudrait mieux rechercher une autre méthode si vous vous trouvez un jour dans une telle situation.</p>
+
+    <h2>Passer des arguments par valeur</h2>
+
+    <p>Si vous utilisez une variable avec l'un des types de données primitifs de JavaScript pour passer votre argument, on dit que celui-ci est passé <span class="ttype">par valeur</span>. Cela signifie que la nouvelle variable créée à l'intérieur de la fonction est totalement distincte de celle qui fournit l'argument. En d'autres termes, quoi qu'il se passe ensuite dans le corps de la fonction, la variable extérieure ne sera pas modifiée.</p>
+
+    <p>Les types de données primitifs en JavaScript sont les médias (<span class="ttype">string</span>), les nombres (<span class="ttype">number</span>), les booléens (<span class="ttype">Boolean</span>), <span class="ttype">undefined</span> et <span class="ttype">null</span>.</p>
+
+    <script type="text/javascript">
+      /**
+      * Incrémente deux nombres
+      * @param {number} number1
+      * @param {number} number2
+      */
+      function addToMyNumbers(number1, number2) {
+        number1++;
+        number2++;
+        console.log("nombre 1 : " + number1);
+        console.log("nombre 2 : " + number2);
+      }
+
+      var number1 = 3;
+      var number2 = 12;
+
+      addToMyNumbers(number1, number2); // passe les arguments
+
+      console.log("nombre original 1 : " + number1);
+      console.log("nombre original 2 : " + number2);
+    </script>
+
+    <h2>Passer des arguments par référence</h2>
+
+    <p>Alors que les types primitifs JavaScript contenus dans des variables sont passés par valeur, les objets sont, eux, passés <span class="ttype">par référence</span>. Cela signifie que, si vous passez un objet en tant qu'argument à une fonction, toute modification apportée à cet objet à l'intérieur de la fonction le changera aussi à l'extérieur de celle-ci.</p>
+
+    <h2>Appeler une fonction sans passer tous les arguments</h2>
+
+    <p>Il n'est pas nécessaire d'appeler une fonction avec la totalité des paramètres déclarés dans sa définition. Si, par exemple, cette définition contient trois paramètres, et que vous l'appelez en ne spécifiant que deux arguments, le troisième créera simplement une variable possédant comme valeur <span class="ttype">undefined</span>.</p>
+
+    <h2>Définir la valeur par défaut des paramètres</h2>
+
+    <p>Si vous voulez que la valeur d'arguments non spécifiés devienne autre chose que <span class="ttype">undefined</span>, vous pouvez définir des valeurs par défaut. La méthode la plus courante dans ce cas consiste à tester les paramètres transmis à l'intérieur de la fonction, afin de pouvoir définir une valeur par défaut si le type de l'argument est <span class="ttype">undefined</span>.</p>
+
+    <div class="ttype">
+      function welcome(yourName) { <br>
+        if (typeof yourName === 'undefined') { <br>
+          yourName = "ami"; <br>
+        } <br>
+        document.write('Bonjour, ' + yourName);<br>
+      } <br>
+    </div>
+
+    <h4>Testons la fonction</h4>
+
+      <script type="text/javascript">
+        function welcome(yourName) {
+          if (typeof yourName === 'undefined') {
+            yourName = "ami";
+          }
+          document.write('<p>Bonjour ' + yourName + '</p>');
+        }
+        welcome();
+      </script>
+
+      <p>Depuis ECMAScript 6 (ES6 pour les intimes), il est possible de définir des valeurs par défaut directement dans l'en-tête des fonctions.</p>
+
+      <div class="ttype">
+        function welcome(yourName = "ami") { <br>
+          document.write("Bonjour, " + yourName); <br>
+        } <br>
+      </div>
+
+      <h4>Testons la fonction</h4>
+
+      <script type="text/javascript">
+        function welcome(yourName = "ami") {
+          document.write("<p>Bonjour, " + yourName + "</p>");
+        }
+        welcome();
+      </script>
+
+      <h2>Appeler une fonction avec plus d'arguments que de paramètres</h2>
+
+      <p>Si vous passez plus d'arguments que de paramètres, les variables locales en trop ne seront pas créées, puisque la fonction n'a aucun moyen de savoir de quoi il s'agit.</p>
+
+      <p>Il existe cependant une astuce permettant de retrouver la valeur des arguments en trop : l'objet <span class="ttype">arguments</span>.</p>
+
+      <h2>Plonger dans la liste des arguments</h2>
+
+      <p>Si vous ne savez pas combien d'arguments seront passés à une fonction, vous pouvez faire appel à l'objet <span class="ttype">arguments</span>, qui est automatiquement associé aux fonctions par JavaScript, pour retrouver tous les arguments qui ont été passés et vous en servir pour effectuer les traitements nécessaires.</p>
+
+      <p>L'objet <span class="ttype">arguments</span> contient un tableau où se trouvent tous les arguments passés à une fonction. En parcourant ce tableau dans une boucle de type <span class="ttype">for</span> ou <span class="ttype">for...in</span>, vous pouvez utiliser chaque argument, même si le nombre de ces arguments change chaque fois que la fonction est appelée.</p>
+
+      <div class="ttype">
+        /** <br>
+        *Message de bienvenue ajustable <br>
+        */ <br>
+        function flexibleWelcome() { <br>
+          var welcome = "Bienvenue, "; <br>
+          for (i = 0; i < arguments.length; i++) { <br>
+            welcome = welcome + arguments[i] + ""; <br>
+          } <br>
+          return welcome; <br>
+        } <br>
+        document.write(flexibleWelcome("Christophe-", "Jean-", "Paul-", "Michou") + "<br>");<br>
+        document.write(flexibleWelcome("Eva-", "Ann-", "Julie") + "<br>");<br>
+      </div>
+
+      <h4>Testons la fonction</h4>
+
+      <script type="text/javascript">
+        /**
+        *Message de bienvenue ajustable
+        */
+        function flexibleWelcome() {
+          var welcome = "Bienvenue, ";
+          for (i = 0; i < arguments.length; i++) {
+            welcome += arguments[i] + '';
+          }
+          return welcome;
+        }
+
+        document.write(flexibleWelcome("Christophe-", "Jean-", "Paul-", "Michou") + "<br>");
+        document.write(flexibleWelcome("Eva-", "Ann-", "Julie") + "<br>");
+      </script>
+
+      <h1>Portée des fonctions</h1>
+
+      <p>Les variables créées dans une fonction en lui passant des arguments, ou en utilisant le mot-clé <span class="ttype">var</span>, ne sont disponibles que dans cette fonction. On appelle cela la <em>portée</em> d'une fonction. Ces variables sont détruites lorsque la fonction se termine.</p>
+
+      <p>Cependant, si vous créez une variable dans une fonction sans spécifier le mot-clé <span class="ttype">var</span>, elle devient <em>globale</em>, et il est possible d'y accéder et de la modifier partout dans votre programme.</p>
+
+      <p>Créer accidentellement une variable globale dans une fonction est la source d'un grand nombre d'erreurs en JavaScript. Il est donc plus que vivement recommandé de toujours définir avec précision la portée des variables, et en particulier de ne créer des variables globales que quand c'est absolument nécessaire.</p>
+
+      <h1>Le cas de la fonction anonyme</h1>
+
+      <p>La partie <em>nom</em> de l'en-tête d'une définition de fonction n'est pas obligatoire. Autrement dit, vous pouvez créer des fonctions sans nom. Cela peut paraître très bizarre. Comment faire pour appeler une fonction qui n'a pas de nom ?</p>
+
+      <p>Cependant, des fonctions anonymes peuvent être affectées à des variables lorsque celles-ci sont créées, ce qui vous offre finalement les mêmes possibilités qu'avec les fonctions nommées.</p>
+
+      <div class="ttype">
+        var choseAFaire = function(uneChose) { <br>
+          document.write("Je vais faire cette chose : " + uneChose); <br>
+        }<br>
+      </div>
+
+      <h4>Testons la fonction</h4>
+
+      <script type="text/javascript">
+        var choseAFaire = function(uneChose) {
+          document.write("Je vais faire cette chose : " + uneChose);
+        }
+        choseAFaire('coder en JavaScript tous les jours !');
+      </script>
+
+      <h2>Différences entre fonctions anonymes et fonctions nommées</h2>
+
+      <p>Il existe quelques différences importantes, et parfois utiles, entre créer une fonction nommée et affecter une fonction anonyme à une variable. La première est qu'une fonction anonyme affectée à une variable n'existe et ne peut être appelée qu'après l'exécution de cette affectation par le programme. Les fonctions nommées, par contre, peuvent être appelées n'importe où dans le programme.</p>
+
+      <p>La seconde différence est que vous pouvez changer la valeur d'une variable et lui affecter une autre fonction à n'importe quel moment. Cela donne aux fonctions anonymes une souplesse particulière.</p>
+
+      <h2>Fonctions anonymes auto-exécutables</h2>
+
+      <p>Une autre application de ce type de fonction est ce qu'on appelle les fonctions <em>auto-exécutables</em>. On appelle ainsi une fonction anonyme qui s'exécute dès qu'elle est créée.</p>
+
+      <p>Pour transformer une fonction anonyme en fonction toujours aussi anonyme, mais auto-exécutable, il vous suffit de la placer dans des parenthèses, puis d'ajouter une paire de parenthèses et un point-virgule.</p>
+
+      <p>Le bénéfice à attendre de cette technique est que les variables définies à l'intérieur d'une fonction anonyme auto-exécutable sont détruites lorsque la fonction se termine. De cette manière, vous pouvez éviter des conflits entre des noms de variables, et vous échappez aussi à l'occupation de la mémoire de l'ordinateur par ces variables une fois que vous n'en avez plus besoin.</p>
+
+      <div class="ttype">
+        var myVariable = "Je me trouve en dehors de la fonction."; <br>
+        (function() { <br>
+          var myVariable = "Je me trouve dans cette fonction anonyme"; <br>
+          document.write(myVariable + ""); <br>
+        })(); <br>
+        document.write(myVariable);
+      </div>
+
+      <h4>Testons la fonction</h4>
+
+      <script type="text/javascript">
+        var myVariable = "Je me trouve en dehors de la fonction.";
+        (function() {
+          var myVariable = "Je me trouve dans cette fonction anonyme";
+          document.write('<p style="color: green; font-family: cursive;">' + myVariable + '</p>');
+        }) ();
+        document.write('<p style="color: red; font-family: fantasy;">' + myVariable + '</p>');
+      </script>
+
+      <p>Les programmeurs d'applications pour le Web utilisent régulièrement des fonctions anonymes pour produire de multiples effets modernes dans les pages Web.</p>
+
+      <h1>On recommence depuis le début (la récursivité)</h1>
+
+      <p>Vous pouvez appeler des fonctions depuis du code qui leur est extérieur, mais aussi à l'intérieur d'autres fonctions. Il est même possible d'appeler une fonction à l'intérieur d'autres fonctions. Il est même possible d'appeler une fonction à l'intérieur d'elle-même. C'est ce que l'on appelle la <em>récursivité</em> (certains programmeurs préfèrent <em>récusrion</em>).</p>
+
+      <p>La récursivité peut s'employer dans la plupart des cas à la place d'une boucle, si ce n'est que les instructions sont répétées à l'intérieur d'une fonction.</p>
+
+      <div class="ttype">
+        function squareItUp(startingNumber) { <br>
+          square = startingNumber * startingNumber; <br>
+          console.log(square); <br>
+          squareItUp(square); <br>
+        } <br>
+      </div>
+
+      <div class="warning">
+        <p>Est-ce que vous voyez la fin de l'histoire ? Non, nulle part. Cette fonction boucle indéfiniment. Elle va simplement empiler des hordes de nombres sans jamais s'arrêter, et ce jusuqu'à ce que vous arriviez à refermer la fenêtre de votre navigateur.</p>
+
+        <p>En fait, en l'état, cette fonction va probablement provoquer un plantage de votre navigateur, si ce n'est de votre ordinateur. Elle ne va provoquer aucun dommage irréparable, bien entendu, mais elle est suffisamment dangereuse pour que vous vous contentiez de lire son code sans essayer de l'exécuter.</p>
+      </div>
+
+      <div class="ttype">
+        function squareItUp(startingNumber) { <br>
+          square = startingNumber * startingNumber; <br>
+
+          if (square > 1000000) { <br>
+            return square; <br>
+          } else { <br>
+            return squareItUp(square); <br>
+          } <br>
+        } <br>
+      </div>
+
+      <h4>Testons la fonction</h4>
+
+      <script type="text/javascript">
+        function squareItUp(startingNumber) {
+          square = startingNumber * startingNumber;
+
+          if (square > 1000000) {
+            return square;
+          } else {
+            return squareItUp(square);
+          }
+        }
+
+        /*
+          Attention le programme ne marche pas si i < 2
+        */
+        for (var i = 2; i < 10; i++) {
+          document.write('<p>Avec ' + i + ' ça donne : ' + squareItUp(i) + '</p>');
+        }
+        /*
+          Attention le programme ne marche pas si i < 2
+        */
+      </script>
+
+      <h1>Des fonctions dans des fonctions</h1>
+
+      <p>Il est possible de déclarer des fonctions à l'intérieur d'autres fonctions.</p>
+
+      <div class="ttype">
+        function turnIntoAMartian(myName) { <br>
+          function recallName(myName) { <br>
+            var martianName = myName + " Martien"; <br>
+          } <br>
+          recallName(myName); <br>
+          console.log(martianName); // Renvoie une valeur indéfinie <br>
+        } <br>
+      </div>
+
+
+
+      <p>Cet exemple démontre en quoi une déclaration de fonction à l'intérieur d'une autre modifie la portée des variables. Les variables déclarées dans la fonction intérieure ne sont pas directement accessibles à la fonction de rang supérieur.</p>
+
+      <div class="ttype">
+        function turnIntoAMartian(myName) { <br>
+          function recallName(myName) { <br>
+            var martianName = myName + " Martien"; <br>
+            return martianName; <br>
+          } <br>
+          var martianName = recallName(myName); <br>
+          console.log(martianName); <br>
+        } <br>
+      </div>
+
+      <h4>Testons la fonction</h4>
+
+      <script type="text/javascript">
+        function turnIntoAMartian(myName) {
+          function recallName(myName) {
+            var martianName = myName + " Martien";
+            return martianName;
+          }
+          var martianName = recallName(myName);
+          document.write(martianName);
+        }
+        turnIntoAMartian('Laurent');
+      </script>
 
   </body>
 </html>
