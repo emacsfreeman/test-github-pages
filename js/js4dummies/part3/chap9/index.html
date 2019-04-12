@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Contrôler le navigateur avec l'objet Window</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <h1>Un peu de culture</h1>
+
+    <h4>Citation originale</h4>
+
+    <blockquote cite="https://www.huxley.net/bnw/four.html">
+      <p>&#8220;Words can be like X-rays, if you use them properly – they'll go through anything. You read and you're pierced.&#8221;</p>
+    </blockquote>
+
+    <cite>– Aldous Huxley, Brave New World</cite>
+
+    <h4>Traduction française</h4>
+
+    <blockquote cite="https://translate.google.fr">
+      <p>&#171; Les mots peuvent ressembler à des rayons X. Si vous les utilisez correctement, ils passent au travers de n'importe quoi. Vous lisez et vous êtes percé. &#187;</p>
+    </blockquote>
+
+    <cite>– Aldous Huxley, Le Meilleur des Mondes</cite>
+
+    <h4>Citation originale</h4>
+
+    <blockquote cite="https://www.azquotes.com/quote/913401">
+      <p>&#8220;In making theories, always keep a window open so that you can throw one out if necessary.&#8221;</p>
+    </blockquote>
+
+    <cite>Bela Lugosi</cite>
+
+    <h4>Traduction française</h4>
+
+    <blockquote>
+      <p>&laquo;L'astuce avec les théories, c'est de toujours garder une fenêtre ouverte de manière à pouvoir en jeter une si nécessaire.&raquo;</p>
+    </blockquote>
+
+    <cite>Bela Lugosi</cite>
+
+    <p>Pour les <a href="https://www.ascii.cl/htmlcodes.htm" target="_blank">symboles HTML</a>.</p>
+
+    <p>Le modèle d'objet du navigateur, ou <a href="https://www.w3schools.com/js/js_window.asp" target="_blank">BOM</a> (<em>Browser Object Model</em>), permet à JavaScript d'interagir avec les fonctionnalités du navigateur Web. Grâce à ce BOM, vous pouvez créer et redimensionner des fenêtres, afficher des messages d'avertissement, ou encore changer la page actuellement affichée dans le navigateur.</p>
+
+    <h1>Comprendre l'environnement du navigateur</h1>
+
+    <p>Les navigateurs Web sont des logiciels très complexes. Lorsqu'ils fonctionnent bien, ils opèrent en douceur et exécutent toutes leurs fonctionnalités sans heurts, procurant ainsi à l'utilisateur une expérience de navigation agréable. Mais nous savons tous que, dans le monde réel, il arrive que des problèmes surgissent, et même qu'un navigateur plante. Pour comprendre comment cela peut se produire, et donc comment mieux gérer les navigateurs, il est important d'en connaître les principaux composants, et comment ceux-ci interagissent.</p>
+
+    <h2>L'interface utilisateur</h2>
+
+    <p>La partie du navigateur avec laquelle vous interagissez lorsque vous tapez une adresse URL, cliquez sur le bouton Accueil, créez ou utilisez un favori, ou encore personnalisez les paramètres du navigateur, s'appelle l'<em>interface utilisateur</em>.</p>
+
+    <p>Cette interface utilisateur contient donc les menus, les cadres des fenêtres, les barres d'outils et les boutons qui se trouvent en dehors de la partie principale de la fenêtre du navigateur, là où se chargent les pages Web.</p>
+
+    <h2>Le <q lang="fr">loader</q></h2>
+
+    <p>On apelle <em>loader</em> la partie d'un navigateur qui communique avec les serveurs Web et télécharge les pages Web, les scripts, les fichiers CSS, les graphiques, et tous les autres composants qui constituent ces pages. En règle générale, c'est ce qui prend le plus de temps et provoque parfois l'incompréhension de l'utilisateur.</p>
+
+    <p>La <em>page HTML</em> est la première partie d'une page Web qui doit être téléchargée .Elle contient en particulier les liens et les scripts incorporés qui doivent être traités de manière à afficher la page.</p>
+
+    <p>Une fois le document HTML téléchargé, le navigateur ouvre plusieurs connexions avec le serveur de manière à charger les autres parties de la page Web aussi rapidement que possible. En règle générale, les parties d'une page Web qui sont liées à cette page <em>via</em> le document HTML (ce que l'on appelle les <em>ressources</em>) sont chargées dans l'ordre où elles apparaissent dans ce document. Par exemple, un script placé dans la section <span class="ttype">head</span> de la page sera chargé avant un autre script qui se trouverait vers la fin de celle-ci.</p>
+
+    <p>L'ordre de téléchargement des ressources est important pour l'efficacité du processus et la vitesse à laquelle la page Web peut être affichée dans la fenêtre du navigateur. De plus, pour que la page puisse être affichée correctement, il est indispensable que les styles CSS qui lui sont appliqués soient chargés et analysés tout de suite. C'est pourquoi ces styles CSS devraient toujours être placés en haut de la page, dans la section <span class="ttype">head</span> du code HTML.</p>
+
+    <p>Même si, le plus souvent, le rôle de JavaScript concerne seulement les fonctionnalités de la page, il peut aussi arriver qu'il joue sur l'affichage de celle-ci. Dans ce cas, ce script devrait lui aussi être chargé dans l'en-tête du document HTML (après les styles CSS). Les scripts qui n'influent pas sur l'aspect de la page trouveront idéalement leur place tout à la fin du code HTML, juste avant la balise <span class="ttype">body</span>. De cette manière, cela évite de provoquer des situations de blocage dans lesquelles le navigateur serait forcé d'attendre le chargement de ces scripts avant de pouvoir afficher quoi que ce soit, ce qui ne manquerait pas d'inquiéter ou d'irriter l'utilisateur.</p>
+
+    <h2>Analyse du code HTML</h2>
+
+    <p>Une fois une page Web téléchargée, le composant d'analyse HTML du navigateur va créer un modèle de cette page. C'est ce que l'on appelle le modèle de l'objet du document (ou DOM, pour <em>Document Object Model</em>). Nous y reviendrons en détail plus tard. Les programmeurs JavaScript utilisent cette carte pour accéder aux différentes parties d'une page Web et les manipuler.</p>
+
+    <p>Lorsque cette phase d'anlayse du code HTML est terminée, le navigateur commence à charger les autres composants de la page Web.</p>
+
+    <h2>Analyse des styles CSS</h2>
+
+    <p>Une fois les définitions des styles CSS d'une page Web totalement chargées, le navigateur se met à analyser ces styles et à déterminer lesquels s'appliquent au document HTML. Il s'agit d'un processus complexe, qui nécessite plusieurs passes pour appliquer ces styles correctement et pour prendre en compte leurs interactions.</p>
+
+    <h2>Analyse du code JavaScript</h2>
+
+    <p>L'étape suivante est l'analyse du code JavaScript. Au cours de ce processus chaque script de votre page Web est compilé et exécuté, et ce dans l'ordre où il apparaît dans le document HTML. Si votre code JavaScript ajoute ou supprime des éléments, du texte ou des styles à l'intérieur du modèle DOM du document HTML, le navigateur ajustera en conséquence le code HTML et le rendu des styles CSS.</p>
+
+    <h2>Mise en page et rendu</h2>
+
+    <p>Finalement, une fois toutes les ressources de la page Web chargées et anaysées, le navigateur détermine la manière dont il doit afficher la page, puis il affiche celle-ci. À moins que vous n'ayez spécifié qu'un script placé vers le début du document ne devrait être exécuté qu'à la fin du processus, le traitement et le rendu de vos scripts seront effectués dans l'ordre où ils sont inclus dans le document.</p>
+
+    <p>En général, il est préférable d'afficher une page aussi rapidement que possible, même si elle n'est pas encore totalement fonctionnelle. Les sites Web modernes utilisent cette stratégie (dite de <em>chargemnt différé</em>) pour améliorer la performance de leurs pages telle qu'elle est perçue par les utilisateurs. S'il vous est arrivé d'ouvrir une page Web et de devoir attendre un peu avant de pouvoir utiliser un formulaire ou un élément interactif, vous avez déjà vu ce chargement différé en action.</p>
+
+    <h2>À propos du BOM</h2>
+
+    <p>Les programmeurs JavaScript peuvent retrouver des informations sur le navigateur dont se sert un utilisateur, et contrôler des aspects de l'expérience utilisateur, <em>via</em> une API appelée le modèle d'objet du navigateur (ou BOM).</p>
+
+    <p>Il n'existe pas de standard officiel pour ce modèle. Différents navigateurs l'implémentent de différentes manières. Cependant, il existe certaines règles généralement acceptées concernant la manière dont JavaScript interagit avec les navigateurs Web.</p>
+
+    <h2>L'objet Navigator</h2>
+
+    <p>L'objet <span class="ttype">Navigator</span> fournit à JavaScript un accès à des informations sur le navigateur de l'utilisateur. Cet objet tire son nom du premier navigateur Web à l'avoir implémenté, Netscape Navigator. Sachez que cet objet n'est pas un élément de JavaScript, mais une fonctionnalité des navigateurs Web à laquelle JavaScript est capable d'accéder. Tous les navigateurs Web modernes ont adopté la même terminologie pour faire référence à cet objet de haut niveau.</p>
+
+    <p>L'objet <span class="ttype">Navigator</span> permet d'accéder à des informations utiles, comme : </p>
+
+    <ul>
+      <li>le nom du navigateur Web</li>
+      <li>la version du navigateur</li>
+      <li>l'emplacement physique de l'ordinateur sur lequel le navigateur est exécuté (si l'utilisateur autorise la géolocalisation de son appareil, bien sûr)</li>
+      <li>la langue du navigateur</li>
+      <li>le type d'ordinateur sur lequel le navigateur est exécuté</li>
+    </ul>
+
+    <TABLE BORDER="0">
+      <CAPTION> Les propriétés de l'objet Navigator </CAPTION>
+      <colgroup>
+        <col style="width: 30%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="width: 70%; background-color: #DEB887;">
+      </colgroup>
+      <TR>
+        <TH> Propriété </TH>
+        <TH> Utilisation </TH>
+      </TR>
+      <TR>
+        <TD> appCodeName </TD>
+        <TD> Donne le nom de code du navigateur </TD>
+      </TR>
+      <TR>
+        <TD> appName </TD>
+        <TD> Donne le nom du navigateur </TD>
+      </TR>
+      <TR>
+        <TD> appVersion </TD>
+        <TD> Donne les informations de version du navigateur </TD>
+      </TR>
+      <TR>
+        <TD> cookieEnabled </TD>
+        <TD> Indique si les cookies sont actifs dans le navigateur </TD>
+      </TR>
+      <TR>
+        <TD> geolocation </TD>
+        <TD> Peut être utilisé pour obtenir la position physique de l'ordinateur de l'utilisateur </TD>
+      </TR>
+      <TR>
+        <TD> language </TD>
+        <TD> Donne la langue dans laquelle le navigateur est exécuté</TD>
+      </TR>
+      <TR>
+        <TD> onLine </TD>
+        <TD> Identifie si le navigateur est en ligne </TD>
+      </TR>
+      <TR>
+        <TD> platform </TD>
+        <TD> Donne la plate-forme pour laquelle le navigateur a été compilé</TD>
+      </TR>
+      <TR>
+        <TD> product </TD>
+        <TD> Donne le nom du moteur de navigation </TD>
+      </TR>
+      <TR>
+        <TD> userAgent </TD>
+        <TD> Donne le nom d'agent utilisateur renvoyé par le navigateur aux serveurs Web</TD>
+      </TR>
+    </TABLE>
+
+    <p>Pour récupérer les propriétés de l'objet <span class="ttype">Navigator</span>, vous utilisez la même syntaxe que pour n'importe quel autre objet, autrement dit soit la notation point, soit l'emploi de crochets.</p>
+
+    <div class="columns">
+      <script type="text/javascript">
+        for (var prop in navigator) {
+          document.write(prop + ": " + navigator[prop] + "<br>");
+        }
+      </script>
+    </div>
+
+    <p class="warning">De nos jours, la détection des navigateurs n'est pas recommandée, et vous avez à votre disposition de bien meilleures méthodes pour déterminer si un navigateur prend en charge une fonctionnalité particulière que de regarder le contenu de la propriété <span class="ttype">appName</span>. La méthode la plus courante consiste à examiner le modèle d'objet du document (DOM) pour rechercher les objets associés à la fonctionnalité que vous voulez utiliser. Par exemple, supposons que vous vouliez savoir si un navigateur prend en charge l'élément <span class="ttype">audio</span> de HTML 5. Vous pouvez alors effectuer le test suivant :</p>
+
+    <div class="ttype">
+      var test_audio = document.createElement("audio"); <br>
+      if (test_audio.play) { <br>
+        console.log("Le navigateur supporte l'audio HTML 5");<br>
+      } else { <br>
+        console.log("Le navigateur ne supporte pas l'audio HTML 5");<br>
+      }<br>
+    </div>
+
+    <h2>L'objet Window</h2>
+
+    <p>La partie principale d'un navigateur, celle qui affiche les pages Web, est appelée la <em>fenêtre</em> (<em>window</em>). C'est là que sont chargés les documents HTML et les ressources qui leur sont associées. Chaque onglet d'un navigateur Web est représenté en JavaScript par une instance de l'objet <span class="ttype">Window</span>.</p>
+
+    <TABLE BORDER="0">
+      <CAPTION> Les propriétés de l'objet Window </CAPTION>
+      <colgroup>
+        <col style="width: 30%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="width: 70%; background-color: #DEB887;">
+      </colgroup>
+      <TR>
+        <TH> Propriété </TH>
+        <TH> Utilisation </TH>
+      </TR>
+      <TR>
+        <TD> closed </TD>
+        <TD> Valeur booléenne indiquant si une fenêtre a été fermée ou non </TD>
+      </TR>
+      <TR>
+        <TD> defaultStatus </TD>
+        <TD> Lit ou définit le texte affiché par défaut dans la barre d'état d'une fenêtre </TD>
+      </TR>
+      <TR>
+        <TD> document </TD>
+        <TD> Fait référence à l'objet <span class="ttype">Document</span> de la fenêtre</TD>
+      </TR>
+      <TR>
+        <TD> frameElement </TD>
+        <TD> frames </TD>
+      </TR>
+      <TR>
+        <TD> history </TD>
+        <TD> Obtient l'historique de navigation pour la fenêtre courante </TD>
+      </TR>
+      <TR>
+        <TD> innerHeight </TD>
+        <TD> Obtient la hauteur intérieure de la fenêtre courante </TD>
+      </TR>
+      <TR>
+        <TD> innerWidth </TD>
+        <TD> Obtient la largeur intérieure de la fenêtre courante </TD>
+      </TR>
+      <TR>
+        <TD> length </TD>
+        <TD> Obtient le nombre de cadres (<strong><em>frames</em></strong>) contenus dans la fenêtre </TD>
+      </TR>
+      <TR>
+        <TD> location </TD>
+        <TD> Obtient l'objet <span class="ttype">Location</span> pour la fenêtre </TD>
+      </TR>
+      <TR>
+        <TD> name </TD>
+        <TD> Lit ou définit le nom de la fenêtre </TD>
+      </TR>
+      <TR>
+        <TD> navigator </TD>
+        <TD> Obtient l'ojet <span class="ttype">Navigator</span> pour la fenêtre </TD>
+      </TR>
+      <TR>
+        <TD> opener </TD>
+        <TD> Obtient l'objet <span class="ttype">Window</span> qui a créé la fenêtre courante </TD>
+      </TR>
+      <TR>
+        <TD> outerHeight </TD>
+        <TD> Obtient la hauteur extérieure de la fenêtre courante, y compris les barres de défilement et les barres d'outils </TD>
+      </TR>
+      <TR>
+        <TD> pageXOffset </TD>
+        <TD> Obtient le nombre de pixels à la suite d'un défilement horizontal dans la fenêtre </TD>
+      </TR>
+      <TR>
+        <TD> pageYOffset </TD>
+        <TD> Obtient le nombre de pixels à la suite d'un défilement vertical dans la fenêtre </TD>
+      </TR>
+      <TR>
+        <TD> parent </TD>
+        <TD> Fait référence au parent de la fenêtre courante </TD>
+      </TR>
+      <TR>
+        <TD> screen </TD>
+        <TD> Fait référence à l'objet <span class="tttype">Screen</span> </TD>
+      </TR>
+      <TR>
+        <TD> screenLeft </TD>
+        <TD> Obtient la distance horizontale en pixels entre le bord gauche de l'écran principal et le bord gauche de la fenêtre courante </TD>
+      </TR>
+      <TR>
+        <TD> screenTop </TD>
+        <TD> Obtient la distance veriticale en pixels entre le bord supérieur de l'écran principal et le bord supérieur de la fenêtre courante </TD>
+      </TR>
+      <TR>
+        <TD> screenX </TD>
+        <TD> Obtient la coordonnée horizontale relativement à l'écran </TD>
+      </TR>
+      <TR>
+        <TD> screenY </TD>
+        <TD> Obtient la coordonnée verticale relativement à l'écran </TD>
+      </TR>
+      <TR>
+        <TD> self </TD>
+        <TD> Fait référence à la fenêtre courante </TD>
+      </TR>
+      <TR>
+        <TD> top </TD>
+        <TD> Fait référence à la fenêtre de navigation de niveau supérieur </TD>
+      </TR>
+    </TABLE>
+
+    <p>Certaines des utilisations les plus courantes de ces propriétés sont les suivantes :</p>
+
+    <ul>
+      <li>Ouvrir un nouvel emplacement dans la fenêtre de navigation</li>
+      <li>Trouver la taille d'une fenêtre de navigation</li>
+      <li>Revenir à une page ouverte précédemment (c'est comme le bouton de retour arrière du navigateur)</li>
+    </ul>
+
+    <h3>Ouvrir une page Web avec la propriété window.location</h3>
+
+    <p>Lire la valeur de <span class="ttype">window.location</span> va renvoyer l'adresse URL de la page courante. Inversement, définir la valeur de cette propriété provoque le chargement de la page correspondant à cette nouvelle URL.</p>
+
+    <!--
+    <script type="text/javascript">
+      function loadNewPage(url) {
+        window.location = url;
+      }
+      var newURL = prompt("Entrez l'adresse d'une page web !");
+      loadNewPage(newURL);
+    </script>
+  -->
+
+    <h3>Déterminer la taille d'une fenêtre de navigation</h3>
+
+    <p>Lorsque vous concevez un site Web, ou une application Web, destiné à fonctionner sur plusieurs types de dispositifs (ce que l'on appelle aujourd'hui le <em>responsive design</em>), connaître la taille du navigateur Web, et en particulier sa largeur, est essentiel.</p>
+
+    <p>Les propriétés <span class="ttype">window.innerWidth</span> et <span class="ttype">window.innerHeight</span> vous fournissent cette information en pixels pour la fenêtre de navigation courante.</p>
+
+    <p>Il est aussi possible de faire appel à CSS pour déterminer ces informations, et c'est d'ailleurs une pratique assez courante. Cependant, il y a certaines différences dans la manière dont CSS et JavaScript traitent le cas des barres de défilement, ce qui peut influencer le choix de la technique à utiliser.</p>
+
+    <script type="text/javascript">
+      var currentWidth = window.innerWidth;
+      if (currentWidth < 500) {
+        document.write("<h1>Votre fenêtre est petite.</h1>");
+      } else {
+        document.write("<h1>Votre fenêtre est grande.</h1>");
+      }
+    </script>
+
+    <h3>Créer un bouton Retour en utilisant location et history</h3>
+
+    <p>La propriété <span class="ttype">history</span> de l'objet <span class="ttype">Window</span> est une référence en lecture seule qui fournit l'historique de navigation de l'objet pour la fenêtre courante. L'utilisation de loin la plus courante de l'objet <span class="ttype">History</span> est d'activer le bouton qui permet à l'utilisateur de revenir à une page déjà consultée.</p>
+
+    <script type="text/javascript">
+      function takeMeBack () {
+        window.location(window.history.go(-1));
+      }
+      function getHistoryLength() {
+        var l = window.history.length;
+        return l;
+      }
+    </script>
+
+  </body>
+</html>
