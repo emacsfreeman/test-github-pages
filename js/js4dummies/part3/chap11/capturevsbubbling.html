@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Capture vs bubbling up</title>
+    <style media="screen">
+      #theText {font-size: 18px;}
+      h1 {
+        border: 1px solid #000;
+        background-color: #dadada;
+      }
+      #capEvent, #bubEvent {
+        background-color: #666;
+      }
+    </style>
+
+    <script type="text/javascript">
+      /**
+       attend que la fenêtre soit finie de chargée avant
+       d'enregistrer les événements
+      **/
+      window.addEventListener('load', registerEvents, false);
+
+      /**
+      Enregistre les événements onclick
+      **/
+      function registerEvents(e) {
+        document.getElementById("capTitle").addEventListener('click', makeTiny, true);
+        document.getElementById("capEvent").addEventListener('click', makeHuge, true);
+        document.getElementById("bubTitle").addEventListener('click', makeTiny, false);
+        document.getElementById("bubEvent").addEventListener('click', makeHuge, false);
+      }
+
+      function makeHuge(e) {
+        console.log("agrandissement du texte");
+        document.getElementById("theText").style.fontSize = "80px";
+      }
+
+      function makeTiny(e) {
+        console.log("réduction du texte");
+        document.getElementById("theText").style.fontSize = "10px";
+      }
+
+    </script>
+  </head>
+  <body>
+    <h1 id="capTitle">Evénement <span id="capEvent"> (mode Capture) </span> </h1>
+    <h1 id="bubTitle">Evénement <span id="bubEvent"> (mode Bubbling up) </span> </h1>
+    <p id="theText">Bonjour, les événements !</p>
+  </body>
+</html>

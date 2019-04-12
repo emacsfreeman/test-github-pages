@@ -40,7 +40,185 @@
         <td class="meth">click</td>
         <td class="retour">Un clic s'est produit sur un élément</td>
       </tr>
+      <tr>
+        <td class="meth">dbclick</td>
+        <td class="retour">Un double-clic s'est produit sur un élément</td>
+      </tr>
+      <tr>
+        <td class="meth">input</td>
+        <td class="retour">La valeur d'un élément <span class="ttype">input</span> ou <span class="ttype">textarea</span> est modifiée</td>
+      </tr>
+      <tr>
+        <td class="meth">keydown</td>
+        <td class="retour">Une touche est pressée</td>
+      </tr>
+      <tr>
+        <td class="meth">keyup</td>
+        <td class="retour">Une touche est relâchée après avoir été pressée</td>
+      </tr>
+      <tr>
+        <td class="meth">mousedown</td>
+        <td class="retour">Un bouton de la souris est pressé alors que le pointeur se trouve au-dessus d'un élément</td>
+      </tr>
+      <tr>
+        <td class="meth">mouseenter</td>
+        <td class="retour">Le pointeur de la souris est déplacé sur l'élément auquel est attaché le gestionnaire d'événement</td>
+      </tr>
+      <tr>
+        <td class="meth">mouseleave</td>
+        <td class="retour">Le pointeur de la souris quitte l'élément auquel est attaché le gestionnaire d'événement</td>
+      </tr>
+      <tr>
+        <td class="meth">mousemove</td>
+        <td class="retour">Le pointeur de la souris est déplacé au-dessus d'un élément</td>
+      </tr>
+      <tr>
+        <td class="meth">mouseout</td>
+        <td class="retour">Le pointeur de la souris quitte l'élément auquel est attaché le gestionnaire d'événement ou un de ses enfants</td>
+      </tr>
+      <tr>
+        <td class="meth">mouseover</td>
+        <td class="retour">Le pointeur de la souris est déplacé sur l'élément auquel est attaché le gestionnaire d'événement ou un de ses enfants </td>
+      </tr>
+      <tr>
+        <td class="meth">mouseup</td>
+        <td class="retour">Un bouton de la souris est relâché alors que le pointeur se trouve au-dessus d'un élément </td>
+      </tr>
+      <tr>
+        <td class="meth">mousewheel</td>
+        <td class="retour">La molette de la souris a été actionnée </td>
+      </tr>
+      <tr>
+        <td class="meth">onreset</td>
+        <td class="retour">Un formulaire a été réinitialisé </td>
+      </tr>
+      <tr>
+        <td class="meth">select</td>
+        <td class="retour">Du texte a été sélectionné </td>
+      </tr>
+      <tr>
+        <td class="meth">submit</td>
+        <td class="retour">Un formulaire est soumis </td>
+      </tr>
     </table>
+
+    <p>Le modèle HTML DOM fournit à JavaScript la possibilité d'identifier les événements qui se produisent dans le navigateur Web et d'y répondre. Les événements peuvent être divisés en plusieurs groupes selon les éléments HTML ou les objets de navigation auxquels ils s'appliquent.</p>
+
+    <p>D'autres types d'événements sont pris en charge par tous les éléments HTML sauf <span class="ttype">body</span> et <span class="ttype">frameset</span>.</p>
+
+    <table>
+      <caption>Evénements pris en charge par chaque élément, à l'exception de body et frameset</caption>
+      <colgroup>
+        <col style="width:25%; background-color: #FFF8DC;">
+        <col style="widht:75%; background-color: #DEB887;">
+      </colgroup>
+      <tr>
+        <th>Evénement</th>
+        <th>Se produit quand...</th>
+      </tr>
+      <tr>
+        <td class="meth">blur</td>
+        <td class="retour">Un élément a perdu le focus</td>
+      </tr>
+      <tr>
+        <td class="meth">error</td>
+        <td class="retour">Un fichier n'a pas pu être chargé</td>
+      </tr>
+      <tr>
+        <td class="meth">focus</td>
+        <td class="retour">Un élément a reçu le focus</td>
+      </tr>
+      <tr>
+        <td class="meth">load</td>
+        <td class="retour">Le chargement d'un fichier, ainsi que de ses fichiers attachés, est terminé</td>
+      </tr>
+      <tr>
+        <td class="meth">resize</td>
+        <td class="retour">Le document a été redimensionné</td>
+      </tr>
+      <tr>
+        <td class="meth">scroll</td>
+        <td class="retour">Un défilement a été appliqué au document ou à un élément</td>
+      </tr>
+      <tr>
+        <td class="meth">afterprint</td>
+        <td class="retour">L'aperçu avant impression du document a été refermé, ou le document a commencé à être imprimé</td>
+      </tr>
+      <tr>
+        <td class="meth">beforeprint</td>
+        <td class="retour">L'aperçu avant impression du document est ouvert, ou le document est prêt à être imprimé</td>
+      </tr>
+      <tr>
+        <td class="meth">beforeunload</td>
+        <td class="retour">La fenêtre, le document et ses fichiers inclus sont sur le point d'être déchargés</td>
+      </tr>
+      <tr>
+        <td class="meth">hashchange</td>
+        <td class="retour">La partie de l'URL placée après le signe dièse (#) change</td>
+      </tr>
+      <tr>
+        <td class="meth">pagehide</td>
+        <td class="retour">Le navigateur place une page dans l'historique de navigation</td>
+      </tr>
+      <tr>
+        <td class="meth">pageshow</td>
+        <td class="retour">Le navigateur accède à une page de l'historique de session</td>
+      </tr>
+      <tr>
+        <td class="meth">popstate</td>
+        <td class="retour">L'élément actif de l'historique de la session change</td>
+      </tr>
+      <tr>
+        <td class="meth">unload</td>
+        <td class="retour">Le document ou un fichier inclus est sur le point d'être déchargé</td>
+      </tr>
+    </table>
+
+    <p>En plus de ces événements, il en existe en fait des quantités d'autres. Par exemple, l'API <span class="ttype">File</span> contient des séries d'événements dédiés au chargement des fichiers, et la spécification Media de HTML 5 gère des événements pour la diffusion de contenus audio et vidéo. En fait, des tas de choses peuvent se produire dans votre navigateur !</p>
+
+    <p>Pour une liste complète de tous ces événements, vous pouvez visiter le site <a href="https://developer.mozilla.org/en-US/docs/Web/Events" target="_blank">MDN</a></p>
+
+    <h1>Gérer les événements</h1>
+
+    <p>Lorsque JavaScript réagit en réponse à un certain événement, on parle de <em>gestion d'événement</em> (et donc aussi de <em>gestionnaire d'événement</em>).</p>
+
+    <p>Au fil des ans, les navigateurs se sont vus implémenter de multiples manières pour les programmes JavaScript de gérer les événements. Du même coup, les questions d'incompatibilité entre navigateurs se sont également accrues.</p>
+
+    <p>De nos jours, JavaScript en est arrivé au stade où les anciennes et inefficaces méthodes de gestion des événements sont arrivées pratiquement en fin de vie. Cependant, ces vieilles techniques sont encore largement employées, et il est donc important de se pencher dessus.</p>
+
+    <h2>Utiliser des gestionnaires d'événements inline</h2>
+
+    <p>Le premier système de gestion des événements date des débuts de JavaScript. Il s'appuie sur des attributs spécifiques, dont notamment le gestionnaire d'événement <span class="ttype">onclick</span>.</p>
+
+    <p>Les attributs de gestion d'événement dits <em>inline</em> sont formés en ajoutant le préfixe <span class="ttype">on</span> à un événement. Pour les utiliser, ajoutez l'attribut d'événement à un élément HTML. Lorsque l'événement spécifié se produit, le code JavaScript contenu dans la valeur de l'attribut est exécuté.</p>
+
+    <p>Dans de nombreuses situations, vous ne voulez pas que l'action associée par défaut à un élément soit exécutée. Par exemple, vous pourriez préférer, dans le que seule la fenêtre de message soit affichée, sans qu'il se produise autre chose.</p>
+
+    <p>Les programmeurs JavaScript ont développé plusieurs techniques différentes pour contourner ce genre de difficulté. Une méthode consiste à faire de l'action par défaut quelque chose de neutre, sans conséquence. Dans notre exemple, il suffirait de changer la valeur de l'attribut <span class="ttype">href</span> en #, et le lien pointera alors vers lui-même.</p>
+
+    <p>Une meilleure méthode, cependant, consiste à demander au gestionnaire d'événement de renvoyer une valeur booléenne <span class="ttype">false</span>, afin d'indiquer que l'action par défaut ne doit pas être exécutée.</p>
+
+    <p>L'un des points à noter dans <a href="comptage.html" target="_blank">comptage.html</a> est le fait que les noms de fonctions qui sont affectés au gestionnaire d'événement ne comportent pas de parenthèses. Cela signifie que l'ensemble de la fonction est assigné au gestionnaire d'événement, ce qui revient à lui indiquer qu'il doit s'exécuter lorsque cet événement se produit, au lieu d'utiliser pour cela un appel de fonction. Si vous ajoutez des parenthèses après le nom de la fonction, celle-ci sera exécutée, et son résultat sera transmis à l'événement <span class="ttype">onclick</span>, ce qui n'est pas ce que nous voulons obtenir ici.</p>
+
+    <h2>Ajouter un gestionnaire d'événement en utilisant addEventListener</h2>
+
+    <p>Même si les deux méthodes précédentes sont utilisées très couramment, et sont prises en charge par n'importe quel navigateur, une méthode plus moderne et plus souple de gérer les événements consiste à faire appel à la méthode <span class="ttype">addEventListener()</span> (et c'est bien sûr celle que nous recommandons avec les navigateurs actuels).</p>
+
+    <p>La méthode <span class="ttype">addEventListener()</span> surveille les événements de n'importe quel noeud DOM et déclenche les actions basées sur ces événements. Lorsque la fonction spécifiée en tant qu'action pour l'événement est exécutée, elle reçoit automatiquement un argument unique, l'objet <span class="ttype">Event</span>. Par convention, nous appelons cet argument <span class="ttype">e</span>.</p>
+
+    <p>La méthode <span>addEventListener()</span> offre plusieurs avantages sur les attributs d'événement de DOM : </p>
+
+    <ul class="chevrons">
+      <li>Vous pouvez appliquer plusieurs <q lang="fr">écouteurs</q> d'événements à un même élément</li>
+      <li>Cette méthode fonctionne avec n'importe noeud de l'arborescence DOM, pas simplement sur des éléments</li>
+      <li>Elle vous procure un contrôle accru sur les événements</li>
+    </ul>
+
+    <h2>Interrompre la propagation</h2>
+
+    <p>Il existe en fait une troisième possibilité pour gérer les événements imbriqués : vous déclenchez le premier événement et vous arrêtez tout de suite. Vous pouvez désactiver la propagation d'un événement, et même de tous les événements, en utilisant la méthode <span class="ttype">stopPropagation()</span>.</p>
+
+    <p>Si vous n'avez pas besoin de propager les événements dans votre script, il est conseillé de désactiver les deux premières méthodes, car elle consomment des ressources système et peuvent rendre votre site Web plus lent.</p>
 
   </body>
 </html>
