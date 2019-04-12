@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+      function numberElements(tagName) {
+        var getTags = document.getElementByTagName(tagName);
+        for (var i = 0; i < getTags.length; i++) {
+          getTags[i].innerHTML = i + 1;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Ce texte va disparaître</h1>
+    <h1>Ceclui-ci sera remplacé</h1>
+    <h1>JavaScript va effacer ceci</h1>
+    <script type="text/javascript">
+      numberElements("1");
+    </script>
+  </body>
+</html>

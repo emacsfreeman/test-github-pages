@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Manipuler des documents avec le DOM</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Un peu de culture</h1>
+
+    <blockquote>
+      <p>&laquo; Aucun objet n'est mystérieux. Le mystère, ce sont vos yeux. &raquo;</p>
+    </blockquote>
+
+    <cite>Elizabeth Bowen</cite>
+
+    <p>Comprendre le DOM est une question clé pour être capable de manipuler le texte ou le contenu HTML d'une page Web. Grâce au DOM, vous pouvez créer des animations, actualiser des données sans rafraîchir les pages, déplacer des objets dans le navigateur, et bien plus encore !</p>
+
+    <p>N'oubliez pas de visiter le site Web compagnon de ce livre pour y télécharger les exemples de ce chapitre !</p>
+
+    <h1>Comprendre le DOM</h1>
+
+    <p>Le DOM (<em>Document Object Model</em>) est l'interface grâce à laquelle JavaScript peut dialoguer et travailler avec les documents HTML à l'intérieur des fenêtres de navigation. Le DOM peut être visualisé sous la forme d'un arbre inversé, chaque partie du document HTML correspondant à une branche qui pointe vers son contenu.</p>
+
+    <table style="margin-right:30%; padding: 5%;">
+      <colgroup>
+        <col style="width:50%;">
+        <col style="width:50%;">
+      </colgroup>
+      <tr>
+        <td><img src="http://bit.ly/arbredudom2" alt="DOM2"></td>
+        <td><img src="http://bit.ly/arbredudom" alt="DOM"></td>
+      </tr>
+    </table>
+
+    <p>Un arbre DOM est formé de composants individuels appelés <em>noeuds</em>. Le noeud principal, celui dont partent tous les autres, est le <em>noeud du document</em>. Le niveau immédiatement inférieur est le <em>noeud de l'élément racine</em>. Pour les documents HTML, ce noeud racine est HTML. Ensuite, chaque élément, attribut ou morceau de contenu est représenté par un noeud de l'arbre qui est issu d'un autre noeud.</p>
+
+    <p>Le modèle DOM possède plusieurs types de noeuds :</p>
+
+    <ul class="chevrons">
+      <li><strong>Document : </strong>Le document HTML en entier est représenté dans ce noeud.</li>
+      <li><strong>Eléments : </strong>Les éléments du code HTML.</li>
+      <li><strong>Attributs : </strong>Les attributs associés à ces éléments.</li>
+      <li><strong>Texte : </strong>Le contenu textuel des éléments.</li>
+      <li><strong>Commentaires : </strong>Les commentaires insérés dans le document HTML.</li>
+    </ul>
+
+    <h1>Relations entre les noeuds.</h1>
+
+    <p>Les arbres DOM sont en fait de très proches parents des arbres généalogiques classiques. C'est d'ailleurs pourquoi on se sert d'une terminologie semblable :</p>
+
+    <ul class="chevrons">
+      <li>Chaque noeud, excepté le noeud racine, a un <em>parent</em>.</li>
+      <li>Chaque noeud peut avoir un ou plusieurs <em>enfants</em>.</li>
+      <li>Les noeuds issus du même parent sont dits frères (et/ou soeurs, évidemment, soit <em>sibling</em> en anglais). Ce parent est également appelé <em>ancêtre</em>, ou <em>ascendant</em>.</li>
+    </ul>
+
+    <p>Du fait que les documents HTML possèdent souvent de multiples éléments de même type, le modèle DOM vous permet d'accéder à chacun individuellement en utilisant un système d'indexation. Par exemple, vous pouvez faire référence au premier élément <span class="ttype">p</span> d'un document sous la forme <span class="ttype">p[0], p[1]</span> représentant le second et ainsi de suite.</p>
+
+    <p class="warning">Bien que cette notation des noeuds puisse faire penser à celle d'un tableau, ce n'est pas le cas. Vous pouvez parcourir dans une boucle le contenu d'une liste de noeuds, mais les méthodes des tableaux ne s'y appliquent pas.</p>
+
+    <p>Le modèle DOM de HTML fournit également divers mots-clés permettant de naviguer entre les noeuds en utilisant leur position relative par rapport à leurs frères et soeurs et à leurs parents. Ces propriétés relatives sont les suivantes : </p>
+
+    <ul class="chevrons">
+      <li><span class="ttype">firstChild:</span> Fait référence au 1er enfant du noeud.</li>
+      <li><span class="ttype">lastChild:</span> Fait référence au dernier enfant du noeud.</li>
+      <li><span class="ttype">nextSibling:</span> Fait référence au prochain noeud ayant le même noeud parent.</li>
+      <li><span class="ttype">previousSibling:</span> Fait référence au noeud précédent ayant le même noeud parent.</li>
+    </ul>
+
+    <h1>Utiliser les propriétés et les méthodes de l'objet Document</h1>
+
+    <p>L'objet Document fournit des propriétés et des méthodes pour travailler avec les documents HTML.</p>
+
+    <h4>Les propriétés de l'objet Document</h4>
+
+    <TABLE BORDER="0">
+      <CAPTION> Les propriétés de l'objet Document </CAPTION>
+      <colgroup>
+        <col style="width: 30%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="width: 70%; background-color: #DEB887;">
+      </colgroup>
+      <TR>
+        <TH> Propriété </TH>
+        <TH> Utilisation </TH>
+      </TR>
+      <TR>
+        <TD> anchors </TD>
+        <TD> Récupère une liste de toutes les ancres (éléments <span class="ttype">a</span> avec des noms d'attributs) du document </TD>
+      </TR>
+      <TR>
+        <TD> applets </TD>
+        <TD> Récupère une liste ordonnée de toutes les applets du document </TD>
+      </TR>
+      <TR>
+        <TD> baseURI </TD>
+        <TD> Récupère l'URI de base du document </TD>
+      </TR>
+      <TR>
+        <TD> body </TD>
+        <TD> Récupère le noeud <span>body</span> ou <span>frameset</span> dans le corps du document </TD>
+      </TR>
+      <TR>
+        <TD> cookie </TD>
+        <TD> Récupère ou définit des couples nom/valeur de cookies dans le document </TD>
+      </TR>
+      <TR>
+        <TD> doctype </TD>
+        <TD> Récupère la déclaration de type associée avec le document </TD>
+      </TR>
+      <TR>
+        <TD> documentElement </TD>
+        <TD> Récupère l'élément qui constitue la racine du document (par exemple, l'élément <span>html</span> dans un document HTML) </TD>
+      </TR>
+      <TR>
+        <TD> documentMode </TD>
+        <TD> Récupère le mode utilisé par le navigateur pour effectuer le rendu du document </TD>
+      </TR>
+      <TR>
+        <TD> documentURI </TD>
+        <TD> Récupère ou définit la localisation du document </TD>
+      </TR>
+      <TR>
+        <TD> domain </TD>
+        <TD> Récupère le nom de domaine du serveur qui a chargé le document </TD>
+      </TR>
+      <TR>
+        <TD> embeds </TD>
+        <TD> Récupère une liste de tous les éléments <span>embed</span> du document</TD>
+      </TR>
+      <TR>
+        <TD> forms </TD>
+        <TD> Récupère une collection de tous les éléments <span>form</span> du document</TD>
+      </TR>
+      <TR>
+        <TD> head </TD>
+        <TD> Récupère l'élément <span>head</span> du document</TD>
+      </TR>
+      <TR>
+        <TD> images </TD>
+        <TD> Récupère une liste de tous les éléments <span>img</span> du document</TD>
+      </TR>
+      <TR>
+        <TD> implementation </TD>
+        <TD> Récupère l'objet <span>DOMImplementation</span> qui gère le document</TD>
+      </TR>
+      <TR>
+        <TD> lastModified </TD>
+        <TD> Récupère la date et l'heure de la dernière modification du document</TD>
+      </TR>
+      <TR>
+        <TD> links </TD>
+        <TD> Récupère une collection de tous les éléments <span>area</span> et <span>a</span> du document qui contiennent l'attribut <span>href</span></TD>
+      </TR>
+      <TR>
+        <TD> readyState </TD>
+        <TD> Récupère l'état de chargement du document. Renvoie <span class="ttype">loading</span> en cours de chargement, <span class="ttype">interactive</span> lorsque l'analyse du contenu est achevée, et <span class="ttype">complete</span> lorsque le chargement est totalement terminé.</TD>
+      </TR>
+      <TR>
+        <TD> referrer </TD>
+        <TD> Obtient l'URL de la page depuis laquelle le document courant était lié </TD>
+      </TR>
+      <TR>
+        <TD> scripts </TD>
+        <TD> Récupère une liste des éléments <span>scripts</span> du document </TD>
+      </TR>
+      <TR>
+        <TD> title </TD>
+        <TD> Récupère ou définit le document </TD>
+      </TR>
+      <TR>
+        <TD> URL </TD>
+        <TD> Récupère l'URL du document </TD>
+      </TR>
+    </TABLE>
+
+    <h4>Les méthodes de l'objet Document</h4>
+
+    <TABLE BORDER="0">
+      <CAPTION> Les méthodes de l'objet Document </CAPTION>
+      <colgroup>
+        <col style="width: 30%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="width: 70%; background-color: #DEB887;">
+      </colgroup>
+      <TR>
+        <TH> Méthode </TH>
+        <TH> Utilisation </TH>
+      </TR>
+      <TR>
+        <TD> addEventListener() </TD>
+        <TD> Assigne un gestionnaire d'événement au document </TD>
+      </TR>
+      <TR>
+        <TD> adoptNode() </TD>
+        <TD> Adopte un noeud à partir d'un document externe </TD>
+      </TR>
+      <TR>
+        <TD> close() </TD>
+        <TD> Termine le flux d'écriture en sortie du document qui a été ouvert avec <span class="ttype">document.open()</span> </TD>
+      </TR>
+      <TR>
+        <TD> createAttribute() </TD>
+        <TD> Crée un noeud d'attribut </TD>
+      </TR>
+      <TR>
+        <TD> createComment() </TD>
+        <TD> Crée un noeud de commentaire </TD>
+      </TR>
+      <TR>
+        <TD> createDocumentFragment() </TD>
+        <TD> Crée un fragment de document vide </TD>
+      </TR>
+      <TR>
+        <TD> createElement() </TD>
+        <TD> Crée un noeud d'élément </TD>
+      </TR>
+      <TR>
+        <TD> createTextNode() </TD>
+        <TD> Crée un noeud de texte </TD>
+      </TR>
+      <TR>
+        <TD> getElementById() </TD>
+        <TD> Récupère l'élément ayant l'attribut ID spécifié </TD>
+      </TR>
+      <TR>
+        <TD> getElementByClassName() </TD>
+        <TD> Récupère tous les éléments ayant le nom de classe spécifié </TD>
+      </TR>
+      <TR>
+        <TD> getElementByName() </TD>
+        <TD> Récupère tous les éléments ayant le nom spécifié </TD>
+      </TR>
+      <TR>
+        <TD> getElementByTagName </TD>
+        <TD> Récupère tous les éléments ayant le nom de balise spécifié </TD>
+      </TR>
+      <TR>
+        <TD> importNode() </TD>
+        <TD> Copie et importe un noeud provenant d'un document externe </TD>
+      </TR>
+      <TR>
+        <TD> normalize() </TD>
+        <TD> Efface les noeuds de texte vides et joint les noeuds adjacents </TD>
+      </TR>
+      <TR>
+        <TD> open() </TD>
+        <TD> Ouvre un document en écriture </TD>
+      </TR>
+      <TR>
+        <TD> querySelector() </TD>
+        <TD> Récupère le 1er élément qui correspond au groupe de sélecteurs spécifié dans le document </TD>
+      </TR>
+      <TR>
+        <TD> removeEventListener() </TD>
+        <TD> Efface un gestionnaire d'événement qui a été ajouté au document en utilisant la méthode <span>addEventListener()</span> </TD>
+      </TR>
+      <TR>
+        <TD> renameNode() </TD>
+        <TD> Renomme un noeud existant </TD>
+      </TR>
+      <TR>
+        <TD> write() </TD>
+        <TD> Ecrit du code JavaScript ou des expressions HTML dans un document </TD>
+      </TR>
+      <TR>
+        <TD> writeIn() </TD>
+        <TD> Ecrit du code JavaScript ou des expressions HTML dans un document et passe à la ligne après chaque instruction </TD>
+      </TR>
+    </TABLE>
+
+    <h1>Utiliser les propriétés et les méthodes de l'objet Element</h1>
+
+    <p>L'objet <span>Element</span> fournit des propriétés et des méthodes pour travailler avec les éléments HTML d'un document.</p>
+
+    <h4>Les propriétés de l'objet Element</h4>
+
+    <TABLE BORDER="0">
+      <CAPTION> Les propriétés de l'objet Element </CAPTION>
+      <colgroup>
+        <col style="width: 30%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="width: 70%; background-color: #DEB887;">
+      </colgroup>
+      <TR>
+        <TH> Propriété </TH>
+        <TH> Utilisation </TH>
+      </TR>
+      <TR>
+        <TD> accessKey </TD>
+        <TD> Récupère ou définit l'attribut <span class="ttype">accessKey</span> de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> attributes </TD>
+        <TD> Récupère une collection de tous les attributs de l'élément enregistrés pour le noeud spécifié (renvoie un <span class="ttype">NameNodeMap</span> ) </TD>
+      </TR>
+      <TR>
+        <TD> childElementCount </TD>
+        <TD> Récupère le nombre d'éléments enfants dans le noeud spécifié </TD>
+      </TR>
+      <TR>
+        <TD> childNodes </TD>
+        <TD> Récupère une liste de noeuds enfants de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> children </TD>
+        <TD> Récupère une liste des éléments enfants de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> classList </TD>
+        <TD> Récupère le ou les noms de classe de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> className </TD>
+        <TD> Récupère ou définit la valeur de l'attribut de classe de l'élément <span>html</span> dans un document HTML) </TD>
+      </TR>
+      <TR>
+        <TD> clientHeight </TD>
+        <TD> Obtient la hauteur interne de l'élément, y compris la valeur de remplissage </TD>
+      </TR>
+      <TR>
+        <TD> clientLeft </TD>
+        <TD> Obtient la largeur de la bordure gauche de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> clientTop </TD>
+        <TD> Obtient la largeur de la bordure supérieure de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> embeds </TD>
+        <TD> Récupère une liste de tous les éléments <span>embed</span> du document</TD>
+      </TR>
+      <TR>
+        <TD> clientWidth </TD>
+        <TD> Obtient la largeur de l'élément, y compris la valeur de remplissage </TD>
+      </TR>
+      <TR>
+        <TD> contentEditable </TD>
+        <TD> Lit ou définit la valeur de l'attribut <q lang="fr">éditable</q> de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> dir </TD>
+        <TD> Lit ou définit la valeur de l'attribut <span class="ttype">dir</span> de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> firstChild </TD>
+        <TD> Récupère le noeud du premier enfant de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> firstElementChild </TD>
+        <TD> Récupère le premier enfant de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> id </TD>
+        <TD> Lit ou définit la valeur de l'attribut de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> innerHTML </TD>
+        <TD> Récupère ou définit le contenu de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> isContentEditable </TD>
+        <TD> Renvoie true si le contenu d'un élément est éditable, false sinon </TD>
+      </TR>
+      <TR>
+        <TD> lang </TD>
+        <TD> Lit ou définit la langue de base pour l'attribut des éléments </TD>
+      </TR>
+      <TR>
+        <TD> lastChild </TD>
+        <TD> Récupère le dernier noeud enfant de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> lastElementChild </TD>
+        <TD> Récupère le dernier enfant de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> namespaceURI </TD>
+        <TD> Obtient le nom d'espace URI pour le premier noeud de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> nextSibling </TD>
+        <TD> Obtient le noeud suivant situé au même niveau </TD>
+      </TR>
+      <TR>
+        <TD> nextElementSibling </TD>
+        <TD> Obtient l'élément suivant situé au même niveau de noeud </TD>
+      </TR>
+      <TR>
+        <TD> nodeName </TD>
+        <TD> Récupère le nom du noeud courant </TD>
+      </TR>
+      <TR>
+        <TD> nodeType </TD>
+        <TD> Obtient le type du noeud courant </TD>
+      </TR>
+      <TR>
+        <TD> nodeValue </TD>
+        <TD> Lit ou définit la valeur du noeud </TD>
+      </TR>
+      <TR>
+        <TD> offsetHeight </TD>
+        <TD> Récupère la hauteur de l'élément, y compris le remplissage vertical, l'encadrement et la barre de défilement </TD>
+      </TR>
+      <TR>
+        <TD> offsetWidth </TD>
+        <TD> Récupère la largeur de l'élément, y compris le remplissage horizontal, l'encadrement et la barre de défilement </TD>
+      </TR>
+      <TR>
+        <TD> offsetLeft </TD>
+        <TD> Obtient la position du décalage horizontal de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> offsetParent </TD>
+        <TD> Obtient le décalage du conteneur de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> offsetTop </TD>
+        <TD> Obtient la position du décalage vertical de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> ownerDocument </TD>
+        <TD> Obtient l'élément racine (le noeud document) pour un élément </TD>
+      </TR>
+      <TR>
+        <TD> parentNode </TD>
+        <TD> Récupère le noeud parent de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> parentElement </TD>
+        <TD> Récupère l'élément parent de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> previousSibling </TD>
+        <TD> Obtient le noeud précédent situé au même niveau </TD>
+      </TR>
+      <TR>
+        <TD> previousElementSibling </TD>
+        <TD> Obtient le noeud précédent situé au même niveau de noeud </TD>
+      </TR>
+      <TR>
+        <TD> scrollHeight </TD>
+        <TD> Obtient la hauteur totale de l'élément, y compris le remplissage </TD>
+      </TR>
+      <TR>
+        <TD> scrollLeft </TD>
+        <TD> Obtient ou définit le nombre de pixels du défilement horizontal de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> scrollTop </TD>
+        <TD> Obtient ou définit le nombre de pixels du défilement vertical de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> style </TD>
+        <TD> Récupère ou définit la valeur de l'attribut <span class="ttype">style</span> de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> tabIndex </TD>
+        <TD> Récupère ou définit la valeur de l'attribut <span class="ttype">tabindex</span> de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> tagName </TD>
+        <TD> Obtient le nom de balise de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> textContent </TD>
+        <TD> Récupère ou définit le contenu textuel du noeud et de ses descendants </TD>
+      </TR>
+      <TR>
+        <TD> title </TD>
+        <TD> Récupère ou définit la valeur de l'attribut <span class="ttype">title</span> de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> length </TD>
+        <TD> Récupère le nombre de noeuds mémorisé dans <span class="ttype">NodeList</span> </TD>
+      </TR>
+    </TABLE>
+
+    <h4>Les méthodes de l'objet Element</h4>
+
+    <TABLE BORDER="0">
+      <CAPTION> Les méthodes de l'objet Element </CAPTION>
+      <colgroup>
+        <col style="width: 30%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="width: 70%; background-color: #DEB887;">
+      </colgroup>
+      <TR>
+        <TH> Méthode </TH>
+        <TH> Utilisation </TH>
+      </TR>
+      <TR>
+        <TD> addEventListener() </TD>
+        <TD> Enregistre un gestionnaire d'événement dans l'élément </TD>
+      </TR>
+      <TR>
+        <TD> appendChild() </TD>
+        <TD> Insère un nouveau noeud enfant dans l'élément (en dernière position) </TD>
+      </TR>
+      <TR>
+        <TD> blur() </TD>
+        <TD> Fait perdre le focus à l'élément </TD>
+      </TR>
+      <TR>
+        <TD> click() </TD>
+        <TD> Simule un clic de souris sur l'élément </TD>
+      </TR>
+      <TR>
+        <TD> cloneNode() </TD>
+        <TD> Clone l'élément </TD>
+      </TR>
+      <TR>
+        <TD> compareDocumentPosition() </TD>
+        <TD> Compare des deux éléments dans le document </TD>
+      </TR>
+      <TR>
+        <TD> contains() </TD>
+        <TD> Génère true si le noeud est un descendant d'un autre noeud, false sinon </TD>
+      </TR>
+      <TR>
+        <TD> focus() </TD>
+        <TD> Donne le focus à l'élément </TD>
+      </TR>
+      <TR>
+        <TD> getAttribute() </TD>
+        <TD> Récupère la valeur de l'attribut spécifié pour le noeud de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> getAttributeNode() </TD>
+        <TD> Récupère le noeud de l'attribut spécifié </TD>
+      </TR>
+      <TR>
+        <TD> getElementByClassName() </TD>
+        <TD> Récupère une collection de tous les éléments ayant le nom spécifié </TD>
+      </TR>
+      <TR>
+        <TD> getElementByTagName </TD>
+        <TD> Récupère tous les éléments ayant le nom de balise spécifié </TD>
+      </TR>
+      <TR>
+        <TD> getFeature() </TD>
+        <TD> Obtient un objet qui implémente l'API de la fonctionnalité spécifiée </TD>
+      </TR>
+      <TR>
+        <TD> hasAttribute() </TD>
+        <TD> Génère true si l'élément possède l'attribut spécifié, false sinon </TD>
+      </TR>
+      <TR>
+        <TD> hasAttributes() </TD>
+        <TD> Génère true si l'élément possède des attributs, false sinon </TD>
+      </TR>
+      <TR>
+        <TD> hasChildNodes() </TD>
+        <TD> Génère true si l'élément possède des noeuds enfants, false sinon </TD>
+      </TR>
+      <TR>
+        <TD> insertBefore() </TD>
+        <TD> Entre un nouveau noeud enfant avant le noeud existant spécifié </TD>
+      </TR>
+      <TR>
+        <TD> isDefaultNamespace() </TD>
+        <TD> Génère true si le namespaceURI spécifié est celui qui est pris par défaut, false sinon </TD>
+      </TR>
+      <TR>
+        <TD> isEqualNode() </TD>
+        <TD> Evalue l'égalité (ou non) de deux éléments </TD>
+      </TR>
+      <TR>
+        <TD> isSameNode() </TD>
+        <TD> Compare deux éléments pour savoir s'ils se trouvent dans le même noeud </TD>
+      </TR>
+      <TR>
+        <TD> isSupported() </TD>
+        <TD> Génère true si la fonctionnalité spécifiée est supportée par l'élément </TD>
+      </TR>
+      <TR>
+        <TD> normalize() </TD>
+        <TD> Joint les noeuds spécifiés et leurs noeuds adjacents, et supprime les noeuds de texte vides </TD>
+      </TR>
+      <TR>
+        <TD> querySelector() </TD>
+        <TD> Obtient le 1er élément enfant correspondant au(x) sélecteur(s) CSS spécifié(s) de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> querySelectorAll() </TD>
+        <TD> Obtient tous les éléments enfants correspondants au(x) sélecteur(s) CSS spécifié(s) de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> removeAttribute() </TD>
+        <TD> Supprime l'attribut spécifié de l'élément </TD>
+      </TR>
+      <TR>
+        <TD> removeAttributeNode() </TD>
+        <TD> Supprime le noeud d'attribut spécifié de l'élément et retrouve le noeud supprimé </TD>
+      </TR>
+      <TR>
+        <TD> removeChild() </TD>
+        <TD> Supprime le noeud enfant spécifié </TD>
+      </TR>
+      <TR>
+        <TD> replaceChild() </TD>
+        <TD> Remplace le noeud enfant spécifié </TD>
+      </TR>
+      <TR>
+        <TD> removeEventListener() </TD>
+        <TD> Supprime le gestionnaire d'événement spécifié </TD>
+      </TR>
+      <TR>
+        <TD> setAttribute() </TD>
+        <TD> Modifie ou définit l'attribut spécifié par la valeur indiquée </TD>
+      </TR>
+      <TR>
+        <TD> setAttributeNode() </TD>
+        <TD> Modifie ou définit le noeud d'attribut spécifié </TD>
+      </TR>
+      <TR>
+        <TD> toString() </TD>
+        <TD> Change un élément en chaîne </TD>
+      </TR>
+      <TR>
+        <TD> item() </TD>
+        <TD> Récupère le noeud ayant l'indice spécifié dans NodeList </TD>
+      </TR>
+    </TABLE>
+
+    <h1>Travailler avec le contenu des éléments</h1>
+
+    <p>Vous pouvez afficher le type des noeuds et les valeurs de ceux-ci en utilisant le modèle DOM de HTML. Vous avez également la possibilité de définir la valeur des propriétés des éléments du DOM en vous servant de l'objet <span class="ttype">Element</span>. Lorsque vous utilisez JavaScript pour définir ces propriétés, les nouvelles valeurs sont prises en compte en temps réel dans le document HTML.</p>
+
+    <p>Modifier les propriétés des éléments dans un document Web de manière à refléter ce changement immédiatement dans le navigateur, sans qu'il soit besoin de rafraîchir ou de recharger la page, est une des pierres angulaires de ce que l'on a pris l'habitude d'appeler le Web 2.0</p>
+
+    <h2>innerHTML</h2>
+
+    <p>La propriété la plus importante que vous puissiez modifier <em>via</em> le DOM est <span class="ttype">innerHTML</span>.</p>
+
+    <p>La propriété <span class="ttype">innerHTML</span> d'un élément contient tout ce qui se trouve entre la balise de début et la balise de fin de cet élément. Par exemple, dans le code qui balise de début et la balise de fin de cet élément. Par exemple, dans le code qui suit, la propriété <span class="ttype">innerHTML</span> de l'élément <span class="ttype">div</span> contient un élément <span class="ttype">p</span> et son noeud enfant de type texte : </p>
+    <div><p>Voici un exemple de texte.</p></div>
+
+    <p class="apparte">Il est très courant dans la programmation Web de créer des éléments <span class="ttype">div</span> vides dans un document HTML, puis d'utiliser la propriété <span class="ttype">innerHTML</span> pour y insérer dynamiquement du texte ou du code HTML.</p>
+
+    <p>Pour récupérer ou définir la valeur de la propriété <span class="ttype">innerHTML</span>.</p>
+
+    <div class="ttype">
+      var getTheInner = document.body.firstChild.innerHTML;<br>
+      getTheInner = "Hello tous";<br>
+      document.write(getTheInner);<br>
+    </div>
+
+    <h2>Définir des attributs</h2>
+
+    <p>Pour définir la valeur d'un attribut HTML, vous pouvez faire appel à la méthode <span class="ttype">setAttibute()</span> :</p>
+
+    <p class="ttype">document.body.fristChild.innerHTML.setAttribute("classe", "maClasse");</p>
+
+    <p>Le résultat de cette instruction est que le premier élément enfant de l'enfant <span class="ttype">body</span> prend un nouvel attribut appelé <span class="ttype">classe</span> avec une valeur égale à <span class="ttype">maClasse</span>.</p>
+
+    <h1>Trouver des éléments par ID, nom de balise ou classe</h1>
+
+    <p>Les méthodes <span class="ttype">getElementById</span> fournissent un accès facile à tout élément, ou groupe d'éléments, dans un document sans avoir à se reposer sur les relations parent/enfant des noeuds. Les trois méthodes les plus utilisées sont : </p>
+
+    <ul class="chevrons, ttype">
+      <li>getElementById</li>
+      <li>getElementByTagName</li>
+      <li>getElementByClassName</li>
+    </ul>
+
+    <h2>getElementById</h2>
+
+    <p>C'est de loin la méthode la plus employée pour sélectionner des éléments. <span class="ttype">getElementById</span> est essentielle pour le développement d'applications Web modernes. Avec cet outil pratique, vous pouvez trouver n'importe quel élément avec lequel vous avez besoin de travailler, simplement en faisant référence à un attribut <span class="ttype">id</span> unique. Quoi qu'il se passe d'autre dans le document HTML, <span class="ttype">getElementById</span> sera toujours à votre disposition pour sélectionner exactement l'élément voulu.</p>
+
+    <h2>getElementByTagName</h2>
+
+    <p>La méthode <span class="ttype">getElementByTagName</span> renvoie une liste de tous les éléments possédant le nom de balise spécifié.</p>
+
+    <h2>getElementByClassName</h2>
+
+    <p>Cette méthode est semblable en termes de fonctionnement à <span class="ttype">getElementByTagName</span>, à ceci près qu'elle utilise les valeurs de l'attribut <span class="ttype">class</span> pour sélectionner les éléments.</p>
+
+    <h1>Utiliser les propriétés de l'objet Attribut</h1>
+
+    <p>L'objet <span class="ttype">Attribut</span> fournit des propriétés pour travailler avec les attributs des éléments HTML.</p>
+
+    <table style="margin-left: 30%;">
+      <caption>Les propriétés de l'objet Attribut</caption>
+      <colgroup>
+        <col style="width:25%; font-family: 'sans serif'; background-color: #FFF8DC;">
+        <col style="width:75%; background-color: #DEB887;">
+      </colgroup>
+      <tr>
+        <th>Propriété</th>
+        <th>Utilisation</th>
+      </tr>
+      <tr>
+        <td>isId</td>
+        <td>Génère true si l'attribut est un id, false sinon</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>Fournit le nom de l'attribut</td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>Récupère ou définit la valeur de l'attribut</td>
+      </tr>
+      <tr>
+        <td>specified</td>
+        <td>Génère true si l'attribut a été spécifié, false sinon</td>
+      </tr>
+    </table>
+
+    <h2>Créer et ajouter des éléments</h2>
+
+    <p>Pour créer un nouvel élément dans un document HTML, utilisez la méthode document.createElement(). Dans ce cas, une balise de début et une balise de fin du type que vous spécifiez seront ajoutées au document.</p>
+
+    <h2>Supprimer des éléments</h2>
+
+    <p>Malgré toutes les grandes choses qu'il vous permet d'accomplir avec vos documents HTML, le modèle DOM n'est pas toujours appréciés des programmeurs JavaScript professionnels. Il a en effet quelques bizarreries et tend à rendre les choses plus difficiles qu'elles ne devraient l'être.</p>
+
+    <p>L'un des grands défauts du DOM, c'est qu'il ne fournit aucun moyen permettant de supprimer directement un élément d'un document. Pour y arriver, vous devez demander à DOM de trouver le parent de l'élément que vous voulez supprimer, puis demander à ce parent d'effectuer le sale travail. Cela peut paraître un peu confus.</p>
+
+    
+
+  </body>
+</html>

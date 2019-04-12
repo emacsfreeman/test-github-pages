@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>La famille HTML</title>
+  </head>
+  <body>
+    <section> <!-- parent des 3 éléments suivants, enfant de body -->
+      <p>Premier</p> <!-- 1er enfant de <section>, frère de 2 <p> -->
+      <p>Deuxième</p> <!-- 2e enfant de <section>, frère de 2 <p> -->
+      <p>Troisième</p> <!-- 3e enfant de <section>, frère de 2 <p> -->
+    </section>
+    <h1>Noeuds dans l'élément section</h1>
+    <script type="text/javascript">
+      var myNodelist = document.body.childNodes[1].childNodes;
+      for (i = 0; i < myNodelist.length; i++) {
+        document.write(myNodelist[i] + "<br>");
+      }
+    </script>
+  </body>
+</html>

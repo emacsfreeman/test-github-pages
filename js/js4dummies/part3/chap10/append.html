@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Voici quelques types de balles</h1>
+    <ul id="ballList">
+
+    </ul>
+
+    <script type="text/javascript">
+      var typeOfBall = ["basket", "rugby", "tennis", "foot", "hand"];
+      for (var i = 0; i < typeOfBall.length; i++) {
+        var listElement = document.createElement("li");
+        listElement.innerHTML = typeOfBall[i];
+        document.getElementById("ballList").appendChild(listElement);
+      }
+    </script>
+  </body>
+</html>
