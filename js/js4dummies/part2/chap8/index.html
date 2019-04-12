@@ -49,5 +49,339 @@
 
     <h1>Créer des objets</h1>
 
+    <p>JavaScript propose deux procédés pour créer des objets :</p>
+
+    <ul>
+      <li>La méthode littérale d'écriture d'objet</li>
+      <li>La méthode de création par constructeur</li>
+    </ul>
+
+    <p>Le choix à faire dépend des circonstances. Dans les sections qui suivent, vous allez découvrir les pour et les contre de chaque méthode, et quand il vaut mieux choisir l'une plutôt que l'autre.</p>
+
+    <h2>Définir des objets : la méthode littérale</h2>
+
+    <p>Cette technique de création d'objet débute par une définition standard de variable, donc en commençant par le mot-clé <span class="ttype">var</span> suivi du nom de l'objet et de l'opérateur d'affectation :</p>
+    <p class="ttype">var personne</p>
+
+    <p>La suite est différente. Vous placez entre des accolades des couples nom/valeur séparés d'une virgule, comme ceci :</p>
+    <p class="ttype">var personne = {yeux:2,pieds:2,mains:2,couleurYeux:"bleu"};</p>
+
+    <p>Si vous ne connaissez pas les propriétés de l'objet au moment de sa création, ou si votre programme nécessite l'ajout ultérieur de nouvelles propriétés, vous pouvez créer cet objet avec un nombre minimum de propriétés, voire aucune. Il vous suffit d'en compléter plus tard la liste :</p>
+
+    <div class="ttype">
+      var personne = {}; <br>
+      personne.yeux = 2; <br>
+      personne.cheveux = "blonds"; <br>
+    </div>
+
+    <p>Les méthodes des exemples utilisés dans les chapitres précédents ont surtout été utilisés pour afficher du texte. Nous avons en effet déjà eu à rencontrer de multiples fois les instructions <span class="ttype">document.write</span> et <span class="ttype">console.log</span>, ce qui fait que cette structure séparant le nom de l'objet et une de ses propriétés ou méthodes par un point devrait maintenant vous être familière.</p>
+
+    <p>Un autre point à noter concernant les objets est que, comme les tableaux, leurs propriétés peuvent contenir différents types de données.</p>
+
+    <p>En fait, pour JavaScript, les tableaux et les fonctions sont des types d'objets, et les types de données que sont les nombres, les chaînes de caractères et les valeurs booléennes peuvent aussi être utilisés comme les objets. En d'autres termes, ils ont toutes les propriétés des objets et on peut leur assigner des propriétés de la même manière que pour les objets.</p>
+
+    <h2>Définir des objets : la méthode par constructeur</h2>
+
+    <p>La seconde technique consiste à définir un objet en utilisant le constructeur <span class="ttype">Object</span>. Dans ce cas, la définition débute par <span class="ttype">new Object</span>, suivi des propriétés de l'objet.</p>
+
+    <div class="ttype">
+      var personne = new Object(); <br>
+      personne.pieds = 2; <br>
+      personne.nom = "Julie"; <br>
+      personne.cheveux = "noir"; <br>
+    </div>
+
+    <p>Cependant, cette façon de procéder n'est généralement pas considérée comme étant la meilleure. Il y a à cela plusieurs raisons :</p>
+    <ul>
+      <li>Elle implique davantage de saisie que la méthode littérale</li>
+      <li>Elle est moins efficace dans les navigateurs Web</li>
+      <li>Elle est plus difficile à lire que la méthode littérale</li>
+    </ul>
+
+    <h1>Retrouver et définir les propriétés des objets</h1>
+
+    <p>Une fois que vous avez créé un objet et défini ses propriétés, vous allez évidemment vouloir retrouver et modifier celles-ci. Vous disposez pour cela de deux variantes : la notation point et l'emploi de crochets droits.</p>
+
+    <h2>La notation point</h2>
+
+    <p>Dans cette notation, le nom de l'objet est suivi d'un point, puis du nom de la propriété que vous voulez lire ou définir.</p>
+
+    <p>Pour créer une nouvelle propriété de l'objet <span class="ttype">personne</span> appelée <span class="ttype">nomFamille</span>, par exemple, ou encore pour modifier la valeur d'une propriété <span class="ttype">nomFamille</span> existante, vous utilisez dans ce cas une syntaxe de ce genre : </p>
+    <p class="ttype">personne.nomFamille = "Durand";</p>
+
+    <p>Si cette propriété n'existe pas encore, cette instruction va la créer. Si elle existe déjà, elle va modifier sa valeur.</p>
+
+    <p>Pour retrouver une certaine propriété avec cette syntaxe, vous écrivez en fait la même chose, mais à un emplacement différent dans l'instruction (on parle alors d'<em>accesseur</em>). Par exemple, si vous voulez concaténer les valeurs contenues dans les propriétés <span class="ttype">nomFamille</span> et <span class="ttype">prenom</span> d'un objet <span class="ttype">personne</span>, et affecter le résultat à une nouvelle variable appelée <span class="ttype">nomComplet</span>, vous allez écrire ceci :</p>
+    <p class="ttype">document.write(person.nomFamille);</p>
+
+    <p>La notation point est généralement plus rapide à taper, et plus facile à lire, pour retrouver ou définir les propriétés des objets.</p>
+
+    <h2>La notation avec crochets droits</h2>
+
+    <p>Cette notation repose sur le même principe que la précédente, si ce n'est que le point est remplacé par des crochets droits, le nom de la propriété étant spécifié entre guillemets, comme ceci :</p>
+    <p class="ttype">personne["nomFamille"] = "Durand";</p>
+
+    <p>Cette technique offre davantage de possibilités que la notation point. La principale différence est qu'elle vous permet d'utiliser des noms de variables entre les crochets droits pour le cas où le nom de la propriété ne serait pas connu lorsque vous écrivez votre prorgramme.</p>
+
+    <p>L'exemple qui suit fait exactement la même chose que le précédent, mais cette fois le nom littéral de la propriété est remplacé par celui d'une variable. De cette manière, vous pouvez créer une instruction qui peut servir dans de multiples circonstances, par exemple dans une boucle ou dans une fonction :</p>
+
+    <div class="ttype">
+      var personneProp = "nomFamille";<br>
+      personne[personneProp] = "Durand";<br>
+    </div>
+
+    <!--
+    <script type="text/javascript">
+      var myCrypto = {"NomCrypto":"", "PrixCrypto":"", "Coinmarketcap":""};
+
+      function configureCrypto() {
+        var userValue;
+        for (var property in myCrypto) {
+          if (myCrypto.hasOwnProperty(property)) {
+            userValue = prompt("Entrez une valeur pour " + property);
+            myCrypto[property] = userValue;
+          }
+        }
+      }
+
+      function writeCryptoReceipt() {
+        document.write("<h2>Votre crypto aura la configuration suivante :</h2>");
+        for (var property in myCrypto) {
+          if (myCrypto.hasOwnProperty(property)) {
+            document.write("<p>" + property + ":" + myCrypto[property] + "</p>");
+          }
+        }
+      }
+      configureCrypto();
+      writeCryptoReceipt();
+    </script>
+  -->
+
+    <h1>Supprimer des propriétés</h1>
+
+    <p>Vous pouvez supprimer des propriétés d'un objet en utilisant l'opérateur <span class="ttype">delete</span>.</p>
+
+    <div class="ttype">
+      var myObject = new Object(); // crée un nouvel objet <br>
+      // ajoute des propriétés à l'objet <br>
+      myObject.var1 = "valeur 1"; <br>
+      myObject.var2 = "valeur 2"; <br>
+      myObject.var3 = "valeur 3"; <br>
+      // supprime var2 de myObject <br>
+      delete myObject.var2; <br>
+      // essaie d'écrire la valeur de var2 <br>
+      document.write(var2 in myObject); // le résultat est 1 erreur <br>
+    </div>
+
+    <h1>Travailler avec les méthodes</h1>
+
+    <p>Les <em>méthodes</em> sont des propriétés dont la valeur est définie par une fonction. Pour définir une méthode, vous procédez exactement comme pour n'importe quelle autre fonction. La seule différence, c'est qu'une méthode est affectée à une propriété d'un objet.</p>
+
+    <div class="ttype">
+      var sandwich = { <br>
+      meat:"", <br>
+      cheese:"", <br>
+      bread:"", <br>
+      condiment:"", <br>
+      makeSandwich: function (meat, cheese, bread, condiment) { <br>
+        sandwich.meat = meat; <br>
+        sandwich.bread = bread; <br>
+        var mySandwich = sandwich.bread + ", " + sandwich.meat + ", " + sandwich.cheese + ", " + sandwich.condiment; <br>
+        return mySandwich; <br>
+      }<br>
+    }<br>
+    </div>
+
+    <p>Pour appeler la méthode <span class="ttype">makeSandwich</span> de l'objet <span class="ttype">sandwich</span>, vous pouvez utiliser la notation point, exactement comme si vous accédiez à une propriété, mais en spécifiant des parenthèses après le nom de la méthode.</p>
+
+    <script type="text/javascript">
+      var sandwich = {
+        meat:"",
+        cheese:"",
+        bread:"",
+        condiment:"",
+        makeSandwich: function (meat, cheese, bread, condiment) {
+          sandwich.meat = meat;
+          sandwich.cheese = cheese;
+          sandwich.bread = bread;
+          sandwich.condiment = condiment;
+          var mySandwich = sandwich.bread + ", " + sandwich.meat + ", " + sandwich.cheese + ", " + sandwich.condiment;
+          return mySandwich;
+        }
+      }
+
+      var sandwichOrder = sandwich.makeSandwich("jambon", "cheddar", "pain au cumin", "moutarde forte");
+      document.write(sandwichOrder);
+    </script>
+
+    <h1>Utiliser this</h1>
+
+    <p>Le mot-clé <span class="ttype">this</span> est un raccourci qui permet de faire référence à l'objet concerné par une méthode. </p>
+
+    <div class="ttype">
+      var sandwich = { <br>
+      meat:"", <br>
+      cheese:"", <br>
+      bread:"", <br>
+      condiment:"", <br>
+      makeSandwich: function (meat, cheese, bread, condiment) { <br>
+        this.meat = meat; <br>
+        this.bread = bread; <br>
+        var mySandwich = this.bread + ", " + this.meat + ", " + this.cheese + ", " + this.condiment; <br>
+        return mySandwich; <br>
+      }<br>
+    }<br>
+    </div>
+
+    <p>Ce qui donne le même résultat</p>
+
+    <script type="text/javascript">
+      var sandwich = {
+        meat:"",
+        cheese:"",
+        bread:"",
+        condiment:"",
+        makeSandwich: function (meat, cheese, bread, condiment) {
+          this.meat = meat;
+          this.cheese = cheese;
+          this.bread = bread;
+          this.condiment = condiment;
+          var mySandwich = this.bread + ", " + this.meat + ", " + this.cheese + ", " + this.condiment;
+          return mySandwich;
+        }
+      }
+
+      var sandwichOrder = sandwich.makeSandwich("jambon", "cheddar", "pain au cumin", "moutarde forte");
+      document.write(sandwichOrder);
+    </script>
+
+    <p>Là où <span class="ttype">this</span> devient très utile, c'est lorsque vous avez une fonction susceptible de s'appliquer à plusieurs objets. Ici, le mot-clé <span class="ttype">this</span> fait référence à celui à partir duquel il a été appelé, plutôt que d'être associé à un objet spécifique.</p>
+
+    <h1>Une méthode orientée objet pour devenir riche : l'héritage</h1>
+
+    <p>Lorsque vous créez des objets, vous n'êtes pas limité à quelque chose de tout à fait spécifique, comme votre guitare, votre voiture, votre chat ou votre sandwich. La véritable beauté des objets, c'est que vous pouvez les utiliser pour créer des types d'objets, ou si vous préférez des objets génériques, à partir desquels il est possible de produire des objets plus spécifiques.</p>
+
+    <p>Reprenons la technique de <em>constructeur</em> :</p>
+    <p class="ttype">var personne = new Object();</p>
+
+    <p>Ici, nous créons un objet de type <span class="ttype">Object</span> avec l'instruction <span class="ttype">new Object</span>. Cette nouvelle personne contient toutes les propriétés et méthodes du type <span class="ttype">Object</span>, mais avec un nouveau nom. Vous pouvez ensuite ajouter vos propres propriétés et vos propres méthodes à l'objet <span class="ttype">personne</span> de manière à décrire précisément ce qui est spécifique à une personne. Par exemple :</p>
+
+    <div class="ttype">
+      var personne = new Object(); <br>
+      personne.yeux = 2; <br>
+      personne.oreilles = 2; <br>
+      personne.bras = 2; <br>
+      personne.mains = 2; <br>
+      personne.pieds = 2; <br>
+      personne.jambes = 2; <br>
+      personne.genre = "Homo sapiens"; <br>
+    </div>
+
+    <p>Nous venons de définir les propriétés particulières à une personne en <em>général</em>. Mais imaginez maintenant que vous vouliez créer un nouvel objet pour un objet <em>en particulier</em>, disons Satoshi Nakamoto. Vous pourriez bien entendu simplement définir un objet supplémentaire appelé <span class="ttype">SatoshiNakamoto</span>, et lui affecter les mêmes propriétés qu'à l'objet <span class="ttype">personne</span>, plus celles qui sont éventuellement uniques dans le cas de Satoshi Nakamoto. Par exemple : </p>
+
+    <div class="ttype">
+      var SatoshiNakamoto = new Object();<br>
+      SatoshiNakamoto.yeux = 2;<br>
+      SatoshiNakamoto.oreilles = 2;<br>
+      SatoshiNakamoto.bras = 2;<br>
+      SatoshiNakamoto.mains = 2;<br>
+      SatoshiNakamoto.pieds = 2;<br>
+      SatoshiNakamoto.jambes = 2;<br>
+      SatoshiNakamoto.genre = "Homo sapiens";<br>
+      SatoshiNakamoto.profession = "cypher-punk";<br>
+      SatoshiNakamoto.invention = "Bitcoin";<br>
+    </div>
+
+    <p>Pour autant, cette méthode est une énorme perte de temps et d'efficacité. Elle vous impose un tas de travail, et rien n'indique que Satoshi Nakamoto soit tout simplement une personne. Simplement, elle possède les mêmes propriétés qu'une personne, mais il pourrait tout aussi bien s'agir d'un robot ou de quoi que ce soit d'autre.</p>
+
+    <p>La solution consiste à créer un nouveau type d'objet, appelé <span class="ttype">Personne</span>, puis à définir SatoshiNakamoto comme étant un objet de type <span class="ttype">Personne</span>.</p>
+
+    <p>Notez que lorsque nous parlons du type d'un objet, nous mettons toujours en majuscule l'initiale de ce type. Cela n'a rien d'une obligation, mais c'est une convention presque universelle. Par exemple : </p>
+    <p class="ttype">var personne = new Object();</p>
+    <p>Ou bien : </p>
+    <p class="ttype">SatoshiNakamoto = Personne();</p>
+
+    <h2>Objets et constructeurs</h2>
+
+    <p>Pour créer un nouveau type d'objet, vous définissez une nouvelle fonction, ou constructeur. Ces fonctions sont formées comme toutes les autres dans JavaScript, mais elles utilisent le mot-clé <span class="ttype">this</span> pour affecter des propriétés à un objet. Le nouvel objet hérite ensuite des propriétés du type d'objet.</p>
+
+    <div class="ttype">
+      function Personne() { <br>
+        this.yeux = 2; <br>
+        this.oreilles = 2; <br>
+        this.bras = 2; <br>
+        this.mains = 2; <br>
+        this.pieds = 2; <br>
+        this.jambes = 2; <br>
+        this.genre = "Homo sapiens"; <br>
+      } <br>
+    </div>
+
+    <p>Pour créer maintenant un nouvel objet de type Personne, il suffit d'affecter la fonction à une nouvelle variable. Par exemple :</p>
+
+    <p class="ttype">var SatoshiNakamoto = new Personne();</p>
+
+    <p>L'objet <span class="ttypee">SatoshiNakamoto</span> hérite des propriétés du type d'objet <span class="ttype">Personne</span>. Même si vous n'avez défini aucune propriété particulière pour l'objet <span class="ttype">SatoshiNakamoto</span>, il contient déjà toutes celles de <span class="ttype">Personne</span>.</p>
+
+    <h4>Testons le code</h4>
+
+    <script type="text/javascript">
+      function Personne() {
+        this.yeux = 2;
+        this.oreilles = 2;
+        this.bras = 2;
+        this.mains = 2;
+        this.pieds = 2;
+        this.jambes = 2;
+        this.genre = "Homo sapiens";
+      }
+      var SatoshiNakamoto = new Personne();
+      document.write('<p>Satoshi Nakamoto a ' + SatoshiNakamoto.pieds + ' pieds !</p>');
+    </script>
+
+    <h2>Modifier un type d'objet</h2>
+
+    <p>Supposons que vous avez votre type d'objet <span class="ttype">Personne</span>, qui sert de prototype pour plusieurs autres objets. À un certain moment, vous réalisez que la personne, de même que tous les objets qui en héritent, devrait avoir quelques propriétés supplémentaires.</p>
+
+    <p>Pour modifier un prototype d'objet, vous utilisez la propriété <span class="ttype">prototype</span> qui permet à chaque membre d'héritier des nouveautés.</p>
+
+    <div class="ttype">
+      function Personne() { <br>
+        this.eyes = 2; <br>
+        this.ears = 2; <br>
+        this.arms = 2; <br>
+        this.hands = 2; <br>
+        this.feet = 2; <br>
+        this.legs = 2; <br>
+        this.species = "Homo sapiens"; <br>
+      } <br>
+      var SatoshiNakamoto = new Personne(); <br>
+      var VitalikButerin = new Personne(); <br>
+      // Personne a besoin de plus de propriétés ! <br>
+      Personne.prototype.knees = 2; <br>
+      Personne.prototype.toes = 10; <br>
+      Personne.prototype.elbows = 2; <br>
+      // Vérifie les valeurs des nouvelles propriétés pour un objet existant <br>
+      document.write(SatoshiNakamoto.toes); // => 10 <br>
+    </div>
+
+    <h2>Créer des objets avec Object.create</h2>
+
+    <p>Une autre façon permettant de créer des objets à partir d'autres objets consiste à utiliser la méthode <span class="ttype">Object.create</span>. L'avantage est ici que vous n'avez pas besoin de définir un constructeur. Cette méthode recopie simplement les propriétés d'un objet spécifié (le prototype) dans un autre objet (l'héritier).</p>
+
+    <div class="ttype">
+      // crée un objet Personne générique <br>
+      var Persone = { <br>
+        eyes: 2, <br>
+        arms: 2, <br>
+        feet: 2<br>
+      }<br>
+      // crée l'objet SatoshiNakamoto, basé sur Personne <br>
+      var SatoshiNakamoto = Object.create(Personne); <br>
+      // teste une propriété héritée <br>
+      document.write(SatoshiNakamoto.feet); // => 2 <br>
+    </div>
+
+
   </body>
 </html>
