@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Test window.location</title>
+    <script type="text/javascript">
+      function loadNewPage(url) {
+        window.location = url;
+      }
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var newURL = prompt("Entrez l'adresse d'une page web !");
+      loadNewPage(newURL);
+    </script>
+  </body>
+</html>
