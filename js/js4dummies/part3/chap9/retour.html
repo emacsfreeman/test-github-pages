@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Créer un bouton Retour</title>
+    <script type="text/javascript">
+      function takeMeBack() {
+        window.location(window.history.go(-1));
+      }
+      function getHistoryLength() {
+        var l = window.history.length;
+        return l;
+      }
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var historyLength = getHistoryLength();
+      document.write("<p>Bienvenue ! Le nombre de pages que vous avez visitées dans cette fenêtre est : " + historyLength + ".</p>");
+    </script>
+    <br>
+    <a href="javascript:void(0);" onclick="takeMeBack();">Retour</a>
+  </body>
+</html>
