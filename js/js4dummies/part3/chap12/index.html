@@ -7,5 +7,324 @@
   </head>
   <body>
     <h1>Un peu de culture</h1>
+    <blockquote>
+      <p>&laquo; Dysfonctionnement. Nécessite entrée. &raquo;</p>
+    </blockquote>
+    <cite>Number 5, Short Circuit (1986)</cite>
+
+    <p>Gérer les entrées de l'utilisateur et renvoyer des résultats sont des fonctions de base et évidemment nécessaires pour n'importe quel programme d'ordinateur. Nous allons découvrir comment JavaScript et HTML travaillent de concert pour recevoir et envoyer des données.</p>
+
+    <h1>Comprendre les formulaires HTML</h1>
+
+    <p>La première manière permettant d'obtenir des saisies utilisateur dans des applications Web consiste à faire appel aux formulaires HTML. Les formulaires HTML offrent aux développeurs la possibilité de créer des champs de texte, des listes déroulantes, des boutons raido, des cases à cocher et des boutons. Avec CSS, vous pouvez ajuster l'aspect d'un formulaire en fonction du style de votre site Web. JavaScript vous permet en plus d'améliorer les fonctionnalités de vos formulaires.</p>
+
+    <h2>L'élément form</h2>
+
+    <p>Les formulaires HTML sont contenus dans un élément <span class="ttype">form</span>. Celui-ci est le conteneur dans lequel prennent place les champs de saisie, les boutons, les cases à cocher et les étiquettes qui définissent une zone de saisie utilisateur. L'élément <span class="ttype">form</span> fonctionne pour l'essentiel à l'instar de tout autre conteneur, comme <span class="ttype">div</span>, <span class="ttype">article</span> ou <span class="ttype">section</span>. Mais il contient également certains attributs qui indiquent au navigateur ce qu'il doit faire avec les champs de saisie qu'il contient.</p>
+
+    <p>Dans l'exemple de la page <a href="formulaire.html" target="_blank">formulaire.html</a>, l'élément <span class="ttype">form</span> possède trois attributs : </p>
+
+    <ul class="chevrons">
+      <li><span class="ttype">action</span> : Indique au navigateur ce qu'il doit faire avec la saisie de l'utilisateur. En règle générale, cette action demande l'exécution d'un script côté serveur.</li>
+      <li><span class="ttype">name</span> : Spécifie le nom que le programmeur a affecté à ce formulaire. Cet attribut est notamment utile pour accéder au formulaire en utilisant le modèle DOM.</li>
+      <li><span class="ttype">method</span> : Prend comme valeur <span class="ttype">get</span> ou <span class="ttype">post</span>, ce qui indique si le navigateur devrait envoyer les données du formulaire vers l'URL ou vers l'en-tête HTML.</li>
+    </ul>
+
+    <p>L'élément <span class="ttype">form</span> peut également contenir plusiseurs attributs : </p>
+    <ul class="chevrons">
+      <li><span class="ttype">accept-charset</span> : Indique le jeu de caractères accépté par le serveur. À moins de travailler avec un contenu multilingue (et même dans ce cas), vous pouvez laisser sans danger cet attribut de côté.</li>
+      <li><span class="ttype">autocomplete</span> : Indique si les champs de saisie du formulaire doivent utiliser la fonction de saisie automatique du navigateur.</li>
+      <li><span class="ttype">enctype</span> : Indique le type de contenu que le formulaire devrait soumettre au serveur. Dans le cas de formulaires qui ne traitent que du texte, cet attribut devrait prendre la valeur <span class="ttype">text/html</span>. Si votre formulaire doit soumettre un fichier au serveur (par exemple pour télécharger une image), la valeur de cet attribut devrait être <span class="ttype">multipart/form-data</span>. La valeur par défaut est <span class="ttype">application/x-www-form-urlencoded</span>.</li>
+      <li><span class="ttype">novalidate</span> : Valeur booléenne indiquant si ce qui est saisi dans le formulaire devrait être validé par le navigateur lors de la soumission. Si cet attribut n'est pas spécifié, les formulaires sont validés par défaut.</li>
+      <li><span class="ttype">target</span> : Indique si la réponse renvoyée par le serveur devrait être affichée après soumission du formulaire. La valeur par défaut ("<span class="ttype">_self</span>") demande à ouvrir la réponse dans la même fenêtre de navigation que celle qui contient le formulaire. Une autre option consiste à afficher cette réponse dans une nouvelle fenêtre ("<span class="ttype">_blank</span>"). Il est également possible de spécifier un cadre nommé.</li>
+    </ul>
+
+    <h2>L'élément label</h2>
+
+    <p>Vous pouvez utiliser l'élément <span class="ttype">label</span> pour associer une description (ou étiquette) à un champ de saisie. L'attribut <span class="ttype">for</span> de cet élément prend la valeur de l'attribut <span class="ttype">id</span> de l'élément auquel l'étiquette devrait être associée, comme dans l'exemple suivant :</p>
+
+    <div class="ttype">
+      label for="firstName">Prénom : <br>
+      input type="text" name="firstName"<br>
+    </div>
+
+    <p>Une autre méthode consiste à imbriquer le champ du formulaire à l'intérieur de l'élément <span class="ttype">label</span>, comme ceci :</p>
+    <p class="ttype">label>Prénom : input type="text" name="firstName"</p>
+
+    <p>L'avantage est ici de ne pas avoir à attribuer un identificateur au champ de saisie (ce qui revient bien souvent à dupliquer son attibut <span class="ttype">name</span>).</p>
+
+    <h2>L'élément input</h2>
+
+    <p>L'élément HTML <span class="ttype">input</span> est le plus fondamental en ce qui concerne les formulaires. Selon la valeur de son attribut <span class="ttype">type</span>, il fait afficher (ou non) par le navigateur plusieurs types de champs de saisie.</p>
+
+    <p>Le plus souvent, le type de l'élément <span class="ttype">input</span> est défini avec la valeur "<span class="ttype">text</span>", ce qui demande au navigateur de créer un champ pour la saisie de texte. L'attribut facultatif <span class="ttype">value</span> sert à affecter une valeur par défaut à l'élément, et l'attribut <span class="ttype">name</span> est le nom qui est associé à la valeur pour former un couple nom/valeur qui est accessible <em>via</em> le modèle DOM, et qui est transmis avec le reste des valeurs du formulaire lorsque celui-ci est soumis.</p>
+
+    <p>Un champ de saisie basique de type texte se présente donc de la manière suivante : </p>
+    <p class="ttype">input type="text" name="nomVille"</p>
+
+    <p>Avec HTML 5, l'élément <span class="ttype">input</span> s'est vu doter d'un tas de nouvelles valeurs d'attribut possibles pour <span class="ttype">type</span>. Ces nouvelles valeurs permettent au développeur Web de spécifier plus précisément la nature des données qui devraient être saisies dans le champ du formulaire. Elles permettent également au navigateur de fournir des contrôles mieux adaptés aux différents types de données, et par voie de conséquence de créer de meilleures applications Web.</p>
+
+    <p>Il pourrait sembler un peu étrange de se concentrer autant sur les fonctionnalités de gestion des formulaires HTML, plutôt que de s'attaquer tout de suite à JavaScript. Cependant, les formulaires constituent un domaine dans lequel HTML peut réellement réduire la charge de travail des programmeurs, et il est donc vital que les développeurs JavaScript soient au clair sur ce sujet.</p>
+
+    <p>Les valeurs possibles pour l'attribut <span class="ttype">type</span> de l'élément <span class="ttype">input</span> sont décrites dans le tableau suivant.</p>
+
+    <table>
+      <caption>Valeurs possibles pour l'attribut type de l'élément input</caption>
+      <colgroup>
+        <col style="width:25%; padding: 2%;">
+        <col style="width:75%; padding: 2%;">
+      </colgroup>
+      <tr>
+        <th>Valeur</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td class="meth">button</td>
+        <td class="retour">Un bouton cliquable</td>
+      </tr>
+      <tr>
+        <td class="meth">checkbox</td>
+        <td class="retour">Une case à cocher</td>
+      </tr>
+      <tr>
+        <td class="meth">color</td>
+        <td class="retour">Un sélecteur de couleur</td>
+      </tr>
+      <tr>
+        <td class="meth">date</td>
+        <td class="retour">Un contrôle de date (année, mois et jour)</td>
+      </tr>
+      <tr>
+        <td class="meth">datetime-local</td>
+        <td class="retour">Un contrôle de date et d'heure (année, mois, jour, heure, minute, seconde et fraction de seconde en temps universel coordonnée - TUC ou UTC)</td>
+      </tr>
+      <tr>
+        <td class="meth">email</td>
+        <td class="retour">Un champ pour une adresse de messagerie</td>
+      </tr>
+      <tr>
+        <td class="meth">file</td>
+        <td class="retour">Un champ de sélection de fichier avec un bouton Parcourir</td>
+      </tr>
+      <tr>
+        <td class="meth">hidden</td>
+        <td class="retour">Un champ de saisie caché</td>
+      </tr>
+      <tr>
+        <td class="meth">image</td>
+        <td class="retour">Un bouton Soumettre utilisant une image à la place du nom par défaut</td>
+      </tr>
+      <tr>
+        <td class="meth">month</td>
+        <td class="retour">Un contrôle mois et année</td>
+      </tr>
+      <tr>
+        <td class="meth">number</td>
+        <td class="retour">Un champ de saisie numérique</td>
+      </tr>
+      <tr>
+        <td class="meth">password</td>
+        <td class="retour">Un champ de saisie pour un mot de passe</td>
+      </tr>
+      <tr>
+        <td class="meth">radio</td>
+        <td class="retour">Un bouton radio</td>
+      </tr>
+      <tr>
+        <td class="meth">range</td>
+        <td class="retour">Un champ de saisie utilisant une plage de nombres, comme un contrôle avec glissière</td>
+      </tr>
+      <tr>
+        <td class="meth">reset</td>
+        <td class="retour">Un bouton Réinitialiser</td>
+      </tr>
+      <tr>
+        <td class="meth">search</td>
+        <td class="retour">Un champ de texte pour saisir un critère de recherche</td>
+      </tr>
+      <tr>
+        <td class="meth">submit</td>
+        <td class="retour">Un bouton Soumettre</td>
+      </tr>
+      <tr>
+        <td class="meth">tel</td>
+        <td class="retour">Un champ pour entrer un numéro de téléphone</td>
+      </tr>
+      <tr>
+        <td class="meth">text</td>
+        <td class="retour">Un champ pour saisir une unique ligne de texte (c'est la valeur par défaut)</td>
+      </tr>
+      <tr>
+        <td class="meth">time</td>
+        <td class="retour">Un contrôle pour entrer une heure (pas de zone de temps)</td>
+      </tr>
+      <tr>
+        <td class="meth">url</td>
+        <td class="retour">Un champ pour saisir une URL</td>
+      </tr>
+      <tr>
+        <td class="meth">week</td>
+        <td class="retour">Un contrôle semaine et année (pas de zone de temps)</td>
+      </tr>
+    </table>
+
+    <h2>L'élément select</h2>
+
+    <p>L'élément HTML <span class="ttype">select</span> définit soit une liste déroulante, soit une saisie avec sélection multiple. Cet élément contient une série d'options, qui sont les choix proposés à l'utilisateur dans le contrôle <span class="ttype">select</span>, comme l'illustre la page <a href="formulaire2.html">formulaire2.html</a>.</p>
+
+    <h2>L'élément textarea</h2>
+
+    <p>L'élément <span class="ttype">textarea</span> définit un champ de saisie multiligne. Dans l'exemple qui suit, ce champ comporte quatre lignes sur une largeur de trente caractères : </p>
+    <p class="ttype">textarea name="description" rows="4" cols="30"</p>
+
+    <h2>L'élément button</h2>
+
+    <p>L'élément <span class="ttype">button</span> fournit peut être utilisé à la place d'éléments <span class="ttype">input</span> dans lesquels l'attribut <span class="ttype">type</span> est défini avec la valeur "<span class="ttype">submit</span>". Mais vous pouvez également vous en servir partout où vous avez besoin d'un bouton, sans pour autant vouloir soumettre quoi que ce soit.</p>
+
+    <p class="warning">Si vous ne voulez pas que le bouton soumette le formulaire lorsque l'utilisateur clique dessus, vous devez lui ajouter un attribut <span class="ttype">type</span> ayant pour valeur "<span class="ttype">button</span>".</p>
+
+    <h1>Travailler avec l'objet Form</h1>
+
+    <p>Le modèle HTML DOM représente les formulaires en utilisant l'objet <span class="ttype">Form</span>. <em>Via</em> cet objet, vous pouvez récupérer et définir la valeur des champs d'un formulaire, contrôler l'action à exécuter lorsque l'utilisateur soumet un formulaire, et modifier le comportement de celui-ci.</p>
+
+    <h2>Utiliser les propriétés de l'objet Form</h2>
+
+    <p>Les propriétés de l'objet <span class="ttype">Form</span> correspondent aux attributs de l'élément HTML <span class="ttype">form</span>. Ils sont utilisés pour retrouver ou définir les valeurs de l'élément HTML <span class="ttype">form</span> avec JavaScript.</p>
+
+    <p>Les objets DOM sont des représentations des pages HTML. Leur but est de vous donner accès à différentes parties du document <em>via</em> JavaScript (ce que l'on appelle l'<em>interface de programmation</em>). Tout ce qui se trouve dans un document HTML peut être récupéré et modifié en utilisant le modèle DOM.</p>
+
+    <table>
+      <caption>Les propriétés de l'objet Form</caption>
+      <colgroup>
+        <col style="width:25%;">
+        <col style="width:75%;">
+      </colgroup>
+      <tr>
+        <th>Propriété</th>
+        <th>Utilisation</th>
+      </tr>
+      <tr>
+        <td class="meth">acceptCharset</td>
+        <td class="retour">Récupère ou définit une liste des jeux de caractères pris en charge par le serveur</td>
+      </tr>
+      <tr>
+        <td class="meth">action</td>
+        <td class="retour">Lit ou définit la valeur de l'attribut <span class="ttype">action</span> de l'élément <span class="ttype">form</span></td>
+      </tr>
+      <tr>
+        <td class="meth">autocomplete</td>
+        <td class="retour">Lit ou définit l'état de la fonction de saisie automatique du navigateur </td>
+      </tr>
+      <tr>
+        <td class="meth">encoding</td>
+        <td class="retour">Indique au navigateur comment encoder les données du formulaire (comme texte ou en tant que fichier), synonyme de enctype </td>
+      </tr>
+      <tr>
+        <td class="meth">enctype</td>
+        <td class="retour">Indique au navigateur comment encoder les données du formulaire (comme texte ou en tant que fichier) </td>
+      </tr>
+      <tr>
+        <td class="meth">length</td>
+        <td class="retour">Récupère le nombre de contrôles dans le formulaire </td>
+      </tr>
+      <tr>
+        <td class="meth">method</td>
+        <td class="retour">Récupère ou définit la méthode HTTP que le navigateur utilise pour soumettre le formulaire </td>
+      </tr>
+      <tr>
+        <td class="meth">noValidate</td>
+        <td class="retour">Indique que le formulaire n'a pas besoin d'être validé avant soumission </td>
+      </tr>
+      <tr>
+        <td class="meth">target</td>
+        <td class="retour">Indique où doivent être affichés les résultats du formulaire qui a été soumis </td>
+      </tr>
+    </table>
+
+    <div class="apparte">
+      <h2>Utiliser l'attribut autocomplete</h2>
+      <div class="columns2">
+        <p>L'attribut <span class="ttype">autocomplete</span> d'un élément HTML <span class="ttype">form</span> définit la valeur par défaut de la saisie automatique pour les éléments <span class="ttype">input</span> d'un formulaire. Si vous voulez que la navigateur propose de compléter automatiquement la saisie pour chaque champ de saisie du formulaire, affectez la valeur '<span>on</span>' à l'attribut <span>autocomplete</span>.</p>
+        <p>Si vous voulez être capable de sélectionner les éléments pour lesquels la saisie automatique est activée, ou si votre document gère lui-même cette fonctionnalité (<em>via</em> JavaScript), donnez à l'attribut <span class="ttype">autocomplete</span> du formulaire la valeur '<span>off</span>'. Vous pourrez alors personnaliser cet attribut pour cahque élément <span class="ttype">input</span> individuel du formulaire.</p>
+      </div>
+    </div>
+
+    <p>Pour obtenir par exemple la propriété <span class="ttype">name</span> du premier formulaire du document, vous pourriez écrire l'instruction suivante : </p>
+    <p class="ttype">document.getElementByTagName("form")[0].name</p>
+
+    <p>Une manière plus courante d'accéder à un formulaire consiste à lui assigner un attribut <span class="ttype">id</span>, puis à utiliser <span class="ttype">getElementById</span> pour le sélectionner.</p>
+
+    <p>Le modèle DOM fournit une autre méthode, plus pratique, pour accéder aux formulaires : la <em>collection</em> <span class="ttype">forms</span>. Avec cette collection, vous pouvez accéder aux formulaires d'un document de deux manières :</p>
+    <ul class="chevrons">
+      <li> <span>Par un numéro d'indice : </span> Lorsqu'un élément <span class="ttype">form</span> est créé dans le document, un indice débutant à zéro lui est affecté. Pour accéder à ce formulaire, utilisez la syntaxe <span class="ttype">document.forms[0]</span>.</li>
+      <li> <span>Par le nom : </span> Vous pouvez aussi accéder aux formulaires en utilisant l'attribut <span class="ttype">name</span> de l'élément <span class="ttype">form</span>. Par exemple, pour obtenir la valeur de la propriété <span class="ttype">action</span> d'un formulaire ayant pour nom "<span class="ttype">formSouscription</span>", vous pourriez écrire <span class="ttype">document.forms.formSouscription.action</span>. Une autre manière de procéder consisterait à utiliser des crochets droits comme ceci : <span class="ttype">document.forms["formSouscription"].action</span>.</li>
+    </ul>
+
+    <h2>Utiliser les méthodes de l'objet Form</h2>
+
+    <p>L'objet <span class="ttype">Form</span> possède deux méthodes : <span class="ttype">reset()</span> et <span class="ttype">submit()</span>.</p>
+
+    <h3>La méthode reset()</h3>
+
+    <p>La méthode <span class="ttype">reset()</span> réinitialise toutes les modifications dans les champs du formulaire qui ont été effectuées une fois la page chargée. Ces champs sont donc remis à leur valeur par défaut. Le résultat est identique à celui du bouton HTML Annuler, qui est créé en utilisant un attribut <span class="ttype">type="reset"</span> avec un élément <span class="ttype">input</span>, comme dans le code suivant : </p>
+    <p class="ttype">input type="reset" value="Effacer le formulaire"></p>
+
+    <h3>La méthode submit()</h3>
+
+    <p>La méthode <span class="ttype">submit()</span> provoque la soumission des valeurs du formulaire en fonction des propriétés définies par celui-ci (<span>action, method, target</span>, et ainsi de suite). Le résultat est le même qu'avec le bouton HTML Soumettre, qui est créé en utilisant un attribut <span class="ttype">type="submit"</span> avec un élément <span class="ttype">input</span>, comme dans le code suivant : </p>
+    <p class="ttype">input type="submit" value="Soumettre le formulaire"></p>
+
+    <p>Voir la <a href="newsletter.html" target="_blank">newsletter</a>.</p>
+
+    <h2>Accéder aux éléments du formulaire</h2>
+
+    <p>JavaScript offre plusieurs techniques permettant d'accéder aux champs de saisie d'un formulaire et à leur valeur. Cependant, toutes ces techniques ne sont pas nées égales, et il existe des différences d'opinions entre programmeurs JavaScript à ce sujet. Dans ce qui suit, nous allons passer en revue ces techniques en signalant les points positifs et les inconvénients de chacune : </p>
+
+    <ul class="chevrons">
+      <li> <strong>Utiliser le numéro d'indice du formulaire et de ses champs de saisie.</strong> Par exemple, pour accéder au premier champ de saisie du premier formulaire, vous pourriez utiliser le code suivant :
+        <p class="ttype">document.forms[0].elements[0]</p>
+        <p>Cette technique est à éviter, car elle repose sur l'idée que la structure du document et l'ordre des éléments à l'intérieur du formulaire ne changera pas. Dès l'instant où quelqu'un déciderait que le champ <span class="ttype">email</span> devrait être maintenant placé avant le champ <span class="ttype">nom</span>, c'est l'ensemble du script qui serait ruiné.</p>
+      </li>
+      <li> <strong>Utiliser le nom du formulaire et le nom du champ de saisie.</strong> Par exemple :
+        <p class="ttype">document.monForm.Nom</p>
+        <p>Cette façon de procéder est plus facile à lire et à utiliser. Elle est prise en charge par tous les navigateurs (de plus, elle existe pratiquement depuis le début du développement du modèle DOM).</p>
+      </li>
+      <li> <strong>Utiliser <span class="ttype">getElementById</span> pour sélectionner le formulaire, et le nom du champ de saisie concerné.</strong> Par exemple :
+        <p class="ttype">document.monForm.Nom</p>
+        <p>Cette technique nécessite que vous affectiez un attribut <span class="ttype">id</span> à l'élément <span class="ttype">form</span>. Par exemple, le code ci-dessus rechercherait un champ appelé <span class="ttype">Nom</span> dans un élément <span class="ttype">form</span> construit de cette manière : </p>
+        <div class="ttype">
+          < form id="monForm" action="monaction.php" ><br>
+          ...<br>
+          < / form ><br>
+        </div>
+      </li>
+      <li>
+        <strong>Utiliser une valeur d'attribut <span class="ttype">id</span> unique pour le champ afin d'accéder directement à celui-ci.</strong> Par exemple :
+        <p class="ttype">document.getElementById("Nom")</p>
+        <p>Dans ce cas, si vous avez plusieurs formulaires sur votre page, vous devrez vous assurer que chaque champ, où qu'il se trouve, possède un attribut <span class="ttype">id</span> parfaitement unique (en fait, comme les attributs <span class="ttype">id</span> doivent de toute manière être uniques, ce n'est pas véritablement un problème).</p>
+      </li>
+    </ul>
+
+    <h2>Obtenir et définir les valeurs des éléments d'un formulaire</h2>
+
+    <p>Le modèle DOM vous donne accès aux éléments des formulaires (nom et valeur) en utilisant les propriétés <span class="ttype">name</span> et <span class="ttype">value</span>. Voir la <a href="calculette.html" target="_blank">calculette.html</a>.</p>
+
+    <h2>Valider la saisie de l'utilisateur</h2>
+
+    <p>L'un des rôles les plus courants de JavaScript consiste à contrôler, ou valider, le contenu du formulaire avant qu'il ne soit soumis au serveur. La validation de formulaire en JavaScript fournit une protection supplémentaire contre des données fausses ou potentiellement dangereuses qui pourraient perturber, voire corrompre, une application Web. Elle permet également de signaler tout de suite à l'utilisateur les erreurs qu'il aurait pu commettre.</p>
+
+    <p>Certaines de ces tâches de validation JavaScript ont été remplacées par des attributs HTML depuis l'introduction de HTML 5. Cependant, du fait des problèmes de compatibilité HTML 5 que connaissent la plupart des navigateurs, il reste préférable de valider les données saisies par l'utilisateur en faisant appel à JavaScript.</p>
+
+    <p>Dans le cas de la calculatrice dévélopée précédemment, le type de donnée a été défini comme étant numérique pour les deux opérandes. De cette manière, le navigateur devrait refuser toute autre saisie que des nombres. Pour autant, comme ce type est relativement nouveau, vous ne pouvez pas toujours compter sur le navigateur pour le prendre en charge. C'est pourquoi la validation de la saisie utilisateur par JavaScript reste si importante.</p>
+
+    <p>La chose importante à noter ici est que l'action du formulaire est configurée pour déclencher la fonction de validation de la saisie. La méthode <span class="ttype">submit()</span> du formulaire n'est exécutée qu'une fois les tests de la fonction de validation exécutés.</p>
+
+    <p>La ligne de code qui prend en charge cette validation se trouve dans la fonction <span class="ttype">validate()</span>. Elle a un aspect un peu étrange :</p>
+    <p class="ttype">if (/^\d+$/.test(first) && /^\d+$/.test(second)) {}</p>
+
+    <p>Les caractères entres les barres obliques constituent ce qu'on appelle une <em>expression régulière</em>. Une expression régulière est un motif de recherche formé de symboles qui représentent des groupes d'autres symboles. Dans ce cas, nous utilisons une telle expression pour vérifier si les valeurs saisies par l'utilisateur sont toutes deux numériques.</p>
+
+    <p>La validation de la saisie est une application si courante en JavaScript que de nombreuses techniques différentes ont été créées pour réaliser ce type de tâche. Avant de vous mettre à réinventer la roue, je vous suggère de faire une recherche portant sur un critère tel que <q lang="fr">validation de saisie JavaScript</q>, ou mieux encore (mais en anglais) <q lang="fr">open source JavaScript input validation</q>, afin de voir si vous pouvez trouver des bibliothèques de code existantes qui pourraient vous faire gagner beaucoup de temps, tout en vous offrant davantage de fonctionnalités.</p>
+
   </body>
 </html>

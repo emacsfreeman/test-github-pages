@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Abonnez-vous à notre newsletter !</title>
+    <script type="text/javascript">
+      function setFormDefaults() {
+        document.forms.subsribeForm.method = "post";
+        document.forms.subsribeForm.target = "_blank";
+        document.forms.subsribeForm.action = "https://laurentgarnier.podia.com/email_lists/20100/subscriptions";
+
+        // enregistre les événements
+        document.getElementById('btnSubscribe').addEventListener('click', submitForm);
+        document.getElementById('btnReset').addEventListener('click', resetForm);
+      }
+      function submitForm() {
+        document.forms.subscribeForm.submit();
+      }
+      function resetForm() {
+        document.forms.subscribeForm.reset();
+      }
+    </script>
+  </head>
+  <body onload="setFormDefaults();">
+    <form name="subscribeForm">
+      <h2>Inscrivez-vous à notre liste de diffusion</h2>
+      <label for="mce-EMAIL">Adresse de messagerie</label>
+      <input type="email" name="EMAIL" value="" id="mce-EMAIL">
+      <button type="button" id="btnSubscribe">Abonnez-vous !</button>
+      <button type="button" id="btnReset">Réinitialiser</button>
+    </form>
+  </body>
+</html>
