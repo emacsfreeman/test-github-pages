@@ -3,12 +3,117 @@
   <head>
     <meta charset="utf-8">
     <title>Comprendre les fonctions de rappel et les fermetures</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
+
     <h1>Un peu de culture</h1>
     <blockquote>
       <p>&laquo; Hier est parti pour toujours. Demain ne viendra peut-être jamais. Seul aujourd'hui t'appartient. &raquo;</p>
     </blockquote>
     <cite>Anonyme</cite>
+
+    <p>Les fonctions de rappel (<em>callbacks</em>) et les fermetures (<em>closures</em>) sont deux des techniques les plus utiles et les plus largement utilisées en JavaScript. Dans ce chapitre, vous allez apprendre pourquoi et comment passer des fonctions en tant que paramètres à d'autres fonctions.</p>
+
+    <h1>C'est quoi, les fonctions de rappel ?</h1>
+
+    <p>Les fonctions de JavaScript sont des objets. Cette phrase est la clé pour comprendre la plupart des techniques les plus avancées de JavaScript, y compris donc les fonctions de rappel.</p>
+
+    <p>Les fonctions, comme tous les autres objets, peuvent être affectées à des variables, être passées en argument à d'autres fonctions, ou encore être créées et retournées à partir de fonctions.</p>
+
+    <h2>Passer des fonctions comme argument</h2>
+
+    <p>Une <em>fonction de rappel</em> (ou <em>callback</em>) est une fonction qui est passée en tant qu'argument à une autre fonction. Il s'agit d'une technique qui est possible en JavaScript du fait que les fonctions sont considérées comme des objets.</p>
+
+    <p>Les objets <q lang="fr">fonction</q> contiennent une chaîne qui est le code de la fonction. Lorsque vous appelez une fonction en donnant son nom suivi de parenthèses, vous lui demandez d'exécuter son code. Par contre, lorsque vous nommez une fonction ou que vous la passez en argument sans spécifier les parenthèses, son code n'est pas exécuté.</p>
+
+    <p>Le Chapitre 11 contient des exemples de fonctions de rappel utilisées avec la méthode <span class="ttype">addEventListener</span>, comme dans : </p>
+    <p class="ttype">document.addEventListener('click', faireQuelqueChose, false);</p>
+
+    <p>Cette méthode prend comme arguments un événement (<span class="ttype">click</span>) et un objet <span class="ttype">Function</span> (<span class="ttype">faireQuelqueChose</span>). La fonction de rappel n'est pas exécutée tout de suite, mais uniquement quand l'événement est déclenché.</p>
+
+    <h2>Ecrire des fonctions avec des rappels</h2>
+
+    <p>Voici un exemple simple de fonction, <span class="ttype">doMath</span>, qui accepte en argument une fonction de rappel : </p>
+
+    <div class="ttype">
+      function doMath(number1, number2, callback) {<br>
+        var result = callback(number1, number2); <br>
+        document.write("Le résultat est : " + result); <br>
+      } <br>
+    </div>
+
+    <p>Il s'agit ici d'une fonction générique qui peut retourner le résultat produit par n'importe quel opérateur mathématique demandant deux opérandes. La fonction de rappel que vous lui passez spécifie les opérations qui doivent être effectuées.</p>
+
+    <p>Pour appeler notre fonction <span class="ttype">doMath</span>, il faut lui passer deux arguments numériques, puis une fonction en tant que troisième argument. Par exemple : </p>
+    <div class="ttype">
+      doMath(5, 2, function(number1, number2) {<br>
+        var calculation = number1 * number2 / 6; <br>
+      }); <br>
+    </div>
+
+    <p>Voir le script de la page <a href="domath.html" target="_blank">doMath</a>.</p>
+
+    <h2>Utiliser des fonctions de rappel nommées</h2>
+
+    <p>Dans la section précédente, toutes les fonctions de rappel sont anonymes. Mais il est aussi possible de définir des fonctions nommées, et de passer leur nom en tant que fonction de rappel.</p>
+
+    <p>Utiliser des fonctions nommées comme rappels peut aider à la compréhension du code, ce qui n'est pas forcément le cas avec les fonctions anonymes. Le script de la page <a href="domathnamed.html" target="_blank">domathnamed</a> montre un exemple d'utilisation de fonction nommée en tant que rappel. Il propose également deux améliorations par rapport au script de la page <a href="domath.html" target="_blank">doMath</a>.</p>
+    <ul class="chevrons">
+      <li>Un test a été ajouté à la fonction <span class="ttype">doMath</span> afin de s'assurer que l'argument <span class="ttype">callback</span> est affiché avant de le montrer.</li>
+    </ul>
+
+    <p>L'emploi de fonctions nommées pour les rappels offre deux avantages sur les fonctions anonymes : </p>
+
+    <ul class="chevrons">
+      <li>Le code est plus facile à lire</li>
+      <li>Les fonctions nommées sont à usage multiple. Autrement dit, elles peuvent être utilisées seules ou comme rappels.</li>
+    </ul>
+
+    <h1>Comprendre les fermetures</h1>
+
+    <p>Une <em>fermeture</em> (ou <em>closure</em>) est une variable locale pour une fonction, dont la valeur reste <q lang="fr">vivante</q> une fois l'exécution de la fonction terminée.</p>
+
+    <p>Prenoms l'exemple du script <a href="greeting.js" target="_blank">greeting.js</a>. Ici, une fonction interne est définie à l'intérieur d'une autre fonction. Lorsque la fonction externe retourne une référence à la fonction interne, cette référence peut continuer à accéder à la donnée locale dans la fonction externe.</p>
+
+    <p>Dans le script <a href="greeting.js" target="_blank">greeting.js</a>, la fonction <span class="ttype">greetVisitor</span> retourne une fonction créée à l'intérieur de son propre code, et qui est appelée <span class="ttype">sayWelcome</span>. Remarquez que l'instruction <span class="ttype">return</span> ne comporte pas de parenthèses après <span class="ttype">sayWelcome</span>. En fait, vous ne voulez pas renvoyer la valeur fournie par la fonction interne, mais le code de celle-ci.</p>
+
+    <p>Ce qui est intéressant avec <a href="greeting.js" target="_blank">greeting.js</a>, c'est que ce code utilise la fonction <span class="ttype">greetVisitor</span> pour créer une nouvelle fonction personnalisée appelée <span class="ttype">personalGreeting</span>, cette dernière étant capable d'accéder aux variables de la fonction originale.</p>
+
+    <p>Normalement, lorsque l'exécution d'une fonction est terminée, ses variables locales deviennent inaccessibles. En retournant une référence à la fonction (<span class="ttype">sayWelcome</span>, ici), cependant, les données de la fonction interne <span class="ttype">greetVisitor</span> deviennent accessibles au monde extérieur.</p>
+
+    <p>Pour comprendre les fermetures, la clé consiste à intégrer la notion de portée des variables en JavaScript ainsi que la différence entre exécuter une fonction et passer une fonction par référence. En affectant la valeur de retour de <span class="ttype">greetVisitor</span> à la nouvelle fonction <span class="ttype">personalGreeting</span>, le programme mémorise le code de la fonction <span class="ttype">sayWelcome</span>. Vous pouvez tester cela en utilisant la méthode <span class="ttype">toString()</span> : </p>
+    <p class="ttype">personalGreeting.toString()</p>
+
+    <p>Dans le script de la page <a href="fermeture.html" target="_blank">fermeture</a>, une nouvelle fermeture a été créée en utilisant un argument différent pour la fonction <span class="ttype">greetVisitor</span>. Même si l'appel à <span class="ttype">greetVisitor</span> change la valeur de la variable <span class="ttype">welcome</span>, le résultat de l'appel à la première fonction (<span class="ttype">personalGreeting</span>) reste le même.</p>
+
+    <p>Les fermetures ne sont pas si difficiles à comprendre dès lors que vous connaissez les concepts sous-jacents et que vous avez besoin de les utiliser. Mais ne paniquez pas si vous ne vous sentez pas tout de suite à l'aise avec elles. Il est parfaitement possible de coder en JavaScript sans utiliser de fermetures, mais, une fois que vous les avez comprises, elles peuvent être vraiment utiles et elles vous aideront à devenir un meilleur programmeur.</p>
+
+    <h1>Utiliser les fermetures</h1>
+
+    <p>Une fermeture, c'est comme conserver une copie des variables locales d'une fonction dans l'état où elles se trouvaient avant que la fermeture n'intervienne.</p>
+
+    <p>Dans la programmation pour le Web, les fermetures sont souvent utilisées pour éliminer tout effort de duplication dans une application, ou encore pour conserver en l'état des valeurs qui ont besoin d'être réutilisées par la suite de manière à ce que le programme n'ait pas besoin de les recalculer à chaque fois qu'il doit les retrouver.</p>
+
+    <p>Un autre emploi des fermetures consiste à créer des versions personnalisées de fonctions pour des usages spécifiques.</p>
+
+    <p>Dans le script de la page <a href="functionmaker.html" target="_blank">functionmaker</a>, des fermetures sont utilisées afin de créer des fonctions affichant des messages d'erreurs spécifiques selon les problèmes qui peuvent survenir dans le programme. Tous ces messages d'erreur sont produits en utilisant la même fonction (c'est ce que l'on appelle parfois une <em>fabrique de fonction</em>).</p>
+
+    <p>Pour comprendre le comportement de ce script, le point clé réside dans la <q lang="fr">fabrique</q> de fonction : </p>
+
+    <div class="ttype">
+      function createMessageAlert(theMessage) {<br>
+        return function() {<br>
+          alert(theMessage); <br>
+        } <br>
+      } <br>
+    </div>
+
+    <p>Pour utiliser ce code, vous affectez sa valeur de retour à une variable, comme dans l'instruction suivante : </p>
+    <p class="ttype">var badMailError = createMessageAlert("Adresse email inconnue !");</p>
+
+    <p>L'instruction précédente crée une fermeture qui peut être utilisée partout ailleurs dans le programme, simplement en exécutant <span class="ttype">badMailError</span> en tant que fonction, comme dans le gestionnaire d'événement suivant : </p>
+    <p class="ttype">document.login.yourEmail.addEventListener('change', badMailError);</p>
+
   </body>
 </html>
