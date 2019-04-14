@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Diaporama JavaScript</title>
+
+    <style media="screen">
+      #caroussel {
+        position: absolute;
+        width: 800px;
+        height: 400px;
+        top: 100px;
+        left: 100px;
+        display: hidden;
+      }
+    </style>
+    <script type="text/javascript">
+      var slides = [
+        "<div id='slide1'>ma première photo<br><img src='image1.jpg'></div>",
+        "<div id='slide2'>ma deuxième photo<br><img src='image2.jpg'></div>",
+        "<div id='slide3'>ma trosième photo<br><img src='image3.jpg'></div>"
+      ];
+
+      var currentSlide = 0;
+      var numberOfSlides = slides.length - 1;
+
+      window.addEventListener("load", loader, false);
+
+      function loader() {
+        changeImage();
+      }
+
+      function changeImage() {
+        console.log("Fonction changeImage");
+        if (currentSlide > numberOfSlides) {
+          currentSlide = 0;
+        }
+
+        document.getElementById("carousel").innerHTML=slides[currentSlide];
+
+        console.log('affichage de la photo' + currentSlide + " sur " + numberOfSlides);
+        currentSlide++;
+
+        setTimeout(changeImage, 1000);
+      }
+
+    </script>
+  </head>
+  <body>
+    <div id="carousel"></div>
+  </body>
+</html>

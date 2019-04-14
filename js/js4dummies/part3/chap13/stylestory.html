@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Une histoire de style</title>
+    <style media="screen">
+      #myText {
+        color: white;
+        background-color: black;
+        font-family: Arial;
+        margin-bottom: 20px;
+      }
+      #styleOutput {
+        font-size: 18px;
+        font-family: monospace;
+      }
+    </style>
+    <script type="text/javascript">
+      function getElementStyles (e) {
+        var colorOutput = "color: " + e.target.style.color;
+        var fontSizeOutput = "font-size: " + e.target.style.fontSize;
+        document.getElementById("stylesOutput").innerHTML = colorOutput + "<br>" + fontSizeOutput;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="myText" style="font-size: 26px;" onclick="getElementStyles(event);">
+      Un texte quelconque.
+    </div>
+    <div id="stylesOutput"></div>
+  </body>
+</html>

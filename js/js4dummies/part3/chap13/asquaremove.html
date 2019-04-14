@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Animation JavaScript</title>
+    <style media="screen">
+      #square {
+        width: 100px;
+        height: 100px;
+        background-color: #333;
+        position: absolute;
+        left: 0px;
+        top: 100px;
+      }
+    </style>
+    <script type="text/javascript">
+      function moveSquare() {
+        for (var i = 0; i < 500; i++) {
+          document.getElementById("square").style.left = i+"px";
+        }
+      }
+    </script>
+  </head>
+  <body onload="moveSquare();">
+    <div id="square"></div>
+  </body>
+</html>

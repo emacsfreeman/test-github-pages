@@ -159,11 +159,11 @@ td {
   text-align: left;
   margin: 2.5%;
   padding: 2.5%;
-  font-size: 1.2em;
+  font-size: 1.25em;
 }
 
 .meth {
-  /*background-color: #F5DEB3;*/
+  background-color: #F5DEB3;
   font-family: monospace;
   /* color: #4682B4; */
   font-weight: bold;
@@ -172,7 +172,7 @@ td {
 
 .retour {
   /*font-weight: bold;*/
-  /*background-color: #C0C0C0;*/
+  background-color: #C0C0C0;
   font-family: sans-serif;
 }
 

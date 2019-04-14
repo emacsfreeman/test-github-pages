@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Redimensionnement de l'image</title>
+    <script type="text/javascript">
+
+      function growImage(imgToGrow) {
+        imgToGrow.width += imgToGrow.width * .05;
+        imgToGrow.height += imgToGrow.width * .05;
+      }
+      function restoreImage(imgToShrink) {
+        imgToShrink.width = imgToShrink.naturalWidth;
+        imgToShrink.height = imgToShrink.naturalHeight;
+      }
+
+    </script>
+  </head>
+  <body>
+    <img src="button1.png" id="myButton" onmouseover="growImage(this);" onmouseout="restoreImage(this);" alt="Survolez-moi !">
+  </body>
+</html>

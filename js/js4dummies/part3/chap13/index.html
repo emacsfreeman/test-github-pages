@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Travailler avec CSS et les graphismes</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Un peu de culture</h1>
+
+    <blockquote>
+      <p>&laquo; Pour avoir du style, commencez par n'en affecter aucun. &raquo;</p>
+    </blockquote>
+    <cite>E.B White, Les éléments du style</cite>
+
+    <p>Une fois que vous avez compris comment manipuler les objets DOM en utilisant JavaScript, les pages Web se transforment de documents statiques en applications dynamiques capables d'interagir avec l'utilisateur, d'évoluer sans avoir à être rechargées, et de délivrer des contenus évolutifs sur de multiples appareils.</p>
+
+    <h1>Utiliser l'objet Style</h1>
+
+    <p>L'objet <span class="ttype">Style</span> du modèle DOM est un outil puissant pour rendre une page Web capable de se modifier et de s'adapter en temps réel aux actions de l'utilisateur ou aux conditions courantes du navigateur. L'objet <span class="ttype">Style</span> permet d'accéder aux propriétés de style CSS pour n'importe quel élément ou collection d'éléments dans un document.</p>
+
+    <p>Parmi tout ce que vous pouvez faire avec l'objet <span class="ttype">Style</span>, citons notamment : </p>
+    <ul class="chevrons">
+      <li>Changer les couleurs du texte, par exemple pour mettre en surbrillance des mots-clés dans des champs de recherche.</li>
+      <li>Animer un objet lorsque l'utilisateur clique dessus.</li>
+      <li>Changer l'encadrement et la couleur d'arrière-plan dans la partie d'un formulaire que l'utilisateur est en train d'éditer.</li>
+      <li>Etendre et réduire, ou encore masquer et afficher, différentes parties de la page.</li>
+      <li>Créer des bulles ou des cases d'aide qui apparaissent au-dessus du contenu de la page lorsque l'utilisateur clique sur un lien.</li>
+    </ul>
+
+    <p>L'objet <span class="ttype">Style</span> travaille de la même manière que les autres objets DOM. Il possède un jeu de propriétés qui vous permettent de lire ou de définir les divers aspects d'un élément sélectionné.</p>
+
+    <table>
+      <caption>Propriétés courantes de l'objet <span class="ttype">Style</span>, et leurs équivalents CSS.</caption>
+      <colgroup>
+        <col style="width:17.5%;">
+        <col style="width:17.5%;">
+        <col style="width:75%;">
+      </colgroup>
+      <tr>
+        <th>Propriété</th>
+        <th>Style CSS</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td class="meth">backgroundColor</td>
+        <td class="retour">background-color</td>
+        <td>Lit ou définit la couleur d'arrière-plan d'un élément</td>
+      </tr>
+      <tr>
+        <td class="meth">borderWidth</td>
+        <td class="retour">border-width</td>
+        <td>Définit l'épaisseur des lignes qui forment l'encadrement d'un élément</td>
+      </tr>
+      <tr>
+        <td class="meth">fontFamily</td>
+        <td class="retour">font-family</td>
+        <td>Lit ou définit une liste de noms de famille de polices de caractères affectées au texte de l'élément</td>
+      </tr>
+      <tr>
+        <td class="meth">lineHeight</td>
+        <td class="retour">line-height</td>
+        <td>Lit ou définit la distance entre les lignes de texte</td>
+      </tr>
+      <tr>
+        <td class="meth">textAlign</td>
+        <td class="retour">text-align</td>
+        <td>Lit ou définit l'alignement horizontal du texte dans un élément</td>
+      </tr>
+    </table>
+
+    <p>Les propriétés de l'objet <span class="ttype">Style</span> reproduisent celles dont vous disposez avec CSS. La différence entre les deux est que le nom de ces propriétés ne comporte pas de tirets pour l'objet <span class="ttype">Style</span>, contrairement à ce qui se passe avec CSS.</p>
+
+    <p>Pour consulter une liste complète des propriétés de l'objet <span class="ttype">Style</span>, de même d'ailleurs que de tous les autres objets DOM, voyez le site <a href="http://overapi.com/css" target="_blank">http://overapi.com/css</a>.</p>
+
+    <h2>Retrouver le style courant d'un élément</h2>
+
+    <p>L'objet <span class="ttype">Style</span> renvoie les styles dits <em>inline</em> actuellement affectés à l'élément spécifié. Il ne vous dit donc pas quel est le style effectivement appliqué par le navigateur. Il ne vous dit donc pas quel est le style effectivement appliqué par le navigateur, car il ne reconnaît pas les styles enregistrés dans des fichiers CSS externes, ou ceux qui sont définis à l'intérieur d'éléments <span class="ttype">style</span>.</p>
+
+    <p>En d'autres termes, seuls les styles définis en utilisant JavaScript, ainsi que les styles CSS définis directement, sont récupérables de cette manière.</p>
+
+    <p>Pour cette raison, l'objet <span class="ttype">Style</span> n'est pas totalement fiable pour récupérer le style d'un élément.</p>
+
+    <p>Voir la page <a href="stylestory.html">stylestory.html</a> pour une illustration.</p>
+
+    <p>Les deux choses importantes à noter sur les résultats produits par ce script sont les suivantes : </p>
+
+    <ul class="chevrons">
+      <li>La valeur de la propriété <span class="ttype">color</span> de l'objet <span class="ttype">Style</span> est vide, bien que la couleur de premier plan de l'objet <span class="ttype">div</span> soit définie comme étant blanche (<em>white</em>) dans l'en-tête de la page.</li>
+      <li>La valeur de la taille de police est correcte, car la propriété CSS <span class="ttype">font-size</span> elle-même.</li>
+    </ul>
+
+    <p>Les propriétés de l'objet <span class="ttype">Style</span> ne retrouvent que les valeurs des styles <em>inline</em> appliquées à un élément.</p>
+
+    <p>Une bonne méthode pour obtenir le style courant d'un élément consiste à utiliser <span class="ttype">window.getComputedStyle()</span>, comme illustré sur la page <a href="anotherstylestory.html" target="_blank">anotherstylestory.html</a>.</p>
+
+    <p>Remarquez que, dans <a href="anotherstylestory.html" target="_blank">anotherstylestory.html</a>,
+      la fonction <span class="ttype">getPropertyValue</span> récupère la propriété CSS (<span class="ttype">font-size</span>)
+      au lieu de la propriété <span class="ttype">style</span> (<span class="ttype">fontsize</span>).
+      La raison tient au fait que le script obtient la valeur de <span class="ttype">font-size</span>
+      directement depuis l'élément, et non <em>via</em> l'objet <span class="ttype">Style</span> (qui ne traite que des styles <em>inline</em>).</p>
+
+      <h2>Définir les propriétés de style</h2>
+
+      <p>Pour définir les propriétés de l'objet <span class="ttype">Style</span>, sélectionnez l'élément pour lequel vous voulez appliquer un nouveau style, puis utilisez la notation point ou avec des crochets droits pour affecter une nouvelle valeur à la propriété voulue.</p>
+
+      <p>Pour modifier par exemple le style d'encadrement ayant comme <span class="ttype">id</span> la valeur <q lang="fr">borderedSquare</q>, vous pourriez utiliser le code suivant : </p>
+      <p class="ttype">document.getElementById("borderedSquare").style.borderWidth = "15px";</p>
+
+      <h1>Animer des éléments avec l'objet Style</h1>
+
+      <p>Vous pouvez utiliser des styles CSS pour contrôler non seulement l'aspect des éléments, mais aussi leur positionnement. En faisant appel à des boucles JavaScript modifiant les propriétés <span class="ttype">style</span>, il est possible de créer assez facilement des animations simples.</p>
+
+      <p>Dans <a href="asquaremove.html">asquaremove.html</a> une fonction JavaScript déplace un carré sur l'écran en utilisant une boucle <span class="ttype">for</span> pour modifier la propriété CSS <span class="ttype">left</span>.</p>
+
+      <p>Si vous exécutez ce code dans un navigateur, vous allez avoir l'impression que l'animation est déjà terminée. En fait, celle-ci est bel et bien exécutée, mais si rapidement que vous ne pouvez pas voir ce qui se passe (à moins d'avoir un ordinateur très lent ou des yeux très rapides).</p>
+
+      <p>Pour que l'animation semble se dérouler à une vitesse acceptable par un être humain normalement constitué, il faut insérer une pause entre chaque itération de la boucle. La manière la plus courante de s'y prendre consiste à utiliser la méthode <span class="ttype">setTimeout()</span> dans une fonction qui sera appelée de manière récursive, nous pouvons contrôler la vitesse de l'animation.</p>
+
+      <p>Sur la page <a href="asquareactuallymoving.html">asquareactuallymoving.html</a> le carré est maintenant déplacé par pas de 1 pixel à un rythme de 1/100e de seconde. Il y a également plusieurs autres améliorations :</p>
+
+      <ul class="chevrons">
+        <li>Le carré est maintenant cliquable, ce qui déclenche l'animation</li>
+        <li>L'animation du carré est basée sur la position de celui-ci lorsque l'événement 'click' survient. Dans ce cas, le déplacement devient de 100 pixels vers la droite à partir de la position courante.</li>
+      </ul>
+
+      <p>Regardez avec attention le code qui enregistre l'événement 'click' pour le carré. Une fonction anonyme est utilisé comme getionnaire d'événement. Même si cela peut sembler un peu confus en première instance, ce code, si vous le réduisez à ses parties de base, effectue le même travail que la méthode <span class="ttype">addEventListener()</span>, avec ses trois arguments : le type de l'événement, la fonction à exécuter (en l'occurrence une fonction anonyme), et une valeur booléenne indiquant si le mode capture est utilisé ou non.</p>
+
+      <h1>Travailler avec les images</h1>
+
+      <p>Les éléments HTML <span class="ttype">img</span> sont normalement plutôt statiques, intangibles, à moins bien sûr qu'il ne s'agisse d'animations. Avec JavaScript, il est possible d'ajouter aux images des tas d'effets, comme les redimensioner, les déplacer, les éclairer, leur ajouter des réactions au passage de la souris, et bien d'autres choses encore. Tout cela est rendu possible en manipulant les attributs de l'élément <span class="ttype">img</span> et en changeant des styles CSS.</p>
+
+      <h2>Utiliser l'objet Image</h2>
+
+      <p>L'objet <span class="ttype">Image</span> du modèle DOM vous donne accès aux propriétés d'un élément HTML <span class="ttype">img</span>. Vous pouvez ensuite lire ou définir les valeurs de ces propriétés pour gérer tous les attributs valides de l'élément. Les propriétés de l'objet <span class="ttype">Image</span> sont décrites dans le tableau suivant : </p>
+
+      <table>
+        <caption>Les propriétés de l'objet Image</caption>
+        <colgroup>
+          <col style="width:25%;">
+          <col style="width:75%;">
+        </colgroup>
+        <tr>
+          <th>Propriété</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td class="meth">alt</td>
+          <td class="retour">Lit ou définit la valeur de l'attribut <span class="ttype">alt</span> d'une image (un texte de substitution au cas où l'image ne peut pas être affichée)</td>
+        </tr>
+        <tr>
+          <td class="meth">complete</td>
+          <td class="retour">Donne <span class="ttype">true</span> si le navigateur a terminé le chargement de l'image</td>
+        </tr>
+        <tr>
+          <td class="meth">height</td>
+          <td class="retour">Lit ou définit la valeur de l'attribut <span class="ttype">height</span> (hauteur) d'une image</td>
+        </tr>
+        <tr>
+          <td class="meth">isMap</td>
+          <td class="retour">Lit ou définit si une image devrait faire partie d'une carte image côté serveur</td>
+        </tr>
+        <tr>
+          <td class="meth">naturalHeight</td>
+          <td class="retour">Lit la hauteur d'origine de l'image</td>
+        </tr>
+        <tr>
+          <td class="meth">naturalWidth</td>
+          <td class="retour">Lit la largeur d'origine de l'image</td>
+        </tr>
+        <tr>
+          <td class="meth">src</td>
+          <td class="retour">Lit ou définit la valeur de l'attribut <span class="ttype">src</span> (source) d'une image</td>
+        </tr>
+        <tr>
+          <td class="meth">useMap</td>
+          <td class="retour">Lit ou définit la valeur de l'attribut <span class="ttype">usemap</span> d'une image</td>
+        </tr>
+        <tr>
+          <td class="meth">width</td>
+          <td class="retour">Lit ou définit la valeur de l'attribut <span class="ttype">width</span> (largeur) d'une image</td>
+        </tr>
+      </table>
+
+      <p>Les propriétés les plus importantes et les plus utilisées de l'objet <span class="ttype">Image</span> sont <span class="ttype">src</span>, <span class="ttype">width</span> et <span class="ttype">height</span>. Avec ces trois propriétés, vous pouvez facilement échanger des images, provoquer d'étonnants effets de redimensionnement, des boutons qui changent d'aspect au passage de la souris, et bien plus encore !</p>
+
+      <h2>Créer des boutons avec effet de survol (rollover)</h2>
+
+      <p>Un bouton <em>rollover</em> (c'est l'appellation généralement employée) est un bouton qui change d'aspect lorsque le pointeur de la souris le survole. C'est par exemple un bon moyen pour indiquer à l'utilisateur qu'une image peut être cliquée. Vous pouvez aussi utiliser de tels boutons pour révéler plus d'informations sur ce qui se passe dans le cas où l'utilisateur clique dessus. Et les motivations purement esthétiques sont tout autant estimables (à condition de ne pas tomber dans le péché de surcharge). Certains programmeurs aiment à placer ainsi dans leurs sites Web ce que l'on appelle des <em>oeufs de Pâques</em> (<em>easter eggs</em> en anglais), et qui sont souvent des sortes de boutons rollover cachés dans la page qui déclenchent par exemple une animation, voire même affichent une page bonus, lorsque l'utilisateur clique dessus.</p>
+
+      <p>Vous pouvez parfaitement créer un effet de rollover avec CSS, mais pour obtenir des résultats plus sophistiqués, il est nécessaire d'en passer par JavaScript, ou par une combinaison de JavaScript et de CSS.</p>
+
+      <p>La page <a href="rollover.html" target="_blank">rollover.html</a> montre comment créer un effet de rollover simple avec une image en JavaScript.</p>
+
+      <h2>Des images que la souris fait grandir</h2>
+
+      <p>Un autre truc qui permet de rendre les sites Web plus attractifs pour l'utilisateur consiste à augmenter légèrement la taille d'un bouton image lorsqu'il est survolé par le pointeur de la souris, ce qui donne une sensation de relief. C'est aussi une manière d'indiquer que l'image est cliquable, tout en fournissant une interactivité supplémentaire.</p>
+
+      <h2>Créer un diaporama</h2>
+
+      <p>Les <em>diaporamas</em> (ou <em>carrousels</em>) sont un procédé courant lorsque l'on veut afficher une série d'images dans un même espace du site. Même si on les rencontre le plus souvent sur les pages d'accueil, ils peuvent donner du dynamisme n'importe où dans vos sites.</p>
+
+      <p>Les diaporamas sont souvent associés à des effets de transition lors du passage d'une image à une autre. Ces transitions sont généralement créées en faisant appel à une bibliothèque de fonctions JavaScript, comme <em>jQuery</em>. Mais il est aussi possible de se contenter de JavaScript, CSS et DOM. Voir la page <a href="diaporama.html" target="
+        ">diaporama</a>.</p>
+
+      <h1>Utiliser les propriétés d'animation de l'objet Style</h1>
+
+      <p>CSS3 et l'objet <span class="ttype">Style</span> du modèle DOM possèdent des propriétés qui simplifient l'animation des éléments. Utilisées ensemble, ces propriétés peuvent vous permettre de créer des animations amusantes ou intéressantes avec un minimum d'efforts. Les propriétés d'animation de l'objet Style sont décrites dans le tableau ci-dessous.</p>
+
+      <table>
+        <caption>Propriétés liées à l'animation de l'objet Style</caption>
+        <colgroup>
+          <col style="width:35%;">
+          <col style="widht:65%;">
+        </colgroup>
+        <tr>
+          <th>Propriété</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td class="meth">animation</td>
+          <td class="retour">Définit simultanément toutes les propriétés de l'animation à l'exception de <span class="ttype">animationPlayState</span></td>
+        </tr>
+        <tr>
+          <td class="meth">animationDelay</td>
+          <td class="retour">Lit ou définit un délai avant le lancement de l'application</td>
+        </tr>
+        <tr>
+          <td class="meth">animationDirection</td>
+          <td class="retour">Lit ou définit si l'animation devrait être jouée en sens inverse pour certains des cycles, ou tous</td>
+        </tr>
+        <tr>
+          <td class="meth">animationDuration</td>
+          <td class="retour">Lit ou définit la durée d'un cycle d'animation</td>
+        </tr>
+        <tr>
+          <td class="meth">animationFillMode</td>
+          <td class="retour">Lit ou définit les valeurs qui sont appliquées en dehors des cycles d'animation</td>
+        </tr>
+        <tr>
+          <td class="meth">animationIterationCount</td>
+          <td class="retour">Lit ou définit le nombre d'exécutions de l'animation</td>
+        </tr>
+        <tr>
+          <td class="meth">animationName</td>
+          <td class="retour">Lit ou définit une liste d'animations</td>
+        </tr>
+        <tr>
+          <td class="meth">animationTimingFunction</td>
+          <td class="retour">Lit ou définit la courbe de vitesse décrivant la mnière dont l'animation devrait progresser dans le temps</td>
+        </tr>
+        <tr>
+          <td class="meth">animationPlayState</td>
+          <td class="retour">Lit ou définit si l'animation est en cours d'exécution ou en pause</td>
+        </tr>
+      </table>
+
+      <p>Sur la page <a href="animcss.html" target="_blank">animcss</a> une animation simple a été créée en utilisant CSS. La durée de celle-ci, ainsi que ses principales propriétés, sont définies en CSS dans la section <span class="ttype">style</span>, puis JavaScript prend le relais pour mettre en pause ou reprendre l'animation. Avec un peu de créativité, vous trouverez de multiples manières de contrôler cette animation avec JavaScript.</p>
+
+      
+
+
+
+  </body>
+</html>
