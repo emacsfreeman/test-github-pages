@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Validateur d'emails</title>
+    <script type="text/javascript">
+      window.addEventListener('load', loader, false);
+      function loader(e) {
+        e.preventDefault();
+        document.getElementById('emailinput').addEventListener('submit', validateEmail, false);
+      }
+
+      function validateEmail(e) {
+        var re = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i;
+        if (re.test(e.target.yourEmail.value)) {
+          alert("Valide !");
+        } else {
+          alert("Invalide !");
+        }
+      }
+
+    </script>
+  </head>
+  <body>
+    <form id="emailinput">
+      <label>Entrez une adresse de messagerie :
+        <input type="text" id="yourEmail">
+      </label>
+      <input type="submit" value="Valider" id="validate">
+    </form>
+    
+  </body>
+</html>

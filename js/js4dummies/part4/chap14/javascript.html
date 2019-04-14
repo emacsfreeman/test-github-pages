@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Recherche en JavaScript</title>
+    <script type="text/javascript">
+      window.addEventListener("load", registerEvents, false);
+
+      function registerEvents(e) {
+        document.getElementById("ask").addEventListener("click", findAnswer, false);
+      }
+
+      function findAnswer() {
+        var question = document.getElementById("userQuestion").value;
+        var re = new RegExp("JavaScript");
+        if (re.test(question) === true) {
+          document.getElementById("answer").innerHTML = 'Une question sur JavaScript ? Voyez ma formation <a href="https://laurentgarnier.podia.com/javascript-de-0-a-heros" target="_blank">JavaScript de zéro à Héros</a>';
+          console.log("JavaScript");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <form id="userInput">
+      <label>Entrez votre question :
+        <textarea id="userQuestion"></textarea>
+      </label>
+      <button type="button" id="ask">Obtenir une réponse</button>
+    </form>
+    <div id="answer"></div>
+  </body>
+</html>

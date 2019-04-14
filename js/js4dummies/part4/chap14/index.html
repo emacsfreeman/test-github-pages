@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Effectuer des recherches avec des expressions régulières</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Un peu de culture</h1>
+    <blockquote>
+      <p>&laquo; Créer des problèmes est facile. Nous le faisons tout le temps. Trouver des solutions définitives et qui produisent de bons résultats, cela demande beaucoup d'efforts et de soin. &raquo;</p>
+    </blockquote>
+    <cite>Henry Rollins</cite>
+
+    <p>Les expressions régulières sont un outil puissant dans de nombreux langages de programmation. Elles permettent de trouver et de modifier du texte dans les documents en fonction d'un certain motif. La syntaxe des expressions régulières peut être intimidante au premier abord, mais, lorsque vous arrivez à les maîtriser, elles vous permettent de faire ce que vous voulez avec les textes.</p>
+
+    <h1>Faire des recherches avec les expressions régulières</h1>
+
+    <p>Les expressions régulières sont une technique permettant de retrouver des motifs ou des combinaisons de caractères dans les chaînes.</p>
+
+    <p>Parmi les exemples d'utilisation de ces expressions régulières, mentionnons-en quelques-uns : </p>
+    <ul class="chevrons">
+      <li>Vérifier qu'un utilisateur a bien saisi une adresse de messagerie en respectant le format voulu.</li>
+      <li>Trouver et remplacer toutes les occurrences du nom d'une personne dans un article.</li>
+      <li>Localiser dans un livre les mots en majuscules au milieu des phrases.</li>
+      <li>Trouver des chaînes numériques semblant être des numéros de téléphone.</li>
+    </ul>
+    <p>Voici à quoi une expression régulière peut ressembler : </p>
+    <p class="ttype">^((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}$</p>
+    <p>Plutôt impressionnant, non ? Mais ne paniquez pas. Vous disposerez bientôt des outils nécessaires pour décoder cette expression. Vous comprendrez alors qu'elle est formée de manière à retrouver des numéros de téléphone au format généralement employé aux USA, comme dans : </p>
+    <p class="ttype">(555)555-555</p>
+    <p>Bien sûr, les expressions régulières peuvent être plus simples que ci-dessus. La page <a href="javascript.html" target="_blank">javascript</a> montre un autre exemple d'utilisation.</p>
+
+    <h1>Ecrire des expressions régulières</h1>
+
+    <p>Avant de pouvoir utiliser une expression régulière, vous devez créer un objet qui contient cette expression. Vous disposez pour cela de deux méthodes : </p>
+    <ul class="chevrons">
+      <li>Utiliser un littéral</li>
+      <li><em>Via</em> la fonction de construction de l'objet <span class="ttype">RegExp</span>.</li>
+    </ul>
+
+    <h1>Utiliser l'objet RegExp</h1>
+
+    <p>Lorsque vous définissez une expression régulière en appelant la fonction de constructeur de l'objet <span class="ttype">RegExp</span>, l'objet résultant est créé lors de l'exécution et lorsque le script est chargé. Vous devriez utiliser cette fonction si vous ne connaissez pas la valeur de l'expression régulière lorsque vous écrivez le script. Par exemple, vous pourriez demander à l'utilisateur de saisir une expression, ou bien encore vous pourriez obtenir celle-ci depuis un fichier extérieur, ou encore calculer cette expression lorsque le script est exécuté.</p>
+
+    <p>Voir le script de la page <a href="randomletter.html" target="_blank">randomletter</a>.</p>
+
+    <h1>Définir des expressions régulières littérales</h1>
+
+    <p>Pour créer une expression régulière littérale, vous entourez la valeur de cette expression par des barres obliques au lieu d'apostrophes.</p>
+
+    <p>Par exemple : </p>
+    <p class="ttype">var monExpressionReg = /JavaScript/;</p>
+
+    <p>Ces expressions littérales sont compilées par le navigateur lorsque le script est téléchargé, et restent identiques au cours de la durée de vie du script. Le résultat est que ce type d'expression régulière offre de meilleures performances tant que que les expressions ne sont pas modifiées.</p>
+
+    <p>L'exemple précédent utilise une expression régulière pour rechercher une correspondance exacte avec la chaîne <q lang="fr">JavaScript</q>. Cependant, dans des applications ou programmes réels, vous auriez sans doute besoin d'autoriser certaines variations quant à l'orthographe exacte du mot, par exemple : </p>
+    <ul class="chevrons">
+      <li>javascript</li>
+      <li>Javascript</li>
+      <li>java script</li>
+      <li>JS</li>
+      <li>js</li>
+    </ul>
+
+    <p>Il pourrait même y avoir quelques variantes encore plus exotiques. L'une des choses les plus étonnantes et les plus frustrantes dans ce cas, c'est que l'inattendu est ce à quoi vous pouvez vous attendre le plus ! Pour détecter toutes ces variations sur le même thème, vous pouvez utiliser des expressions régulières encore plus sophistiquées pour rechercher des motifs ou jeux de caractères, plutôt que des chaînes littérales.</p>
+
+    <p class="ttype">var monExpressionReg = /[Jj]ava[Ss]cript/;</p>
+
+    <p>Tout cela peut sembler un peu lointain. Mais, si vous y regardez d'un peu plus près, vous constaterez que les choses sont finalement assez simples. La partie qui se trouve entre crochets droits est une expression régulière qui définit un ensemble de caractères, et tout ce qui correspond à ce qui se trouve entre ces crochets sera vérifié. En écrivant [Jj], nous nous assurons que l'emploi de majuscules comme de minuscule sera considéré comme valide, du moins pour ce qui concerne la lettre J.</p>
+
+    <h1>Tester des expressions régulières</h1>
+
+    <p>Lorsque vous écrivez des expressions régulières, il peut être utile de disposer d'un moyen commode de les tester afin de vous assurer qu'elles font bien ce que vous avez prévu. Nombre de sites Web et d'outils vous permettent d'effectuer ces tests. Parmi ces sites, mentionnons en particulier <a href="http://regex101.com" target="_blank">https://regex101.com/</a>. Pour l'utiliser, saisissez votre expression régulière dans le champ du haut, puis tapez un texte à votre convenance dans le second champ. Le site va mettre en surbrillance les correspondances qu'il trouve entre votre expression et le texte à tester.</p>
+
+    <h1>Caractères spéciaux dans les expressions régulières</h1>
+
+    <p>Les expressions régulières vous permettent de rechercher des nombres dans des chaînes, de même que des lettres, des groupes de lettres, des caractères répétitifs, et bien plus encore.</p>
+
+    <p>Pour créer des motifs de recherche complexes, vous pouvez utiliser les caractères spéciaux reconnus par les expressions régulières. Les plus courants sont listés dans le tableau suivant : </p>
+
+    <table>
+      <caption>Caractères spéciaux dans les expressions régulières</caption>
+      <colgroup>
+        <col style="width:25%;">
+        <col style="width:75%;">
+      </colgroup>
+      <tr>
+        <th>Caractère spécial</th>
+        <th>Signification</th>
+      </tr>
+      <tr>
+        <td class="meth">\</td>
+        <td class="retour">Indique si le caractère qui suit devrait être traité comme caractère spécial ou comme littéral. Si le caractère suivant est également un caractère spécial, \ demande à ce qu'il soit traité littéralement.</td>
+      </tr>
+      <tr>
+        <td class="meth">^</td>
+        <td class="retour">Trouve le début de la saisie</td>
+      </tr>
+      <tr>
+        <td class="meth">$</td>
+        <td class="retour">Trouve la fin de la saisie</td>
+      </tr>
+      <tr>
+        <td class="meth">*</td>
+        <td class="retour">Trouve le caractère précédent zéro fois ou plus</td>
+      </tr>
+      <tr>
+        <td class="meth">+</td>
+        <td class="retour">Trouve le caractère précédent une fois ou plus</td>
+      </tr>
+      <tr>
+        <td class="meth">?</td>
+        <td class="retour">Trouve le caractère précédent zéro ou une fois</td>
+      </tr>
+      <tr>
+        <td class="meth">.</td>
+        <td class="retour">Trouve n'importe quel caractère unique à l'exception du changement de ligne</td>
+      </tr>
+      <tr>
+        <td class="meth">x|y</td>
+        <td class="retour">Trouve soit x soit y</td>
+      </tr>
+      <tr>
+        <td class="meth">{n}</td>
+        <td class="retour">Trouve exactement <em>n</em> occurrences du caractère précédent</td>
+      </tr>
+      <tr>
+        <td class="meth">[xyz]</td>
+        <td class="retour">Trouve n'importe lequel des caractères entre crochets</td>
+      </tr>
+      <tr>
+        <td class="meth">[^xyz]</td>
+        <td class="retour">Trouve n'importe quel caractère autre que ceux placés entre crochets</td>
+      </tr>
+      <tr>
+        <td class="meth">[\b]</td>
+        <td class="retour">Trouve une espace</td>
+      </tr>
+      <tr>
+        <td class="meth">\b</td>
+        <td class="retour">Trouve une limite de mot (attention : les caractères accentués sont traités comme des limites de mots)</td>
+      </tr>
+      <tr>
+        <td class="meth">\B</td>
+        <td class="retour">Ne trouve pas de limite de mot</td>
+      </tr>
+      <tr>
+        <td class="meth">\d</td>
+        <td class="retour">Trouve un caractère numérique</td>
+      </tr>
+      <tr>
+        <td class="meth">\D</td>
+        <td class="retour">Trouve n'importe quel caractère non numérique</td>
+      </tr>
+      <tr>
+        <td class="meth">\n</td>
+        <td class="retour">Trouve un retour à la ligne</td>
+      </tr>
+      <tr>
+        <td class="meth">\s</td>
+        <td class="retour">Trouve un caractère blanc (espace, tabulation, retour à la ligne, etc)</td>
+      </tr>
+      <tr>
+        <td class="meth">\S</td>
+        <td class="retour">Trouve un caractère qui n'est pas blanc</td>
+      </tr>
+      <tr>
+        <td class="meth">\t</td>
+        <td class="retour">Trouve une tabulation</td>
+      </tr>
+      <tr>
+        <td class="meth">\w</td>
+        <td class="retour">Trouve un caractère alphanumérique, y compris le trait de soulignement</td>
+      </tr>
+      <tr>
+        <td class="meth">\W</td>
+        <td class="retour">Trouve un caractère qui n'est pas un caractère <q lang="fr">de mot</q> </td>
+      </tr>
+    </table>
+
+    <h1>Utiliser des modificateurs</h1>
+
+    <p>Les modificateurs servent à changer globalement plusieurs paramètres de recherche. Pour cela, vous passez ces modificateurs comme second argument du constructeur <span class="ttype">RegExp()</span> lorsque vous créez votre expression régulière, ou vous les placez après la barre oblique / finale dans une expression définie sous forme de littéral.</p>
+
+    <p>Les trois modificateurs sont : </p>
+    <ul class="chevrons">
+      <li><span class="ttype">g</span> (global) : Indique que la chaîne toute entière devrait être recherchée, et pas seulement jusqu'à ce que la première occurrence soit trouvée.</li>
+      <li><span class="ttype">i</span> (insensible à la casse) : Indique que les majuscules et les minuscules doivent être indifférenciées</li>
+      <li><span class="ttype">m</span> (multilingue) : Effectue une recherche multilingue. Par exemple, lorsque les caractères spéciaux ^(début) et $(fin) sont utilisés, le modificateur traite chaque nouvelle ligne comme un nouveau début/une nouvelle fin, au lieu de prendre en compte seulement le début et la fin de l'entrée.</li>
+    </ul>
+
+    <p>Ainsi, l'expression régulière suivante recherchera toutes les variantes du mot JavaScript dans la totalité du document : </p>
+    <p class="ttype">/javascript/ig</p>
+
+    <h1>Coder avec des expressions régulières</h1>
+
+    <p>Les expressions régulières disposent de leurs propres méthodes, ainsi que d'un sous-ensemble des fonctions de chaîne.</p>
+
+    <p>Les méthodes des expressions régulières sont les suivantes : </p>
+
+    <ul class="chevrons">
+      <li><span class="ttype">test</span> : Teste une correspondance. Renvoie <span class="ttype">true</span> en cas de succès, <span class="ttype">false</span> sinon.</li>
+      <li> <span class="ttype">exec</span> : Teste une correspondance. Renvoie un tableau d'informations sur cette correspondance.</li>
+    </ul>
+
+    <p>Si vous avez uniquement besoin de savoir si l'expression régulière trouve une correspondance pour le critère de recherche qu'elle définit, vous devriez utiliser la méthode <span class="ttype">test</span>. Par contre, si vous voulez savoir où se trouve cette correspondance (ou ces correspondances) dans une chaîne, quel est le nombre de correspondances, et le texte correspondant, vous devriez faire appel à la méthode <span class="ttype">exec</span>.</p>
+
+    <p>Les fonctions de chaîne qui peuvent être utilisées avec des expressions régulières sont décrites dans le tableau suivant : </p>
+
+    <table>
+      <caption>Fonctions de chaîne qui pour les expressions régulières</caption>
+      <colgroup>
+        <col style="width:20%;">
+        <col style="width:80%;">
+      </colgroup>
+      <tr>
+        <th>Fonction</th>
+        <th>Utilisation</th>
+      </tr>
+      <tr>
+        <td class="meth">match</td>
+        <td class="retour">Recherche une correspondance ou l'expression régulière dans une chaîne. Renvoie un tableau d'informations sur la correspondance, ou <span class="ttype">null</span> en cas d'échec.</td>
+      </tr>
+      <tr>
+        <td class="meth">search</td>
+        <td class="retour">Teste une correspondance dans une chaîne. En cas de succès, renvoie l'indice de la correspondance, ou -1 en cas d'échec.</td>
+      </tr>
+      <tr>
+        <td class="meth">replace</td>
+        <td class="retour">Recherche une correspondance dans une chaîne, et remplace celle-ci par la chaîne spécifiée</td>
+      </tr>
+      <tr>
+        <td class="meth">split</td>
+        <td class="retour">Partage une chaîne en un tableau de sous-chaînes en utilisant une expression régulière ou une chaîne fixée</td>
+      </tr>
+    </table>
+
+    <p>La vérification d'une adresse de messagerie est un bon exemple, et de surcroît étonnamment complexe, d'utilisation des expressions régulières. Toute adresse de messagerie valide doit se conformer à certaines règles, en particulier celles-ci : </p>
+
+    <ul class="chevrons">
+      <li>L'adresse doit contenir le symbole @.</li>
+      <li>Le symbole @ doit être précédé et suivi de caractères.</li>
+      <li>Il doit y avoir au moins un séparateur de groupe après le symbole @.</li>
+    </ul>
+
+    <p>Il y a encore d'autres règles, mais les choses se compliquent assez rapidement si vous commencez à fouiller dans les détails, par exemple le fait que des espaces peuvent être autorisées dans certains cas, de même que l'emploi de caractères internationaux.</p>
+
+    <p>Pour un formulaire qui n'a pas besoin d'entrer dans ces considérations sophistiquées, il suffit généralement de demander à l'utilisateur de saisir son adresse de messagerie dans un champ de texte, puis d'effectuer des vérifications sur la base des règles énoncées ci-dessus. Cela devrait permettre d'éliminer la plupart des erreurs.</p>
+
+    <p>Le script de la page <a href="email.html" target="_blank">email</a> illustre cela. Une fois que l'utilisateur a saisi une adresse de messagerie et a cliqué sur le bouton de validation, le script teste cette adresse à l'aide de l'expression régulière littérale suivante : </p>
+    <p class="ttype">/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i</p>
+
+    <p>Cette expression débute par \b, le caractère spécial de recherche de limite de nouveau mot. Il est suivi du motif suivant : </p>
+    <p class="ttype">[A-Z0-9._%+-]+</p>
+
+    <p>Ce motif recherche une ou plusieurs combinaisons de lettres ou de chiffres, ainsi que des traits de soulignement, de signes de pourcentage ou de tirets. Vient ensuite : </p>
+    <p class="ttype">@[A-Z0-9.-]+</p>
+
+    <p>Cette partie rend obligatoire le séparateur d'adresse @, à nouveau suivi d'une combinaison de lettres, de chiffres et de tirets. L'expression se termine par : </p>
+    <p class="ttype">\.[A-Z]{2,4}\b/i</p>
+
+    <p>La fin de l'expression régulière recherche une chaîne commençant par un point (le séparateur dans le nom de domaine de l'adresse de messagerie), et suivie de deux à quatre caractères de longueur (par exemple <span class="ttype">fr, com, net</span> ou encore <span class="ttype">org</span>). La recherche se termine avec le caractère spécial \b (fin de mot). Le modificateur /i indique que les caractères peuvent être aussi bien saisis en minuscules qu'en majuscules.</p>
+
+    <p>Si une correspondance est trouvée, cela signifie que les données saisies par l'utilisateur ont passé le test, ce qui est signalé par le message "<span>Valide !</span>".</p>
+
+    <p class="warning">Avec l'extension actuelle des noms de domaine Internet, l'expression rationnelle utilisée ici pourrait ne pas être suffisante. Par exemple, le suffixe peut maintenant dépasser les quatres caractères, voire comporter éventuellement deux points ou même plus (comme dans <span class="ttype">.gouv.fr</span> ou encore <span class="ttype">.finances.gouv.fr</span>). À charge pour vous donc d'améliorer notre expression régulière pour prendre en compte ces situations...</p>
+
+    
+
+
+  </body>
+</html>
