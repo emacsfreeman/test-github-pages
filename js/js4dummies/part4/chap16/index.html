@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Toujours plus loin avec Ajax et JSON</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <h1>Un peu de culture</h1>
+    <blockquote>
+      <p>&laquo; Le Web ne fait pas que connecter des machines. Il connecte des gens. &raquo;</p>
+    </blockquote>
+    <cite>Tim Berners-Lee</cite>
+
+    <h1>Travailler en coulisses avec Ajax</h1>
+
+    <p>Ajax est un acronyme qui signifie <span class="ttype">Asynchronous JavaScript + XML</span>. Ce terme est utilisé pour décrire une méthode d'utilisation de JavaScript, du modèle DOM, de HTML et de l'objet <span class="ttype">HMLHttpRequest</span> pour raffraîchir des parties d'une page Web avec des données dynamiques sans avoir à recharger la page entière. Ajax a d'abord été implémenté à une large échelle par Google pour sa messagerie Gmail en 2004, et son nom définitif lui a été donné par James Garret en 2005.</p>
+
+    <p>Le modèle DOM de HTML change la page de manière dynamique. L'importante innovation apportée par Ajax a été l'utilisation de l'objet <span class="ttype">XMLHttpRequest</span> pour retrouver des données sur le serveur de façon asynchrone (en arrière-plan, si vous préférez), sans blocage de l'exécution du reste du code JavaScript dans la page Web.</p>
+
+    <p>Bien qu'Ajax reposait à l'origine sur des données au format XML (pout <em>Extensible Markup Language</em>, ou langage de balisage extensible), il est plus courant aujourd'hui pour les applications Ajax de faire appel à un format appelé JSON (pour <em>JavaScript Object Notation</em>). Bien entendu, dans ce cas, le X final devrait plutôt être remplacé par un J pour donner Ajaj, mais il faut reconnaître que cette appellation serait moins poétique.</p>
+
+    <h2>Exemples Ajax</h2>
+
+    <p> <a href="https://www.html5rocks.com/en/tutorials/cors/" target="_blank">à lire</a> </p>
+
+    <p>Lorsque les développeurs Web ont commencé à utiliser Ajax, celui-ci est devenu l'un des marqueurs de ce qu'on a appelé le Web 2.0. Avant Ajax, la méthode la plus courante pour montrer des données dynamiques consistait à télécharger une nouvelle page depuis le serveur.</p>
+
+    <p>Prenons l'exemple d'un catalogue en ligne. Pour naviguer  entre les catégories ou les résultats de recherches, vous pouvez cliquer sur des liens qui provoquent le rafraîchissement de l'ensemble de la page. Même si elle reste toujours très courante, la technique consistant à recharger toute la page alors que seule une partie de son contenu a changé est inutilement lente, ce qui peut de surcroît laisser une impression un peu désagréable à l'utilisateur.</p>
+
+    <p>Comparons maintenant le site précédent avec celui des amis de Google, Google Plus. Google Plus utilise Ajax pour charger de nouveaux contenus dans les &laquo; pavés &raquo; de la page, tandis que la barre de navigation reste statique.</p>
+
+    <p>En plus de rendre la navigation plus fluide, Ajax est également excellent pour créer des éléments &laquo; vivants &raquo; dans une page Web. Avant Ajax, si vous vouliez afficher des données dynamiques, comme un graphique en temps réel, ou encore une vue actualisée de la boîte de réception d'une messagerie, vous deviez soit utiliser un plug-in (comme Adobe Flash), ou provoquer périodiquement un rafraîchissement de la page.</p>
+
+    <p>Avec Ajax, il est possible d'actualiser périodiquement les données grâce à un processus asynchrone qui s'exécute en arrière-plan, et qui ne met à jour que les éléments de la page qui ont besoin d'être modifiés.</p>
+
+    <p>Le site Wundermap (<a href="https://www.wunderground.com/wundermap" target="_blank">https://www.wunderground.com/wundermap</a>) montre une carte météo qui change constamment. Les données de cette carte sont récupérées sur des serveurs distants en utilisant Ajax.</p>
+
+    <h2>Voir Ajax en action</h2>
+
+    <p>Sur la figure <img src="wundermap.png" alt="Network" width=90% style="margin:2%;"> les outils de développement de Brave ont été ouverts en activant l'onglet Network (réseau). Celui-ci montre toutes les activités réseau concernant la page Web courante. Lorsqu'une page est chargée, cela concerne les requêtes et les téléchargements du code HTML, CSS et JavaScript ainsi que des images. Une fois ce chargement terminé, l'onglet Network affiche aussi les requêtes et les réponses HTTP asynchrones qui rendent Ajax possible.</p>
+
+    <h2>Utiliser l'objet XMLHttpRequest</h2>
+
+    <p>L'objet <span class="ttype">XMLHttpRequest</span> fournit un moyen pour les navigateurs Web d'envoyer une requête au serveur pour obtenir en retour des données sans avoir à raffraîchir la page.</p>
+
+    <p>L'objet <span class="ttype">XMLHttpRequest</span> a été créé et implémenté en premier par Microsoft dans son navigateur Internet Explorer. C'est devenu depuis un standard du Web, et il a été adapté par tous les navigateurs Web modernes.</p>
+
+    <p>Vous pouvez utiliser les méthodes et les propriétés de l'objet <span class="ttype">XMLHttpRequest</span> pour récupérer des données depuis un serveur distant ou sur votre serveur local. En dépit de son nom, l'objet <span class="ttype">XMLHttpRequest</span> peut obtenir d'autres types de données que du XML, et il est capable d'utiliser pour cela différents protocoles en plus de HTTP.</p>
+
+    <p>Le script de la page <a href="externaldata.html" target="_blank">externaldata</a> montre comment vous pouvez utiliser <span class="ttype">XMLHttpRequest</span> pour charger le contenu d'un document de texte externe (contenant en l'occurrence une ligne de code HTML) dans la page Web HTML courante.</p>
+
+    <p>La première ligne de code à l'intérieur de la fonction crée le nouvel objet <span class="ttype">XMLHttpRequest</span> et lui donne comme nom <span class="ttype">oReq</span> : </p>
+    <p class="ttype">var oReq = new XMLHttpRequest();</p>
+
+    <p>Les méthodes et propriétés de l'objet <span class="ttype">XMLHttpRequest</span> sont maintenant accessibles <em>via</em> l'objet <span class="ttype">oReq</span>.</p>
+
+    <p>La seconde ligne assigne une fonction, reqListener, à l'événement <span class="ttype">onload</span> de l'objet <span class="ttype">oReq</span>. Le but de cette instruction est de forcer l'appel à <span class="ttype">reqListener</span> lorsque <span class="ttype">oReq</span> charge un document : </p>
+    <p class="ttype">oReq.onload = reqListener;</p>
+
+    <p>La troisième ligne utilise la méthode <span class="ttype">open</span> pour créer une requête : </p>
+    <p class="ttype">oReq.open("get", "loadme.txt", true);</p>
+
+    <p>Dans ce cas, la fonction utilise la méthode HTTP <span class="ttype">get</span> pour charger le fichier appelé <span class="ttype">loadme.txt</span>. Le dernier paramètre est l'argument <span class="ttype">async</span>. Il spécifie le mode synchrone ou asynchrone de la requête. Si la valeur est <span class="ttype">false</span>, la méthode <span class="ttype">send</span> ne retournera rien jusqu'à ce que la requête soit totalement traitée. Si sa valeur est <span class="ttype">true</span>, des notifications sur l'état d'avancement de la requête seront fournies <em>via</em> un gestionnaire d'événement. Du fait que le gestionnaire est configuré ici pour surveiller l'événement
+      <span class="ttype">load</span>, une requête asynchrone est ce qui nous intéresse.</p>
+
+    <p class="warning">Il est peu probable que vous puissiez vous trouver dans une situation où vous voudriez définir l'argument <span class="ttype">async</span> avec la valeur <span class="ttype">false</span>. En fait, certains navigateurs ont commencé à ignorer cet argument s'il vaut <span class="ttype">false</span>, donc à le traiter comme valant <span class="ttype">true</span> dans tous les cas, et ce afin d'éliminer le mauvais effet que peuvent avoir sur l'expérience utilisateur les requêtes synchrones.</p>
+
+    <p>La dernière ligne de la fonction <span class="ttype">documentLoader</span> transmet la requête créée avec la méthode <span class="ttype">open</span> : </p>
+    <p class="ttype">oReq.send;</p>
+
+    <p>La méthode <span class="ttype">open</span> récupère la dernière version du fichier demandé. Les applications réellement dynamiques utilisent souvent des boucles pour demander de manière répétée les données disponibles les plus récentes à un serveur utilisant Ajax.</p>
+
+    <h2>Travailler avec la contrainte same-origin policy</h2>
+
+    <p>Si vous exécutez le script de la page <a href="externaldata.html" target="_blank">externaldata</a> dans un navigateur Web, vous n'allez pas obtenir le résultat que vous escomptiez. Si vous ouvrez par exemple la console dans les outils de développement, vous devriez voir (au moins) un message d'erreur semblable à celui-ci <img src="errorMessage.png" alt="error" width=90% style="margin:2%;"></p>
+
+    <p>Le problème, ici, tient à ce qui est appelé <em>same-origin policy</em> (règle de même origine). Pour éviter que des pages Web puissent, à l'insu de l'utilisateur, télécharger par l'intermédiaire de <span class="ttyp">XMLHttpRequest</span> du code qui pourrait être dommageable (virus ou autre), les navigateurs renvoient par défaut une erreur lorsqu'un script essaie de charger une URL qui n'a pas la même origine que l'adresse courante. Si vous ouvrez par exemple une page Web provenant du site <span class="ttype">www.site1.com</span>, et qu'un script tente de retrouver des données à l'adresse <span class="ttype">www.site2.com</span>, le navigateur réagira par une erreur semblable à celle qui apparaît sur la figure ci-dessus.</p>
+
+    <p>Cette règle vaut aussi pour les fichiers qui sont enregistrés sur votre ordinateur local. Si ce n'était pas le cas, <span class="ttype">XMLHttpRequest</span> pourrait être utilisé pour compromettre la sécurité de votre système (et donc la vôtre).</p>
+
+    <p>Dans le cas des exemples de ce livre, il n'y a absolument aucune raison de s'inquiéter à ce sujet. Cependant, pour que les exemples de ce chapitre fonctionnent correctement sur votre ordinateur, il faut bien qu'il existe un moyen de contourner la règle <span class="ttype">same-origin policy</span>.</p>
+
+    <p>La première méthode consiste à placer le fichier HTML qui contient la fonction <span class="ttype">documentLoader</span> et le fichier de texte ensemble sur le même serveur Web.</p>
+
+    <p>La seconde méthode revient à désactiver temporairement les restrictions same-origin policy dans votre navigateur.</p>
+
+    <p class="warning">Ces instructions vous permettent de tester vos propres fichiers (dans le cas où vous n'avez pas installé un serveur Web sur votre machine) uniquement sur votre propre ordinateur. Ne surfez pas sur le Web avec les restrictions same-origin policy désactivées ! Vous pourriez exposer votre ordinateur à être infecté par du code malveillant.</p>
+
+    <p>Pour désactiver les restrictions same-origin policy sous macOS : </p>
+
+    <ol>
+      <li>Regermez votre navigateur</li>
+      <li>Ouvrez le terminal et relancez le navigateur en tapant la commande :
+        <p class="ttype">/Applications/Brave.app/Contents/MacOS/Brave --disable-web-security</p>
+      </li>
+    </ol>
+
+    <p>Vous pouvez maintenant exécuter localement des fichiers contenant des requêtes Ajax, et ce jusqu'à ce que vous refermiez la fenêtre du navigateur. Lors de la prochaine ouverture, les restrictions de sécurité seront automatiquement réactivées.</p>
+
+    <h2>Utiliser CORS pour les requêtes Ajax</h2>
+
+    <p>Il est assez courant qu'une application Web ait besoin d'adresser des requêtes à des serveurs différents pour obtenir les données dont elle a besoin. Par exemple, Google fournit ses géographiques gratuitement à des applications tierces.</p>
+
+    <p>Pour que les transactions entre serveurs soient sécurisées, il faut disposer de mécanismes pour que les navigateurs et les serveurs soient capables de faire fi de leurs différences afin de pouvoir collaborer en toute confiance.</p>
+
+    <p>Jusqu'ici, la meilleure méthode permettant d'autoriser ou d'interdire le partage de ressources entre serveurs est le standard appelé CORS (pour <em>Cross-Origin Resource Sharing</em>, ou encore croisement de ressources - ou de domaine).</p>
+
+    <p>Pour voir CORS en action, jetez un coup d'oeil à l'onglet Network des outils de développement tout en naviguant sur le site <a href="https://www.wunderground.com/wundermap" target="_blank">Wundermap</a>. Pour cela, cliquez sur un des liens qui indique <a href="http://stationdata.wunderground.com/cgi-bin/stationlookup" target="_blank">http://stationdata.wunderground.com/cgi-bin/stationlookup</a>.</p>
+
+    <p>Vous devriez voir sous l'onglet Headers le texte suivant dans l'en-tête http : </p>
+
+    <p class="ttype">Access-Control-Allow-Origin:*</p>
+
+    <p>Il s'agit de l'en-tête de la réponse CORS pour laquelle ce serveur particulier est configuré. L'astérisque après le deux-points indique que ce serveur peut accepter des requêtes de n'importe quelle origine. Si le propriétaire du site <a href="www.wunderground.com" target="_blank">www.wunderground.com</a> voulait restreindre l'accès aux données provenant de certains serveurs spécifiques ou d'utilisateurs authentifiés, il utiliserait aussi CORS.</p>
+
+    <h1>Mettre des objets en mouvement avec JSON</h1>
+
+    <p>Dans le script de la page <a href="externaldata.html" target="_blank">externaldata</a> vous avez utilisé Ajax pour ouvrir et afficher un document de texte contenant une simple ligne de code HTML. Un autre usage courant d'Ajax consiste à demander et à recevoir des données pour qu'elles soient traitées par le navigateur.</p>
+
+    <p>Par exemple, nos amis américains disposent d'un site, <a href="https://gasbuddy.com" target="_blank">gasbuddy.com</a>, qui leur permet d'utiliser une carte fournie par Google pour afficher des prix du carburant à tel ou tel endroit, comme l'illustre la figure <img src="gassbudy.png" alt="gasbuddy" width=90% style="margin:2%;"> </p>
+
+    <p>Si vous examinez ce qu'indique l'onglet Network dans <a href="https://gasbuddy.com" target="_blank">gasbuddy.com</a>, vous pourrez constater que certaines requêtes ont des réponses dont le code ressemble à celui-ci : </p>
+
+    <div class="ttype">
+      {"station":{"Id":33201,"Name":"76","Site":{"Name":"SanFran",
+      "Title":"San Francisco","ProperName":"San Francisco",
+      "StateCode":"CA","IsStateSite":false,"CountryCode":"USA",
+      "Country":"United States","CountryProper":
+      "the United States","PriceUnit":"$/G","TimeOffset":-3,
+      "ObsoletePriceTime":36,"ExcludeMembershipStations":false,
+      "State":"California"},"Lat":37.781024,"Lng":-122.471546,
+      "AreaName":null,"City":"San Francisco","Address":
+      "4850 Geary Blvd","ZipCode":"94118-2911","Country":"USA",
+      "NotIntersection":false,"CrossSt":"Funston Ave","State":"CA",
+      "Phone":"415-221-5164","IsEnterprise":false,"IsNear":false,
+      "PhotoUrls":
+      ["https://images.gasbuddy.com/FetchImage.ashx?key=nmWpl2fDPx9Nxe3tbrLxUw%3d%3d
+      \u0026id=3JD00fdTWIQbVtEy1oLQj49291hpyiR3ifupenxvXL8GY4AyJDS9nw%3d%3d",
+      "https://images.gasbuddy.com/FetchImage.ashx?key=nmWpl2fDPx9Nxe3tbrLxUw%3d%3d
+      \u0026id=gq4xYHPd6gscJGhHu4iH6ro6nqw%2fsq0XoaadIPUyLdVLhbDnHxzo%2fw%3d%3d"],
+      "Features":[{"Id":11,"DisplayName":"Pay At Pump","Available":
+      true,"ImageURL":"https://www.gasbuddy.com/img/art/features/pay_at_pump.png"},
+      {"Id":9,"DisplayName":"C-Store","Available":true,"ImageURL":
+      "https://www.gasbuddy.com/img/art/features/c_store.png"},
+      {"Id":20,"DisplayName":"Service Station","Available":true,
+      "ImageURL":"https://www.gasbuddy.com/img/art/features/service.png"},
+      {"Id":21,"DisplayName":"Loyalty Discount","Available":true,"ImageURL":
+      "https://www.gasbuddy.com/img/art/features/membership_discount.png"},
+      {"Id":27,"DisplayName":"Has Power","Available":true,"ImageURL":
+      "https://www.gasbuddy.com/img/art/features/has_power.png"},
+      {"Id":26,"DisplayName":"Has Gas","Available":true,"ImageURL":
+      "https://www.gasbuddy.com/img/art/features/has_fuel.png"},{"Id":31,
+      "DisplayName":"Has Diesel","Available":true,"ImageURL":
+      "https://www.gasbuddy.com/img/art/features/has_diesel.png"}],
+      "TopSpotters":[{"SpotterDays":28,"IsChamp":true,"DaysAsChamp":
+      75,"MemberId":"sc222","CarIcon":null,"AvatarUrl":
+      "https://images.gasbuddy.com/FetchImage.ashx?key=nmWpl2fDPx9Nxe3tbrLxUw%3d%3d
+      \u0026id=3PzevnY8wl%2fcSZrKFuAvLRMaj5vGnGLgWSL596aqR1HF5yIKxRvhsQ%3d%3d",
+      "Site":null,"PointsToday":0,"OverallRank":0,"JoinDate":
+      "\/Date(-62135578800000)\/","ThirtyDayRank":0,"ConsecutiveDays":0,
+      "TotalPoints":0,"AchievementGroupList":null},{"SpotterDays":20,"IsChamp"
+      :false,"DaysAsChamp":0,"MemberId":"dtsang91","CarIcon":null,"AvatarUrl":
+      "https://images.gasbuddy.com/FetchImage.ashx?key=nmWpl2fDPx9Nxe3tbrLxUw%3d%3d
+      \u0026id=TWKbzeK%2f%2bdA6tQf%2f4FxO8fA2V3ZwWtHlsk2tqRY9i%2flQrWg4gsR4fQ%3d%3d",
+      "Site":null,"PointsToday":0,"OverallRank":0,"JoinDate":
+      "\/Date(-62135578800000)\/","ThirtyDayRank":0,
+      "ConsecutiveDays":0,"TotalPoints":0,"AchievementGroupList":
+      null},{"SpotterDays":10,"IsChamp":false,"DaysAsChamp":0,
+      "MemberId":"Ap2Vroom","CarIcon":null,"AvatarUrl":null,"Site":
+      null,"PointsToday":0,"OverallRank":0,"JoinDate":
+      "\/Date(-62135578800000)\/","ThirtyDayRank":0,"ConsecutiveDays":0,
+      "TotalPoints":0,"AchievementGroupList":null},{"SpotterDays":7,"IsChamp":
+      false,"DaysAsChamp":0,"MemberId":"Wubbawu","CarIcon":null,"AvatarUrl":null,
+      "Site":null,"PointsToday":0,"OverallRank":0,"JoinDate":
+      "\/Date(-62135578800000)\/","ThirtyDayRank":0,"ConsecutiveDays":0,
+      "TotalPoints":0,"AchievementGroupList":null},{"SpotterDays":5,"IsChamp":
+      false,"DaysAsChamp":0,"MemberId":"Deansfyl","CarIcon":null,"AvatarUrl":
+      null,"Site":null,"PointsToday":0,"OverallRank":0,"JoinDate":
+      "\/Date(-62135578800000)\/",
+      "ThirtyDayRank":0,"ConsecutiveDays":0,"TotalPoints":0,
+      "AchievementGroupList":null}],"Reviews":{"Reviews":[{"HasAgreed":false,
+      "CanDelete":false,"ReviewId":4931693,"StationId":33201,"Review":
+      "76 great gas,seem to scrimp on gas","ReviewDate":"\/Date(1554234503213)\/",
+      "MemberId":"kingofwaikiki","ProfileImageUrl":
+      "https://images.gasbuddy.com/FetchImage.ashx?key=nmWpl2fDPx9Nxe3tbrLxUw%3d%3d
+      \u0026id=zWp7yXloREHItqLbKnFWuLrcHlgL8bbgb9lcYtdNQUiPIB5EHXl8Ow%3d%3d",
+      "OverallRating":2,"AgreeTotal":0,"ReplyRequested":false,"Reply":null,
+      "Replies":[],"IsReportable":false,"IsVisible":true,"SentimentScore":
+      0.7124500274658203},{"HasAgreed":false,"CanDelete":false,"ReviewId":4891974,
+      "StationId":33201,"Review":"ok station ","ReviewDate":
+      "\/Date(1554206120193)\/","MemberId":"ajb53","ProfileImageUrl":
+      "https://images.gasbuddy.com/images/websites/gasbuddy/default-avatar.jpg",
+      "OverallRating":2,"AgreeTotal":0,"ReplyRequested":false,"Reply":null,
+      "Replies":[],"IsReportable":false,"IsVisible":true,"SentimentScore":
+      0.39800000190734863},{"HasAgreed":false,"CanDelete":
+      false,"ReviewId":4626035,"StationId":33201,"Review":
+      "Pumps often broken - today I think all of them were out of order.
+      Recently, some pumps were working at a trickle - 25 cents\u0027 worth in
+      five minutes. People often park at the pumps just to buy something from
+      the store.
+      \n\nI mistakenly first posted this review under the Chevron near Arguello.
+      This station has changed hands so many times, I couldn\u0027t remember it
+      was still a 76. Wish this website would let you delete or update reviews.
+      Have to wait some unspecified amount of time before
+      I can post again and correct that.","ReviewDate":"\/Date(1551202924927)\/",
+      "MemberId":"#12#_sulequan","ProfileImageUrl":
+      "https://images.gasbuddy.com/images/websites/gasbuddy/default-avatar.jpg",
+      "OverallRating":1,"AgreeTotal":0,"ReplyRequested":false,"Reply":null,
+      "Replies":[],
+      "IsReportable":false,"IsVisible":true,"SentimentScore":-0.2808000147342682},
+      {"HasAgreed":false,"CanDelete":false,"ReviewId":4407922,"StationId":33201,
+      "Review":"Ok","ReviewDate":"\/Date(1549033808587)\/","MemberId":"mug23",
+      "ProfileImageUrl":
+      "https://images.gasbuddy.com/images/websites/gasbuddy/default-avatar.jpg",
+      "OverallRating":0,"AgreeTotal":0,"ReplyRequested":false,"Reply":null,
+      "Replies":[],"IsReportable":false,"IsVisible":true,"SentimentScore":
+      0.39800000190734863}],"Pager":{"PageNumber":0,"PageSize":4,"RecordCount":
+      17,"PageCount":5,"IsLastPage":false,"IsFirstPage":false,"PreviousPageNumber":
+      -1,"NextPageNumber":1}},"TotalReviewsCount":0,"Rating":{"BestBets":[],
+      "WatchOuts":[],"StarValue":4,"RatingCount":152},"APIFuel":[{"Id":1,
+      "DisplayName":"Regular","ShortName":"Reg","Available":true,"ImageURL":
+      "https://www.gasbuddy.com/img/art/features/regular.png"},{"Id":2,
+      "DisplayName":"Midgrade",
+      "ShortName":"Mid","Available":true,"ImageURL":
+      "https://www.gasbuddy.com/img/art/features/midgrade.png"},{"Id":3,
+      "DisplayName":"Premium","ShortName":"Pre","Available":true,"ImageURL":
+      "https://www.gasbuddy.com/img/art/features/premium.png"},{"Id":4,
+      "DisplayName":"Diesel","ShortName":"Diesel","Available":
+      true,"ImageURL":"https://www.gasbuddy.com/img/art/features/diesel.png"},
+      {"Id":10,"DisplayName":"E85","ShortName":"E85","Available":false,"ImageURL":
+      "https://www.gasbuddy.com/img/art/features/e85.png"}],"Fuels":[{"FuelType"
+      :1,"CreditPrice":{"Type":0,"Amount":3.89,"TimePosted":"\/Date(1555273359297)\/",
+      "Member":{"MemberId":"dee_win","CarIcon":"greencar.gif","AvatarUrl":null,
+      "Site":null,"PointsToday":0,"OverallRank":438493,"JoinDate":
+      "\/Date(1420005157497)\/","ThirtyDayRank":0,"ConsecutiveDays":1,
+      "TotalPoints":49900,"AchievementGroupList":null}},"CashPrice":null},
+      {"FuelType":2,"CreditPrice":{"Type":0,
+      "Amount":4.03,"TimePosted":"\/Date(1555300920987)\/","Member":{"MemberId":
+      "dtsang91","CarIcon":"redspcar.gif","AvatarUrl":
+      "https://images.gasbuddy.com/FetchImage.ashx?key=nmWpl2fDPx9Nxe3tbrLxUw%3d%3d
+      \u0026id=TWKbzeK%2f%2bdA6tQf%2f4FxO8fA2V3ZwWtHlsk2tqRY9i%2flQrWg4gsR4fQ%3d%3d",
+      "Site":null,"PointsToday":0,"OverallRank":16208,"JoinDate":"\/Date(1441304059897)\/",
+      "ThirtyDayRank":8273,"ConsecutiveDays":32,"TotalPoints":
+      2993583,"AchievementGroupList":null}},"CashPrice":null},{"FuelType":3,
+      "CreditPrice":{"Type":0,"Amount":4.15,"TimePosted":"\/Date(1555300921893)\/",
+      "Member":{"MemberId":"dtsang91","CarIcon":"redspcar.gif","AvatarUrl":
+      "https://images.gasbuddy.com/FetchImage.ashx?key=nmWpl2fDPx9Nxe3tbrLxUw%3d%3d
+      \u0026id=TWKbzeK%2f%2bdA6tQf%2f4FxO8fA2V3ZwWtHlsk2tqRY9i%2flQrWg4gsR4fQ%3d%3d",
+      "Site":null,"PointsToday":0,"OverallRank":16208,"JoinDate":"\/Date(1441304059897)\/",
+      "ThirtyDayRank":8273,"ConsecutiveDays":32,"TotalPoints":2993583,"AchievementGroupList"
+      :null}},"CashPrice":null},{"FuelType":4,
+      "CreditPrice":{"Type":0,"Amount":3.99,"TimePosted":"\/Date(1555300921993)\/",
+      "Member":{"MemberId":"dtsang91","CarIcon":"redspcar.gif","AvatarUrl":
+      "https://images.gasbuddy.com/FetchImage.ashx?key=nmWpl2fDPx9Nxe3tbrLxUw%3d%3d
+      \u0026id=TWKbzeK%2f%2bdA6tQf%2f4FxO8fA2V3ZwWtHlsk2tqRY9i%2flQrWg4gsR4fQ%3d%3d",
+      "Site":null,"PointsToday":0,"OverallRank":16208,"JoinDate":"\/Date(1441304059897)\/",
+      "ThirtyDayRank":8273,"ConsecutiveDays":32,"TotalPoints":2993583,
+      "AchievementGroupList":null}},"CashPrice":null}],"CheapestFuel":{"FuelType":1,
+      "CreditPrice":{"Type":0,"Amount":3.89,"TimePosted":"\/Date(1555273359297)\/",
+      "Member":{"MemberId":"dee_win","CarIcon":"greencar.gif","AvatarUrl":null,
+      "Site":null,"PointsToday":0,"OverallRank":438493,"JoinDate":"\/Date(1420005157497)\/",
+      "ThirtyDayRank":0,"ConsecutiveDays":1,"TotalPoints":49900,"AchievementGroupList":null}},
+      "CashPrice":null},"WebCouponEndDate":"\/Date(-62135578800000)\/","WebCouponImageUrl"
+      :null,"WebCouponLeft":0,"WebCouponLink":null,"WebCouponTitle":null,"WebCouponTop"
+      :0,"WebGbrsBackGroundColor":null,"WebGbrsForeGroundColor":null,"WebLogoImageUrl"
+      :null,"WebLogoLink":null,"WebLogoWidth":0,"WebPricesOffset":false,
+      "WebPricesTemplateId":0,"WebSortOrder":0,"BrandId":15,
+      "BrandVersion":2,"StationUrl":"/Station/33201"},"prices":[{"Price":3.89,
+      "Time":"19h ago","ShowMemberIcon":true,"MemberIconUrl":
+      "//static.gasbuddy.com/web/consumer/user-icon.svg","MemberId":"dee_win",
+      "IsCash":false,"CarIcon":"greencar.gif","IsReservedMember":false}]}
+    </div>
+
+    <p>Si vous prenez une partie de ce code et que vous le reformatez, vous obtiendrez quelque chose qui ressemble au format <span class="ttype">nom:valeur</span> d'un objet littéral de JavaScript.</p>
+
+    <p>La raison principale pour laquelle JSON est si facile à utiliser est qu'il propose un format avec lequel JavaScript est déjà capable de travailler. Aucune conversion n'est donc nécessaire.</p>
+
+    <p>Nous allons afficher le fichier JSON <a href="js4dummies.json" target="_blank">js4dummies.json</a> dans la page <a href="dispjson.html" target="_blank">dispjson.html</a>.</p>
+
+
+
+
+  </body>
+</html>
