@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>L'objet Position</title>
+    <script type="text/javascript">
+      var gps = navigator.geolocation.getCurrentPosition(
+
+        function (position) {
+          for (key in position.coords) {
+            document.write(key+': '+position.coords[key]);
+            document.write('<br>');
+          }
+        });
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

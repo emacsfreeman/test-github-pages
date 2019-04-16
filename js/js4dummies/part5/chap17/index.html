@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>HTML 5 et ses API</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <h1>Un peu de culture</h1>
+    <blockquote>
+      <p>&laquo; Le langage est un virus venu de l'espace &raquo;</p>
+    </blockquote>
+    <cite>William S. Burroughs</cite>
+
+    <p>Les API de HTML 5 vous donnent accès à de multiples fonctionnalités, aussi bien sur ordinateur que sur des dispositifs mobiles. Dans ce chapitre, vous allez découvrir comment vous servir de ces API, quelles sont les méthodes et les techniques standard qu'elles utilisent, ainsi que des exemples de code qui vous permettront de pénétrer dans cet univers excitant.</p>
+
+    <h1>Comprendre comment les API fonctionnent</h1>
+
+    <p>Une API (pour <em>Application Programming Interface</em>, ou interface de programmation d'application) est un ensemble de routines et de standards logiciels qui permettent au programmeur d'accéder aux fonctionnalités d'une application. Les API sont le moyen grâce auquel un programme informatique offre à un autre programme la possibilité d'interagir avec lui. Ainsi, lorsqu'un navigateur Web permet à JavaScript d'interagir avec lui, il le fait en utilisant des API.</p>
+
+    <p>Par exemple, les API Battery Status définies par le consortium W3C décrivent la manière dont les navigateurs devraient se comporter devant ce qui se passe avec la batterie d'un certain dispositif, comme un smartphone ou une tablette. D'autres programes (come des scripts JavaScript à l'intérieur de pages Web) peuvent alors accéder à cette API pour déterminer quel est l'état de charge de la batterie de l'appareil, par exemple si sa capacité est faible, si elle est en charge, quel est le temps écoulé depuis que l'appareil a été allumé, et ainsi de suite. Ces informations sont utilisables dans votre programme.</p>
+
+    <p>Le langage d'une API est extrêmement précis, et il décrit exactement la manière dont cette API devrait être implémentée dans les navigateurs Web. Voir sa <a href="https://developer.mozilla.org/fr/docs/Web/API/Battery_status_API" target="_blank">documentation</a>.</p>
+
+    <p>Typiquement, une API est écrite sous forme de spécifications qui indiquent quelles propriétés et quelles méthodes sont disponibles pour les programmeurs, quels arguments peuvent être passés aux méthodes, et quelles sortes de valeurs sont retournées par les propriétés.</p>
+
+    <p>Dans le cas d'API développées par des institutions officielles, comme le consortium W3C (<em>World Wide Web consortium</em>), il s'agit bien souvent de spécifications décrivant comment les programmes devraient être capables d'interagir avec les navigateurs Web, plutôt que la manière dont ils le font réellement. C'est alors aux équipes qui développent ces navigateurs Web de décider comment ils vont implémenter en pratique ces API.</p>
+
+    <p>Une API indique aux programmeurs comment ils peuvent interagir avec le logiciel, et comment celui-ci devrait répondre. Il est important de garder présent à l'esprit le fait que ce n'est pas parce qu'une API existe que les programmeurs peuvent l'utiliser. En fait, il existe de nombreuses API qui ont été proposées et décrites, mais qui n'ont pas encore été implémentées, ou qui ne l'ont été que partiellement, dans les navigateurs Web.</p>
+
+    <h2>Vérifier le support par le navigateur des API HTML 5</h2>
+
+    <p>La meilleure source permettant de vérifier quel navigateur prend en charge un standard particulier, ou un standard simplement proposé, est le site <a href="https://caniuse.com" target="_blank">www.caniuse.com</a>. CanIUse.com liste tous les éléments et API HTML 5, et il fournit un tableau des navigateurs qui les prennent en charge.</p>
+
+    <h2>Découvrir les API de HTML 5</h2>
+
+    <p>Le standard HTML 5 définit et documente nombre d'API que les programmeurs JavaScript peuvent utiliser pour accéder à des fonctionnalités des navigateurs Web d'une manière standardisée.</p>
+
+    <p>À ce jour, de nombreuses API HTML 5 ne sont pas encore finalisées et implémentées par tous les navigateurs Web. Mais celles qui le sont se révèlenet extrêmement utiles, et elles étendent les limites de ce qu'il est possible de faire avec des applications Web.</p>
+
+    <p>La liste des API de HTML 5 change et s'étend constamment. Pour consulter une liste des API voir ce site <a href="http://html5index.org/">html5index.org</a>.</p>
+
+    <h1>Utiliser la géolocalisation</h1>
+
+    <p>L'API Geolocation permet aux programmes d'accéder aux fonctions de géolocalisation du navigateur Web, et donc aux données indiquant quel est le lieu où se trouve l'appareil.</p>
+
+    <p>Cette API est certainement la mieux prise en charge de toutes, et elle est implémentée dans au moins 90% des navigateurs mobiles ou de bureau, et donc dans tous les navigateurs les plus répandus, à l'exception d'Opera Mini.</p>
+
+    <h2>Que fait la géolocalisation ?</h2>
+
+    <p>L'API Geolocation décrit la manière dont JavaScript peut interagir avec l'objet <span class="ttype">navigator.geolocation</span> de manière à obtenir des données sur la position courante d'un dispositif, notamment : </p>
+    <ul class="chevrons">
+      <li> <strong>Latitude : </strong> La latitude en degrés décimaux.</li>
+      <li> <strong>Longitude : </strong> La longitude en degrés décimaux.</li>
+      <li> <strong>Altitude : </strong> L'altitude en mètres.</li>
+      <li> <strong>Heading : </strong> La direction dans laquelle pointe le dispositif.</li>
+      <li> <strong>Speed : </strong> La vitesse à laquelle le dispositif se déplace en mètres par seconde.</li>
+      <li> <strong>Accuracy : </strong> La précision avec laquelle la latitude et la longitude sont mesurées (en mètres).</li>
+    </ul>
+
+    <p>En obtenant tout ou partie de ces données, une application JavaScript s'exécutant dans un navigateur Web pourra placer l'utilisateur sur une carte, faire appel à des ressources comme Google Maps afin de proposer à l'utilisateur des points d'intérêt ou des services proches de lui, et bien plus encore.</p>
+
+    <h2>Comment la géolocalisation travaille-t-elle ?</h2>
+
+    <p>Lorsque JavaScript initie une requête demandant la position de l'appareil <em>via</em> l'objet <span class="ttype">Geolocation</span>, un certain nombre d'étapes sont exécutées avant que les informations de lieu ne soient renvoyées.</p>
+
+    <p>La première chose, si ce n'est la plus importante, est que le navigateur doit s'assurer que l'utilisateur a autorisé pour cette application Web spécifique l'accès à ses informations de localisation. Des navigateurs différents peuvent poser la question à l'utilisateur de différentes manières, mais il s'agit en général d'une sorte de notification ou de fenêtre pop-up.</p>
+
+    <p>Si vous donnez votre accord, le navigateur va essayer de vous localiser. Il utilise pour cela différents moyens, en allant du plus précis au moins précis.</p>
+
+    <p>Si le programme indique qu'une précision élevée est nécessaire, la géolocalisation va prendre plus de temps pour essayer d'accéder aux données les plus précises disponibles <em>via</em> le GPS. Sinon, le navigateur va tenter de trouver le bon équilibre entre vitesse et précision afin d'obtenir les meilleurs résultats possibles en faisant appel aux ressources suivantes, si elles sont disponibles, bien sûr : </p>
+    <ul class="chevrons">
+      <li>la position des satellites GPS</li>
+      <li>votre connexion réseau sans fil</li>
+      <li>l'antenne à laquelle votre téléphone ou votre appareil mobile est connecté</li>
+      <li>l'adresse IP de votre appareil ou de votre ordinateur</li>
+    </ul>
+
+    <h2>Comment utiliser la géolocalisation ?</h2>
+
+    <p>La clé pour utiliser la géolocalisation, c'est la méthode <span class="ttype">getCurrentPosition</span> de l'objet <span class="ttype">navigator.geolocation</span>. Cette méthode peut prendre trois arguments : </p>
+    <ul class="chevrons">
+      <li> <span class="ttype">success:</span> Une fonction de rappel qui est passée à l'objet <span class="ttype">Position</span> lorsque la localisation est un succès</li>
+      <li> <span class="ttype">error:</span> Une fonction de rappel facultative qui est passée à l'objet <span class="ttype">PositionError</span> lorsque la localisation échoue.</li>
+      <li> <span class="ttype">options:</span> Un objet PositionOptions facultatif qui peut être utilisé pour contrôler plusieurs aspects concernant la manière dont la recherche de la position est effectuée.</li>
+    </ul>
+
+    <p>L'objet <span class="ttype">Position</span> qui est retourné par la méthode <span class="ttype">getCurrentPosition</span> contient deux propriétés : </p>
+    <ul class="chevrons">
+      <li> <span class="ttype">Position.coords</span> : Contient un objet <span class="ttype">Coordinates</span> qui décrit le lieu.</li>
+      <li> <span class="ttype">Position.timestamp</span> : L'instant auquel la position a été retrouvée.</li>
+    </ul>
+
+    <p>Le script de la page <a href="position.html" target="_blank">position</a> montre comment utiliser la méthode <span class="ttype">getCurrentPosition</span>.</p>
+
+    <p>Si le code est exécuté sur un ordinateur de bureau, certaines valeurs peuvent être nulles ou vides (0 ou <span class="ttype">null</span>), voire indiquées comme NaN (<em>Not a Number</em>, donc pas un nombre) si elles apparaissent comme n'étant pas calculables. Bien entendu, l'exécution de ce script dans un navigateur mobile sur smartphone donnerait des résultats un peu différents.</p>
+
+    <h2>Combiner la géolocalisation avec Google Maps</h2>
+
+    <p>L'une des applications les plus courantes de la géolocalisation consiste à afficher une position sur une carte. Pour y arriver, les premières choses dont vous avez besoin sont les informations de lattitude et de longitude. Mais vous savez maintenant comment les obtenir. En revanche, dessiner une carte centrée sur une position donnée est est un autre problème.</p>
+
+    <p>Fort heureusement, il y a des gens qui se sont déjà penchés sur cette question, et qui ont créé une API pour interagir avec leur logiciel de cartographie. Le fournisseur le plus célèbre, c'est évidemment Google, qui fournit gratuitement l'API permettant d'accéder à Google Maps (même si les motivations sous-jacentes sont commerciales).</p>
+
+    <p>Pour utiliser l'API de Google Maps, suivez ces étapes : </p>
+    <ol>
+      <li>Commencez par vous connecter à l'adresse <a href="https://console.developers.google.com/cloud-resource-manager" target="_blank">code.google.com/apis/console</a> et connectez-vous avec votre compte Google.</li>
+      <li>Une fois connecté, il est possible que Google vous demande d'accepter son contrat de licence, ce que vous devez bien entendu faire.</li>
+      <li>Cliquez sur le lien qui indique Activer et gérer des API.</li>
+      <li>Donnez un nom à votre projet et cochez la case Oui pour accepter les conditions d'utilisation. Cliquez ensuite sur le bouton Créer.</li>
+    </ol>
+
+    
+
+  </body>
+</html>
