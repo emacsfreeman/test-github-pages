@@ -108,9 +108,56 @@
       <li>Une fois connecté, il est possible que Google vous demande d'accepter son contrat de licence, ce que vous devez bien entendu faire.</li>
       <li>Cliquez sur le lien qui indique Activer et gérer des API.</li>
       <li>Donnez un nom à votre projet et cochez la case Oui pour accepter les conditions d'utilisation. Cliquez ensuite sur le bouton Créer.</li>
+      <p>Votre navigateur va afficher une liste des API disponibles ainsi qu'un champ de recherche.</p>
+      <li>Dans la section API Google Maps, cliquez sur le lien qui indique Google Maps JavaScript API.</li>
+      <li>Cliquez sur le bouton Enable pour activer l'API.</li>
+      <li>Cliquez ensuite sur le bouton Identifiants, dans le volet de gauche, puis sur Create credentials.</li>
+      <li>Cliquez sur l'option Clé API</li>
+      <li>Dans la boîte de dialogue qui suit, cliquez sur le bouton Clé Navigateur.</li>
+      <li>Donnez un nom à la nouvelle clé puis cliquez sur le bouton Créer.</li>
+      <li>Au bout de quelques instants, vous allez obtenir votre clé API.</li>
     </ol>
 
-    
+    <p>Cette clé API est tout ce dont vous avez besoin pour accéder aux remarquables fonctionnalités de Google Maps. Il est temps maintenant de voir comment l'utiliser.</p>
+
+    <p>Le script de la page <a href="localiser.html" target="_blank">localiser</a> récupère la position de votre ordinateur en utilisant l'objet <span class="ttype">navigator.geolocation</span>, puis il la passe à Google Maps pour obtenir une carte.</p>
+
+    <h1>Accéder à l'audio et à la vidéo</h1>
+
+    <p>Avant HTML 5, la seule façon pour une page Web d'utiliser une caméra connectée à un ordinateur, ou intégrée à celui-ci, passait par l'utilisation de plug-ins spécialisés, notamment Flash.</p>
+
+    <p>L'un des objectifs majeurs poursuivis par HTML 5 est d'éliminer le besoin de ces compléments, avec les mises à jour trop fréquentes et les problèmes de sécurité que cela pose. Depuis que HTML 5 a été proposé, il y a eu plusieurs essais visant à définir un standard pour l'utilisation de ces caméras.</p>
+
+    <p>La dernière et la meilleure API destinée à gérer les communications audio et vidéo en direct <em>via</em> les navigateurs Web est appelée WebRTC (pour <em>Web Real Time Communications</em>, ou communications Web en temps réel).</p>
+
+    <p>Au coeur de WebRTC se trouve la méthode <span class="ttype">navigator.getUserMedia ()</span>, qui permet d'obtenir un flux multimédia (audio et vidéo) à partir du dispositif dont se sert l'utilisateur.</p>
+
+    <p>Actuellement, <span class="ttype">getUserMedia</span> est pris en charge par Chrome, Opera et Firefox. Si vous voulez l'utiliser dans d'autres navigateurs, comme Safari ou Internet Explorer, vous devrez utiliser un outil appelé un <em>polyfill</em>. Pour en savoir plus sur les polyfills, voyez la page <a href="https://fr.wikipedia.org/wiki/Polyfill" target="_blank">Wikipédia</a>.</p>
+
+    <p>Le premier paramètre de <span class="ttype">getUserMedia</span> est un objet dont les propriétés indiquent le type de média auquel vous voulez accéder. Si vous avez besoin par exemple d'accéder aussi bien à la vidéo qu'à l'audio, vous devriez définir l'objet suivant comme premier paramètre : </p>
+    <p class="ttype">{video: true, audio: true}</p>
+
+    <p>Les autres paramètres demandés par <span class="ttype">getUserMedia</span> sont une fonction de rappel en cas de succès, ou en cas d'échec. Le script de la page <a href="media.html" target="_blank">media</a> en montre un exemple simple d'utilisation.</p>
+
+    <p>Voyons ça de plus près : </p>
+    <p class="ttype">window.addEventListener('DOMContentLoaded', function() {})</p>
+
+    <p>Il s'agit ici de l'événement principal. Il prend notamment en charge un gestionnaire d'événement qui attend que le DOM soit chargé avant d'exécuter la suite du script : </p>
+    <p class="ttype">var v = document.getElementById('v');</p>
+
+    <p>La ligne précédente crée une nouvelle variable, appelée <span class="ttype">v</span>, qui contient une référence à l'élément vidéo possédant un identificateur appelé <span class="ttype">id= "v"</span> :</p>
+    <div class="ttype">
+      navigator.getUserMedia || <br>
+        navigator.webkitGetUserMedia || <br>
+        navigator.mozGetUserMedia || <br>
+        navigator.msGetUserMedia); <br>
+    </div>
+
+    <p>En fait, <span class="ttype">getUserMedia</span> est une technologie expérimentale qui n'est pas complètement standardisée. De ce fait, les navigateurs Web peuvent l'implémenter de manière différente, ce qu'ils indiquent en appliquant leur propre préfixe. Cette instruction définit la valeur de l'objet <span class="ttype">navigator.getUserMedia</span> selon la version préfixée prise en charge par le navigateur courant de l'utilisateur. Si, par exemple, vous utilisez Firefox et que vous appelez <span class="ttype">getUserMedia</span>, vous aller appeler en fait <span class="ttype">navigator.mozGetUserMedia</span> : </p>
+    <p class="ttype">if (navigator.getUserMedia) {}</p>
+
+    <p>Cela permet de vérifier si le navigateur de l'utilisateur prend en charge <span class="ttype">getUserMedia</span> : </p>
+
 
   </body>
 </html>
