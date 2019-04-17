@@ -1,0 +1,78 @@
+#+TITLE: 10 outils en ligne pour vous aider à écrire du meilleur code  JavaScript
+#+AUTHOR: Laurent Garnier
+
+
+#+OPTIONS: date:nil toc:t h:2
+#+LANGUAGE: FR
+#+LATEX_HEADER: \usepackage[french]{babel}
+#+LATEX_HEADER: \hypersetup{colorlinks = true}
+
+
+* JSLint
+
+  + [[http://jslint.com/]]
+
+    JSLint, créé par Douglas Crockford, un super génie du JavaScript,
+    est un outil de vérification conçu pour vous dire où votre code a
+    des problèmes, et pas juste le genre de problèmes qui pourraient
+    générer des erreurs.
+
+* JSFiddle.net
+
+  + [[https://jsfiddle.net/]]
+
+   JSFiddle est un programme en ligne servant à exécuter des
+    applications Web dans un environnement de test.
+
+* JSBin
+
+  + [[https://jsbin.com/?html,js,output]]
+
+  JSBin est un site de partage de code qui vous permet de partager vos
+  créations avec d'autres personnes.
+
+* Javascriptcompressor.com
+
+  + [[http://javascriptcompressor.com/]]
+
+  Plus vos fichiers JavaScript sont petits, et plus vite ils sont
+  téléchargés.
+
+* JSBeautifier.io
+
+  + [[https://beautifier.io/]]
+
+  JSBeautifier est un outil en ligne qui reçoit du code JavaScript
+  réputé être laid pour le rendre plus beau
+
+
+* JSONFormatter
+
+  + [[https://jsonformatter.org/]]
+
+  Le système de formatage et de validation JSON appelé JSONFormatter
+  vous permet de coller du code JSON non formaté.
+
+* JavaScript Regex Generator
+
+  + [[https://scriptular.com/]]
+  + [[https://regexr.com/]]
+  + [[https://www.regexpal.com/]]
+
+
+* Jshint.com
+
+  + [[https://jshint.com/]]
+  
+  JShint est un outil qui vous aide à détecter des erreurs et des
+  problèmes potentiels dans votre code JavaScript.
+
+* MDN
+
+  + [[https://developer.mozilla.org/fr/docs/Web/JavaScript]]
+  + [[https://developer.mozilla.org/en-US/docs/Web/javascript]]
+
+* Douglas Crockford
+
+  + [[http://crockford.com/javascript/]]
+   
