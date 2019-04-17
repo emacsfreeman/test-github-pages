@@ -15,6 +15,69 @@
     <p>jQuery est le compagnon le plus populaire de JavaScript, et il est utilisé par pratiquement tous les programmeurs pour accélérer et simplifier le développement de leurs applications JavaScript. Dans ce chapitre, vous allez découvrir les bases de jQuery et pourquoi il est si répandu.</p>
 
     <h1>Ecrire plus, tout en faisant moins</h1>
+
+    <p>jQuery est actuellement utilisé par plus de 61% des 100 000 sites les plus visités. Il est si largement employé que de nombreuses personnes le voient comme un outil essentiel pour le développement en JavaScript.</p>
+
+    <p>jQuery permet de régler certains des problèmes les plus épineux en JavaScript, comme les questions liées à la compatibilité des navigateurs, et il rend la sélection ainsi que la modification de parties d'un document HTML bien plus faciles.</p>
+
+    <p>jQuery contient également des outils vous permettant d'ajouter des animations et de l'interactivité à vos pages Web.</p>
+
+    <p>Les bases de jQuery sont faciles à apprendre une fois que vous connaissez JavaScript.</p>
+
+    <h1>Débuter avec jQuery</h1>
+
+    <p>Pour débuter avec jQuery, vous devez inclure sa bibliothèque dans vos pages Web. La méthode la plus simple consiste à utiliser une version hébergée sur un réseau de diffusion de contenu (ou RDC). Sinon, vous pouvez télécharger cette bibliothèque depuis le site de jQuery et l'héberger sur votre serveur.</p>
+
+    <p>Google héberge des versions de nombreuses bibliothèques JavaScript. Vous pouvez trouver des liens et copier des balises pour les coller dans votre code à l'adresse <a href="https://developers.google.com/speed/libraries/" target="_blank">https://developers.google.com/speed/libraries/</a>.</p>
+
+    <p>Une fois que vous avez trouvé un lien pour une version disponible sur un réseau de diffusion de contenu (<em>Content Delivery Network</em>, ou CDN), il vous suffit de l'inclure entre les balises <span class="ttype">head</span> de chaque page dans laquelle vous avez besoin d'utiliser jQuery.</p>
+
+    <p>Voir le code source de la page <a href="hellojquery.html" target="_blank">hellojquery</a>.</p>
+
+    <h1>L'objet jQuery</h1>
+
+    <p>Toutes les fonctionnalités de jQuery sont accessibles par l'intermédiaire de l'objet <span class="ttype">jQuery</span>. Cet objet peut être référencé de deux manières différentes : par le mot-clé <span class="ttype">jQuery</span>, ou par l'alias <span class="ttype">$</span>. Les deux méthodes font absolument la même chose. Evidemment, l'emploi de l'alias est plus court, donc plus rapide, et c'est pourquoi il a la faveur des programmeurs.</p>
+
+    <p>La syntaxe de base pour utiliser jQuery se présente ainsi : </p>
+    <p class="ttype">$("sélecteur").méthode();</p>
+
+    <p>La 1ère partie, placée entre parenthèses, indique quels éléments vous voulez traiter. La 2de partie explicite ce qui devrait être fait avec ces éléments.</p>
+
+    <p>En réalité, les instructions jQuery exécutent souvent de multiples actions sur les éléments sélectionnés en utilisant une technique de <em>chaînage</em>. Celle-ci permet d'attacher plusieurs méthodes au sélecteur en ajoutant des points supplémentaires. Sur l'exemple du script de la page <a href="exchainjquery.html" target="_blank">exchainjquery</a>, le chaînage est utilisé pour sélectionner un élément (ayant pour identificateur <span class="ttype">pageHeader</span>) puis lui appliquer un style.</p>
+
+    <h1>Est-ce que votre document est prêt ?</h1>
+
+    <p>jQuery sa propre manière d'indiquer que tout est bien chargé et opérationnel : l'événement <em>document ready</em>. Pour éviter des erreurs provoquées par le DOM, ou par le fait que jQuery pourrait ne pas être chargé au moment où le script est exécuté, il est important d'utiliser cet événement, à moins de placer toutes les instructions jQuery à la fin du document HTML.</p>
+
+    <h1>Utiliser les sélecteurs jQuery</h1>
+
+    <p>À la différence des moyens compliqués, et limités, qu'offre JavaScript pour sélectionner des éléments, jQuery rend cette sélection simple. Avec jQuery, les programmeurs se servent des mêmes techniques que celles qu'ils utilisent pour sélectionner des éléments avec CSS.</p>
+
+    <h1>Changer des choses avec jQuery</h1>
+
+    <h2>Modifier des styles CSS</h2>
+
+    <p>Voir la page <a href="jquerycss.html" target="_blank">jquerycss</a>.</p>
+
+    <h1>Evénements</h1>
+
+    <h2>Utiliser on() pour attacher des événements</h2>
+
+    <p>Voir la page <a href="jqueryetcss.html" target="_blank">jqueryetcss</a>.</p>
+
+    <h2>Jouer avec les animations jQuery</h2>
+
+    <p>Voir la page <a href="querystyle.html" target="_blank">querystyle</a>.</p>
+
+    <h1>Ajax</h1>
+
+    <h2>Utiliser la méthode ajax()</h2>
+
+    <p>Voir <a href="https://api.jquery.com/jquery.ajax/" target="_blank">api.jquery.com/jquery/jquery.ajax</a> et <a href="introdyn.html" target="_blank">introdyn</a> pour une illustration.</p>
+
     
+
+
+
   </body>
 </html>

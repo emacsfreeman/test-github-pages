@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery CSS</title>
+    <style media="screen">
+      td {
+        border: 1px solid black;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+        $('#colorizer').on('click', function() {
+          $('#things tr:even').css('background', 'yellow');
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <table id="things">
+      <tr>
+        <td>élément 1</td>
+        <td>élément 2</td>
+        <td>élément 3</td>
+      </tr>
+      <tr>
+        <td><a href="https://coinmarketcap.com/currencies/bitcoin/" target="_blank">Bitcoin</a></td>
+        <td><a href="https://coinmarketcap.com/currencies/ethereum/" target="_blank">Ethereum</a></td>
+        <td><a href="https://coinmarketcap.com/currencies/litecoin/" target="_blank">Litecoin</a></td>
+      </tr>
+      <tr>
+        <td><a href="https://coinmarketcap.com/currencies/eos/" target="_blank">EOS</a></td>
+        <td><a href="https://coinmarketcap.com/currencies/binance-coin/" target="_blank">Binance Coin</a></td>
+        <td><a href="https://coinmarketcap.com/currencies/tether/" target="_blank">Tether</a></td>
+      </tr>
+    </table>
+    <br>
+    <form id="tableControl">
+      <button type="button" id="colorizer">Colorer</button>
+    </form>
+  </body>
+</html>
