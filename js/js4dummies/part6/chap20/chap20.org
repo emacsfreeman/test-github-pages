@@ -1,0 +1,163 @@
+#+TITLE: 10 erreurs JavaScript courantes et comment les éviter
+#+AUTHOR: Laurent Garnier
+
+
+#+OPTIONS: date:nil toc:t h:2
+#+LANGUAGE: FR
+#+LATEX_HEADER: \usepackage[french]{babel}
+#+LATEX_HEADER: \hypersetup{colorlinks = true}
+
+
+* Confusion dans l'égalité
+
+  Est-ce que x est égal à y ? Est-ce que x est vrai (=true=) ? Les
+  questions d'égalité sont centrales en JavaScript et peuvent sembler
+  assez confuses. Tout cela tourne autour de trois zones de
+  JavaScript : les instructions et opérateurs conditionnels (=if=,
+  =&&= et ainsi de suite), l'opérateur d'égalité (~==~) et l'opérateur
+  d'égalité stricte (~===~).
+
+  Pour nous compliquer encore plus l'existence, l'opérateur
+  d'affectation (~=~) ressemble furieusement à ce que la plupart
+  d'entre nous appellent le signe égal. Ne vous trompez pas ! 
+
+** Eviter une mauvaise utilisation de l'affectation
+
+   L'opérateur d'affectation assigne l'opérande de droite à l'opérande
+   de gauche.
+
+   #+BEGIN_SRC javascript
+     var a = 3;
+   #+END_SRC
+
+   Ici, l'instruction affecte à une nouvelle variable, appelée =a=, la
+   valeur 3.
+
+   Dans un programme, une /opérande/ peut représenter n'importe
+   quoi. C'est un peu comme un sujet ou un substantif dans une phrase,
+   les opérateurs (+, -, *, / etc) représentent les verbes.
+
+   Une erreur courante des débutants consiste à écrire une affectation
+   dans une instruction de comparaison. Par exemple : 
+   
+   #+BEGIN_SRC javascript
+     if (a = 4) {...}
+   #+END_SRC
+
+   Si vous pensiez comparer la valeur de la variable a avec le chiffre
+   4, vous pouvez être certain que ce code ne donnera pas le résultat
+   escompté.
+
+** L'égalité et ses écueils
+
+   L'opérateur d'égalité (~==~) et son double diabolique, l'opérateur
+   d'inégalité (~!=~), peut être plutôt souple, mais aussi très
+   dangereux. Nous vous conseillons de l'utiliser le moins
+   possible. Voici pourquoi :
+
+   #+BEGIN_SRC javascript
+     0 == '0'// renvoie true
+     0 === '0' // renvoie false
+     parseInt(0) === parseInt('0') // renvoie true
+   #+END_SRC
+
+* Les crochets mal accrochés
+
+  Toujours vérifier que chaque parenthèse, accolade ou crochet
+  fonctionne bien par paire. En clair, vérifiez que les fermetures ne
+  sont pas omises.
+
+* Confusion entre guillemets et apostrophes
+
+  Même remarque que pour les parenthèses.
+
+* Le point-virgule manquant
+
+  Les instructions JavaScript devraient toujours se terminer par un
+  point-virgule. Cependant, si vous placez chaque instruction sur sa
+  propre ligne et que vous n'ajoutez pas de point-virgule, JavaScript
+  traitera tout de même ce code comme si ces signes de ponctuation
+  étaient là. Même si l'exécution semble se dérouler normalement,
+  l'absence de point-virgule peut conduire à de sérieux problèmes si
+  vous voulez réorganiser votre code, ou si deux instructions
+  finissent par se terminer sur la même ligne.
+
+  La meilleure manière d'échapper à ce risque, c'est d'utiliser
+  systématiquement un point-virgule pour terminer chaque instruction.
+
+* Des erreurs capitales  
+
+  JavaScript est sensible à la casse, c'est-à-dire à la capitalisation
+  des caractères. Cela signifie que les noms des variables que vous
+  créez doivent conserver leur nom exact, majuscules et minuscules
+  comprises, durant toute leur durée de vie. Autre implication : les
+  noms de fonctions (y compris celles de JavaScript) doivent respecter
+  cette règle pour qu'elles ne provoquent pas de problèmes de syntaxe.
+
+  L'une des causes d'erreur parmi les plus fréquentes, c'est le cas de
+  la méthode =getElementById= de l'objet =Document=. Vous pourriez
+  croire qu'écrire =getElementByID= serait plus logique, mais ce n'est
+  pas correct !
+
+* Référencer le code avant son chargement
+
+  Le code JavaScript est normalement chargé et exécuté dans l'ordre où
+  il apparaît dans un document (le cas des fonctions étant
+  spécifique). Cela peut poser des problèmes si vous faites dans un
+  script qui se trouve vers l'en-tête du document à une partie du code
+  qui est située plus loin dans celui-ci. Par exemple : 
+  #+BEGIN_SRC html
+    <html>
+      <head>
+	<script>
+	  document.getElementById("monDiv").innerHTML = "Ce div est MON div";
+	</script>
+      </head>
+      <body>
+	<div id = "monDiv">Ce div est VOTRE div.</div>
+      </body>
+    </html>
+  #+END_SRC
+
+  Ce code provoque une erreur parce qu'au moment où JavaScript est
+  exécuté, le navigateur ne sait rien de l'élément =div= ayant pour
+  identifiant =monDiv=.
+
+  Il faudrait placer le script après le div.
+
+* De mauvais noms de variables
+
+  JavaScript contient plus de soixante noms réservés, et de nombreux
+  autres que vous ne devriez pas employer pour vos variables. Plutôt
+  que d'essayer de mémoriser tous ces mots réservés, il vaut mieux
+  utiliser un schéma personnel descriptif.
+
+* Erreurs de portée
+
+  La notion de portée en JavaScript est soit locale, soit globale. Si
+  vous déclarez une variable sans le mot-clé =var=, sa portée est
+  globale, et elle sera donc utilisable partout dans le
+  programme. 
+
+  Utilisez toujours le mot-clé =var=.
+
+* Paramètres manquants dans les appels de fonctions
+
+  Chaque fois que vous déclarez une fonction, vous devez aussi
+  déclarer le nombre de paramètres que vous devriez lui passer
+  lorsqu'elle est appelée. Se tromper dans ce nombre ne provoque pas
+  forcément une erreur. En revanche, cela peut se traduire par des
+  résultats inattendus si la fonction attend des paramètres qui ne
+  sont pas présents.
+
+  Assurez-vous que vous donnez à vos paramètres des noms descriptifs
+  lorsque vous définissez des fonctions. 
+
+* Oublier que JavaScript compte à partir de zéro
+
+  Si vous dénombrez un tableau ou parcourez une chaîne, l'indice
+  démarre à zéro.
+
+  
+
+   
