@@ -1,0 +1,267 @@
+#+TITLE: Dix bibliothèques et frameworks pour aller plus loin avec JavaScript
+#+AUTHOR: Laurent Garnier
+
+#+LANGUAGE: FR
+#+LATEX_HEADER: \usepackage[french]{babel}
+#+LATEX_HEADER: \hypersetup{colorlinks = true}
+
+* Angular JS
+
+  + [[https://angularjs.org/]]
+  + [[https://docs.angularjs.org/tutorial/]]
+
+  Angulair JS, plus communément appelé Angular, est un framework
+  d'application JavaScript open source. Il est géré par Google et une
+  communauté de développeurs.
+
+  Le framework adapte et étend le HTML traditionnel pour fournir des
+  contenus dynamiques /via/ une liaison de données bidirectionnelle
+  qui permet une synchronisation automatique entre modèles (données)
+  et vues (pages Web). Angular JS permet en quelque sorte de masquer
+  la manipulation du DOM avec comme objectif d'améliorer la
+  testabilité et les performances du code.
+
+  En résumé, Angular JS a pour but :
+
+  + D'améliorer la testabilité du code en séparant manipulation du DOM
+    et logique de l'application
+  + De tester plus facilement le code
+  + De créer une séparation entre le côté client de l'application et
+    le côté serveur
+  + De fournir une structure pour le processus de construction de
+    l'application, de la conception initiale à l'interface
+    utilisateur, en passant par la logique de l'écriture et le test du
+    code
+
+** Qui l'utilise ?
+
+   + [[https://www.youtube.com/channel/UC0-_4-vctZIzlTRWnIqGfOA?view_as=subscriber][YouTube]]
+   + [[https://www.lynda.com/]]
+   + [[https://www.netflix.com/]]
+   + [[https://www.freelancer.com/]]
+
+* Backbone.js
+
+  + [[https://backbonejs.org/]]
+  + [[https://en.wikipedia.org/wiki/Backbone.js]]
+
+  Backbone.js est une bibliothèque JavaScript MVC open source conçue
+  pour créer des sites Web avec une page unique. Le développement
+  d'applications Web avec Backbone donne une structure à celles-ci, et
+  renforce le très bon principe selon lequel la communication avec le
+  serveur devrait être effectuée /via/ une API RESTful.
+
+  MVC est un sigle qui signifie /Model-View-Controller/. Son principe
+  consiste à séparer le modèle de données (/Model/) de l'interface
+  utilisateur (/View/) en utilisant une couche de contrôle
+  intermédiaire (/Controller/). Cette couche appelle le modèle et la
+  vue voulus en fonction des données présentes en entrée. De son côté,
+  REST signifie /Representational State Transfer/ (transfert d'état
+  représentationnel). Il s'agit en bref d'un style d'architecture pour
+  le développement d'applications réseau s'appuyant sur un protocole
+  de communications client-serveur sans état. Les applications RESTful
+  utilisent typiquement des requêtes HTTP pour poster des données, les
+  lire ou encore les supprimer.
+
+  Avec Backbone, votre code est plus modulaire. De plus, il vous
+  permet de construire et de gérer des applications Web très complexes
+  avec un minimum de code et une excellente organisation. 
+
+  Backbone a une seule dépendance (=underscore.js=) et surcharge très
+  peu le chargement de votre application Web.
+
+** Qui l'utilise ?  
+
+   + [[https://www.reddit.com/]]
+   + [[https://bitbucket.org/]]
+   + [[https://www.tumblr.com/]]
+   + [[https://www.pinterest.fr/]]
+   + [[https://www.linkedin.com/]]
+
+* Ember.js
+
+  + [[https://emberjs.com/]]
+  + [[https://en.wikipedia.org/wiki/Ember.js]]
+  + [[https://youtu.be/N4KrBuO0RRE]]
+
+  Ember.js est l'un des plus anciens frameworks JavaScript MVC, ses
+  racines remontant à 2007. Il se définit lui-même comme << un
+  framework pour créer des applications Web ambitieuses >>. Comme la
+  plupart des autres frameworks décrit dans ce chapitre, il est basé
+  sur une architecture logicielle MVC. Et comme Backbone, il est conçu
+  pour créer des applications Web monopages.
+
+  Ember a la réputation d'être difficile à apprendre. Cependant, une
+  fois que vous le connaissez, ses bénéfices sont multiples. Avec du
+  code écrit selon les pratiques normales d'Ember, le développeur n'a
+  plus besoin de tout spécifier manuellement pour son application, ce
+  qui peut faire gagner beaucoup de temps.
+
+** Qui l'utilise ?  
+
+   + [[https://www.digitalocean.com/]]
+   + [[https://vine.co/]]
+   + [[http://nbcnews.com/]]
+   + [[https://www.twitch.tv/]]
+   + [[https://www.mediabistro.com/]]
+
+
+* Famo.us
+
+  + [[https://famous.co/]]
+  + [[https://www.youtube.com/channel/UCiFhuK7AExmfhl8iUzw2g4w]]
+  + [[https://github.com/famous]]
+  + [[https://fr.slideshare.net/hinablue/famous-new-generation-of-html5-web-application-framework][slideshare]]
+
+    
+  Famo.us est un framework JavaScript open source servant à créer des
+  interfaces utilisateur complexes pour n'importe quel écran.
+
+  Famo.us contient un moteur de rendu 3D, ce qui rend possible
+  d'écrire du code JavaScript capable de déplacer des objets en 3D
+  dans le navigateur, et de créer des effets et des interfaces qui
+  n'étaient auparavant disponibles que dans des logiciels
+  spécialisés. De ce fait, les applications créées avec Famo.us
+  peuvent être plus rapides et plus fluides qu'avec une stricte
+  utilisation de HTML 5, CSS 3 et JavaScript.
+
+** Qui l'utilise ?
+
+   + [[http://superstereo.co.uk/]]
+   + [[https://japantoday.com/]]
+
+* Knockout
+
+  + [[https://knockoutjs.com/]]
+  + [[https://en.wikipedia.org/wiki/Knockout_(web_framework)]]
+  + [[https://youtu.be/z3-G9bYNbwU]]
+  + [[https://www.youtube.com/watch?v=yC9Lt6hTIUE&list=PLo80fWiInSIONI-Al0iVvq9NNWllM0RrT][Knockout tutorial (Indian)]]
+
+  Knockout est un framework JavaScript open source servant à
+  simplifier la programmation d'interfaces utilisateur dynamiques. Il
+  utilise un modèle dit MVVM (/Model-View-View-Model/) qui est un
+  dérivé du modèle MVC.
+
+  Parmi les caractéristiques de Knockout, mentionnons celles-ci : 
+  + liaisons déclaratives
+  + rafraîchissement automatique de l'interface utilisateur lorsque
+    les données changent
+  + suivi des dépendances 
+  + modélisation
+
+** Qui l'utilise ?
+
+   + [[https://www.mlb.com/]]
+   + [[https://www.ancestry.com/]]
+   + [[https://www.eventbrite.com/]]
+   + [[https://www.tdameritrade.com/home.page]]
+
+* QUnit
+
+  + [[https://qunitjs.com/]]
+  + [[https://qunitjs.com/cookbook/]]
+  + [[https://en.wikipedia.org/wiki/QUnit]]
+  + [[https://github.com/qunitjs/qunit]]
+
+    
+  QUnit est un framework destiné à la réalisation de tests pour
+  JavaScript. Il est utilisé pour de nombreux projets JavaScript open
+  source, y compris jQuery. Il peut tester n'importe quel code
+  JavaScript générique, et il est connu pour être aussi puissant que
+  facile à utiliser.
+
+** Qui l'utilise ?
+
+  + [[https://jquery.com/]]
+  + [[https://jqueryui.com/]]
+  + [[https://jquerymobile.com/]]
+  + [[https://www.sitepoint.com/]]
+  
+
+* Underscore.js
+
+  + [[https://underscorejs.org/]]
+  + [[http://royto.familleroy.fr/2013/10/08/presentation-de-underscore-js/][roytoblog]]
+
+  Underscore est une bibliothèque JavaScript qui fournit aux
+  programmeurs de nombreuses fonctions utiles. Une fois que vous aurez
+  commencé à utiliser les fonctionnalités d'Underscore, vous vous
+  demanderez comment vous aviez pu vivre sans elles.
+
+  Parmi ces fonctionnalités offertes par Underscore, citons =sortBy=
+  (pour trier des listes), =groupBy= (pour regrouper une collection en
+  jeux d'éléments), =contains= (retourne =true= si une liste contient
+  une valeur spécifiée), =shuffle= (retourne une copie mélangée d'une
+  liste) et environ une centaine d'autres fonctions (dont la plupart
+  auraient dû être implémentées dans JavaScript dès l'origine).
+
+** Qui l'utilise ?
+
+   + [[https://www.dropbox.com/]]
+   + [[https://lifehacker.com/]]
+   + [[https://www.theverge.com/]]
+   + [[https://www.att.com/]]
+   + [[https://gawker.com/]]
+
+
+* Modernizr   
+
+  + [[https://modernizr.com/]]
+  + [[https://fr.wikipedia.org/wiki/Modernizr]]
+
+  Modernizr est une bibliothèque JavaScript permettant de détecter les
+  fonctionnalités du navigateur Web dans lequel il est exécuté.
+
+  Il est le plus souvent utilisé comme moyen très simple et pratique
+  pour vérifier si le navigateur de l'utilisateur est capable
+  d'exécuter un code JavaScript particulier, ou s'il faut utiliser
+  d'abord une API avant d'essayer d'exécuter ce code. Modernizr est
+  fréquemment employé en conjonction avec des outils appelés
+  /Polyfills/, qui fournissent une méthode alternative pour mettre en
+  oeuvre certaines fonctionnalités avancées des navigateurs modernes
+  sur des dispositifs ou dans des navigateurs moins évolués.
+
+** Qui l'utilise ?
+
+   + [[http://go.com/]]
+   + [[https://www.dotdash.com/]]
+   + [[https://www.hostgator.com/]]
+   + [[https://www.addthis.com/]]
+   + [[https://eu.usatoday.com/]]
+
+* Handlebars.js
+
+  + [[https://handlebarsjs.com/]]
+  + [[https://fr.wikipedia.org/wiki/Handlebars_(moteur_de_template)]]
+
+    
+  Handlebars est un moteur servant à créer des gabarits (ou
+  /templates/) JavaScript côté client. Il permet d'insérer ces
+  gabarits dans des pages Web qui seront analysées afin d'utiliser les
+  données en temps réel qui sont passées à Handlebars.js
+
+** Qui l'utilise ?  
+
+   + [[https://www.meetup.com]]
+   + [[https://mashable.com/]]
+   + [[https://www.flickr.com/]]
+   + [[https://www.wired.com/]]
+   + [[https://www.overstock.com/]]
+
+* jQuery
+
+  + [[https://jquery.com/]]
+  + [[https://fr.wikipedia.org/wiki/JQuery]]
+
+  jQuery est la bibliothèque << Ecrire moins, en faire plus >> de
+  JavaScript. jQuery est utilisé par plus de 60% des sites les plus
+  populaires du Web. Il est devenu un outil indispensable pour la
+  plupart des programmeurs JavaScript.
+
+** Qui l'utilise ?
+
+   + [[https://fr.wordpress.com/]]
+   + [[https://www.pinterest.fr/]]
+   + [[https://www.amazon.fr/]]
+   + [[https://www.microsoft.com/fr-fr/]]
+   + [[https://www.etsy.com/]]
