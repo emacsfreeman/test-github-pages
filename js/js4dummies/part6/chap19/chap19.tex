@@ -1,0 +1,370 @@
+% Created 2019-04-17 Mer 14:05
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[french, frenchb]{babel}
+\hypersetup{colorlinks = true}
+\usetheme{default}
+\author{Laurent Garnier}
+\date{}
+\title{Dix bibliothèques et frameworks pour aller plus loin avec JavaScript}
+\hypersetup{
+ pdfauthor={Laurent Garnier},
+ pdftitle={Dix bibliothèques et frameworks pour aller plus loin avec JavaScript},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.1.14)}, 
+ pdflang={Frenchb}}
+\begin{document}
+
+\maketitle
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+
+\section{Angular JS}
+\label{sec:org8211a96}
+
+\begin{frame}[label={sec:orga8d9219}]{Ressources pour Angular JS}
+\begin{itemize}
+\item \url{https://angularjs.org/}
+\item \url{https://docs.angularjs.org/tutorial/}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orgbd7e6d3}]{Brève description d'Angular}
+Angular JS a pour but :
+
+\begin{itemize}
+\item D'améliorer la testabilité du code en séparant manipulation du DOM
+et logique de l'application
+\item De tester plus facilement le code
+\item De créer une séparation entre le côté client de l'application et
+le côté serveur
+\item De fournir une structure pour le processus de construction de
+l'application, de la conception initiale à l'interface
+utilisateur, en passant par la logique de l'écriture et le test du
+code
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org1c08fcf}]{Qui l'utilise ?}
+\begin{itemize}
+\item \href{https://www.youtube.com/channel/UC0-\_4-vctZIzlTRWnIqGfOA?view\_as=subscriber}{YouTube}
+\item \url{https://www.lynda.com/}
+\item \url{https://www.netflix.com/}
+\item \url{https://www.freelancer.com/}
+\end{itemize}
+\end{frame}
+
+\section{Backbone.js}
+\label{sec:org9ca3b9a}
+
+\begin{frame}[label={sec:org1f62aae}]{Ressources pour Backbone.js}
+\begin{itemize}
+\item \url{https://backbonejs.org/}
+\item \url{https://en.wikipedia.org/wiki/Backbone.js}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:orge261c16}]{Brève description de Backbone.js}
+Backbone.js est une bibliothèque JavaScript MVC open source conçue
+pour créer des sites Web avec une page unique. Le développement
+d'applications Web avec Backbone donne une structure à celles-ci, et
+renforce le très bon principe selon lequel la communication avec le
+serveur devrait être effectuée \emph{via} une API RESTful.
+
+MVC est un sigle qui signifie \emph{Model-View-Controller}. Son principe
+consiste à séparer le modèle de données (\emph{Model}) de l'interface
+utilisateur (\emph{View}) en utilisant une couche de contrôle
+intermédiaire (\emph{Controller}). Cette couche appelle le modèle et la
+vue voulus en fonction des données présentes en entrée. De son côté,
+REST signifie \emph{Representational State Transfer} (transfert d'état
+représentationnel). Il s'agit en bref d'un style d'architecture pour
+le développement d'applications réseau s'appuyant sur un protocole
+de communications client-serveur sans état. Les applications RESTful
+utilisent typiquement des requêtes HTTP pour poster des données, les
+lire ou encore les supprimer.
+\end{frame}
+
+
+\begin{frame}[label={sec:org236fbff}]{Qui l'utilise ?}
+\begin{itemize}
+\item \url{https://www.reddit.com/}
+\item \url{https://bitbucket.org/}
+\item \url{https://www.tumblr.com/}
+\item \url{https://www.pinterest.fr/}
+\item \url{https://www.linkedin.com/}
+\end{itemize}
+\end{frame}
+
+\section{Ember.js}
+\label{sec:orga214561}
+
+\begin{frame}[label={sec:orgebfc068}]{Ressources pour Ember.js}
+\begin{itemize}
+\item \url{https://emberjs.com/}
+\item \url{https://en.wikipedia.org/wiki/Ember.js}
+\item \url{https://youtu.be/N4KrBuO0RRE}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:org94c5e95}]{Brève description d'Ember}
+Ember.js est l'un des plus anciens frameworks JavaScript MVC, ses
+racines remontant à 2007. Il se définit lui-même comme << un
+framework pour créer des applications Web ambitieuses >>. Comme la
+plupart des autres frameworks décrit dans ce chapitre, il est basé
+sur une architecture logicielle MVC. Et comme Backbone, il est conçu
+pour créer des applications Web monopages.
+
+Ember a la réputation d'être difficile à apprendre. Cependant, une
+fois que vous le connaissez, ses bénéfices sont multiples. Avec du
+code écrit selon les pratiques normales d'Ember, le développeur n'a
+plus besoin de tout spécifier manuellement pour son application, ce
+qui peut faire gagner beaucoup de temps.
+\end{frame}
+
+\begin{frame}[label={sec:orgbed8848}]{Qui l'utilise ?}
+\begin{itemize}
+\item \url{https://www.digitalocean.com/}
+\item \url{https://vine.co/}
+\item \url{http://nbcnews.com/}
+\item \url{https://www.twitch.tv/}
+\item \url{https://www.mediabistro.com/}
+\end{itemize}
+\end{frame}
+
+
+\section{Famo.us}
+\label{sec:orgf8248b1}
+
+\begin{frame}[label={sec:org7fd73e9}]{Ressources pour Famo.us}
+\begin{itemize}
+\item \url{https://famous.co/}
+\item \url{https://www.youtube.com/channel/UCiFhuK7AExmfhl8iUzw2g4w}
+\item \url{https://github.com/famous}
+\item \href{https://fr.slideshare.net/hinablue/famous-new-generation-of-html5-web-application-framework}{slideshare}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org587e4a5}]{Brève description de Famo.us}
+Famo.us est un framework JavaScript open source servant à créer des
+interfaces utilisateur complexes pour n'importe quel écran.
+
+Famo.us contient un moteur de rendu 3D, ce qui rend possible
+d'écrire du code JavaScript capable de déplacer des objets en 3D
+dans le navigateur, et de créer des effets et des interfaces qui
+n'étaient auparavant disponibles que dans des logiciels
+spécialisés. De ce fait, les applications créées avec Famo.us
+peuvent être plus rapides et plus fluides qu'avec une stricte
+utilisation de HTML 5, CSS 3 et JavaScript.
+\end{frame}
+
+\begin{frame}[label={sec:org39ecba3}]{Qui l'utilise ?}
+\begin{itemize}
+\item \url{http://superstereo.co.uk/}
+\item \url{https://japantoday.com/}
+\end{itemize}
+\end{frame}
+
+\section{Knockout}
+\label{sec:orga6f960f}
+
+\begin{frame}[label={sec:org454b129}]{Ressources pour Knockout}
+\begin{itemize}
+\item \url{https://knockoutjs.com/}
+\item \url{https://en.wikipedia.org/wiki/Knockout\_(web\_framework)}
+\item \url{https://youtu.be/z3-G9bYNbwU}
+\item \href{https://www.youtube.com/watch?v=yC9Lt6hTIUE\&list=PLo80fWiInSIONI-Al0iVvq9NNWllM0RrT}{Knockout tutorial (Indian)}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:org10241da}]{Brève description de Knockout}
+Knockout est un framework JavaScript open source servant à
+simplifier la programmation d'interfaces utilisateur dynamiques. Il
+utilise un modèle dit MVVM (\emph{Model-View-View-Model}) qui est un
+dérivé du modèle MVC.
+
+Parmi les caractéristiques de Knockout, mentionnons celles-ci : 
+\begin{itemize}
+\item liaisons déclaratives
+\item rafraîchissement automatique de l'interface utilisateur lorsque
+les données changent
+\item suivi des dépendances
+\item modélisation
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org82347f9}]{Qui l'utilise ?}
+\begin{itemize}
+\item \url{https://www.mlb.com/}
+\item \url{https://www.ancestry.com/}
+\item \url{https://www.eventbrite.com/}
+\item \url{https://www.tdameritrade.com/home.page}
+\end{itemize}
+\end{frame}
+
+\section{QUnit}
+\label{sec:org56a00d4}
+\begin{frame}[label={sec:org0e04aed}]{Ressources pour QUnit}
+\begin{itemize}
+\item \url{https://qunitjs.com/}
+\item \url{https://qunitjs.com/cookbook/}
+\item \url{https://en.wikipedia.org/wiki/QUnit}
+\item \url{https://github.com/qunitjs/qunit}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orge59b5b0}]{Brève description de QUnit}
+QUnit est un framework destiné à la réalisation de tests pour
+JavaScript. Il est utilisé pour de nombreux projets JavaScript open
+source, y compris jQuery. Il peut tester n'importe quel code
+JavaScript générique, et il est connu pour être aussi puissant que
+facile à utiliser.
+\end{frame}
+
+\begin{frame}[label={sec:org195793a}]{Qui l'utilise ?}
+\begin{itemize}
+\item \url{https://jquery.com/}
+\item \url{https://jqueryui.com/}
+\item \url{https://jquerymobile.com/}
+\item \url{https://www.sitepoint.com/}
+\end{itemize}
+\end{frame}
+
+
+\section{Underscore.js}
+\label{sec:orgcfdfbb6}
+\begin{frame}[label={sec:orgf98c28a}]{Ressources pour Underscore.js}
+\begin{itemize}
+\item \url{https://underscorejs.org/}
+\item \href{http://royto.familleroy.fr/2013/10/08/presentation-de-underscore-js/}{roytoblog}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,label={sec:org81f8650}]{Brève description de Underscore}
+ Underscore est une bibliothèque JavaScript qui fournit aux
+programmeurs de nombreuses fonctions utiles. Une fois que vous aurez
+commencé à utiliser les fonctionnalités d'Underscore, vous vous
+demanderez comment vous aviez pu vivre sans elles.
+
+Parmi ces fonctionnalités offertes par Underscore, citons \texttt{sortBy}
+(pour trier des listes), \texttt{groupBy} (pour regrouper une collection en
+jeux d'éléments), \texttt{contains} (retourne \texttt{true} si une liste contient
+une valeur spécifiée), \texttt{shuffle} (retourne une copie mélangée d'une
+liste) et environ une centaine d'autres fonctions (dont la plupart
+auraient dû être implémentées dans JavaScript dès l'origine).
+\end{frame}
+
+\begin{frame}[label={sec:org3717dd8}]{Qui l'utilise ?}
+\begin{itemize}
+\item \url{https://www.dropbox.com/}
+\item \url{https://lifehacker.com/}
+\item \url{https://www.theverge.com/}
+\item \url{https://www.att.com/}
+\item \url{https://gawker.com/}
+\end{itemize}
+\end{frame}
+
+
+\section{Modernizr}
+\label{sec:org57a1590}
+\begin{frame}[label={sec:orgce5ea31}]{Ressources pour Modernizr}
+\begin{itemize}
+\item \url{https://modernizr.com/}
+\item \url{https://fr.wikipedia.org/wiki/Modernizr}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orgea07932}]{Brève description de Modernizr}
+Modernizr est une bibliothèque JavaScript permettant de détecter les
+fonctionnalités du navigateur Web dans lequel il est exécuté.
+
+Il est le plus souvent utilisé comme moyen très simple et pratique
+pour vérifier si le navigateur de l'utilisateur est capable
+d'exécuter un code JavaScript particulier, ou s'il faut utiliser
+d'abord une API avant d'essayer d'exécuter ce code. Modernizr est
+fréquemment employé en conjonction avec des outils appelés
+\emph{Polyfills}, qui fournissent une méthode alternative pour mettre en
+oeuvre certaines fonctionnalités avancées des navigateurs modernes
+sur des dispositifs ou dans des navigateurs moins évolués.
+\end{frame}
+
+\begin{frame}[label={sec:orge1a67aa}]{Qui l'utilise ?}
+\begin{itemize}
+\item \url{http://go.com/}
+\item \url{https://www.dotdash.com/}
+\item \url{https://www.hostgator.com/}
+\item \url{https://www.addthis.com/}
+\item \url{https://eu.usatoday.com/}
+\end{itemize}
+\end{frame}
+
+\section{Handlebars.js}
+\label{sec:orge98088b}
+\begin{frame}[label={sec:orgce8a4a1}]{Ressources pour Handlebars.js}
+\begin{itemize}
+\item \url{https://handlebarsjs.com/}
+\item \url{https://fr.wikipedia.org/wiki/Handlebars\_(moteur\_de\_template)}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org8b15622}]{Brève description de Handlebars}
+Handlebars est un moteur servant à créer des gabarits (ou
+\emph{templates}) JavaScript côté client. Il permet d'insérer ces
+gabarits dans des pages Web qui seront analysées afin d'utiliser les
+données en temps réel qui sont passées à Handlebars.js
+\end{frame}
+
+\begin{frame}[label={sec:orgf55bab2}]{Qui l'utilise ?}
+\begin{itemize}
+\item \url{https://www.meetup.com}
+\item \url{https://mashable.com/}
+\item \url{https://www.flickr.com/}
+\item \url{https://www.wired.com/}
+\item \url{https://www.overstock.com/}
+\end{itemize}
+\end{frame}
+
+\section{jQuery}
+\label{sec:org34228e1}
+\begin{frame}[label={sec:orge2dc62a}]{Ressources pour jQuery}
+\begin{itemize}
+\item \url{https://jquery.com/}
+\item \url{https://fr.wikipedia.org/wiki/JQuery}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orgccfac94}]{Brève description de jQuery}
+jQuery est la bibliothèque << Ecrire moins, en faire plus >> de
+JavaScript. jQuery est utilisé par plus de 60\% des sites les plus
+populaires du Web. Il est devenu un outil indispensable pour la
+plupart des programmeurs JavaScript.
+\end{frame}
+
+\begin{frame}[label={sec:org15138d2}]{Qui l'utilise ?}
+\begin{itemize}
+\item \url{https://fr.wordpress.com/}
+\item \url{https://www.pinterest.fr/}
+\item \url{https://www.amazon.fr/}
+\item \url{https://www.microsoft.com/fr-fr/}
+\item \url{https://www.etsy.com/}
+\end{itemize}
+\end{frame}
+\end{document}

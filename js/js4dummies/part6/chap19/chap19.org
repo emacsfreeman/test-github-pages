@@ -1,27 +1,21 @@
 #+TITLE: Dix bibliothèques et frameworks pour aller plus loin avec JavaScript
 #+AUTHOR: Laurent Garnier
 
+#+OPTIONS: date:nil toc:t h:2
 #+LANGUAGE: FR
 #+LATEX_HEADER: \usepackage[french]{babel}
 #+LATEX_HEADER: \hypersetup{colorlinks = true}
 
 * Angular JS
 
+** Ressources pour Angular JS
+
   + [[https://angularjs.org/]]
   + [[https://docs.angularjs.org/tutorial/]]
 
-  Angulair JS, plus communément appelé Angular, est un framework
-  d'application JavaScript open source. Il est géré par Google et une
-  communauté de développeurs.
-
-  Le framework adapte et étend le HTML traditionnel pour fournir des
-  contenus dynamiques /via/ une liaison de données bidirectionnelle
-  qui permet une synchronisation automatique entre modèles (données)
-  et vues (pages Web). Angular JS permet en quelque sorte de masquer
-  la manipulation du DOM avec comme objectif d'améliorer la
-  testabilité et les performances du code.
-
-  En résumé, Angular JS a pour but :
+** Brève description d'Angular
+  
+  Angular JS a pour but :
 
   + D'améliorer la testabilité du code en séparant manipulation du DOM
     et logique de l'application
@@ -42,8 +36,13 @@
 
 * Backbone.js
 
+** Ressources pour Backbone.js
+
   + [[https://backbonejs.org/]]
   + [[https://en.wikipedia.org/wiki/Backbone.js]]
+
+
+** Brève description de Backbone.js
 
   Backbone.js est une bibliothèque JavaScript MVC open source conçue
   pour créer des sites Web avec une page unique. Le développement
@@ -63,12 +62,6 @@
   utilisent typiquement des requêtes HTTP pour poster des données, les
   lire ou encore les supprimer.
 
-  Avec Backbone, votre code est plus modulaire. De plus, il vous
-  permet de construire et de gérer des applications Web très complexes
-  avec un minimum de code et une excellente organisation. 
-
-  Backbone a une seule dépendance (=underscore.js=) et surcharge très
-  peu le chargement de votre application Web.
 
 ** Qui l'utilise ?  
 
@@ -80,9 +73,14 @@
 
 * Ember.js
 
+** Ressources pour Ember.js
+
   + [[https://emberjs.com/]]
   + [[https://en.wikipedia.org/wiki/Ember.js]]
   + [[https://youtu.be/N4KrBuO0RRE]]
+
+
+** Brève description d'Ember
 
   Ember.js est l'un des plus anciens frameworks JavaScript MVC, ses
   racines remontant à 2007. Il se définit lui-même comme << un
@@ -108,11 +106,14 @@
 
 * Famo.us
 
+** Ressources pour Famo.us
+
   + [[https://famous.co/]]
   + [[https://www.youtube.com/channel/UCiFhuK7AExmfhl8iUzw2g4w]]
   + [[https://github.com/famous]]
   + [[https://fr.slideshare.net/hinablue/famous-new-generation-of-html5-web-application-framework][slideshare]]
 
+** Brève description de Famo.us
     
   Famo.us est un framework JavaScript open source servant à créer des
   interfaces utilisateur complexes pour n'importe quel écran.
@@ -132,10 +133,15 @@
 
 * Knockout
 
+** Ressources pour Knockout
+
   + [[https://knockoutjs.com/]]
   + [[https://en.wikipedia.org/wiki/Knockout_(web_framework)]]
   + [[https://youtu.be/z3-G9bYNbwU]]
   + [[https://www.youtube.com/watch?v=yC9Lt6hTIUE&list=PLo80fWiInSIONI-Al0iVvq9NNWllM0RrT][Knockout tutorial (Indian)]]
+
+
+** Brève description de Knockout
 
   Knockout est un framework JavaScript open source servant à
   simplifier la programmation d'interfaces utilisateur dynamiques. Il
@@ -157,12 +163,14 @@
    + [[https://www.tdameritrade.com/home.page]]
 
 * QUnit
+** Ressources pour QUnit
 
   + [[https://qunitjs.com/]]
   + [[https://qunitjs.com/cookbook/]]
   + [[https://en.wikipedia.org/wiki/QUnit]]
   + [[https://github.com/qunitjs/qunit]]
 
+** Brève description de QUnit
     
   QUnit est un framework destiné à la réalisation de tests pour
   JavaScript. Il est utilisé pour de nombreux projets JavaScript open
@@ -179,9 +187,12 @@
   
 
 * Underscore.js
+** Ressources pour Underscore.js
 
   + [[https://underscorejs.org/]]
   + [[http://royto.familleroy.fr/2013/10/08/presentation-de-underscore-js/][roytoblog]]
+
+** Brève description de Underscore
 
   Underscore est une bibliothèque JavaScript qui fournit aux
   programmeurs de nombreuses fonctions utiles. Une fois que vous aurez
@@ -205,9 +216,12 @@
 
 
 * Modernizr   
+** Ressources pour Modernizr
 
   + [[https://modernizr.com/]]
   + [[https://fr.wikipedia.org/wiki/Modernizr]]
+
+** Brève description de Modernizr
 
   Modernizr est une bibliothèque JavaScript permettant de détecter les
   fonctionnalités du navigateur Web dans lequel il est exécuté.
@@ -230,11 +244,13 @@
    + [[https://eu.usatoday.com/]]
 
 * Handlebars.js
+** Ressources pour Handlebars.js
 
   + [[https://handlebarsjs.com/]]
   + [[https://fr.wikipedia.org/wiki/Handlebars_(moteur_de_template)]]
 
-    
+** Brève description de Handlebars
+
   Handlebars est un moteur servant à créer des gabarits (ou
   /templates/) JavaScript côté client. Il permet d'insérer ces
   gabarits dans des pages Web qui seront analysées afin d'utiliser les
@@ -249,9 +265,12 @@
    + [[https://www.overstock.com/]]
 
 * jQuery
+** Ressources pour jQuery
 
   + [[https://jquery.com/]]
   + [[https://fr.wikipedia.org/wiki/JQuery]]
+
+** Brève description de jQuery
 
   jQuery est la bibliothèque << Ecrire moins, en faire plus >> de
   JavaScript. jQuery est utilisé par plus de 60% des sites les plus
