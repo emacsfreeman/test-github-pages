@@ -1,0 +1,4 @@
+#+TITLE: Introduction
+#+AUTHOR: Laurent Garnier
+
+Pourquoi apprendre Python ?
