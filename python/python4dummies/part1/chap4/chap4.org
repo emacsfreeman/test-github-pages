@@ -1,0 +1,35 @@
+#+TITLE: Ecrire votre première application
+#+AUTHOR: Laurent Garnier
+
+Nombreux sont les gens qui voient le développement d'applications
+comme une sorte de magie pratiquée par des sorciers appelés des
+/geeks/ qui envoient des ondes bizarres à leurs claviers pour produire
+toutes sortes de programmes. En fait, la vérité est bien plus
+prosaïque.
+
+Le développement d'une application suit un certain nombre de processus
+très stricts, qui n'ont absolument rien à voir avec quelque magie que
+ce soit. Ce chapitre a pour but d'effacer toute part d'imaginaire pour
+rentrer dans le concret, la technologie. Lorsque vous l'aurez terminé,
+vous devriez être à même de développer une application, certes simple,
+sans avoir besoin d'invoquer je ne sais quel sort. 
+
+Comme pour n'importe quel type de tâche, il faut des outils pour
+écrire des applications. Dans le cas de Python, vous n'avez pas à
+prendre un véritable ouitl en main. Mais utiliser un outil, même comme
+ici en apparence immatériel, rend le travail bien plus facile. Dans ce
+chapitre, vous allez donc vous servir d'un outil fourni avec Python,
+l'environnement de développement intégré appelé IDLE.
+
+Pour d'autres outils :
++ Komodo :
+  [[https://www.activestate.com/products/komodo-ide/download-ide/#edit]]
++ [[https://wiki.python.org/moin/IntegratedDevelopmentEnvironments]]
+
+* Créer l'application
+
+  #+BEGIN_SRC python
+    print("Ceci est une application Python très simple.")
+  #+END_SRC
+
+  
