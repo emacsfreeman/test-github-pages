@@ -1,0 +1,460 @@
+#+TITLE: Parler à votre ordinateur
+#+AUTHOR: Laurent Garnier
+
+Avoir une conversation avec son ordinateur peut encore de nos jours
+paraître relever de la science-fiction. Après tout, les membres de
+l'équipage du vaisseau Enterprise dans /Star Trek/ parlaient
+régulièrement à leurs ordinateurs. Mais, avec l'avènement de logiciels
+interactifs, comme Siri (Apple), Now (Google) ou encore Cortana
+(Microsoft), finalement rien de tout cela n'est plus inconcevable.
+
+Demander vocalement à un ordinateur ou à un appareil portable comme un
+smartphone ou une tablette de donner certaines informations est une
+chose. Mais fournir des informations à la machine en est une autre. Ce
+chapitre (comme évidemment tout ce livre) considère que vous voulez
+donner des instructions à votre ordinateur et en obtenir des
+résultats. Vous y découvrirez également qu'il est nécessaire de faire
+appel à un langage spécial pour effectuer ce type de communication, et
+pourquoi vous devez utiliser le langage Python pour y arriver. Mais
+l'idée principale à retirer de ce chapitre, c'est que la programmation
+est simplement une forme de communication, qui vient prendre sa place
+parmi les autres formes de communication dont vous vous servez déjà
+avec votre ordinateur.
+
+* Comprendre pourquoi vous voulez parler à votre ordinateur
+
+  Parler (j'emploie ce verbe au sens large) à une machine peut sembler
+  un peu bizarre au premier abord, mais c'est nécessaire, car
+  l'ordinateur ne peut pas lire dans votre cerveau. Du moins, pas
+  encore. Et même s'il était capable de déchiffrer vos pensées, il ne
+  ferait que continuer à communiquer avec vous. Rien ne peut se
+  produire sans cet échange d'informations entre la machine et
+  vous. Des activités telles que celle-ci :
+  + Lire vos messages électroniques
+  + Ecrire quelque chose à propos de vos vacances
+  + Trouver le plus beau cadeau du monde
+
+
+  ... sont toutes des exemples de communication entre vous et
+  l'ordinateur. Et le fait que, pour atteindre les buts que vous lui
+  assignez, il doive pousser plus loin l'interaction avec d'autres
+  machines, ou d'autres personnes, pour leur transmettre vos requêtes
+  n'y change rien. Il s'agit tout simplement d'une extension de l'idée
+  de base, à savoir que communiquer est une condition nécessaire pour
+  obtenir n'importe quel résultat.
+
+  Dans la plupart des cas, tout cela se déroule de manière
+  pratiquement invisible pour vous, à moins que vous n'y réfléchissez
+  d'un peu plus près. Supposons par exemple que vous dialoguiez avec
+  une autre personne en ligne (disons par l'intermédiaire d'un
+  /messenger/ quelconque). En réalité, vous communiquez avec votre
+  ordinateur (ou votre smartphone), qui lui-même communique avec
+  l'ordinateur (ou le smartphone) de la personne qui est à l'autre
+  bout via un << salon où l'on cause >> quelconque, et cet ordinateur
+  lointain communique avec votre correspondant ou votre
+  correspondante. Evidemment, le même principe s'applique dans l'autre
+  sens.
+
+* Oui, une application est une forme de communication
+
+  La communication avec les ordinateurs s'établit dès lors que vous
+  vous servez d'applications. Par exemple, vous utilisez une
+  application pour répondre à vos messages, une autre pour acheter
+  quelque chose, et une autre encore pour créer un diaporama. Une
+  /application/ (certains l'appellent maintenant une /app/) fournit le
+  moyen d'exprimer des idées humaines devant un ordinateur, tout en
+  permettant à celui-ci de les comprendre et en définissant les outils
+  grâce auxquels ce dernier est capable de gérer ces processus de
+  communication. Les données utilisées pour exprimer le contenu d'une
+  présentation sont évidemment différentes de celles qui concernent un
+  cadeau pour votre maman. Par conséquent, les manières dont vous les
+  visualisez, les utilisez et les comprenez sont différentes pour
+  chaque tâche. C'est pourquoi vous devez utiliser des applications
+  diverses de manière à interagir avec toutes ces données pour que
+  l'ordinateur et vous arriviez à vous comprendre.
+
+  Il est possible de trouver des applications qui répondent à vos
+  besoins quotidiens. En fait, il en existe vraisemblablement des tas
+  qui sont capables de le faire, sans que vous le sachiez. Les
+  programmeurs ont travaillé dur pour créer des millions et des
+  millions d'applications de tous types depuis de nombreuses
+  années. Mais cela ne répond pas forcément à votre question. La
+  réponse tient dans une réflexion sur vos données et sur la manière
+  dont vous voulez interagir avec elles. Certaines de ces données
+  peuvent être tellement spécifiques qu'aucun programmeur ne s'est
+  penché dessus. À moins que vous n'ayez besoin d'un format de données
+  totalement nouveau. Dans ce cas, le dialogue avec l'ordinateur ne
+  peut pas s'établir à moins que vous ne définissiez vous-même une
+  application capable de traiter vos données.
+
+  Les sections qui suivent décrivent cette notion d'application du
+  point de vue de /vos/ données, avec les traitements dont /vous/ avez
+  besoin. Vous pourriez par exemple vouloir accéder à une bibliothèque
+  d'enregistrements vidéo, mais sans pouvoir y accéder d'une manière
+  qui réponde à vos souhaits. Ces données sont donc uniques, et vos
+  besoins d'accès très spécifiques. Vous allez donc devoir créer une
+  application qui réponde à ces deux problèmes : quelles sont vos
+  données, et comment pouvez-vous y accéder ?
+
+* Des procédures pour tous les jours 
+
+  Une /procédure/, c'est simplement une série d'étapes à exécuter pour
+  effectuer une certaine tâche. Pour griller du pain, par exemple,
+  vous devez suivre une procédure.
+
+  D'accord, il peut y avoir des variations, et chacun prépare son
+  petit-déjeuner à sa manière. Mais il y a un point qui met tout le
+  monde d'accord : vous ne beurrez pas vos tartines /avant/ de les
+  mettre dans le grille-pain.
+
+  Les ordinateurs sont incapables d'exécuter des tâches en l'absence
+  de procédures. Autrement dit, vous devez lui expliquer quelles
+  étapes il doit effectuer, dans quel ordre, et quels sont les cas
+  particuliers (les /exceptions/) auxquels il doit répondre. Toutes
+  ces informations (et plus encore) sont définies à l'intérieur d'une
+  application. Pour faire court, une application est simplement une
+  procédure écrite que vous utilisez pour expliquer à l'ordinateur ce
+  qu'il doit faire, quand il doit le faire, et comment il doit le
+  faire. Du fait que vous utilisez des procédures dans pratiquement
+  chaque instant de votre vie, tout ce que vous avez à faire, c'est
+  d'appliquer des connaissances que vous possédez déjà pour expliquer
+  à un ordinateur ce qu'il doit réaliser.
+
+
+* Ecrire des procédures
+
+  Dans la vraie vie, de nombreuses expériences reposent sur la mise en
+  oeuvre de procédures. Songez un instant à la << check-list >> que
+  doivent respecter les pilotes avant un décollage. Sans une procédure
+  bien rodée, l'avion risquerait bien de s'écraser. Apprendre à écrire
+  une bonne procédure prend du temps, mais cela en vaut la peine. Cela
+  ne marche généralement pas du premier coup, mais c'est quand même
+  une possibilité. Et écrire une procédure ne suffit pas. Il faut
+  aussi la tester, notamment en faisant appel à une ou plusieurs
+  personnes qui ne connaissent pas la règle du jeu et ne sont pas
+  familiarisées avec les tâches à mettre en oeuvre. Lorsque vous
+  travaillez avec un ordinateur, c'est lui qui est votre premier et
+  meilleur cobaye. Et, croyez-moi, les enfants en sont encore de bien
+  meilleurs pour trouver les failles dans vos procédures...
+
+* Les applications sont des procédures comme les autres
+
+  Lorsque vous écrivez une application, vous écrivez en réalité une
+  procédure qui définit une série d'étapes que l'ordinateur devrait
+  exécuter pour accomplir certaines tâches, ce que vous voulez lui
+  voir faire. Si vous manquez une étape, vous n'obtiendrez pas les
+  résultats escomptés. L'ordinateur ne sait pas ce que vous voulez
+  dire, ou ce que vous avez l'intention de lui faire réaliser. La
+  seule chose, qu'il comprenne, c'est que vous lui avez fourni une
+  procédure spécifique, et qu'il doit suivre les étapes de celle-ci.
+
+* Comprendre que les ordinateurs font les choses à la lettre
+
+  Il y a sans doute des personnes qui suivent des procédures que vous
+  avez créées. Elles compensent automatiquement les déficiences de
+  votre procédure en fonction de leur propre expérience, ou prennent
+  des notes pour signaler ce qui ne va pas. En d'autres termes, les
+  êtres humains sont capables d'interpréter vos intentions pour en
+  combler les lacunes.
+
+  Lorsque vous commencez à écrire des programmes pour ordinateur, vous
+  ressentez généralement de la frustration, car la machine effectue
+  les tâches qui lui sont dévolues d'une manière totalement précise,
+  et elle prend vos instructions au pied de la lettre. 
+
+* Définir ce qu'est une application
+
+  Comme déjà mentionné, les applications fournissent des moyens pour
+  définir des idées humaines avec précision, et d'une manière telle
+  qu'elle soit compréhensible par un ordinateur. Pour atteindre cet
+  objectif, l'application s'appuie sur une ou plusieurs procédures qui
+  décrivent comment manipuler certaines données, et comment les
+  présenter. Par exemple, vous pouvez voir sur votre écran quelque
+  chose qui est affiché par votre traitement de texte. Mais, pour
+  cela, l'ordinateur a besoin de procédures permettant de retrouver
+  les données qui forment ce texte sur le disque, leur donner une mise
+  en forme compréhensible par vous, puis vous présenter le
+  résultat. Les sections qui suivent définissent les spécificités
+  d'une application plus en détail.
+
+** Comprendre que les ordinateurs utilisent un langage spécial
+
+   Les langues humaines sont complexes et diffiles à comprendre. Même
+   des applications comme Siri, Google Now ou Cortana ont de sérieuses
+   limites quant à la compréhension de ce que vous dites. Au des ans,
+   les ordinateurs (ou plutôt ceux qui développent des applications
+   pour les ordinateurs) ont acquis la possibilité de transformer la
+   voix en données et de comprendre que certains mots sont des
+   commandes qu'on veut les voir exécuter. Pour autant, cette
+   compréhension ne dépasse pas un certain niveau de
+   complexité. Prenons l'exemple d'un texte juridique. Si vous lisez
+   un compte-rendu de jugement, vous allez penser qu'il s'agit d'un
+   langage extraterrestre. Cependant, le but est de transcrire par des
+   mots des idées et des concepts d'une manière qui ne soit pas
+   sujette à l'interprétation. Cet objectif est difficile à atteindre,
+   justement parce que le langage humain est imprécis.
+
+   De leur côté, les ordinateurs sont, par essence, incapables de
+   s'appuyer uniquement sur votre langage pour comprendre les
+   procédures que vous écrivez. Comme dit plus haut, ils prennent
+   celles-ci au pied de la lettre. Si vous écriviez des applications
+   comme vous parlez, les résultats seraient totalement
+   imprévisibles. C'est pourquoi vous devez utiliser un langage
+   spécial, appelé un /langage de programmation/, pour communiquer
+   avec les ordinateurs. Ce, ou plutôt ces langages spéciaux rendent
+   possible l'écriture de procédures qui sont à la fois spécifiques et
+   totalement compréhensibles aussi bien par les humains que par les
+   ordinateurs.
+
+   En fait, les ordinateurs ne parlent aucun langage. Ils utilisent
+   des codes binaires pour modifier en interne des sortes de bascules
+   et effectuer des tas de calculs mathématiques. Ils ne comprennent
+   même pas les lettres, rien que les nombres. Une application
+   particulière transforme le langage spécifique que vous utilisez
+   pour communiquer avec l'ordinateur en codes binaires (des 0 et des
+   1, et c'est tout). Evidemment, c'est là un sujet que vous n'avez en
+   aucun cas besoin d'approfondir pour lire ce livre. Mais il est
+   intéressant de savoir que les ordinateurs ne connaissent que les
+   chiffres, et donc ne parlent aucune langue.
+
+** Aider les humains à parler à l'ordinateur
+
+   Il est important de ne jamais perdre de vue l'objectif que vous
+   poursuivez lorsque vous écrivez une application. Celle-ci sert à
+   aider les humains à dialoguer avec l'ordinateur d'une certaine
+   manière. Toute application travaille avec certains types de données
+   qui sont entrées, stockées, manipulées et << recrachées >> pour
+   fournir les résultats désirés. Que cette application soit un jeu ou
+   un tableur, l'idée de base est exactement la même. Les ordinateurs
+   travaillent avec des données fournies par des êtres humains pour
+   délivrer un certain résultat.
+
+   Lorsque vous créez une application, vous fournissez une nouvelle
+   méthode pour le dialogue entre l'homme et la machine. La nouvelle
+   approche que vous construisez permettra à d'autres humains de voir
+   des données d'une nouvelle façon. La communication homme/machine
+   devrait être suffisamment simple pour que l'application semble
+   disparaître de la vue. Réfléchissez à votre propre expérience
+   utilisateur. Les meilleures applications sont bien celles avec qui
+   vous permettent de vous concentrer uniquement sur les données avec
+   lesquelles vous interagissez.
+
+   Une des meilleures façons de commencer à réfléchir à une
+   application que vous voudriez créer, c'est de regarder comme
+   d'autres gens procèdent. Ecrire ce que vous aimez ou pas dans
+   d'autres applications est un bon point de départ pour définir ce
+   que vous voulez faire, comment vous voulez le faire, et comment
+   tout cela devrait se présenter aux yeux du monde. Voici quelques
+   questions que vous pouvez poser au cours de ce processus mental :
+   + Qu'est-ce qui m'a gêné dans l'application ?
+   + Quelles fonctions étaient faciles à utiliser ?
+   + Quelles fonctions étaient difficiles à utiliser ?
+   + Est-ce qu'il était facile ou pas d'interagir avec mes données ?
+   + Comment serait-il possible d'améliorer ces interactions ?
+   + Qu'est-ce que je pourrais faire pour améliorer une telle
+     application ?
+
+
+   Les développeurs pro se posent bien d'autres questions lorsqu'ils
+   développent des applications. Mais celles-ci constituent un bon
+   point de départ, car elles vous aident à mieux percevoir les
+   applications comme des moyens d'aider les êtres humains à
+   communiquer avec les ordinateurs. Si vous vous êtes déjà senti
+   frustré en utilisant une application, vous pouvez comprendre ce que
+   vos utilisateurs pourront ressentir si vous ne vous êtes pas posé
+   les bonnes questions au cours de votre travail de développement. La
+   communication est l'élément le plus important de toute application
+   que vous êtes appelé à créer. 
+
+   Vous pouvez aussi commencer à réfléchir à la manière dont vous
+   travaillez. Commencez à écrire des procédures pour des choses que
+   /vous/ faites. Une bonne idée consiste à prendre le processus étape
+   par étape, en écrivant à chaque fois toutes vos réflexions. Lorsque
+   vous avez terminé, demandez à quelqu'un d'autre de tester votre
+   procédure afin de voir si elle marche effectivement. Vous pourriez
+   être surpris de découvrir que, même en fournissant de gros efforts,
+   vous pouvez facilement oublier d'inclure certaines étapes.
+
+   La pire application du monde débute généralement par le fait que
+   le programmeur ne sait pas exactement ce que cette application est
+   censée faire, en quoi elle est spéciale, ce qu'elle doit apporter,
+   et à qui elle est destinée. Lorsque vous décidez de créer une
+   application, assurez-vous que vous savez pourquoi vous le faites,
+   et quel est l'objectif que vous voulez atteindre. Mettre un plan de
+   bataille en place aide beaucoup à bien programmer, et à y prendre
+   du plaisir (ce qui a son importance). Vous pourrez ainsi travailler
+   posément sur votre nouvelle application et voir les étapes se
+   réaliser les unes après les autres jusqu'à ce que tout soit
+   opérationnel. Après quoi, vos amis à qui vous demanderez de tester
+   votre application trouveront qu'elle est vraiment /cool/, et vous
+   aussi.
+
+* Comprendre pourquoi Python est si cool
+
+  Il existe de nombreux langages de programmation. En fait, un
+  étudiant pourrait passer tout un semestre à étudier des langages de
+  programmation, et ne même pas entendre parler de certains d'entre
+  eux. Vous pourriez-vous penser que les développeurs sont
+  parfaitement à l'aise avec tout cela, et qu'ils en choisissent
+  simplement un pour communiquer avec l'ordinateur. Mais ce n'est que
+  le petit bout de la lorgnette.
+
+  Il y a de bonnes raisons qui justifient la création de nouveaux
+  langages. Chaque langage a quelque chose de particulier à offrir,
+  quelque chose qu'il fait particulièrement bien. De plus, la
+  technologie évolue sans cesse, et donc les langages de programmation
+  doivent eux aussi progresser. Du fait que créer une application est
+  une affaire de communication efficace, de nombreux programmeurs
+  connaissent plusieurs langages de manière à pouvoir choisir celui
+  qui convient le mieux pour réaliser une tâche particulière. 
+
+  Comme tous les langages de programmation, Python fait certaines
+  choses exceptionnellement bien; vous devez donc savoir quels sont
+  ses principaux champs de compétence avant de commencer à
+  l'utiliser. Vous pourriez bien être étonné par les choses réellement
+  /cool/ que vous pouvez réaliser avec Python. Connaître les forces et
+  les faiblesses d'un langage de programmation vous aide non seulement
+  à en tirer le meilleur parti, mais aussi à éviter les frustrations
+  dues à l'emploi d'un langage pour des choses qu'il ne fait pas très
+  bien. Les sections qui suivent devraient vous aider à prendre ce
+  genre de décision.
+
+** Quelques bonnes raisons de choisir Python
+
+   La plupart des langages de programmation sont créés pour répondre à
+   des besoins spécifiques. Ces besoins aident à définir les
+   caractéristiques du langage, et à déterminer ce que vous pouvez
+   faire avec lui. En fait, il ne peut pas exister de langage <<
+   universel >>, car les gens ont des buts et des besoins extrêmement
+   variés lorsqu'ils créent des applications. Dans le cas de Python,
+   l'objectif principal était de produire un langage de programmation
+   qui aide les programmeurs à être efficaces et productifs. En
+   gardant cela présent à l'esprit, voici quelques (bonnes) raisons
+   d'utiliser Python pour créer vos applications : 
+   + Moins de temps de développement : le code Python est généralement
+     deux à trois fois plus court que l'équivalent en C/C++ ou en
+     Java.
+   + Facilité de lecture : un langage de programmation est comme tout
+     autre langage, vous devez être capable de le lire pour comprendre
+     ce qu'il fait.
+   + Temps d'apprentissage réduit 
+
+
+** Décider comment tirer un bénéfice personnel de Python   
+
+   En dernier ressort, vous pouvez utiliser n'importe quel langage de
+   programmation pour écrire toutes sortes d'applications. Mais si
+   vous vous trompez dans votre choix, le processus risque d'être
+   lent, avec de gros risques d'erreurs ou de bugs. Mais vous pouvez
+   quand même arriver au bout de vos peines. Bien entendu, personne
+   n'a envie de vivre une telle expérience, et il est donc important
+   de savoir quels types d'applications sont généralement créés avec
+   Python. En voici quelques exemples (évidemment non exhaustifs) : 
+   + Créer des exemples de << maquettes >> d'applications :: les
+        développeurs ont souvent besoin de produire un /prototype/,
+        disons comme une maquette d'application, avant d'obtenir les
+        ressources qui leur permettront de créer l'application
+        elle-même. Python est un outil adapté à leur productivité, ce
+        qui permet de fabriquer rapidement de tels prototypes.
+   + Créer des scripts pour des applications Web :: Même si JavaScript
+        est probablement le langage de programmation le plus populaire
+        dans ce domaine, Python est un second tout proche de la
+        première place. Il offre en particulier des fonctionnalités
+        que ne propose pas JavaScript, et sa grande efficacité
+        accélère la création de ce type d'applications (ce qui est un
+        plus dans notre monde en accélération permanente).
+   + Concevoir des applications mathématiques, scientifiques ou d'ingénierie :: il est intéressant de savoir que Python donne
+     accès à des bibliothèques qui facilitent grandement la création
+     de telles applications. Les deux bibliothèques les plus
+     populaires sont NumPy ([[https://www.numpy.org/]]) et SciPy
+     ([[https://www.scipy.org/]]). Elles permettent de réduire
+     considérablement le temps passé à écrire des applications à
+     caractère scientifique.
+   + Travailler avec XML :: XML (pour eXtensible Markup Language, ou
+        langage de balisage étendu) est la base utilisée pour le
+        stockage de la plupart des données sur l'Internet, ainsi que
+        par de nombreuses applications de bureau. Contrairement à la
+        plupart des langages, pour qui XML est bien souvent une pièce
+        rapportée, Python en fait un citoyen de 1ère classe. Si vous
+        avez besoin de travailler avec un service Web, ce qui est la
+        principale méthode pour échanger des informations sur
+        l'Internet (ou tout autre application faisant un usage
+        intensif du XML), Python est un excellent choix.
+   + Interagir avec des bases de données :: L'industrie et les
+        services reposent très largement de nos jours sur la gestion
+        de bases de données. Python n'est pas un langage de requête,
+        comme SQL, mais il est très bon dans l'interaction avec les
+        bases de données. Il rend la création de connexions et de
+        manipulation des données relativement aisée.
+   + Développer des interfaces utilisateur :: Python ne ressemble pas
+        à d'autres langages comme C#, où vous disposez d'un outil de
+        conception intégré pour réaliser une interface utilisateur et
+        où vous pouvez simplement déposer des éléments par
+        glisser-déposer à partir d'une boîte à outils pour créer une
+        interface utilisateur. Cependant, il possède de multiples
+        extensions qui rendent ce genre d'interface facile à fabriquer
+        (voyez l'adresse [[https://wiki.python.org/moin/GuiProgramming]]
+        pour plus de détails). En fait, Python n'est pas lié à tel ou
+        tel type d'interface. Vous pouvez utiliser la méthode qui
+        convient le mieux à vos besoins.
+
+
+** Quelles organisations utilisent Python ?   
+
+   Python est très bien adapté aux tâches pour lesquelles il a été
+   conçu. Cela va sans dire, mais encore mieux en le disant... En
+   fait, c'est la raison pour laquelle de nombreuses organisations se
+   servent de Python pour des prototypes de développement de leurs
+   propres applications (et bien entendu plus si affinité). Vous avez
+   donc besoin de connaître un tel langage de programmation, car ces
+   grandes organisations ont tendance à investir dans son
+   développement pour le rendre meilleur. Citons quelques noms
+   connus :
+   + Go.com ([[http://go.com/]]) :: Application Web
+   + Google ([[https://www.google.com/]]) :: Moteur de recherche
+   + NASA ([[https://www.nasa.gov/]]) :: Applications scientifiques
+   + Nyse - New York Stock Exchange ([[https://www.nyse.com/index]]) ::
+        Applications Web
+   + Redhat ([[https://www.redhat.com/en]]) :: Outils d'installation Linux
+   + Yahoo! ([[https://fr.yahoo.com/?p=us]]) :: Des parties de la
+        messagerie Yahoo!
+   + YouTube ([[https://www.youtube.com/]]) :: Moteur graphique
+
+   
+   Cette liste ne constitue évidemment qu'une toute petite partie des
+   organisations qui utilisent Python d'une manière extensive. Pour en
+   savoir plus sur le sujet, voyez l'adresse
+   [[https://www.python.org/about/success/]]. Le nombre de ces << success
+   stories >> est devenu si important que cette liste est probablement
+   très incomplète et qu'il faudrait créer de nouvelles catégories
+   pour mieux prendre conscience de cette réussite.
+
+** Trouver des applications Python utiles
+
+   Vous pouvez très bien avoir une application Python en pleine
+   activité sur votre ordinateur sans que vous en ayez même
+   conscience. Python est en effet utilisé de nos jours dans de
+   multiples types d'applications. Cela va des utilisateurs qui
+   fonctionnent dans une console (une fenêtre de commandes, si vous
+   préférez) à des suites dédiées à la Conception Assistée par
+   Ordinateur (la CAO). Certaines applications sont dédiées aux
+   appareils portables, tandis que d'autres sont réservées à des
+   services pour de grandes entreprises. En résumé, aucun domaine
+   n'échappe aux applications écrites en Python. Pour autant, rien ne
+   remplace l'expérience que vous pouvez retirer de celle d'autres
+   utilisateurs. Vous pouvez trouver de multiples références en ligne,
+   mais le meilleur point de départ se trouve à l'adresse
+   [[https://wiki.python.org/moin/Applications]].
+
+   En tant que programmeur Python, vous avez aussi envie de savoir que
+   nombre d'outils de développement sont facilement accessibles afin
+   de vous aciliter l'existence. Un /outil de développement/ fournit
+   certains niveaux d'automatisation lorsque vous écrivez des
+   procédures qui indiquent à l'ordinateur ce qu'il doit faire. Plus
+   il y a d'outils de développement, et moins vous avez à travailler
+   pour créer une application parfaitement fonctionnelle. Les
+   développeurs adorent partager leurs listes d'outils préférés. Mais,
+   en tout état de cause, vous devriez pouvoir trouver votre bonheur
+   (ou une bonne partie de celui-ci) en consultant la page
+   [[https://www.python.org/about/apps/]]
+
