@@ -1,0 +1,158 @@
+#+TITLE: Effectuer des tâches répétitives
+#+AUTHOR: Laurent Garnier
+
+* Traiter des données en utilisant l'instruction for
+** Pour parcourir une chaîne de caractère 
+
+  #+BEGIN_SRC python
+    num = 1
+    for letter in "Bonjour":
+	print("La lettre ", num, " est ", letter)
+	num += 1
+  #+END_SRC
+
+** Contrôler l'exécution avec l'instruction break
+   
+   #+BEGIN_SRC python
+     value = input("Tapez un mot d'au plus 8 caractères : ")
+     num = 1
+
+     for letter in value:
+	 print("La lettre ", num, " est ", letter)
+	 num += 1
+	 if num > 8:
+	     print("La chaîne est trop longue !")
+	     break
+   #+END_SRC
+  
+
+** Continuer l'exécution avec l'instruction continue
+
+   #+BEGIN_SRC python
+     num = 1
+
+     for letter in "Bonjour":
+	 if letter == "j":
+	     continue
+	     print("La lettre j rencontrée, traitement interrompu.")
+	 print("La lettre ", num, " est ", letter)
+	 num += 1
+   #+END_SRC
+
+** Contrôler l'exécution avec la clause pass
+
+   #+BEGIN_SRC python
+     num = 1
+
+     for letter in "Bonjour":
+	 if letter == "j":
+	     pass
+	     print("La lettre j rencontrée, non traitée.")
+	 print("La lettre ", num, " est ", letter)
+	 num += 1
+   #+END_SRC
+
+
+** Contrôler l'exécution avec la clause else
+
+   #+BEGIN_SRC python
+     value = input("Tapez moins de 8 caractères : ")
+     num = 1
+
+     for letter in value:
+	 print("La lettre ", num, " est ", letter)
+	 num += 1
+     else:
+	 print("La chaîne est vide.")
+   #+END_SRC
+
+* Traiter des données avec l'instruction while
+** Utiliser l'instruction while dans une application 
+
+   #+BEGIN_SRC python
+     sum = 0
+
+     while sum < 5:
+	 print(sum)
+	 sum += 1
+   #+END_SRC
+
+* Imbriquer des boucles
+
+  Générateur de table de multiplication :
+  #+BEGIN_SRC python
+    x,  y = 1, 1
+
+    print('{:>4}'.format(' '), end= ' ')
+
+    for x in range(1, 11):
+	print('{:>4}'.format(x), end=' ')
+
+    print()
+
+    for x in range(1, 11):
+	print('{:>4}'.format(x), end=' ')
+	while y <= 10:
+	    print('{:>4}'.format(x * y), end=' ')
+	    y += 1
+	print()
+	y = 1
+  #+END_SRC
+
+  Cet exemple commence par créer deux variables, x et y, chargées de
+  contenir respectivement la valeur en ligne et en colonne de la
+  table. 
+
+  Pour que cette table soit lisible, le code doit créer un en-tête en
+  haut de chaque colonne et à gauche de chaque ligne. Lorsque
+  l'utilisateur voit la valeur 3 en haut, et la valeur 4 à gauche, il
+  doit simplement les suivre pour savoir où les rangées
+  correspondantes se coupent, et donc où se trouve leur produit. 
+
+  La première instruction =print()= ajoute un espace (puisque rien
+  n'apparaît dans le coin supérieur gauche de la table). Toutes les
+  autres instructions de formatage créent un espacement de quatre
+  caractères de large. La partie ={:>4}= du code détermine la taille
+  de la colonne. La fonction =format(' ')= définit ce qui est affiché
+  dans cet espace. L'attribut =end= de l'instruction =print()= change
+  le caractère de fin de ligne pour remplacer le retour chariot par un
+  espace. 
+
+  La première boucle =for= affiche les nombres de 1 à 10 en haut de la
+  table. La fonction =range()= permet de spécifier facilement cet
+  intervalle. Vous devez lui passer la valeur de départ, donc 1 dans
+  ce cas, et la valeur finale augmentée d'une unité, soit 11 ici.
+
+  Arrivé là, le curseur attend patiemment à la fin de la ligne
+  d'en-tête. Pour le renvoyer à la ligne suivante, un simple appel à
+  la fonction =print()=, sans aucun argument, suffit à faire le
+  travail.
+
+  Même si le morceau de code qui suit peut paraître un peu complexe,
+  il suffit de le suivre ligne par ligne pour en comprendre le
+  mécanisme. La table de multiplication calcule des valeurs allant de
+  1 * 1 à 10 * 10, et donc vous avez besoin de dix lignes et de dix
+  colonnes pour afficher tous les résultats de ces
+  opérations. L'instruction =for= demande donc à Python de créer dix
+  lignes. 
+
+  Bien entendu, vous devez formater cette présentation, et c'est
+  pourquoi le code utilise un espacement de quatre caractères se
+  terminant par un espace vide (au lieu d'un retour chariot) pour
+  pouvoir afficher les résultats des calculs sur la même ligne.
+
+  C'est maintenant qu'arrive la boucle =while=. Celle-ci gère
+  l'affichage d'une colonne donnée, et ce pour la ligne courante. Les
+  valeurs à placer dans les colonnes sont à chaque fois le produit de
+  x par y. Là encore, la sortie formatée pour respecter la règle des
+  quatres espaces (bien entendu, vous pourriez choisir une autre, dès
+  lors que le résultat est lisible et cohérent). La boucle =while= se
+  termine une fois que y a atteint sa valeur limite, 10, grâce à
+  l'incrémentation y += 1.
+
+  Vous revenez alors à la boucle =for=. L'instruction =print()=
+  termine la ligne courante en envoyant un retour chariot. De plus, y
+  doit être réinitialisé à la valeur 1 afin qu'il soit prêt pour la
+  ligne suivante. Et ainsi de suite...
+
+  
