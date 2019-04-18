@@ -1,0 +1,175 @@
+#+TITLE: Interagir avec Python
+#+AUTHOR: Laurent Garnier
+
+En dernier ressort, toute application que vous créez interagit avec
+l'ordinateur et les données qu'il contient. Le point central, ce sont
+les données. Sans données, il n'y a effectivement aucune raison
+valable pour avoir une application. Et toute application que vous
+utilisez (même un petit jeu de solitaire) manipule des données d'une
+certaine manière. En fait, tout cela pourrait se résumer en quelques
+mots : 
+
++ Créer
++ Lire
++ Actualiser
++ Supprimer
+
+Si vous vous rappelez de l'acronyme CLAS, vous aurez présent à
+l'esprit le résumé de ce que la plupart des applications font avec les
+données contenues dans l'ordinateur. Cependant, avant que votre
+application puisse accéder à l'ordinateur, vous devez vous-même
+interagir avec un langage de programmation qui va créer une liste de
+tâches à effectuer dans un autre langage, celui que l'ordinateur
+comprend. Tel est l'objet de ce chapitre. Ici, vous allez commencer à
+interagir avec Python. C'est lui qui va être chargé de prendre la
+liste des étapes que vous voulez réaliser avec les données de
+l'ordinateur, et les traduire dans la langue extrêmement binaire de la
+machine. 
+
+* Maîtriser la ligne de commande
+
+  + Options :: Une option, ou encore un commutateur de la ligne de
+               commandes, débute par un signe moins (<< =-= >>), suivi
+               d'une ou plusieurs lettres. Par exemple, si vous voulez
+               obtenir de l'aide sur Python, vous tapez =Python -h= et
+               vous appuyez sur Entrée. Vous pouvez également voir
+               d'autres options sur l'art et la manière de démarrer
+               Python. Nous y reviendrons plus loin.
+  + Nom de fichier :: Fournir un nom de fichier demande à Python de
+                      charger celui-ci et de l'exécuter. Vous pouvez
+                      par exemple lancer l'un des exemples de ce livre
+                      en spécifiant le nom du fichier correspondant
+                      sur la ligne de commandes. Supposons par
+                      exemple que vous ayez à disposition un fichier
+                      de script nommé =Bonjour.py=. Pour l'exécuter,
+                      il vous suffirait alors de taper =Python
+                      Bonjour.py= et d'appuyer sur Entrée.
+  + Arguments :: Une application peut accepter des informations
+                 supplémentaires afin de préciser la manière dont elle
+                 doit fonctionner. Ce type d'information est appelé un
+                 /argument/. Ne vous faites pas de soucis à ce sujet
+                 pour l'instant. Nous y reviendrons plus loin dans ce
+                 livre.
+
+
+  Python utilise des options qui sont sensibles à la casse :
+  + =-b= :: Ajoute des avertissements à la sortie lorsque Python
+            utilise certaines foncitonnalités, en particulier
+            =str(bytes_instance)=, =str(bytearray_instance)=, la
+            comparaison d'octets =(bytes)= ou =bytearray= avec
+            =str()=.
+  + =-bb= :: Ajoute des erreurs à la sortie lorsque Python utilise
+             certaines fonctionnalités, en particulier
+             =str(bytes_instance)=, =str(bytearray_instance)=, la
+             comparaison d'octets =(bytes)= ou =bytearray= avec
+            =str()=.
+  + =-B= :: Empêche d'écrire une extension de fichier =.py= ou =.pyco=
+            lors de l'importation d'un module.
+  + =-c `ja= :: Utilise l'information fournie par /cmd/ pour lancer un
+                programme. Cette option indique également à Python de
+                cesser de traiter le reste de l'information de la
+                ligne de commandes en tant qu'options.
+  + =-d= :: Lance le débogueur (il sert à localiser les erreurs dans
+            votre application)
+  + =-E= :: ignore toutes les variables d'environnement de Python,
+            comme PYTHONPATH, qui sont utilisées pour configurer son
+            environnement. 
+  + =-h= :: Affiche une aide sur les options et les variables
+            d'environnement de base. Python se termine après avoir
+            exécuté cette requête cette requête sans rien faire
+            d'autre.
+  + =-i= :: Force Python à vous permettre d'inspecter le code de
+            manière interactive après avoir exécuté cette requête sans
+            rien faire d'autre. 
+  + =-m jla= :: Lance le module de bibliothèque spécifié par
+                /mod/. Cette option indique également à Python de
+                cesser de traiter le reste de l'information de la
+                ligne de commandes en tant qu'options.
+  + =-O= :: Optimise légèrement le code binaire généré par Python.
+  + =-OO= :: Optimise davantage le code binaire généré par Python.
+  + =-q= :: Demande à Python de ne pas afficher le message de version
+            et de copyright lors de son lancement.
+  + =-s= :: Force Python à ne pas ajouter le chemin du site de
+            l'utilisateur à =sys.path= (une variable qui indique à
+            Python où trouver des modules).
+  + =-S= :: Demande à Python de ne pas rechercher lors de son
+            initialisation des chemins d'accès qui pourraient contenir
+            des modules dont il a besoin.
+  + =-v= :: Place Python en mode dit << verbose >> de manière à
+            pouvoir visualiser toutes les instructions importées.
+  + =-V= :: Affiche le numéro de version de Python et quitte.
+  + =--version= :: Agit comme =-V=
+  + =-W ^odp= :: Modifie le niveau des avertissements émis par
+                 Python. Les valeurs valides pour /args/ sont :
+                 =action=, =message=, =category=, =module=, =lineno=
+  + =-x= :: Saute la première ligne d'un fichier contenant du code
+            source, ce qui permet d'utiliser des formes non Unix de =#
+            ! `ja=
+  + =-X lmq= :: Définit une option spécifique d'implémentation 
+
+** Tirer profit des variables d'environnement Python
+
+   Les /variables d'environnement/ sont des réglages spéciaux qui sont
+   placés sur la ligne de commandes, ou qui sont définis dans votre
+   système d'exploitation. Elles servent à configurer Python d'une
+   manière particulière. Elles effectuent des tâches qui correspondent
+   à des options fournies lors du lancement de Python, mais elles
+   peuvent être rendues permanentes. Ceci permet donc d'obtenir une
+   configuration de Python qui sera identique à chaque démarrage, sans
+   avoir besoin de spécifier ces options à chaque fois dans la ligne
+   de commandes.
+
+   La plupart des systèmes d'exploitation permettent de définir des
+   variables d'environnement de manière temporaire, en les configurant
+   au cours d'une certaine session, ou bien de manière permanente, en
+   les enregistrant dans les options de configuration du système
+   lui-même. La manière de procéder dépend de votre système
+   d'exploitation. 
+
+   Voici un aperçu de ces variables d'environnement : 
+   
+   + PYTHONDEBUG=i :: joue le même rôle que l'option =-d=
+   + PYTHONDONTWRITEBYTECODE=u :: joue le même rôle que l'option =-B=
+   + PYTHONFALTHANDLER= u :: force Python à lister tous les appels qui
+        ont conduit à des erreurs fatales
+   + PYTHONHASHSEED=^od :: définit une valeur source (ou semence)
+        servant à générer des valeurs de hachage pour différents types
+        de données. Lorsque cette variable est définie avec la valeur
+        =random=, Python utilise un nombre aléatoire pour générer les
+        valeurs de hachage des objets =str= (chaîne), =bytes= (octets)
+        et =datetime= (temps). L'intervalle entier valide va de 0
+        à 4294967295. Utilisez une valeur de semence spécifique afin
+        d'obtenir des valeurs de hachage prévisibles lors de phases de
+        test.
+   + PYTHONHOME=^od :: définit le chemin d'accès par défaut que Python
+                       utilise pour rechercher des modules
+   + PYTHONINSPECT=u :: joue le même rôle que l'option =-i=
+   + PYTHONIOENCODING=^od :: spécifie la valeur =encoding[:errors]=
+        (comme =utf-8=) utilisée pour les dispositifs =stdin=,
+        =stdout= et =stderr=.
+   + PYTHONNOUSERSITE :: joue le même rôle que l'option =-s=
+   + PYTHONOPTIMIZE=u :: joue le même rôle que l'option =-O=
+   + PYTHONPATH=^od :: fournit une liste de chemins d'accès séparés
+                       par un point-virgule pour la recherche des
+                       modules. Cette valeur est enregistrée dans la
+                       variable =sys.path= de Python
+   + PYTHONSTARTUP=arg :: définit le nom d'un fichier à exécuter au
+        lancement de Python. Il n'y a pas de valeur par défaut pour
+        cette variable d'environnement.
+   + PYTHONUNBUFFERED=u :: joue le même rôle que l'option =-u=
+   + PYTHONVERBOSE=u :: joue le même rôle que l'option =-v=
+   + PYTHONWARNINGS=^od :: joue le même rôle que l'option =-W=
+
+* Taper une commande   
+
+  #+BEGIN_SRC python
+    help()
+    keywords
+    topics
+    modules
+  #+END_SRC
+
+  Pour sortir de l'aide il suffit d'appuyer sur Entrée sans rien
+  d'autre sur la ligne.
+
+  
