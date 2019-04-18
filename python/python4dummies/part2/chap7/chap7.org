@@ -1,0 +1,105 @@
+#+TITLE: Prendre des décisions
+#+AUTHOR: Laurent Garnier
+
+* Prendre des décisions simples avec l'instruction if
+** Comprendre l'instruction if
+
+   #+BEGIN_SRC python
+     test_me = 5
+     if test_me == 5:
+	 print("test_me est égal à 5 !")
+   #+END_SRC
+
+* Construction entre plusieurs alternatives   
+
+  #+BEGIN_SRC python
+    value = int(input("Tapez un nombre entre 1 et 10 : "))
+
+    if (value > 0) and (value <= 10):
+	print("Vous avez tapé : ", value)
+    else:
+	print("Vous avez tapé une valeur incorrecte !")
+  #+END_SRC
+
+
+* Utiliser l'instruction if...elif dans une application
+
+  #+BEGIN_SRC python
+    print("1. Rouge")
+    print("2. Orange")
+    print("3. Jaune")
+    print("4. Vert")
+    print("5. Bleu")
+    print("6. Pourpre")
+
+    choice = int(input("Choisissez votre couleur favorite : "))
+
+    if (choice == 1):
+	print("Vous avez choisi Rouge !")
+    elif (choice == 2):
+	print("Vous avez choisi Orange !")
+    elif (choice == 3):
+	print("Vous avez choisi Jaune !")
+    elif (choice == 4):
+	print("Vous avez choisi Vert !")
+    elif (choice == 5):
+	print("Vous avez choisi Bleu !")
+    elif (choice == 6):
+	print("Vous avez choisi Pourpre !")
+    else:
+	print("Vous avez fait un choix invalide !")
+  #+END_SRC
+
+* Combiner d'autres types de décisions
+
+  #+BEGIN_SRC python
+    print("1. Oeufs")
+    print("2. Crêpes")
+    print("3. Gaufres")
+    print("4. Céréales")
+    main_choice = int(input("Que voulez-vous au petit déjeuner ? "))
+
+    if (main_choice == 2):
+	meal = "Crêpes"
+    elif (main_choice == 3):
+	meal = "Gaufres"
+
+
+    if (main_choice == 1):
+	print("1. Galette au froment")
+	print("2. Beignet")
+	print("3. Galette de seigle")
+	print("4. Crêpe nature")
+	pancake = int(input("Choisissez un type de crêpe : "))
+
+	if (pancake == 1):
+	    print("Vous avez choisi des oeufs avec une galette au froment.")
+	elif (pancake == 2):
+	    print("Vous avez choisi des oeufs avec des beignets.")
+	elif (pancake == 3):
+	    print("Vous avez choisi des oeufs avec une galette de seigle.")
+	elif (pancake == 4):
+	    print("Vous avez choisi des oeufs avec une crêpe nature.")
+	else:
+	    print("Nous avons des oeufs, mais pas ce type de crêpe.")
+
+    elif (main_choice == 2) or (main_choice == 3):
+	print("1. Sirop")
+	print("2. Confiture de fraises")
+	print("3. Sucre en poudre")
+	topping = int(input("Choisissez une garniture : "))
+	if (topping == 1):
+	    print("Vous avez choisi " + meal + " au sirop.")
+	elif (topping == 2):
+	    print("Vous avez choisi " + meal + " à la confiture de fraises.")
+	elif (topping == 3):
+	    print("Vous avez choisi " + meal + " avec du sucre en poudre.")
+	else:
+	    print("Nous avons des " + meal + ", mais pas cette garniture.")
+
+    elif (main_choice == 4):
+	print("Vous avez choisi des céréales.")
+
+    else:
+	print("Désolé, nous n'avons pas cela dans notre menu !")
+  #+END_SRC
