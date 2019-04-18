@@ -1,0 +1,76 @@
+#+TITLE: Introduction
+#+AUTHOR: Laurent Garnier
+
+Vite ! Quel est le langage de programmation qui vous permet d'écrire
+rapidement des applications fonctionnelles et utilisables sur
+pratiquement n'importe quelle plate-forme ? Vous donnez votre langue
+au chat ? Oui, c'est Python. Ce qu'il y a de merveilleux avec Python,
+c'est effectivement que vous pouvez réellement écrire une application
+sur une plate-forme, et l'utiliser sur n'importe quelle autre
+plate-forme (à condition bien sûr qu'elle ne soit pas totalement
+exotique). Contrairement à d'autres langages de programmation, Python
+ne fait pas que faire des promesses : il les tient. Et, dans ce cas,
+le résultat vaut la promesse.
+
+Python propose un code lisible et une syntaxe concise qui vous permet
+d'écrire des applications qui nécessitent moins de code que d'autres
+langages. De plus, il est utile dans toutes sortes de
+domaines. Certains le voient uniquement comme un langage de script,
+mais il vaut en réalité bien que cela.
+
+* À propos de ce livre
+
+  Ce livre aborde tout ce qui concerne l'installation, la mise en
+  oeuvre et surtout la mise en action rapide de Python. Vous voulez
+  apprendre rapidement les bases de ce langage de manière à devenir
+  productif dans votre travail, qui peut être à peu près quelconque,
+  ou encore dans la formation que vous suivez. Contrairement à nombres
+  d'autres livres consacrés à ce sujet, celui-ci commence par le
+  commencement en vous montrant ce qui rend Python différent des
+  autres langages, et comment il peut vous aider dans vos activités
+  quelles qu'elles soient. Ceci vous aidera à mieux comprendre comment
+  atteindre vos objectifs personnels et à réaliser les tâches que vous
+  vous fixerez, et ce en particulier grâce aux exemples (simples)
+  proposés. Vous découvrirez même comment installer efficacement
+  Python sur votre propre système.
+
+  Une fois Python correctement installé, vous pourrez commencer à
+  travailler avec lui. Quand vous aurez étudié les exemples de ce
+  livre, vous devriez être capable d'écrire des programmes simples et
+  d'effectuer certaines tâches avancées, par exemple envoyer des
+  e-mails. Certes, vous ne deviendrez pas un expert, mais vous serez
+  capable d'utiliser Python pour des besoins spécifiques dans votre
+  environnement professionnel. Pour rendre tout cela plus digeste, ce
+  livre utilise quelques conventions :
+
+  + Le texte que vous êtes supposé taper au clavier est imprimé en
+    caractères gras. D'accord, lorsque vous devez suivre une liste
+    d'étapes, dont le texte est déjà mis en caractères gras, le texte
+    à taper restera tel quel.
+  + Si vous voyez des caractères en /italiques/ dans une séquence que
+    vous devez saisir, cela signifie que vous devez les remplacer par
+    quelque chose de plus personnel. Exemple : << Tapez *votre nom* et
+    appuyez sur Entrée >>. Remplacez alors /Votre nom/ par votre
+    propre nom (ou par un autre, d'ailleurs).
+  + Les adresses Web apparaissent dans une =police
+    particulière=. C'est juste pour ne pas les confondre avec autre
+    chose.
+
+    
+  En fait, c'est à peu près tout, et donc vous pouvez constater qu'il
+  n'y a rien de particulièrement compliqué dans ces conventions.
+
+
+* Quelques suppositions un peu folles
+
+  Même si vous avez du mal à le croire, je ne suppose rien de
+  particulier sur vous. Après tout, on ne se connaît pas ! Même si les
+  suppositions sont généralement un peu vides de sens, il en faut tout
+  de même quelques-unes pour se mettre bien d'accord dès le début.
+
+  Il est important que vous soyez familiarisé avec la plate-forme que
+  vous utilisez, car vous ne trouverez rien de particulier dans ce
+  livre à ce sujet (même si le Chapitre 2 vous explique comment
+  installer Python sur les principales plates-formes). Dans le même
+  esprit, nous ne traiterons pas non plus des problèmes
+  potentiellement liés à telle ou telle plate-forme. 
