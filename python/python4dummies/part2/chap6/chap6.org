@@ -1,0 +1,66 @@
+#+TITLE: Gérer l'information
+#+AUTHOR: Laurent Garnier
+
+* Comprendre l'opérateur ternaire
+
+  #+BEGIN_SRC python
+    print("Bonjour" if True else "Au revoir")
+    print("Bonjour" if False else "Au revoir")
+    print(("Au revoir", "Bonjour")[True])
+    print(("Au revoir", "Bonjour")[False])
+  #+END_SRC
+
+
+* Définir une fonction  
+** Sans arguments
+  #+BEGIN_SRC python
+    def hello(): # définition de la fonction
+	print("Hello World")
+
+    hello() # appel de la fonction    
+  #+END_SRC
+
+** Avec 1 nombre d'arguments fixe
+
+   #+BEGIN_SRC python
+     def hello(word):
+	 print("Hello" + word)
+     hello("world")
+
+     def add_int(val1, val2):
+	 print(val1, " + ", val2, " = ", (val1 + val2))
+     add_int(2, 3)    
+   #+END_SRC
+
+** Avec 1 nombre d'arguments variable
+
+   #+BEGIN_SRC python
+     def hello(arg_count, *var_args):
+	 print("Vous avez passé ", arg_count, " argument(s).")
+	 for arg in var_args:
+	     print(arg)
+
+     hello(1, "test")
+     hello(2, "un", "deux", "trois")
+   #+END_SRC
+
+
+** Renvoyer des informations depuis une fonction
+
+   #+BEGIN_SRC python
+     def do_add(val1, val2):
+	 return val1 + val2
+
+     print("3 + 4 = ", do_add(3, 4))
+   #+END_SRC
+
+* Interagir avec l'utilisateur
+
+  #+BEGIN_SRC python
+    name = input("Quel est votre nom : ")
+    print("Bonjour ", name)
+
+    age = int(input("Quel est votre âge : "))
+    print("Vous avez ", age, " ans.")
+          
+  #+END_SRC
