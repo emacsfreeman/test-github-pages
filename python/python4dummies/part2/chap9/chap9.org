@@ -468,4 +468,446 @@ tous ces sujets dans ce chapitre.
 	  File.close();    
     #+END_SRC
 
+* Obtenir la liste des arguments d'une exception    
+
+  La liste des éventuels arguments varie selon l'exception et de ce
+  que fournit l'appelant. Il n'est pas toujours facile de se faire une
+  idée de ce que vous pouvez obtenir lorsque vous recherchez des
+  informations complémentaires. Une manière de gérer cette question
+  consiste à afficher simplement toute cette liste en utilisant un
+  code tel que celui-ci :
+  #+BEGIN_SRC python
+    import sys
+
+    try:
+	File = open('myfile.txt')
+    except IOError as e:
+	for Arg in e.args:
+	    print(Arg)
+    else:
+	print("Le fichier a bien été ouvert.")
+	File.close();
+  #+END_SRC
+  
+  La propriété =args= contient toujours une liste des arguments de
+  l'exception au format chaîne de caractères. Vous pouvez utiliser une
+  simple boucle =for= pour imprimer chaque argument. Le seul problème
+  avec cette approche est que vous n'obtenez pas le nom de ces
+  arguments. Vous savez donc ce qu'ils contiennent, mais pas comment
+  les appeler.
+
+  Une méthode plus complexe consiste à afficher à la fois le nom et la
+  valeur des arguments. C'est ce que fait le code suivant :
+  #+BEGIN_SRC python
+    import sys
+
+    try:
+	File = open('myfile.txt')
+    except IOError as e:
+	for Entry in dir(e):
+	    if (not Entry.startswith("_")):
+		try:
+		    print(Entry, " = ", e.__getattribute__(Entry))
+		except AttributeError:
+		    print("Attribut ", Entry, " non accessible.")
+	    else:
+		print("Le fichier a bien été ouvert.")
+		File.close();
+  #+END_SRC
+
+
+  Ici, vous commencez par obtenir une liste des attributs associés à
+  l'objet argument de l'erreur en utilisant la fonction =dir()=. La
+  sortie produite par cette fonction est une liste de chaînes de
+  caractères contenant les noms des attributs affichables. Seuls les
+  arguments dont le nom ne débute pas par un trait de soulignement
+  (=_=) contiennent des informations utiles sur
+  l'exception. Cependant, même certaines de ces entrées sont
+  inaccessibles. C'est pourquoi vous devez placer la sortie de
+  =print()= dans un second bloc =try...except=.
+
+  Le nom de l'attribut est simple à traiter, car il est contenu dans
+  =Entry=. Pour obtenir la valeur correspondante, vous devez faire
+  appel à la fonction =__getattribute__= en lui fournissant le nom de
+  l'attribut concerné. Lorsque vous exécutez ce code, vous voyez donc
+  à la fois le nom et la valeur de chacun des attributs de l'argument
+  pour cette exception particulière. Dans ce cas, la sortie produite
+  par l'application se présenterait ainsi : 
+
+  #+BEGIN_SRC python
+    args = (2, 'No such file or directory')
+    Attribut characters_written non accessible.
+    errno = 2
+    filename = myfile.txt
+    filename2 = None
+    strerror = No such file or directory
+    wneerror = None
+    with_traceback = <built-in method_with_traceback of
+    FileNotFoundError object at 0x031810D0>
+  #+END_SRC
+
+** Gérer de multiples exceptions avec une seule clause except  
+
+   La plupart des applications sont capables de générer plusieurs
+   exceptions pour une même ligne de code. Cette situation a déjà été
+   rencontrée dans ce chapitre. La manière de gérer une telle
+   situation dépend de ce que vous cherchez à obtenir, du type des
+   exceptions et du degré de compétence éventuel de vos
+   utilisateurs. Avec des utilisateurs plus ou moins novices, il est
+   souvent préférable de leur dire que l'application a rencontré une
+   erreur non récupérable, et d'enregistrer les détails dans un
+   fichier journal placé dans le dossier de l'application ou bien dans
+   une unité en réseau, ou encore envoyée vers un nuage Internet. 
+
+   Utiliser une clause =except= unique pour gérer de multiples
+   exceptions ne marche que s'il est possible de satisfaire aux
+   besoins de tous les types d'exceptions à l'intérieur d'une source
+   commune d'actions. Sinon, cela signifie que chaque exception doit
+   être traitée individuellement. Les étapes qui suivent illustrent
+   cette méthode de travail l
+   #+BEGIN_SRC python
+     try:
+	 Value = int(input("Tapez un nombre entre 1 et 10 : "))
+     except (ValueError, KeyboardInterrupt):
+	 print("Vous devez taper un nombre entre 1 et 10 !")
+     else:
+
+	 if (Value > 0) and (Value <= 10):
+	     print("Vous avez tapé : ", Value)
+	 else:
+	     print("La valeur que vous avez tapée est incorrecte !")
+   #+END_SRC
+
+** Gérer des exceptions multiples avec plusieurs clauses except    
+
+   Lorsque vous travaillez avec des exceptions multiples, il est
+   généralement préférable de placer chacune d'entre elles dans sa
+   propre clause =except=. Cette approche vous permet de fournir un
+   système de gestion personnalisé pour chaque exception, ce qui
+   permet notamment à l'utilisateur de savoir plus précisément où se
+   situe le problème. Bien entendu, cette approche demande également
+   plus de travail. 
+
+   #+BEGIN_SRC python
+     try:
+	 Value = int(input("Tapez un nombre entre 1 et 10 : "))
+     except ValueError:
+	 print("Vous devez taper un nombre entre 1 et 10 !")
+     except KeyboardInterrupt:
+	 print("Vous avez appuyé sur Ctrl+C !")
+     else:
+
+	 if (Value > 0) and (Value <= 10):
+	     print("Vous avez tapé : ", Value)
+   #+END_SRC
+
+** Gérer des exceptions en allant du plus spécifique au moins spécifique   
+
+   Une stratégie de gestion des exceptions consiste à fournir des
+   clauses =except= spécifiques pour toutes les exceptions connues, et
+   des clauses =except= génériques pour toutes les exceptions non
+   prévisibles ou inconnues. La documentation en ligne de Python
+   détaille la hiérarchie des exceptions (voyez l'adresse
+   [[https://docs.python.org/3.7/library/exceptions.html]]). Vous y
+   remarquez par exemple que =BaseException= est l'exception de plus
+   haut niveau. La plupart des exceptions sont dérivées de
+   =Exception=. Si vous travaillez sur des opérations mathématiques,
+   vous pouvez utiliser l'exception générique =ArithmeticError=, ou la
+   plus spécifique =ZeroDivisionError=.
+
+   Python évalue les clauses =except= dans l'ordre où elles
+   apparaissent dans le fichier du code source. La première rencontrée
+   est examinée en premier, la seconde vient après, et ainsi de
+   suite. Les étapes qui suivent vous aident à examiner un exemple
+   destiné à démontrer l'importance qu'il y a à utiliser un ordre
+   correct pour le traitement des exceptions.
+
+   #+BEGIN_SRC python
+     try:
+	 Value1 = int(input("Tapez le premier nombre : "))
+	 Value2 = int(input("Tapez le second nombre : "))
+	 Output = Value1 / Value2
+     except ValueError:
+	 print("Vous devez taper un nombre entier !")
+     except KeyboardInterrupt:
+	 print("Vous avez appuyé sur Ctrl+C !")
+     except ArithmeticError:
+	 print("Une erreur de math non définie s'est produite.")
+     except ZeroDivisionError:
+	 print("Tentative de division par zéro !")
+     else:
+	 print(Output)
     
+   #+END_SRC
+
+* Imbriquer des exceptions   
+
+  Vous aurez parfois besoin de placer un gestionnaire d'exception à
+  l'intérieur d'un autre. Ce processus est appelé
+  /imbrication/. Lorsque vous procédez ainsi, Python essaie d'abord de
+  trouver un gestionnaire d'exception dans les niveaux les plus bas,
+  puis il remonte vers les couches extérieures. Vous pouvez empiler
+  autant de niveaux que vous le souhaitez pour rendre votre code aussi
+  sûr qu'il est possible. 
+
+  L'une des raisons les plus courantes d'utilisation de cette
+  technique est la construction d'une partie de code dans laquelle
+  vous demandez à l'utilisateur de saisir quelque chose. Vous placez
+  ensuite la réponse obtenue dans une boucle pour vous assurer que
+  vous avez bien obtenu l'information demandée. C'est ce qu'illustrent
+  les étapes qui suivent :
+
+  #+BEGIN_SRC python
+    TryAgain = True
+
+    while TryAgain:
+
+	try:
+	    Value = int(input("Tapez un nombre entier : "))
+	except ValueError:
+	    print("Vous devez taper un nombre entier !")
+
+	    try:
+		DoOver = input("Essayer à nouveau (o/n) ? ")
+	    except:
+		print("OK, à la prochaine fois !")
+		TryAgain = False
+	    else:
+		if (str.upper(DoOver) == "N"):
+		    TryAgain = False
+
+	except KeyboardInterrupt:
+	    print("Vous avez appuyé sur Ctrl+C !")
+	    print("À la prochaine fois !")
+	    TryAgain = False
+	else:
+	    print(Value)
+	    TryAgain = False
+  #+END_SRC
+
+
+  Ce code commence par créer une boucle de saisie. Cette méthode est
+  en fait assez courante, car vous ne voulez pas que l'application se
+  termine chaque fois qu'il y a une erreur de saisie. Cette boucle est
+  simplifiée, et, normalement, vous devriez créer une fonction séparée
+  pour ce code.
+
+  Lorsque la boucle démarre, l'application demande à l'utilisateur de
+  taper un nombre entier. Il peut s'agir de n'importe quelle valeur
+  entière. Si l'utilisateur entre un nombre qui n'est pas un entier,
+  ou encore s'il appuie sur Ctrl + C, Cmd + C ou une autre combinaison
+  de touches d'interruption, le code de gestion des exceptions se
+  déclenche. Sinon, l'application affiche la valeur fournie par
+  l'utilisateur, et la variable =TryAgain= est mise à la valeur
+  =False=, ce qui termine la boucle. 
+
+  Une exception =ValueError= peut se produire lorsque l'utilisateur
+  fait une erreur. Comme vous ne connaissez pas la raison de celle-ci,
+  vous devez demander à l'utilisateur s'il veut faire une nouvelle
+  tentative. Bien entendu, répéter cette procédure pourrait générer
+  une autre exception. Le bloc de code intérieur =try...except= gère
+  cette seconde saisie. 
+
+  Notez l'emploi de la fonction =str.upper()= à la suite de la
+  question posée à l'utilisateur. Elle permet de répondre par o ou par
+  O sans avoir à distinguer entre minuscule et majuscule. Chaque fois
+  que vous demandez à l'utilisateur de répondre de cette manière,
+  convertir ce qu'il tape en majuscule est toujours une bonne idée,
+  car cela vous permet de n'effectuer qu'une seule comparaison et
+  réduit le nombre d'erreurs potentielles. 
+
+  L'exception =KeyboardInterrupt= affiche deux messages, puis quitte
+  automatiquement la boucle en affcetant à la variable =TryAgain= la
+  valeur =False=. Cette exception ne se produit que si l'utilisateur
+  appuie sur une certaine combinaison de touches destinée à terminer
+  l'application. Dans ce cas, cela signifie très certainement que
+  l'utilisateur ne veut pas continuer. 
+
+* Lever des exceptions  
+
+  Jusqu'ici, les exemples de ce chapitre ont réagi à des
+  exceptions. Quelque chose se produit, et l'application fournit le
+  support d'un gestionnaire d'exception pour traiter cet
+  événement. Cependant, dans certaines circonstances, vous ne savez
+  pas comment gérer tel ou tel événement problématique au cours du
+  processus de développement. Par exemple, vous ne pouvez pas traiter
+  une erreur à un certain niveau, et vous devez donc la transmettre à
+  un autre niveau. Dit autrement, il existe des situations dans
+  lesquelles votre application doit générer une exception. On appelle
+  souvent cela /lever une exception/ (ou parfois /propager une
+  exception/). Les sections qui suivent décrivent quelques scénarii
+  courants dans lesquels vous avez à lever des exceptions de manière
+  spécifique.
+
+** Lever des exceptions lors de conditions exceptionnelles
+
+   Cet exemple vous montre comment lever une exception simple, ne
+   réclamant rien de spécial.
+
+   #+BEGIN_SRC python
+     try:
+	 raise ValueError
+     except ValueError:
+	 print("Exception ValueError!")
+   #+END_SRC
+
+   Evidemment, vous n'allez jamais écrire du code tel que
+   celui-ci. Mais ce petit exemple vous montre comment les choses se
+   passent au niveau le plus basique. Dans ce cas, l'appel à =raise=
+   apparaît à l'intérieur d'un bloc =try...except=. Il fournit
+   simplement le nom de l'exception qui a été levée (ou
+   propagée). Vous pouvez également fournir des arguments dans la
+   sortie pour fournir des informations complémentaires. 
+
+   Remarquez que le bloc =try...except= ne contient pas de clause
+   =else=, simplement parce qu'il n'y a rien de particulier à faire
+   après l'appel. Même si cette forme est rare, elle est possible. La
+   clause =else= est optionnelle, même si vous devriez pratiquement
+   toujours en ajouter au moins une.
+
+** Passer des informations sur une erreur à l'appelant   
+
+   Python fournit un système de gestion des erreurs exceptionnellement
+   souple en ce que vous pouvez passer des informations à l'/appelant/
+   (le code qui appelle votre code) quelle que soit l'exception
+   concernée. Bien entendu, cet appelant peut ne pas savoir que cette
+   information est disponible, ce qui pose d'autres questions. Si vous
+   travaillez avec le code de quelqu'un d'autre et que vous ne savez
+   pas comment les choses se passent, vous pouvez toujours faire appel
+   à la technique décrite plus haut dans l'encadré << Obtenir la liste
+   des arguments d'une exception >>. 
+
+   Vous pouvez vous demander s'il est possible de communiquer de
+   meilleures informations lorsque vous travaillez avec l'exception
+   =ValueError=, plutôt qu'avec une exception fournie nativement par
+   Python. Les étapes qui suivent vous montrent comment modifier la
+   sortie pour obtenir un tel résultat. 
+
+   #+BEGIN_SRC python
+     try:
+	 Ex = ValueError()
+	 Ex.strerror = "La valeur doit être comprise entre 1 et 10."
+	 raise Ex
+     except ValueError as e:
+	 print("Exception ValueError!", e.strerror)
+   #+END_SRC
+
+* Créer et utiliser des exceptions personnalisées   
+
+  Python fournit une grande quantité d'exceptions standard que vous
+  devriez utiliser chaque fois qu'il est possible. Ces exceptions sont
+  incroyablement souples, et vous pouvez même les modifier en fonction
+  de vos besoins (dans des limites raisonnables et justifiées, bien
+  entendu). Par exemple, la section précédente vous montre comment
+  modifier une exception =ValueError= pour afficher des informations
+  complémentaires. Cependant, il peut arriver qu'aucune exception
+  standard ne réponde à votre problème. Par exemple, le nom de
+  l'exception ne dit rien à l'utilisateur qui le renseigne sur ce qui
+  se passe. Ou encore, vous travaillez sur une base de données
+  spécifique, ou encore avec un certain service. Dans de tels cas,
+  vous pouvez donc avoir besoin de créer une exception personnalisée. 
+
+  L'exemple de cette section illustre une méthode rapide pour créer
+  vos propres exceptions. Pour cela, vous devez créer une /classe/
+  utilisant comme point de départ une exception basée sur les
+  fonctionnalités offertes par l'exception =ValueError=. Elle rend
+  également l'utilisation de l'exception modifiée plus simple. 
+
+  #+BEGIN_SRC python
+    class CustomValueError(ValueError):
+	def __init__(self, arg):
+	    self.strerror = arg
+	    self.args = {arg}
+
+
+    try:
+	raise CustomValueError("La valeur doit être comprise entre 1 et 10.")
+    except CustomValueError as e:
+	print("Exception CustomValueError!", e.strerror)
+  #+END_SRC
+
+
+  Pour l'essentiel, vous retrouvez ici la fonctionnalité développée
+  dans le code de la section << Passer des informations sur une erreur
+  à l'appelant >>. Cependant, elle place la même erreur à la fois dans
+  =strerror= et dans =args=, de manière à ce que le développeur ait
+  accès aux deux (comme cela devrait normalement se produire).
+
+  Le code commence par créer une classe appelée
+  =CustomValueError=. Celle-ci prend comme point de départ la valeur
+  de l'exception =ValueError=. La fonction =__init__()= fournit le
+  moyen de créer une nouvelle instance de cette classe. Vous pourriez
+  à ce stade vous figurer une classe comme une sorte de plan
+  d'architecte, et l'instance comme le bâtiment construit à partir de
+  ce plan.
+
+  L'attribut =strerror= prend la valeur qui lui est directement
+  affectée, tandis que =args= la reçoit sous forme d'une chaîne. Le
+  membre =args= contient normalement un tableau de toutes les valeurs
+  d'exception. Cette procédure est donc standard, même si dans le cas
+  présent =args= ne contient qu'une seule valeur.
+
+  Le code servant à utiliser l'exception est ensuite considérablement
+  plus simple que la modification directement de la valeur de
+  =ValueError=. Tout ce que vous avez à faire, c'est d'appeler =raise=
+  avec le nom de l'exception et les arguments que vous voulez lui
+  passer. Tout cela tient en une ligne.
+
+
+* Utiliser la clause finally
+  
+  Normalement, vous voulez gérer une exception qui se produit sans
+  provoquer un plantage de l'application. Cependant, il peut arriver
+  que vous ne puissiez rien faire pour réparer les dommages. À ce
+  stade, votre objectif devient donc de faire en quelques sorte
+  atterrir l'application en douceur, en d'autres termes refermer les
+  fichiers qui ont pu être ouverts et effectuer d'autres tâches de
+  cette nature. Ceci permet d'éviter d'endommager des données ou de
+  laisser le système dans un état instable. Ce qui est le minimum
+  qu'on puisse demander à une application...
+  
+  La clause =finally= fait partie de cette stratégie. Vous l'utilisez
+  pour réaliser les tâches essentielles de dernière
+  minute. Normalement, cette clause est assez courte et utilise
+  uniquement des appels qui sont supposés pouvoir réussir sans poser
+  davantage de problèmes. Il est essentiel de refermer les fichiers,
+  de déconnecter l'utilisateur, d'effectuer quelques autres tâches
+  ménagères, puis de laisser l'application terminer avant qu'il
+  n'arrive quelque chose d'absolument terrible (comme un crash violent
+  du système). Cette nécessité étant posée, et bien mémorisée dans
+  votre esprit, les étapes qui suivent vous propose un exemple simple
+  d'utilisation de la clause =finally=.
+
+  #+BEGIN_SRC python
+    import sys
+
+    try:
+	raise ValueError
+	print("Exception levée.")
+    except ValueError:
+	print("Exception ValueError!")
+	sys.exit()
+    finally:
+	print("Prenez soin des détails de dernière minute.")
+
+    print("Ce code ne sera jamais exécuté.")    
+  #+END_SRC
+
+
+  Dans cet exemple, le code lève une exception =ValueError=. La clause
+  =except= s'exécute normalement dans ce genre de
+  circonstances. L'appel à =sys.exit()= signifie que l'application se
+  termine une fois l'exception gérée. Dans ce cas, la sortie de
+  l'application s'effectue directement, ce qui fait que la fonction
+  =print()= finale n'est jamais exécutée.
+
+  Le code associé à la clause =finally= est toujours exécuté. Le fait
+  que l'exception se produise ou non n'a aucune importance dans ce
+  cas. Le code que vous placez dans ce bloc doit donc avoir un
+  caractère tout à fait général, puisque vous voulez qu'il soit
+  exécuté systématiquement. Par exemple, si vous travaillez avec un
+  fichier, vous placerez ici le code qui le referme pour vous assurer
+  que les données qu'il contient seront en bon état sur le disque
+  dur. 
+
+  
