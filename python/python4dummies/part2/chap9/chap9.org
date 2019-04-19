@@ -1,0 +1,471 @@
+#+TITLE: Les erreurs ? Quelles erreurs ?
+#+AUTHOR: Laurent Garnier
+
+La plupart du temps, un code d'une certaine complexité comporte des
+erreurs. Si votre application se bloque soudain sans raison
+apparente, il y a une erreur. Voir appraître un message obscur est un
+autre type d'erreur. Cependant, nombre d'erreurs peuvent aussi se
+produire sans que vous ne receviez la moindre notification. Par
+exemple, une application pourrait effectuer les mauvais calculs sur
+une série de valeurs qui lui ont été fournies, ce qui donnerait un
+résultat erroné. Dans ce cas, vous pourriez ne jamais vous en
+apercevoir, jusqu'à ce que quelqu'un vous en avertisse ou que vous
+soyez pris d'un sérieux doute. Les erreurs ont aussi besoin de
+cohérence. Vous pourriez par exemple en déclencher une dans certaines
+circonstances, disons par exemple quand le réseau est surchargé, et
+pas dans d'autres.  En bref, des peuvent survenir dans toutes sortes
+de situations et pour toutes sortes de raisons. Ce chapitre se
+consacre donc à cette importante question et il vous explique comment
+réagir lorsque votre application rencontre des erreurs. 
+
+Il n'y a rien de surprenant à ce que des erreurs surgissent. Les
+applications sont écrites par des humains, et les humains font des
+erreurs. La plupart des développeurs appellent ces erreurs des
+/exceptions/, dans le sens où il s'agit d'exception à la
+règle. Puisque des exceptions se produisent dans les applications,
+vous devez les détecter et y réagir dès que possible. Détecter et
+traiter une exception relève de ce que l'on appelle un /gestionnaire
+d'erreur/, ou encore un /gestionnaire d'exception/ (on parle aussi de
+système de gestion d'exception, ou d'erreur). Pour détecter
+correctement des erreurs, vous avez besoin de savoir quelle peut en
+être la cause, et pourquoi elles se produisent. Pour cela, vous devez
+/intercepter/ l'exception, autrement dit l'examiner et si possible en
+faire quelque chose. Nous découvrirons donc aussi comment gérer des
+exceptions dans vos propres applications. 
+
+Parfois, votre code détecte une erreur dans l'application. Lorsque
+cela se produit, vous devez /lever/ (raise) ou /propager/ (throw) une
+exception. Vous pouvez rencontrer ces deux termes (avec des variantes)
+pour désigner à peu près la même chose : votre code a rencontré une
+erreur qu'il ne peut pas gérer, et il passe une information sur cette
+erreur à une autre pièce de code, le gestionnaire d'exception, qui va
+interpréter, traiter et avec de la chance réparer cette erreur. Même
+si Python possède des tas de messages génériques qui couvrent la
+plupart des situations, certaines sont tout à fait spéciales, ce qui
+peut vous obliger à utiliser des messages d'erreur personnalisés (sans
+compter que ceux de Python sont tous en anglais). Par exemple, vous
+pourriez avoir besoin de fournir un support particulier pour une
+application de base de données, chose que Python ne couvre pas par
+défaut. Il est important de savoir quand il est nécessaire de traiter
+les exceptions spéciales, de manière à ce que chaque partie de
+l'application sache comment gérer l'exception. Nous reviendrons sur
+tous ces sujets dans ce chapitre. 
+
+* Savoir pourquoi Python ne vous comprend pas
+
+  Les langages de programmation comme les ordinateurs sont des choses
+  inanimées. Ils n'ont aucun état d'âme, aucun désir, aucune volonté
+  personnelle. De plus, ils ne pensent pas. Ils acceptent à peu près
+  littéralement ce que les programmeurs leurs disent de faire. Et
+  c'est tout. Et c'est en même temps parfois très frustrant quand on a
+  soudain l'impression (fausse) que le langage de programmation ou
+  l'ordinateur semble vaquer à ses propres occupations sans se soucier
+  du reste...
+
+  Ni Python ni l'ordinateur ne sont capables de comprendre ce que vous
+  voulez faire lorsque vous tapez du code. Ils suivent vos
+  instructions en les prenant au pied de la lettre. Par exemple, vous
+  n'avez /pas/ demandé à Python de supprimer un fichier de données, à
+  moins qu'une certaine situation absurde se produise. Mais, si vous
+  n'avez pas très clairement explicité les choses, il n'est pas
+  impossible que Python supprime le fichier de données, situation
+  absurde ou pas. Lorsque ce genre de chose se produit, on dit
+  généralement que l'aplication /bug/. Mais, en réalité, il s'agit
+  simplement d'erreurs de codage qui pourraient être détectées et
+  corrigées en faisant appel à un /débogueur/. 
+
+  Des erreurs se produisent bien souvent dans des situations où le
+  développeur fait certaines suppositions qui se révèlent
+  fausses. Bien entendu, ceci comprend les réactions des utilisateurs,
+  qui ne se soucient probablement pas du tout de l'extrême niveau de
+  soin que vous avez pris pour écrire une application
+  parfaite. L'utilisateur entre une mauvaise donnée. Python, qui n'est
+  en rien concerné par ces problématiques, traite cette donnée, même
+  si votre intention initiale était toute autre. Python ne comprend
+  rien à ces questions existentielles. Il effectue son travail en
+  fonction des règles que vous avez définies. Ce qui impique qu'il
+  vous appartient, et uniquement à vous, de créer des règles qui
+  protègent les utilisateurs d'eux-mêmes. 
+
+  Python n'est ni proactif ni créatif. Ce sont des qualités qui
+  n'existent que chez le développeur. Si une erreur réseau se produit,
+  ou si l'utilisateur fait quelque chose d'inattendu, Python est
+  incapable de créer une solution afin de résoudre ce problème. Il ne
+  fait qu'exécuter du code. Si vous n'avez rien de prévu pour gérer
+  une telle situation, il est probable que l'application plantera sans
+  autre forme de procès (et éventuellement les données de
+  l'utilisateur avec). Bien entendu, un développeur ne peut pas
+  anticiper tous les cas possibles. C'est pourquoi la plupart des
+  applications complexes comportent des erreurs (en l'occurrence, il
+  s'agirait d'une erreur par omission). 
+
+  Ne vous bercez d'aucune illusion : écrire un code parfaitement à
+  l'épreuve des balles est juste une idée absurde. Vous devez être
+  totalement convaincu qu'un certain nombre de /bugs/ se produiront
+  dans la durée de vie de vos applications, que la nature et les
+  utilisateurs continueront à effectuer des actions auxquelles
+  personne n'avait pensé, et que même le meilleur programmeur du monde
+  ne peut pas anticiper toutes les conditions d'erreur possible. En
+  d'autres termes, supposez /toujours/ que votre application est
+  sujette à des erreurs qui vont provoquer des exceptions. C'est en
+  raisonnant ainsi que vous pourrez créer des applications non pas
+  parfaites, mais plus efficaces et plus fiables. 
+
+* Prendre en considération les sources d'erreurs
+  
+  Vous pourriez peut-être deviner les sources d'erreurs potentielles
+  de votre application en lisant dans le marc de café, mais vous vous
+  doutez bien que cela risque de ne pas être très efficace. En fait,
+  les erreurs se répartissent en catégories bien définies qui vous
+  aident, du moins dans une certaine mesure, à mieux comprendre quand
+  et où elles sont susceptibles de se produire. Les deux catégories
+  principales sont les suivantes : 
+  + les erreurs qui surgissent à un moment spécifique 
+  + les erreurs qui sont d'un type spécifique
+  
+  
+  Les sections qui suivent explicitent ces notions. Le concept
+  général, c'est que vous avez besoin de réfléchir à la classification
+  des erreurs de manière à commencer à les trouver et les réparer dans
+  vos applications avant même qu'elles ne deviennent un problème. 
+
+** Erreurs surgissant à un moment spécifique  
+
+   Ce type d'erreur se décompose en deux catégories principales : 
+   + au moment de la compilation
+   + au moment de l'exécution
+
+   
+   Dans tous les cas, votre application va mal. Voyons donc cela de
+   plus près.
+
+** Erreur de compilation   
+
+   Une telle erreur se produit au moment où vous demandez à Python
+   d'exécuter votre application. Avant même de commencer, il doit
+   interpréter le code et le transcrire dans une forme compréhensible
+   par l'ordinateur. L'ordinateur, de son côté, ne connaît qu'une
+   langue extrêmement binaire, et de surcroît liée à son processeur et
+   à son architecture. Si les instructions que vous avez saisies sont
+   mal formées, ou si des informations indispensables manquent, Python
+   ne peut pas effectuer la conversion dans le langage de la
+   machine. Il renvoie donc une erreur que vous devez réparer pour que
+   l'application puisse être lancée. 
+
+   Fort heureusement, les erreurs de ce type sont les plus faciles à
+   localiser et à fixer. Du fait que l'application ne peut même pas se
+   lancer, l'utilisateur ne voit jamais ce genre d'erreur. C'est à
+   vous de résoudre le problème en corrigeant le code erroné. 
+
+   L'apparence d'une erreur de compilation devrait attirer votre
+   attention sur le fait qu'il existe d'autres fautes de frappe ou
+   d'autres omissions dans le code. Il est toujours bénéfique de
+   contrôler les lignes de code environnantes afin de s'assurer qu'il
+   n'y a pas d'autres problèmes potentiels qui pourraient ne se
+   révéler qu'au moment de l'exécution.
+
+** Erreur d'exécution
+
+   C'est fait. Python a compilé votre code et lancé l'application. Et
+   c'est à partir de là que peut se produire une erreur
+   d'exécution. De telles erreurs peuvent avoir des causes variées, et
+   certaines sont plus difficiles à cerner que d'autres. Vous savez
+   qu'une erreur d'exécution s'est produite si l'application cesse
+   brusquement de fonctionner en affichant une exception, ou encore si
+   l'utilisateur se plaint de recevoir une sortie erronée, ou bien
+   encore de l'instabilité de l'application. 
+
+   Toutes les erreurs d'exécution ne produisent pas une
+   exception. Certaines peuvent se traduire par un gel du
+   fonctionnement, par une sortie qui semble erratique, ou encore par
+   des données endommagées. Certaines peuvent aussi affecter d'autres
+   applications, voire même la plate-forme sur laquelle le code est
+   exécuté Votre responsabilité est donc engagée en tant que
+   développeur !
+
+   De nombreuses erreurs d'exécution sont provoquées par des fautes de
+   frappe, voire des oublis de saisie. Par exemple, mal orthographier
+   le nom d'une variable empêchera Python de placer la bonne valeur au
+   bon endroit (de ce point de vue, la confusion entre majuscule et
+   minuscule est rédhibitoire). Oublier un argument facultatif, mais
+   nécessaire dans l'appel à une méthode peut aussi provoquer des
+   problèmes. En général, il est possible de localiser de telles
+   erreurs en faisant appel aux services d'un débogueur, ou plus
+   simplement en relisant votre code ligne par ligne. 
+
+   Les erreurs d'exécution peuvent également être provoquées par des
+   événements extérieurs non associés à votre code. Par exemple,
+   l'utilisateur entre une information incorrecte et que l'application
+   ne sait pas traiter, ce qui provoque une exception. Un problème sur
+   le réseau peut tout aussi bien rendre des données
+   inaccessibles. Parfois aussi, c'est matériel de l'ordinateur qui a
+   une défaillance, ce qui provoque une erreur non repérable. Tous ces
+   exemples forment des /erreurs par omission/, que votre application
+   pourrait être en mesure de récupérer si votre application contient
+   le code nécessaire à cela. Il est important de prendre en compte
+   ces différents cas lorsque vous vous concevez votre application. 
+
+** Distinguer les types d'erreurs   
+
+   Connaître les types d'erreurs vous aide à comprendre où rechercher
+   d'éventuels problèmes dans une application. Les exceptions
+   fonctionnent comme de nombreuses autres choses de la vie. Par
+   exemple, vous savez que les appareils électroniques ne marchent pas
+   sans une source d'alimentation électrique. Si vous essayez
+   d'allumer votre téléviseur, et qu'il ne se passe rien, la première
+   chose à faire est de vérifier que son cordon d'alimentation est
+   correctement branché dans la prise de contact. 
+
+   Comprendre les types d'erreurs vous aide à localiser celles-ci plus
+   vite, plus tôt et plus efficacement. Et donc aussi à commettre
+   moins d'erreurs avec les erreurs. Les meilleurs développeurs savent
+   bien qu'il est toujours plus facile de corriger les problèmes
+   pendant le développement d'une application que lorsqu'elle est en
+   service, car les utilisateurs sont par essence impatients, et ils
+   veulent que les problèmes soient réparés immédiatement et
+   correctement. De plus, en prenant cette question à bras le corps
+   dès le début du cycle de développement limite la quantité de code à
+   vérifier et à corriger. 
+
+   Toute l'astuce consiste à savoir où regarder. Python (comme la
+   plupart des autres langages de programmation) distingue ces types
+   d'erreurs : 
+   + syntaxiques
+   + sémantiques
+   + logiques
+
+   Les sections qui suivent vont préciser cela en procédant par ordre
+   de difficulté croissante.
+
+*** Erreurs de syntaxe
+    
+    Chaque fois que vous faites une faute de frappe quelconque, vous
+    commettez une erreur de syntaxe. Bien souvent, celles-ci sont
+    plutôt faciles à détecter, car le code ne s'exécute tout
+    simplement pas. L'interpréteur peut même vous guider en affichant
+    un message d'erreur qui vous signale l'emplacement de
+    l'erreur. Cependant, certaines erreurs de syntaxe sont très
+    délicates à découvrir. Ainsi, Python est extrêmement sensible à la
+    capitalisation des caractères. Il suffit donc de mettre une
+    majuscule à la place d'une minuscule (ou l'inverse) dans une seule
+    occurrence d'une variable pour que celle-ci ne fonctionne pas
+    comme elle le devrait. Localiser ce genre de faute peut parfois
+    être un véritable challenge.
+
+    La plupart des erreurs de syntaxe sont délcenchées lors de la
+    compilation, et l'interpréteur les pointe pour vous. Dans ce cas,
+    la correction est facilitée, puisque l'interpréteur vous dit
+    généralement ce qu'il faut modifier, et ce avec une précision
+    considérable. Même si ce n'est pas le cas, les erreurs de syntaxe
+    empêchent l'application de fonctionner correctement, et vous le
+    retrouvez au cours des phases de test. Peu d'erreurs de ce type
+    devraient persister au-delà, du moins si vous avez testé
+    complètement votre application.
+
+*** Erreurs sémantiques
+
+    Lorsque vous créez une boucle qui s'exécute plus de fois qu'il
+    n'est nécessaire, vous ne recevez en général aucune information de
+    l'application vous signalant qu'il y a une erreur. Du point de vue
+    de l'application, tout semble normal, mais des boucles
+    supplémentaires peuvent provoquer toutes sortes d'erreurs dans les
+    données. Vous n'avez pas fait de faute de frappe, vous avez
+    provoqué sans le vouloir une /erreur sémantique/.
+
+    Les erreurs sémantiques sont dues au fait que l'idée sous-jacente
+    à une série d'étapes est erronée. Le résultat est incorrect, même
+    si le code semble se dérouler normalement. De telles erreurs sont
+    parfois ardues à localiser, et un bon débogueur est bien souvent
+    votre meilleur allié.
+
+*** Erreurs de logique
+
+    Certains ne font pas la distinction entre erreurs sémantiques et
+    erreurs de logique, mais ils ont tort. Une erreur sémantique se
+    produit lorsque le code est pour l'essentiel correct, mais que
+    l'implémentation est mauvaise (comme une boucle qui s'exécute une
+    fois de trop). Les erreurs de logique sont dues à un défaut de
+    raisonnement du développeur. Cela se produit souvent lors de
+    l'emploi incorrect d'un opérateur relationnel ou logique. Mais
+    elles peuvent aussi être dues à bien d'autres causes. Par exemple,
+    un programmeur pense que les données qu'il traite sont toujours
+    stockées sur le disque dur local. Et l'application risque donc
+    fort de se comporter d'une manière inhabituelle si elle essaie de
+    charger des données à partir d'un disque réseau. 
+
+    Les erreurs logiques sont assez difficiles à corriger, puisque le
+    problème ne se trouve pas dans le code, mais dans la conception
+    qui a amené à l'écrire. C'est le processus mental de développement
+    qui est fautif. Et donc la personne qui est responsable de cette
+    erreur est la moins bien placée pour la localiser. Avoir une
+    seconde paire d'yeux (disons, un partenaire avisé) est donc
+    toujours une bonne idée. De même, formaliser avec précision les
+    spécifications d'une application aidera beaucoup, car cela
+    permettra de mieux suivre la logique cachée derrière les tâches
+    que cette application doit réaliser. 
+
+* Intercepter les exceptions
+
+  D'un point de vue général, un utilisateur ne devrait jamais voir un
+  message ou une boîte de dialoguqe dont l'affichage est provoqué par
+  une exception. L'application devrait toujours intercepter cette
+  exception, et la traiter avant qu'elle n'arrive jusqu'à
+  l'utilisateur. Bien entendu, le monde réel n'est pas aussi simple
+  que cela, et certaines exceptions arrivent à passer à travers les
+  mailles du filet. Pour autant, le but est d'essayer d'intercepter
+  toute exception potentielle lors du développement d'une
+  application. C'est le sujet des sections qui suivent. 
+
+** Comprendre les exceptions intégrées à Python
+   
+   Python est accompagné d'une grande quantité d'exceptions
+   prédéfinies, bien plus que vous ne pourriez l'imaginer. Vous pouvez
+   en voir la liste en consultant l'adresse
+   [[https://docs.python.org/3.7/library/exceptions.html]]. La
+   documentation partage la liste des exceptions en plusieurs
+   catégories. En voici un rapide aperçu : 
+   + Classes de base :: elles fournissent les blocs de constructions
+        essentiels pour les autres exceptions (par exemple,
+        l'exception judicieusement appelée =Exception=). Vous pouvez
+        cependant voir directement certaines d'entre elles lorsque
+        vous travaillez avec une application (par exemple,
+        =ArithmeticError=).
+   + Exceptions dites concrètes :: certaines applications peuvent
+        rencontrer des erreurs difficiles peuvent rencontrer des
+        erreurs difficiles à résoudre parce qu'il n'existe pas de bon
+        procédé pour les traiter, ou parce qu'elles signalent un
+        événement que l'application doit gérer elle-même. Par exemple,
+        si un système vient à manquer de mémoire, Python génère une
+        exception =MemoryError=. Résoudre ce problème est difficile,
+        car il n'est pas toujours possible de libérer de la mémoire
+        occupée par d'autres programmes. Lorsque l'utilisateur appuie
+        sur une touche d'interruption (comme Ctrl+C), Python génère
+        une exception =KeyboardInterrupt=. C'est bien à l'application
+        de réagir face à cette situation avant de passer à d'autres
+        tâches. 
+   + Exceptions de l'OS :: le système d'exploitation peut générer des
+        erreurs que Python passe ensuite à votre application. Si, par
+        exemple, celle-ci tente d'ouvrir un fichier qui n'existe pas,
+        le système génère une erreur =FileNotFoundError=. 
+   + Avertissements :: Python essaie aussi parfois de vous avertir
+                       d'un événement inattendu, ou d'actions qui
+                       pourraient par la suite engendrer des
+                       erreurs. Par exemple, une tentative
+                       inappropriée d'utiliser une certaine ressource,
+                       comme une icône, va déclencher l'exception
+                       =ResourceWarning=. Il s'agit bien d'un simple
+                       avertissement, pas d'une erreur. Vous n'êtes
+                       donc pas verbalisé. Vous pouvez l'ignorer, mais
+                       vous devez savoir qu'une erreur peut survenir
+                       plus tard.
+
+
+** Gérer les exceptions de base
+
+   Pour gérer les exceptions, vous devez indiquer votre intention à
+   Python puis fournir le code qui va effectuer ce genre de
+   tâche. Vous avez pour cela de nombreuses méthodes à votre
+   disposition. Nous allons dans ce qui suit commencer par le plus
+   simple pour aller vers des méthodes plus complexes, mais aussi plus
+   souples et plus puissantes. 
+
+*** Gérer une unique exception
+
+    #+BEGIN_SRC python
+      try:
+	  value = int(input("Tapez un nombre entre 1 et 10 : "))
+      except ValueError:
+	  print("Vous devez taper un nombre entre 1 et 10 !")
+      else:
+
+	  if (value > 0) and (value <= 10):
+	      print("Vous avez tapé : ", value)
+	  else:
+	      print("La valeur que vous avez tapée est incorrecte !")
+    #+END_SRC
+
+    Le code qui est placé à l'intérieur du bloc =try= gère ses propres
+    exceptions. Dans ce cas, cette gestion signifie obtenir de
+    l'utilisateur une saisie via l'appel à =int(input())=. Si une
+    exception se produit à l'extérieur de ce bloc, elle ne sera pas
+    gérée par celui-ci. Bien entendu, du coup, la tentation pourrait
+    être grande de placer tout le code dans un seul bloc =try=. Mais
+    ce serait en fait une très mauvaise idée. Un bon gestionnaire
+    d'exception doit être petit et spécifique à un certain problème
+    potentiel pour qu'il soit plus facile de localiser et donc de
+    corriger celui-ci.
+
+    Le bloc =except= recherche une exception spécifique, dans ce cas
+    =ValueError=. Si l'utilisateur provoque une exception =ValueError=
+    en tapant par exemple *Bonjour* au lieu d'une valeur numérique, ce
+    bloc d'exception particulier est exécuté. Si l'utilisateur génère
+    une autre exception, le bloc =except= ne pourra pas la gérer.
+
+    Le bloc =except= contient tout le code qui est exécuté si le bloc
+    de code =try= génère une exception. Tout le reste est lié à =try=,
+    car vous ne voulez exécuter ce bloc que si l'utilisateur saisit
+    une valeur correcte, autrement dit un nombre compris entre 1
+    et 10.
+
+*** Utiliser la clause except sans exception
+
+    Vous pouvez créer dans Python un gestionnaire d'exception
+    générique, et donc sans spécifier une exception particulière. Dans
+    la plupart des cas, il y a quelques bonnes raisons pour fournir
+    une exception spécifique :
+    + éviter de masquer une exception que vous n'avez pas prise en
+      compte lors de la conception de l'application
+    + s'assurer que d'autres savent précisément quelles exceptions
+      votre application va gérer
+    + gérer les exceptions correctement en utilisant un code adapté à
+      chacune d'elle
+
+
+    Cependant, vous avez parfois besoin de quelque chose de plus
+    générique, par exemple si vous utilisez une bibliothèque externe
+    ou si vous interagissez avec un service externe. 
+
+    #+BEGIN_SRC python
+      try:
+	  value = int(input("Tapez un nombre entre 1 et 10 : "))
+      except:
+	  print("Vous devez taper un nombre entre 1 et 10 !")
+      else:
+
+	  if (value > 0) and (value <= 10):
+	      print("Vous avez tapé : ", value)
+	  else:
+	      print("La valeur que vous avez tapée est incorrecte !")
+    #+END_SRC
+
+
+*** Exceptions et arguments     
+
+    La plupart des exceptions ne fournissent pas d'arguments
+    (c'est-à-dire une liste de valeurs que vous pouvez tester pour
+    obtenir des informations supplémentaires). Une exception est ou
+    n'est pas, là est la question. Cependant, quelques rares
+    exceptions fournissent des arguments. Vous les verrez plus loin
+    dans ce livre. Ces arguments vous en disent plus sur l'exception
+    et ils fournissent les détails dont vous avez besoin pour corriger
+    le problème. 
+
+    Pour couvrir tout de même l'éventail des possibilités, cette
+    section vous propose un exemple simple qui génère une exception
+    avec un argument. 
+
+    #+BEGIN_SRC python
+      import sys
+
+      try:
+	  File = open('myfile.txt')
+      except IOError as e:
+	  print("Erreur lors de l'ouverture du fichier ! \r\n" +
+		"Numéro de l'erreur : {0}\r\n".format(e.errno) +
+		"Texte de l'erreur : {0}".format(e.strerror))
+      else:
+	  print("Le fichier a bien été ouvert.")
+	  File.close();    
+    #+END_SRC
+
+    
