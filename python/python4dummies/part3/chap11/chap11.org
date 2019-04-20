@@ -1,0 +1,306 @@
+#+TITLE: Travailler avec les chaînes de caractères
+#+AUTHOR: Laurent Garnier
+
+Votre ordinateur ne comprend rien aux chaînes de caractères. C'est
+juste un fait. Les ordinateurs connaissent les nombres, pas les
+chaînes. Si vous voyez une suite de caractères à l'écran, lui ne voit
+que des valeurs numériques. Cependant, les êtres humains, eux, voient
+des textes et vos applications doivent être capables de convertir les
+uns dans les autres. Heureusement, Python facilite beaucoup ce genre
+de travail. Il transcrit vos chaînes de caractères en valeurs
+compréhensibles par l'ordinateur, et réciproquement. 
+
+Pour que vos chaînes de caractères soient utiles, vous devez pouvoir
+les manipuler. Bien entendu, cela signifie que vous pouvez les
+décomposer ou encore rechercher une certaine information. Ce chapitre
+décrit donc les méthodes dont vous disposez pour construire des
+chaînes de caractères, les décomposer, ou encore en utiliser les
+parties dont vous avez besoin. Tout cela constitue une partie
+importante de vos applications, car vos utilisateurs dépendent
+énormément de ce genre de travail (même si leur ordinateur n'a aucune
+idée particulière de ce qui se passe).
+
+Une fois que votre chaîne est correctement mise en forme, vous devez
+la présenter d'une manière plaisante. Là encore, ce n'est pas le
+problème de l'ordinateur, mais le vôtre. Savoir comment formater la
+présentation des chaînes de caractères est important, car vos
+utilisateurs ont besoin de voir des informations dans un format qu'ils
+sont capables de lire. Lorsque vous aurez terminé la lecture de ce
+chapitre, vous devriez pouvoir créer, manipuler et formater des
+chaînes de caractères de manière à ce que vos utilisateurs puissent
+lire les bonnes informations au bon moment.
+
+* Comprendre que les chaînes sont différentes 
+
+  La plupart des aspirants développeurs (et même des moins aspirants)
+  ont parfois du mal à comprendre que les ordinateurs ne connaissent
+  que deux choses : les 0 et les 1. Même les nombres les plus grands
+  ne sont faits que de cela, de 0 et de 1. Les comparaisons
+  n'utilisent rien d'autre. Pas plus que les modifications dans les
+  données. En résumé, un ordinateur ne sait rien de ce qu'est une
+  chaîen de caractères. C'est pourquoi ce sujet est un peu plus
+  compliqué que la plupart des autres...
+
+  L'informatique ne sait rien des chaînes. Celles-ci sont faites de
+  séquences de caractères individuels qui sont en réalité des valeurs
+  numériques du point de vue de l'ordinateur. Le fait de travailler
+  avec Python n'y change rien. C'est pourquoi les sections qui suivent
+  sont aussi importantes. Elles vous aideront à mieux comprendre en
+  quoi les chaînes sont si particulières, et donc à moins vous prendre
+  la tête par la suite...
+
+** Définir une chaîne de caractères en utilisant des nombres
+
+   Pour créer un caractère, vous devez d'abord définir sa relation
+   numérique. Plus important encore, tout le monde devrait être
+   conscient que lorsqu'un certain nombre apparaît dans une
+   application et qu'il est considéré comme étant un caractère, alors
+   ce nombre subit une certaine conversion. L'une des méthodes les
+   plus couramment admises est appelée ASCII (American Standard Code
+   for Information Interchange). De ce fait, Python utilise ce code
+   ASCII pour transformer la valeur 65 en la lettre A. Vous pouvez
+   trouver une table d'équivalence à l'adresse
+   [[http://www.asciitable.com/]]
+
+   Chaque caractère doit être associé à un code numérique
+   différent. La lettre A a pour code 65. Par contre, la minuscule /a/
+   a pour code 97. Pour l'ordinateur, ces deux lettres sont totalement
+   différentes, même si la plupart des gens ne les différencient pas.
+
+   Les valeurs utilisées dans ce chapitre sont présentées sous une
+   forme décimale. Pour autant, ce sont autant de 0 et de 1 du point
+   de vue de l'ordinateur. Par exemple, la lettre majuscule A vaut en
+   fait 01000001, et la minuscule a 01100001. Lorsque vous voyez sur
+   l'écran un A ou un a, l'ordinateur, de son côté, ne voit que des
+   valeurs binaires. 
+
+   Bien entendu, l'idéal serait de n'avoir besoin que d'un seul jeu de
+   caractères. De ce point de vue, il est évident que le système ASCII
+   est très limité (même si Python n'a pas de problèmes avec les
+   caractères accentués). C'est pourquoi il a été très largement
+   étendu avec l'introduction du système Unicode. Mais c'est là un
+   sujet qui dépasse largement nos besoins, et donc le cadre de ce
+   livre. 
+
+** Utiliser des caractères pour créer des chaînes
+
+   Python ne vous force pas à sauter au milieu de cerceaux pour créer
+   des chaînes de caractères. En fait, le mot /chaîne/ donne une bonne
+   idée de ce qui se passe. Imaginez par exemple que vous avez un tas
+   de perles et un fil. Vous enfilez une première perle, puis une
+   autre, et ainsi de suite jusqu'à ce que le collier soit
+   terminé. Vous finissez en mettant un fermoir, et c'est fait. Donc,
+   un collier est un ensemble de perles enfilées à la suite les unes
+   des autres (vous pouvez remplacer les perles par autre chose, c'est
+   juste pour l'image). 
+
+   Le même concept s'applique aux chaînes de caractères. Si vous voyez
+   affichée une phrase sur votre écran, vous savez qu'elle est
+   constituée de caractères individuels qui sont alignés les uns à la
+   suite des autres par le langage de programmation que vous
+   utilisez. Ce langage crée une structure qui contient tous les
+   caractères individuels, les uns mis à la suite des autres pour
+   former une phrase. C'est le langage, et non l'ordinateur, qui sait
+   qu'une certaine quantité de nombres (chaque nombre représentant un
+   certain caractère) définit une chaîne formant une phrase. 
+
+   Il est réellement important de savoir comment Python travaille avec
+   les caractères. En effet, la plupart des fonctionnalités qu'il
+   fournit dans ce domaine travaillent avec des caractères
+   individuels. De surcroît, là où vous voyez une phrase, Python, de
+   son côté, ne voit qu'une succession de nombres. 
+
+   Contrairement à ce qui se passe avec la plupart des langages de
+   programmation, Python vous permet de placer les chaînes de
+   caractères entre des guillemets ou des apostrophes. Par exemple, <<
+   Bonjour la Terre ! >> est une chaîne. Et 'Bonjour la Terre !' est
+   également une chaîne. Python supporte également des guillemets et
+   des apostrophes triplés qui vous permettent de créer des chaînes
+   occupant plusieurs lignes. Les étapes qui suivent explorent
+   certaines de ces fonctionnalités. 
+
+   #+BEGIN_SRC python
+     print('Bonjour la Terre (Apostrophes simples)!')
+     print("Bonjour la Terre (Guillemets)!")
+     print("""Ceci est une ligne multiple
+     utilisant trois guillemets,
+     mais vous pourriez également utiliser trois apostrophes simples.""")
+   #+END_SRC
+
+* Créer des chaînes comportant des caractères spéciaux   
+
+  Certaines chaînes contiennent des caractères spéciaux. Ils diffèrent
+  des caractères alphanumériques et des signes de ponctuation que vous
+  avez l'habitude d'utiliser. En fait, ils peuvent être répartis en
+  plusieurs catégories :
+  + Contrôle :: une application a besoin de pouvoir déterminer si un
+                caractère particulier n'est pas destiné à être
+                affiché, mais plutôt à contrôler l'affichage. Tous les
+                déplacements, par exemple, sont basés sur la position
+                du /point d'insertion/, le trait clignotant que vous
+                voyez sur l'écran quand vous tapez du texte. Par
+                exemple une tabulation ne se signale par rien de
+                visible. Pourtant, elle fait bien partie du texte. De
+                même, vous appuyez sur la touche Entrée lorsque vous
+                voulez passer à la ligne suivante. Là encore, ceci se
+                traduit par l'ajout d'un code numérique à votre
+                texte. 
+  + Dessin :: certains caractères ASCII permettent de réaliser des
+              formes graphiques simples. Voyez par exemple le site
+              [[http://www.asciiworld.com/]]
+  + Typographie :: nombre de caractères typographiques peuvent être
+                   affichés par un traitement de texte ou un éditeur
+                   évolué, comme le marqueur de fin de paragraphe, ou
+                   pied-de-mouche (¶)
+  + Autre :: selon le jeu de caractères que vous utilisez, les
+             possibilités sont pratiquement sans fin. Vous pouvez
+             trouver un caractère pour pratiquement tout ce dont vous
+             pouvez avoir besoin. Tout le problème est d'indiquer à
+             Python comment présenter ces caractères spéciaux.
+   
+
+  Lorsque l'on travaille avec des chaînes, même simples, il est
+  courant d'avoir à faire à des caractères de contrôle. Python fournit
+  pour cela des séquences dites d'échappement qui vous permettent de
+  définir directement de tels caractères spéciaux. 
+
+  Une /séquence d'échappement/ transforme une lettre, comme un a, en
+  lui donnant une nouvelle signification (comme un bip sonore). La
+  combinaison de la barre oblique inverse (=\=) et d'une lettre
+  (disons un a) sert à définir une telle séquence, ou code,
+  d'échappement. 
+
+  #+BEGIN_SRC python
+    print("Une partie de ce texte\r\nse trouve sur la ligne suivante.")
+    print("Ceci est un A avec un accent grave : \xC0.")
+    print("Ceci est un caractère dessiné : \u2562.")
+    print("Et voici un retour chariot : \266.")
+    print("Ceci est le signe de la division : \xF7.")
+  #+END_SRC
+
+
+* Sélectionner des caractères individuels
+
+  Vous savez maintenant que les chaînes sont formées de caractères
+  inidividuels, comme des perles enfilées dans un collier. Python vous
+  permet d'accéder directement à chaque perle, autrement dit à chaque
+  caractère. C'est une fonctionnalité importante, puisqu'elle vous
+  permet en particulier de créer de nouvelles chaînes à partir de
+  l'original. De plus, vous pouvez combiner plusieurs chaînes pour en
+  former une nouvelle. Le secret de cette technique, c'est l'emploi de
+  crochets droits. Il vous suffit d'indiquer le rang d'un caractère à
+  l'intérieur de ces crochets pour le récupérer, comme ceci :
+
+  #+BEGIN_SRC python
+    MyString = "Bonjour le monde"
+    print(MyString[0])
+  #+END_SRC
+
+  Dans cet exemple, la sortie serait le caractère B. Python débute en
+  effet la numérotation des caractères d'une chaîne en partant de zéro
+  pour le premier. Si vous tapez =print(MyString[1])=, la réponse sera
+  donc /o/, et ainsi de suite. 
+
+  Vous pouvez également récupérer une section de votre chaîne. Pour
+  cela, vous spécifiez la position de début et la celle de fin en les
+  séparant par un deux-points. Dans l'exemple ci-dessus, l'instruction
+  =print(MyString[11:16])= renverrait le mot /monde/. Le douzième
+  caractère de la chaîne, qui a le rang 11 du point de vue de Python,
+  est bien la lettre /m/.
+
+  #+BEGIN_SRC python
+    String1 = "Bonjour la Terre"
+    String2 = "Ici Python"
+
+    print(String1[0])
+    print(String1[0:5])
+    print(String1[:5])
+    print(String1[6:])
+
+    String3 = String1[:6] + String2[:6]
+    print(String3)
+
+    print(String2[:7]*5)
+  #+END_SRC
+
+* Trancher et couper les chaînes de caractères  
+
+  + =capitalize()= :: met la première lettre d'une chaîne en majuscule
+  + ~center(i^odbro, objmifpp^db=>> <<)~ :: centre la chaîne de
+       manière à ce qu'elle remplisse l'espace spécifié par
+       /largeur/. Si vous fournissez un caractère pour /remplissage/,
+       la fonction l'utilisera. Sinon, elle se sert par défaut du
+       caractère d'espacement pour obtenir la largeur voulue.
+  + ~expandtabs(q^fiibq^_=8)~ :: modifie les tabulations d'une chaîne
+       en remplaçant l'espacement par défaut (8) par la valeur
+       spécifiée dans /tailletab/
+  + ~isalnum()~ :: renvoie True si la chaîne a au mins un caractère et
+                   que tous les caractères sont alphanumériques
+
+  #+BEGIN_SRC python
+    MyString = "   Bonjour la Terre  "
+
+
+    print(MyString.upper())
+
+    print(MyString.strip())
+    print(MyString.center(21, "*"))
+    print(MyString.strip().center(21, "*"))
+
+    print(MyString.isdigit())
+    print(MyString.istitle())
+
+    print(max(MyString))
+
+    print(MyString.split())
+    print(MyString.split()[0])
+      
+
+  #+END_SRC		   
+
+* Localiser une valeur dans une chaîne  
+
+  #+BEGIN_SRC python
+    SearchMe = "La pomme est rouge et la luzerne est verte !"
+
+    print(SearchMe.find("est"))
+    print(SearchMe.rfind("est"))
+
+    print(SearchMe.count("est"))
+
+    print(SearchMe.startswith("La"))
+    print(SearchMe.endswith("La"))
+
+    print(SearchMe.replace("pomme", "voiture")
+	  .replace("luzerne", "camionnette"))
+  #+END_SRC
+
+* Formater les chaînes de caractères  
+
+  #+BEGIN_SRC python
+    Formatted = "{:d}"
+    print(Formatted.format(7000))
+
+    Formatted = "{:,d}"
+    print(Formatted.format(7000))
+
+    Formatted = "{:^15,d}"
+    print(Formatted.format(7000))
+
+    Formatted = "{:*^15,d}"
+    print(Formatted.format(7000))
+
+    Formatted = "{:*^15.2f}"
+    print(Formatted.format(7000))
+
+    Formatted = "{:*>15X}"
+    print(Formatted.format(7000))
+
+    Formatted = "{:*<#15x}"
+    print(Formatted.format(7000))
+
+    Formatted = "Une {1} {0} et un {2} {0}."
+    print(Formatted.format("bleu(e)", "voiture", "camion"))
+  #+END_SRC
+
+  
