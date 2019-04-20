@@ -1,0 +1,511 @@
+#+TITLE: Interagir avec les modules
+#+AUTHOR: Laurent Garnier
+
+Les exemples de ce livre sont petits, mais les fonctionnalités qu'ils
+proposent sont également extrêmement limitées. Même des applications
+simples du monde réel contiennent facilement des milliers de lignes de
+code. En fait, les applications qui contiennent des /millions/ de
+lignes de code sont relativement courantes. Imaginez maintenant que
+vous travaillez sur un fichier d'une taille suffisante pour comporter
+des millions de lignes de code. Vous n'arriverez très certainement
+jamais à rien, ou pas à grand-chose. Vous avez donc besoin d'organiser
+votre propre code en un ensemble de parties qui seront plus faciles à
+gérer, comme les exemples de ce livre. La solution offerte par Python
+consiste à placer tout ce code dans des groupes appelés /modules/. Les
+modules disponibles via des sources externes, et qui contiennent du
+code répondant à des besoins génériques, sont appelés des
+/bibliothèques/.
+
+Les modules sont stockés dans des fichiers séparés. Pour pouvoir
+utiliser un module, vous devez demander à Python de le charger dans
+l'application courante. Ce processus est appelé une
+/importation/. Vous importez donc un module ou une bibliothèque pour
+utiliser le code qu'il ou elle contient. Quelques exemples de ce livre
+ont déjà fait appel à cette technique en appelant l'instruction
+=import=. Dans ce chapitre, vous allez l'étudier plus en détail afin
+de savoir comment l'utiliser. Lors de son démarrage, Python crée un
+pointeur vers les bibliothèques de portée générale dont il se
+sert. Dans ce cas, il vous suffit d'ajouter une instruction =import=
+suivie du nom d'une bibliothèque, et Python le retrouvera
+directement. Mais il est toujours utile de savoir comment localiser
+ces fichiers sur le disque, pour le cas où vous auriez besoin de la
+liste déjà copieuse des extensions de Python.
+
+Le code des bibliothèques est généralement bien documenté. Certains
+développeurs pensent qu'ils n'ont pas besoin d'y jeter un coup d'oeil,
+ce qui n'est pas totalement faux. Cependant, la lecture de ce code
+peut être intéressante pour comprendre son fonctionnement. De plus,
+cela peut vous aider à progresser et à découvrir des techniques que
+vous n'auriez pas découvertes autrement. Ce genre de lecture est donc
+certes facultatif, mais cela peut grandement vous aider. 
+
+L'une des choses que vous avez besoin de savoir, c'est comment accéder
+à la documentation de Python concernant ses bibliothèques, et comment
+utiliser ces informations. Ce chapitre vous expliquera également ce
+qu'il faut connaître à ce sujet.
+
+* Créer des groupes de code
+
+  Il est important de regrouper des pièces de code de manière à rendre
+  celui-ci plus facile à utiliser, à modifier et à comprendre. Plus
+  une application prend de l'ampleur, et plus gérer tout ce code dans
+  un seul fichier devient difficile. À un certain stade, cela devient
+  même impossible tellement le fichier est devenu volumineux.
+
+  Le mot /code/ est employé ici dans un sens très large. Le groupement
+  de pièces de code peut concerner : 
+  + des classes
+  + des fonctions
+  + des variables
+  + du code exécutable
+
+
+  La collection des classes, des fonctions, des variables et du code
+  exécutable contenus dans un module est aussi connue sous le nom
+  d'/attributs/. Un modèle possède des attributs auxquels vous pouvez
+  accéder par leur nom. Les sections qui suivent précisent ce mode de
+  fonctionnement. 
+
+  Le code exécutable peut en fait écrit dans un autre langage que
+  Python. Par exemple, il est assez courant de trouver des modules qui
+  sont écrits en C++. La raison principale est que cela peut rendre
+  les applications Python plus rapides, moins gourmandes en ressources
+  et mieux adaptées à des plates-formes variées. Cependant, cela rend
+  en même temps les applications moins portables, à moins de disposer
+  d'une version de ce code exécutable pour chaque plate-forme à
+  laquelle votre application est destinée. De plus, ce << double
+  langage >> peut être plus difficile à gérer, puisque vous devez
+  collaborer avec des développeurs capables de parler chacune des
+  langues utilisées dans l'application.
+
+  La manière la plus courante de créer un module consiste à définir un
+  fichier distinct qui contient le code que vous voulez séparer du
+  reste de l'application. Par exemple, vous pourriez placer dans un
+  module une routine d'impression dont une application se sert à de
+  nombreuses reprises. Cette routine ne sert à rien seule, mais
+  uniquement lorsque l'application en a besoin. Il est donc utile de
+  la séparer du reste du code, et de plus intéressant de le faire
+  puisque vous pourriez en avoir besoin dans d'autres applications. La
+  possibilité de réutiliser du code est un des atouts majeurs des
+  modules.
+
+  Pour rendre les choses plus faciles à comprendre, les exemples de ce
+  chapitre font appel à un même module. Celui-ci ne fait rien de
+  sensationnel. Il sert juste de base pour montrer les principes
+  d'utilisation des modules. 
+
+  #+BEGIN_SRC python
+    def SayHello(Name):
+	print("Bonjour ", Name)
+	return
+
+    def SayGoodbye(Name):
+	print("Au revoir ", Name)
+	return
+  #+END_SRC
+
+  Ce code contient deux fonctions très simples, l'une pour dire
+  bonjour (=SayHello()=) et l'autre jour pour dire au revoir
+  (=SayGoodby()=). Dans les deux cas, vous fournissez juste un nom à
+  afficher. Une fois son message affiché, chaque fonction renvoie le
+  contrôle à l'appelant. Evidemment, les fonctions que vous allez
+  créer seront bien plus complexes, mais celles-ci suffisent au propos
+  de ce chapitre.
+
+
+* Importer des modules
+
+  Pour pouvoir utiliser un module, vous devez l'importer. Python place
+  le code des modules avec le reste de l'application en mémoire, comme
+  si vous aviez créé un très gros fichier. Rien n'est modifié dans le
+  fichier tel qu'il est enregistré sur le disque. Toutes les sources
+  restent bien distinctes. Seule change la manière dont Python << voit
+  >> le code.
+
+  Il y a deux façons d'importer des modules. Chaque technique est
+  employée dans des circonstances spécifiques :
+  + =import= :: Vous utilisez l'instruction =import= lorsque vous
+                voulez importer un module entier. C'est la méthode la
+                plus courante, car elle permet de gagner du temps et
+                ne nécessite qu'une seule ligne de code. Cependant,
+                cette approche consomme davantage de ressources
+                mémoire que la technique suivante. 
+  + =from...import= :: Vous utilisez cette instruction lorsque vous
+       voulez importer sélectivement des attributs spécifiques dans un
+       module. Ceci permet de gagner des ressources, mais au prix
+       d'une plus grande complexité. De plus, si vous essayez
+       d'utiliser un attribut qui n'a pas été importé, Python
+       provoquera une erreur. Certes, le module contient bien
+       l'attribut voulu, mais Python ne peut pas le voir, car vous
+       avez oublié de l'importer.
+
+* Changer le dossier courant de Python
+
+  Le dossier que Python utilise pour accéder au code influe sur les
+  modules que vous pouvez importer. Les bibliothèques de Python
+  lui-même sont toujours incluses dans la liste des emplacements
+  auxquels il peut accéder, mais Python ne sait rien du dossier dont
+  vous servez pour enregistrer votre code, à moins que vous ne lui
+  indiquiez où il doit regarder. La méthode la plus simple consiste à
+  modifier le dossier courant de Python pour qu'il pointe vers votre
+  propre code. Pour cela, procédez ainsi :
+  1. Ouvrez une fenêtre de Python en mode Shell
+  2. Tapez =import os= et appuyez sur Entrée
+  
+  Cette action importe la bibliothèque =os= de Python. Vous devez
+  réaliser cette importation afin de modifier l'emplacement de travail
+  utilisé pour ce chapitre.
+  
+  3. Tapez maintenant =os.chdir('~/Chap10')= et appuyez sur Entrée
+
+  Vous avez besoin d'utiliser le dossier qui contient les sources de
+  votre propre projet sur votre disque local. L'appel ci-dessus
+  utilise l'emplacement par défaut défini dans ce livre. Mais vous
+  devrez peut-être modifier ce chemin en fonction de votre propre
+  choix. Python peut maintnant accéder aux modules que vous allez
+  créer dans ce chapitre.
+
+  Maintenant que vous avez une meilleure idée de l'importation des
+  modules, il est temps d'y regarder de plus près. Les sections qui
+  suivent vont vous aider à vos familiariser avec les deux techniques
+  d'importation de Python.
+
+** Utiliser l'instruction import
+
+   L'instruction =import= est la méthode la plus courante pour
+   importer un module dans Python. Cette approche est rapide, et elle
+   s'assure que la totalité du contenu du module est disponible dans
+   Python. Voyons de plus près comment les choses se passent :
+   1. Ouvrez une fenêtre Python en mode Shell
+   2. Faites pointer Python vers le dossier qui contient votre code
+      source.
+   3. Tapez import MyLibrary et appuyez sur Entrée
+      
+      Python importe le contenu du fichier =MyLibrary.py=, celui que
+      vous avez créé plus haut dans ce chapitre. Ce module est
+      maintenant prêt à être utilisé.
+
+      Il est important de savoir que Python crée aussi un cache où il
+      stocke ce module. Ce cache est enregistré dans un sous-dossier
+      appelé =__psycache__=. Ouvrez le dossier de votre application,
+      et vous pourrez remarquer sa présence. Par contre, vous devrez
+      le supprimer si vous voulez éditer votre module. Sinon, Python
+      continuera à utiliser la version qu'il a mise en cache, et celle
+      que vous avez mise à jour.
+   4. Tapez dir(MyLibrary) et appuyez sur Entrée
+      
+      Vous allez voir un listing correspondant au contenu du module,
+      dont notamment les fonctions =SayHello()= et
+      =SayGoodbye()=. 
+   5. Tapez MyLibrary.SayHello('Jean-Pierre') et appuyez sur Entrée
+      
+      La fonction =SayHello()= affiche le texte attendu.
+
+      Vous devez faire précéder le nom de l'attribut, ici
+      =SayHello()=, de celui du module, =MyLibrary=. Les deux éléments
+      sont séparés par un point. Tout appel de ce type doit suivre ce
+      schéma.
+   6. Tapez maintenant MyLibrary.SayGoodbye('Marie') et appuyez sur
+      Entrée
+
+      Là encore, la fonction affiche le texte attendu
+   7. Refermez la fenêtre de Python
+
+** Utiliser l'instruction from...import
+
+   L'instruction =from...import= offre l'avantage de n'importer que
+   les attributs d'un module dont vous avez besoin. Elle consomme donc
+   moins de mémoire et de ressources système que l'instruction
+   =import=. De plus, elle rend l'utilisation du module un peu plus
+   facile, car certaines commandes, telles que =dir()=, montrent moins
+   d'informations, ou seulement celles dont vous avez vraiment
+   besoin. Vous obtenez donc uniquement ce que vous voulez et rien
+   d'autre. Les étapes qui suivent explicitent l'emploi de
+   l'instruction =from...import=.
+   1. Ouvrez une fenêtre Python en mode Shell
+   2. Faites pointer Python vers le dossier qui contient votre code
+      source.
+   3. Tapez from MyLibrary import SayHello et appuyez sur Entrée
+
+      Python importe la fonction =SayHello()= du module =MyLibrary=,
+      et uniquement celle-ci. 
+
+      Vous pouvez toujours importer la totalité du module si c'est ce
+      que vous voulez. Les deux techniques pour obtenir ce résultat
+      consistent soit à créer une liste d'attributs à importer en
+      séparant leur nom par une virgule (comme dans =MyLibrary import
+      SayHello, SayGoodbye=), soit à utiliser le caractère de
+      substitution * pour remplacer un nom quelconque
+   4. Tapez dir(MyLibrary) et appuyez sur Entrée
+      
+      Python va afficher un message d'erreur. Il n'importe en effet
+      que l'attribut que vous avez spécifié, et non le module
+      entier. Par conséquent, le module MyLibrary n'est pas en
+      mémoire. Seuls les attributs indiqués le sont.
+   5. Tapez dir(SayHello) et appuyez sur Entrée
+
+      Cette fois, vous voyez une liste d'attributs qui sont associés à
+      la fonction =SayHello()=. À ce stade, il n'est pas important de
+      comprendre comment ces attributs fonctionnent, mais vous en
+      utiliserez certainement plus tard dans ce livre.
+   6. Tapez SayHello('Claire') et appuyez sur Entrée.
+
+      Lorsque vous importez des attributs en utilisant l'instruction
+      =from...import=, il n'est pas nécessaire de faire précéder leur
+      nom de celui du module d'où ils proviennent. Ceci facilité donc
+      leur accès. 
+
+      L'emploi de l'instruction =from...import= peut également
+      provoquer des problèmes. Si deux attributs possèdent le même
+      nom, vous ne pouvez importer que l'un d'entre eux. L'instruction
+      =import= évite ce genre de collision, ce qui est important si
+      vous devez importer un grand nombre d'attributs.
+   7. Tapez SayGoobye('Antoine') et appuyez sur Entrée
+
+      Vous n'avez importé que la fonction =SayHello()=. Python ne sait
+      donc rien de la fonction =SayGoodbye()=, et il affiche par
+      conséquent un message d'erreur. La nature même de l'instruction
+      =from...import= peut être une source de problèmes si vous n'avez
+      pas pris toutes vos précautions et que vous supposez qu'un
+      certain attribut est présent, alors qu'il n'y est pas.
+   8. Refermez la fenêtre de Python
+
+* Trouver des modules sur le disque
+
+  Pour pouvoir utiliser le code d'un module, Python doit être capable
+  de la localiser et de le charger en mémoire. Ces chemins d'accès
+  sont enregistrés dans une liste gérée par Python. Chaque fois que
+  vous avez besoin d'importer un module, Python fait une recherche
+  dans les chemins d'accès qu'il connaît afin de le retrouver. Ces
+  informations proviennent de trois sources : 
+  + Variables d'environnement :: le chapitre 3 vous explique ce dont
+       il s'agit. En particulier la variable d'environnement
+       =PYTHONPATH= indique à Python où rechercher des modules sur le
+       disque
+  + Dossier courant :: plus haut dans ce chapitre, vous avez appris
+       que vous pouviez modifier le dossier courant de Python de
+       manière à ce qu'il puisse localiser les modules utilisés par
+       votre application
+  + Dossiers par défaut :: même si vous n'avez pas défini de variables
+       d'environnement, et que le dossier courant ne contient pas de
+       module utilisable, Python est tout de même capable de retrouver
+       ses propres bibliothèques dans la liste des dossiers par défaut
+       qui est incluse dans sa propre configuration
+
+
+  Il est utile de connaître le ou les chemins d'accès courant, car une
+  erreur dans une telle information, ou l'absence de celle-ci, peut
+  faire échouer votre application. Voici comment procéder pour
+  récupérer ces chemins d'accès courant :
+  1. Ouvrez une fenêtre de Python en mode Shell
+  2. Tapez import sys et appuyez sur Entrée
+  3. Tapez for p in sys.path: et appuyez sur Entrée
+
+     Python indente automatiquement la nouvelle ligne en attendant la
+     suite de la boucle =for=. L'attribut =sys.path= contient toujours
+     une liste des chemins d'accès par défaut.
+  4. Tapez print(p) et appuyez deux fois sur Entrée
+
+     Vous voyez s'afficher une liste de chemins d'accès. Tout dépend
+     de votre plate-forme, de la version de Python que vous utilisez,
+     du dossier dans lequel Python est installé et des fonctionnalités
+     que vous avez pu lui ajouter.
+
+     L'attribut =sys.path= est fiable, mais cela ne signifie pas qu'il
+     sait tout sur les chemins d'accès connus de Python. Si vous
+     constatez qu'une certaine information manque alors que vous
+     pensez qu'elle devrait être présente, vous pouvez suivre ces
+     étapes :
+     1. Tapez import os et appuyez sur Entrée
+     2. Tapez maintenant os.environ['PYTHONPATH'].split(os.pathsep) et
+        appuyez sur Entrée
+
+	Une variable d'environnement appelée =PYTHONPATH= doit avoir
+        été définie au préalable, à défaut de quoi vous obtiendrez un
+        message d'erreur.
+
+	Si la variable =PYTHONPATH= existe, son contenu va s'afficher.
+
+	L'attribut =sys.path= ne comprend pas de fonction
+        =split()=. C'est pourquoi l'exemple utilise une boucle
+        =for=. Par contre, l'attribut =os.environ['PYTHONPATH']=
+        possède une telle fonction, ce qui permet de créer une liste
+        de chemins individuels.
+
+	La fonction =split()= doit contenir une valeur permettant de
+        découper une liste d'éléments en ses composants. La
+        =constante= (autrement dit, une valeur prédéfinie, fixée une
+        fois pour toutes) =os.pathsep= définit le séparateur entre ces
+        différents éléments. Même si ce séparateur peut varier d'une
+        plate-forme à une autre, Python se charge de la question, ce
+        qui vous permet d'utiliser partout ce même code.
+     3. Refermez la fenêtre de Python
+
+	Vous pouvez également ajouter ou supprimer des éléments de
+        =sys.path=. 
+
+* Voir le contenu d'un module
+
+  Python fournit plusieurs méthodes différentes pour voir le contenu
+  d'un module. 
+
+  + =__builtins__= :: contient une liste de tous les attributs
+                      intégrés qui sont accessibles dans le module. Ce
+                      sont ces attributs qui sont automatiquement
+                      ajoutés par Python.
+  + =__cached__= :: vous indique le nom et l'emplacement du fichier
+                    mis en cache lorsque vous importez le module. Ce
+                    chemin d'accès est défini de façon relative par
+                    rapport au dossier courant de Python.
+  + =__doc__= :: affiche une information d'aide sur le module, du
+                 moins si celle-ci a été rédigée. Par exemple, si vous
+                 tapez =os.__doc__= et que vous appuyez sur Entrée,
+                 Python va afficher l'aide associée à la bibliothèque
+                 =os=
+  + =__file__= :: vous indique le nom et l'emplacement du module. Le
+                  chemin d'accès est défini relativement au dossier
+                  courant de Python.
+  + =__initializing__= :: détermine si le module est en cours
+       d'initialisation. Normalement, cet attribut renvoie la valeur
+       False, puisque le module devrait déjà avoir terminé son
+       initialisation à ce moment. Cet attribut peut cependant être
+       utile si vous avez besoin d'attendre qu'un module ait terminé
+       son chargement avant d'importer un autre module dépendant du
+       premier.
+  + =__loader__= :: affiche des informations sur le chargement du
+                    module. Vous devriez pas avoir à utiliser cet
+                    attribut.
+  + =__name__= :: rappelle simplement le nom du module.
+  + =__package__= :: sert uniquement au système d'importation pour
+                     faciliter le chargement et la gestion des
+                     modules. Vous n'avez pas à vous en soucier.
+
+
+  En fait, vous pouvez même plonger encore plus profondément dans la
+  liste des attributs. Tapez *dir(MyLibrary.SayHello)* et appuyez sur
+  Entrée. 
+
+  Certaines de ces entrées, comme =__name__=, apparaissent aussi dans
+  le listing module. Cependant, certaines autres entrées peuvent
+  attirer votre curiosité. Par exemple, vous voudriez savoir à quoi
+  correspond =__sizeof__=. Pour cela, tapez =help(__sizeof__)= et
+  appuyez sur Entrée. 
+
+  Python ne va pas vous manger si vous essayez l'attribut. Même si le
+  Shell rencontre des problèmes, vous pouvez toujours ouvrir une autre
+  fenêtre. Une autre manière de rechercher des informations sur un
+  modèle consiste donc à tester simplement les attributs. Si vous
+  tapez par exemple MyLibrary.SayHello.__sizeof__() et que vous
+  appuyez sur Entrée, vous allez voir s'afficher la taille de la
+  fonction =SayHello()= en octets.
+
+  Contrairement à d'autres langages, Python rend public le code source
+  de ses propres bibliothèques. Par exemple, si vous ouvrez le dossier
+  =Python37/Lib=, vous y trouverez toute une série de fichiers =.py=
+  que vous pouvez ouvrir dans IDLE sans aucun problème. Essayez par
+  exemple d'ouvrir la bibliothèque =os.py= déjà utilisée à plusieurs
+  reprises dans ce chapitre.
+
+  Voir directement le contenu d'une bibliothèque peut vous aider à
+  découvrir de nouvelles techniques de programmation et à mieux
+  comprendre le fonctionnement de Python. Plus vous y passerez de
+  temps, et mieux vous serez à même de même construire des
+  applications intéressantes. 
+
+  Contentez-vous de consulter le contenu des bibliothèques, et surtout
+  n'y modifiez rien ! Si vous changiez accidentellement des morceaux
+  de code, vous pourriez introduire des bogues dans votre
+  application. Ces problèmes apparaîtraient uniquement sur votre
+  propre système, et pas sur d'autres plates-formes. La prudence la
+  plus extrême est donc de rigueur.
+
+* Utiliser la documentation des modules de Python
+
+  Vous pouvez utiliser la fonction =doc()= chaque fois que vous en
+  avez besoin pour obtenir de l'aide. Cependant, il existe un meilleur
+  moyen d'étudier les modules et bibliothèques fournis avec Python :
+  c'est la documentation de celui-ci. Celle-ci apparaît parfois sous
+  le nom Module Docs dans le dossier de Python. On y fait aussi
+  référence sous le nom de =pydoc=. Mais quelle que soit
+  l'appellation, cette documentation est une aide précieuse pour les
+  développeurs. Voyons donc cela de plus près.
+
+** Ouvrir l'application pydoc  
+
+   Pydoc est tout simplement une autre application Python. Elle se
+   trouve dans le dossier =Python37/Lib= de votre système sous le nom
+   de =pydoc.py=. Comme tout autre fichier =.py=, vous pouvez l'ouvrir
+   dans IDLE et étudier son fonctionnement. Une autre manière d'y
+   accéder consiste à choisir le raccourci =Python 3.7 Module Docs= de
+   votre installation Python, ou encore à taper une commande en mode
+   Terminal.
+
+   L'application crée un serveur localisé qui fonctionne avec votre
+   navigateur Web par défaut afin d'afficher des informations sur les
+   modules et les bibliothèques de Python. 
+
+   Comme pour tout serveur, votre système peut vous demander une
+   autorisation d'accès. Par exemple, votre pare-feu peut vous
+   signaler qu'un programme inconnu tente d'accéder au système
+   local. Vous devez alors valider la permission demandée pour accéder
+   aux informations fournies par =pydoc=. Il en va de même le cas
+   échéant pour votre antivirus.
+
+   Normalement, le serveur ouvre automatiquement une fenêtre dans
+   votre navigateur. Cette fenêtre liste les divers modules contenus
+   sur votre système, y compris les modules personnalisés que vous
+   auriez créés et qui seraient contenus dans le chemin d'accès de
+   Python. Pour voir le contenu correspondant, il vous suffit de
+   cliquer sur un lien.
+
+   Bien entendu, toutes ces documentations sont en anglais, ce dont
+   vous vous doutiez déjà.
+
+   Le terminal offre deux commandes pour contrôler le serveur. Il vous
+   suffit pour cela de taper la lettre correspondante : 
+   + b :: ouvre une nouvelle copie du navigateur Web par défaut en y
+          chargeant la page d'index
+   + q :: stoppe le serveur
+
+	  
+
+   Lorsque vous avez terminé votre navigation, n'oubliez pas de taper
+   *q* et d'appuyer sur Entrée pour refermer le serveur. Celui-ci va
+   libérer les ressources qu'il consommait, et refermer tous les trous
+   qu'il aurait pu provoquer dans votre pare-feu.
+
+** Utiliser les liens d'accès rapide   
+
+   La première page affichée est toujours celle qui correspond au lien
+   Module Index. Si vous avez besoin de revenir à cette page, il vous
+   suffit donc à tout instant de cliquer sur ce lien. 
+
+   Elle propose des liens vers des sujets essentiels de Python. Si
+   vous voulez en savoir plus sur les valeurs booléennes, par exemple,
+   cliquez sur le lien =BOOLEAN=. La page qui va s'afficher alors
+   décrit la manière dont les valeurs booléennes fonctionnent dans
+   Python. En bas de cette page, vous trouvez d'autres liens
+   permettant d'accéder à des informations complémentaires utiles.
+
+** Taper un terme à rechercher    
+
+   Les pages contiennent également deux champs de texte, en haut et
+   vers la droite. Le premier est suivi d'un bouton Get, et le second
+   d'un bouton Search Lorsque vous entrez un terme à rechercher dans
+   le premier champ et que vous cliquez sur le bouton Get, vous
+   obtenez la documentation qui concerne ce module ou cet attribut
+   particulier. Pour voir ce qui se passe, tapez *print* et cliquez
+   sur Get. 
+
+   Si vous tapez un critère dans le second champ et que vous cliquez
+   sur le bouton Search, vous obtenez cette fois une liste de tous les
+   sujets qui peuvent avoir un rapport avec ce terme. Essayez par
+   exemple taper *print* et de cliquer sur Search. Vous pouvez ensuite
+   cliquer sur un autre lien, par exemple calendar, si vous voulez
+   consulter des informations techniques sur la gestion de l'affichage
+   des dates. 
+
+** Voir les résultats   
+   
+   Les réponses que vous obtenez peuvent varier
+   considérablement. Certains sujets sont brefs. 
