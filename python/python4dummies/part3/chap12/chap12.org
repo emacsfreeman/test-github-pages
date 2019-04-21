@@ -1,0 +1,62 @@
+#+TITLE: Gérer des listes
+#+AUTHOR: Laurent Garnier
+
+Des tas de gens perdent facilement de vue que la plupart des
+techniques de programmation sont basées sur le monde réel. Une des
+raisons tient au fait que les programmeurs utilisent souvent des
+termes qui ne parlent pas au commun des mortels. Par exemple, vous
+dites que vous rangez quelque chose dans une boîte. Les développeurs,
+de leur côté, diront qu'ils affectent une valeur à une /variable/. Les
+listes sont différentes. Après tout, tout le monde fait des listes
+pour tout un tas de choses : des listes de courses, des listes de
+bagages pour les vacances, des listes de tâches à réaliser, et ainsi
+de suite. Ce chapitre traite donc de quelque choses que vous utilisez
+déjà dans la vie de tous les jours. La seule différence, c'est que
+vous devez envisager ce sujet du point de vue de Python. 
+
+Si certaines personnes trouvent qu'il est difficile de travailler avec
+les listes, c'est vraisemblablement parce qu'elles n'ont pas
+l'habitude de réfléchir aux listes qu'elles créent. Lorsque vous
+rédigez une liste, vous écrivez simplement une suite d'éléments dans
+un ordre qui a un sens pour vous. Parfois, vous reprenez votre liste
+pour en changer l'ordre (mais pourquoi ont-ils encore déplacé le rayon
+dans le magasin ?). Ou bien vous parcourez la liste du bout du doigt
+pour vérifier si vous n'avez rien oublié. En fait, tout ce que vous
+pouvez faire avec vos propres listes est également réalisable avec
+Python. Le point essentiel, c'est que devez bien réfléchir à ce que
+vous faites si vous voulez que Python comprenne votre objectif.
+
+* Organiser les informations dans une application
+
+  Les gens créent listes pour organiser des informations, et en
+  faciliter l'accès ainsi que les modifications. Vous utilisez des
+  listes dans Python pour les mêmes raisons. Dans de nombreuses
+  situations, vous avez besoin d'une forme d'organisation de vos
+  données pour pouvoir gérer celles-ci. Par exemple, vous pourriez
+  vouloir créer un << quelque chose >> qui contiendrait les jours de
+  la semaine ou les mois de l'année. Les noms de ces éléments
+  apparaîtraient dans une liste, comme si vous les aviez écrits sur
+  une feuille de papier dans le monde réel. Les sections qui suivent
+  approfondissent ces notions. 
+
+** Définir une organisation à l'aide de listes
+
+   Dans Python, une liste se définit comme étant un type de
+   séquence. Les /séquences/ fournissent un certain procédé permettant
+   à de multiples données de coexister en tant qu'entités distinctes
+   dans un même espace de stockage. Prenons l'exemple d'un grand
+   immeuble : en bas, vous trouvez plusieurs blocs de boîtes aux
+   lettres. Chacun contient une rangée de boîtes, et chaque boîte
+   contient du courrier. Python supporte d'autres types de séquences
+   au nom parfois mystérieux :
+   + Tuples
+   + Dictionnaires
+   + Piles
+   + Files
+   + Deques
+
+
+   De toutes les séquences, les listes sont les plus faciles à
+   comprendre, et les plus proches du monde réel. Se familiariser avec
+   des listes vous aide à devenir plus à même de travailler avec
+   d'autres types de séquences fournissant davantage de puissance 
