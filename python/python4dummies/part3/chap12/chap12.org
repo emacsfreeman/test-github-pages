@@ -59,4 +59,67 @@ vous faites si vous voulez que Python comprenne votre objectif.
    De toutes les séquences, les listes sont les plus faciles à
    comprendre, et les plus proches du monde réel. Se familiariser avec
    des listes vous aide à devenir plus à même de travailler avec
-   d'autres types de séquences fournissant davantage de puissance 
+   d'autres types de séquences fournissant davantage de puissance et
+   de souplesse. L'essentiel à retenir, c'est que les données sont
+   enregistrées dans une liste comme si vous les écriviez sur une
+   feuille de papier, un élément après l'autre. La liste a un début,
+   un milieu et une fin. De plus, même si ce n'est pas forcément ce
+   que vous feriez dans la vie de tous les jours, Python numérote
+   automatiquement chacun des éléments de la liste. 
+
+** Comprendre comment les ordinateurs voient les listes   
+
+   Les ordinateurs ne voient pas les listes de la même façon que
+   vous. Il n'a ni bloc-notes ni crayon. Il a juste de la
+   mémoire. L'ordinateur enregistre donc chaque élément d'une liste
+   dans un emplacement mémoire distinct. Cette mémoire est
+   continue. Lorsque vous ajoutez de nouveaux éléments, ils viennent
+   donc prendre place dans le prochain emplacement en mémoire. D'une
+   certaine manière, une liste se comporte dans l'ordinateur un peu
+   comme une série de boîtes alignées : le premier élément est rangé
+   dans la première boîte, le second dans la deuxième, et ainsi de
+   suite. L'avantage, c'est bien sûr que la mémoire de l'ordinateur
+   peut contenir un très grand nombre de ces boîtes, beaucoup plus que
+   votre armoire à chaussures...
+
+   Python étant vraisemblablement mieux organisé que vous, les
+   emplacements utilisés pour stocker les éléments d'une liste sont
+   numérotés. Cette numérotation comme à 0 (sans doute pour des
+   raisons de facilité). Prenons l'exemple d'une liste de noms de
+   mois. Elle comportera douze éléments numérotés de 0 à 11. Il est
+   évidemment essentiel de bien intégrer cette manière de procéder. 
+
+   Selon le type d'information que vous enregistrez dans les
+   différentes << boîtes >>, celles-ci n'ont pas besoin d'avoir toutes
+   la même taille. Python vous permet par exemple de placer une chaîne
+   de caractères dans une boîte, un entier dans une autre, et une
+   valeur en virgule flottante dans une troisième. L'ordinateur ne
+   sait pas, et n'a pas besoin de savoir, ce qui se trouve dans
+   chacune des boîtes. Tout ce qu'il voit, c'est une longue suite de
+   chiffres qui pourraient représenter n'importe quoi. C'est Python
+   qui effectue tout le travail nécessaire au traitement des données
+   en fonction de leur type, et qui, si vous demandez l'élément numéro
+   5 vous renvoie l'élément numéro 5 et rien d'autre.
+
+   En règle générale, il est préférable de créer des listes formant
+   des ensembles de données plus faciles à gérer. En vous limitant par
+   exemple à une liste composée uniquement de nombres entiers, vous
+   pouvez facilement faire des suppositions sur ce que vous pouvez y
+   trouver, sans perdre votre temps à tenter de retrouver la bonne
+   valeur. Pour autant, il y a bien entendu des cas où des données de
+   nature diférente doivent être associées. Cependant, souvenez-vous
+   que cela impose de déterminer le type des données lorsque vous
+   recherchez des informations afin de pouvoir traiter correctement
+   celles-ci. Prendre une chaîne pour un entier pourrait provoquer des
+   problèmes dans votre application (ce qui n'est pas le cas dans
+   d'autres langages de programmation, qui imposent généralement de ne
+   créer que des listes formées d'éléments de même type).
+
+* Créer des listes 
+
+  Avant de pouvoir faire quoi que ce soit avec une liste, vous devez
+  évidemment commencer par créer celle-ci. Comme cela a été mentionné
+  plus haut, les listes de Python peuvent mélanger différents types de
+  données. Mais c'est toujours une bonne pratique de n'utiliser qu'un
+  seul type chaque fois que c'est possible. 
+
