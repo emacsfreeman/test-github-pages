@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POO 1 : Méthode inline</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Déclaration inline d'un objet JavaScript
+      // NB : cette technique ne permet pas l'héritage
+      var Addition = {
+        x : 5,
+        y : 10,
+        calcul : function () {
+          return this.x + this.y;
+        }
+      };
+
+      // Utilisation de l'objet Addition
+      document.write("Somme : " + Addition.calcul());
+    </script>
+  </body>
+</html>
