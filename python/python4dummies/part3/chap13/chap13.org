@@ -1,0 +1,187 @@
+#+TITLE: Collecter toutes sortes de données
+#+AUTHOR: Laurent Garnier
+
+* Comprendre les collections
+
+  + Tuple
+  + Dictionnaire
+  + =queue=
+  + =deque=
+
+* Travailler avec les tuples
+
+  #+BEGIN_SRC python
+    MyTuple = ('Rouge', 'Vert', 'Bleu')
+    dir(MyTuple)
+    MyTuple = MyTuple.__add__(('Pourpre', ))
+    MyTuple
+    MyTuple = MyTuple.__add(('Jaune', ('Orange', 'Noir')))
+    MyTuple[4]
+    MyTuple[5]
+    MyTuple[5][0]
+  #+END_SRC
+
+* Travailler avec les dictionnaires
+** Créer et utiliser un dictionnaire  
+
+   #+BEGIN_SRC python
+     Colors = {'Paul': 'Bleu', 'Annie': 'Rouge', 'Sarah': 'Jaune'}
+     Colors
+     Colors['Annie']
+     Colors.keys()
+
+     for Item in Colors.keys():
+	 print("{0} aime la couleur {1}."
+	       .format(Item, Colors[Item]))
+   #+END_SRC
+
+
+** Remplacer l'instruction switch par un dictionnaire
+
+   #+BEGIN_SRC python
+     def PrintBlue():
+	 print("Vous avez choisi bleu !\r\n")
+
+     def PrintRed():
+	 print("Vous avez choisi rouge !\r\n")
+
+     def PrintOrange():
+	 print("Vous avez choisi orange !\r\n")
+
+     def PrintYellow():
+	 print("Vous avez choisi jaune !\r\n")
+
+     ColorSelect = {
+	 0: PrintBlue,
+	 1: PrintRed,
+	 2: PrintOrange,
+	 3: PrintYellow
+     }
+
+     Selection = 0
+
+     while (Selction != 4):
+	 print("O. Bleu")
+	 print("1. Rouge")
+	 print("2. Orange")
+	 print("3. Jaune")
+	 print("4. Quitter")
+
+	 Selection = int(input("Sélectionnez une option de couleur : "))
+
+	 if (Selection >= 0) and (Selection < 4):
+	     ColorSelect[Section]()
+   #+END_SRC
+
+* Créer des piles en utilisant des listes
+
+  #+BEGIN_SRC python
+    MyStack = []
+    StackSize = 3
+
+    def DisplayStack():
+	print("Etat courant de la pile : ")
+	for Item in MyStack:
+	    print(Item)
+
+    def Push(Value):
+	if len(MyStack) < StackSize:
+	    MyStack.append(Value)
+	else:
+	    print("La pile est pleine !")
+
+    def Pop():
+	if len(MyStack) > 0:
+	    MyStack.pop()
+	else:
+	    print("La pile est vide.")
+
+    Push(1)
+    Push(2)
+    Push(3)
+    DisplayStack()
+    input("Appuyez sur une touche quand vous êtes prêt...")
+
+    Push(4)
+    DisplayStack()
+    input("Appuyez sur une touche quand vous êtes prêt...")
+
+    Pop()
+    DisplayStack()
+    input("Appuyez sur une touche quand vous êtes prêt...")
+
+    Pop()
+    Pop()
+    Pop()
+    DisplayStack()
+  #+END_SRC
+
+
+* Travailler avec les fichiers
+
+  #+BEGIN_SRC python
+    import queue
+
+    MyQueue = queue.Queue(3)
+
+    print(MyQueue.empty())
+    input("Appuyez sur une touche quand vous êtes prêt...")
+
+    MyQueue.put(1)
+    MyQueue.put(2)
+    print(MyQueue.full())
+    input("Appuyez sur une touche quand vous êtes prêt...")
+
+    MyQueue.put(3)
+    print(MyQueue.full())
+    input("Appuyez sur une touche quand vous êtes prêt...")
+
+
+    print(MyQueue.get())
+    print(MyQueue.empty())
+    print(MyQueue.full())
+    input("Appuyez sur une touche quand vous êtes prêt...")
+
+    print(MyQueue.get())
+    print(MyQueue.get())
+  #+END_SRC
+
+* Travailler avec des deques
+
+  #+BEGIN_SRC python
+    import collections
+
+    MyDeque = collections.deque("abcdef", 10)
+
+    print("Etat initial : ")
+    for Item in MyDeque:
+	print(Item, end=" ")
+
+    print("\r\n\r\nAjout et extension à droite")
+    MyDeque.append("h")
+    MyDeque.extend("ij")
+    for Item in MyDeque:
+	print(Item, end=" ")
+    print("\r\nMyDeque contient {0} éléments."
+	  .format(len(MyDeque)))
+
+    print("\r\nPop à droite")
+    print("Pop de {0}".format(MyDeque.pop()))
+    for Item in MyDeque:
+	print(Item, end=" ")
+    print("\r\n\r\nAjout et extension à gauche")
+    MyDeque.appendleft("a")
+    MyDeque.extendleft("bc")
+    for Item in MyDeque:
+	print(Item, end=" ")
+    print("\r\nMyDeque contient {0} éléments."
+	  .format(len(MyDeque)))
+
+    print("\r\nPop à gauche")
+    print("Pop de {0}".format(MyDeque.popleft()))
+    for Item in MyDeque:
+	print(Item, end=" ")    
+  #+END_SRC
+
+
+
