@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Polynôme du second degré</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Saisie des paramètres
+      a = prompt("a : ");
+      b = prompt("b : ");
+      c = prompt("c : ");
+
+      // Calcul du discriminant
+      delta = (parseInt(b) * parseInt(b)) - (4 * parseInt(a) * parseInt(c));
+
+      // Affichage des paramètres
+      document.write("a : " + a + "<br>");
+      document.write("b : " + b + "<br>");
+      document.write("c : " + c + "<br>");
+      document.write("Discriminant delta : " + delta + "<br>");
+
+      // Détermination des racines
+      if (delta < 0)
+      {
+        document.write("Pas de soltions (réelles)");
+      }
+      else
+      {
+        if (delta == 0)
+        {
+          document.write("Solution unique : " + (-b / (2 * a)));
+        }
+        else
+        {
+          document.write("Solution n°1 : " + (-b + Math.sqrt(delta)) /
+          (2 * a) + "<br>");
+          document.write("Solution n°1 : " + (-b - Math.sqrt(delta)) /
+          (2 * a) + "<br>");
+        }
+      }
+    </script>
+  </body>
+</html>
