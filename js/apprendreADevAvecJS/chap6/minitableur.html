@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mini-tableur</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Déclaration des variables locales
+      var tableau = new Array(5);
+      var numLigne, numColonne;
+      var valeur;
+
+      // Déclaration de 5 colonnes par ligne
+      for (var numLigne = 1; numLigne < tableau.length; numLigne++)
+      {
+        // Création des colonnes
+        tableau[numLigne] = new Array(6);
+      }
+
+      // Initialisation du tableau
+      valeur = 1;
+      for (var numLigne = 1; numLigne <= 3; numLigne++)
+      {
+        for (var numColonne = 1; numColonne <= 4; numColonne++)
+        {
+          tableau[numLigne][numColonne] = valeur;
+          valeur += 1;
+        }
+      }
+
+      // Mise à zéro des totaux en ligne n°4
+      for (numColonne = 1; numColonne <= 5; numColonne++)
+      {
+        tableau[4][numColonne] = 0;
+      }
+
+      // Mise à zéro des totaux en colonne n°5
+      for (numLigne = 1; numLigne <= 3; numLigne++)
+      {
+        tableau[numLigne][5] = 0;
+      }
+
+      // Détermination des totaux en ligne n°4 et en colonne n°5
+      for (numLigne = 1; numLigne <= 3; numLigne++)
+      {
+        for (numColonne = 1; numColonne <= 4; numColonne++)
+        {
+          // Totalisation en ligne n°4
+          tableau[4][numColonne] = tableau[4][numColonne]
+           + tableau[numLigne][numColonne];
+          // Totalisation en colonne n°5
+          tableau[numLigne][5] = tableau[numLigne][5]
+           + tableau[numLigne][numColonne];
+          // Totalisation générale en ligne n°4-colonne n°5
+          tableau[4][5] += tableau[numLigne][numColonne];
+        }
+      }
+
+      // Affichage du total général
+      // NB : Total de 78 éléments
+      document.write("Total général en tableau[4][5] = " + tableau[4][5]);
+    </script>
+  </body>
+</html>
