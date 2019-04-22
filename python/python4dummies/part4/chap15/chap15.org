@@ -1,0 +1,187 @@
+#+TITLE: Enregistrer des données dans des fichiers
+#+AUTHOR: Laurent Garnier
+
+* Comprendre le fonctionnement des supports de stockage permanents
+  
+* Créer du contenu
+
+  #+BEGIN_SRC python
+    # Sauvegarder sous le nom FormattedData.py
+
+    class FormatData:
+	def __init__(self, Name="", Age=0, Married=False):
+	    self.Name = Name
+	    self.Age = Age
+	    self.Married = Married
+
+	def __str__(self):
+	    OutString = "'{0}', {1}, {2}".format(
+		self.Name,
+		self.Age,
+		self.Married)
+	    return OutString
+  #+END_SRC
+
+** Importation  
+   #+BEGIN_SRC python
+     from FormattedData import FormatData
+
+     NewData = [FormatData("Georges", 65, True),
+		FormatData("Sophie", 47, False),
+		FormatData("Pierre", 52, True)]
+
+     for Entry in NewData:
+	 print(Entry)
+   #+END_SRC
+* Créer un fichier
+
+  #+BEGIN_SRC python
+    # Sauvegarder sous le nom FormattedData.py
+
+    import csv
+
+    class FormatData:
+	def __init__(self, Name="", Age=0, Married=False):
+	    self.Name = Name
+	    self.Age = Age
+	    self.Married = Married
+
+	def __str__(self):
+	    OutString = "'{0}', {1}, {2}".format(
+		self.Name,
+		self.Age,
+		self.Married)
+	    return OutString
+
+	def SaveData(Filename = "", DataList = []):
+	    with open(Filename,
+		      "w", newline='\n') as csvfile:
+		DataWriter = csv.writer(
+		    csvfile,
+		    delimiter='\n',
+		    quotechar=" ",
+		    quoting=csv.QUOTE_NONNUMERIC)
+		DataWriter.writerow(DataList)
+		csvfile.close()
+		print("Données enregistrées !")
+  #+END_SRC
+
+  Autre code
+  #+BEGIN_SRC python
+    from FormattedData import FormatData
+
+    NewData = [FormatData("Georges", 65, True),
+	       FormatData("Sophie", 47, False),
+	       FormatData("Pierre", 52, True)]
+
+    FormatData.SaveData("TestFile.csv", NewData)
+  #+END_SRC
+* Lire le contenu d'un fichier
+
+  #+BEGIN_SRC python
+    # Sauvegarder sous le nom FormattedData.py
+
+    import csv
+
+    class FormatData:
+	def __init__(self, Name="", Age=0, Married=False):
+	    self.Name = Name
+	    self.Age = Age
+	    self.Married = Married
+
+	def __str__(self):
+	    OutString = "'{0}', {1}, {2}".format(
+		self.Name,
+		self.Age,
+		self.Married)
+	    return OutString
+
+	def SaveData(Filename = "", DataList = []):
+	    with open(Filename,
+		      "w", newline='\n') as csvfile:
+		DataWriter = csv.writer(
+		    csvfile,
+		    delimiter='\n',
+		    quotechar=" ",
+		    quoting=csv.QUOTE_NONNUMERIC)
+		DataWriter.writerow(DataList)
+		csvfile.close()
+		print("Données enregistrées !")
+
+	def ReadData(Filename = ""):
+	with open(Filename,
+		  "r", newline='\n') as csvfile:
+	    DataReader = csv.reader(
+		csvfile,
+		delimiter="\n",
+		quotechar=" ",
+		quoting=csv.QUOTE_NONNUMERIC)
+
+	    Output = []
+	    for Item in DataReader:
+		Output.append(Item[0])
+
+	    csvfile.close()
+	    print("Données lues !")
+	    return Output
+  #+END_SRC
+
+  Autre code
+  #+BEGIN_SRC python
+    from FormattedData import FormatData
+
+    NewData = FormatData.ReadData("TestFile.csv")
+
+    for Entry in NewData:
+	print(Entry)
+  #+END_SRC
+* Mettre à jour le contenu d'un fichier
+
+  #+BEGIN_SRC python
+    from FormattedData import FormatData
+    import os.path
+
+    if not os.path.file.isfile("TestFile.csv"):
+	print("SVP exécutez le fichier d'exemple CreateFile.py !")
+	quit()
+
+    NewData = FormatData.ReadData("TestFile.csv")
+    for Entry in NewData:
+	print(Entry)
+
+
+    print("\r\nAjout d'un enregistrement pour Antoine.")
+    NewRecord = "'Antoine', 23, False"
+    NewData.append(NewRecord)
+    for Entry in NewData:
+	print(Entry)
+
+    print("\r\nSuppression de l'enregistrement de Pierre.")
+    Location = NewData.index("'Pierre', 52, True")
+    Record = NewData[Location]
+    NewData.remove(Record)
+    for Entry in NewData:
+	print(Entry)
+	print("\r\nModification de l'enregistrement de Sophie.")
+	Location = NewData.index("'Sophie', 47, False")
+	Record = NewData[Location]
+	Split = Record.split(",")
+	NewRecord = FormatData(Split[0].replace("'", ""),
+			       int(Split[1]),
+			       bool(Split[2]))
+	NewRecord.Married = True
+	NewRecord.Age = 48
+	NewData.append(NewRecord.__str__())
+	NewData.remove(Record)
+	for Entry in NewData:
+	    print(Entry)
+
+	FormatData.SaveData("ChangedFile.csv", NewData)
+  #+END_SRC
+* Supprimer un fichier
+  #+BEGIN_SRC python
+    import os
+
+    os.remove("ChangedFile.csv")
+    print("Fichier supprimé !")
+  #+END_SRC
