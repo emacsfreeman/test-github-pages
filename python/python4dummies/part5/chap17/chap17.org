@@ -1,0 +1,57 @@
+#+TITLE: Dix ressources de programmation à découvrir
+#+AUTHOR: Laurent Garnier
+
+* Travailler avec la documentation de Python en ligne
+
+  + [[https://docs.python.org/3/]]
+
+* Utiliser le tutoriel LearnPython.org
+
+  + [[https://learnpython.org/]]
+
+* Programmer pour le Web avec Python
+
+  + [[https://wiki.python.org/moin/WebProgramming]]
+
+* Obtenir des bibliothèques supplémentaires
+
+  + [[http://pythonware.com/]]
+  + [[http://effbot.org/]]
+
+* Créer des applications plus rapidement avec un environnement de développement interactif
+
+  + [[https://wiki.python.org/moin/PythonEditors]]
+
+* Vérifier votre syntaxe avec plus de facilité
+
+  + [[https://wiki.python.org/moin/Vim]]
+  + [[https://realpython.com/emacs-the-best-python-editor/]]
+
+* Utiliser XML à votre avantage
+
+  + [[https://www.w3schools.com/xml/]]
+  + [[https://www.w3schools.com/python/default.asp]]
+
+* Eviter les erreurs courantes des débutants
+
+  + [[https://amir.rachum.com/blog/2013/07/06/python-common-newbie-mistakes-part-1/][blog.amir.rachum.com]]
+  + [[https://pythonprogramming.net/]]
+
+
+* Comprendre Unicode 
+
+  + [[https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/][Joel on Software]]
+  + [[http://lucumr.pocoo.org/2013/7/2/the-updated-guide-to-unicode/]]
+  + [[https://docs.python.org/3/howto/unicode.html]]
+  + [[https://www.unicode.org/standard/tutorial-info.html]]
+  + [[http://eric.themoritzfamily.com/python-encodings-and-unicode.html]]
+  + [[https://www.reddit.com/r/Python/comments/1g62eh/explain_it_like_im_five_python_and_unicode/]]
+  + [[https://nedbatchelder.com/text/unipain/unipain.html#1]]
+
+* Rendre vos applications Python plus rapides
+
+  + [[http://pythonic.zoomquiet.top/data/20170602154836/index.html]]
+  + [[https://wiki.python.org/moin/PythonSpeed/PerformanceTips]]
+
+
+ 
