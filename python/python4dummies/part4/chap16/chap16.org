@@ -139,3 +139,532 @@ courrier simple, si vous voulez).
    jusqu'à son destinataire, et celui-ci ouvre le message pour le lire
    (il peut aussi le jeter à la corbeille - encore une image qui relie
    le monde virtuel au monde réel). 
+
+
+** Définir les parties de l'enveloppe
+
+   Il y a une différence entre la manière dont l'enveloppe d'un e-mail
+   est configurée et celle dont elle est effectivement gérée. Lorsque
+   vous voyez l'enveloppe d'un e-mail, elle semble ressembler
+   parfaitement à celle d'un courrier contenant l'adresse de
+   l'expéditeur et celle du destinataire. En fait, sur une enveloppe
+   papier, vous trouvez non seulement le nom du destinataire, mais
+   aussi son adresse postale en entier. Et la même chose est vraie
+   pour l'expéditeur, du moins si vous avez correctement rempli toutes
+   les zones. Tous ces éléments déterminent où le service postal
+   devrait déposer le courrier, et où il devrait le renvoyer dans le
+   cas où le destinataire habite une adresse inconnue ou bien s'il a
+   déménagé. 
+
+   Cependant, lorsqu'un serveur SMTP traite l'enveloppe d'un e-mail,
+   il doit regarder des adresses spécifiques, et c'est là où son
+   chemin avec une enveloppe papier se met à diverger. En effet, une
+   adresse e-mail contient des éléments spécifiques, notamment
+   ceux-ci :
+   + Hôte :: L'hôte est à peu près comme les informations inscrites
+             sur une enveloppe. L'adresse de l'hôte fournit l'adresse
+             utilisée par la carte électronique qui est physiquement
+             connectée à l'Internet, et il faut alors gérer tout ce
+             que l'Internet consume ou fournit comme trafic pour cette
+             machine particulière. Un PC, ou une autre plate-forme,
+             peut utiliser des ressources Internet de multiples
+             manières, mais l'adresse de l'hôte reste toujours la
+             même.
+   + Port :: Un port est un peu comme l'adresse de la rue sur une
+             enveloppe papier. Elle spécifie quelle partie du système
+             devrait recevoir le message. Par exemple, un serveur SMTP
+             utilise généralement pour l'envoi du courrier le
+             port 25. Par contre, les serveurs dits POP3 (Point Of
+             Presence), qui traitent l'arrivée des messages, se
+             servent typiquement du port 110. Votre navigateur mobile
+             utilise normalement le port 80 pour communiquer avec les
+             sites Web. Par contre, les sites dits sécurisés (ceux qui
+             utilisent le protocole https au lieu de http) font appel
+             au port 443. Voyez par exemple à ce sujet l'adresse
+             [[https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers]]
+   + Nom d'hôte local :: Il s'agit de la version << humainement >>
+        lisible de la combinaison entre l'hôte et le port. Par
+        exemple, le site Web [[http://chezmoi.fr/]] pourrait être résolu
+        en une adresse du genre 55.225.163.40 :80 (où la première
+        partie est l'adresse de l'hôte, et les chiffres qui suivent
+        les deux-points le port). Python se charge de ces détails en
+        arrière-plan, et vous n'avez donc normalement pas à vous en
+        soucier. Mais il est utile de savoir que cela existe.
+
+
+
+   Maintenant que vous connaissez ces généralités, il est temps d'y
+   regarder de plus près. Les sections qui suivent décrivent
+   l'enveloppe d'un e-mail de façon plus précise.
+
+** Hôte
+
+   L'/adresse de l'hôte/ est l'identificateur utilisé pour une
+   connexion à un serveur. De même qu'une adresse sur une enveloppe
+   n'est pas la position réelle du destinataire, l'adresse de l'hôte
+   ne définit pas le serveur réel, mais plutôt l'emplacement de ce
+   serveur. 
+
+   La connexion utilisée pour accéder à la combinaison d'une adresse
+   d'hôte et d'un port est appelée /socket/ (c'est comme une prise de
+   courant...). La provenance de ce nom étrange n'a pas
+   d'importance. L'essentiel, c'est que vous pouvez l'utiliser pour
+   trouver toutes sortes d'informations utiles pour comprendre comment
+   fonctionne la messagerie électronique. Les étapes qui suivent vont
+   vous aider à voir tout cela en action. Ce qui compte le plus, c'est
+   bien comprendre l'idée générale sur ce qu'est l'enveloppe d'un
+   e-mail et les adresses qu'il contient.
+
+   1. Ouvrez une fenêtre de Python en mode Shell
+      
+      Vous voyez l'indicatif habituel
+   2. Tapez import socket et appuyez sur Entrée
+      
+      Pour pouvoir travailler avec des /sockets/, vous devrez tout
+      d'abord importer la bibliothèque correspondante. Celle-ci
+      contient toutes sortes d'attributs compliqués, et il faut donc
+      s'en servir en prenant des précautions. Mais on y trouve aussi
+      des fonctions intéressantes qui peuvent vous aider à mieux voir
+      comment sont gérées les adresses Internet.
+   3. Tapez =socket.gethostbyname= ("localhost") et appuyez sur Entrée
+
+      Vous voyez s'afficher une adresse d'hôté, en l'occurrence
+      127.0.0.1 qui est l'adresse standard associée au nom d'hôte
+      =localhost= (en fait, celle de votre propre système).
+   4. Tapez =socket.gethostbyaddr= ("127.0.0.1") et appuyez sur Entrée
+
+      Attendez-vous à une surprise. Vous obtenez en fait un tuple dont
+      le contenu peut éventuellement vous laisser quelques doutes sur
+      ce qui se passe dans votre machine. Vous constatez cependant que
+      le nom de votre machine est bien présent dans la liste.
+   5. Tapez =socket.gethostbyname= ("www.pourlesnuls.fr") et appuyez
+      sur Entrée
+
+      Le point principal, c'est que cette adresse fonctionne où que
+      vous vous trouviez, et quoi que vous fassiez, exactement comme
+      si elle était inscrite sur une enveloppe papier. Un service
+      postal utilise des adresses qui sont uniques, et l'Internet agit
+      de la même manière. 
+
+
+** Port
+
+   Un /port/ est un point d'entrée spécifique dans un
+   serveur. L'adresse de l'hôte spécifie l'emplacement, mais le port
+   définit où précisément entrer. Même si vous ne précisez pas un
+   numéro de port chaque fois que vous utilisez une adresse d'hôte,
+   cette information est implicite. L'accès est toujours autorisé en
+   combinant l'adresse de l'hôte et le port. Les étapes qui suivent
+   illustrent ce mode de fonctionnement.
+
+   1. Ouvrez une fenêtre de Python en mode Shell
+   2. Tapez =import socket= et appuyez sur Entrée
+
+      Rappelez-vous qu'un /socket/ fournit à la fois l'adresse de
+      l'hôte et le port. Vous l'utilisez pour créer une connexion qui
+      comprend ces deux éléments.
+   3. Tapez =socket.getaddrinfo= ("localhost", 110) et appuyez sur
+      Entrée
+
+      La 1ère valeur est le nom de l'hôte sur lequel vous voulez
+      obtenir des informations. La seconde valeur est un numéro de
+      port sur cet hôte, en l'occurrence le port 110.
+
+      Vous obtenez une sortie formée de deux tuples : l'un pour le
+      protcole Internet version 6 (IPv6), l'autre pour le protocole
+      Internet version 4 (IPv4). Chaque tuple contient plusieurs
+      entrées dont vous n'avez en fait pas à vous soucier, puisque
+      vous n'en aurez vraisemblablement jamais besoin. 
+   4. Tapez =socket.getaddrinfo= ("www.pourlesnuls.fr", 80) et appuyez
+      sur Entrée
+   5. Tapez =socket.getservbyport=(25) et appuyez sur Entrée
+
+      La méthode =socket.getservbyport()= fournit le moyen de
+      déterminer comment est utilisé un certain port. Le port 25 est
+      dédié au support SMTP sur tous les serveurs. Si vous accédez par
+      exemple à l'adresse 127.0.0.1 :80, vous demandez en fait le
+      serveur SMTP sur l'hôte local. En résumé, un port fournit un
+      type spécifique d'accès dans de nombreuses situations. 
+
+      
+
+
+   L'information sur le port n'est pas toujours disponible. Lorsque
+   vous ne précisez pas de port, Python utilise une valeur par
+   défaut. Cependant, faire confiance à ce port par défaut n'est pas
+   une bonne idée, car vous ne savez pas exactement à quel service
+   vous accédez. De plus, certains systèmes se servent d'affectation
+   non standard des ports pour des raisons de sécurité. Vous devriez
+   donc prendre l'habitude d'utiliser le numéro du port et de vous
+   assurer qu'il correspond bien à la tâche que vous voulez réaliser.
+
+** Nom d'hôte local
+
+   Il s'agit simplement de la forme lisible par un être humain de
+   l'adresse de l'hôte. En fait, les humains ont du mal à comprendre
+   quelque chose comme 127.0.0.1 (et c'est encore bien pire pour la
+   version IPv6). Par contre, un nom d'hôte local est bien plus facile
+   à saisir. Il y a un serveur spécial et une configuration tout aussi
+   spéciale qui permet de traduire les noms locaux en adresses
+   d'hôtes, mais vous n'avez pas à vous en soucier dans ce livre (ni
+   plus généralement ailleurs). Mais il est utile d'avoir quelques
+   notions à ce sujet si votre application se plante soudainement sans
+   raison apparente.
+
+   La section << Hôte >>, plus haut dans ce chapitre, vous a présenté
+   la méthode =socket.gethostbyaddr()=, qui transforme une adresse en
+   nom d'hôte. Vous avez aussi vu le processus inverse avec la méthode
+   =socket.gethostbyname()=. Les étapes qui suivent vous aideront à
+   saisir certaines nuances lors du travail avec le nom d'hôte :
+   1. Ouvrez une fenêtre de Python en mode Shell
+   2. Tapez import socket et appuyez sur Entrée
+   3. Tapez =socket.gethostname()= et appuyez sur Entrée
+
+      Bien entendu, le nom de votre propre système est différent du
+      mien. Mais le principe est le même dans tous les cas.
+   4. Tapez =socket.gethostbyname(socket.gethostname())= et appuyez
+      sur Entrée
+
+
+** Définir les parties du courrier       
+
+   L'/enveloppe/ d'une adresse de messagerie est ce que le serveur
+   SMTP utilise pour router l'e-mail. Cependant, cette enveloppe en
+   comprend aucun contenu. Cela, c'est le rôle de la lettre proprement
+   dite. Il faut éviter toute confusion à ce sujet, sachant que la
+   lettre contientn aussi le nom de l'expéditeur et celui du
+   destinataire. En fait, ces informations apparaissent dans le
+   courrier exactement comme c'est le cas pour des lettres à caractère
+   professionnel. Elles sont là pour attirer votre attention, et c'est
+   tout. Si vous envoyez un courrier avec ce genre de présentation, la
+   personne qui travaille au centre de tri de même que le facteur ou
+   la factrice n'ont pas besoin de savoir quelles adresses sont
+   écrites sur la lettre. Seule l'enveloppe les intéresse.
+
+   Puisque seules comptent pour la bonne circulation du courrier les
+   adresses qui se trouvent sur l'enveloppe, rien ne garantit que ces
+   informations soient correctes dans la lettre elle-même...
+
+   La partie << lettre >> d'un e-mail est formée de plusieurs
+   éléments, exactement comme pour l'enveloppe. Ils sont pour
+   l'essentiel au nom de trois : 
+   + Expéditeur :: Cette information vous dit qui a envoyé le
+                   message. Elle contient uniquement l'adresse de
+                   messagerie de l'expéditeur.
+   + Destinataire(s) :: Cette information vous dit qui doit recevoir
+        le message. Il s'agit en fait d'une liste d'adresses de
+        messagerie. Cette liste peut évidemment être réduite à un seul
+        élément. 
+   + Message :: Contient l'information que vous voulez que le
+                destinataire voie. Celle-ci peut contenir les éléments
+                suivants : 
+		- De : L'adresse humainement lisible de l'expéditeur.
+                - À : L'adresse humainement lisible du ou des
+                  destinataires.
+                - CC : Une ou plusieurs autres adresses mises en
+                  copie.
+                - Objet : Le sujet du message.
+                - Documents : Un ou plusieurs documents, y compris le
+                  texte qui apparaît dans le message.
+
+
+
+   Les e-mails peuvent, le cas échéant, être assez complexes et
+   longs. Ils sont susceptibles de contenir de multiples informations
+   supplémentaires. Pour autant, la plupart des messages ne
+   contiennent que ces simples composants, et c'est la base dont vous
+   avez besoin pour envoyer des e-mails à partir de vos
+   applications. Les sections qui suivent décrivent plus en détail le
+   processus utilisé pour générer une lettre et ses composants.
+
+** Définir le message
+
+   Envoyer à quelqu'un une enveloppe vide, c'est possible, mais ce
+   n'est pas très excitant. Pour que votre message serve à quelque
+   chose, vous devez lui donner un certain contenu. Python supporte
+   diverses méthodes pour créer des e-mails. La manière la plus simple
+   et la plus fiable consiste à utiliser la fonctionnalité dite MIME
+   (pour Multipurpose Internet Mail Extensions).
+
+   Comme la plupart des fonctions de messagerie, les types MIME sont
+   standardisés, et sont donc indépendants de toute plate-forme. Il en
+   existe de nombreux formats. Vous pouvez en apprendre à ce sujet en
+   consultant la page
+   [[https://docs.python.org/3/library/email.mime.html]]. Les formats les
+   plus courants dans le cas de la messagerie sont les suivants :
+   + MIMEApplication :: Fournit une méthode pour envoyer et recevoir
+        l'entrée ou la sortie d'une application.
+   + MIMEAudio :: Contient un fichier audio.
+   + MIMEImage :: Contient un fichier image.
+   + MIMEMultipart :: Permet à un message de combiner différentes
+                      sous-parties, comme du texte et des images
+                      graphiques.
+   + MIMEText :: Contient du texte qui peut être au format ASCII,
+                 HTML, ou un autre format standard.
+
+
+
+   Bien que vous puissiez créer n'importe quelle sorte de message avec
+   Python, le cas le plus simple est celui d'un e-mail qui ne contient
+   que du texte brut. L'absence de tout formatage dans le contenu vous
+   permet de vous concentrer sur les techniques permettant de produire
+   le message, plutôt que sur l'aspect de celui-ci. Les étapes qui
+   suivent vous montrent comment se déroule ce processus, même si
+   votre message n'est pas réellement envoyé ici.
+
+   1. Ouvrez une fenêtre de Python en mode Shell
+   2. Tapez le code suivant en appuyant sur Entrée après chaque
+      ligne :
+      #+BEGIN_SRC python
+	from email.mime.text import MIMEText
+	msg = MIMEText("Bonjour le monde !")
+	msg['Subject'] = "Message de test"
+	msg['From'] = 'John Mueller <John@JohnMuellerBooks.com>'
+	msg['To'] = 'John Mueller <John@JohnMuellerBooks.com>'
+      #+END_SRC
+
+      Ici, le message est un texte brut. Avant de pouvoir faire quoi
+      que ce soit, vous devez importer la classe correspondante,
+      c'est-à-dire =MIMEText=. Pour créer des formats de message
+      différents, vous devriez importer d'autres classes, ou encore le
+      module =email.mime= en entier.
+
+      Le constructeur =MIMEText()= nécessite un texte en entrée. Il
+      s'agit du corps de votre message, ce qui fait qu'il peut être
+      assez long. Pour cet exemple, nous nous contentons d'un simple
+      salut. 
+
+      Arrivé là, il faut affecter des valeurs à des attributs
+      standards. Cet exemple en montre trois qui doivent être
+      systématiquement définis : =Subject= (l'objet du message),
+      =From= (le nom sous forme humaine et l'adresse de messagerie de
+      l'expéditeur), et =To= (le nom sous forme humaine et l'adresse
+      de messagerie du destinataire).
+   3. Tapez =msg.as_string()= et appuyez sur Entrée
+
+      Vous obtenez un message réel. Si vous avez déjà regardé comment
+      se présentait la source d'un e-mail au format texte dans votre
+      application de messagerie, vous ne devriez pas être trop
+      dépaysé.
+
+      La section =Content-Type= reflète le type de message que vous
+      avez créé, en l'occurrence =text/plain=, donc du texte brut. La
+      valeur de =charset= spécifie la nature du jeu de caractères
+      utilisé dans le message, de manière à ce que le programme de
+      messagerie du messagerie du destinataire sache comment le
+      gérer. La partie =MIME-Version= spécifie la version du type
+      MIME, ce qui est aussi utile pour le programme de messagerie qui
+      va décoder tout cela. Finalement, =Content-Transfer-Encoding=
+      détermine comment le message est converti en un flux de bits
+      avant d'être expédié au destinataire.
+
+** Spécifier la méthode de transmission
+
+   Nous avons vu plus haut comment l'enveloppe est utilisée pour
+   transférer un message d'un point à un autre. Le processus d'envoi
+   d'un e-mail implique la définition d'une méthode de
+   transmission. Certes, Python crée l'enveloppe pour vous et effectue
+   la transmission, mais vous devez tout de même définir les
+   particularités de celle-ci. Les étapes qui suivent vous aideront à
+   comprendre l'approche la plus simple dans le cas de Python. Elles
+   ne conduisent à aucune transmission effective et réussie, à moins
+   de les adapter à une configuration SMTP spécifique.
+
+   1. Utilisez la fenêtre de Python qui est restée ouverte à la fin de
+      la section << Définir le message >>.
+   2. Tapez le code suivant en appuyant sur Entrée à la fin de chaque
+      ligne (et une seconde fois à la suite de la dernière) :
+      #+BEGIN_SRC python
+	import smtplib
+	s = smtplib.SMTP('localhost')
+      #+END_SRC
+      
+      Le module =smtplib= contient tout ce dont vous besoin pour créer
+      l'enveloppe du message et pour envoyer celui-ci. La première
+      étape du processus consiste à créer une connexion au serveur
+      SMTP, dont vous fournissez le nom dans le constructeur. Si le
+      serveur SMTP indiqué n'existe pas, l'application va générer
+      immédiatement une erreur vous disant que l'hôte a expressément
+      refusé la connexion.
+   3. Tapez =s.sendmail('AdresseExpediteur', ['AdresseDestinataire'],
+      msg.as_string())= et appuyez sur Entrée
+
+      Pour que cette étape fonctionne, vous devez remplacer
+      =AdresseExpediteur= et =AdresseDestinataire= par des adresses de
+      messagerie réelles. Vous ne devez pas inclure ici le format <<
+      humainement lisible >> de ces adresses.
+
+      Il s'agit de l'étape qui crée effectivement l'enveloppe, insère
+      le message proprement dit dans celle-ci, et envoie le tout au
+      destinataire. Notez bien que ces mêmes informations sont
+      fournies de manière totalement indépendante dans l'enveloppe et
+      dans le message lui-même, ce dernier n'étant pas lu par le
+      serveur SMTP.
+
+** Les messages et leur sous-types 
+
+   Plus haut, dans la section << Définir le message >>, nous avons vu
+   les principaux types MIME utilisés, comme texte ou
+   application. Cependant, si les messages ne devaient reposer que sur
+   ces types, la transmission de messages cohérents à quelqu'un
+   d'autre pourrait parfois être difficile. Le problème, c'est que le
+   type des informations n'est pas suffisamment explicite. Le
+   problème, c'est que le type des informations n'est pas suffisamment
+   explicite. Par exemple, si vous envoyez un message qui ne contient
+   que du texte, encore faut-il savoir de quel genre de texte il
+   s'agit avant de pouvoir le traiter, et présupposer tel ou tel
+   comportement par défaut n'est pas une bonne idée. Un message texte
+   pourrait être formé sous la forme de texte brut, mais aussi être en
+   réalité une page HTML. Le type principal n'est donc pas
+   suffisant. Les messages réclament donc un sous-type. Par exemple,
+   si vous voulez envoyer une page HTML, le type est bien textuel,
+   mais le sous-type est =html= (ce qui permet au programme de
+   messagerie du destinataire de savoir ce qu'il doit interpréter). Le
+   type et le sous-type sont séparés par une barre oblique. Si vous
+   regardez la source du message, vous constaterez alors que la valeur
+   de =Content-Type= indique =test/html=.
+
+   En théorie, le nombre des sous-types n'est pas limité, du moins dès
+   lors que la plate-forme dispose d'une méthode adpatée pour traiter
+   chaque cas. Cependant, la réalité est évidemment plus complexe,
+   puisque l'expéditeur n'est pas censé connaître la configuration de
+   la machine du destinataire (à moins que les deux ne se soient mis
+   d'accord par avance pour utiliser un sous-type spécifique). Pour en
+   apprendre plus à ce sujet, vous pouvez par exemple consulter
+   l'adresse [[https://freeformatter.com/mime-types-list.html]]. 
+
+* Créer un e-mail
+
+  Jusqu'ici, vous avez vu comment fonctionnent l'enveloppe et le
+  message. Il est temps maintenant de joindre les deux bouts pour voir
+  comment tout cela se déroule. Les sections qui suivent vous
+  proposent de créer deux messages, le premier sous la forme de texte
+  brut, et le second formaté en HTML. Aucune fioriture particulière
+  n'étant proposée ici, ces deux styles de messages devraient être
+  universellement acceptés.
+
+** Travailler avec un message texte
+   
+   Les messages composés uniquement de texte représentant la méthode
+   la plus efficace et moins gourmande en ressources pour envoyer des
+   informations. Mais, évidemment, ce sont aussi eux qui contiennent
+   le moins d'informations. Vous pouvez utiliser des émoticônes pour
+   souligner certaines choses, mais l'absence de formatage pose
+   parfois problème. Les étapes qui suivent vous montrent comment
+   créer un message textuel simple en utilisant Python. 
+
+   1. Ouvrez une fenêtre de fichier Python
+   2. Tapez le code suivant en appuyant sur Entrée à la fin de chaque
+      ligne :
+      #+BEGIN_SRC python
+	from email.mime.text import MIMEText
+	import smtplib
+
+	msg = MIMEText("Bonjour le monde !")
+
+	msg['Subject'] = 'Message de test'
+	msg['From'] = '<SenderAddress>'
+	msg['To'] = '<RecipientAddress>'
+
+	s = smtplib.SMTP('localhost')
+	s.sendmail('SenderAddress',
+		   ['RecipientAddress'],
+		   msg.as_string())
+
+	print("Message envoyé !")
+      #+END_SRC
+
+      Cet exemple combine tout ce que vous avez vu jusqu'ici dans ce
+      chapitre. Mais c'est la première fois que tout est mis
+      ensemble. Remarquez que, comme dans tout courrier qui se
+      respecte, vous créez d'abord le message et vous remplissez
+      ensuite l'enveloppe.
+
+* Vous et votre serveur SMTP
+  
+  Si vous avez essayé l'exemple de ce chapitre sans le modifier, vous
+  vous demandez vraisemblablement ce qui ne va pas. Il est peu
+  probable que votre système ait un serveur =SMTP= connecté à
+  l'emplacement localhost. La raison pour laquelle celui-ci est
+  utilisé dans les exemples est de simplement fournir une sorte de
+  conteneur destiné à être remplacé par des informations liées à votre
+  propre système.
+
+  Pour que ces exemples fonctionnent réellement, vous avez besoin d'un
+  serveur SMTP ainsi que d'un compte de messagerie issu du monde
+  réel. Bien entendu, vous pourriez installer tout le logiciel
+  nécessaire pour créer un tel environnement sur votre système (jetez
+  par exemple un coup d'oeil du côté de Sendmail, un produit libre
+  accessible depuis l'adresse
+  [[http://sendmail.com/sm/open_source/download/]]). Cela étant dit, votre
+  système d'exploitation est livré avec sa propre messagerie, et la
+  manière la plus simple de voir comment ces exemples fonctionnent
+  consiste à utiliser le même serveur SMTP que celui dont vous vous
+  servez pour envoyer vos e-mails. Pour connaître l'adresse du serveur
+  SMTP, voyez dans les paramètres de votre compte de
+  messagerie. Fournissez alors cette adresse dans les exemples, ainsi
+  que celle de votre messagerie, et bien entendu une adresse pour le
+  destinataire (qui peut être celle d'un autre compte que vous
+  possédez). Sinon, les exemples ne marcheront pas.
+
+** Travailler avec un message HTML
+
+   Il s'agit typiquement d'un message texte comportant un formatage
+   particulier. Les étapes qui suivent vous montrent comment créer un
+   message HTML en utilisant Python. 
+   1. Ouvrez une fenêtre de fichier Python
+   2. Tapez le code suivant en appuyant sur Entrée à la fin de chaque
+      ligne : 
+      #+BEGIN_SRC python
+	from email.mime.text import MIMEText
+	import smtplib
+
+	msg = MIMEText(
+	    "<h1>Titre</h1><p>Bonjour le monde !</p>", "html")
+
+	msg['Subject'] = 'Test de message HTML'
+	msg['From'] = 'SenderAddress'
+	msg['To'] = 'RecipientAddress'
+
+	s = smtplib.SMTP('localhost')
+	s.sendmail('SenderAddress',
+		   ['RecipientAddress'],
+		   msg.as_string())
+
+	print("Message envoyé !")
+      #+END_SRC
+
+      Le corps du message est le même que dans l'exemple précédent, si
+      ce n'est qu'il est maintenant formaté à l'aide de balises
+      HTML. Il ne s'agit pas ici d'une page complète, mais uniquement
+      d'un titre de niveau H1 et d'un paragraphe. 
+
+      Le plus important ici est l'argument =html= qui change le
+      sous-type de =text/plain= en =text/html=. De cette manière, le
+      système de destination saura comment traiter ce message. Si vous
+      oubliez cet argument, votre correspondant verra tout le code
+      HTML, ce qui ne l'aidera pas forcément à comprendre ce que vous
+      voulez lui dire.
+   
+* Consulter ses messages
+
+  À ce stade, vous devriez avoir deux ou trois messages en attente,
+  selon la manière dont vous avez suivi les exemples de ce
+  chapitre. Pour les voir, votre application de messagerie doit
+  recevoir ces e-mails du serveur. Supposons la question réglée. 
+  
+  Si votre application de messagerie offre la possibilité de consulter
+  la source des messages, vous constaterez que vous y retrouverez bien
+  les informations qui ont été vues plus haut dans ce chapitre. Rien
+  n'est différent, car le message n'est pas modifié au cours de son
+  voyage. 
+
+  L'intérêt de créer votre propre application pour envoyer et recevoir
+  des e-mails n'est pas le fait que cela soit intéressant ou pratique,
+  mais d'apporter une grande souplesse. Comme vous avez pu le
+  constater dans cette courte introduction à ce sujet, vous pouvez
+  contrôler chaque aspect des messages lorsque vous créez votre propre
+  application. Python cache tous les détails techniques, ce qui fait
+  que vous pouvez vous concentrer sur l'essentiel, c'est-à-dire
+  produire et transmettre des messages en utilisant les arguments
+  corrects. 
