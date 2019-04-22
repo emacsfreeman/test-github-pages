@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Appel d'une fonction avec passage de paramètres</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Fonction maxi
+      function maxi(x, y)
+      {
+        // Détermination du maximum
+        if (x > y)
+        {
+          return x;
+        }
+        else
+        {
+          return y;
+        }
+      }
+
+      // Affichage du nom du script
+      alert("Exercice Fonction");
+
+      // Déclaration des variables locales
+      var a, b, c, d;
+
+      // Saisie des paramètres a et b
+      a = parseInt(prompt("Paramètre a : "));
+      b = parseInt(prompt("Paramètre b : "));
+
+      // Appel de la fonction maxi
+      alert("Maximum : " + maxi(a, b));
+
+      // Saisie des paramètres c et d
+      c = parseInt(prompt("Paramètre c : "));
+      d = parseInt(prompt("Paramètre d : "));
+
+      // Appel de la fonction maxi
+      document.write("Maximum : " + maxi(c, d));
+    </script>
+  </body>
+</html>
