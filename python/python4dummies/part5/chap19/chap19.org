@@ -1,0 +1,54 @@
+#+TITLE: Dix outils intéressants
+#+AUTHOR: Laurent Garnier
+
+* Outils
+
+  + [[https://wiki.python.org/moin/DevelopmentTools]]
+
+* Pister les bogues avec Roundup Issue Tracker
+
+  + [[https://github.com/]]
+  + [[https://code.google.com/]]
+  + [[https://bitbucket.org/]]
+  + [[https://launchpad.net/]]
+  + [[http://roundup.sourceforge.net/]]
+  
+* Créer un environnement virtuel avec VirtualEnv
+
+  + [[https://pypi.org/project/virtualenv/]]
+
+
+* Installer votre application avec PyInstaller
+
+  + [[http://www.pyinstaller.org/]]
+
+* Construire une documentation de développement avec pdoc
+
+  + [[https://github.com/mitmproxy/pdoc]]
+
+* Développer le code de l'application avec Komodo Edit
+
+  + [[https://www.activestate.com/products/komodo-edit/]]
+
+* Déboguer votre application avec pydbgr
+
+  + [[https://code.google.com/archive/p/pydbgr/]]
+
+* Entrer dans un environnement interactif avec IPython
+
+  + [[https://ipython.org/]]
+
+* Tester les applications Python avec PyUnit  
+
+  + [[https://wiki.python.org/moin/PyUnit]]
+
+* Améliorer votre code avec Isort
+
+  + [[https://timothycrosley.github.io/isort/]]
+
+* Contrôler les versions en utilisant Mercurial
+
+  + [[https://www.mercurial-scm.org/]]
+  + [[https://www.mercurial-scm.org/wiki/tutorial]]
+
+
