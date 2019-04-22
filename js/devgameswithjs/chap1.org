@@ -1,0 +1,34 @@
+#+TITLE: Mettre au point le concept du jeu
+#+AUTHOR: Laurent Garnier
+
+* Etude de marché
+** Quelques géants du Social Gaming
+*** Facebook
+*** Zynga
+*** Disney
+*** Electronic Arts
+** Etude démographique et comportementale
+** Etude technologique
+** Votre étude de marché
+* Positionnement
+** Joueurs ciblés
+** Prix du jeu
+* Type de jeu
+** Action
+** Jeu de rôle
+** Aventure
+** Action-Aventure
+** Simulation
+** Sport
+** Réflexion
+* Choisir un framework
+** Easel.js
+   + [[https://www.createjs.com/]]
+** Kinetic.js
+   + [[http://kineticjs.com/]]
+** Crafty.js
+   + [[http://craftyjs.com/]]
+** Caat.js
+   + [[https://hypertolosana.github.io/caat/]]
+** CanvasEngine.js
+   + [[https://github.com/RSamaium/CanvasEngine]]
