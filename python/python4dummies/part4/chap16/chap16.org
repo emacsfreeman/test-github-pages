@@ -1,0 +1,141 @@
+#+TITLE: Envoyer un e-mail
+#+AUTHOR: Laurent Garnier
+
+Dans ce chapitre, vous allez apprendre comment envoyer un e-mail en
+utilisant Python. Mais, et c'est le plus important, il concerne ce qui
+peut se passer lorsque vous essayez de communiquer vers le monde
+extérieur (autrement dit, à l'extérieur de votre système). Mais si ce
+chapitre se concentre sur un sujet, les e-mails, il contient aussi des
+principes que vous pouvez utiliser pour d'autres tâches. Par exemple,
+si vous travaillez pour un service externalisé, vous avez souvent
+besoin de créer quelque chose qui ressemble à ce que vous devez faire
+pour traiter des messages.
+
+Pour que tout cela reste compréhensible, nous allons nous baser sur la
+notion de courrier postal en tant qu'équivalent des e-mails dans le
+monde réel. La comparaison est d'ailleurs justifiée, car les e-mails
+sont effectivement conçus sur le même modèle. Même si, en d'autres
+temps, ce type d'échange nécessitait que l'expéditeur et le
+destinataire soient connectés en même temps (ce que l'on appellerait
+aujourd'hui un /chat/), nous allons considérer ce sujet tel qu'il se
+présente aujourd'hui, c'est-à-dire un mécanisme d'échange de documents
+de divers types. 
+
+Les exemples de ce chapitre reposent sur la disponibilité d'un serveur
+SMTP (Simple Mail Transfert Protocol, ou protocole de transfert de
+courrier simple, si vous voulez). 
+
+* Courrier et serveur SMTP
+
+  Lorsque vous travaillez avec une messagerie, vous pouvez voir
+  régulièrement quelque chose qui fait référence à l'acronyme SMTP
+  (Simple Mail Transfert Protocol). Bien entendu, la chose peut vous
+  paraître très ésotérique, et même technique, ce qui est plutôt
+  vrai. En fait, l'essentiel est de savoir que cela marche, et que
+  vous pouvez donc envoyer des messages sans souci particulier. Pour
+  autant, comprendre qu'il s'agit d'un peu plus qu'une boîte noire qui
+  prend le message que veut envoyer l'expéditeur pour l'expédier
+  quelque part ailleurs peut ne pas être inutile.
+
+  Si vous prenez les lettres de l'acronyme SMTP dans l'ordre inverse,
+  vous voyez plusieurs éléments :
+  + Protocole :: C'est un ensemble standardisé de règles. Les e-mails
+                 ont besoin d'un protocole accepté et reconnu par tout
+                 le monde. Sinon, vous seriez incapable de recevoir ou
+                 d'envoyer des messages (et pire encore, il n'y aurait
+                 même pas d'Internet sans protocoles).
+  + Transfert de messages :: Les documents sont envoyés d'un endroit à
+       un autre, selon le même modèle que du courrier postal. Dans le
+       cas des e-mails, toute l'affaire repose sur de courtes
+       commandes que votre application envoie vers un serveur
+       SMTP. Par exemple, la commande MAIL FROM indique au serveur
+       SMTP qui envoie le message, tandis que la commande RCPT TO lui
+       explique où l'envoyer.
+  + Simple :: Là, c'est juste pour dire que ce protocole ne réclame
+              que peu d'efforts et de ressources. En règle générale,
+              plus c'est simple, et plus c'est fiable.
+
+
+  Si vous voulez vraiment en savoir plus, essayez de voir ce que dit
+  l'adresse
+  [[https://computer.howstuffworks.com/e-mail-messaging/email.htm]], et en
+  particulier la page de ce site
+  ([[https://computer.howstuffworks.com/e-mail-messaging/email3.htm]]) 
+
+* Comprendre ce qui se passe lorsque vous envoyez un e-mail
+
+  Les e-mails sont devenus si courants et si fiables que la plupart
+  des gens ne se posent même pas la question de savoir comment un tel
+  miracle est possible. En fait, la même question vaut pour le
+  courrier postal. Si vous y réfléchissez un peu, le simple fait qu'un
+  courrier, qu'il soit posté dans une boîte aux lettres ou expédié via
+  logiciel de messagerie, parte d'un point A pour arriver sans erreur
+  et sans encombre à un point B semble être chose pratiquement
+  impossible. Et pourtant, elle tourne, comme disait Copernic ! Les
+  sections qui suivent examinent ce qui se passe lorsque vous écrivez
+  un message électronique, que vous cliquez sur Envoyer, et que le
+  destinataire le reçoit pratiquement dans l'instant qui suit.
+
+** Un e-mail, c'est comme du courrier
+
+   La meilleure manière d'envisager les choses, c'est de considérer
+   que lire un e-mail est comme lire une lettre sur papier. Lorsque
+   vous écrivez une lettre, il vous faut deux morceaux de papier au
+   minimum. Le premier sert à rédiger votre lettre, et le second est
+   une enveloppe. En supposant que le service postal est honnête (et
+   il l'est!), le papier contenu dans l'enveloppe n'est jamais examiné
+   par qui que ce soit d'autre que le destinataire. On peut en dire
+   autant d'un message électronique. Enfin, en théorie...
+
+   Un e-mail se décompose ainsi :
+   + Message :: C'est le contenu de l'e-mail, qui est formé de deux
+                éléments :
+		- En-tête : C'est la partie de l'e-mail qui contient
+                  le sujet, la liste des destinataires, ainsi que
+                  d'autres compléments, comme le degré d'urgence du
+                  message.
+                - Corps : C'est le message proprement dit. Celui-ci
+                  peut être rédigé en texte brut, formaté en HTML,
+                  contenir un ou plusieurs documents, ou toute
+                  combinaison possible de tous ces éléments.
+   + Enveloppe :: C'est ici un conteneur pour le message. L'enveloppe
+                  fournit des informations sur l'expéditeur et le
+                  destinaire, exactement comme pour un courrier
+                  papier. Par contre, vous n'avez pas besoin de coller
+                  un timbre.
+
+		  
+   Pour écrire et lire vos e-mails, vous avez besoin d'un logiciel de
+   messagerie. Lors de la configuration de celui-ci, vous définissez
+   les renseignements qui concernent votre compte d'utilisateur, ce
+   qui permet au << service postal >> de savoir que vous avez bien le
+   droit d'envoyer et de recevoir des messages en passant par leurs <<
+   boîtes aux lettres >> et leurs << facteurs >>.
+
+   Lorsque vous rédigez un message et que vous cliquez sur Envoyer :
+   1. L'application place votre missive, l'en-tête en premier, dans
+      une enveloppe virtuelle qui comprend les informations sur
+      l'expéditeur (vous) et le destinataire.
+   2. L'application utilise les informations de votre compte pour
+      contacter le serveur SMTP et lui transmettre votre message.
+   3. Le serveur SMTP lit uniquement les informations qu'il trouve sur
+      l'enveloppe. Il vérifie que vous êtes bien un expéditeur
+      autorisé, puis il envoie le message au destinataire.
+   4. L'application de messagerie du destinataire se connecte à un
+      serveur local, elle y récupère le message, puis affiche le
+      contenu de celui-ci sur son écran.
+
+
+   
+   Evidemment, le processus réel est un peu plus compliqué que cette
+   description. Mais, pour l'essentiel, c'est ainsi que les choses se
+   passent. En fait, les étapes essentielles sont identiques au
+   fonctionnement de n'importe quel service postal. Vous prenez la
+   place de votre ordinateur, et le destinataire en fait de même. Le
+   serveur SMTP est remplacé par un bureau de poste, le serveur local
+   par un centre de tri, et les connexions électroniques par un
+   facteur ou une factrice. Dans tous les cas, quelqu'un génère un
+   message, celui-ci est transporté d'une manière ou d'une autre
+   jusqu'à son destinataire, et celui-ci ouvre le message pour le lire
+   (il peut aussi le jeter à la corbeille - encore une image qui relie
+   le monde virtuel au monde réel). 
