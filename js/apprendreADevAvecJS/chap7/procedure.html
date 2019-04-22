@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Procédure</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Procédure doublement
+      function doublement(x, y)
+      {
+        // Doublement
+        x *= 2;
+        y *= 2;
+        // Affichage du couple
+        document.write("Le couple doublé est (" + x + ", " + y + ") <br>");
+      }
+
+      // Affichage du nom du script
+      alert("Exercice Procédure");
+
+      // Déclaration des variables locales
+      var a, b, c, d;
+
+      // Saisie des paramètres
+      a = parseInt(prompt("Paramètre a : "));
+      b = parseInt(prompt("Paramètre b : "));
+
+      // Appel de la procédure doublement
+      doublement(a, b);
+
+      // Saisie des paramètres c et d
+      c = parseInt(prompt("Paramètre c : "));
+      d = parseInt(prompt("Paramètre d : "));
+
+      // Appel de la procédure doublement
+      doublement(c, d);
+    </script>
+  </body>
+</html>
