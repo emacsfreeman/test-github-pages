@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POO 6 : Notion de prototype</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Définition d'une fonction constructeur de nom Voiture
+      // NB : le constructeur est ici vide
+      var Voiture = function(){};
+
+      // Test de l'existence par défaut d'un prototype pour tout constructeur
+      document.write("Prototype du constructeur : " + Voiture.prototype);
+
+      // Ajout d'une méthode zigzaguer au prototype du constructeur Voiture
+      Voiture.prototype.zigzaguer = function()
+      {
+        document.write("zigzague dangereusement<br>");
+      };
+
+      // Instanciation d'un objet simca1100 via le constructeur Voiture
+      var simca1100 = new Voiture();
+
+      // Appel de la méthode zigzaguer de l'objet simca1100 accessible via le prototype du constructeur Voiture
+      document.write("<br>Que fait la simca1100 ? Elle ");
+      simca1100.zigzaguer();
+
+      // Instanciation d'un objet renault12 via le constructeur Voiture
+      var renault12 = new Voiture();
+
+      // Test méthode zigzaguer partagée ou pas entre les objets simca1100 et renault12
+      if (simca1100.zigzaguer == renault12.zigzaguer)
+      {
+        document.write("Méthode zigzaguer partagée par les objets simca1100 et renault12<br>");
+      }
+      else
+      {
+        document.write("Méthode zigzaguer non partagée par les objets simca1100 et renault12<br>");
+      }
+    </script>
+  </body>
+</html>

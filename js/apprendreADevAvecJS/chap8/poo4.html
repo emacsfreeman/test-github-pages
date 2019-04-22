@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POO 4 : Passage de paramètre(s) à un constructeur</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Définition d'une fonction constructeur de nom Voiture
+      var Voiture = function(modele)
+      {
+        // Attribut(s) de l'objet renseigné à l'instanciation
+        this.modele = modele;
+      }
+
+      // Instanciation d'un objet simca1100 via le constructeur Voiture avec passage de paramètre
+      var maVoiture = new Voiture("simca1100");
+
+      // Affichage de l'attribut modele de l'objet maVoiture
+      document.write("Je possède une " + maVoiture.modele);
+    </script>
+  </body>
+</html>

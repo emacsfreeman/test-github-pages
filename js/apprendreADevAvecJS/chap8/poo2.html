@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POO 2 : Méthode par Constructeur</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Définition d'une fonction constructeur de nom Voiture
+      var Voiture = function()
+      {
+        // Attribut(s) de l'objet
+        this.possedeMoteur = true;
+        // Méthode(s) de l'objet
+        this.avancer = function()
+        {
+          document.write("avance");
+        }
+      }
+
+      // Instanciation d'un objet simca1100 via le constructeur Voiture
+      var simca1100 = new Voiture();
+
+      // Affichage de l'attribut possedeMoteur de l'objet simca1100
+      if (simca1100.possedeMoteur)
+      {
+        document.write("La voiture simca1100 possède pas de moteur<br>");
+      }
+      else
+      {
+        document.write("La voiture simca1100 ne possède pas de moteur !<br>");
+      }
+
+      // Appel de la méthode avancer de l'objet simca1100
+      document.write("La voiture simca1100");
+      simca1100.avancer();
+    </script>
+  </body>
+</html>

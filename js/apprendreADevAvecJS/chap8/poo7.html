@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POO 7 : Surcharge d'une méthode</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Définition d'une fonction constructeur
+      // NB : le constructeur est ici vide
+      var Voiture = function(){};
+
+      // Ajout d'une méthode piler au prototype du constructeur
+      Voiture.prototype.piler = function()
+      {
+        document.write("pile<br>");
+      }
+
+      // Instanciation d'un objet simca1100 via le constructeur Voiture
+      var simca1100 = new Voiture();
+
+      // Appel de la méthode piler de l'objet simca1100 accessible via le prototype du constructeur Voiture
+      document.write("La simca1100 ");
+      simca1100.piler();
+
+      // Instanciation d'un objet renault12 via le constructeur Voiture
+      var renault12 = new Voiture();
+
+      // Modification (surcarge) de la méthode piler pour l'objet simca1100
+      simca1100.piler = function()
+      {
+        document.write("pile brutalement<br>");
+      };
+
+      // Appel de la méthode piler (surchargée) de l'objet simca1100
+      document.write("La simca1100 ");
+      simca1100.piler();
+
+      // Appel de la méthode piler (non surchargée) de l'objet renault12
+      document.write("La renault12 ");
+      renault12.piler();
+    </script>
+  </body>
+</html>

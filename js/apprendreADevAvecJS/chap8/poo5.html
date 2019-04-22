@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POO 5 : Non-partage des méthodes par les instances d'objets</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Définition d'une fonction constructeur de nom Voiture
+      var Voiture = function()
+      {
+        // Attribut(s) de l'objet
+        this.possedeMoteur = true;
+        // Méthode(s) de l'objet
+        this.avancer = function()
+        {
+          document.write("avance");
+        }
+        this.reculer = function()
+        {
+          document.write("recule");
+        }
+      }
+
+      // Instanciation d'un objet simca1100 via le constructeur Voiture
+      var simca1100 = new Voiture();
+
+      // Instanciation d'un objet renault12 via le constructeur Voiture
+      var renault12 = new Voiture();
+
+      // Test d'égalité des méthodes avancer des objets simca1100 et renault12
+      if (simca1100.avancer == renault.avancer)
+      {
+        document.write("Méthode avancer partagée par les objets simca1100 et Renault12<br>");
+      }
+      else
+      {
+        document.write("Méthode avancer non partagée par les objets simca1100 et Renault12<br>");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POO 8 : Extension d'un prototype</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Définition d'une fonction constructeur de nom Voiture
+      // NB : le constructeur est ici vide
+      var Voiture = function() {};
+
+      // Ajout d'une méthode accelerer au prototype du constructeur Voiture
+      Voiture.prototype.accelerer = function()
+      {
+        document.write("accélère<br>");
+      };
+
+      // Instanciation d'un objet simca1100 via le constructeur Voiture
+      var simca1100 = new Voiture();
+
+      // Appel de la méthode acceler de l'objet simca1100 accessible via le prototype du constructeur Voiture
+      document.write("La simca1100 ");
+      simca1100.acceler();
+
+      // Ajout (surcharge) de la méthode ralentir accessible via le prototype du constructeur
+      Voiture.prototype.ralentir = function()
+      {
+        document.write("ralentit");
+      };
+
+      // Appel de la méthode ralentir (ajoutée dans le prototype du constructeur Voiture) à partir de l'objet simca1100
+      document.write("La simca1100 ");
+      simca1100.ralentir();
+    </script>
+  </body>
+</html>

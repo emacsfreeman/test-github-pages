@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POO 11 : Une seconde limite à notre héritage</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Définition d'une fonction constructeur de nom Vehicule
+      // NB : le constructeur est ici vide
+      var Vehicule = function() {};
+
+      // Ajout d'une méthode accelerer au prototype du constructeur Vehicule
+      Vehicule.prototype.accelerer = function()
+      {
+        document.write("accélère<br>");
+      };
+
+      // Définition d'une fonction constructeur de nom Voiture
+      // NB : le constructeur est ici vide
+      var Voiture = function() {};
+
+      /*
+      Copie de tous les éléments (attributs et méthodes) du prototype
+      du constructeur Vehicule dans le prototype du constructeur Voiture
+      NB : surtout ne pas faire Voiture.prototype = Vehicule.prototype car
+      dans ce cas le prototype serait partagé
+      */
+      for (cle in Vehicule.prototype)
+      {
+        Voiture.prototype[cle] = Vehicule.prototype[cle];
+      }
+
+      // Ajout de la méthode ralentir au prototype du constructeur Vehicule
+      Vehicule.prototype.ralentir = function()
+      {
+        document.write("ralentir<br>");
+      };
+
+      // Instanciation d'un objet vaisseau via le constructeur Vehicule
+      var vaisseau = new Vehicule();
+
+      // Appel de la méthode ralentir pour l'objet vaisseau
+      document.write("Le vaisseau ");
+      vaisseau.ralentir();
+
+      // Instanciation d'un objet simca1100 via le constructeur Voiture
+      var simca1100 = new Voiture();
+
+      // Appel de la méthode ralentir pour l'objet simca1100
+      document.write("la simca1100 ");
+      simca1100.ralentir();
+    </script>
+  </body>
+</html>

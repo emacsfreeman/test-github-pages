@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POO 3 : Variables privée</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Définition d'une fonction constructeur de nom Voiture
+      var Voiture = function()
+      {
+        // Variable(s) locale(s) non accessible(s) depuis l'extérieur de l'objet
+        var nombreRoues = 4;
+        // Méthode(s) de l'objet
+        this.avancer = function()
+        {
+          document.write("avance");
+        }
+      }
+
+      // Instanciation d'un objet simca1100 via le constructeur Voiture
+      var simca1100 = new Voiture();
+
+      // Appel de la méthode avancer de l'objet simca1100
+      document.write("La voiture simca1100 ");
+      simca1100.avancer();
+
+      // Tentative d'affichage de la variable locale du constructeur Voiture
+      document.write("<br>");
+      document.write("La voiture simca1100 a " + simca1100.nombreRoues + " roues");
+
+    </script>
+  </body>
+</html>

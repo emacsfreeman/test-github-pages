@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POO 10 : Limite de l'héritage de la séquence n°9</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Définition d'une fonction constructeur de nom Vehicule
+      // NB : Le constructeur est ici vide
+      var Vehicule = function() {};
+
+      // Ajout d'une méthode accelerer au prototype du constructeur Vehicule
+      Vehicule.prototype.accelerer = function()
+      {
+        document.write("accélère<br>");
+      };
+
+      // Définition d'une fonction constructeur de nom Voiture
+      // NB : Le constructeur est ici vide
+      var Voiture = function() {};
+
+      /*
+      Copie de tous les éléments (attributs et méthodes) du prototype du
+      constructeur Vehicule dans le prototype du constructeur Voiture
+      NB : surtout ne pas faire Voiture.prototype = Vehicule.prototype
+      car dans ce cas le prototype serait partagé
+      */
+      for (cle in Vehicule.prototype)
+      {
+        Voiture.prototype[cle] = Vehicule.prototype[cle];
+      }
+
+      // Instanciation d'un objet simca1100 via le constructeur Voiture
+      var simca1100 = new Voiture();
+
+      // Constructeur utilisé pour la création de l'objet simca1100 est-il Voiture ?
+      document.write("simca1100 a pour constructeur Voiture : ");
+      document.write(simca1100 instanceof Voiture);
+
+      // Constructeur utilisé pour la création de l'objet simca1100 est-il Vehicule ?
+      document.write("<br>simca1100 a pour constructeur Vehicule : ");
+      document.write(simca1100 instanceof Vehicule);
+    </script>
+  </body>
+</html>
