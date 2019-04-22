@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Décompte des nombres pairs dans un tableau</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Déclaration des variables locales
+      /*
+      i       : compteur de boucle
+      nbPairs : cumul du nombre de nombres pairs
+      tableau : tableau de nombres
+      */
+      var i, nbPairs;    var tableau = new Array;
+
+      // Initialisations
+      nbPairs = 0;
+      for (var i = 1; i <= 5; i++)
+      {
+        tableau[i] = parseInt(prompt("tableau[" + i + "] : "));
+      }
+
+      // Détermination du nombre de nombres pairs dans le tableau
+      for (var i = 1; i <= 5 ; i++)
+      {
+        if (tableau[i] % 2 == 0)
+        {
+          nbPairs += 1;
+        }
+      }
+
+      // Affichage du résultat
+      document.write("Le tableau contient " + nbPairs + " nombres pairs");
+    </script>
+    </body>
+</html>
