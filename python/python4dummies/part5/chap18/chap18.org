@@ -1,0 +1,65 @@
+#+TITLE: Dix domaine où faire fortune avec Python
+#+AUTHOR: Laurent Garnier
+
+* Utiliser Python dans l'assurance qualité
+
+* Devenir responsable informatique dans une petite organisation  
+
+  + [[https://support.microsoft.com/fr-fr/help/276494/using-python-scripts-with-iis]]
+
+
+* Applications et scripts Python
+  
+  + [[https://www.autodesk.fr/products/maya/overview]]
+  + [[https://www.autodesk.fr/products/3ds-max/overview]]
+  + [[https://www.3ds.com/fr/produits-et-services/simulia/produits/abaqus/]]
+  + [[https://www.blender.org/]]
+  + [[https://developers.maxon.net/docs/Cinema4DPythonSDK/html/index.html]]
+  + [[https://www.gimp.org/docs/python/]]
+  + [[https://cloud.google.com/appengine/docs/python/]]
+  + [[http://www.sidefx.com/docs/houdini/hom/index.html]]
+  + [[http://wiki.inkscape.org/wiki/index.php/PythonEffectTutorial]]
+  + [[https://pypi.org/project/lightwave/]]
+  + [[http://sdk.luxology.com/wiki/Python]]
+  + [[http://docs.autodesk.com/MB/2014/ENU/MotionBuilder-SDK-Documentation/index.html?url=files/GUID-747BA9FF-F7F4-4637-BB99-F130AD48BB00.htm,topicNumber=d30e364][MotionBuilder]]
+  + [[https://learn.foundry.com/nuke/developers/63/pythondevguide/basics.html]]
+  + [[https://www.paintshoppro.com/fr/]]
+  + [[https://fr.flossmanuals.net/scribus/les-scripts/]]
+  + [[https://vimeo.com/75264122][Softimage]]
+
+* Administrer
+  
+  + [[https://trigger.readthedocs.io/en/latest/]]
+
+* Apprendre aux autres
+
+  + [[https://www.raspberrypi.org/]]
+  + [[https://retropie.org.uk/]]
+  + [[https://raspberryblog.de/?tag=python]]
+  + [[https://www.raspberrypi.org/blog/boris-the-twitter-dino-bot/]]
+
+* Aider les gens à choisir un emplacement
+
+  + [[https://www.qgis.org/en/site/about/case_studies/czech_brno.html]]
+  + [[https://www.gislounge.com/python-and-gis-resources/]]
+  + [[https://www.e-education.psu.edu/geog485/node/91]]
+  + [[https://www.esri.com/fr-fr/arcgis/about-arcgis/overview]]
+  + [[https://resources.arcgis.com/en/communities/python/]]
+
+* Explorer des données
+
+  + [[http://guidetodatamining.com/]]
+  + [[https://dzone.com/refcardz/data-mining-discovering-and?chapter=1]]
+
+* Interagir avec des systèmes embarqués
+  + [[https://wiki.python.org/moin/EmbeddedPython]]
+  + [[https://youtu.be/UjdU77m1228]]
+  + [[https://www.linuxjournal.com/article/8513]]
+
+* Travailler avec des données scientifiques
+
+  + [[https://wiki.python.org/moin/NumericAndScientific]]
+
+* Effectuer des analyses de données en temps réel
+
+  
