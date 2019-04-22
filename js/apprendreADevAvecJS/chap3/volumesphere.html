@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Volume d'une sphère</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Déclaration des variables locales
+      var pi, rayon, surface, volume;
+
+      // Initialisation des variables
+      pi = 3.14;
+      rayon = prompt("Rayon de la sphère : ");
+
+      // Calculs
+      surface = 4 * pi * rayon * rayon;
+      volume = surface * rayon / 3;
+
+      // Affichage des résultats
+      document.write("Rayon de la sphère : "
+              + rayon + "<br>");
+      document.write("Surface : " + surface
+              + "<br> Volume : " + volume);
+
+    </script>
+    <br><br><br>
+    <center>
+      <a href="JavaScript:window.location=
+      'view-source:'+window.location">
+      Code source
+    </a>
+    </center>
+  </body>
+</html>
