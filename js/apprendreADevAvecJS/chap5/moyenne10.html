@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Moyenne de 10 nombres</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Déclaration des variables locales
+      var nombreLu, compteur, somme, moyenne;
+
+      // Initialisations
+      compteur = 1;
+      somme = 0.0;
+
+      // Boucle de traitement
+      while (compteur <= 10)
+      {
+        nombreLu = parseFloat(prompt("Nombre n° " + compteur + " : "));
+        somme = somme + parseFloat(nombreLu);
+        compteur = compteur + 1;
+      }
+
+      // Affichage du résultat
+      moyenne = somme / 10;
+      document.write("Moyenne : " + moyenne);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Décompte du nombre de voyelles dans un mot</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Déclaration des variables locales
+      var mot, nombre_voyelles, compteur;
+
+      // Saisie du mot
+      mot = prompt("Mot : ");
+
+      // Conversion en majuscules (pour éviter de faire trop de tests)
+      mot = mot.toUpperCase();
+
+      // Initialisation des variables
+      nombre_voyelles = 0;
+
+      // Détermination du nombre de voyelles
+      for (var compteur = 0; compteur < mot.length; compteur++)
+      {
+        switch (mot.charAt(compteur))
+        {
+          case "A":
+            nombre_voyelles += 1;
+            break;
+          case "E":
+            nombre_voyelles += 1;
+            break;
+          case "I":
+            nombre_voyelles += 1;
+            break;
+          case "O":
+            nombre_voyelles += 1;
+            break;
+          case "U":
+            nombre_voyelles += 1;
+            break;
+          case "Y":
+            nombre_voyelles += 1;
+            break;
+        }
+      }
+
+      // Affichage du résultat
+      document.write(mot, " contient " + nombre_voyelles + " voyelles");
+    </script>
+  </body>
+</html>

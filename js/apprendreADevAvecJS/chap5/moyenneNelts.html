@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Moyenne d'une série de n nombres</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Initialisations
+      compteur = 1;
+      somme = 0.0;
+
+      // Saisie d'un premier nombre
+      nombreLu = parseFloat(prompt("Nombre (0 pour finir) : "));
+
+      // Boucle de traitement
+      while (nombreLu != 0)
+      {
+        somme = somme + parseFloat(nombreLu);
+        nombreLu = parseFloat(prompt("Nombre (0 pour finir) : "));
+        compteur = compteur + 1;
+      }
+
+      // Affichage du résultat
+      if (compteur == 1)
+      {
+        document.write("Aucun nombre n'a été saisi");
+      }
+      else
+      {
+        moyenne = somme / (compteur - 1);
+        document.write("Moyenne : " + moyenne);
+      }
+    </script>
+  </body>
+</html>

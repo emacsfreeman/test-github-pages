@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Moyenne avec une boucle do while</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Initialisations
+      compteur = 0;
+      somme = 0.0;
+
+      // Boucle de traitement
+      do
+      {
+        nombreLu = parseFloat(prompt("Nombre (0 pour finir) : "));
+        compteur = compteur + 1;
+        somme = somme + parseFloat(nombreLu);
+      } while (nombreLu != 0)
+
+      // Affichage du résultat
+      if (compteur == 1)
+      {
+        document.write("Aucun nombre n'a été saisi");
+      }
+      else
+      {
+        moyenne = somme / (compteur - 1);
+        document.write("Moyenne : " + moyenne);
+      }
+    </script>
+  </body>
+</html>
