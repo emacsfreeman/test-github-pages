@@ -1,0 +1,61 @@
+#+TITLE: Dix bibliothèque à connaître
+#+AUTHOR: Laurent Garnier
+
+* Meilleur emplacement pour trouver une liste de bibliothèque
+
+  + [[https://wiki.python.org/moin/UsefulModules]]
+  + [[http://www.lleess.com/2013/03/7-python-libraries-you-should-know-about.html]]
+
+* Développer un environnement sécurisé avec PyCrypto
+
+  + [[https://www.dlitz.net/software/pycrypto/]]
+
+* Interagir avec des bases de données grâce à SQLAlchemy
+
+  + [[https://www.sqlalchemy.org/]]
+
+* Voir le monde avec Google Maps
+
+  + [[https://pypi.org/project/googlemaps/]]
+
+* Ajouter une interface utilisateur graphique avec TkInter
+
+  + [[https://wiki.python.org/moin/TkInter]]
+  + [[https://tcl.tk/]]
+
+* Présenter des données tabulées avec PrettyTable
+
+  + [[https://pypi.org/project/PrettyTable/]]
+
+* Sonoriser votre application avec PyAudio
+
+  + [[https://people.csail.mit.edu/hubert/pyaudio/]]
+
+* Manipuler des images avec PyQtGraph
+
+  + [[http://pyqtgraph.org/]] : il faut (obligatoirement) les outils
+    suivants :
+    - [[https://wiki.python.org/moin/PyQt]] (PyQt > 4.8)
+    - [[https://wiki.python.org/moin/PySide]] 
+    - [[https://www.numpy.org/]]
+    - [[https://www.scipy.org/]]
+    - [[http://pyopengl.sourceforge.net/]]
+
+* Localiser vos informations avec IRLib
+
+  + [[https://github.com/gr33ndata/irlib]]
+
+* Créer des liens avec Java en utilisant JPype
+
+  + [[http://jpype.sourceforge.net/]]
+
+* Accéder à des ressources réseau locales avec Twisted Matrix
+
+  + [[https://twistedmatrix.com/trac/]]
+
+* Accéder à des ressources Internet en utilisant des bibliothèques
+
+  + [[https://github.com/jcgregorio/httplib2]]
+
+    
+
