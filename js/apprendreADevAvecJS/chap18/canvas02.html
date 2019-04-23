@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>CANVAS_02</title>
+
+    <canvas
+            id="grilleMorphion"
+            width="1000"
+            height="800">
+            Attention votre navigateur ne supporte pas l'élément Canvas
+    </canvas>
+    
+    <script type="text/javascript">
+      // Fonction tracerGrille
+      function tracerGrille(x, y, cote)
+      {
+        // Tracé dans le canvas
+        // Définition des propriétés des traits
+        contexteCanvas.strokeStyle = "black";
+        contexteCanvas.lineWidth = 1;
+
+        // Définition des propriétés de la grille
+        var xDepart = x;
+        var yDepart = y;
+        var longueurCote = cote;
+
+        // Début du parcours en ligne brisée
+        contexteCanvas.beginPath();
+
+        // Point de départ du tracé (x, y)
+        contexteCanvas.moveTo(xDepart, yDepart);
+
+        // Tracé du trait haut horizontal
+        contexteCanvas.lineTo(xDepart + longueurCote, yDepart);
+
+        // Tracé du trait droit vertical
+        contexteCanvas.lineTo(xDepart + longueurCote, yDepart + longueurCote);
+
+        // Tracé du trait bas horizontal
+        contexteCanvas.lineTo(xDepart, yDepart + longueurCote);
+
+        // Tracé du trait gauche vertical
+        contexteCanvas.lineTo(xDepart, yDepart);
+
+        // Fin de parcours en ligne brisée (facultatif)
+        contexteCanvas.closePath();
+
+        // Tracé effectif
+        contexteCanvas.stroke();
+      }
+    </script>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+      // Définition de l'emplacement du canvas
+      var emplacementCanvas = document.getElementById("grilleMorphion");
+
+      // Définition du contexte du canvas (2D)
+      var contexteCanvas = emplacementCanvas.getContext("2d");
+
+      /* Tracé de la grille
+      NB : la fonction tracerGrille possède 3 paramètres :
+           - Paramètre 1 : xDepart
+           - Paramètre 2 : yDepart
+           - Paramètre 3 : longueurCote
+      */
+      for (ligne = 1; ligne <= 5; ligne++)
+      {
+        // Tracé des 5 carrés de la ligne n° ligne de la grille
+        for (var colonne = 1; colonne <= 5; colonne++)
+        {
+          tracerGrille(colonne * 100, ligne * 100, 100);
+        }
+      }
+
+    </script>
+  </body>
+</html>
