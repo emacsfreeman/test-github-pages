@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Objet 3</title>
+    <script type="text/javascript">
+      // Fonction demarrerTimer
+      function demarrerTimer()
+      {
+        // Valeur de départ du timer
+        valeurTimer = 11;
+
+        // Appel de la fonction d'actualisation du timer
+        actualiserTimer();
+      }
+
+      // Fonction actualiserTimer
+      function actualiserTimer()
+      {
+        if (valeurTimer > 0)
+        {
+          // Décrémentation d'une unité (seconde)
+          valeurTimer -= 1;
+          // Affichage de la valeur actualisée
+          document.getElementById("affichageTimer").innerHTML = valeurTimer;
+          // Actualisation par appel de la fonction actualiserTimer
+          if (valeurTimer > 0)
+          {
+            // Actualisation toutes les secondes
+            monTimer = setTimeout("actualiserTimer()", 1000);
+          }
+        }
+      }
+
+      // Fonction arreterTimer
+      function arreterTimer()
+      {
+        clearTimeout(monTimer);
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <input type="button"
+             value="Démarrage du timer"
+             onclick="demarrerTimer()">
+      <input type="button"
+             value="Arreter du timer"
+             onclick="arreterTimer()">
+    </div>
+    <br><br>
+    <div id="affichageTimer">Timer</div>
+  </body>
+</html>

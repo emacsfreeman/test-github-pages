@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Objet 2</title>
+    <script type="text/javascript">
+      // Fonction afficherHeureCourante
+      function afficherHeureCourante()
+      {
+        // Récupération de l'heure système
+        var maReferenceTemps = new Date();
+
+        // Conversion de l'heure système en format loccal (hh:mm:ss)
+        var hhmmss = maReferenceTemps.toLocaleTimeString();
+
+        // Affichage dans le span heureEnCours
+        document.getElementById("heureEnCours").innerHTML = hhmmss;
+      }
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Affichage du nom du script
+      alert("DATE_02");
+
+      // Appel de la fonction afficherHeureCourante
+      var monHeure = setInterval (
+        function()
+        {
+          afficherHeureCourante()
+        }, 1000
+      );
+    </script>
+
+    Heure en cours : <span id="heureEnCours"></span>
+  </body>
+</html>

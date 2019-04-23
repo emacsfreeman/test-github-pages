@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Objet Window 2</title>
+    <script type="text/javascript">
+      // Fonction ouvrirFenetre
+      function ouvrirFenetre(URL)
+      {
+        maFenetre = window.open(
+          URL, "FENETRE_02",
+          "width=400, height=200,location=1, titlebar=yes, resizable=yes"
+        );
+      }
+      // Fonction fermerFenetre
+      function fermerFenetre()
+      {
+        maFenetre.close();
+      }
+    </script>
+  </head>
+  <body>
+    <form>
+      Ouverture d'une fenêtre avec passage de l'URL en paramètre<br>
+      <input type="button"
+             value="Ouverture d'une fenêtre brave.com"
+             onclick="ouvrirFenetre('https://brave.com/')">
+      <br><br><br>
+      Fermeture de la fenêtre <br>
+      <input type="button"
+             value="Fermeture de la fenêtre"
+             onclick="fermerFenetre()">
+    </form>
+  </body>
+</html>

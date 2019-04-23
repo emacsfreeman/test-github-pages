@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Objet Navigator 1</title>
+  </head>
+  <body>
+    <div>
+      <input
+            type="button"
+            value="Caractéristiques du navigateur"
+            onclick="testerNavigateur()">
+    </div>
+
+    <br><br>
+    <div id="affichageInfosNavigateur"></div>
+
+    <script type="text/javascript">
+      // Fonction testerNavigateur
+      function testerNavigateur()
+      {
+        var caracteristiquesNavigateur = "";
+        caracteristiquesNavigateur = "Code du navigateur : "
+          + navigator.appCodeName + "<br>";
+        caracteristiquesNavigateur += "Nom du navigateur : "
+          + navigator.appName + "<br>";
+        caracteristiquesNavigateur += "Version : "
+          + navigator.appVersion + "<br>";
+        caracteristiquesNavigateur += "Support des cookies : "
+          + navigator.cookieEnabled + "<br>";
+        caracteristiquesNavigateur += "Système d'exploitation : "
+          + navigator.platform + "<br>";
+        caracteristiquesNavigateur += "User-agent header : "
+          + navigator.userAgent + "<br>";
+        caracteristiquesNavigateur += "User-agent language : "
+          + navigator.systemLanguage + "<br>"; 
+
+        // Affichage des caractéristiques du navigateur
+        document.getElementById("affichageInfosNavigateur").innerHTML = caracteristiquesNavigateur;
+      }
+    </script>
+
+  </body>
+</html>

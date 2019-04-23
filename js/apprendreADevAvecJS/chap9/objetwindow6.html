@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Objet Window 6</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Infos sur l'URL de la page en cours
+
+      // Propriété host
+      document.write("<br>Propriété location.host : " + window.location.host);
+
+      // Propriété hostname
+      document.write("<br>Propriété location.hostname : " + window.location.hostname);
+
+      // Propriété href
+      document.write("<br>Propriété location.href : " + window.location.href);
+
+      // Propriété pathname
+      document.write("<br>Propriété location.pathname : " + window.location.pathname);
+
+      // Propriété port
+      document.write("<br>Propriété location.port : " + window.location.port);
+
+      // Fonction revenirPagePrecedente
+      function revenirPagePrecedente()
+      {
+        // Retour à la page précédente
+        window.history.back();
+      }
+
+    </script>
+
+    <div>
+      <input type="button"
+             value="Retour à la précédente"
+             onclick="revenirPagePrecedente()">
+    </div>
+  </body>
+</html>
