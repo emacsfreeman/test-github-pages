@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Code QR embarquant un numéro de téléphone</title>
+  </head>
+  <body>
+    <h2>QR code permettant de lancer un appel téléphonique</h2>
+    <form method="post"
+    action="http://qr-code-generator.iwwwit.com/createur-qr-code.php">
+        Numéro de téléphone : <input type="text" name="tel-num" id="tel-num">
+        <input type="hidden" name="couleurf" class="couleurf" value="#ffffff">
+        <input type="hidden" name="couleurp" class="couleurp" value="#000000">
+        <input type="hidden" name="err" class="err-l" value="L">
+        <input type="hidden" name="qrsize" class="qrsize" value="300">
+        <input type="submit" name="sub" value="Génération du code QR">
+    </form>
+  </body>
+</html>
