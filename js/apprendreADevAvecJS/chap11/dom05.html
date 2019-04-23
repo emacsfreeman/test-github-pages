@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DOM_05</title>
+  </head>
+  <body>
+    <strong>Formulaire n°1</strong>
+    <form name="form1" id="idForm1" method="post">
+      Champ 1 : <input type="text" id="champ1" size="20"><br>
+      Champ 2 : <input type="text" id="champ2" size="20"><br>
+    </form>
+    <br><br>
+    <strong>Formulaire n°2</strong>
+    <form name="form2" id="idForm2" method="post">
+      Champ 3 : <input type="text" id="champ3" size="20"><br>
+      Champ 4 : <input type="text" id="champ4" size="20"><br>
+    </form>
+    <br><br>
+    <strong>Formulaire n°3</strong>
+    <form name="form3" id="idForm3" method="post">
+      Champ 5 : <input type="text" id="champ5" size="20"><br>
+      Champ 6 : <input type="text" id="champ6" size="20"><br>
+    </form>
+    <br><br>
+
+    <script type="text/javascript">
+      // Affichage du nombre de forumulaire(s) du document
+      document.write("Nombre de forumulaire(s) du document : "
+        + document.forms.length + "<br>");
+
+      // Affichage du nom du 1er forumulaire du document
+      document.write("Nom du 1er forumulaire du document : "
+        + document.forms[0].name + "<br>");
+
+      // Affichage du nom de l'identifiant du 2ème forumulaire du document
+      document.write("Nom de l'identifiant du 2ème forumulaire du document : "
+        + document.forms[1].id + "<br>");
+
+    </script>
+  </body>
+</html>

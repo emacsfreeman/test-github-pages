@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DOM_07_3</title>
+    <script type="text/javascript">
+      // Fonction historyBack
+      function historyBack()
+      {
+        // Retour à la page précédente
+        window.historyBack();
+      }
+    </script>
+  </head>
+  <body>
+    <h1>DOM_07_3</h1>
+
+    <script type="text/javascript">
+      // Affichage du nom du script
+      alert("DOM_07_3");
+
+      // Affichage de l'URL de la page donnant accès au document
+      document.write("URL de la page donnant accès au document : "
+      + document.referrer + "<br>");
+
+      /*
+      Affichage de la valeur du paramètre  passé par la page précédente
+      NB : param contiendra la chaîne ?param=Eni%20Javascript
+      */
+      var param = window.location.search;
+      document.write("Paramètre (avant recodage) : "
+      + param + "<br>");
+
+      // Décodage du paramètre (remplacement de %20 par un espace)
+      param = unescape(param);
+      document.write("Paramètre (après recodage) : "
+      + param + "<br>");
+
+      // Suppression du nom du paramètre (livre dans notre cas)
+      param = param.substring(param.lastIndexOf("=")+1);
+      document.write("Valeur du paramètre : "
+      + param);
+
+    </script>
+
+    <br><br>
+    <form>
+      <input
+            type="button"
+            id="boutonHistoryBack"
+            value="Retour à la page précédente"
+            onclick="historyBack()">
+    </form>
+
+  </body>
+</html>

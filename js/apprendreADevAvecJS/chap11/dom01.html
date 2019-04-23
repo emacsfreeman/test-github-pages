@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DOM 01</title>
+    <script type="text/javascript">
+      // Recherche de l'élément div ayant comme identifiant container
+      var ancienContainer = document.getElementById('container');
+
+      // Création en mémoire d'un élément div
+      var nouvelleDiv = document.createElement('div');
+
+      // Création du mode de type texte
+      var texteDiv = document.createTextNode('Bonjour le monde');
+
+      // Affectation du node texteDiv au node nouvelleDiv
+      nouvelleDiv.appendChild(texteDiv);
+
+      // Intégration du nouveau div
+      ancienContainer.appendChild(nouvelleDiv);
+
+
+    </script>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+      // Affichage du nom du script
+      alert("DOM_01");
+
+      // Affichage Hello World! ar la méthode document.write
+      document.write("Hello World!<br>");
+
+      document.write("<strong>Hello World!</strong>");
+    </script>
+
+    <div id="container"></div>
+
+  </body>
+</html>

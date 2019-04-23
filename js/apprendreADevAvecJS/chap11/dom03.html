@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DOM_03</title>
+  </head>
+  <body>
+
+    <p>Moteur de recherche <a href="https://www.startpage.com/" target="_blank" id="startpage">Startpage</a></p>
+    <p>Site du Bitcoin <a href="https://bitcoin.org/fr/" target="_blank" id="bitcoin">Bitcoin</a></p>
+    <p>Pour gérer des crypto-monnaies <a href="https://bit.ly/2QgCLRH" target="_blank">Wirex</a></p>
+    <script type="text/javascript">
+      // Saut de lignes
+      document.write("<br><br>");
+
+      // Affichage du nombre de lien(s) 'hypertexte' du document
+      document.write("Nombre de lien(s) 'hypertexte' du document : "
+      + document.links.length + "<br>");
+
+      // Affichage de l'identifiant du 2ème lien 'hypertexte' du document
+      document.write("Identifiant du 2ème lien 'hypertexte' du document : "
+      + document.links[1].id + "<br>");
+
+      // Affichage de l'identifiant du 3ème lien 'hypertexte' du document
+      document.write("Identifiant du 3ème lien 'hypertexte' du document : "
+      + document.links[2].href + "<br>");
+
+    </script>
+  </body>
+</html>

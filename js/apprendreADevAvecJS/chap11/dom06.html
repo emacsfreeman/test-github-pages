@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DOM_06</title>
+  </head>
+  <body>
+    <a name="html">Cours n°1 (HTML)</a><br>
+    <a name="css">Cours n°2 (CSS)</a><br>
+    <a name="xml">Cours n°3 (XML)</a><br>
+
+    Accès à un <a href="https://www.startpage.com/" target="_blank">complément de cours</a> (cf. moteur de recherche startpage)
+
+    <script type="text/javascript">
+      // Saut de lignes
+      document.write("<br><br>");
+
+      // Affichage du nombre d'ancre(s) du document
+      document.write("Nombre d'ancre(s) du document : "
+      + document.anchors.length + "<br>");
+
+      // Affichage de l'intitulé de la 1ère ancre du document
+      document.write("Intitulé de la 1ère ancre du document : "
+      + document.anchors[0].text + "<br>");
+
+      // Affichage du nom de la 2ème ancre du document
+      document.write("Nom de la 2ème ancre du document : "
+      + document.anchors[1].name + "<br>");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DOM_04</title>
+  </head>
+  <body>
+    <img
+        id="van_van_1" border="1"
+        src="van_van_01.jpg"
+        width="150" height="100">
+    <br><br>
+    <img
+        id="van_van_2" border="2"
+        src="van_van_02.jpg"
+        width="150" height="100">
+    <br><br>
+    <img
+        id="van_van_3" border="1"
+        src="van_van_03.jpg"
+        width="150" height="100">
+    <br><br>
+    <img
+        id="van_van_4" border="2"
+        src="van_van_04.jpg"
+        width="220" height="150">
+    <br><br>
+
+    <script type="text/javascript">
+      // Affichage du nombre d'image(s) du document
+      document.write("Nombre d'image(s) du document : "
+      + document.images.length + "<br>");
+
+      // Affichage de l'identifiant de la 1ère image
+      document.write("Identifiant de la 1ère image : "
+      + document.images[0].id + "<br>");
+
+      // Affichage de l'attribut border de la 2ème image
+      document.write("Attribut border de la 2ème image : "
+      + document.images[1].border + "<br>");
+
+      // Affichage de l'attribut src de la 3ème image
+      document.write("Attribut src de la 3ème image : "
+      + document.images[2].src + "<br>");
+
+      // Affichage de l'attribut width et height de la 4ème image
+      document.write("Attribut width de la 4ème image : "
+      + document.images[3].width + "<br>");
+      document.write("Attribut height de la 4ème image : "
+      + document.images[3].height + "<br>");
+
+    </script>
+  </body>
+</html>
