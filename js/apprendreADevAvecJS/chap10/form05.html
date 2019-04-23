@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>FORM 05</title>
+    <script type="text/javascript">
+      // Définition des valeurs acceptées
+      var valeursAcceptees = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+
+      // Test de la structure de l'adresse e-mail
+      if (email.value.match(valeursAcceptees))
+      {
+        // Valeur de retour
+        alert("Structure d'adresse e-mail correcte");
+        return true;
+      }
+      else {
+        // Affichage d'un message d'alerte
+        alert(messageAlerte);
+        // Focus sur le champ en erreur
+        email.focus();
+        // Valeur de retour
+        return false;
+      }
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

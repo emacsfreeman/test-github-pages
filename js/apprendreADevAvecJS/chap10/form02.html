@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Form 02</title>
+    <script type="text/javascript">
+      function estNumerique(identifiant, message)
+      {
+        // Définition des valeurs acceptées
+        var valeursAcceptees = '/^[0-9]+$/';
+        /* Test de numéricité */
+        if (champ.value.match(valeursAcceptees))
+        {
+          // Valeur de retour
+          alert("Vous avez saisi " + document.getElementById('nombre').value);
+          return true;
+        }
+        else
+        {
+          // Affichage d'un message d'alerte
+          alert(messageAlerte);
+          // Focus sur le champ en erreur
+          champ.focus();
+          // Valeur de retour
+          return false;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <form>
+      Montant (saisie d'un nombre entier SVP) :
+      <input
+            type="text"
+            id="nombre">
+      <input
+            type="button"
+            onclick="estNumerique(document.getElementById('nombre'),
+            'Saisie nombre entier SVP')"
+            value="Validation saisie">
+    </form>
+  </body>
+</html>

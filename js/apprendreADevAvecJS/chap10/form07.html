@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>FORM 07</title>
+    <script type="text/javascript">
+    // Fonction affichant les choix (multiples) effectués dans 1 liste déroulante
+      function controlerChoixListe(liste)
+      {
+        for (var i = 0; i < document.forms.formulaire.liste.options.length; i++)
+        {
+          if (document.forms.formulaire.liste.options[i].selected)
+          {
+            alert("Sport sélectionné : "
+            + document.forms.formulaire.liste.options[i].text)
+          }
+        }
+        // Valeur de retour
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <form name="formulaire">
+      <select id="liste" size="7" multiple>
+        <optgroup label="Sports collectifs">
+          <option value="football" selected>Football</option>
+          <option value="volley">Volley Ball</option>
+        </optgroup>
+        <optgroup label="Sports individuels">
+          <option value="golf">Golf</option>
+          <option value="natation" selected>Natation</option>
+          <option value="tennis">Tennis</option>
+        </optgroup>
+      </select>
+      <input
+            type="button"
+            onclick="controlerChoixListe(document.getElementById('liste'))"
+            value="Validation saisie">
+    </form>
+  </body>
+</html>

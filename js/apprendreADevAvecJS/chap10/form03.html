@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Form 03</title>
+    <script type="text/javascript">
+    function estMot(identifiant, message)
+    {
+      // Définition des valeurs acceptées
+      var valeursAcceptees = '/^[a-zA-Z]+$/';
+      /* Test de numéricité */
+      if (champ.value.match(valeursAcceptees))
+      {
+        // Valeur de retour
+        alert("Vous avez saisi " + document.getElementById('mot').value);
+        return true;
+      }
+      else
+      {
+        // Affichage d'un message d'alerte
+        alert(messageAlerte);
+        // Focus sur le champ en erreur
+        champ.focus();
+        // Valeur de retour
+        return false;
+      }
+    }
+
+    </script>
+  </head>
+  <body>
+    <form>
+      Mot (saisie d'un mot SVP) :
+      <input
+            type="text"
+            id="mot">
+      <input
+            type="button"
+            onclick="estMot(document.getElementById('mot'),
+            'Saisie mot SVP')"
+            value="Validation saisie">
+    </form>
+  </body>
+</html>
