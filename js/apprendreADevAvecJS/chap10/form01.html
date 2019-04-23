@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Formulaire 01</title>
+    <script type="text/javascript">
+      // Fonction de test de saisie
+      function nonVide(champ, messageAlerte)
+      {
+        if (champ.value.length == 0)
+        {
+          // Affichage d'un message d'alerte
+          alert(messageAlerte);
+          // Focus sur le champ en erreur
+          champ.focus();
+          // Valeur de retour
+          return false;
+        }
+        // Valeur de retour
+        alert("Votre nom est "
+        + document.getElementById('nom').value);
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Editions ENI - JavaScript - FORM_01</h1>
+
+    <script type="text/javascript">
+      // Affichage du nom du script
+      alert("FORM_01");
+    </script>
+
+    <form>
+      Votre nom (champ obligatoire) :
+      <input
+            type="text"
+            id="nom">
+      <input
+            type="button"
+            onclick="nonVide(document.getElementById('nom'),
+            'Saisie obligatoire')"
+            value="Validation saisie">
+    </form>
+
+    <br><br><br>
+    <center>
+      <a href="JavaScript:window.location='view-source:'+window.location">
+        Code source
+      </a>
+    </center>
+  </body>
+</html>
