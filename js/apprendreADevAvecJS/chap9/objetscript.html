@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Objet String</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Définition de variables de type String
+      var prenom = new String("Laurent");
+      var nom = "GARNIER";
+      document.write("Prénom : " + prenom);
+      document.write("<br>Nom : " + nom);
+
+      // Initiale du prénom
+      document.write("<br>Initiale du prénom : " + prenom.charAt(0));
+
+      // Caractère Unicode (position dans la table ASCII) de l'initiale du nom
+      document.write("<br>Caractère Unicode (position dans la table ASCII) de l'initiale du nom : " + nom.charCodeAt(0));
+
+      // Concaténation du prénom et du nom
+      var identite = prenom.concat(" ");
+      identite = identite.concat(nom);
+      document.write("<br>Prénom & Nom : " + identite);
+
+      // Position de la première lettre "R" dans le nom
+      var position_dernier_r = nom.indexOf("R") + 1;
+      document.write("<br>Le dernier 'R' du nom est en position : " + position_dernier_r);
+
+      // Position de la dernière lettre 'R' dans le nom
+      var position_dernier_r = nom.lastIndexOf("R") + 1;
+      document.write("<br>Le dernier 'R' du nom est en position : " + position_dernier_r);
+
+      // Remplacement d'une chaîne de caractères
+      var origineNom = nom.replace("GAR", "DER");
+      document.write("<br>Origine du nom : " + origineNom);
+
+      // Extraction d'une sous-chaîne par la méthode slice(position_debut, position_fin - 1)
+      var surnom = nom.slice(0, 4);
+      document.write("<br>Surnom (méthode slice) : " + surnom);
+
+      // Extraction d'une sous-chaîne par la méthode substr(position_debut, longueur)
+      var surnom = nom.substr(0, 4);
+      document.write("<br>Surnom (méthode substr) : " + surnom);
+
+      // Extraction d'une sous-chaîne par la méthode substring(position_debut, position_fin - 1)
+      var surnom = nom.substring(0, 4);
+      document.write("<br>Surnom (méthode substring) : " + surnom);
+
+      // Mise d'une phrase en tableau
+      var auteur = "Laurent GARNIER est le rédacteur de ce code";
+      var tableauAuteur = auteur.split(" ");
+      document.write("<br>Le nom de l'auteur de ce code : " + tableauAuteur[1]);
+
+      // Conversion en majuscules
+      document.write("<br>Le prénom en majuscules : " + prenom.toUpperCase());
+
+      // Conversion en minuscules
+      document.write("<br>Le nom en minuscules : " + nom.toLowerCase());
+
+      // Suppression des espaces non significatifs
+      var identite = "                 Laurent GARNIER                  ";
+      document.write("<br>Identité avec espaces non significatifs : " + "[" + identite + "]");
+      document.write("<br>Identité sans espaces non significatifs : " + "[" + identite.trim() + "]");
+
+    </script>
+  </body>
+</html>
