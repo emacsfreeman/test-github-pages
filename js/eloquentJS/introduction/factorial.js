@@ -12,5 +12,5 @@ factorial(n)
 
 for (var i = 0; i <= 10; i++)
 {
-  console.log(factorial(i));
+  console.log(i + "! = " + factorial(i));
 }
