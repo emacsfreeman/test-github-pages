@@ -46,5 +46,8 @@ console.log('2^6 = ' + power(2, 6));
 const square1 = (x) => { return x * x; };
 const square2 = x => x * x;
 
+// it works without parameter
+const horn = () => { console.log("Toot"); };
+
 
 
