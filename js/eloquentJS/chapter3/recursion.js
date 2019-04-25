@@ -78,7 +78,7 @@ for (let i = 0; i < 100; i++)
   for a solutionfor the number 13.
 */
 
-document.write('<p>Pour aller plus loin :</p>');
+document.write('<h2>Pour aller plus loin :</h2>');
 document.write('<ul>');
 document.write('<li><a href="https://codeburst.io/learn-and-understand-recursion-in-javascript-b588218e87ea" target="_blank">Codeburst.io</a></li>');
 document.write('<li><a href="https://javascript.info/recursion" target="_blank">javascript.info</a></li>');
