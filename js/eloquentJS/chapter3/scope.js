@@ -24,7 +24,7 @@ const hummus = function(factor)
     const ingredient = function(amount, unit, name)
     {
       let ingredientAmount = amount * factor;
-      if (ingredientAmunt > 1)
+      if (ingredientAmount > 1)
       {
         unit += "s";
       }
@@ -37,3 +37,22 @@ const hummus = function(factor)
     ingredient(2, "tablespoon", "olive oil");
     ingredient(0.5, "teaspoon", "cumin");
 };
+// tests
+for (let i = 2; i < 10; i++)
+{
+  msgIntro = 'For ' + i + ' people, you need:';
+  console.log(msgIntro);
+  const dash = function(dashType)
+  {
+    msgOutro = '';
+    for (let j = 0; j < msgIntro.length; j++)
+    {
+      msgOutro += dashType;
+    }
+    console.log(msgOutro);
+  };
+  dash('-');
+  hummus(i);
+  dash('=');
+  console.log('\n');
+}
