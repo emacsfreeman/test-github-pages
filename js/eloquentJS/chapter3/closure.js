@@ -49,4 +49,13 @@ console.log(twice(5));
 */
 
 
+document.write('<h2>Pour aller plus loin :</h2>');
+document.write('<ul>');
+document.write('<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank">MDN</a></li>');
+document.write('<li><a href="https://www.w3schools.com/js/js_function_closures.asp" target="_blank">w3schools</a></li>');
+document.write('<li><a href="https://medium.freecodecamp.org/javascript-closures-simplified-d0d23fa06ba4" target="_blank">freeCodeCamp</a></li>');
+document.write('<li><a href="https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8" target="_blank">Daily JS</a></li>');
+document.write('<li><a href="https://www.codingame.com/playgrounds/6516/closures-in-javascript-for-beginners" target="_blank">codingame</a></li>');
+document.write('</ul>');
+
 
