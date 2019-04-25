@@ -17,3 +17,23 @@ const halve = function(n)
 let n = 10;
 console.log(halve(100));
 console.log(n);
+
+// Nested scope 
+const hummus = function(factor)
+{
+    const ingredient = function(amount, unit, name)
+    {
+      let ingredientAmount = amount * factor;
+      if (ingredientAmunt > 1)
+      {
+        unit += "s";
+      }
+      console.log(`${ingredientAmount} ${unit} ${name}`);
+    };
+    ingredient(1, "can", "chickpeas");
+    ingredient(0.25, "cup", "tahini");
+    ingredient(0.25, "cup", "lemon juice");
+    ingredient(1, "clove", "garlic");
+    ingredient(2, "tablespoon", "olive oil");
+    ingredient(0.5, "teaspoon", "cumin");
+};
