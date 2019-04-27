@@ -1,4 +1,4 @@
-// Version 1 : version << naïve >> utilisant 2 variables
+// Version 1 : "naive" version with 2 variables
 let nbHashTag = 0; 
 let string = "";
 while (nbHashTag < 7)
@@ -8,7 +8,7 @@ while (nbHashTag < 7)
   nbHashTag += 1;
 }
 
-// Version 2 : version << élégante >> utilisant une propriété
+// Version 2 : "elegant" version with a property
 let string = "";
 while (string.length < 7)
 {
