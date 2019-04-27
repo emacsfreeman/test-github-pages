@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <h1>My version</h1>
+    <input type="text" name="text" placeholder="Enter your text here">
+    <input type="submit" name="submit" value="Submit">
+
+    <h1>Ivan version</h1>
+    <input id="theInput" type="text"/>
+    <button id="theButton">Show written text</button>
+
+    <script type="text/javascript">
+
+      $( 'input[name=submit]' ).click(function() {
+        alert('Alert, you typed: "' + $( 'input:text' ).val() + '"');
+        console.log('Look into the console to see your text: "' + $('input:text').val() + '"');
+        document.write('<p style="font-style: Futura">Here is the text you entered: "' + $('input:text').val() + '"</p>');
+      });
+
+      $('#theButton').click(function() {
+        var textInputted = $('#theInput').val();
+        console.log(textInputted);
+      });
+
+
+    </script>
+
+  </body>
+</html>
