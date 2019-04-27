@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Test Javascript</title>
+  </head>
+  <body>
+
+    <form id="demo">
+      <input id="name" placeholder="Name" type="text"/>
+      <input type="submit"/>
+    </form>
+    <script type="text/javascript">
+
+      document.getElementById('demo').onsubmit = function() {
+        alert('hello, ' + document.getElementById('name').value);
+      };
+
+    </script>
+
+  </body>
+</html>
