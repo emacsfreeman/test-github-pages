@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Test Javascript</title>
+
+    <script type="text/javascript">
+
+      function greet()
+      {
+        alert('hello, ' + document.getElementById('name').value);
+      }
+
+    </script>
+
+  </head>
+  <body>
+
+    <form id="demo" onsubmit="greet(); return false;">
+      <input id="name" placeholder="Name" type="text"/>
+      <input type="submit"/>
+    </form>
+
+  </body>
+</html>
