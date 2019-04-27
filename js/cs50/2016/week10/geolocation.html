@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>geolocation</title>
+    </head>
+    <body>
+        <script>
+
+            navigator.geolocation.getCurrentPosition(function(position) {
+                document.write(position.coords.latitude + ', ' + position.coords.longitude);
+            });
+
+        </script>
+    </body>
+    <footer>
+      Go <a href="https://docs.cs50.net/2016/fall/notes/10/week10.html" target="_blank">here</a> to get more.
+    </footer>
+</html>

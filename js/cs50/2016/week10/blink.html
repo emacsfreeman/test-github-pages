@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script>
+
+            // toggles visibility of greeting
+            function blink()
+            {
+                var div = document.getElementById('greeting');
+                if (div.style.visibility == 'hidden')
+                {
+                    div.style.visibility = 'visible';
+                }
+                else
+                {
+                    div.style.visibility = 'hidden';
+                }
+            }
+
+            // blink every 500ms
+            window.setInterval(blink, 500);
+
+        </script>
+        <style>
+
+            #greeting
+            {
+                font-size: 96pt;
+                margin: 240px;
+                text-align: center;
+            }
+
+        </style>
+        <title>blink</title>
+    </head>
+    <body>
+        <div id="greeting">
+            hello, world
+        </div>
+    </body>
+    <footer>
+      Go <a href="https://docs.cs50.net/2016/fall/notes/10/week10.html" target="_blank">here</a> to get more.
+    </footer>
+</html>
