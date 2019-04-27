@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery0</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <style media="screen">
+      #myButton::before
+      {
+        content: "\01F1FA\01F1F8";
+      }
+      #monBouton::before
+      {
+        content: "🇫🇷";
+      }
+      #meinKnopf::before
+      {
+        content: "🇩🇪";
+      }
+      #miBoton::before
+      {
+        content: "🇪🇸";
+      }
+      #meuBotao::before
+      {
+        content: "🇵🇹/🇧🇷";
+      }
+    </style>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <h1>Smiley Emoji</h1>
+    <h2>Go visit <a href="https://www.w3schools.com/charsets/ref_emoji_smileys.asp" target="_blank">W3SCHOOLS</a> for details</h2>
+    <p style="font-size:100px">&#128540;</p>
+    <p>I will display &#128540;</p>
+    <p>I will display &#x1F61C;</p>
+    <p id="usFlag">Code HTML </p>
+    <p>Let's get started &#127937;</p>
+
+    <h1>Emoji Icons - Flags</h1>
+    <h2>Go visit this website <a href="https://www.quackit.com/character_sets/emoji/emoji_v3.0/emoji_icons_flags.cfm" target="_blank">Quackit</a></h2>
+    <ol>
+      <li id="myButton"> (U+1F1FA/U+1F1F8) <button class="buttons" type="button" name="button">Click me</button></li>
+      <li id="monBouton"> (U+1F1EB) <button class="buttons">Clique dessus</button></li>
+      <li id="meinKnopf"> (U+1F1E9) <button class="buttons">Klicken Sie auf</button></li>
+      <li id="miBoton"> (U+1F1EA) <button class="buttons">Haga clic en</button></li>
+      <li id="meuBotao"> (U+1F1F5/U+1F1E7) <button class="buttons">Clique em</button></li>
+    </ol>
+
+    <table>
+      <colgroup>
+           <col style="width: 9.5%; margin: 2%; padding: 1%;">
+           <col style="width: 16.5%; margin: 2%; padding: 1%;">
+           <col style="width: 20.5%; margin: 2%; padding: 1%;">
+           <col style="width: 24.5%; margin: 2%; padding: 1%;">
+           <col style="width: 20.5%; margin: 4%; padding: 1%;">
+           <col style="width: 11.5%; margin: 4%; padding: 4%;">
+      </colgroup>
+      <tr>
+        <th>Flags</th>
+        <th>Unicode</th>
+        <th>HTML</th>
+        <th>CSS</th>
+        <th><a href="https://mzl.la/2VyjZdZ" target="_blank">JS</a></th>
+        <th>Button</th>
+      </tr>
+      <tr>
+        <td class="column1Flag"> <a href="http://bit.ly/2XKFXYw" target="_blank">&#x1F1FA;&#x1F1F8;</a></td>
+        <td class="bout2code">(U)U+1F1FA (S)U+1F1F8</td>
+        <td class="bout2code">&amp;#x1F1FA;&amp;#x1F1F8;</td>
+        <td class="bout2code">\01F1FA\01F1F8</td>
+        <td class="bout2code">(0x1F1FA,0x1F1F8)</td>
+        <td><button type="button" name="button">Click me</button></td>
+      </tr>
+      <tr>
+        <td class="column1Flag"><a href="http://bit.ly/2UL6Jyi" target="_blank">&#x1F1EC;&#x1F1E7;</a></td>
+        <td class="bout2code">(G)U+1F1FEC (B)U+1F1F7</td>
+        <td class="bout2code">&amp;#x1F1FA;&amp;#x1F1F8;</td>
+        <td class="bout2code">\01F1FEC\01F1F7;</td>
+        <td class="bout2code">(0x1F1FEC,0x1F1F7)</td>
+        <td><button type="button" name="button">Click me</button></td>
+      </tr>
+      <tr>
+        <td class="column1Flag"> <a href="http://bit.ly/2PA7QQ9" target="_blank">&#x1F1E8;&#x1F1F3;</a></td>
+        <td class="bout2code">(C)U+1F1FE8 (N)U+1F1F3</td>
+        <td class="bout2code">&amp;#x1F1FE8;&amp;#x1F1F3;</td>
+        <td class="bout2code">\01F1FE8\01F1F3;</td>
+        <td class="bout2code">(0x1F1FE8,0x1F1F3)</td>
+        <td><button type="button" name="button">点击 Diǎnjī</button></td>
+      </tr>
+      <tr>
+        <td class="column1Flag"> <a href="http://bit.ly/2voRhxp" target="_blank">&#x1F1EA;&#x1F1F8;</a></td>
+        <td class="bout2code">(E)U+1F1EA (S)U+1F1F8</td>
+        <td class="bout2code">&amp;#x1F1EA;&amp;#x1F1F8;</td>
+        <td class="bout2code">\01F1EA\01F1F8</td>
+        <td class="bout2code">(0x1F1EA,0x1F1F8)</td>
+        <td><button type="button" name="button">Haga clic en</button></td>
+      </tr>
+    </table>
+
+    <script type="text/javascript">
+      // here we have jQuery functionality
+      $( "button" ).click(function() {
+        alert( "Well done! You clicked the button." );
+      });
+
+      $("#monBouton").click(function() {
+        alert("Bien joué, je suis en français !");
+      });
+
+      var usFlag = document.querySelector("#usFlag");
+      usFlag.innerText = String.fromCodePoint(0x1F1FA, 0x1F1F8);
+
+
+    </script>
+
+  </body>
+
+</html>
