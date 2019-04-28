@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>List2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>My favorite cryptos</h1>
+
+    <ol id="cryptoList">
+
+    </ol>
+
+    <h1>Add your cryptos</h1>
+
+    <p>
+      <input
+        id="cryptoNameInput"
+        type="text"
+        placeholder="Add your favorite crypto name here"
+        size="28">
+
+      <input
+        id="coinmarketcapInput"
+        type="text"
+        placeholder="Add coinmarketcap url here"
+        size="28">
+      <button
+        id="theButton"
+        type="button"
+        name="button">
+        submit
+      </button>
+    </p>
+
+    <script type="text/javascript">
+        //var cryptos = ["Bitcoin", "Ethereum", "Litecoin", "XRP"];
+        var cryptos = [
+          {
+            name: "Bitcoin",
+            coinmarketcap: "https://coinmarketcap.com/currencies/bitcoin/"
+          },
+          {
+            name: "Ethereum",
+            coinmarketcap: "https://coinmarketcap.com/currencies/ethereum/"
+          },
+          {
+            name: "EOS",
+            coinmarketcap: "https://coinmarketcap.com/currencies/eos/"
+          },
+          {
+            name: "Litecoin",
+            coinmarketcap: "https://coinmarketcap.com/currencies/litecoin/"
+          },
+          {
+            name: "Stellar",
+            coinmarketcap: "https://coinmarketcap.com/currencies/stellar/"
+          },
+          {
+            name: "Cardano",
+            coinmarketcap: "https://coinmarketcap.com/currencies/cardano/"
+          },
+          {
+            name: "TRON",
+            coinmarketcap: "https://coinmarketcap.com/currencies/tron/"
+          },
+          {
+            name: "Monero",
+            coinmarketcap: "https://coinmarketcap.com/currencies/monero/"
+          },
+          {
+            name: "Dash",
+            coinmarketcap: "https://coinmarketcap.com/currencies/dash/"
+          },
+          {
+            name: "Tezos",
+            coinmarketcap: "https://coinmarketcap.com/currencies/tezos/"
+          },
+          {
+            name: "IOTA",
+            coinmarketcap: "https://coinmarketcap.com/currencies/iota/"
+          },
+          {
+            name: "NEO",
+            coinmarketcap: "https://coinmarketcap.com/currencies/neo/"
+          },
+          {
+            name: "Ontology",
+            coinmarketcap: "https://coinmarketcap.com/currencies/ontology/"
+          },
+          {
+            name: "Basic Attention Token",
+            coinmarketcap: "https://coinmarketcap.com/currencies/basic-attention-token/"
+          },
+          {
+            name: "Zcash",
+            coinmarketcap: "https://coinmarketcap.com/currencies/zcash/"
+          },
+          {
+            name: "Presearch",
+            coinmarketcap: "https://coinmarketcap.com/currencies/presearch/"
+          }
+        ]
+
+        function readrawList()
+        {
+
+          var list = $('#cryptoList');
+          list.html("");
+
+          $.each(cryptos, function(index, value){
+            console.log(value);
+            var listItem = $('<li>').text(value.name + ", " + value.coinmarketcap).appendTo(list);
+          });
+
+        }
+
+        readrawList();
+
+        $('#theButton').click(function(){
+          var cryptoName = $( '#cryptoNameInput' ).val();
+          var cryptoCoinmarketcap = $( '#coinmarketcapInput' ).val();
+
+          var cryptoObject = {name: cryptoName, coinmarketcap: cryptoCoinmarketcap }
+          cryptos.push(cryptoObject);
+          console.log(cryptos);
+          readrawList();
+        });
+    </script>
+  </body>
+</html>

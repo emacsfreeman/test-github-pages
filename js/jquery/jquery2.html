@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+      <script type="text/javascript">
+      /*
+        function makeAlert()
+        {
+          document.write('<h1>This text appears 2s after loading the page</h1>');
+        }
+        setTimeout(makeAlert, 2000);
+      */
+
+        function doThreeTimes(toDo, number)
+        {
+          for (var counter = 0; counter < number; counter++)
+          {
+            document.write('<h3>n°' + counter + '</h3>');
+            toDo();
+          }
+        }
+
+        function randomFunction()
+        {
+          document.write('<h2>This is an h2 tag</h2>');
+        }
+
+        doThreeTimes(randomFunction, 10);
+      </script>
+  </body>
+</html>

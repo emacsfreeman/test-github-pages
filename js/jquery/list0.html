@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>List0</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <h1>My favorite fruits</h1>
+
+    <ol id="fruitList">
+
+    </ol>
+
+    <script type="text/javascript">
+
+      var fruits = ["Apple", "Orange", "Banana", "Pineapple"];
+
+      var list = $('#fruitList');
+
+      $.each(fruits, function(index, value){
+        var listItem = $('<li>').text(value).appendTo(list);
+      });
+
+    </script>
+  </body>
+</html>

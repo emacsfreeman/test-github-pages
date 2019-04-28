@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Object0</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      function alerting()
+      {
+        alert('This is a red alert!');
+      }
+
+      var car1 = {manufacturer: "volvo", year: 1996, alertFunc:alerting};
+      var car2 = {manufacturer: "bmw", year: 2006};
+      var car3 = {manufacturer: "mercedes", year: 2019};
+
+      car1.manufacturer = "ford";
+      car1.numberOfWheels = 4;
+      car1.alertFunc();
+
+      var cars = [car1, car2, car3];
+
+      console.log(cars);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>List1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <h1>My favorite cryptos</h1>
+
+    <ol id="cryptoList">
+
+    </ol>
+
+    <h1>Add your cryptos</h1>
+
+    <p>
+      <input
+        id="theText"
+        type="text"
+        placeholder="Add your favorite crypto here, one by one"
+        size="30">
+      <button
+        id="theButton"
+        type="button"
+        name="button">
+        submit
+      </button>
+    </p>
+
+    <script type="text/javascript">
+
+      var cryptos = ["Bitcoin", "Ethereum", "Litecoin", "XRP"];
+
+      function readrawList()
+      {
+
+        var list = $('#cryptoList');
+        list.html("");
+
+        $.each(cryptos, function(index, value){
+          var listItem = $('<li>').text(value).appendTo(list);
+        });
+
+      }
+
+      $('#theButton').click(function(){
+        var userCrypto = $( '#theText' ).val();
+        cryptos.push(userCrypto);
+        console.log(cryptos);
+        readrawList();
+      });
+
+
+    </script>
+  </body>
+</html>
