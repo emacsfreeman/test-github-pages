@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Promises</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <button id="theButton">Hello</button>
+
+    <script type="text/javascript">
+
+      function constructTimeoutPromise(){
+        return new Promise(function(resolve, reject){
+          setTimeout(resolve, 2000);
+          // CONNECT TO DATABASE
+        });
+      }
+
+
+      constructTimeoutPromise().then(function(){
+        console.log('Connecting to database');
+        return constructTimeoutPromise();
+      }).then(function(){
+          console.log('Reading from database');
+          return constructTimeoutPromise();
+      }).then(function(){
+          console.log('Structuring data');
+          return constructTimeoutPromise();
+      }).then(function(){
+            console.log('Initiating send transaction');
+            return constructTimeoutPromise();
+      }).then(function(){
+            console.log('Sent data!');
+            return constructTimeoutPromise();
+      });
+    /*
+      setTimeout(function(){
+        console.log('Connecting to database');
+        setTimeout(function(){
+          console.log('Reading from database');
+          setTimeout(function(){
+            console.log('Structuring data');
+            setTimeout(function(){
+              console.log('Initiating send transaction');
+              setTimeout(function(){
+                console.log('Sent data!');
+              }, 2000);
+            }, 2000);
+          }, 2000);
+        }, 2000);
+      }, 2000);
+
+      console.log('THIS WILL BE PRINTED FIRST');
+    */
+
+    </script>
+
+  </body>
+</html>

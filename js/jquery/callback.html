@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Callback</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <button id="theButton">Hello</button>
+
+    <script type="text/javascript">
+
+      // la fonction anonyme est le callback
+      $('#theButton').click(function(){
+        console.log('button clicked');
+      });
+
+      // la fonction anonyme est le Callback
+      /*setTimeout(function(){
+        alert('hello');
+      }, 2000);*/
+
+      setTimeout(function(){
+        console.log('Printing, first time');
+
+        setTimeout(function(){
+          console.log('Printing again, second time');
+          setTimeout(function(){
+            console.log('Printing again, third time');
+          }, 2000);
+        }, 2000);
+      }, 2000);
+      /*
+        cette imbrication de callbacks est ce qu'on
+        appelle le callback hell
+      */
+
+      console.log('This will be printed first');
+
+    </script>
+  </body>
+</html>
