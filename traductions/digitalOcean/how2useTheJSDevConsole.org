@@ -1,0 +1,155 @@
+#+TITLE: Comment utiliser la console développeur JavaScript ?
+#+AUTHOR: Lisa \textsc{Tagliaferri} traduit par Laurent \textsc{Garnier}
+
+* Introduction
+
+  Les navigateurs modernes ont des outils de développement intégrés
+  avec JavaScript et d'autres technologies. Ces outils incluent la
+  Console qui est similaire à une interface shell, parmi les outils
+  pour inspecter le DOM, déboguer, et analyser l'activité du réseau. 
+
+  La console peut être utilisée pour enregistrer des informations
+  dans le cadre du processus de développement JavaScript, ainsi que
+  pour vous permettre d'interagir avec une page Web en exécutant des
+  expressions JavaScript dans le contexte de la page. Pour
+  l'essentiel, la console vous permet d'écrire, de gérer et de
+  surveiller JavaScript à la demande. 
+
+  Ce didacticiel explique comment utiliser la console en JavaScript
+  dans le contexte d'un navigateur et donne un aperçu des autres
+  outils de développement intégrés que vous pouvez utiliser dans le
+  cadre de votre processus de développement Web.
+
+* Travailler avec la console dans un navigateur  
+
+  La plupart des navigateurs Web modernes prenant en charge les
+  langages HTML et XHTML standard vous donnent accès à une console de
+  développeur sur laquelle vous pouvez utiliser JavaScript dans une
+  interface similaire à un terminal. Nous verrons comment accéder à la
+  console dans Firefox et Chrome. 
+
+** Firefox  
+
+   Pour ouvrir la [[https://developer.mozilla.org/en-US/docs/Tools/Web_Console][console web]] dans Firefox, vous pouvez naviguer dans
+   le menu ☰ dans le coin supérieur droit après la barre d'adresse.
+
+   De là, cliquez sur le bouton Développeur symbolisé par l'icône
+   représentant une clé, ce qui ouvrira le menu Développeur Web. Cela
+   étant ouvert, cliquez sur l'élément de menu de la console Web.
+
+   [[./dev-web-menu.png]]
+
+   Une fois que vous le ferez, un plateau s'ouvrira au bas de la
+   fenêtre de votre navigateur :
+   
+   [[./console.png]]
+
+   Vous pouvez également accéder à la console Web à l'aide du
+   raccourci clavier =CTRL + SHIFT + K= sur Linux et Windows ou
+   =COMMAND + OPTION + K= sur macOS.
+
+   Maintenant que nous avons accédé à la console, nous pouvons
+   commencer à y travailler en JavaScript.
+
+   
+   
+** Chrome 
+   
+   Pour ouvrir la [[https://developers.google.com/web/tools/chrome-devtools/console/][console JavaScript]] dans Chrome, vous pouvez naviguer
+   dans le menu supérieur droit de la fenêtre de votre navigateur,
+   indiqué par trois points verticaux à la suite. À partir de là, vous
+   pouvez sélectionner Autres outils, puis Outils de développement.
+
+   [[./dev-tools-chrome.png]]
+
+   Cela ouvrira un panneau où vous pourrez cliquer sur *Console* dans
+   la barre de menus supérieure pour afficher la console JavaScript si
+   elle n'est pas déjà mise en surbrillance : 
+
+   [[./community.png]]
+
+   Vous pouvez également accéder à la console JavaScript à l'aide du
+   raccourci clavier =CTRL + SHIFT + J= sur Linux ou Windowd, ou
+   =COMMAND + OPTION + J= sur macOS, ce qui mettra immédiatement
+   l'accent sur la console.
+
+   Maintenant que nous avons accédé à la console, nous pouvons
+   commencer à y travailler en JavaScript.
+
+* Travailler avec la console
+
+  Dans la console, vous pouvez saisir du code JavaScript.
+
+  Commençons par une alerte qui affiche la chaîne (de caractères)
+  =Hello, World!=:
+
+  #+BEGIN_SRC javascript
+  >> alert("Hello, World!");
+  #+END_SRC
+
+  [[./hello.png]]
+
+  Notez que la console affichera également le résultat de l'évaluation
+  d'une expression, qui sera considérée comme =undefined= lorsque
+  l'expression ne renvoie pas explicitement quelque chose.
+
+  Plutôt que d'avoir des alertes contextuelles sur lesquelles nous
+  devons continuer à cliquer, nous pouvons utiliser JavaScript en le
+  connectant à la console à l'aide =console.log=.
+
+  Pour afficher la chaîne =Hello, World!=, nous pouvons taper la
+  commande suivante dans la console : 
+  #+BEGIN_SRC javascript
+    >> console.log("Hello, World!");
+  #+END_SRC
+
+  Dans la console, vous recevrez la sortie suivante : 
+  #+BEGIN_SRC javascript
+    Output
+    Hello, World!
+  #+END_SRC
+
+  Nous pouvons aussi utiliser JavaScript pour réaliser des calculs
+  dans la console :
+  #+BEGIN_SRC javascript
+    >> console.log(2 + 6);
+  #+END_SRC
+
+  #+BEGIN_SRC javascript
+    Output
+    8
+  #+END_SRC
+
+  Vous pouvez aussi essayer des calculs plus compliqués :
+  #+BEGIN_SRC javascript
+    >> console.log(34348.2342343403285953845 * 4310.23409128534);
+  #+END_SRC
+
+  #+BEGIN_SRC javascript
+    Output
+    148048930.17230788
+  #+END_SRC
+
+  De plus, nous pouvons travailler sur plusieurs lignes avec des
+  variables :
+
+  #+BEGIN_SRC javascript
+    >> let d = new Date();
+    >> console.log("Today's date is " + d);
+  #+END_SRC
+
+  #+BEGIN_SRC javascript
+    Output
+    Today's date is Wed Jun 21 2017 15:49:47 GMT-0400 (EDT)
+  #+END_SRC
+
+  Si vous devez modifier une commande que vous avez passée via la
+  console, vous pouvez taper la touche flèche haut ↑ de votre clavier
+  pour récupérer la commande précédente. Cela vous permettra d'éditer
+  la commande et de l'envoyer à nouveau.
+
+  La console JavaScript vous fournit un espace pour tester le code
+  JavaScript en temps réel en vous permettant d'utiliser un
+  environnement similaire à une interface terminal shell.
+
+  
