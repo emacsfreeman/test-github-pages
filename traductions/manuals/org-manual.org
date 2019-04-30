@@ -1,0 +1,2404 @@
+#+TITLE: Traduction française du [[https://orgmode.org/org.pdf][manuel Org]]
+#+AUTHOR: Laurent Garnier
+
+#+LANGUAGE: FR
+#+OPTIONS: toc:t h:3 num:t
+* Introduction 
+** Résumé
+
+   Org est un mode pour prendre des notes, gérer des listes de choses
+   à faire, et plannifier des projets avec un système de texte brut
+   rapide et efficace. C'est aussi un système pour écrire avec un
+   soutien unique pour la programmation littérale et la recherche
+   reproductible. 
+
+   Org est implémenté par dessus le mode Outline (contour), ce qui
+   rend possible de conserver des fichiers de grande taille bien
+   structurés. La visibilité des cycles et la structure d'édition
+   aident à travailler avec des arbres. Les tableaux sont facilement
+   créés avec un éditeur de table intégré. Les liens en texte brut du
+   style URL connectent aux sites web, emails, messages Usenet,
+   entrées BBDB, et tout fichier relié aux projets. 
+
+   Org développe l'organisation des tâches autour des fichiers de
+   notes qui contiennent des listes ou des informations à propos des
+   projets comme texte brut. La plannification de projet et la gestion
+   de tâche font usage de méta-données qui font partie d'un noeud de
+   contour. Basées sur ces données, des entrées spécifiques peuvent
+   être extraites en requêtes et créer des /vues d'agenda/ dynamiques
+   qui intègrent également le calendrier Emacs et le quotidien. Org
+   peut être utilisé pour implémenter de nombreux schémas de projets
+   différents, tels que le système GTD de David Allen.
+
+   Les fichiers Org peuvent servir de simple système d'écriture avec
+   l'exportation en de nombreux formats tels que HTML, \LaTeX, Open
+   Document, et Markdown. De nouvelles options d'exportations peuvent
+   être dérivées de celles existantes, ou définies à partir de zéro.
+
+   Les fichiers Org peuvent inclure des blocs de code source, ce qui
+   rend Org parfaitement adapté pour l'écriture de documents
+   techniques avec des exemples de codes. Les blocs de code source Org
+   sont pleinement fonctionnels, ils peuvent être évalués en place et
+   leurs résultats peuvent être capturés dans le fichier. Cela rend
+   possible de créer un simple fichier de recherche reproductible
+   compendium.
+
+   Org garde les choses simples. Lorsque découvert pour la première
+   fois, il devrait sembler comme un contourneur direct et facile à
+   utiliser. La complexité n'est pas imposée, mais une foison
+   d'options est disponible si besoin. Org est une boîte à outils. De
+   nombreux utilisateurs exécutent seulement une fraction (très
+   personnelle) des capacités de Org, et savent qu'il y a plus s'ils
+   en ont besoin. 
+
+   Tout cela est réalisé avec des fichiers de texte brut, le format de
+   fichier le plus portable. Org tourne dans Emacs. Emacs est l'un des
+   programmes les plus largement portés, de sorte que le mode Org est
+   disponible sur toutes les plateformes majeures. 
+
+   Il y a un site web sur Org qui fournit des liens pour les nouvelles
+   versions de Org, autant que des informations supplémentaires, FAQ,
+   des liens vers des tutoriels, etc. Cette page est située à
+   [[https://orgmode.org]]
+
+   Une version antérieur (7.3) de ce manuel est disponible en version
+   papier depuis Network Theory Ltd.
+
+** Installation
+   Org fait partie des récentes distributions de GNU Emacs, donc
+   normalement vous n'avez pas besoin de l'installer.
+
+   Si, pour une raison ou pour une autre, vous voulez installer Org
+   par-dessus cette version pré-paquetée, il y a trois façons de le
+   faire :
+   + En utilisant le système de paquets Emacs.
+   + En téléchargeant Org comme une archive.
+   + En utilisant le dépôt git Org.
+
+   Nous *recommandons fortement* de s'en tenir à une seule méthode
+   d'installation. 
+
+*** Utiliser le système de paquetage Emacs   
+
+    Les distributions Emacs récentes incluent un système de paquetage
+    qui vous laisse installer des bibliothèques Elisp.
+
+    Vous pouvez installer Org avec =M-x package-install RET org=.
+
+    *Important* : vous devez faire ça dans une session durant laquelle
+     aucun fichier =.org= n'a été visité, i.e, où aucune fonction
+     intégrée Org n'a été chargée. Autrement les fonctions Org
+     d'autochargement ficheront l'installation en l'air. 
+
+     Ensuite, pour être sûr que votre configuration Org est prise en
+     compte, initialiser le système de paquets avec
+     =(package-initialize)= dans votre fichier init Emacs avant de
+     configurer n'importe quelle option Org. Si vous souhaitez
+     utiliser le paquet Org du dépôt, vérifiez la page Org ELPA.
+
+*** Télécharger Org comme une archive
+
+    Vous pouvez télécharger la dernière version Org depuis le site web
+    de Org. Dans ce cas, assurez-vous d'avoir configuré correctement
+    le chemin de chargement dans votre fichier init :
+
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'load-path "~/path/to/orgdir/lisp")
+    #+END_SRC
+
+    L'archive téléchargée contient des bibliothèques contribuées qui
+    ne sont pas inclues dans Emacs. 
+
+    Si vous voulez les utiliser, ajouter le répertoire =contrib= à
+    votre chemin de chargement :
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'load-path "~/path/to/orgdir/contrib/lisp" t)
+    #+END_SRC
+
+    Optionnellement, vous pouvez compiler les fichiers et/ou les
+    installer sur votre système. Lancez =make help= pour lister les
+    options de compilation et d'installation.
+
+*** Utiliser le dépôt git de Org
+    
+    Vous pouvez cloner le dépôt de Org et installer Org comme ça :
+    #+BEGIN_SRC sh
+      cd ~/src/
+      git clone https://code.orgmode.org/bzg/org-mode.git
+      cd org-mode/
+      make autoloads
+    #+END_SRC
+
+    Notez que dans ce cas, =make autoloads= est requis : cela définit
+    la version de Org dans =org-version.el= et l'auto-chargement de
+    Org dans =org-loaddefs.el=.
+
+    Rappelez-vous d'ajouter le bon chemin de chargement comme décrit
+    dans la méthode ci-dessus.
+    
+    Vous pouvez aussi compiler avec =make=, générer la documentation
+    avec =make doc=, créer une configuration locale avec =make config=
+    et installer Org avec =make install=. Prière de lancer =make help=
+    pour obtenir la liste des options de compilation/installation.
+
+    Pour plus d'explications détaillées sur le système de construction
+    Org, merci de vérifier la page Org Build System sur Worg.
+** Activation
+   
+   Les tampons du mode Org nécessitent que le verrouillage de police
+   soit activé : c'est le cas par défaut dans Emacs[fn:1]. 
+
+   Il y a des problèmes de compatibilité entre le mode Org et d'autres
+   paquets Elisp, merci de prendre le temps de vérifier la liste (voir
+   Section 15.10.2 [Conflicts], page 239).
+
+   Les quatres commandes Org =org-store-link=, =org-capture=,
+   =org-agenda=, et =org-switchb= devraient être accessible via les
+   touches globales (i.e, n'importe où dans Emacs, pas seulement dans
+   les tampons Org). 
+
+   Voici quelques suggestions de combinaisons pour ces touches, merci de
+   modifier les touches avec vos propres liaisons :
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key "\C-cl" 'org-store-link)
+     (global-set-key "\C-ca" 'org-agenda)
+     (global-set-key "\C-cc" 'org-capture)
+     (global-set-key "\C-cb" 'org-switchb)
+   #+END_SRC
+
+   Les fichiers avec l'extension =.org= utilisent le mode Org par
+   défaut. Pour déclencher le mode Org dans un fichier qui n'a pas
+   l'extension =.org=, faire en sorte que la première ligne du fichier
+   ressemble à ça :
+   =MY PROJECTS     -*- mode: org; -*-=
+   ce qui sélectionnera le mode Org pour ce tampon peu importe le nom
+   du fichier. Voir aussi la variable
+   =org-insert-mode-line-in-empty-file=.
+
+   De nombreuses commandes dans Org fonctionnent sur la région si la
+   région est /active/. Pour faire usage de cela, vous devez avoir
+   activé =transient-mark-mode=, ce qui est le cas par défaut. Si vous
+   n'aimez pas =transient-mark-mode=, vous pouvez créer une région
+   active en utilisant la souris pour sélectionner une région, ou en
+   pressant =C-SPC= deux fois avant de déplacer le curseur.
+** Retours (Feedback)
+   
+   Si vous rencontrez des problèmes avec Org, ou si vous avez des
+   questions, remarques, ou idées à son propos, merci d'écrire à la
+   liste de diffusion de Org =[[emacs-orgmode@gnu.org]]=. Vous pouvez vous
+   inscrire à la liste sur cette page. Si vous n'êtes pas un membre de
+   la liste de diffusion, votre courrier sera transmis après qu'un
+   modérateur l'ait approuvé[fn:2].
+
+   Pour reporter des bugs, merci d'essayer d'abord de reproduire le
+   bug avec la dernière version de Org disponible--si vous lancez une
+   version périmée, c'est très possible que le bug ait déjà été
+   résolu. Si le bug persiste, préparez un rapport et fournissez
+   autant d'information que possible, incluant les informations de
+   version de Emacs (=M-x emacs-version RET=) et Org (=M-x org-version
+   RET=), autant que la configuration Org reliée au fichier init
+   Emacs. La façon la plus simple de faire ça est d'utiliser la
+   commande =M-x org-submit-bug-report RET= qui mettra toute cette
+   information dans un tampon mail Emacs de sorte que vous n'avez qu'à
+   ajouter votre description. Si vous n'envoyez pas d'e-mail depuis
+   Emacs, merci de copier-coller le contenu dans votre programme
+   d'e-mail.
+
+   Parfois vous pourriez faire face à un problème dû à une erreur dans
+   votre configuration Emacs ou Org. Avant de reporter un bug, c'est
+   très utile de démarrer Emacs avec des personnalisations minimales
+   et de reproduire le problème. Faire cela aide souvent à déterminer
+   si le problème vient de votre personnalisation ou du mode Org
+   lui-même. Vous pouvez démarrer une session minimale typique avec
+   une commande comme l'exemple ci-dessous :
+   #+BEGIN_SRC sh
+     emacs -Q -l /path/to/minimal-org.el
+   #+END_SRC
+   Cependant si vous utilisez le mode Org tel que distribué avec
+   Emacs, une configuration minimale n'est pas nécessaire. Dans ce cas
+   c'est suffisant de démarrer Emacs avec =emacs -Q=. Le fichier de
+   configuration =minimal-org.el= peut avoir des contenus comme montré
+   ci-dessous :
+   #+BEGIN_SRC emacs-lisp
+     ;;; Minimal setup to load latest 'org-mode'
+
+     ;; activate debugging
+     (setq debug-on-error t
+	   debug-on-signal nil
+	   debug-on-quit nil)
+
+     ;; add latest org-mode to load path
+     (add-to-list 'load-path "/path/to/org-mode/lisp")
+     (add-to-list 'load-path "/path/to/org-mode/contrib/lisp" t)
+   #+END_SRC
+
+   Si une erreur survient, un /backtrace/ peut être très utile (voir
+   ci-dessous pour comment en créer un). Souvent un petit fichier
+   d'exemple aide, avec des informations claires à propos de :
+   1. Qu'avez-vous fait exactement ?
+   2. Qu'attendiez-vous qu'il se produise ?
+   3. Que s'est-il produit à la place ?
+
+   Merci d'aider à améliorer ce programme.
+   
+   
+*** Comment créer un backtrace
+
+    Si travailler avec Org produit une erreur avec un message que vous
+    ne comprenez pas, vous avez peut-être tapé un bug. La meilleure
+    façon de reporter ça c'est en fournissant, en plus de ce qui a été
+    mentionné au-dessus, un /backtrace/. C'est de l'information depuis
+    le débogueur intégré à propos de où et comment l'erreur est
+    apparue. Voici comment produire un backtrace utile :
+    1. Recharger les versions non compilées de tous les fichiers Lisp
+       en mode Org. Le backtrace contient beaucoup plus d'informations
+       s'il est produit avec du code non compilé. Pour faire ça,
+       utiliser : =C-u M-x org-reload RET= ou sélectionnez 
+       =Org -> Refresh/Reload -> Reload Org uncompiled= depuis le menu
+    2. Aller dans le menu =Options= et sélectionnez =Enter Debugger on
+       Error=
+    3. Faites tout ce que vous avez à faire pour taper
+       l'erreur. N'oubliez pas de documenter les étapes que vous
+       suivez.
+    4. Lorsque vous tapez l'erreur, un tampon =*Backtrace*= apparaîtra
+       à l'écran. Enregistrez ce tampon dans un fichier (par exemple
+       en utilisant =C-x C-w=) et attachez-le à votre report de bug.
+
+** Conventions typographiques utilisées dans ce manuel
+*** Mots-clés TODO, balises, propriétés, etc.   
+    Org utilise principalement trois types de mots-clés : mots-clés
+    TODO, noms de balises et noms de propriétés. Dans ce manuel nous
+    utilisons les conventions suivantes :
+
+    + TODO WAITING :: les mots-clés TODO sont écrits en capitales,
+                      même si ils sont définis par l'utilisateur. 
+    + boss ARCHIVE :: les balises définies par l'utilisateur sont
+                      écrites en minuscule; les balises intégrées avec
+                      un sens spécial sont écrites en capitales.
+    + Release PRIORITY :: les propriétés définies par l'utilisateur
+         sont en capitales; les propriétés intégrées avec une
+         signification spéciale sont écrites en capitales.
+
+	 
+
+    De plus, Org utilise des mots-clés optionnels (comme =#+TITLE=
+    pour configurer le titre) et des mots-clés environnement (comme
+    =#+BEGIN_EXPORT html= pour démarrer un environnement HTML). Ils
+    sont écrits en majuscules dans le manuel pour améliorer leur
+    lisibilité, mais vous pouvez utiliser des minuscules dans votre
+    fichier Org.
+*** Combinaisons de touches et commandes
+    Le manuel suggère quelques combinaisons de touches globales, en
+    particulier =C-c= pour =org-agenda= et =C-c c= pour
+    =org-capture=. Ce sont seulement des suggestions, mais le reste du
+    manuel suppose que ces combinaisons de touches sont en place afin
+    de lister les commandes par accès de touches. 
+
+    Aussi, le manuel liste à la fois les touches et les commandes
+    correspondantes pour accéder aux fonctionnalités. Le mode Org
+    utilise souvent la même touche pour différentes fonctions, selon
+    le contexte. La commande qui est liée à de telles touches a un nom
+    générique, comme =org-metaright=. Dans le manuel nous donnerons, à
+    chaque fois que possible, la fonction qui est appelée en interne
+    par la commande générique. Par exemple, dans le chapitre sur la
+    structure du document, =M-RIGHT= sera listée pour appeler
+    =org-to-demote=, alors que dans le chapitre sur les tableaux, elle
+    sera listée pour appeler =org-table-move-column-right=. Si vous
+    préférez, vous pouvez compiler le manuel sans les noms de
+    commandes en déconfigurant le drapeau =cmdnames= dans =org.texi=.
+* Structure du document
+  Org est basé sur le mode Outline et fournit des commandes pour
+  éditer la structure du document. 
+** Outlines (contours)
+
+   Org est implémenté par-dessus le mode Outline. Les contours
+   permettent à un document d'être organisé selon une structure
+   hiérarchique, ce qui est (au moins pour moi), la meilleure
+   représentation de notes et de pensées. Un aperçu de cette structure
+   est obtenu en pliant (cachant) de grandes parties du document pour
+   montrer uniquement la structure générale du document les parties en
+   cours de travail. Org simplifie grandement l'usage de contours en
+   compressant l'entière fonctionnalité montrer/cacher en une seule
+   commande, =org-cycle=, qui est liée à la touche =TAB=.
+** Headlines (en-têtes, rubriques)
+   Les rubriques définissent la structure du contour d'un arbre. Les
+   rubriques dans Org démarrent avec une ou plusieurs étoiles, sur la
+   marge de gauche[fn:3]. Par exemple :
+   #+BEGIN_SRC org
+     ,* Top level headline
+     ,** Second level
+     ,*** 3rd level
+	 some text
+     ,*** 3rd level
+	 more text
+
+
+     ,* Another top level headline
+   #+END_SRC
+
+   Notez qu'une rubrique nommée après =org-footnote-section=, qui est
+   par défaut reliée à ='Foonotes'=, est considérée comme spéciale. Un
+   sous-arbre avec cette rubrique sera silencieusement ignoré par les
+   fonctions d'exportation.
+
+   Certaines personnes trouvent les nombreuses étoiles trop ennuyantes
+   et préféreraient un contour avec des espaces blancs suivis d'une
+   seule étoile comme début de rubrique. La section 15.8 [Clean view],
+   page 235, décrit une configuration pour réaliser cela.
+
+   Une ligne vide après la fin d'un sous-arbre est considéré comme en
+   faisant partie et sera cachée lorsque le sous-arbre sera
+   plié. Cependant, si vous laissez au moins deux lignes vierges, une
+   ligne vierge restera visible après avoir plié le sous-arbre, afin
+   de structurer la vue écrasée. Voir la variable
+   =org-cycle-separator-lines= pour modifier ce comportement. 
+
+** Cycle de visibilité
+*** Cycle local et cycle global
+    Les contours rendent possible de cacher des parties de texte dans
+    le tampon. Org utilise juste deux commandes, liées à =TAB= et
+    =S-TAB= pour changer la visibilité dans le tampon.
+
+    + TAB :: =(org-cycle)= cycle du sous-arbre : tourne le sous-arbre
+             actuel selon les états =FOLDED -> CHILDREN ->
+             SUBTREE=. Le point doit être sur la rubrique pour que
+             ça marche[fn:4].
+    + S-TAB C-u TAB :: =(org-global-cycle)= cycle global : tourne le
+                       tampon entier selon les états =OVERVIEW ->
+                       CONTENTS -> SHOW ALL= 
+                       Lorsque =S-TAB= est appelé avec un argument
+                       numérique N préfixé, le du contenu à la
+                       rubrique de niveau N devient visible. Notez que
+                       dans les tableaux, =S-TAB= saute au champ
+                       précédent. 
+
+		       Vous pouvez lancer le cycle global en utilisant
+                       =TAB= seulement si le point est au tout début
+                       du tampon, mais pas sur une rubrique, et
+                       =org-cycle-global-at-bob= est configuré à une
+                       valeur non-=nil=.
+    + C-u C-u TAB :: =(org-set-startup-visibility)= revient à la
+                     visibilité du début du tampon (voir Section 2.3.2
+                     [Initial visibility], page 8).
+    + C-u C-u C-u TAB :: =(outline-show-all)= Montre tout, y compris
+         les tiroirs.
+    + C-c C-r :: =(org-reveal)= Révèle le contexte autour du point,
+                 montrant l'entrée en cours, l'en-tête suivant et la
+                 hiérarchie au-dessus. Utile pour travailler près d'un
+                 emplacement qui a exposé à la commande d'arbre épars
+                 (voir Section 2.6 [Sparse trees], page 11) ou une
+                 commande d'agenda (voir Section 10.5 [Agenda
+                 commands], page 115). Avec un argument préfixé
+                 montre, sur chaque niveau, toutes les en-têtes
+                 filles. Avec un argument préfixé double, montre aussi
+                 le sous-arbre entier du parent. 
+    + C-c C-k :: =(outline-show-branches)= Expose toutes les en-têtes
+                 du sous-arbre, la vue du contenu d'un seul
+                 sous-arbre.
+    + C-c TAB :: =(outline-show-children)= Expose tous les enfants
+                 directs du sous-arbre. Avec un argument numérique N
+                 préfixé, expose tous les enfants jusqu'au niveau N.
+    + C-c C-x b :: =(org-tree-to-indirect-buffer)= Montre le
+                   sous-arbre actuel dans un tampon indirect[fn:5]. Avec un
+                   argument numérique N préfixé, va au niveau N et
+                   ensuite prend cet arbre. Si N est négatif alors
+                   remonte de N niveaux. Avec un préfixe =C-u=, ne pas
+                   retirer le tampon précédent indirectement utilisé.
+    + C-c C-x v :: =(org-copy-visible)= Copie le texte /visible/ dans
+                   la région dans le cycle du presse-papier.
+*** Visibilité initiale
+    Lorsque Emacs visite un fichier Org pour la première fois, l'état
+    global est configuré sur OVERVIEW, i.e, seulement les rubriques top
+    niveau sont visibles[fn:6]. Cela peut être configuré via la variable
+    =org-startup-folded=, sur la base d'un fichier-per en ajoutant
+    l'une des lignes suivantes n'importe où dans le tampon :
+    #+BEGIN_SRC org
+      ,#+STARTUP: overview
+      ,#+STARTUP: content
+      ,#+STARTUP: showall
+      ,#+STARTUP: showeverything
+    #+END_SRC
+
+    De plus, n'importe quelles entrées avec une propriété VISIBILITY
+    (voir Chapter 7 [Properties and columns], page 64) verront leur
+    visibilité adapté en conséquence. Les valeurs autorisées par cette
+    propriétés sont =folded, children, content= et =all=.
+
+    + C-u C-u TAB :: =(org-set-startup-visibility)= Reviens à la
+                     visibilité du tampon, i.e, quoique ce soit qui
+                     est requis par les options de démarrage les propriétés
+                     VISIBILITY dans les entrées individuelles.
+
+*** Attraper des éditions invisibles
+    Parfois vous pouvez par inadvertance éditer éditer une partie
+    invisible du tampon et être confus sur ce qui a été édité et comme
+    annuler l'erreur. Configurer =org-catch-invisible-edits= à
+    non-=edit= empêchera cela. Voir la docstring de cette option sur
+    comment Org devrait attraper les édits invisible.  
+
+** Déplacement
+   Les commandes suivantes sautent vers d'autres rubriques dans le
+   tampon
+
+   + =C-c C-n= (=org-next-visible-heading=) :: prochaine rubrique
+   + =C-c C-p= (=org-previous-visible-heading=) :: rubrique précédente
+   + =C-c C-f= (=org-forward-same-level=) :: prochaine rubrique de
+        même niveau
+   + =C-c C-u= (=outline-up-heading=) :: retour vers une rubrique de
+        niveau supérieur
+   + =C-c C-j= (=org-goto=) :: saut vers un endroit différent sans
+        modifier la visibilité du contour actuel. Montre la structure
+        du document dans un tampon temporaire, où vous pouvez utiliser
+        les touches suivantes pour trouver votre destination :
+	+ =TAB= :: visibilité du cycle
+        + =DOWN / UP= :: prochaine/précédente rubrique visible
+        + =RET= :: choisir cet emplacement
+        + =/= :: faire une recherche d'arbre épars
+        
+		 
+        Les touches suivantes fonctionnent si vous désactivez
+        =org-goto-auto-isearch=
+
+        + =n / p= :: prochaine / précédente rubrique visible
+        + =f / b= :: prochaine / précédente rubrique de même niveau
+        + =u= :: un niveau plus haut
+        + =0-9= :: argument numérique
+        + =q= :: quitter 
+
+        
+        Voir aussi l'option =org-goto-interface=
+          
+** Edition de la structure
+   + =M-RET= (=org-meta-return=) :: insère une nouvelle rubrique 
+
+     Si la commande est utilisée en début de ligne, et s'il y a une
+        rubrique ou un élément de liste (voir Section 2.7 [Plain
+        lists], page 12) au point, la nouvelle rubrique/élément est
+        créée avant la ligne actuelle. Lorsqu'utilisé au début d'une
+        ligne régulière d'un texte, transforme cette ligne en entête.
+	Lorsque cette commande est utilisée au milieu d'une ligne, la
+        ligne se sépare en deux et le reste de la ligne devient la
+        nouvelle ligne d'entête. Si vous ne voulez pas que la ligne se
+        sépare, personnalisez =org-M-RET-may-split-line=. 
+	
+	Appeler la commande avec un préfixe =C-u= insère une nouvelle
+        rubrique à la fin de la sous-arborescence courante, tout en
+        préservant son contenu. Avec un double préfixe =C-u C-u=, la
+        nouvelle rubrique est créée à la fin du parent de la
+        sous-arborescence à la place.
+   + =C-RET= (=org-insert-heading-respect-content=) :: insère une
+        nouvelle rubrique à la fin de la sous-arborescence actuelle. 
+   + =M-S-RET= (=org-insert-todo-heading=) :: insère une nouvelle
+        entrée TODO de même niveau que la rubrique en cours. Voir
+        aussi la variable
+        =org-treat-insert-todo-heading-as-state-change=.
+   + =C-S-RET= (=org-insert-todo-heading-respect-content=) :: insère
+        une nouvelle entrée TODO au même niveau que la rubrique en
+        cours. Comme =C-RET=, la nouvelle rubrique est insérée après
+        la sous-arboresence actuelle.
+   + =TAB= (=org-cycle=) :: Dans une nouvelle entrée sans texte
+        encore, le premier =TAB= rétrograde l'entrée pour en faire un
+        enfant de la précédente. Le =TAB= suivant en fait un parent,
+        et ainsi de suite, jusqu'au top niveau. Encore un autre =TAB=,
+        et vous revenez au niveau initial.
+   + =M-LEFT= (=org-do-promote=) :: Promeut la rubrique courante d'un
+        niveau.
+   + =M-RIGHT= (=org-do-demote=) :: Rétrograde la rubrique courante
+        d'un niveau.
+   + =M-S-LEFT= (=org-promote-subtree=) :: Promeut la
+        sous-arborescence courante d'un niveau.
+   + =M-S-RIGHT= (=org-demote-subtree=) :: Rétrograde la
+        sous-arborescence courante d'un niveau.
+   + =M-UP= (=org-move-subtree-up=) :: Remonte la sous-arborescence,
+        /i.e/, échange avec la sous-arborescence précédente de même
+        niveau.
+   + =M-DOWN= (=org-move-subtree-down=) :: Descends la
+        sous-arborescence, /i.e/, échange avec la sous-arborescence
+        suivante de même niveau.
+   + =C-c @= (=org-mark-subtree=) :: Marque la sous-arborescence au
+        point. Tapé à plusieurs reprises marque les sous-arbres
+        suivants de même niveau que la sous-arborescence marquée.
+   + =C-c C-x C-w= (=org-cut-subtree=) :: Détruit la
+        sous-arborescence, /i.e/, l'efface du tampon mais l'enregistre
+        dans le cycle de destruction (kill ring). Avec un argument
+        numérique préfixé N, détruit N sous-arborescences
+        séquentiellement. 
+   + =C-c C-x M-w= (=org-copy-subtree=) :: Copie la sous-arborescence
+        dans le cycle de destruction (kill ring). Avec un argument
+        numérique préfixé N, copie les N sous-arborescences
+        séquentiellement. 
+   + =C-c C-x C-y= (=org-paste-subtree=) :: Colle la sous-arborescence
+        depuis le cycle de destruction (kill ring). Cela modifie le
+        niveau de la sous-arborescence pour s'assurer que l'arbre
+        rentre proprement à la position de colle. Le niveau de collage
+        peut aussi être spécifiée avec un argument numérique préfixé,
+        ou par collage après un marqueur de rubrique comme '=****='. 
+   + =C-y= (=org-yank=) :: Selon les variables
+        =org-yank-adjusted-subtrees= et =org-yank-folded-subtrees=, la
+        commande interne Org =yank= colle les sous-arborescences
+        pliées et d'une façon intelligente, utilise la même commande
+        que =C-c C-x C-y=. Avec les paramétrages par défaut, aucun
+        niveau d'ajustement n'a lieu, mais l'arbre collé est plié à
+        moins que ce faisant ça avalerait du texte précédemment
+        visible. Tout argument préfixé à cette commande force un
+        =yank= normal à s'exécuter, avec le préfixe transmis. Une
+        bonne façon de forcer un yank normal est =C-u C-y=. Si vous
+        utilisez =yank-pop= après un yank, cela colle totalement les
+        éléments détruit précédemment, sans ajustement ni pliage.
+   + =C-c C-x c= (=org-clone-subtree-with-time-shift=) :: Clone un
+        sous-arbre en en faisant plusieurs copies. Vous êtes invité à
+        indiquer le nombre de copies à effectuer et vous pouvez
+        également spécifier si des horodatages de l'entrée doivent
+        être décalés.  Cela peut être utile, par exemple, pour créer
+        un certain nombre de tâches liées à une série de conférences à
+        préparer. Pour plus de détails, voir la documentation de la
+        commande =org-clone-subtree-with-time-shift=.
+   + =C-c C-w= (=org-refile=) :: Reclasse l'entrée ou la région à un
+        endroit différent. Voir Section 9.5 [Refile and Copy]
+   + =C-c ^= (=org-sort=) :: Tri les entrées de même
+        niveau. Lorsqu'une région est activée, toutes les entrées dans
+        la région sont triées. Autrement les enfants de la rubrique
+        courante sont triés. La commande attend la méthode de tri, qui
+        peut être alphabétiquement, numériquement, par date---premier
+        horodatage avec actif préféré, date de création, date
+        programmée, date de délai---par priorité, par mots-clés
+        TODO---dans la suite les mots-clés ont été défini dans la
+        configuration---ou par la valeur d'une propriété. Le tri
+        inversé est possible aussi. Vous pouvez fournir votre propre
+        fonction pour extraire la clé de tri. Avec un préfix =C-x=, le
+        tri est sensible à la casse (majuscule, minuscule). 
+   + =C-x n s= (=org-narrow-to-subtree=) :: Réduis le tampon à la
+        sous-arborescence actuelle.
+   + =C-x n b= (=org-narrow-to-block=) :: Réduis le tampon au bloc
+        courant. 
+   + =C-x n w= (=widen=) :: Elargit le tampon pour effacer la
+        réduction.
+   + =C-c *= (=org-toggle-heading=) :: Transforme une ligne normale ou
+        une liste d'éléments en une rubrique---de sorte qu'il devienne
+        une sous-rubrique à son emplacement. Transforme aussi une
+        rubrique en une ligne normale en enlevant l'étoile. S'il y a
+        une région active, transforme toutes les lignes dans la région
+        en rubriques. Finalement, si la première ligne est une
+        rubrique, efface les étoiles de toutes les rubriques dans la
+        région. 
+
+
+Lorsqu'il y a une région active---/i.e/, lorsque le mode Transient
+Mark est actif---la promotion et la relégation marchent sur toutes les
+rubriques de la région. Pour choisir une région de rubriques, c'est
+mieux de placer à la fois le point et la marque au début d'une ligne,
+la marque au début de la première rubrique, et le point à la ligne
+juste après la dernière rubrique à changer. Notez que lorsque le point
+est à l'intérieur d'un tableau (voir Chapitre 3 [Tableaux]), les
+touches méta-curseur ont des fonctionnalités différentes. 
+** Arbres clairsemés
+   Une caractéristique importante du mode Org est la possibilité de
+   construire des /arbres clairsemés/ pour les informations
+   sélectionnées dans un arbre hiérarchique, de sorte que tout le
+   document soit plié autant que possible, mais les informations
+   sélectionnées sont rendues visibles avec la structure de titre
+   au-dessus[fn:7]. Essayez-le juste et vous verrez comment ça
+   marche. 
+
+   Le mode Org contient plusieurs commandes pour créer de tels arbres,
+   toutes ces commandes sont accessibles depuis un répartiteur :
+   + =C-c /= (=org-sparse-tree=) :: Cela demande une touche
+        supplémentaire pour sélectionner une commande de création
+        d'arbre clairsemé. 
+   + =C-c / r= ou =C-c / /= (=org-occur=) :: Demande une expression
+        rationnelle (regexp) et affiche un arbre fragmenté avec toutes les
+        correspondances. Si la correspondance est dans un titre, le
+        titre est rendu visible. Si la correspondance est dans le
+        corps d'une entrée, le titre et le corps sont rendus
+        visibles. Afin de fournir un contexte minimal, la hiérarchie
+        complète des titres au-dessus de la correspondance est
+        affichée, ainsi que le titre suivant la correspondance. Chaque
+        correspondance est également mise en évidence. les surbrillances
+        disparaissent lorsque le tampon est modifié par une commande
+        d'édition ou en appuyant sur =C-c C-c=[fn:8]. Lorsque appelée
+        avec un argument préfixé =C-u=, les surbrillances précédentes
+        sont conservées, ce qui permet d'empiler plusieurs appels à
+        cette commande.
+   + =M-g n= ou =M-g M-n= (=next-error=) :: Saute à la prochaine
+        correspondance d'arbre clairsemé dans ce tampon. 
+   + =M-g p= ou =M-g M-p= (=previous-error=) :: Saute à la précédente
+        correspondance d'arbre dans ce tampon.
+
+	
+   Pour les arborescences éparses fréquemment utilisées de chaînes de
+   recherche spécifiques, vous pouvez utiliser la variable
+   =org-agenda-custom-custom-commands= pour définir un accès rapide au
+   clavier à des arborescences éparses spécifiques. Ces commandes
+   seront alors accessibles via le répartiteur de l'agenda (voir
+   Section 10.2 [Agenda Dispatcher]). Par exemple :
+   #+BEGIN_SRC emacs-lisp
+     (setq org-agenda-custom-commands
+	   '(("f" occur-tree "FIXME")))
+   #+END_SRC
+   définit la touche =f= comme un raccourci pour la création d'abre
+   clairsemé correspondant à la chaîne '=FIXME='. 
+   
+   Les autres commandes d'arbres épars sélectionnent des rubriques
+   basées sur les mots-clés TODO, des balises (tags), ou des
+   propriétés et seront discutées plus tard dans ce manuel.
+
+   Pour afficher un arbre épars, vous pouvez utiliser la commande
+   Emacs =ps-print-buffer-with-faces= qui n'affiche pas les parties
+   inivsibles du document. Ou vous pouvez utiliser la commande =C-c
+   C-e v= pour exporter uniquement la partie visible du document et
+   afficher le fichier résultant.
+
+** Listes
+   Dans une entrée de l'arborescence, des listes formatées à la main
+   peuvent fournir une structure supplémentaire. Elles fournissent
+   également un moyen de créer des listes de cases à cocher (voir
+   Section 5.6 [Checkboxes]). Org soutient l'édition de telles listes,
+   et chaque exportateur (voir Chapitre 12 [Exporting]) peut les
+   analyser et les formater.
+
+   Org connaît les listes ordonnées, les listes non-ordonnées, et les
+   listes descriptives. 
+   + Les éléments des listes non-ordonnées commencent par '=-=', '=+=', ou
+     '=*='[fn:9] en tant que puces.
+   + Les éléments des listes ordonnées commencent par un nombre suivi
+     par soit un point ou une parenthèse droite[fn:10], tels que
+     '=1.=', ou '=1)='[fn:11]. Si vous voulez
+     qu'une liste commence avec une valeur différente---par exemple,
+     20---commencez le texte avec '=[@20]='[fn:12]. Ces constructions
+     peuvent être utilisées dans n'importe quel élément de la liste
+     afin de renforcer une numérotation particulière. 
+   + Les éléments des listes descriptives des éléments de listes
+     non-ordonnées, et contiennent le séparateur '=::=' pour le
+     /terme/ de description de la description.
+
+     
+   Les éléments appartenant à la même liste doivent avoir la même
+   indentation sur la première ligne. En particulier, si une liste
+   ordonnée atteint le nombre '=10.=', alors les nombres à 2 chiffres
+   doivent être écrits alignés à gauche avec les autres nombres de la
+   liste. Un élément finit avant la prohcaine ligne qui est moins ou
+   également indentée que sa puce/son nombre.
+
+   Une liste finit chaque fois que tous les éléments sont finis, ce
+   qui signifie avant toute ligne moins ou également indentée que les
+   éléments top niveau. Elle finit aussi avant deux lignes
+   blanches. Dans ce cas, tous les éléments sont fermés. Voici un
+   exemple :
+   #+BEGIN_SRC org
+     ,* Le seigneur des anneaux
+     Mes scènes favorites sont (dans cet ordre)
+     1. L'attaque de Rohirrim
+     2. Le combat d'Eowyn avec le roi sorcier
+	+ c'était déjà ma scène favorite dans le livre
+	+ J'aime vraiment Miranda Otto. 
+     3. Peter Jackson tiré par Legolas
+	- dans le DVD seulement
+	Il fait une tête vraiment amusante quand ça arrive.
+     Mais au final, aucune scène individuelle ne compte mais le film dans
+     son ensemble. 
+     Acteurs majeurs dans ce film :
+     - Elijah Wood :: Il joue Frodon
+     - Sean Astin :: Il joue Sam, l'ami de Frodon. Je me rappelle encore
+		     très bien de lui dans son rôle de Mikey Walsh dans
+		     /les Goonies/.
+   #+END_SRC
+   Org prend en charge ces listes en ajustant les commandes de
+   remplissage et d'habillage pour les traiter correctement et en les
+   exportant correctement (voir Chapitre 12 [Exporting]). Puisque
+   l'indentation est ce qui gouverne la structure de ces listes,
+   beaucoup de constructions structurelles comme les blocs
+   '=#+BEGIN_=' peuvent être indentés pour signaler leur appartenance
+   à un élément particulier.
+
+   Si vous trouvez qu'utiliser une puce différente pour une
+   sous-liste---que celle utilisée pour le niveau de la liste
+   courante---améliore la lisibilité, personnalisez la variable
+   =org-list-demote-modify-bullet=.  Pour obtenir une différence plus
+   importante d'indentation entre éléments et sous-éléments,
+   personnaliser =org-list-indent-offset=.
+
+   Les commandes suivantes agissent sur les éléments lorsque le point
+   est dans la première ligne d'un élément---la ligne avec la puce ou
+   le nombre. Certaines d'entre elles impliquent l'application de
+   règles automatiques pour conserver la structure de la liste
+   intacte. Si certaines de ces actions vous gênent, configurez
+   =org-list-automatic-rules= pour les désactiver individuellement. 
+
+   + =TAB= (=org-cycle=) :: Les éléments peuvent être pliés comme les
+        rubriques de niveaux. Normalement cela fonctionne uniquement
+        si le point est sur un élément de liste brute. Pour plus de détails,
+        voir la variable =org-cycle-include-plain-lists=. Si cette
+        variable est configurée à =integrate=, les éléments de liste
+        brute sont traités comme des rubriques de bas niveau. Le
+        niveau d'un élément est alors donné par l'indentation de la
+        puce/du nombre. Les éléments sont toujours subordonnés aux
+        réelles rubriques, toutefois; les hiérarchies restent
+        totalement séparées. Dans un nouvel élément sans encore de
+        texte, le premier =TAB= rélègue l'élément à devenir un enfant
+        du précédent. Les =TAB=s suivants déplacent l'élément aux
+        niveaux significatifs dans la liste le remettant
+        éventuellement à sa place initiale.
+   + =M-RET= (=org-insert-heading=) :: Insère un nouvel élément dans
+        le niveau courant. Avec un argument préfixé, force un nouvelle
+        rubrique (voir Section 2.5 [Structure Editing]). Si cette
+        commande est utilisée au milieu d'un élément, cet élément est
+        /éclaté/ en deux, et la seconde partie devient le nouvel
+        élément[fn:13]. Si cette commande est exécutée /avant le corps de l'élément/, le nouvel élément est créé /avant/ l'actuel. 
+   + =M-S-RET= :: Insère un nouvel élément avec une case à cocher
+                  (voir Section 5.6 [Checkboxes]).
+   + =S-UP= / =S-DOWN= :: Saute à l'élément précédent/suivant dans la
+        liste en cours, mais seulement si =org-support-shift-select=
+        est désactivé[fn:14]. Sinon, vous pouvez encore utiliser les
+        commande de saut de paragraphe comme =C-UP= et =C-DOWN= pour
+        des effets assez similaires. 
+   + =M-UP= / =M-DOWN= :: Déplace l'élément incluant les sous-éléments
+        haut/bas[fn:15], i.e, échanger avec l'élément
+        précédent/suivant de même indentation. Si la liste est
+        ordonnée, renumérote automatiquement. 
+   + =M-LEFT= / =M-RIGHT= :: Diminue/augmente l'indentation d'un
+        élément, laissant tranquille les enfants. 
+   + =M-S=LEFT= / =M-S-RIGHT= :: Diminue/augmente l'indentation de
+        l'élément, incluant les sous-éléments. Initialement, l'élément
+        arbre est sélectionné sur la base de l'indentation
+        courante. Lorsque ces commandes sont exécutées plusieurs fois
+        consécutivement, la région initialement sélectionnée est
+        utilisée, même si la nouvelle indentation impliquerait une
+        hiérarchie différente. Pour utiliser la nouvelle hiérarchie,
+        casser la chaîne de commande en déplaçant le point.
+	
+	Comme un cas spécial, utiliser cette commande sur le tout
+        premier élément d'une liste déplace la liste entière. Ce
+        comportement peut être désactivé en configurant
+        =org-list-automatic-rules=. L'indentation globale d'une liste
+        n'a pas d'influence sur le texte /après/ la liste. 
+   + =C-c C-c= :: S'il y a une case à cocher (voir Section 5.6
+                  [Checkboxes]) dans la ligne de l'élément, bascule
+                  l'état de la cse à cocher. Dans tous les cas,
+                  vérifie la cohérence des puces et de l'indentation
+                  dans la liste entière. 
+   + =C-c -= :: Parcourt (cycle) le niveau entier de la liste via les
+                différents éléments/puces ('=-=', '=+=', '=*=',
+                '=1.=', '=1)=') ou un sous-ensemble d'entre eux, selon
+                =org-plain-list-ordered-item-terminator=, le type de
+                liste, et son indentation. Avec un argument numérique
+                préfixé N, sélectionne la Nème puce de cette
+                liste. S'il y a une région active lors de cet appel,
+                le texte sélectionné est modifié en un élément. Avec
+                un argument préfixé, toutes les lignes sont converties
+                en éléments de liste. Si la première ligne est déjà un
+                élément de liste, tous les marqueurs sont effacés de
+                la liste. Finalement, même sans une région active, une
+                ligne normale est convertie en un élément de liste. 
+   + =C-c *= :: Transforme un élément de liste brute en une
+                rubrique---de sorte que ça devient une sous-rubrique à
+                son emplacement. Voir Section 2.5 [Structure Editing],
+                pour une explication plus détaillée.
+   + =C-c C-*= :: Transforme la liste brute entière en un sous-arbre
+                  de la rubrique en cours. Les cases à cocher (voir
+                  Section 5.6 [Checkboxes]) deviennent des mots-clés
+                  TODO, et DONE respectivement, lorsque non cochées,
+                  et respectivement lorsque cochées. 
+   + =S-LEFT= / =S-RIGHT= :: Cette commande parcourt les styles de
+        puce lorsque le point est sur la puce ou n'importe où dans
+        une ligne d'un élément, les détails dépendent de
+        =org-support-shift-select=. 
+   + =C-c ^= :: Tri la liste brute. Attend la méthode de tri :
+                numériquement, alphabétiquement, par date, ou par une
+                fonction personnalisée.
+
+** Tiroirs
+   Parfois vous voulez garder l'information associée à une entrée,
+   mais usuellement vous ne voulez pas la voir. Pour ça, le mode Org a
+   les /tiroirs/. Ils peuvent contenir n'importe quoi sauf une
+   rubrique ou un autre tiroir. Les tiroirs ressemblent à ça :
+   #+BEGIN_SRC org
+     ,** Ceci est une rubrique
+     Toujours à l'extérieur du tiroir
+     :DRAWERNAME:
+     Ceci est l'intérieur du tiroir.
+     :END:
+     Après le tiroir.
+   #+END_SRC
+   Vous pouvez insérer interactivement un tiroir au point en appelant
+   =org-insert-drawer=, qui lié à =C-c C-x d=. Avec une région active,
+   cette commande met la région à l'intérieur du tiroir. Avec un
+   argument préfixé, cette commande appelle
+   =org-insert-property-drawer=, qui crée un tiroir '=PROPERTIES='
+   juste en dessous de la ligne courante.L Le mode Org utilise ce
+   tiroir spécial pour trier les propriétés (voir Chapitre 7
+   [Properties and Columns]). Vous ne pouvez pas l'utiliser pour autre
+   chose. 
+
+   La complétion sur les mots-clés du tiroir est aussi possible en
+   utilisant =M-TAB=[fn:16]. 
+
+   Le cycle de visibilité (voir Section 2.3 [Visibility Cycling]) sur
+   la rubrique cache et montre l'entrée, mais garde le tiroir éclaté
+   sur une seule ligne. Afin de regarder à l'intérieur du tiroir, vous
+   devez déplacer le point sur la ligne du tiroir et y presser =TAB=.
+
+   Vous pouvez également organiser des notes de changement d'état
+   (voir Section 5.3.2 [Tracking TODO state changes]) et des horaires
+   (voir Section 8.4 [Clocking Work Time]) pour être stocké dans un
+   tiroir '=LOGBOOK='. Si vous voulez stocker une note brève là, de
+   façon similaire au changement d'état, utilisez
+   + =C-c C-z= :: Ajoutez une note d'horodatage au tiroir
+                  '=LOGBOOK='. 
+
+** Blocs
+   Le mode Org utilise des blocs '=#+BEGIN=' ... '=#+END=' pour des
+   buts variés de l'inclusion d'exemples de codes sources (voir
+   Section 11.6 [Literal Examples]) à la capture de l'heure
+   d'enregistrement d'information (voir Section 8.4 [Clocking Work
+   Time]). Ces blocs peuvent être pliés et dépliés en pressant =TAB=
+   dans la ligne '=#+BEGIN='. Vous pouvez aussi obtenir tous les blocs
+   pliés à startup en configurant la variable =org-hide-block-startup=
+   ou par fichier en utilisant :
+   #+BEGIN_SRC org
+     ,#+STARTUP: hideblocks
+     ,#+STARTUP: nohideblocks
+   #+END_SRC
+** Création de notes de pied de page   
+   Le mode Org supporte la création de notes de pied de page.
+
+   Une note de pied de page est commencée par un marqueur de note de
+   pied de page dans entre crochets en colonne 0, aucune indentation n'est
+   acceptée. Elle finit à la définition de la prochaine définition
+   note de pied de page, rubrique, ou après deux lignes blanches
+   consécutives. La référence de la note de pied de page est
+   simplement le marqueur entre crochets, à l'intérieur du texte. Les
+   marqueurs commencent toujours avec '=fn:='. Par exemple :
+   #+BEGIN_SRC org
+     La page d'accueil Org[fn:1] a l'air beaucoup mieux maintenant
+     qu'avant.
+     ...
+     [fn:1] Le lien est : https://orgmode.org
+   #+END_SRC
+   Le mode Org étend la syntaxe basée sur les numéros aux notes de
+   pied de page /nommées/ et aux définitions optionnelles en
+   ligne. Voici des références valides :
+   + '=[fn:NAME]=' :: Une référence de note de pied de page nommée, où
+                      NAME est un mot étiquette unique, ou, par
+                      simplicité de la création automatique, un
+                      nombre.
+   + '=[fn:: Ceci est une définition en ligne de cette note]=' :: Une
+        note anonyme à la \LaTeX où la définition est donnée
+        directement à la référence du point.
+   + '=[fn:NAME: une définition]=' :: Une définition en ligne d'une
+        note de pied de page, qui spécifie aussi un nom de la
+        note. Puisque Org autorise les références multiples à la même
+        note, vous pouvez alors utiliser '=[fn:NAME]=' pour créer des
+        références supplémentaires. 
+
+    
+   Les étiquettes de note de pied de page peuvent être créées
+   automatiquement, ou vous pouvez créer des noms vous-même. C'est
+   géré par la variable =org-footnote-auto-label= et ses mots-clés
+   '=STARTUPT=' correspondants. Voir la documentation pour plus de
+   détails. 
+
+   Les commandes suivantes manipulent les notes de pied de page :
+   + =C-c C-x f= :: La commande d'action de note.
+		    
+		    Lorsque le point est sur une référence de note,
+                    saute jusqu'à la définition. Lorsque c'est à la
+                    définition, saute jusqu'à
+                    la---première---référence.
+
+		    Autrement, crée une nouvelle note. Selon la
+                    variable =org-footnote-define-inline=[fn:17], la
+                    définition est placée juste dans le texte comme
+                    partie de la référence, ou séparément dans
+                    l'emplacement réservé par la variable
+                    =org-footnote-section=. 
+
+		    Lorsque cette commande est appelée avec un
+                    argument préfixé, un menu supplémentaire est
+                    offert :
+		    + =s= :: Tri les définitions de note par suite de
+		             référence. 
+	            + =r= :: Renumérote les notes simples '=fn:N='
+                    + =S= :: Raccourci pour les actions =r= en
+                             premier, puis =s=
+                    + =n= :: Renomme toutes les notes dans une suite
+                             '=fn:1=' ... '=fn:n='
+                    + =d= :: Efface la note au point, incluant la
+                             définition et les références.
+
+		    Selon la variable
+                    =org-footnote-auto-adjust=[fn:18], la renumérotation et
+                    le tri des notes peut être automique après chaque
+                    insertion ou suppression.
+   + =C-c C-c= :: Si le point est référence de note, saute à la
+                  définition. S'il est à la définition, retourne à la
+                  référence. Lorsqu'appelée à l'emplacement d'une note
+                  avec un argument préfixé, offre le même menu que
+                  =C-c C-x f=.
+   + =C-c C-o= ou =mouse-1/2= :: Des étiquettes de notes sont aussi
+        liées aux définitions ou références correspondantes, et vous
+        pouvez utiliser les commandes usuelles pour suivre ces liens. 
+
+* Tableaux
+  Org vient avec un éditeur de tableau rapide et intuitif. Les calculs
+  de type tableur sont possibles en utilisant le paquet Emacs Calc
+  (voir calc). 
+** Editeur de tableau intégré
+   Org rend cela facile de formater des tableaux en ASCII brut. Toute
+   ligne avec '=|=' comme le premier caractère non-espace est
+   considéré comme partie du tableau.L '=|=' est aussi le séparateur
+   de colonne[fn:19]. De plus, une ligne commençant par '=|-=' est une
+   ligne horizontale. Cela sépare explicitement les rangées. Les
+   rangées avant la ligne horizontale sont des en-tête de ligne. Un
+   tableau pourrait ressembler à ça :
+   #+BEGIN_SRC org
+     | Nom   | Téléphone | Âge |
+     |-------+-----------+-----|
+     | Peter |      1234 |  17 |
+     | Anna  |      4321 | 25  |
+   #+END_SRC
+   Un tableau est ré-aligné automatiquement chaque fois que vous
+   pressez =TAB=, =RET= ou =C-c C-c= dans le tableau. =TAB= déplace
+   aussi vers le prochain champ---=RET= vers la prochaine rangée---et
+   crée de nouvelles rangées de tableau à la fin du tableau ou avant
+   les lignes horizontales. L'indentation du tableau est définie par
+   la première ligne. Les lignes horizontales sont automatiquement
+   étendue sur chaque ré-alignement pour couvrir toute la largeur du
+   tableau. Donc, pour créer le tableau ci-dessous vous taperiez :
+   #+BEGIN_SRC org
+     | Nom | Téléphone | Âge |
+     |-
+   #+END_SRC
+   et ensuite presserez =TAB= pour aligner le tableau et le début du
+   remplissage des champs. Même encore plus vite
+   '=|Nom|Téléphone|Âge=' suivi par =C-c RET=.
+
+   Lorsque vous tapez du texte dans un champ, Org traite =DEL=,
+   =Backspace=, et toutes les touches de caractères d'une façon
+   spéciale, de sorte que ça insère et supprime évitant de décaler les
+   autres champs. Aussi, lorsque vous tapez /immédiatement/ après que le
+   point ait été déplacé dans un nouveau champ avec =TAB=, =S-TAB= ou
+   =RET=, le champ est automatiquement rendu vierge. Si ce
+   comportement est trop imprédictible pour vous, configurez l'option
+   =org-table-auto-blank-field=. 
+*** Création et conversion
+    + =C-c |= (=org-table-create-or-convert-from-region=) :: Convertit
+         la région active en tableau. Si chaque ligne contient au
+         moins un caractère =TAB=, la fonction suppose que le matériel
+         est séparé par des tab. Si chaque ligne contient une virgule,
+         Comma-Seperated-Value (CSV) est supposé. Sinon, les lignes
+         sont éclatées en espaces blancs dans les champs. Vous pouvez
+         utiliser un argument préfixé pour forcer un séparateur
+         spécifique : =C-u= force CSV, =C-u C-u= force =TAB=, =C-u C-u
+         C-u= invite à saisir une expression régulière pour
+         correspondre au séparateur, et un argument numérique N
+         indique que le séparateur sera au moins N espaces
+         consécutifs, ou alternativement une =TAB=. 
+
+	 S'il n'y a pas de région active, cette commande crée un
+         tableau Org vide. Mais il est plus facile de commencer à
+         taper, comme =|Name|Phone|Age RET|- TAB=.
+
+*** Réalignement et déplacement de champ
+    + =C-c C-c= (=org-table-align=) :: Ré-aligne le tableau sans
+         déplacer le point.
+    + =TAB= (=org-table-next-field=) :: Ré-aligne le tableau, bouge
+         vers le champ suivant. Crée une nouvelle rangée si
+         nécessaire.
+    + =C-c SPC= (=org-table-blank-field=) :: Rend le champ vide au
+         point.  
+    + =S-TAB= (=org-table-previous-field=) :: Ré-aligne, bouge au
+         champ précédent. 
+    + =RET= (=org-table-next-row=) :: Ré-aligne le tableau et descend
+         d'une rangée. Crée une nouvelle rangée si nécessaire. Au
+         début ou à la fin d'une ligne, =RET= insère encore une ligne,
+         donc ça peut être utilisé pour diviser un tableau.
+    + =M-a= (=org-table-beginning-of-field=) :: Bouge au début du
+         champ courant, ou vers le champ précédent. 
+    + =M-e= (=org-table-end-of-field=) :: Bouge à la fin du champ
+         courant, ou vers le champ suivant.
+	 
+*** Edition de ligne et colonne
+    + =M-LEFT= (=org-table-move-column-left=) :: Déplace la colonne
+         courante vers la gauche.
+    + =M-RIGHT= (=org-table-move-column-right=) :: Déplace la colonne
+         courante vers la droite.
+    + =M-S-LEFT= (=org-table-delete-column=) :: Détruit la colonne
+         courante. 
+    + =M-S-RIGHT= (=org-table-insert-column=) :: Insère une nouvelle
+         colonne à la gauche de la position du point.
+    + =M-UP= (=org-table-move-row-up=) :: Déplace la ligne courante
+         vers le haut.
+    + =M-DOWN= (=org-table-move-row-down=) :: Déplace la ligne
+         courante vers le bas.
+    + =M-S-UP= (=org-table-kill-row=) :: Détruit la ligne courante ou
+         la ligne horizontale (le filet)
+    + =M-S-DOWN= (=org-table-insert-row=) :: Insère une nouvelle ligne
+         au-dessus de l'actuelle. Avec un argument préfixé, la ligne
+         est créée au dessous de l'actuelle. 
+    + =C-c -= (=org-table-insert-hline=) :: Insère une ligne
+         horizontale sous l'actuelle. Avec un argument préfixé, la
+         ligne est créée au-dessus de l'actuelle. 
+    + =C-c RET= (=org-table-hline-and-move=) :: Insère une ligne
+         horizontale sous l'actuelle, et déplace le point dans la
+         ligne sous le filet.
+    + =C-c ^= (=org-table-sort-lines=) :: Tri les lignes du tableau
+         dans la région. La position du point indique la colonne à
+         utiliser pour le tri, et l'étendue de lignes est l'étendue
+         entre le séparteur de ligne le plus proche, ou le tableau
+         entier. S'il n'y a pas de région active, la marque spécifie
+         la première ligne et la colonne de tri, alors que le point
+         devrait être dans la dernière ligne à être inclus dans le
+         tri. La commande invite à saisir le type de tri,
+         alphabétiquement, numériquement, ou par date. Vous pouvez
+         trier dans l'ordre croissant ou décroissant. Vous pouvez
+         aussi fournir votre propre clé d'extraction et fonction de
+         comparaison. Lorsqu'appelée avec un argument préfixé, le tri
+         alphabétique est sensible à la casse.
+
+*** Régions
+    + =C-c C-x M-w= (=org-table-copy-region=) :: Copie une région
+         rectangulaire depuis un tableau vers un presse-papier
+         spécial. Le point et la marque déterminent les bords des
+         champs du rectangle. S'il n'y a pas de région active, copie
+         juste le champ courant. Le processus ignore les séparateurs
+         de lignes horizontales.
+    + =C-c C-x C-w= (=org-table-cut-region=) :: Copie une région
+         rectangulaire depuis un tableau vers un presse-papier
+         spécial, et efface tous les champs dans le rectangle. Donc
+         c'est l'opération "couper".
+    + =C-c C-x C-y= (=org-table-paste-rectangle=) :: Colle une région
+         rectangulaire dans un tableau. Le coin supérieur gauche finit
+         dans le champ courant. Tous les champs impliqués sont
+         écrasés. Si le rectangle ne rentre pas dans le présent
+         tableau, le tableau est élargi autant que nécessaire. Le
+         processus ignore les séparateurs de lignes horizontales.
+    + =M-RET= (=org-table-wrap-region=) :: Divise le champ courant à
+         la position du point et déplace le reste vers la ligne du
+         dessous. S'il n'y a pas de région active, et le point et la
+         marque dans la même colonne, le texte dans la colonne est
+         enroulé dans la largeur minimale pour le nombre donné de
+         lignes. Un argument numérique préfixé peut être utilisé pour
+         changer le nombre de lignes désirées. S'il n'y a pas de
+         région active, mais que vous spécifiez un argument préfixé,
+         le champ courant est rendu vierge, et le contenu et ajouté au
+         champ au dessus.  
+
+*** Calculs
+    + =C-c += (=org-table-sum=) :: Somme les nombres dans la colonne
+         courante, ou dans le rectangle défini par la région
+         active. Le résultat est montré dans la zone d'écho et peut
+         être inséré avec =C-y=.
+    + =S-RET= (=org-table-copy-down=) :: Lorsque le champ actuel est
+         vide, copiez le premier champ non vide ci-dessus. Lorsqu'il
+         n'est pas vide, copiez le champ actuel dans la rangée
+         suivante et déplacez le point avec lui. Selon la variable
+         =org-table-copy-increment=, des champs de valeurs entières
+         peuvent être incrémentés durant la copie. Les entiers trop
+         grand ne sont pas incrémentés toutefois. Aussi, un argument
+         préfixé 0 désactive temporairement l'incrément. Cette touche
+         est aussi utilisée par décalage de sélection et les modes
+         reliés (voir Section 15.12.2 [Conflicts]). 
+
+*** Divers 
+    + =C-c `= (=org-table-edit-field=) :: Edite le champ courant dans
+         une fenêtre séparée. Ceci est utile pour des champs qui ne
+         sont pas pleinement visibles (voir Section 3.2 [Column Width
+         and Alignment]). Lorsqu'appelée avec un préfixe =C-u=, fait
+         la fenêtre de l'éditeur suivre le point à travers le tableau
+         et montre toujours le champ courant. Le mode suivi sort
+         automatiquement lorsque le point quitte le tableau, ou quand
+         vous répétez la command avec =C-u C-u C-c `=.
+    + =M-x org-table-import= :: Importe un fichier en tant que
+         tableau. Le tableau devrait être =TAB= ou séparé avec des
+         espaces blancs. Utilisez par exemple, pour importer un
+         tableau excel ou des données depuis une base de données,
+         parce ces programmes peuvent généralement écrire des fichiers
+         de texte séparés par des tabulations. Cette commande
+         fonctionne par insertion du fichier dans le tampon et ensuite
+         convertit la région en un tableau. Tout argument préfixé
+         est passé au convertisseur, qui l'utilise pour déterminer le
+         séparateur.  
+    + =C-c |= (=org-table-create-or-convert-from-region=) :: Les
+         tableaux peuvent aussi être importés en collant des tableaux
+         de texte dans le tampon Org, sélectionnant le texte collé
+         avec =C-x C-x= et ensuite en utilisant la commande =C-c |=
+         (voir [Creation and conversion]). 
+    + =M-x org-table-export= :: Exporte le tableau, par défaut comme
+         un fichier séparé par des tabulations. Utiliser pour échanger
+         des données avec, par exemple, un tableur ou des programmes
+         de base de données. Le format utilisé pour exporter le
+         fichier peut être configuré dans la variable
+         =org-table-export-default-format=. Vous pouvez aussi utiliser
+         '=TABLE_EXPORT_FILE=' et '=TABLE_EXPORT_FORMAT=' pour
+         spécifier le nom de fichier et le format exporter un tableau
+         dans une sous-arborescence.Org supporte les formats généraux
+         pour les tableaux exportés. Le format de l'exportateur est le
+         même que celui utilisé par les tableaux radio Orgtbl, voir
+         Section A.5.3 [Translator functions], pour une description
+         détaillée.    
+
+** Largeur de colonne et alignement
+   La largeur des colonnes est automatiquement déterminée par
+   l'éditeur de tableau. L'alignement d'une colonne est déterminé
+   automatiquement à partir de la fraction de champs numériques ou non
+   numériques de la colonne. 
+
+   Editer un champ peut modifier l'alignement du tableau. Déplacer une
+   ligne ou une colonne contigue---i.e, utiliser =TAB= ou =RET=---le
+   ré-aligne automatiquement. Si vous voulez désactiver ce
+   comportement, configurer =org-table-automatic-realign= à
+   =nil=. Dans tous les cas, vous pouvez toujours aligner manuellement
+   un tableau :
+   + =C-c C-c= (=org-table-align=) :: Aligne le tableau courant. 
+
+
+   Configurer l'option =org-startup-align-all-tables= ré-aligne tous
+   les tableaux dans un fichier lors de sa visite. Vous pouvez aussi
+   configurer cette option par fichier avec : 	
+   #+BEGIN_SRC org
+     ,#+STARTUP: align
+     ,#+STARTUP: noalign
+   #+END_SRC
+   Parfois, un seul champ ou quelques champs doivent contenir plus de
+   texte, ce qui entraîne des colonnes trop larges. Peut-être vous
+   voulez cacher plusieurs colonnes ou les afficher avec une largeur
+   fixée, peu importe le contenu, comme montré dans l'exemple. 
+   #+BEGIN_SRC org
+     |---+--------+----------|
+     |   | <6>    |          |
+     | 1 | un     | peu      |
+     | 2 | deux   | ennuyeux |
+     | 3 | Ceci est un long texte | colonne  |
+   #+END_SRC
+   Pour configurer la largeur d'une colonne, un champ n'importe où
+   dans la colonne peut contenir juste la chaîne '=<N>=' où N spécifie
+   la largeur comme nombre de caractères. Vous pouvez contrôler la
+   largeur d'affichée des colonnes avec les outils suivants :
+   + =C-c TAB= (=org-table-toggle-column-width=) :: Réduis ou agrandis
+        la colonne actuelle. 
+
+	Si la largeur d'un cookie spécifie une largeur W pour la
+        colonne, la réduire affiche les W premiers caractères visibles
+        uniquement. Autrement, la colonne est réduite à un seul
+        caractère. 
+
+	Lorsqu'appelée avant la première colonne ou après la dernière,
+        demande une liste de plages de colonnes sur lesquelles opérer.
+   + =C-u C-c TAB= (=org-table-shrink=) :: Réduis toutes les colonnes
+        avec une largeur de colonne. Etend les autres. 
+   + =C-u C-u C-c TAB= (=org-table-expand=) :: Etend toutes les
+        colonnes.
+
+
+   Pour voir le texte plein d'un champ réduit, maintenir la souris
+   au-dessus de lui : une info-bulle montre alors le contenu complet
+   du champ. Alternativement, =C-h .= (=display-local-help=) les
+   révèle aussi. Par confort, toute modification proche de la partie
+   réduite d'une colonne l'étend. 
+
+   Configurer l'option =org-startup-shrink-all-tables= réduit toutes
+   les colonnes contenant un large cookie dans un fichier lors de sa
+   visite. Vous pouvez aussi configurer cette option par fichier
+   avec : 
+   =#+STARTUP: shrink=
+   Si vous souhaitez remplacer l'alignement automatique des colonnes
+   riches en nombres à droite et des colonnes riches en chaînes à
+   gauche, vous pouvez utiliser '=<r>=', '=<c>=', ou '=<l>=' de façon
+   similaire. Vous pouvez aussi combiner alignement et largeur de
+   champ comme ça : '=<r10>='.
+
+   Les lignes qui contiennent uniquement ces formatages de cookie sont
+   automatiquement effacées lors de l'exportation du document. 
+
+** Groupes de colonnes
+   Lorsque Org exporte des tableaux, il le fait par défaut sans lignes
+   verticales parce que c'est plus satisfaisant visuellement en
+   général. Occasionnellement toutefois, des lignes verticales peuvent
+   être utiles pour structurer un tableau en groupes de colonnes, plus
+   comme des lignes horizontales peuvent le faire pour des groupes de
+   rangées. Afin de spécifier des groupes de colonnes, vous pouvez
+   utiliser une rangée spéciale où le premier champ contient
+   uniquement '=/='. Les autres champs peuvent contenir soit '=<='
+   pour indiquer que cette colonne devrait commencer un groupe, '=>='
+   pour indiquer la fin d'une colonne, ou '=<>=' (pas d'espace entre
+   '=>=' et '=>=') pour faire un groupe de colonne en soi. Lors de
+   l'exportation, les limites entre groupes de colonnes sont marquées
+   avec des lignes verticales. Voici un exemple :
+   #+BEGIN_SRC org
+     | N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
+     |---+-----+-----+-----+---------+------------|
+     | / |   < |     |   > |       < |          > |
+     | 1 |   1 |   1 |   1 |       1 |          1 |
+     | 2 |   4 |   8 |  16 |  1.4142 |     1.1892 |
+     | 3 |   9 |  27 |  81 |  1.7321 |     1.3161 |
+     |---+-----+-----+-----+---------+------------|
+     ,#+TBLFM: $2=$1^2::$3=$1^3::$4=$1^4::$5=sqrt($1)::$6=sqrt(sqrt(($1)))
+   #+END_SRC
+   C'est aussi suffisant de juste insérer le groupe de colonnes après
+   chaque ligne verticale que vous souhaiteriez avoir :
+   #+BEGIN_SRC org
+     | N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
+     |---+-----+-----+-----+---------+------------|
+     | / | <   |     |     | <       |            |
+   #+END_SRC
+   
+** Le mode mineur Orgtbl
+   Si vous aimez la façon intuitive dont l'éditeur de tableau Org
+   marche, vous pourriez vouloir l'utiliser dans d'autres modes comme
+   dans le mode Text ou Mail. Le mode mineur Orgtbl rend cela
+   possible. Vous pouvez toujours basculer le mode avec =M-x
+   orgtbl-mode=. Pour l'activer par défaut par exemple dans le mode
+   Message, utiliser :
+   =(add-hook 'message-mode-hook 'turn-on-orgtbl)=
+
+   En outre, avec une certaine configuration spéciale, il est possible
+   de maintenir les tableaux dans une syntaxe arbitraire avec le mode
+   Orgtbl. Par exemple, il est possible de construire des tableaux
+   \LaTeX avec la facilité et la puissance sous-jacente du mode
+   Orgtbl, incluant les capacités de tableur. Pour les détails, voir
+   Section A.5 [Tables in Arbitrary Syntax]. 
+
+** Le tableur
+   L'éditeur de tableau fait usage du paquet Emacs Calc pour
+   implémenter des capacités de tableur. Il peut aussi évaluer des
+   formules Emacs Lisp pour dériver des champs d'autres champs. Bien
+   que plein d'options, l'implémentation Org n'est pas identiques aux
+   autres tableurs. Par exemple, Org connaît le concept de /formule de
+   colonne/ qui sera appliquée à tous les champs hors en-tête dans une
+   colonne sans avoir à copier la formule pour chaque champ
+   pertinent. Il y a aussi une formule de débogage, et un éditeur de
+   formule, déplaçant ces références avec les touches flèches. 
+*** Références
+    Pour calculer les champs dans le tableau à partir d'autres champs,
+    les formules doivent faire référence à d'autres champs ou
+    plages. Dans Org, des champs peuvent être référencées par nom, par
+    coordonnées absolues, et par coordonnées relatives. Pour découvrir
+    queles sont les coordonnées d'un champ, pressez =C-c ?= dans ce
+    champ, ou pressez =C-c —}= pour basculer l'affichage d'une grille.
+**** Références de champ 
+     Les formules peuvent référencer la valeur d'un autre champs de
+     deux façons. Comme dans tout autre tableur, vous pouvez
+     référencer les champs par des combinaisons lettre/nombre comme
+     '=B3=', signifiant le second champ dans la troisième
+     ligne. Néanmoins, Org préfère utiliser une autre représentation
+     plus générale qui ressemble à[fn:20] :
+     
+     =@ROW$COLUMN=
+     
+     Les spécifications de colonnes peuvent être absolues comme
+     '=$1=', '=$2=', ..., '=$N=', ou relative à la colonne courante,
+     i.e, la colonne du champ qui est calculé, comme '=$+1=' ou
+     '=$-2='. '=$<=' et '=$>=' sont des références immuables pour la
+     1ère et la dernière colonne, respectivement, et vous pouvez
+     utiliser '=$>>>=' pour indiquer la 3ème colonne depuis la droite.
+
+     La spécification de rangée compte uniquement les lignes avec des
+     données et ignore les séparateurs horizontaux, ou "hlines". Comme
+     avec les colonnes, vous pouvez utiliser des numéros absolus de
+     rangées '=@1=', '=@2=', ..., '=@N=', et des numéros relatifs à la
+     rangée en cours comme '=@+3=' ou '=@-1='. '=@<=' et '=@>=' sont
+     des références immuables à la 1ère et dernière rangée dans le
+     tableau, respectivement. Vous pouvez aussi spécifier la rangée
+     relative à une des hlines : '=@I=' se réfère à la 1ère hline,
+     '=@II=' à la seconde, etc. '=@-I=' se réfère à la 1ère telle
+     ligne au dessus de la ligne actuelle, '=@+I=' à la 1ère telle
+     ligne au dessous de la ligne actuelle. Vous pouvez aussi écrire
+     '=@III+2=' qui est la seconde ligne de donnée après la 3ème hline
+     dans le tableau. 
+
+     '=@0=' et '=$0=' se réfèrent à la ligne et la colonne actuelles,
+     respectivement, i.e, à la ligne/colonne du champ qui est
+     calculé. Aussi, si vous omettez soit la colonne soit la ligne de
+     la référence, l'actuelle ligne/colonne est impliquée.
+
+     Les références Org utilisent des nombres /non signés/ qui sont
+     des références fixées dans le sens où si vous utilisez la même
+     référence dans la formule pour deux champs différents, le même
+     champ est référencé à chaque fois. Les références Org avec des
+     nombres /signés/ sont des références flottantes parce que le même
+     opérateur de référence peut référencer différent champ selon le
+     chaque qui est calculé par la formule.
+
+     Voici quelques exemples :
+
+     | '=@2$3='   | 2e ligne, 3e colonne (idem que '=C2=')                           |
+     | '=$5='     | colonne 5 dans la ligne actuelle (idem que '=E&=')               |
+     | '=@2'=     | colonne actuelle, ligne 2                                        |
+     | '=@-1$-3=' | champ une ligne au dessus, trois colonnes à gauche               |
+     | '=@-I$2='  | champ juste sous hline au dessus de la ligne actuelle, colonne 2 |
+     | '=@>$5='   | champ dans la dernière ligne, colonne 5                          |
+
+**** Références de plages
+     Vous pouvez référencer une plage rectangulaire de champs en
+     spécifiant deux champs de références connectées par deux points
+     '=..='. Si les deux champs sont dans la ligne en cours, vous
+     pouvez simplement utiliser '=$2..$7=', mais si au moins un champ
+     est dans une ligne différente, vous devez utiliser le format
+     général '=@ROW$COLUMN=' au moins pour le premier champ, i.e, la
+     référence doit démarrer avec '=@=' afin d'être interprétée
+     correctement. Exemples :
+     | '=$1..$3='      | premier trois champs dans la ligne courante                       |
+     | '=$P..$Q='      | plage, utilisant noms de colonnes                                 |
+     | '=$<<<..$>>='   | démarre en colonne 3, continue jusqu'à la dernière                |
+     | '=@2$1..@4$3='  | 6 champs entre ces 2 (idem que '=A2..C4=')                        |
+     | '=@-1$-2..@-1=' | 3 champs dans la rangée au dessus, commençant 2 colonnes à gauche |
+     | '=@I..II='      | entre la 1ère et la 2de hline, raccourci pour '=@I..@II='         |
+
+     La plage de références renvoie un vecteur de valeurs qui peuvent
+     être introduites en vecteur de fonctions Calc. Les champs libres
+     dans les plages sont normalement supprimés, de sorte que le
+     vecteur contienne uniquement des champs non-vides. Pour d'autres
+     options avec le switche '=E=', '=N=' et des exemples, voir
+     Section 3.5.2 [Formula syntax for Calc].
+
+**** Coordonnées des champs dans les formules
+     L'une des toutes premières actions durant l'évaluation des
+     formules Calc et des formules Lisp et de substituer '=@#=' et
+     '=$#=' dans la formule avec le numéro de ligne ou colonne du
+     champ où le résultat ira. Les formules Lisp traditionnelles
+     équivalentes sont =org-table-current-dline= et
+     =org-table-current-column=. Exemples :
+     + '=if(@# % 2, $#, string(""))=' :: insère un numéro de colonne
+          sur les lignes impaires, configure le champ à vide même sur
+          les lignes paires.
+     + '~$2 = '(identity remote(FOO, @@#$1))~' :: copie le texte ou
+          les valeurs de chaque rangée de la colonne 1 du tableau
+          nommé FOO dans la colonne 2 du tableau courant.
+     + '~@3 = * remote(FOO, @@1$$#)~' :: insère la valeur doublée de
+          chaque colonne de la ligne 1 du tableau nommé FOO dans la
+          rangée 3 du tableau courant. 
+
+  
+     Pour les 2e et 3e exemples, le tableau FOO doit avoir au moins
+     autant de lignes ou colonnes que le tableau actuel. Noter que
+     c'est inefficace[fn:21] pour un grand nombre de lignes.
+
+**** Références nommées
+     '=$name=' est interprété comme le nom d'une colonne, paramètre ou
+     constante. Les constantes sont définies globalement via la
+     variable =org-table-formula-constants=, et localement---pour le
+     fichier---via une ligne comme cet exemple :
+
+     =#+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6=
+
+     Aussi, les propriétés (voir Chapitre 7 [Properties and Columns])
+     peuvent être utilisées comme constantes dans des formules de
+     tableaux : pour une propriété '=Xyz=' utiliser le nom
+     '=$PROP_Xyz=', et la propriété sera cherchée dans l'entrée
+     hiérarchique actuelle et dans la hiérarchie au dessus. Si vous
+     avez le paquet '=constants.el=', il sera aussi utilisé pour
+     résoudre les constantes, incluant des constantes naturelles comme
+     '=$h=' pour la constante de Planck, et des unités comme '=$km='
+     pour les kilomètres[fn:22]. Les noms de colonnes et les
+     paramètres peuvent être spécifié dans des lignes spéciales de
+     tableau. Elles sont décrites plus bas, voir Section 3.5.10
+     [Advanced features]. Tous les noms doivent commencer par une
+     lettre, et les autres constitué de lettres et de nombres.
+
+**** Références distantes
+     Vous pouvez aussi référencer des constantes, des champs et des
+     plages depuis différents tableaux, soit dans le fichier actuel ou
+     même dans un fichier différent. La syntaxe est
+
+     =remote(NAME, REF)=
+
+     où NAME peut être le nom d'un tableau dans le fichier actuel
+     comme défini par une ligne '=#+NAME:=' avant le tableau. Cela
+     peut aussi être l'ID d'une entrée, même dans un fichier
+     différent, et la référence se réfère à l'entrée dans le premier
+     tableau. REF est une référence absolue de champ ou plage comme
+     décrit au dessus par exemple '=@3$3=' ou '=$somename=', valide
+     dans le tableau référencé. 
+
+     Lorsque NAME le format '=@ROW$COLUMN=', il est remplacé par le
+     nom et l'ID trouvé dans ce champ du tableau actuel. Par exemple
+     '=remote($1, @@>$2)=' \Rightarrow '=remote(year_2013,
+     @@>$1)='. Le format '=B3=' n'est pas supporté parce qu'il ne peut
+     pas être distingué d'un nom ou ID brut. 
+*** Syntaxe des formules pour Calc
+    Une formule peut être n'importe quelle expression algébrique
+    comprise par le paquet Emacs Calc. Noter que Calc a la convention
+    non standard que '=/=' a une priorité plus faible que '=*=', de
+    sorte que '=a/b*c=' est interprété comme '=(a/(b*c))='. Avant
+    évaluation par =calc-eval= (voir Section "Calling Calc from Your
+    Programs' dans [[https://www.gnu.org/software/emacs/manual/html_node/calc/index.html][calc]]), le changement de variable a lieu selon les
+    règles décrites plus haut.
+
+    La plage de vecteurs peut être directement remplie dans les
+    fonctions Calc comme =vmean= et =vsum=. Une formule peut contenir
+    un mode optionnel chaîne après un point-virgule. Cette chaîne
+    est composée d'indicateurs pour influencer Calc et d'autres modes
+    durant l'exécution. Par défaut, Org utilise les modes Calc
+    standard (précision 12, unités des angles degrés, modes fraction
+    et symbolic off). Le format d'affichage, toutefois, a été modifié
+    en '=(float 8)=' pour garder les tableaux compacts. Les réglages
+    par défaut peuvent être configurés en utilisant la variable
+    =org-calc-default-modes=. 
+
+    + '=p20=' :: Configure les calculs internes de Calc avec une
+                 précision de 20 chiffres.
+    + '=n3=', '=s3=', '=e2=', '=f4=' :: Format normal, scientifique,
+         ingénieur, ou fixé du résultat de Calc passé à Org. Le
+         formatage de Calc est illimité tant que la précision du
+         calcul de Calc est supérieure.
+    + '=D=', '=R=' :: modes degrés et radians de Calc.
+    + '=F=', '=S=' :: modes fraction et symbolique de Calc.
+    + '=T=', '=t=', '=U=' :: calculs de durées dans Calc ou Lisp,
+         Section 3.5.4 [Durations and times values]
+    + '=E=' :: Si et comment considérer les champs vides. Sans '=E='
+               les champs vides des références de plage sont
+               supprimés, de sorte que le vecteur Calc ou la liste
+               Lisp ne contient que les champs non vides. Avec '=E=',
+               les champs vides sont conservés. Pour les champs vides
+               dans les plages ou les références de champ vides, la
+               valeur '=nan=' (pas un nombre, /not a number/) est
+               utilisée dans les formules Calc et la chaîne vide est
+               utilisée pour les formules Lisp. Ajoutez "N" pour
+               utiliser 0 à la place des deux types de formules. Pour
+               la valeur d’un champ, le mode '=N=' a une priorité
+               supérieure à '=E='.
+    + '=N=' :: Interprète tous les champs comme des nombres, utilise 0
+               pour les non-nombres. Voir la prochaine section pour
+               voir comment c'est essentiel pour les calculs avec les
+               formules Lisp. Dans les formules Calc, c'est utilisé
+               occasionnellement, car les chaînes de nombres sont déjà
+               interprétées comme des nombres sans '=N='.
+    + '=L=' :: Littéral, pour les formules Lisp uniquement. Voir la
+               section suivante. 
+
+
+
+    À moins que vous n'utilisiez de grands nombres entiers ou des
+    calculs de haute précision  et affichez des nombres à virgule
+    flottante vous pouvez alternativement fournir un spécificateur de
+    format à =printf= pour reformater le résultat de Calc après qu'il
+    ait été passé à Org au lieu de laisser Calc faire le
+    formatage[fn:23]. Quelques exemples : 
+
+    + '=$1+$2=' :: Somme des premier et second champs.
+    + '=$1+$2;%.2f=' :: Idem, formatage du résultat à 2 décimales.
+    + '=exp($2)+exp($1)=' :: Des fonctions mathématiques peuvent être
+         utilisées. 
+    + '=$0;%.1f=' :: Reformate les cellules courantes à 1 décimales.
+    + '=($3-32)*5/9=' :: Conversion degrés F \rightarrow C 
+    + '=$c/$1/$cm=' :: Conversion Hz \rightarrow cm, utilisant
+                       '=constants.el='
+    + '=tan($1);Dp3s1=' :: Calculs en degrés, précision 3, affichage
+         SCI 1
+    + '=sin($1);Dp3%.1e=' :: Idem, mais usage du spécificateur
+         =printf= pour l'affichage.
+    + '=vean($2..$7)=' :: Calcul de la plage de colonne, utilisant une
+         fonction vectorielle
+    + '=vmean($2..$7);EN=' :: Idem, mais traite les champs vides comme
+         0
+    + '=taylor($3,x=7,2)=' :: Série de Taylor de $3, à x = 7, second
+         degré
+
+
+
+    Calc contient aussi un ensemble complet d'opérations logiques
+    (voir Section "Logical Operations dans [[https://www.gnu.org/software/emacs/manual/html_node/calc/index.html][calc]]). Par exemple
+
+    + '=if($1 < 20, teen, string(""))=' :: '="teen"=' si age '=$1='
+         est moins que 20, sinon le champ résultat du tableau Org est
+         configuré à vide avec la chaîne vide.
+    + '~if("$1" == "nan" || "$2" == "nan", string(""), $1 + $2); E f-1~' :: Somme les deux premières colonnes. Lorsqu'au moins
+      un des champs de saisie est vide le champ résultat du tableau
+      Org est configuré à vide. '=E=' est requis pour ne pas convertir
+      les champs vides en 0. '=f-1=' est un format de chaîen Calc
+      optionnel similaire à '=%.1f=' mais laisse vide les résultats
+      vides.
+    + '~if(typeof(vmean($1..$7)) == 12, string(""), vmean($1..$7); E~'
+         :: Valeur moyenne d'une plage à moins qu'il n'y ait un champ
+      vide. Chaque champ dans la plage qui est vide est remplacé par
+      '=nan=' ce qui laisse le résultat de '=vmean=' à '=nan='. Alors
+      '~typeof =~' 12= détecte le '=nan=' depuis '=vmean=' et le champ
+      résultat du tableau Org est configuré à vide. Utilise ça
+      lorsque l'échantillon est supposé n'avoir aucune valeur
+      manquante. 
+    + '~if("$1..$7" == "[]", string(""), vmean($1..$7))~' :: Valeur
+         moyenne d'une plage avec des champs vides zappés. Chaque
+         champ dans la plage qui est vide est zappé. Lorsque tous les
+         champs dans la plage sont vides la valeur moyenne n'est pas
+         définie et le résultat du tableau Org est réglé à
+         vide. Utilise ça lorsque l'échantillon a une taille
+         variable. 
+    + '=vmean($1..$7); EN=' :: Pour compléter l'exemple précédent :
+         valeur moyenne d'une plage avec des champs vides comptant
+         comme échantillons avec valeur 0. Utilise uniquement lorsque
+         des échantillons incomplets devraient être comblés par
+         des 0. 
+    
+
+    Vous pouvez ajouter vos propres fonctions Calc définies en Emacs
+    Lisp avec =defmath= et utilisez-les dans la syntaxe de formule
+    pour Calc.
+
+*** Les formules Emacs Lisp en tant que formules
+
+    Il est aussi possible d'écrire une formule en Emacs Lisp. Cela
+    peut être utile pour la manipulation de chaîne et de structures de
+    contrôle, si les fonctionnalités de Calc ne sont pas suffisantes.
+
+    Si une formule commence avec une apostrophe suivie par une
+    parenthèse ouvrante, alors c'est évalué comme une formule
+    Lisp. L'évaluation devrait renvoyer soit une chaîne soit un
+    nombre. Comme avec une formule Calc, vous pouvez spécifier les
+    modes et un format =printf= après un point-virgule. 
+
+    Avec des formules Emacs Lisp, vous devez être conscient de la
+    façon dont les références de champ sont interpolées dans la
+    formule. Par défaut, une référence est interpolée comme une chaîne
+    Lisp (entre guillemets) contenant le champ. Si vous fournissez le
+    mode '=N=' switch, tous les éléments référencés sont des champs
+    numériques---non-numériques seront zéro---et interpolé comme
+    nombres Lisp, sans apostrophe. Si vous fournissez le drapeau
+    '=L=', tous les champs sont interpolés littéralement, sans
+    apostrophe. Par exemple, si vous voulez qu'une référence soit
+    interprétée comme une chaîne par la formule Lisp, encapsulez
+    l'opérateur de référence lui-même entre guillemets, comme
+    '="$3"='. Les plages sont insérées comme des champs d'espace
+    séparés, de sorte que vous pouvez les embarquer dans une syntaxe
+    de liste ou de vecteur. 
+
+    Voici quelques exemples---noter comment le mode '=N=' est utilisé
+    lorsque nous faisons des calculs en Lisp :
+    + '='(concat (substring $1 1 2) (substring $1 0 1) (substring $1 2))'= :: Echange les deux premiers caractères du contenu de la
+      colonne 1
+    + '='(+ $1 $2);N'=' :: Ajoute les colonnes 1 et 2, équivalent à
+         '=$1 + $2=' en Calc.
+    + '='(apply '+ '($1..$4));N=' :: Calcule la somme des colonnes 1 à
+         4, comme '=vsum($1..$4)=' avec Calc
+
+*** Valeurs de temps et de durées
+    Si vous voulez calculer des valeurs de temps utilisez les drapeaux
+    '=T=', '=t=', ou '=U=', soit dans des formules Calc ou dans des
+    formules Elisp :
+
+    | Tâche 1 |  Tâche 2 |    Total |
+    |---------+----------+----------|
+    |    2:12 |     1:47 | 03:59:00 |
+    |    2:12 |     1:47 |    03:59 |
+    | 3:02:20 | -2:07:00 |     0.92 |
+    #+TBLFM: @2$3=$1+$2;T::@3$3=$1+$2;U::@4$3=$1+$2;t
+
+    L'introduction de valeurs de durées doit être sous la form
+    '=HH:MM[:SS]=', où les secondes sont optionnelles. 
+
+    Avec le drapeau '=T=', les durées calculées sont affichées comme
+    '=HH:MM:SS=' (voir la première formule ci-dessus). Avec le drapeau
+    '=U=', les secondes sont omises de sorte que le résultat est
+    seulement '=HH:MM=' (voir la seconde formule ci-dessus). La mise à
+    zéro du champ des heure dépend de la valeur de la variable
+    =org-table-duration-hour-zero-padding=.
+
+    Avec le drapeau '=t=', les durées calculées sont affichées selon
+    la valeur de l'option =org-table-duration-custom-format=, qui par
+    défaut est =hours= et affiche le résultat comme une fraction
+    d'heures (voir la troisième formule dans l'exemple ci-dessus). 
+
+    Les valeurs de durées négatives peuvent aussi bien être
+    manipulées, et les entiers sont considérés comme des secondes en
+    addition comme en soustraction. 
+
+*** Champ et plage de formules
+    Pour assigner une formule à un champ particulier, tapez-le
+    directement dans le champ, précédé par '~:=~', par exemple
+    '=vsum(@II...III)='. Lorsque vous pressez =TAB= ou =RET= ou =C-c C-c= avec le point toujours dans le champ, la formule est stockée
+    comme la formule pour ce champ, évaluée, et le champ actuel est
+    remplacé par le résultat. 
+
+    Les formules sont stockées dans un mot-clé spécial '=TBLFM=' situé
+    directement sous le tableau. Si vous tapez l'équation dans le
+    quatrième champ de la troisième ligne de donnée dans le tableau,
+    la formule ressemble à '=@3$4=$1+$2='. Lorsque vous
+    insérez/supprimez/échangez des colonnes ou des lignes avec les
+    commandes appropriées, les /références absolues/ (mais pas les
+    relatives) dans les formules stockées sont modifiées afin de
+    référencer encore le même champ. Pour éviter que cela n'arrive, en
+    particulier dans les plages de références, ancrer les plages aux bords
+    tableau (utilisant '=@<=', '=@>=', '=$<=', '=$>='), ou aux hlines
+    utilisant la notation '=@I='. L'adaptation automatique aux
+    références de champ ne se produit pas si vous éditez la structure
+    du tableau avec des commandes d'éditions normales---vous devez
+    régler les formules vous-même. 
+
+    Au lieu de taper une équation dans le champ, vous pouvez aussi
+    utiliser la commande suivante :
+    + ~C-u C-c =~ (=org-table-eval-formula=) :: Installe une nouvelle
+         formule dans le champ courant. La commande invite à saisir
+         une formule avec par défaut le mot-clé '=TBLFM=', l'applique
+         au champ courant, et la stocke.
+    
+
+    Le membre de gauche de la formule peut aussi être une expression
+    spéciale afin d'assigner la formule à un nombre de champs
+    différents. Il n'y a pas de raccourci clavier pour entrer une
+    telle plage de formules. Pour les ajouter, utiliser l'éditeur de
+    formule (voir Section 3.5.8 [Editing and debugging formulas]) ou
+    éditer directement le mot-clé '=TBLFM='.
+
+    + '=$2=' :: Formule de colonne, valide pour la colonne
+                entière. C'est si commun qu'Org traite ces formules
+                d'une façon spéciale, voir Section 3.5.6 [Column
+                formulas]
+    + '=@3=' :: Formule de ligne, s'applique à tous les champs d'une
+                ligne spécifique. '~@>=~' signifie la dernière ligne. 
+    + '=@1$2..@4$3=' :: Plage de formule, s'applique à tous les champs
+                        dans la plage rectangulaire donnée. Cela peut
+                        aussi être utilisée pour assigner une formule
+                        à certains champs mais pas tous dans une
+                        ligne.
+    + '~$NAME=~' :: Champ nommé, voir Section 3.5.10 [Advanced
+                    features]
+ 
+*** Formules de colonnes
+
+    Lorsque vous assignez une formule à une simple référence de
+    colonne comme '=$3=', la même formule est utilisée dans tous les
+    champs pour cette colonne, avec les exceptions très pratiques
+    suivantes : (i) Si le tableau contient des séparateurs horizontaux
+    hlines avec des lignes au dessus et au dessous, tout avant la
+    première telle hline est considéré comme partie de la /tête/ du
+    tableau et n'est pas modifié par les formules de colonnes. Ainsi
+    une tête est requise lorsque vous utilisez des formules de
+    colonnes et voulez ajouter des hlines à des groupes de lignes,
+    comme par exemple pour séparer un total de ligne en bas des lignes
+    sommées au dessus. (ii) Les champs qui ont déjà une valeur depuis
+    une formule de champ/plage sont laissées tranquilles par les
+    formules de colonnes. Ces conditions rendent les formules de
+    colonnes très faciles à utiliser. 
+
+    Pour assigner une formule à une colonne, tapez la directement dans
+    n'importe quel champ de la colonne, précédée par un signe égal,
+    comme '~=$1+$2~'. Lorsque vous pressez =TAB= ou =RET= ou =C-c C-c=
+    avec le point encore dans le champ, la formule est stockée comme
+    formule pour la colonne courante, évaluée et le champ courant est
+    remplacé par le résultat. Si le champ contient uniquement '~=~',
+    la forumule précédemment stockée est utilisée. Pour chaque
+    colonne, Org se rappelle uniquement la formule utilisée la plus
+    récente. Dans le mot-clé '=TBLFM=', des formules de colonnes
+    ressemblent à '~$4=$1+$2~'. Le membre de gauche d'une formule de
+    colonne peut être le nom de colonne, ce doit être la référence
+    numérique de la colonne ou '=$>='. 
+
+    Au lieu de taper une équation dans le champ, vous pouvez aussi
+    utiliser la commande suivante :
+
+    + ~C-c =~ (=org-table-eval-formula=) :: Installe une nouvelle
+         formule dans la colonne courante et remplace le champ courant
+         avec le résultat de la formule. La commande invite à saisir
+         une formule, avec par défaut le mot-clé '=TBLFM=', l'applique
+         au champ courante et la stocke. Avec un argument préfixé, par
+         exemple, ~C-5 C-c =~, la commande l'applique à ces champs
+         consécutifs dans la colonne courante. 
+
+*** Fonctions de recherche
+    Org a trois fonctions Emacs Lisp prédéfinies pour rechercher dans
+    des tableaux.
+    + ='(org-lookup-first VAL S-LIST R-LIST &optional PREDICATE)'= ::
+         Cherche le premier élément S dans S-LIST pour lequel
+         =(PREDICATE VAL S)= est non-=nil=; renvoie la valeur depuis
+         la position correspondante dans R-LIST. Le PREDICATE par
+         défaut est =equal=. Noter que les paramètres VAL et S sont
+         passés à PREDICATE dans le même ordre que les paramètres
+         correspondants dans l'appel à =org-lookup-first=, où VAL est
+         prioritaire sur S-LIST. Si R-LIST est =nil=, l'élément
+         correspondant S de S-LIST est renvoyé.
+    + ='(org-lookup-last VAL S-LIST R-LIST &optional PREDICATE)'= ::
+         Similaire à =org-lookup-first= au-dessus, mais cherche le
+         /dernier/ élément pour lequel PREDICATE est non-=nil=.    
+    + ='(org-lookup-all VALL S-LIST R-LIST &optional PREDICATE)'= ::
+         Similaire à =org-lookup-first=, mais cherche /toutes/ les
+         valeurs correspondantes. Cette fonction peut ne pas être
+         utilisée dans une formule, parce qu'elle renvoie une liste de
+         valeurs. Cependant de puissantes fonctions de recherche
+         peuvent être bâties lorsque cette fonction est combinée avec
+         d'autres fonctions Emacs Lisp.
+
+
+    Si les plages utilisées dans ces fonctions contiennent des champs
+    vides, le mode '=E=' pour les formules devrait être spécifié :
+    autrement des champs vides ne sont pas inclus dans S-LIST et/ou
+    R-LIST lesquelles peuvent, par exemple, résulter en une
+    correspondance incorrecte entre un élément de S-LIST et un élément
+    de R-LIST.
+
+    Ces trois fonctions peuvent être utilisées pour implémenter des
+    tableaux associatifs, compter des cellules correspondantes, des
+    classements, des groupes de données, etc. Pour des exemples
+    pratiques voir [[https://orgmode.org/worg/org-tutorials/org-lookups.html][ce tutoriel sur Worg]].
+
+*** Edition et débogage de formules
+    Vous pouvez éditer des formules individuelles dans le mini-tampon
+    ou directement dans le champ. Org peut aussi préparer un tampon
+    spécial avec toutes les formules actives d'un tableau. Lors de la
+    proposition d'une formule pour l'édition, Org convertit les
+    références au format standard (comme '=B3=' ou '=D&=') si
+    possible. Si vous préférez travailler uniquement avec le format
+    interne (comme '=@3$2=' ou '=$4='), configurez la variable
+    =org-table-use-standard-references=. 
+
+    + ~C-c =~ ou ~C-c =~ (=org-table-eval-formula=) :: Edite la
+         formule associée la colonne/le champ actuel dans le
+         mini-tampon. Voir Section 3.5.6 [Column formulas], et Section
+         3.5.5 [Field and range formulas]. 
+    + ~C-u C-u C-c =~ (=org-table-eval-formula=) :: Ré-insère la
+         formule active (soit une formule de champ, soit une formule
+         de colonne) dans le champ courant, de sorte que vous pouvez
+         directement l'éditer dans le champ. L'avantage de l'édition
+         dans le mini-tampon est que vous pouvez utiliser la commande
+         =C-c ?=. 
+    + =C-c ?= (=org-table-field-info=) :: Lors de l'édition d'une
+         formule dans un champ de tableau, souligne les champs
+         référencés par référence à la position du point dans la
+         formule. 
+    + =C-c }= (=org-table-toggle-coordinate-overlays=) :: Bascule
+         l'affichage d'un numéro de ligne et de colonne d'un tableau,
+         utilisant des superpositions. Ils sont mis à jour chaque fois
+         que le tableau est aligné ; vous pouvez le forcer avec =C-c
+         C-c=. 
+    + =C-c {= (=org-tablea-toggle-formula-debugger=) :: Bascule le
+         débogueur de formule on et off. Voir plus bas.
+    + =C-c '= (=org-table-edit-formulas=) :: Edite toutes les formules
+         pour le tableau actuel dans un tampon spécial, où les
+         formules sont affichées ligne par ligne. Si le champ actuel a
+         une formule active, le point dans l'éditeur de formule la
+         marque. Alors que dans le tampon spécial, Org surligne
+         automatiquement tout champ ou plage de référence à la
+         position du point. Vous pouvez éditer, effacer et ajouter des
+         formules, et utiliser les commandes suivantes :
+    + =C-c C-c= ou =C-x C-s= (=org-table-fedit-finish=) :: Sort
+              de l'éditeur de formule et stocke les formules
+              modifiées. Avec un préfixe =C-u=, applique aussi les
+              nouvelles formules au tableau entier. 
+    + =C-c C-q= (=org-table-fedit-abort=) :: Sort de l'éditeur de
+              formule sans installer de changement. 
+    + =C-c C-r= (=org-table-fedit-toggle-ref-type=) :: Bascule
+              toutes les références dans l'éditeur de tableaux entre
+              standard (comme '=B3=') et interne (comme '=@3$2='). 
+    + =TAB= (=org-table-fedit-lisp-indent=) :: Affiche joliment
+              ou indente une formule Lisp au point. Lorsque dans une
+              ligne contenant une formule Lisp, formate la formule
+              selon les règles Emacs Lisp. Une autre =TAB= explose à
+              nouveau la formule. Dans la formule ouverte, =TAB=
+              ré-indente juste comme en mode Emacs Lisp.
+    + =M-TAB= (=lisp-complete-symbol=) :: Complète les symboles Lisp,
+         juste comme en mode Emacs Lisp.
+    + =S-UP=, =S-DOWN=, =S-LEFT=, =S-RIGHT= :: Décale la référence au
+         point. Par exemple, si la référence est '=B3=' et vous
+         pressez =S-RIGHT=, ça devient '=C3='. Cela marche aussi pour
+         les références relatives et pour les références hline.
+    + =M-S-UP= (=org-table-fedit-line-up=) :: Déplace la ligne de
+         test pour les formules de colonnes en haut dans le tampon
+         Org.
+    + =M-S-DOWN= (=org-table-fedit-line-down=) :: Déplace la ligne de
+         test pour les formules de colonnes en bas dans le tampon Org.
+    + =M-UP= (=org-table-fedit-scroll-up=) :: Défile la fenêtre vers
+         le haut affichant le tableau.
+    + =M-DOWN= (=org-table-fedit-scroll-down=) :: Défile la fenêtre
+         vers le bas affichant le tableau
+    + =C-c }= Bascule les coordonnées de la grille du tableau on et
+      off.
+
+
+
+    Faire un champ de table vide ne supprime pas la formule associée
+    au champ, car elle est stockée sur une autre ligne---la ligne
+    '=TBLFM='. Lors du prochain recalcul, le champ sera rempli à
+    nouveau. Pour supprimer une formule d’un champ, vous devez donner
+    une réponse vide lorsque vous y êtes invité ou modifier le mot-clé
+    '=TBLFM='. 
+
+    Vous pouvez éditer le mot-clé '=TBLFM=' directement et
+    ré-appliquer les équations modifiées avec =C-c C-c= dans cette
+    ligne ou avec des commandes de recalcul normal dans le tableau. 
+**** Utiliser plusieurs lignes '=TBLFM='
+     Vous pouvez appliquer la formule temporairement. C'est très utile
+     lorsque vous souhaitez basculer la formule appliquée au
+     tableau. Placez plusieurs mots-clés '=TBLFM=' juste après le
+     tableau, et ensuite pressez =C-c C-c= sur la formule à
+     appliquer. Voici un exemple :
+     
+     #+BEGIN_SRC org
+       | x | y |
+       |---+---|
+       | 1 |   |
+       | 2 |   |
+       ,#+TBLFM: $2=$1*1
+       ,#+TBLFM: $2=$1*2
+     #+END_SRC
+
+     Presser =C-c C-c= dans la ligne de '=#+TBLFM: $2=$1*2=' fournit : 
+
+     #+BEGIN_SRC org
+       | x | y |
+       |---+---|
+       | 1 | 2 |
+       | 2 | 4 |
+       ,#+TBLFM: $2=$1*1
+       ,#+TBLFM: $2=$1*2
+     #+END_SRC
+     Si vous recalculez le tableau, avec =C-u C-c *=, par exemple,
+     vous obtenez le résultat suivant en appliquant uniquement le
+     premier mot-clé '=TBLFM=' :
+     #+BEGIN_SRC org
+	 | x | y |
+	 |---+---|
+	 | 1 | 1 |
+	 | 2 | 2 |
+	 ,#+TBLFM: $2=$1*1
+	 ,#+TBLFM: $2=$1*2
+     #+END_SRC
+**** Débogage de formules
+     Lorsque l'évaluation d'une formule conduit à une erreur, le
+     contenu du champ devient la chaîne '=#ERROR='. Si vous voulez
+     voir ce qui se passe lors d'un changement de variable et du
+     calcul afin de trouver un bug, activer un débogage de formule
+     dans le menu Tbl et répéter le calcul, par exemple en pressant
+     ~C-u C-u C-c = RET~ dans un champ. Des informations détaillées
+     sont affichées. 
+*** Mettre le tableau à jour
+    Le recalcul d'un tableau n'est normalement pas automatique, mais a
+    besoin d'être déclenché par une commande. Pour rendre le recalcul
+    au moins semi-automatique, voir Section 3.5.10 [Advanced
+    features]. 
+    
+    Afin de recalculer une ligne d'un tableau ou le tableau entier,
+    utiliser les commandes suivantes : 
+
+    + =C-c *= (=org-table-recalculate=) :: Recalcule la ligne courante
+         en appliquant d'abord les formules de colonne stockées de la
+         gauche vers la droite, et toutes les formules de champ/plage
+         dans la ligne actuelle. 
+    + =C-u C-c *= ou =C-u C-c C-c= :: recalcule le tableau entier,
+         ligne par ligne. Toute ligne avant la première hline est
+         laissée seule, supposant qu'elle fait partie de l'en-tête.
+    + =C-u C-u C-c *= ou =C-u C-u C-c C-c= (=org-table-iterate=) ::
+         Itère le tableau en le recalculant jusqu'à ce que plus aucun
+         changement ne se produise. Cela peut être nécessaire si
+         certain champs calculés utilisent la valeur d'autres champs
+         qui seront calculés plus tard dans la suite de calculs.
+    + =M-x org-table-recalculate-buffer-tables= :: Recalcule tous les
+         tableaux dans le tampon courant. 
+    + =M-x org-table-iterate-buffer-tables= :: Itère tous les tableaux
+         dans le tampon courant, afin de convertir les dépendences de
+         tableau en tableau.
+*** Fonctionnalités avancées
+    Si vous voulez que le recalcul des champs arrive automatiquement,
+    ou si vous voulez être capable d'attribuer des noms[fn:24] aux
+    champs et aux colonnes, vous devez réserver la première colonne du
+    tableau pour le marquage des caractères spéciaux. 
+    + =C-#= (=org-table-rotate-recalc-marks=) :: Bascule la marque de
+         calcul dans la première colonne via les états '=#=', '=*=',
+         '=!=', '=$='. Lorsqu'il y a une région active, modifie toutes
+         les marques de la région.
+
+
+    Voici un exemple d'un tableau qui collecte des résultats d'examens
+    d'étudiants et qui fait usage des ces fonctionnalités :
+    #+BEGIN_SRC org 
+      |   | Etudiant | Prob 1 | Prob 2 | Prob 3 | Total | Note |
+      |---+----------+--------+--------+--------+-------+------|
+      | ! |          |     P1 |     P2 |     P3 |   Tot |      |
+      | # | Maximum  |     10 |     15 |     25 |    50 | 10.0 |
+      | ^ |          |     m1 |     m2 |     m3 |    mt |      |
+      |---+----------+--------+--------+--------+-------+------|
+      | # | Peter    |     10 |      8 |     23 |    41 |  8.2 |
+      | # | Sam      |      2 |      4 |      3 |     9 |  1.8 |
+      |---+----------+--------+--------+--------+-------+------|
+      |   | Average  |        |        |        |  25.0 |      |
+      | ^ |          |        |        |        |    at |      |
+      | $ | max=50   |        |        |        |       |      |
+      |---+----------+--------+--------+--------+-------+------|
+      ,#+TBLFM: $6=vsum($P1..$P3)::$7=10*$Tot/$max;%.1f::$at=vmean(@-II..@-I);%.1f
+    #+END_SRC
+    *Important :* Veuillez noter que pour ces tableaux spéciaux, le
+     recalcul du tableau avec =C-u C-c *= affecte uniquement les
+     lignes qui sont marquées '=#=' ou '=*=', et les champs qui ont
+     des formules assignées au champ lui-même. Les formules de colonne
+     ne sont pas appliquées dans les lignes avec le premier champ
+     vide. 
+
+     Les caractères de marquages ont les significations suivantes : 
+     + '=!=' :: Les champs dans cette ligne définissent des noms pour
+                les colonnes, de sorte que vous pouvez vous référer à
+                une colonne comme '=$Tot=' au lieu de '=$6='.
+     + '=^=' :: Cette ligne définit des noms pour les champs
+                /au-dessus/ de la ligne. Avec une telle définition,
+                toute formule dans le tableau peut utiliser '=$m1='
+                pour se référer à la valeur '=10='. Aussi, si vous
+                assignez une formule à un nom de champ, elle sera
+                stockée dans '~$name =  ...~'
+     + '=-=' :: Similaire à '=^=', mais définit des noms pour les
+                champs dans la ligne /en-dessous/.
+     + '=$=' :: Des champs dans cette ligne peuvent définir des
+                /paramètres/ pour des formules. Par exemple, si un
+                champ dans une ligne '=$=' contient '=max=50=', alors
+                des formules dans ce tableau peut référer à la valeur
+                50 en utilisant '=$max='. Des paramètres fonctionnent
+                exactement comme des constantes, seulement ils
+                peuvent être définis sur une base individuelle.
+     + '=#=' :: Des champs dans cette ligne sont automatiquement
+                recalculés en pressant =TAB= ou =RET= ou =S-TAB= dans
+                cette ligne. Aussi, cette ligne est sélectionnée pour
+                un recalcul global avec =C-u C-c *=. Les lignes non
+                marquées sont laissés tranquille par cette commande. 
+     + '=*=' :: Sélectionne cette ligne pour un recalcul global avec
+                =C-u C-c *=, mais pas pour un recalcul
+                automatique. Utiliser cela lorsque le recalcul
+                automatique ralentit trop l'édition.
+     + '=/=' :: N'exporte pas cette ligne. Utile pour des lignes qui
+                contiennent des marqueurs '=<N>=' de réduction  ou des
+                marqueurs de groupes de colonnes.
+		
+
+     Enfin, juste pour vous mettre en appétit pour ce qui peut être
+     fait avec le fantastique package Calc, voici un tableau qui
+     calcule la série de degrés n de Taylor à l’emplacement x pour
+     quelques fonctions.
+
+     #+BEGIN_SRC org
+       |---+-------------+---+-----+--------------------------------------|
+       |   | Fonction    | n | x   | Résultat                             |
+       |---+-------------+---+-----+--------------------------------------|
+       | # | exp(x)      | 1 | x   | 1 + x                                |
+       | # | exp(x)      | 2 | x   | 1 + x + x^2 / 2                      |
+       | # | exp(x)      | 3 | x   | 1 + x + x^2 / 2 + x^3 / 6            |
+       | # | x^2+sqrt(x) | 2 | x=0 | x*(0.5 / 0) + x^2 (2 - 0.25 / 0) / 2 |
+       | # | x^2+sqrt(x) | 2 | x=1 | 2 + 2.5 x - 2.5 + 0.875 (x - 1)^2    |
+       | * | tan(x)      | 3 | x   | x pi / 180 + 5.72e-8 x^3 pi^3        |
+       ,#+TBLFM: $5=taylor($2,$4,$3);n3
+     #+END_SRC
+
+** Org Plot
+   Org Plot peut produire des graphiques d'informations stockées dans
+   des tableaux Org, soit graphiquement soit sous forme d'art ASCII.
+*** Graphiques utilisant Gnuplot   
+    Org Plot peut produire des graphiques 2D et 3D avec des
+    informations stockées dans des tableaux Org utilisant [[http://www.gnuplot.info/][Gnuplot]] et
+    Gnuplot mode. Pour voir ça en action, assurez-vous que vous avez
+    Gnuplot et Gnuplot mode installé sur votre système, puis appelez
+    =C-c " g= ou =M-x org-plot/gnuplot= sur le tableau suivant.
+    #+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]"
+    | Sede      | Max cites | H-index |
+    |-----------+-----------+---------|
+    | Chile     |    257.72 |   21.39 |
+    | Leeds     |    165.77 |   19.68 |
+    | Sao Paolo |     71.00 |   11.50 |
+    | Stockholm |    134.19 |   14.33 |
+    | Morelia   |    257.56 |   17.67 |
+    
+    Noter que Org Plot est suffisamment intelligent pour appliquer
+    pour considérer les en-tête de tableau comme des étiquettes. Des
+    contrôles supplémentaires sur les étiquettes, le type, le contenu,
+    et l'apparence des graphiques peuvent être exercé via le mot-clé
+    '=PLOT=' précédant le tableau. Voir ci-dessous pour une liste
+    complète des options de Org Plot. Pour plus d'information et
+    exemples voir le [[https://orgmode.org/worg/org-tutorials/org-plot.html][tutoriel Org Plot]].
+*** Options Plot
+    + '=set=' :: Spécifiez toute option Gnuplot à définir lors de la
+                 représentation graphique.
+    + '=title=' :: Spécifiez le titre du graphe.
+    + '=ind=' :: Spécifiez quelle colonne du tableau utiliser pour
+                 l'axe des '=x='.
+    + '=deps=' :: Spécifiez les colonnes à représenter sous forme de
+                  liste de styles Lisp, entourées de parenthèses et
+                  séparées par des espaces, par exemple, '=dep: (3 4)='
+                  pour représenter graphiquement les troisième et
+                  quatrième colonnes. La valeur par défaut est de
+                  représenter graphiquement toutes les autres colonnes
+                  en dehors de la colonne ‘=ind=’.
+    + '=type=' :: Spécifiez si le graphe est '=2d=', '=3d=', ou
+                  '=grid=' (quadrillage)
+    + '=with=' :: Spécifiez une option '=with=' à insérer pour toutes
+                  les colonnes représentées, par exemple, '=lines=',
+                  '=points=', '=boxes=', '=impulses='. Par défaut
+                  '=lines='.
+    + '=file=' :: Si vous voulez tracer le graphe d'un fichier,
+                  spécifiez '="path/to/desired/output-file"='.
+    + '=labels=' :: Liste d'étiquettes à utiliser pour le
+                    '=deps='. Par défaut des en-tête de colonnes si
+                    elles existent.
+    + '=line=' :: Spécifiez une ligne entière à insérer dans le script
+                  Gnuplot.
+    + '=map=' :: Lors du tracé de types '=3d=' ou '=grid=',
+                 l'initialise à '=t=' pour tracer une carte plate
+                 plutôt qu'en '=3d='.
+    + '=timefmt=' :: Spécifiez le format des horodatages du mode Org
+                     comme s'ils étaient analysés par Gnuplot. Par
+                     défaut '=%Y-%m-%d-%H:%M:%S'.
+    + '=script=' :: Si vous voulez le contrôle total, vous pouvez
+                    spécifier un fichier de script---placer le nom de
+                    fichier entre guillemets---ce qui sera utilisé
+                    pour tracer le graphe. Avant le traçage, toutes
+                    les instance de '=$datafile=' dans le script
+                    spécifié seront remplacés par le chemin du fichier
+                    de données généré. Note : même si vous configurez
+                    cette option, vous pouvez encore vouloir spécifier
+                    le type de tracé, puisque ça peut avoir un impact
+                    sur le contenu du fichier de données.
+*** Les diagrammes en barre ASCII
+    Lorsque le point est sur une colonne, taper =C-c `` a= ou =M-x
+    orgtbl-ascii-plot= crée une nouvelle colonne contenant un
+    diagramme en barre ASCII. Le diagramme est implémenté via une
+    formule de colonne rectangulaire. Lorsque le source de colonne
+    change, le diagramme en barre peut être mis à jour en
+    rafraichissant le tableau, par exemple en tapant =C-u C-c *=.
+    
+    | Sede          | Max cites |              |
+    |---------------+-----------+--------------|
+    | Chile         |    257.72 | WWWWWWWWWWWW |
+    | Leeds         |    165.77 | WWWWWWWh     |
+    | Sao Paolo     |     71.00 | WWW;         |
+    | Stockholm     |    134.19 | WWWWWW:      |
+    | Morelia       |    257.56 | WWWWWWWWWWWW |
+    | Rochefourchat |      0.00 |              |
+    #+TBLFM: $3='(orgtbl-ascii-draw $2 0.0 257.72 12)
+
+    La formule est un appel Elisp.
+   
+    =orgtbl-ascii-draw= valeur min max &optional width
+
+    Dessine un diagrame en barre ASCII dans un tableau.
+
+    VALUE est la valeur du diagramme.
+    MIN est la valeur affichée comme une barre vide. MAX est la valeur
+    remplissant tous les WIDTH.
+    Les valeurs sources en dehors de cette plage sont affichées comme
+    '=too small=' ou '=too large='. 
+    WIDTH est le nombre de caractères du diagramme en barre. Par
+    défaut '=12='.
+* Hyperliens
+  Comme HTML, Org fournit des liens à l'intérieur d'un document, des
+  liens externes vers d'autres fichiers, articles Usenet, emails, et
+  bien plus.
+** Format de lien
+   Org reconnaîtra les liens URL bruts et les activera comme des liens
+   cliquables. Le format général des liens, toutefois, ressemble à
+   ça : 
+   #+BEGIN_SRC org
+     [[lien][description] ] ou [[lien] ]
+   #+END_SRC
+   Une fois qu'un lien dans le tampon est complet (tous les crochets
+   sont présent), Org modifiera l'affichage de sorte que
+   '=description=' est affiché au lieu de '=[[lien][description] ]='
+   et '=lien=' est affiché au lieu de '=[[lien] ]='. Les liens seront
+   surlignés avec la face =org-link=, qui par défaut est soit la
+   partie '=lien=' (s'il n'y a pas de description) soit la partie
+   '=description='. Pour éditer aussi la partie '=lien=' invisible,
+   utiliser =C-c C-l= avec le curseur sur le lien. 
+
+   Si vous placez le curseur au début ou avant la fin du texte affiché
+   et pressez BACKSPACE, vous effacerez le crochet (invisible) à cet
+   endroit. Cela rend le lien incomplet et l'intérieur est à nouveau
+   affiché comme texte brut. Insérer le crochet manquant cache à
+   nouveau le lien interne. Pour montrer la structure interne de tous
+   les liens, utiliser le menu d'entrée =Org->Hyperlinks->Literal
+   links=.
+** Liens internes
+  Si le lien ne ressemble pas à une URL, il est considéré comme étant
+  un lien interne dans le fichier actuel. Le cas le plus important est
+  un lien comme '=[[#my-custom-id] ]=' qui liera l'entrée avec la
+  propriété CUSTOM_ID '=my-custom-id='. Vous êtes responsable de vous
+  assurer que ces identifiants personnalisés soient unique dans un
+  fichier. 
+
+  Des liens tels que '=[[Ma cible] ]=' ou '=[[Ma cible][Trouve ma
+  cible] ]=' mènent à une recherche textuelle dans le fichier actuel. 
+
+  Le lien peut être suivi avec =C-c C-o= lorsque le curseur est sur le
+  lien, ou avec un clic de souris (voir Section 4.4 [Handling
+  links]). Les liens vers des identifiants personnalisés pointeront
+  vers la rubrique correspondante. La correspondance préférée pour un
+  lien textuel est une /cible dédiée/ : la même chaîne entre double
+  chevrons, comme '=<<Ma cible>>='.
+
+  Si aucune cible dédiée n'existe, le lien essaiera de correspondre
+  avec le nom exact d'un élément dans le tampon. Le nommage est fait
+  avec le mot-clé =#+NAME=, qui doit être mis dans la ligne avant
+  l'élément auquel il se réfère, comme dans l'exemple suivant :
+  #+BEGIN_SRC org
+    ,#+NAME: Ma cible
+    | un | tableau         |
+    |----+-----------------|
+    | de | quatre cellules |
+  #+END_SRC
+  Si aucun de ceux ci-dessus n'ont de succès, Org cherchera une
+  rubrique qui est exactement le lien textuel mais peut aussi inclure
+  un mot-clé TODO et des balises[fn:25].
+
+  Durant l'exportation, les liens internes seront utilisés pour
+  marquer les objets et leur assigner un nombre. 
+
+  Les objets marqués seront alors référencés par les liens pointant
+  vers eux. En particulier, des liens sans une description
+  apparaîtront comme nombre assigné à l'objet marqué[fn:26]. Dans
+  l'extrait suivant depuis un tampon Org
+  #+BEGIN_SRC org
+    - un élément
+    - <<cible>>un autre élément
+    Ici nous nous référons à l'élément [[cible] ]
+  #+END_SRC
+  La dernière phrase apparaîtra comme '=Ici nous nous référons à
+  l'élément 2=' lorsqu'elle sera exportée. 
+
+  Dans les fichiers non-Org, la recherche cherchera les mots dans le
+  lien textuel. Dans l'exmple ci-dessus la recherche serait pour '=ma
+  cible='. 
+  
+  Suivant un lien poussant une marque dans la chaîne Org. Vous pouvez
+  retourner à la position précédente avec =C-c &=. Utilisant cette
+  commande plusieurs fois en succession directe renvoie aux positions
+  enregistrées plus tôt.
+*** Cibles radio
+  Org peut automatiquement transformer toute occurrence de certains
+  noms de cible en texte normal en un lien. Donc sans créer un lien
+  explicite, le texte se connecte à la cible radioant sa position. Les
+  cibles radio sont encapsulées entre trois chevrons. Par exemple, une
+  cible '=<<<Ma cible>>>=' force toute occurrence de '=ma cible=' en
+  texte normal à devenir activé comme un lien. Le fichier Org est
+  automatiquement scanné pour les cibles radio uniquement lorsque le
+  fichier est chargé en premier dans Emacs. Pour mettre à jour la
+  liste des cibles durant l'édition, pressez =C-c C-c= avec le curseur
+  sur ou à une cible. 
+** Liens externes
+   Org supporte les liens vers des fichiers, des sites web, Usenet et
+   des messages email, des entrées de base de données BBDB et des
+   liens vers à la fois des conversations IRC et leur logs. Les liens
+   externes sont comme des localisateurss URL. Ils commencent avec une
+   courte chaîne identifiante suivie d'un point. La liste suivante
+   montre des exemples de chaque type de lien.
+
+   + =http://www.astro.uva.nl/~dominik= :: sur le web
+   + =doi:10.1000/182= :: DOI pour une ressource électronnique
+   + =file:/home/dominik/images/jupiter.jpg= :: file, absolute path
+   + =/home/dominik/images/jupiter.jpg= :: pareil qu'au-dessus
+   + =file:papers/last.pdf= :: fichier, chemin relatif
+   + =./papers/last.pdf= :: pareil qu'au-dessus
+   + =file:/ssh:myself@some.where:papers/last.pdf= :: fichier, chemin
+        sur une machine distante
+   + =/ssh:myself@some.where:papers/last.pdf= :: pareil qu'au-dessus
+   + =file:sometextfile::NNN= :: fichier, saute au numéro de ligne
+        indiqué 
+   + =file:projects.org= :: un autre fichier Org
+   + =file:projects.org::some words= :: recherche textuelle dans un
+        fichier Org[fn:27]
+   + =file:projects.org::*task title= :: recherche une rubrique dans
+        un fichier Org[fn:28]
+   + =docview:papers/last.pdf:NNN= :: ouvre en mode doc-view à la page
+   + =id:B7423F4D-2E8A-471B-8810-C40F074717E9= :: lien vers rubrique
+        par ID
+   + =news:comp.emacs= :: lien Usenet
+   + =mailto:adent@galaxy.net= :: lien mail
+   + =mhe:folder= :: lien du dossier MH-E 
+   + =mhe:folder#id= :: lien du message MH-E
+   + =rmail:folder= :: lien du dossier RMAIL
+   + =rmail:folder#id= :: lien du message RMAIL
+   + =gnus:group= :: lien de groupe Gnus
+   + =gnus:group#id= :: lien d'article Gnus
+   + =bbdb:R.*Stallman= :: lien BBDB (avec regexp)
+   + =irc:/irc.com/#emacs/bob= :: lien IRC
+   + =info:org#External links= :: Noeud d'info ou lien d'index
+   + =shell:ls *.org= :: Une commande shell
+   + =elisp:org-agenda= :: Commande interactive Elisp
+   + =elisp:(find-file-other-frame "Elisp.org")= :: Forme Elisp à
+        évaluer
+   
+   Par dessus ces types de liens intégrés, certains sont disponibles via
+   le répertoire =contrib/= (voir Section 1.2 [Installation]). Par
+   exemple, ces liens ver VM ou des messages Wanderlust sont disponibles
+   lorsque vous chargez les bibliothèques correspondantes depuis le
+   répertoire =contrib/= :
+
+   + =vm:folder= lien de dossier VM
+   + =vm:folder#id= lien de message VM
+   + =vm://myself@some.where.org/folder#id= :: VM sur une machine à
+        distance
+   + =vm-imap:account:folder= :: lien de dossier IMAP VM
+   + =vm-imap:account:folder#id= :: lien de message IMAP VM
+   + =wl:folder= :: lien de dossier WANDERLUST
+   + =wl:folder#id= :: lien de message WANDERLUST
+
+		       
+   Pour personnaliser Org pour ajouter de nouveaux types de lien
+   Section A.3 [Adding hyperlink types].
+
+   Un lien devrait être encapsulé entre deux paires de crochets et
+   peut contenir un texte descriptif pour être affiché au lieu de
+   l'URL (voir Section 4.1 [Link format]), par exemple : 
+   =[[https://www.gnu.org/software/emacs/][GNU Emacs] ]=
+
+   Si la description est un nom de fichier ou une URL qui pointe vers
+   une image, une exportation HTML (voir Section 12.9 [HTML export])
+   transformera l'image en un bouton cliquable. S'il n'y a pas de
+   description et que le lien pointe vers une image, cette image sera
+   mises en ligne dans le fichier HTML exporté. 
+
+
+   Org trouve aussi les liens externes dans le texte normal et les
+   active comme liens. Si les espaces doivent faire partie du lien
+   (par exemple dans '=bbdb:Richard Stallman='), ou si vous devez
+   supprimer les ambiguïtés à propos de la fin du lien, encapsulez-les
+   avec des crochets. 
+** Manipulation de liens 
+   Org fournit des méthodes pour créer un lien avec la bonne syntaxe,
+   pour l'insérer dans un fichier Org, et suivre le lien.
+   
+   La fonction principale est ou =org-store-link=, appelée avec =M-x
+   org-store-link=. À cause de son importance, nous suggérons la lier
+   à un grand nombre de touches (voir Section 1.3 [Activation]). Elle
+   stocke un lien à l'emplacement actuel. Le lien est stocké pour une
+   insertion ultérieure dans un tampon Org--voir plus bas. Le lien est
+   stocké dans le tampon actuel : 
+
+   + Tampons Org mode :: Pour les fichiers Org mode, s'il y a une
+        '=<<cible>>=' au point, le lien pointe vers la
+        cible. Autrement il pointe vers la rubrique actuelle, qui est
+        aussi la description[fn:31]. 
+
+        Si la rubrique a une propriété '=CUSTOM_ID=', stocke un lien
+        vers cet identifiant personnalisé. De plus ou alternativement,
+        selon la valeur de =org-link-to-org-use-id=, crée et/ou
+        utilise une propriété globale unique '=ID=' pour le
+        lien[fn:29]. Donc en utiliser cette commande dans des tampons
+        Org crée potentiellement deux liens : un lien lisible depuis
+        le ID personnalisé, et l'un d'entre eux est globalement unique
+        et fonctionne même si l'entrée est déplacée de fichier à
+        fichier. Plus tard, lors de l'insertion de lien, vous devez
+        décider lequel utilisé. 
+   + Email/News clients : VM, Rmail, Wanderlust, MH-E, Gnus :: 
+* Footnotes
+
+[fn:29] La bibliothèque Org Id doit d'abord être chargée, soit via
+=org-customize=, soit en activant =id= dans =org-modules=, ou en
+ajoutant '=(require 'org-id)=' dans votre fichier init dans Emacs.
+
+[fn:31] Si la rubrique contient un horodatage, il sera effacé du lien
+et résultera un mauvais lien--vous devriez éviter de mettre un
+horodatage dans une rubrique.
+
+[fn:30] La bibliothèque =org-id.el= doit d'abord être chargée, soit
+via =org-customize= en activant =org-id= dans org-modules, ou en
+ajoutant (=require 'org-id=) dans votre fichier init Emacs.
+
+
+[fn:28] Les recherches de rubriques correspondent toujours avec la
+rubrique exacte, ignorant les espaces et cookies. Si la rubrique n'est
+pas trouvée et que la valeur de l'option
+=org-link-search-must-match-exact-headline= est =query-to-create=,
+alors l'utilisateur sera invité à la créer.
+
+[fn:27] Le réel comportement de la recherche dépendra de la valeur de
+l'option =org-link-search-must-match-exact-headline=. Si sa valeur
+est =nil=, alors une recherche de texte floue sera faite. Si c'est
+=t=, alors uniquement la rubrique exacte sera mise en correspondance,
+ignorant les espaces et cookies. Si la valeur est =query-to-create=,
+alors une rubrique exacte sera cherchée; si elle n'est pas trouvée,
+alors l'utilisateur sera invité à la créer.
+
+[fn:26] Lorsque ciblant un mot-clé =#+NAME=, un mot-clé =#+CAPTION=
+est requis afin d'obtenir une bonne numérotation (voir Section 11.4
+[Images and tables]).
+
+[fn:25] Pour insérer un lien ciblant une rubrique, la complétion peut
+être utilisée. Taper juste une étoile suivie par quelques lettres
+optionnelles dans le tampon et pressez =M-TAB=. Toutes les rubriques
+dans le tampon actuel seront proposées comme complétions.
+
+[fn:24] De tels noms doivent démarrer par un caractère alphabétique et
+utiliser uniquement des caractères alpha-numérique/tiret du bas.
+
+[fn:23] Le reformatage de printf est limité en précision parce que la
+valeur qui lui est passée est convertie en "integer" (entier) ou
+"double" (approximation de réel). Le "integer" est limité en taille
+par troncature de la valeur du signe à 32 bits. Le "double" est limité
+en précision à 64 bits au total, ce qui laisse environ 16 chiffres
+décimaux significatifs.
+
+[fn:22] Le fichier '=constants.el=' peut fournir les valeurs de
+constantes dans deux systèmes d'unités différents, '=SI=' et
+'=cgs='. Celui utilisé dépend de la valeur de la variable
+=constants-unit-system=. Vous pouvez utiliser les options '=constSI='
+et '=constcgs=' de '=STARTUP=' pour configurer cette valeur pour le
+tampon actuel. 
+
+[fn:21] La complexité du calcul est de l'ordre de O(N^2) parce que le
+tableau FOO est analysée pour chaque champ copié.
+
+[fn:20] Org comprend les références tapées par l'utilisateur comme
+'=B4=', mais il n'utilise pas cette syntaxe lorsqu'il offre une
+formule pour l'édition. Vous pouvez personnaliser ce comportement en
+utilisant la variable =org-table-use-standard-references=.
+
+[fn:19] Pour insérer une barre verticale dans le champ, utiliser
+'=\vert=' ou, à l'intérieur d'un mot '=abc\vert{}def='.
+
+[fn:18] La configuration correspondante dans le tampon est :
+'=#+STARTUP: fnadjust=' ou '=#+STARTUP: nofnadjust='.
+
+[fn:17] La configuration correspondante dans le tampon est :
+'=#+STARTUP: fninline=' ou '=#+STARTUP: nofninline='.
+
+[fn:16] De nombreuses interfaces de bureau utilisent =M-TAB= pour
+basculer entre les fenêtres. Utiliser =C-M-i= ou =ESC TAB= à la place.
+
+[fn:15] Voir =org-list-use-circular-motion= pour un comportement
+cyclique. 
+
+[fn:14] Si vous voulez parcourir les éléments de cette façon, vous
+pouvez personnaliser =org-list-use-circular-motion=.
+
+[fn:13] Si vous voulez que l'élément soit éclaté, personnalisez la
+variable =org-M-RET-may-split-line=.
+
+[fn:12] S'il y a une case à cocher dans l'élément, le cookie doit être
+mis /avant/ la case à cocher. Si vous avez activé les listes
+alphabétiques, vous pouvez aussi utiliser des compteurs comme '=[@b]='.
+
+[fn:11] Vous pouvez filtrer l'un d'eux en configurant
+=org-plain-list-ordered-item-terminator=
+
+[fn:10] Vous pouvez aussi obtenir '=a.=', '=A.=', '=a)=' et '=A)=' en
+configurant =org-list-allow-alphabetical=. Pour minimiser la confusion
+avec le texte normal, ils sont limités à un caractère. Au-delà de
+cette limite, les puces deviennent automatiquement des nombres.
+
+[fn:9] Lors de l'utilisation de '=*=' comme puce, les lignes doivent
+être indentées de sorte qu'elles ne soient pas interprétées comme des
+rubriques. Aussi, lorsque vous cachez les étoiles dirigeantes pour
+obtenir une vue de contour propre, les listes d'éléments commençant
+par des étoiles peuvent être difficile à distinguer des vraies
+rubriques. En clair : même si '=*=' est supporté, il serait préférable
+de ne pas l'utiliser pour les listes. 
+
+[fn:8] Cela dépend de l'option =org-remove-highlights-with-change=.
+
+[fn:7] Voir aussi la variable =org-show-context-detail= pour décider combien
+de contexte est montré autour de chaque correspondance. 
+
+[fn:6] Lorsque =org-agenda-inhibit-startup= est non-=nil=, Org
+n'honore pas l'état de visibilité par défaut lors de la première
+ouverture d'un fichier de l'agenda (voir Section A.8 [Speeding Up
+Your Agendas]).
+
+[fn:5] Le tampon indirect contient le tampon entier, mais est réduit à
+l'arborescence actuelle. Editer le tampon indirect change aussi le
+tampon originel, mais sans affecter la visibilité dans le tampon. Pour
+plus d'information à propos des tampons indirects, voir Section
+"Indirect Buffers" dans emacs.
+
+[fn:4] Voir, toutefois, l'option =org-cycle-emulate-tab=
+
+[fn:3] Voir les variables =org-special-ctrl-a/e=,
+=org-special-ctrl-k=, et =org-ctrl-k-protect-subtree= pour configurer
+un comportement spécial de =C-a=, =C-e=, et =C-k= dans les
+rubriques. Noter également que le pointage ne fonctionne qu'avec des
+rubriques indentées de moins de 30 étoiles.
+
+[fn:2] Prière de considérer de souscrire à la liste de diffusion afin
+de minimiser le travail que les modérateurs de la liste ont à faire. 
+
+[fn:1] Si vous n'utilisez pas le verrouillage de police de façon
+permanente, activez-le dans le tampon Org avec '(=add-hook 'org-mode-hook 'turn-on-font-lock=)'.
+ 
