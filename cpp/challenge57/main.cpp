@@ -107,7 +107,8 @@ int main()
     // Assignement 1
     for (int number = 0; number <= 20; ++number)
     {
-        cout << "number = " << number << endl;
+        if (number % 2 == 0)
+            cout << "number = " << number << endl;
     }
     
     // Assignement 2
