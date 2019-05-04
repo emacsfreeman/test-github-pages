@@ -1,5 +1,5 @@
 
-# Table of Contents
+# Sommaire
 
 1.  [Introduction](#org4c9554f)
 2.  [Travailler avec la console dans un navigateur](#org942961b)
@@ -390,3 +390,17 @@ les [types de données](https://www.digitalocean.com/community/tutorials/underst
 Ceci est une traduction de l'article [How To Use the JavaScript
 Developer Console](https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-developer-console) rédigé par [Lisa Tagliaferri](https://www.digitalocean.com/community/users/ltagliaferri) pour le site DigitalOcean.
 
+# Table des matières
+
+1.  [Introduction](#org4c9554f)
+2.  [Travailler avec la console dans un navigateur](#org942961b)
+    1.  [Firefox](#orgc33f271)
+    2.  [Chrome](#orgc7c3a6c)
+3.  [Travailler avec la console](#org6ea0318)
+4.  [Travailler avec un fichier HTML](#org5ed0b40)
+5.  [Comprendre d'autres outils de développement](#org941343c)
+    1.  [DOM &#x2013; Document Object Model](#org5dd7dd7)
+    2.  [Network (réseau)](#org9b8e3d9)
+    3.  [Responsive Design (Conception Sensible)](#org05a3614)
+6.  [Conclusion](#org3b29c8f)
+7.  [Note du traducteur](#orgc94832a)
