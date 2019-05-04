@@ -1,22 +1,17 @@
 
 # Sommaire
 
-1.  [Introduction](#org4c9554f)
-2.  [Travailler avec la console dans un navigateur](#org942961b)
-    1.  [Firefox](#orgc33f271)
-    2.  [Chrome](#orgc7c3a6c)
-3.  [Travailler avec la console](#org6ea0318)
-4.  [Travailler avec un fichier HTML](#org5ed0b40)
-5.  [Comprendre d'autres outils de développement](#org941343c)
-    1.  [DOM &#x2013; Document Object Model](#org5dd7dd7)
-    2.  [Network (réseau)](#org9b8e3d9)
-    3.  [Responsive Design (Conception Sensible)](#org05a3614)
-6.  [Conclusion](#org3b29c8f)
-7.  [Note du traducteur](#orgc94832a)
+1.  [Introduction](#orgcf96066)
+2.  [Travailler avec la console dans un navigateur](#orgdadec0b)
+3.  [Travailler avec la console](#orgfd2eb35)
+4.  [Travailler avec un fichier HTML](#orgfe7d650)
+5.  [Comprendre d'autres outils de développement](#orga8865a6)
+6.  [Conclusion](#org1913c61)
+7.  [Note du traducteur](#org84e52e8)
 
 
 
-<a id="org4c9554f"></a>
+<a id="orgcf96066"></a>
 
 # Introduction
 
@@ -38,27 +33,27 @@ outils de développement intégrés que vous pouvez utiliser dans le
 cadre de votre processus de développement Web.
 
 
-<a id="org942961b"></a>
+<a id="orgdadec0b"></a>
 
 # Travailler avec la console dans un navigateur
 
 La plupart des navigateurs Web modernes prenant en charge les
 langages HTML et XHTML standard vous donnent accès à une console de
-développeur sur laquelle vous pouvez utiliser JavaScript dans une
+développement sur laquelle vous pouvez utiliser JavaScript dans une
 interface similaire à un terminal. Nous verrons comment accéder à la
 console dans Firefox et Chrome. 
 
 
-<a id="orgc33f271"></a>
+<a id="orgc226639"></a>
 
 ## Firefox
 
 Pour ouvrir la [console web](https://developer.mozilla.org/en-US/docs/Tools/Web_Console) dans Firefox, vous pouvez naviguer dans
 le menu ☰ dans le coin supérieur droit après la barre d'adresse.
 
-De là, cliquez sur le bouton Développeur symbolisé par l'icône
-représentant une clé, ce qui ouvrira le menu Développeur Web. Cela
-étant ouvert, cliquez sur l'élément de menu de la console Web.
+De là, cliquez sur le bouton Développement web, ce qui ouvrira le
+menu Développement Web. Cela étant ouvert, cliquez sur l'élément de
+menu de la Console web (ou Outils de développement).
 
 ![img](./dev-web-menu.png)
 
@@ -67,7 +62,7 @@ fenêtre de votre navigateur :
 
 ![img](./console.png)
 
-Vous pouvez également accéder à la console Web à l'aide du
+Vous pouvez également accéder à la Console web à l'aide du
 raccourci clavier `CTRL + SHIFT + K` sur Linux et Windows ou
 `COMMAND + OPTION + K` sur macOS.
 
@@ -75,14 +70,14 @@ Maintenant que nous avons accédé à la console, nous pouvons
 commencer à y travailler en JavaScript.
 
 
-<a id="orgc7c3a6c"></a>
+<a id="org221970b"></a>
 
 ## Chrome
 
 Pour ouvrir la [console JavaScript](https://developers.google.com/web/tools/chrome-devtools/console/) dans Chrome, vous pouvez naviguer
 dans le menu supérieur droit de la fenêtre de votre navigateur,
 indiqué par trois points verticaux à la suite. À partir de là, vous
-pouvez sélectionner Autres outils, puis Outils de développement.
+pouvez sélectionner Plus d'outils, puis Outils de développement.
 
 ![img](./dev-tools-chrome.png)
 
@@ -101,7 +96,7 @@ Maintenant que nous avons accédé à la console, nous pouvons
 commencer à y travailler en JavaScript.
 
 
-<a id="org6ea0318"></a>
+<a id="orgfd2eb35"></a>
 
 # Travailler avec la console
 
@@ -120,7 +115,7 @@ l'expression ne renvoie pas explicitement quelque chose.
 
 Plutôt que d'avoir des alertes contextuelles sur lesquelles nous
 devons continuer à cliquer, nous pouvons utiliser JavaScript en le
-connectant à la console à l'aide `console.log`.
+connectant à la console à l'aide de `console.log`.
 
 Pour afficher la chaîne `Hello, World!`, nous pouvons taper la
 commande suivante dans la console : 
@@ -157,16 +152,16 @@ variables :
     Today's date is Wed Jun 21 2017 15:49:47 GMT-0400 (EDT)
 
 Si vous devez modifier une commande que vous avez passée via la
-console, vous pouvez taper la touche flèche haut ↑ de votre clavier
+console, vous pouvez taper la touche flèche vers le haut ↑ de votre clavier
 pour récupérer la commande précédente. Cela vous permettra d'éditer
 la commande et de l'envoyer à nouveau.
 
 La console JavaScript vous fournit un espace pour tester le code
 JavaScript en temps réel en vous permettant d'utiliser un
-environnement similaire à une interface terminal shell.
+environnement similaire à une interface terminal Shell.
 
 
-<a id="org5ed0b40"></a>
+<a id="orgfe7d650"></a>
 
 # Travailler avec un fichier HTML
 
@@ -269,21 +264,21 @@ dans la console. Dans ce cas, une fois la page rechargée, un
 document vierge apparaîtra.
 
 
-<a id="org941343c"></a>
+<a id="orga8865a6"></a>
 
 # Comprendre d'autres outils de développement
 
 En fonction des outils de développement du navigateur que vous
 utilisez, vous pourrez utiliser d'autres outils pour vous aider dans
-votre processus de développement Web. Examinons quelques-uns de ces
+votre processus de développement web. Examinons quelques-uns de ces
 outils.
 
 
-<a id="org5dd7dd7"></a>
+<a id="org77f5fb0"></a>
 
 ## DOM &#x2013; Document Object Model
 
-Chaque fois qu'une page Web est chargée, le navigateur dans lequel
+Chaque fois qu'une page web est chargée, le navigateur dans lequel
 elle se trouve crée un modèle de document, ou DOM, de la page. 
 
 Le DOM est une arborescence d'objets et affiche les éléments HTML
@@ -319,7 +314,7 @@ Comme avec la console, si vous rechargez la page, vous revenez à
 l'état enregistré du document HTML.
 
 
-<a id="org9b8e3d9"></a>
+<a id="org7427351"></a>
 
 ## Network (réseau)
 
@@ -331,7 +326,7 @@ et fournit les détails de chacune de ces requêtes. Cela peut être
 utilisé pour optimiser les performances de chargement de page et
 les problèmes de demande de débogage. 
 
-Vous pouvez utiliser l'onglet Réseau à côté de la JavaScript. En
+Vous pouvez utiliser l'onglet Réseau à côté de la Console JavaScript. En
 d'autres termes, vous pouvez commencer à déboguer une page avec la
 console, puis basculer sur l'onglet Réseau pour voir l'activité du
 réseau sans recharger la page.
@@ -342,25 +337,25 @@ initiez-vous à l'analyse des performances du réseau avec les outils
 [DevTools de Chrome](https://developers.google.com/web/tools/chrome-devtools/network/).
 
 
-<a id="org05a3614"></a>
+<a id="orgdcc89b2"></a>
 
 ## Responsive Design (Conception Sensible)
 
-Lorsque les sites Web sont réactifs, ils sont conçus et développés
-pour ressembler et fonctionner correctement sur une gamme
+Lorsque les sites web sont réactifs (*responsive*), ils sont conçus
+et développés pour ressembler et fonctionner correctement sur une gamme
 d'appareils différents : téléphones mobiles, tablettes, ordinateurs
 de bureau et ordinateurs portables. La taille de l'écran, la
 densité de pixels et le toucher tactile sont des facteurs à prendre
 en compte lors du développement d'un périphérique à l'autre. En
-tant que développeur Web, il est important de garder à l'esprit les
-principes de conception réactive afin que vos sites Web soient
-enitèrement disponibles pour les internautes, quel que soit le
-périphérique auquel ils ont accès.
+tant que développeur web, il est important de garder à l'esprit les
+principes de conception réactive (*responsive design*) afin que vos
+sites web soient enitèrement disponibles pour les internautes, quel
+que soit le périphérique auquel ils ont accès.
 
 Firefox et Chrome fournissent tous deux des modes permettant de
 s'assurer que les principes de conception réactive sont pris en
 compte lorsque vous créez et développez des sites et des
-applications pour le Web. Ces modes émulent différents
+applications pour le web. Ces modes émulent différents
 périphériques que vous pouvez étudier et analyser dans le cadre de
 votre processus de développement. 
 
@@ -370,7 +365,7 @@ savoir plus sur [le mode de conception réactif de Firefox](https://developer.mo
 [mode Appareil Chrome](https://developers.google.com/web/tools/chrome-devtools/device-mode/).
 
 
-<a id="org3b29c8f"></a>
+<a id="org1913c61"></a>
 
 # Conclusion
 
@@ -383,7 +378,7 @@ Pour en savoir plus sur JavaScript, vous pouvez en savoir plus sur
 les [types de données](https://www.digitalocean.com/community/tutorials/understanding-data-types-in-javascript) ou sur les bibliothèques [jQuery](https://www.digitalocean.com/community/tutorials/an-introduction-to-jquery) ou [D3](https://www.digitalocean.com/community/tutorials/getting-started-with-data-visualization-using-javascript-and-the-d3-library).
 
 
-<a id="orgc94832a"></a>
+<a id="org84e52e8"></a>
 
 # Note du traducteur
 
@@ -392,15 +387,15 @@ Developer Console](https://www.digitalocean.com/community/tutorials/how-to-use-t
 
 # Table des matières
 
-1.  [Introduction](#org4c9554f)
-2.  [Travailler avec la console dans un navigateur](#org942961b)
-    1.  [Firefox](#orgc33f271)
-    2.  [Chrome](#orgc7c3a6c)
-3.  [Travailler avec la console](#org6ea0318)
-4.  [Travailler avec un fichier HTML](#org5ed0b40)
-5.  [Comprendre d'autres outils de développement](#org941343c)
-    1.  [DOM &#x2013; Document Object Model](#org5dd7dd7)
-    2.  [Network (réseau)](#org9b8e3d9)
-    3.  [Responsive Design (Conception Sensible)](#org05a3614)
-6.  [Conclusion](#org3b29c8f)
-7.  [Note du traducteur](#orgc94832a)
+1.  [Introduction](#orgcf96066)
+2.  [Travailler avec la console dans un navigateur](#orgdadec0b)
+    1.  [Firefox](#orgc226639)
+    2.  [Chrome](#org221970b)
+3.  [Travailler avec la console](#orgfd2eb35)
+4.  [Travailler avec un fichier HTML](#orgfe7d650)
+5.  [Comprendre d'autres outils de développement](#orga8865a6)
+    1.  [DOM &#x2013; Document Object Model](#org77f5fb0)
+    2.  [Network (réseau)](#org7427351)
+    3.  [Responsive Design (Conception Sensible)](#orgdcc89b2)
+6.  [Conclusion](#org1913c61)
+7.  [Note du traducteur](#org84e52e8)
