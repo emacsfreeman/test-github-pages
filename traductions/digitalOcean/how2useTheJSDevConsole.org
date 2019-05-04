@@ -24,7 +24,7 @@
 
   La plupart des navigateurs Web modernes prenant en charge les
   langages HTML et XHTML standard vous donnent accès à une console de
-  développeur sur laquelle vous pouvez utiliser JavaScript dans une
+  développement sur laquelle vous pouvez utiliser JavaScript dans une
   interface similaire à un terminal. Nous verrons comment accéder à la
   console dans Firefox et Chrome. 
 
@@ -33,9 +33,9 @@
    Pour ouvrir la [[https://developer.mozilla.org/en-US/docs/Tools/Web_Console][console web]] dans Firefox, vous pouvez naviguer dans
    le menu ☰ dans le coin supérieur droit après la barre d'adresse.
 
-   De là, cliquez sur le bouton Développeur symbolisé par l'icône
-   représentant une clé, ce qui ouvrira le menu Développeur Web. Cela
-   étant ouvert, cliquez sur l'élément de menu de la console Web.
+   De là, cliquez sur le bouton Développement web, ce qui ouvrira le
+   menu Développement Web. Cela étant ouvert, cliquez sur l'élément de
+   menu de la Console web (ou Outils de développement).
 
    [[./dev-web-menu.png]]
 
@@ -44,7 +44,7 @@
    
    [[./console.png]]
 
-   Vous pouvez également accéder à la console Web à l'aide du
+   Vous pouvez également accéder à la Console web à l'aide du
    raccourci clavier =CTRL + SHIFT + K= sur Linux et Windows ou
    =COMMAND + OPTION + K= sur macOS.
 
@@ -58,7 +58,7 @@
    Pour ouvrir la [[https://developers.google.com/web/tools/chrome-devtools/console/][console JavaScript]] dans Chrome, vous pouvez naviguer
    dans le menu supérieur droit de la fenêtre de votre navigateur,
    indiqué par trois points verticaux à la suite. À partir de là, vous
-   pouvez sélectionner Autres outils, puis Outils de développement.
+   pouvez sélectionner Plus d'outils, puis Outils de développement.
 
    [[./dev-tools-chrome.png]]
 
@@ -95,7 +95,7 @@
 
   Plutôt que d'avoir des alertes contextuelles sur lesquelles nous
   devons continuer à cliquer, nous pouvons utiliser JavaScript en le
-  connectant à la console à l'aide =console.log=.
+  connectant à la console à l'aide de =console.log=.
 
   Pour afficher la chaîne =Hello, World!=, nous pouvons taper la
   commande suivante dans la console : 
@@ -144,13 +144,13 @@
   #+END_SRC
 
   Si vous devez modifier une commande que vous avez passée via la
-  console, vous pouvez taper la touche flèche haut ↑ de votre clavier
+  console, vous pouvez taper la touche flèche vers le haut ↑ de votre clavier
   pour récupérer la commande précédente. Cela vous permettra d'éditer
   la commande et de l'envoyer à nouveau.
 
   La console JavaScript vous fournit un espace pour tester le code
   JavaScript en temps réel en vous permettant d'utiliser un
-  environnement similaire à une interface terminal shell.
+  environnement similaire à une interface terminal Shell.
 
 * Travailler avec un fichier HTML  
 
@@ -278,12 +278,12 @@
 
   En fonction des outils de développement du navigateur que vous
   utilisez, vous pourrez utiliser d'autres outils pour vous aider dans
-  votre processus de développement Web. Examinons quelques-uns de ces
+  votre processus de développement web. Examinons quelques-uns de ces
   outils.
 
 ** DOM -- Document Object Model  
 
-   Chaque fois qu'une page Web est chargée, le navigateur dans lequel
+   Chaque fois qu'une page web est chargée, le navigateur dans lequel
    elle se trouve crée un modèle de document, ou DOM, de la page. 
 
    Le DOM est une arborescence d'objets et affiche les éléments HTML
@@ -328,7 +328,7 @@
    utilisé pour optimiser les performances de chargement de page et
    les problèmes de demande de débogage. 
 
-   Vous pouvez utiliser l'onglet Réseau à côté de la JavaScript. En
+   Vous pouvez utiliser l'onglet Réseau à côté de la Console JavaScript. En
    d'autres termes, vous pouvez commencer à déboguer une page avec la
    console, puis basculer sur l'onglet Réseau pour voir l'activité du
    réseau sans recharger la page.
@@ -340,21 +340,21 @@
 
 ** Responsive Design (Conception Sensible)
 
-   Lorsque les sites Web sont réactifs, ils sont conçus et développés
-   pour ressembler et fonctionner correctement sur une gamme
+   Lorsque les sites web sont réactifs (/responsive/), ils sont conçus
+   et développés pour ressembler et fonctionner correctement sur une gamme
    d'appareils différents : téléphones mobiles, tablettes, ordinateurs
    de bureau et ordinateurs portables. La taille de l'écran, la
    densité de pixels et le toucher tactile sont des facteurs à prendre
    en compte lors du développement d'un périphérique à l'autre. En
-   tant que développeur Web, il est important de garder à l'esprit les
-   principes de conception réactive afin que vos sites Web soient
-   enitèrement disponibles pour les internautes, quel que soit le
-   périphérique auquel ils ont accès.
+   tant que développeur web, il est important de garder à l'esprit les
+   principes de conception réactive (/responsive design/) afin que vos
+   sites web soient enitèrement disponibles pour les internautes, quel
+   que soit le périphérique auquel ils ont accès.
 
    Firefox et Chrome fournissent tous deux des modes permettant de
    s'assurer que les principes de conception réactive sont pris en
    compte lorsque vous créez et développez des sites et des
-   applications pour le Web. Ces modes émulent différents
+   applications pour le web. Ces modes émulent différents
    périphériques que vous pouvez étudier et analyser dans le cadre de
    votre processus de développement. 
    
