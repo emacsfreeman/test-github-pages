@@ -1,3 +1,6 @@
+# for Gmail account activate this before https://myaccount.google.com/lesssecureapps?pli=1 
+# Useful tutorial: https://youtu.be/JRCJ6RtE3xU
+
 import smtplib
 
 host = 'smtp.gmail.com'
