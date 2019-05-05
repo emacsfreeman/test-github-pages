@@ -5,7 +5,7 @@ port = 587
 username = input('Enter user email: ')
 password = input('Enter user password: ')
 from_email = username
-to_list = ['cours-laurent@tutanota.com', 'polymathfreeman@gmail.com', 'becomefreerichman@gmail.com', 'laurent.garnier.superprof@gmail.com']
+to_list = ['polymathfreeman@gmail.com', 'becomefreerichman@gmail.com']
 
 email_conn = smtplib.SMTP(host, port)
 email_conn.ehlo()
