@@ -52,19 +52,434 @@
     git remote
   #+END_SRC
 
-  
+  Pour une sortie plus détaillée, utilisez l'option =-v=.
+
+  #+BEGIN_SRC shell
+    git remote -v
+  #+END_SRC
+
+  Ajoutez le Git en amont, qui peut être une URL ou peut être hébergé
+  sur un serveur (dans ce dernier cas, connectez-vous avec =ssh=).
+
+  #+BEGIN_SRC shell
+    git remote add upstream https://www.github.com/username/repo-name
+  #+END_SRC
 
 * Mise en place (/staging/)
+  Lorsque vous avez modifié un fichier et que vous l'avez marqué pour
+  votre prochaine validation, il est considéré comme un fichier
+  intermédiaire.
+
+  Vérifiez l'état de votre référentiel Git, y compris les fichiers
+  ajoutés qui ne sont pas gérés, et les fichiers qui sont gérés.
+
+  #+BEGIN_SRC shell
+    git status
+  #+END_SRC
+
+  Pour créer des fichiers modifiés, utilisez la commande =add=, que vous
+  pouvez exécuter plusieurs fois avant une validation. Si vous
+  apportez les modifications suivantes que vous souhaitez inclure dans
+  la prochaine validation, vous devez exécuter =add= again.
+
+  Vous pouvez spécifier le fichier spécifique avec =add=.
+
+  #+BEGIN_SRC shell
+    git add my_script.py
+  #+END_SRC
+
+  Avec =.= vous pouvez ajouter tous les fichiers du répertoire actuel, y
+  compris ceux commençant par =.=.
+
+  #+BEGIN_SRC shell
+    git add .
+  #+END_SRC
+
+  Vous pouvez supprimer un fichier du stockage intermédiaire tout en
+  conservant les modifications dans votre répertoire de travail avec
+  =reset=.
+
+  #+BEGIN_SRC shell
+    git reset my_script.py
+  #+END_SRC
+
 * Rapporter (/committing/)
+  Une fois que vous avez mis en forme vos mises à jour, vous êtes prêt
+  à les valider, lesquelles enregistreront les modifications que vous
+  avez apportées au référentiel.
+
+  Pour valider des fichiers intermédiaires, vous devez exécuter la
+  commande =commit= avec votre message de validation significatif afin
+  de pouvoir suivre les validations (commits).
+
+  #+BEGIN_SRC shell
+    git commit -m "Commit message"
+  #+END_SRC
+
+  Vous pouvez condenser la sauvegarde de tous les fichiers suivis en
+  les validant en une seule étape.
+
+  #+BEGIN_SRC shell
+    git commit -am "Commit message"
+  #+END_SRC
+
+  Si vous devez modifier votre message de validation, vous pouvez le
+  faire avec l'indicateur =--amend=.
+
+  #+BEGIN_SRC shell
+    git commit --amend -m "New commit message"
+  #+END_SRC
+
 * Branches
+  Une branche dans Git est un pointeur mobile sur l'un des commits du
+  référentiel. Elle vous permet d'isoler le travail et de gérer le
+  développement et les intégrations de fonctionnalités. Vous pouvez en
+  apprendre plus sur les branches en lisant la [[https://git-scm.com/book/en/v1/Git-Branching-What-a-Branch-Is][documentation de Git]].
+
+  Répertoriez toutes les branches actuelles avec la commande
+  =branch=. Un astérisque (*) apparaîtra à côté de votre branche
+  actuellement active.
+
+  #+BEGIN_SRC shell
+    git branch
+  #+END_SRC
+
+  Créer une nouvelle branche. Vous resterez sur votre branche active
+  jusqu'à ce que vous passiez à la nouvelle.
+
+  #+BEGIN_SRC shell
+    git branch new-branch
+  #+END_SRC
+
+  Basculez vers une branche existante et extrayez-la dans votre
+  répertoire de travail actuel.
+
+  #+BEGIN_SRC shell
+    git checkout another-branch
+  #+END_SRC
+
+  Vous pouvez consolider la création et l'extraction d'une nouvelle
+  branche à l'aide de l'indicateur =-b=.
+
+  #+BEGIN_SRC shell
+    git checkout -b new-branch
+  #+END_SRC
+
+  Renommez le nom de votre branche.
+
+  #+BEGIN_SRC shell
+    git branch -m current-branch-name new-branch-name
+  #+END_SRC
+
+  Fusionnez l’historique de la branche spécifiée avec celui dans
+  lequel vous travaillez actuellement.
+
+  #+BEGIN_SRC shell
+    git merge branch-name
+  #+END_SRC
+
+  Abandonnez la fusion en cas de conflit.
+
+  #+BEGIN_SRC shell
+    git merge --abort
+  #+END_SRC
+
+  Vous pouvez également sélectionner un commit particulier à fusionner
+  avec =cherry-pick= avec la chaîne faisant référence au commit
+  spécifique.
+
+  #+BEGIN_SRC shell
+    git cherry-pick f7649d0
+  #+END_SRC
+
+  Lorsque vous avez fusionné une branche et que vous n'en avez plus
+  besoin, vous pouvez le supprimer.
+
+  #+BEGIN_SRC shell
+    git branch -d branch-name
+  #+END_SRC
+
+  Si vous n'avez pas fusionné une branche avec le maître, mais que
+  vous êtes certain de vouloir la supprimer, vous pouvez *forcer* la
+  suppression d'une branche.
+
+  #+BEGIN_SRC shell
+    git branch -D branch-name
+  #+END_SRC
+
 * Collaborer et mettre à jour
+  Pour télécharger les modifications depuis un autre référentiel, tel
+  que celui situé en amont, vous utiliserez =fetch=.
+
+  #+BEGIN_SRC shell
+    git fetch upstream
+  #+END_SRC
+
+  Fusionner les commits récupérés.
+
+  #+BEGIN_SRC shell
+    git merge upstream/master
+  #+END_SRC
+
+  Poussez ou transmettez vos commits de branche locale à la branche de
+  référentiel distant.
+
+  #+BEGIN_SRC shell
+    git push origin master
+  #+END_SRC
+
+  Récupérer et fusionner les validations de la branche distante de
+  suivi.
+
+  #+BEGIN_SRC shell
+    git pull
+  #+END_SRC
+
 * Inspecter 
+  Affiche l'historique de validation de la branche actuellement
+  active.
+
+  #+BEGIN_SRC shell
+    git log
+  #+END_SRC
+
+  Affiche les commits qui ont changé un fichier particulier. Cela suit
+  le fichier indépendamment du renommage du fichier.
+
+  #+BEGIN_SRC shell
+    git log --follow my_script.py
+  #+END_SRC
+
+  Affiche les commits qui se trouvent sur une branche et non sur
+  l’autre. Cela affichera les commits sur =a-branch= qui ne sont pas
+  sur la =b-branch=.
+
+  #+BEGIN_SRC shell
+    git log a-branch..b-branch
+  #+END_SRC
+
+  Consultez les journaux de référence (=reflog=) pour savoir quand les
+  astuces des branches et autres références ont été mises à jour pour
+  la dernière fois dans le référentiel.
+
+  #+BEGIN_SRC shell
+    git reflog
+  #+END_SRC
+  
+  Affichez n'importe quel objet dans Git via sa chaîne de validation
+  ou son hachage dans un format plus lisible par l'homme.
+
+  #+BEGIN_SRC shell
+    git show de754f5
+  #+END_SRC
+  
 * Montrer les modifications
+  La commande =git diff= montre les changements entre les validations,
+  les branches, etc. Vous pouvez en savoir plus à ce sujet dans la
+  [[https://git-scm.com/docs/git-diff][documentation Git]].
+
+  Comparez les fichiers modifiés qui se trouvent dans la zone de
+  transfert.
+
+  #+BEGIN_SRC shell
+    git diff --staged
+  #+END_SRC
+
+  Affiche le diff de ce qui est dans =a-branch= mais pas dans la
+  =b-branch=.
+
+  #+BEGIN_SRC shell
+    git diff a-branch..b-branch
+  #+END_SRC
+
+  Affiche le diff entre deux commits spécifiques.
+
+  #+BEGIN_SRC shell
+    git diff 61ce3e6..e221d9c
+  #+END_SRC
+
 * Mise à l'écart (/stashing/)
+  Parfois, vous constaterez que vous avez modifié certains codes, mais
+  avant de terminer, vous devez commencer à travailler sur autre
+  chose. Vous n'êtes pas tout à fait prêt à appliquer les
+  modifications que vous avez apportées jusqu'à présent, mais vous ne
+  voulez pas perdre votre travail. La commande =git stash= vous
+  permettra de sauvegarder vos modifications locales et de revenir au
+  répertoire de travail correspondant au dernier commit =HEAD=.
+
+
+  Rangez votre travail actuel.
+
+  #+BEGIN_SRC shell
+    git stash
+  #+END_SRC
+
+  Voir ce que vous avez actuellement caché.
+
+  #+BEGIN_SRC shell
+    git stash list
+  #+END_SRC
+
+  Vos cachettes s'appelleront =stash@{0}=, =stash@{1}=, etc.
+
+  Afficher des informations sur une réserve particulière.
+
+  #+BEGIN_SRC shell
+    git stash show stash@{0}
+  #+END_SRC
+
+  Pour appliquer les fichiers de la réserve actuelle dans une réserve
+  active tout en conservant cette dernière, utilisez =apply=.
+
+  #+BEGIN_SRC shell
+    git stash apply stash@{0}
+  #+END_SRC
+
+  Si vous souhaitez extraire des fichiers d'une réserve et que vous
+  n'en avez plus besoin, utilisez =pop=.
+
+  #+BEGIN_SRC shell
+    git stash pop stash@{0}
+  #+END_SRC
+
+  Si vous n'avez plus besoin des fichiers sauvegardés dans une réserve
+  particulière, vous pouvez la =drop= (supprimer).
+
+  #+BEGIN_SRC shell
+    git stash pop stash@{0}
+  #+END_SRC
+
+  Si vous avez plusieurs sauvegardes enregistrées et que vous n'avez
+  plus besoin de les utiliser, vous pouvez utiliser =clear= pour les
+  supprimer.
+
+  #+BEGIN_SRC shell
+    git stash clear
+  #+END_SRC
+
 * Ignorer des fichiers
+  Si vous souhaitez conserver des fichiers dans votre répertoire Git
+  local, mais que vous ne voulez pas les valider dans le projet, vous
+  pouvez ajouter ces fichiers à votre fichier =.gitignore= afin d'éviter
+  tout conflit.
+
+  Utilisez un éditeur de texte tel que nano pour ajouter des fichiers au
+  fichier =.gitignore=.
+
+  #+BEGIN_SRC shell
+    nano .gitignore
+  #+END_SRC
+
+  Pour voir des exemples de fichiers .gitignore, vous pouvez consulter
+  le référentiel de [[https://github.com/github/gitignore][modèles =.gitignore= de GitHub]].
+
 * Rebasement (/rebasing/)
+  Une rebase nous permet de déplacer des branches en modifiant le
+  commit sur lequel elles sont basées. Avec le rebasement, vous pouvez
+  écraser ou reformuler les commits.
+
+  Vous pouvez commencer une base de secours en appelant le nombre de
+  commits que vous avez effectués et que vous voulez rebaser (5 dans
+  le cas ci-dessous).
+
+  #+BEGIN_SRC shell
+    git rebase -i HEAD-5
+  #+END_SRC
+
+  Vous pouvez également vous baser sur une chaîne de validation ou un
+  =hash= particulier.
+
+  #+BEGIN_SRC shell
+    git rebase -i 074a4e5
+  #+END_SRC
+
+  Une fois que vous avez supprimé ou modifié les validations, vous
+  pouvez compléter la nouvelle base de votre branche par-dessus la
+  dernière version du code en amont du projet.
+
+  #+BEGIN_SRC shell
+    git rebase upstream/master
+  #+END_SRC
+  
+  Pour en savoir plus sur le rebasage et la mise à jour, vous pouvez
+  lire la rubrique [[https://www.digitalocean.com/community/tutorials/how-to-rebase-and-update-a-pull-request][Comment redéfinir la base et mettre à jour une
+  demande d'extraction]], qui s'applique également à tout type de
+  validation.
+
 * Reconfiguration
+  Parfois, y compris après une nouvelle base, vous devez réinitialiser
+  votre arbre de travail. Vous pouvez réinitialiser un commit
+  particulier et *supprimer toutes les modifications* à l'aide de la
+  commande suivante.
+
+  #+BEGIN_SRC shell
+    git reset --hard 1fc6665
+  #+END_SRC
+
+  Pour forcer l'envoi de votre dernière validation non conflictuelle
+  connue dans le référentiel d'origine, vous devez utiliser =--force=.
+
+  *Avertissement* : La force qui pousse à maîtriser est souvent mal vue,
+  sauf s’il existe une raison très importante de le
+  faire. Utilisez-les avec parcimonie lorsque vous travaillez sur vos
+  propres référentiels et évitez cela lorsque vous collaborez.
+
+  #+BEGIN_SRC shell
+    git push --force origin master
+  #+END_SRC
+
+  Pour supprimer des fichiers et des sous-répertoires locaux non
+  suivis du répertoire Git afin de créer une branche en bon
+  fonctionnement, vous pouvez utiliser =git clean=.
+
+  #+BEGIN_SRC shell
+    git clean -f -d
+  #+END_SRC
+
+  Si vous devez modifier votre référentiel local pour qu'il ressemble
+  au maître en amont actuel (c'est-à-dire qu'il existe trop de
+  conflits), vous pouvez effectuer une réinitialisation matérielle.
+
+  *Remarque* : L'exécution de cette commande donnera à votre référentiel
+  local un aspect identique à celui en amont. Tous les commits que
+  vous avez faits mais qui n’ont pas été tirés en amont *seront
+  détruits*.
+
+  #+BEGIN_SRC shell
+    git reset --hard upstream/master
+  #+END_SRC
+
 * Conclusion
+  Ce guide couvre certaines des commandes Git les plus courantes que
+  vous pouvez utiliser pour gérer des référentiels et collaborer sur
+  des logiciels.
+
+  Pour en savoir plus sur les logiciels Open Source et la
+  collaboration dans notre série de didacticiels [[https://www.digitalocean.com/community/tutorial_series/an-introduction-to-open-source][Introduction à l'Open
+  Source]] :
+
+  + [[https://www.digitalocean.com/community/tutorials/how-to-contribute-to-open-source-getting-started-with-git][Comment contribuer à l'Open Source : commencer avec Git]]
+  + [[https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github][Comment créer une Pull Request sur GitHub]]
+  + [[https://www.digitalocean.com/community/tutorials/how-to-rebase-and-update-a-pull-request][Comment rebaser et mettre à jour une Pull Request]]
+  + [[https://www.digitalocean.com/community/tutorials/how-to-maintain-open-source-software-projects][Comment maintenir des projets de logiciels Open-Srouce]]
+
+  
+  Il existe de nombreuses autres commandes et variantes que vous
+  pourrez trouver utiles dans le cadre de votre travail avec Git. Pour
+  en savoir plus sur toutes les options disponibles, vous pouvez
+  exécuter :
+
+  #+BEGIN_SRC shell
+    git --help
+  #+END_SRC
+
+  Pour recevoir des informations utiles. Vous pouvez également en
+  savoir plus sur Git et consulter la documentation de Git sur le [[https://git-scm.com/][site
+  Web officiel de Git]].
+
+  
+
+
 * Note du traducteur
   Ceci est une traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-use-git-a-reference-guide][How To Use Git]] rédigé par [[https://www.digitalocean.com/community/users/ltagliaferri][Lisa
   Tagliaferri]] pour le site DigitalOcean.
