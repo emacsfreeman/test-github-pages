@@ -1,0 +1,70 @@
+#+TITLE: Comment utiliser Git : un guide de référence
+#+AUTHOR: Lisa \textsc{Tagliaferri} traduit par Laurent \textsc{Garnier}
+
+* Aide-mémoire Git
+** Introduction
+   Les équipes de développeurs et les mainteneurs de logiciels à code
+   source ouvert gèrent typiquement leurs projets via Git, un
+   système de contrôle de version distribué qui supporte la
+   collaboration.
+
+   Ce guide de style aide-mémoire fournit une référence rapide aux
+   commandes utiles pour travailler et collaborer dans un référentiel
+   Git. Pour installer et configurer Git, veillez à lire "[[https://www.digitalocean.com/community/tutorials/how-to-contribute-to-open-source-getting-started-with-git][Comment
+   contribuer à Open Source: initiation à Git]]".
+
+   *Comment utiliser ce guide* : 
+
+   + Ce guide est au format aide-mémoire avec des extraits de ligne de
+     commande autonomes.
+   + Accédez à toute section pertinente à la tâche que vous tentez de
+     terminer.
+   + Lorsque vous voyez du =texte en surbrillance= dans les commandes de
+     ce guide, n'oubliez pas que ce texte doit faire référence aux
+     validations et aux fichiers de votre propre référentiel.
+
+* Configuration et initialisation
+  Vérifiez votre version de Git avec la commande suivante, qui
+  confirmera également que Git est installé.
+
+  #+BEGIN_SRC shell
+    git --version
+  #+END_SRC
+
+  Vous pouvez initialiser votre répertoire de travail actuel en tant
+  que référentiel Git avec =init=.
+
+  #+BEGIN_SRC shell
+    git init
+  #+END_SRC
+
+  Pour copier un référentiel Git existant hébergé à distance, vous
+  utiliserez =git clone= avec l'URL du référentiel ou l'emplacement du
+  serveur (dans ce dernier cas, vous utiliserez =ssh=).
+
+  #+BEGIN_SRC shell
+    git clone https://www.github.com/username/repo-name
+  #+END_SRC
+
+  Affichez le référentiel distant de votre répertoire Git actuel.
+
+  #+BEGIN_SRC shell
+    git remote
+  #+END_SRC
+
+  
+
+* Mise en place (/staging/)
+* Rapporter (/committing/)
+* Branches
+* Collaborer et mettre à jour
+* Inspecter 
+* Montrer les modifications
+* Mise à l'écart (/stashing/)
+* Ignorer des fichiers
+* Rebasement (/rebasing/)
+* Reconfiguration
+* Conclusion
+* Note du traducteur
+  Ceci est une traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-use-git-a-reference-guide][How To Use Git]] rédigé par [[https://www.digitalocean.com/community/users/ltagliaferri][Lisa
+  Tagliaferri]] pour le site DigitalOcean.
