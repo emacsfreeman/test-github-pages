@@ -1,14 +1,14 @@
 #+TITLE: Ressources pour les Dapps
 #+AUTHOR: Laurent Garnier
 
-* Bitcoin (Wirex)
+* Bitcoin ([[https://bit.ly/2QgCLRH][Wirex]])
 ** Coinmarketcap
    + [[https://coinmarketcap.com/currencies/bitcoin/]]
 ** Whitepaper
    + [[chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://bitcoin.org/bitcoin.pdf][Bitcoin Whitepaper]]
 ** GitHub  
    + [[https://github.com/bitcoin/]]
-* Ethereum (Wirex)
+* Ethereum ([[https://bit.ly/2QgCLRH][Wirex]])
 ** Coinmarketcap
    + [[https://coinmarketcap.com/currencies/ethereum/]]
 ** YouTube
@@ -38,12 +38,12 @@
    + [[https://github.com/trufflesuite/drizzle]]
    + [[https://github.com/eshon/conference]]
    + [[https://github.com/TrustWallet/dapps-browser]]
-* XRP (Wirex)
+* XRP ([[https://bit.ly/2QgCLRH][Wirex]])
 ** Coinmarketcap
    + [[https://coinmarketcap.com/currencies/ripple/]]
 ** GitHub  
    + [[https://github.com/ripple]]
-* Litecoin (Wirex)
+* Litecoin ([[https://bit.ly/2QgCLRH][Wirex]])
 ** Coinmarketcap
    + [[https://coinmarketcap.com/currencies/litecoin/]]
 ** GitHub
@@ -67,28 +67,28 @@
    + [[https://github.com/EOSIO/eosio-card-game-repo]]
    + [[https://github.com/consenlabs/eos-stake-vote-dapp]]
    + [[https://github.com/eosasia/eos-dapps]]
-* Stellar (Wirex)
+* Stellar ([[https://bit.ly/2QgCLRH][Wirex]])
 ** Coinmarketcap
    + [[https://coinmarketcap.com/currencies/stellar/]]
 ** GitHub
   + [[https://github.com/stellar]]
-* Waves (Wirex)
+* Waves ([[https://bit.ly/2QgCLRH][Wirex]])
 ** Coinmarketcap
    + [[https://coinmarketcap.com/currencies/waves/]]
 ** GitHub
    + [[https://github.com/wavesplatform/]]
-* Wollo (Wirex)
+* Wollo ([[https://bit.ly/2QgCLRH][Wirex]])
 ** Coinmarketcap
    + [[https://coinmarketcap.com/currencies/wollo/]]
 ** GitHub
    + [[https://github.com/pigzbe/pigzbe-app]]
 
-* Dai (Wirex)
+* Dai ([[https://bit.ly/2QgCLRH][Wirex]])
 ** Coinmarketcap
    + [[https://coinmarketcap.com/currencies/dai/]]
 ** GitHub
    + [[https://github.com/makerdao/]]
-* Nano (Wirex)
+* Nano ([[https://bit.ly/2QgCLRH][Wirex]])
 ** Coinmarkertcap
    + [[https://coinmarketcap.com/currencies/nano/]]
 ** GitHub
@@ -96,3 +96,4 @@
 * Pour coder
   + [[https://remix.ethereum.org]]
   + [[https://iot-academy.superblocks.com/]]
+  + [[https://github.com/ethereum/web3.js/]]
