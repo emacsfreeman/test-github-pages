@@ -46,5 +46,5 @@
 
 * Travailler avec un fichier JavaScript séparé
 * Note du traducteur
-  Ceci est une traduction de l'article  rédigé par [[https://www.digitalocean.com/community/users/ltagliaferri][Lisa Tagliaferri]] pour le site
-  DigitalOcean.
+  Ceci est une traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-add-javascript-to-html][How To Add JavaScript to HTML]]
+  rédigé par [[https://www.digitalocean.com/community/users/ltagliaferri][Lisa Tagliaferri]] pour le site [[https://digitalocean.com/][DigitalOcean]].
