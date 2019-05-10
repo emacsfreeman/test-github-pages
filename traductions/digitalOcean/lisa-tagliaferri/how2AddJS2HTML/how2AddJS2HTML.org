@@ -1,0 +1,50 @@
+#+TITLE: Comment ajouter JavaScript à HTML ?
+#+AUTHOR: Lisa \textsc{Tagliaferri} traduit par Laurent \textsc{Garnier}
+
+* Introduction
+  JavaScript, aussi abrégé en JS, est un langage de programmation
+  utilisé dans le développement web. En tant que technologie de base
+  du web aux côtés du HTML et du CSS, JavaScript est utilisé pour rendre les
+  pages interactives et bâtir des applications web. Les navigateurs
+  web modernes, qui respectent les normes d'affichage communes,
+  prennent en charge JavaScript via des moteurs intégrés sans
+  nécessiter de  greffons (/plugins/) supplémentaires.
+
+  Lorsqu'il travaille avec des fichiers pour le web, JavaScript doit
+  être chargé et exécuté aux côtés du HTML. Cela peut être fait soit
+  en ligne (/inline/) dans un document HTML ou dans un fichier séparé
+  que le navigateur téléchargera aux du document HTML.
+
+  Ce didacticiel couvrera comment incorporer JavaScript dans vos
+  fichiers web, à la fois en ligne dans un document HTML et comme un
+  fichier séparé.
+* Ajouter du JavaScript dans un document HTML
+
+  Vous pouvez ajouter du code JavaScript dans un document HTML en
+  utilisant la balise dédiée =<script>= qui entoure du code
+  JavaScript.
+
+  La balise =<script>= peut être placée dans la section =<head>= de
+  votre HTML, dans la section =<body>=, ou après la balise fermante
+  =</body>=, selon le moment où vous voulez que le JavaScript soit
+  chargé. 
+
+  Généralement, le code JavaScript peut aller à l'intérieur de la
+  section =<head>= du docuement afin de le garder contenu et hors du
+  contenu principal de votre document HTML.
+
+  Cependant, si votre script a besoin d'être exécuté à un moment
+  précis avec un affichage de page -- comme lors de l'usage de
+  =document.write= pour générer du contenu -- vous devrez le mettre à
+  l'endroit où il devrait être appelé, usuellement dans la section
+  =<body>=. 
+
+  Considérons le document HTML vierge suivant avec un navigateur titré
+  =Today's Date= :
+
+  [[./index.png]]
+
+* Travailler avec un fichier JavaScript séparé
+* Note du traducteur
+  Ceci est une traduction de l'article  rédigé par [[https://www.digitalocean.com/community/users/ltagliaferri][Lisa Tagliaferri]] pour le site
+  DigitalOcean.
