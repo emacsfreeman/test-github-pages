@@ -1,0 +1,79 @@
+#+TITLE: Comprendre la syntaxe et la structure du code en JavaScript
+#+AUTHOR: Tania \textsc{Rascia} traduit par Laurent \textsc{Garnier}
+
+
+* Introduction
+
+  Avant d'apprendre à écrire dans une langue parlée, vous devez
+  d'abord apprendre les règles de la grammaire. Voici quelques
+  exemples de règles que vous pourriez trouver en anglais (ou en
+  français) : 
+
+  + Une phrase commence par une lettre capitale.
+  + Une phrase finit par un point.
+  + Un nouveau paragraphe est indenté.
+  + Le langage parlé est mis entre guillemets.
+
+    
+  De même, tous les langages de programmation doivent adhérer à des
+  règles spécifiques pour fonctionner. Cet ensemble de règles qui
+  déterminent la structure correcte des langages de programmation est
+  appelé *syntaxe*. De nombreux langages de programmation se composent
+  en grande partie de concepts similaires avec des variantes de
+  syntaxe.
+
+  Dans ce didacticiel, nous allons passer en revue de nombreuses
+  règles et conventions de la syntaxe et la stucture du code
+  JavScript.  
+
+* Fonctionnalité et lisibilité
+  
+  La fonctionnalité et la lisibilité sont deux raisons importantes de
+  privilégier la syntaxe lorsque vous commencez à utiliser JavaScript.
+  
+  Certaines règles de syntaxe sont obligatoires pour la fonctionnalité
+  JavaScript. S'ils ne sont pas suivis, la console émettra une erreur
+  et le script cessera son exécution.
+
+  Considérez une erreur de syntaxe dans le programme "Hello, World!" : 
+
+  [[./broken.png]]
+
+  La parenthèse fermante est manquante dans cet exemple de code et
+  remplace l'impression attendue du message "Hello, World!" dans la
+  console, l'erreur suivante apparaîtra : 
+  
+  [[./output.png]]
+
+  La =)= manquante doit être ajoutée avant que le script ne continue à
+  s'exécuter. Ceci est un exemple de la façon dont une erreur de
+  syntaxe JavaScript peut casser le script, car une syntaxe correcte
+  doit être suivie pour que le code puisse s'exécuter.
+
+  Certains aspects de la syntaxe et du formatage de JavaScript sont
+  basés sur différentes écoles de pensée. En d'autres termes,
+  certaines règles ou choix stylistiques ne sont pas obligatoires et
+  n'entraîneront aucune erreur lors de l'exécution du code. Cependant,
+  il existe de nombreuses conventions communes qu'il est judicieux de
+  suivre, car les développeurs entre les projets et les bases de code
+  seront plus familiarisés avec le style. Le respect des conventions
+  courantes améliore la lisibilité. 
+
+  Considérez les trois exemples suivants d'affection de variable.
+
+  #+BEGIN_SRC javascript
+    const greeting="Hello";          // pas d'espace entre variable et chaîne
+    const greeting =       "Hello"; // espace excessif après la déclaration
+    const greeting = "Hello";      // un simple espace entre variable et chaîne
+  #+END_SRC
+
+  
+  
+* Espaces (blancs)
+* Points-virgules
+* Indentation
+* Identifiers
+* Conclusion
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/understanding-syntax-and-code-structure-in-javascript][Understanding Syntax and Code Structure in
+  JavaScript]] rédigé par [[https://www.digitalocean.com/community/users/taniarascia][Tania Rascia]] pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
