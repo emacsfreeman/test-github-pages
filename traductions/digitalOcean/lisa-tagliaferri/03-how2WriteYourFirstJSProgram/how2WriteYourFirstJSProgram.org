@@ -59,9 +59,10 @@
    Une fois que vous avez appuyé sur la touche =ENTER= après votre
    ligne de code JavaScript, vous devriez voir apparaître le pop-up
    d'alerte suivant :
-
+  
+   #+BEGIN_CENTER
    [[./hw.png]]
-
+   #+END_CENTER
    
 
 * Inviter à saisir (des données)
