@@ -1,0 +1,11 @@
+#+TITLE: Comment écrire votre premier programme JavaScript ?
+#+AUTHOR: Lisa \textsc{Tagliaferri} traduit par Laurent \textsc{Garnier}
+
+* Introduction
+* Pré-requis
+* Création du programme "Hello, World!"
+* Inviter à saisir (des données)
+* Conclusion
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-write-your-first-javascript-program][How To Write Your First JavaScript Program]]
+  rédigé par [[https://www.digitalocean.com/community/users/ltagliaferri][Lisa Tagliaferri]] pour le site [[https://www.digitalocean.com/][Digitalocean]].
