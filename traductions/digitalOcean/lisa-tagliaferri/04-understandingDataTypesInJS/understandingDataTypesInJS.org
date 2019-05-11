@@ -1,0 +1,7 @@
+#+TITLE: Comprendre les types de données en JavaScript
+#+AUTHOR: lISA \textsc{Tagliaferri} traduit par Laurent \textsc{Garnier}
+
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/understanding-data-types-in-javascript][Understanding Data Types in JavaScript]] rédigé
+  par [[https://www.digitalocean.com/community/users/ltagliaferri][Lisa Tagliaferri]]  pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
