@@ -1,0 +1,7 @@
+#+TITLE: Comment travailler avec les chaînes en JavaScript
+#+AUTHOR: Tania \textsc{Rascia} traduit par Laurent \textsc{Garnier}
+
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-work-with-strings-in-javascript][How To Work with Strings in JavaScript]] rédigé
+  par [[https://www.digitalocean.com/community/users/taniarascia][Tania Rascia]] pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
