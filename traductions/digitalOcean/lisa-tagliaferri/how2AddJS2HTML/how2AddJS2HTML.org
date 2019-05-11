@@ -44,6 +44,57 @@
 
   [[./index.png]]
 
+  Pour le moment, ce fichier ne contient que du balisage HTML. Disons
+  que nous aimerions ajouter le code JavaScript suivant au document : 
+
+  #+BEGIN_SRC javascript
+    let d = new Date();
+    alert("Today's date is " + d);
+  #+END_SRC
+
+  Cela permettra à la page Web d'afficher une alerte avec la date du
+  jour, quel que soit le moment où l'utilisateur charge le site.
+
+  Afin d'accomplir ça, nous ajouterons une balise =<script>= avec du
+  code JavaScript dans le fichier HTML.
+
+  Pour commencer, nous allons ajouter le code JavaScript entre les
+  balises =<head>=, signalant au navigateur d'exécuter le script
+  JavaScript avant le chargement dans le reste de la page. Nous
+  pouvons ajouter le JavaScript sous les balises =<title>, par
+  exemple, comme indiqué ci-dessous : 
+
+  [[./index2.png]]
+
+  Une fois la page chargée, vous recevrez une alerte qui ressemblera à
+  ceci : 
+
+  [[./alert.png]]
+
+  Vous pouvez également essayer de placer le script à l'intérieur ou à
+  l'extérieur des balises =<body>= et recharger la page. Comme il ne
+  s'agit pas d'un document HTML robuste, vous ne remarquerez
+  probablement aucune différence dans le chargement de la page.
+
+  Si nous modifions ce qui est affiché dans le corps du code HTML,
+  nous aurions besoin de l'implémenter après la section =<head>= pour
+  qu'il s'affiche sur la page, comme dans l'exemple ci-dessous : 
+
+  [[./index3.png]]
+  
+  La sortie du document HTML ci-dessus chargé via un navigateur Web
+  ressemblerait à ce qui suit : 
+
+  [[./date.png]]
+
+  Les scripts qui sont petits ou qui ne fonctionnent que sur une seule
+  page peuvent fonctionner correctement dans un fichier HTML, mais
+  pour les scripts plus volumineux ou qui seront utilisés sur
+  plusieurs pages, ce n'est pas une solution très efficace car
+  l'inclure peut devenir difficile à lire ou à lire et à
+  comprendre. Dans la section suivante, nous verrons comment gérer un
+  fichier JavaScript séparé dans votre document HTML.
+
 * Travailler avec un fichier JavaScript séparé
 * Note du traducteur
   Ceci est une traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-add-javascript-to-html][How To Add JavaScript to HTML]]
