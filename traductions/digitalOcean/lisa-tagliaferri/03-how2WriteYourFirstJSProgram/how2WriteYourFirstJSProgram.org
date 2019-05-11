@@ -2,8 +2,68 @@
 #+AUTHOR: Lisa \textsc{Tagliaferri} traduit par Laurent \textsc{Garnier}
 
 * Introduction
+
+  Le programme "Hello, World!" est une tradition classique et
+  consacrée de la programmation informatique. Il s'agit d'un premier
+  programme court et complet pour les débutants. Il s'agit d'un bon
+  moyen de s'assurer que votre environnement est correctement
+  configuré.
+
+  Ce didacticiel vous guidera dans la création de ce programme en
+  JavaScript. Cependant, pour rendre le programme plus intéressant,
+  nous allons modifier le programme traditionnel "Hello, World!" afin
+  qu'il demande à l'utilisateur son nom. Nous allons ensuite utiliser
+  le nom dans un message d'accueil. Lorsque vous aurez terminé ce
+  didacticiel, vous aurez un programme interactif "Hello, World!".
+
 * Pré-requis
+
+  Vous pouvez compléter ce didacticiel en utilisant la console de
+  développement JavaScript dans votre navigateur Web. Avant de
+  commencer ce didacticiel, vous devez vous familiariser avec
+  l'utilisation de cet outil. Pour en savoir plus à ce sujet vous
+  pouvez lire notre didacticiel "[[https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-developer-console][How To Use the JavaScript Developer
+  Console]]".
+  
 * Création du programme "Hello, World!"
+
+  Pour écrire le programme "Hello, World!", ouvrez d'abord la console
+  JavaScript de votre navigateur Web préféré. 
+
+  Il existe deux manières principales de créer le programme "Hello,
+  World!" en JavaScript, avec la méthode =alert()= et avec la méthode
+  =console.log()=. 
+
+** Utiliser =alert()=  
+
+   Le premier moyen d'écrire ce programme consiste à utiliser la
+   méthode =alert()=, qui affiche un message d'alerte sur votre
+   fenêtre en cours avec un message spécifié (dans ce cas, ce sera
+   "Hello, World!") et un bouton =OK= qui permettra à l'utilisateur de
+   fermer l'alerte.
+
+   Dans la méthode, nous allons lui passer le type de données chaîne
+   ([[https://www.digitalocean.com/community/tutorials/how-to-work-with-strings-in-javascript][string]]) en tant que paramètre. Cette chaîne sera définie sur la
+   valeur =Hello, World!= afin que cette valeur soit affichée dans la
+   boîte d'alerte.
+
+   Pour écrire ce premier style du programme "Hello, World!", nous
+   encapsulons la chaîne entre parenthèses de la méthode
+   =alert()=. Nous terminerons notre déclaration JavaScript par un
+   point-virgule ([[https://www.digitalocean.com/community/tutorials/understanding-syntax-and-code-structure-in-javascript#semicolons][semi-colon]]). 
+
+   #+BEGIN_SRC javascript
+     alert("Hello, World!");
+   #+END_SRC
+
+   Une fois que vous avez appuyé sur la touche =ENTER= après votre
+   ligne de code JavaScript, vous devriez voir apparaître le pop-up
+   d'alerte suivant :
+
+   [[./hw.png]]
+
+   
+
 * Inviter à saisir (des données)
 * Conclusion
 * Note du traducteur
