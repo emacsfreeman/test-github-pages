@@ -15,7 +15,7 @@ contract CoinFlip {
         uint bet = msg.value;
 
         if (time % 2 == 0) {
-            msg.sender.transfer(bet + 2); 
+            msg.sender.transfer(bet * 2); 
         }
     }
 }
