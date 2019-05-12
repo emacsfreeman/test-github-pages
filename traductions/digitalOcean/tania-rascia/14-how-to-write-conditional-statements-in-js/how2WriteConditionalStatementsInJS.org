@@ -1,0 +1,8 @@
+#+TITLE: Comment écrire des instructions conditionnelles en JavaScript
+#+AUTHOR: Tania \textsc{Rascia} traduit par Laurent \textsc{Garnier}
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-write-conditional-statements-in-javascript][How To Write Conditional Statements in
+  JavaScript]] rédigé par [[https://www.digitalocean.com/community/users/taniarascia][Tania Rascia]] pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
+
+
