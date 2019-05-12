@@ -1,0 +1,7 @@
+#+TITLE: Comprendre les variables, la portée, et le hoisting en JavaScript
+#+AUTHOR: Tania \textsc{Rascia} traduit par Laurent \textsc{Garnier}
+
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-index-split-and-manipulate-strings-in-javascript][How To Index, Split, and Manipulate Strings
+  in JavaScript]] rédigé par [[https://www.digitalocean.com/community/users/taniarascia][Tania Rascia]] pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
