@@ -1,0 +1,7 @@
+#+TITLE: Comment utiliser des méthodes d'objet en JavaScript
+#+AUTHOR: Tania \textsc{Rascia} traduit par Laurent \textsc{Garnier}
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-use-object-methods-in-javascript][How To Use Object Methods in JavaScript]]
+  rédigé par [[https://www.digitalocean.com/community/users/taniarascia][Tania Rascia]] pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
+
