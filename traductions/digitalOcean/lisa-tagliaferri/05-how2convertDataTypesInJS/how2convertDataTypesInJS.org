@@ -1,0 +1,7 @@
+#+TITLE: Comment convertir les types de données en JavaScript
+#+AUTHOR: Lisa \textsc{Tagliaferri} traduit par Laurent \textsc{Garnier}
+
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-convert-data-types-in-javascript][How To Convert Data Types in JavaScript]] rédigé
+  par [[https://www.digitalocean.com/community/users/ltagliaferri][Lisa Tagliaferri]]  pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
