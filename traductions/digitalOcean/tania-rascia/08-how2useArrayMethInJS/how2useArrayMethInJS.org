@@ -1,0 +1,8 @@
+#+TITLE: Comment utiliser des méthodes de tableaux en JavaScript : méthodes mutatrices
+#+AUTHOR: Tania \textsc{Rascia} traduit par Laurent \textsc{Garnier}
+
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-use-array-methods-in-javascript-mutator-methods][How To Use Array Methods in JavaScript:
+  Mutator Methods]] rédigé par [[https://www.digitalocean.com/community/users/taniarascia][Tania Rascia]] pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
+
