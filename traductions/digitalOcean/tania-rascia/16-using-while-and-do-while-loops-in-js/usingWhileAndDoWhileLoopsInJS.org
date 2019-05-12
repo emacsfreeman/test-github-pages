@@ -1,0 +1,7 @@
+#+TITLE: Utiliser les boucles while et do while en JavaScript
+#+AUTHOR: Tania \textsc{Rascia} traduit par Laurent \textsc{Garnier}
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/using-while-and-do-while-loops-in-javascript][Using While and Do...While Loops in
+  JavaScript]] rédigé par [[https://www.digitalocean.com/community/users/taniarascia][Tania Rascia]] pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
+
