@@ -1,0 +1,7 @@
+#+TITLE: Comprendre les tableaux en JavaScript
+#+AUTHOR: Tania \textsc{Rascia} traduit par Laurent \textsc{Garnier}
+
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/understanding-arrays-in-javascript][Understanding Arrays in JavaScript]]
+  rédigé par [[https://www.digitalocean.com/community/users/taniarascia][Tania Rascia]] pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
