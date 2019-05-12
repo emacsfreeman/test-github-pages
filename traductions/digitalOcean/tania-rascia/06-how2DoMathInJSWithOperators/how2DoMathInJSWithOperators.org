@@ -1,0 +1,8 @@
+#+TITLE: Comment faire des calculs en JavaScript avec les opérateurs
+#+AUTHOR: Tania \textsc{Rascia} traduit par Laurent \textsc{Garnier}
+
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-do-math-in-javascript-with-operators][How To Do Math in JavaScript with Operators]]
+  rédigé par [[https://www.digitalocean.com/community/users/taniarascia][Tania Rascia]] pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
+
