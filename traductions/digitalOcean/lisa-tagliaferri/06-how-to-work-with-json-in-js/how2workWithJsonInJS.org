@@ -1,0 +1,7 @@
+#+TITLE: Comment travailler avec JSON en JavaScript
+#+AUTHOR: Lisa \textsc{Tagliaferri} traduit par Laurent \textsc{Garnier}
+
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/how-to-work-with-json-in-javascript][How To Work with JSON in JavaScript]] rédigé
+  par [[https://www.digitalocean.com/community/users/ltagliaferri][Lisa Tagliaferri]]  pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
