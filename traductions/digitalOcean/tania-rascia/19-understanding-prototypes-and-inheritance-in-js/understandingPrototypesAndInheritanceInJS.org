@@ -1,0 +1,7 @@
+#+TITLE: Comprendre les prototypes et l'héritage en JavaScript
+#+AUTHOR: Tania \textsc{Rascia} traduit par Laurent \textsc{Garnier}
+
+* Note du traducteur
+  Traduction de l'article [[https://www.digitalocean.com/community/tutorials/understanding-prototypes-and-inheritance-in-javascript][Understanding Prototypes and Inheritance in
+  JavaScript]] rédigé par [[https://www.digitalocean.com/community/users/taniarascia][Tania Rascia]] pour le site [[https://www.digitalocean.com/][DigitalOcean]]. 
+
