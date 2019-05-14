@@ -1,0 +1,670 @@
+#+TITLE: Comment être n°1 sur Google pour les nuls ?
+#+AUTHOR: Laurent Garnier
+
+* Introduction
+  Internet est ancré dans notre environnement quotidien. Pour ce qui
+  me concerne, il est devenu ma 1ère source d'informations en
+  actualités, le 1er réflexe en tant que consommateur, l'outil auquel
+  je recours naturellement dès que je me pose une question. Il en est
+  probablement de même pour vous.
+
+  En réalité, cet état de fait est devenu la norme pour la plupart des
+  citoyens.
+
+** Le Web, premier outil d'information
+   Internet est devenu la toute première source d'informations de nos
+   concitoyens. Une étude publiée en 2015 par Consumer Barometer a
+   fait ressortir les faits suivants concernant la France.
+
+   + 82% des Français se connectent au moins une fois par jour. Des
+     chiffres plus récents ont également indiqué que, dans la tranche
+     des 18-24 ans, le pourcentage est de 95%.
+   + Les internautes utilisent plusieurs terminaux pour s'informer :
+     smartphone, ordinateur, tablette, télévision...
+   + Les moteurs de recherche sont l'outil n°1 pour se renseigner au
+     niveau local (73%), loin devant les sites d'entreprise (45%) et
+     les réseaux sociaux (9%).
+   + 38% des consommateurs utilisent le Web pour s'informer sur des
+     produits.
+   + Internet avait été utilisé dans 60% des achats récents.
+   + Les recherches en ligne génèrent des conversions.
+
+
+   8 internautes français sur 10 utilisent désormais le Web comme
+   principale source d'informations.
+
+   La disponibilité du Web sur les téléphones mobiles, sur les
+   tablettes, sur le téléviseur et autres médias a certes été majeure
+   dans cette évolution.
+
+*** Le Web devant la télévision 
+    Une autre étude, publiée par Wearesocial en janvier 2016, indique
+    les Français passent en moyenne :
+
+    + 3 heures 37 par jour sur Internet depuis un PC ou une tablette.
+    + 58 minutes par jour sur Internet depuis un téléphone mobile.
+    + Le temps passé devant la télévision n'est en comparaison que de
+      2 heures 49 par jour.
+
+
+    De son côté la FEVAD/Médiamétrie nous donne ces chiffres datés de
+    décembre 2017 : 
+    + 82,7% des Français effectuent des achats en ligne soit 36,9
+      millions d'individus.
+    + 7 internautes sur 10 ont effectué leurs courses de Noël en
+      ligne. Le montant moyen envisagé pour cette occasion était de
+      244 euros.
+    + Sur l'année 2017, le montant moyen des achats a été de 66 euros.
+    + Selon la même source, en 2015, les internautes français avaient
+      réalisé 22,9 achats en ligne et dépensé en moyenne 1 780O euros.
+
+** Avantages et inconvénients du Web
+   En réalité, l'avènement du Web est à la fois une chance et une
+   malchance pour celui qui désire promouvoir son activité, ses
+   services, ses spécialistes ou encore le sujet dont il est
+   passionné.
+
+   Aux alentours de l'an 2000, un club local, un musée ou un magasin
+   étaient relativement sûrs de pouvoir toucher la population locale
+   par des moyens connus pour assurer leur visibilité :
+   + publicité 
+   + vitrine bien décorée
+   + distribution de prospectus sur les places de marché...
+
+
+   Celui qui voulait acheter un tabouret de piano se rendait à la
+   boutique la plus proche vendant de tels objets. Peut-être y
+   avait-il deux ou trois enseignes vendant des tabourets de piano
+   dans la ville où il résidait. S'il n'était pas trop pressé, le
+   client comparait les prix, les modèles, les promotions
+   éventuelles. Bien souvent, il achetait le modèle qu'il trouvait
+   dans la première boutique visitée.
+
+   Le Web a modifié la donne en permettant à n'importe qui, à tout
+   moment, d'offrir ses articles au tout-venant. Un artisan peut
+   proposer ses créations depuis sa page et séduire potentiellement
+   des clients dans toute l'Europe. Cela veut-il dire qu'il est assuré
+   de toucher un large public ? Aucunement !
+
+   Si Internet est devenu l'outil auquel on pense naturellement pour
+   effectuer une recherche quelconque, notamment pour trouver un
+   livre, un article rare ou courant, l'abondance est la norme. La
+   moindre requête génère un nombre titanesque de réponses. 
+
+   Quelques exemples sur Google :
+   + La requête << tabouret de piano >> renvoie 669 000 résultats.
+   + << robot aspirateur >> renvoie 4,5 millions de réponses.
+   + << appartement à louer Toulouse >> donne 3,9 millions de
+     résultats
+
+     
+   Ainsi, la FEVAD a recensé plus de 200 000 sites marchands actifs en
+   France en 2017 (près de 15 fois plus qu'en 2005). Et annoncé qu'il
+   se créait un site d'e-commerce toutes les 30 minutes !
+
+   Dans la pratique, quelle est l'incidence d'un tel volume de
+   réponses à une même question ? C'est qu'elle permet aisément à un
+   internaute de comparer plusieurs offres. Il en résulte une
+   situation qu'un rapport Forrester Research a résumée ainsi :
+
+   /Plus de la moitié des internautes finissent par acheter une marque
+   différente de celle qu'ils avaient initialement envisagée après
+   avoir fait des recherches sur Internet !/
+
+** Se distinguer dans la multitude
+
+   Autrefois, une entreprise pouvait espérer devenir leader en
+   maîtrisant quelques points :
+   + Aquérir une forte notoriété auprès du public, /via/ la publicité
+     traditionnelle, par exemple dans des médias.
+   + Sur un plus long terme, se faire apprécier du public grâce à la
+     qualité de ses produits, des prix concurrentiels, un service aux
+     clients irréprochable, suscitant un bouche-à-oreille positif.
+
+   
+   De nos jours, ces deux facteurs existent toujours, mais ils ont
+   évolué.
+
+   + La notoriété auprès du public va dépendre fortement d'outils liés
+     au Web : moteur de recherche, buzz, réseaux sociaux, avis
+     d'utilisateurs librement publiés, et sur lesquels, par bonheur,
+     les sites de vente en ligne n'ont officiellement aucune influence
+     ils peuvent bien évidemment demander à leurs employés de poster
+     des avis positifs, mais cela n'empêchera pas de tels messages de
+     côtoyer de véritables commentaires. Pour ce qui est des moteurs
+     de recherche, la 1ère problématique, celle qui fait le sujet de
+     ce livre, est de parvenir à au moins exister sur le Web, soit en
+     clair : apparaitre dans les résultats de Google !
+   + La réputation d'un produit ou d'un service va dépendre en grande
+     partie des informations que diffuse le site Web officiel, si tant
+     est qu'il soit bien classé - idéalement en tête des
+     résultats. Toutefois, d'autres sites Web peuvent traiter du même
+     sujet et ils peuvent être très nombreux. Parfois, des sites
+     proposant des comptes rendus préjudiciables à une personnalité ou
+     à une entreprise se classent même devant les sites officiels dans
+     les pages de Google et consorts, faute d'un travail de
+     référencement naturel bien effectué. Ce thème de l'e-réputation
+     n'est pas le sujet de ce livre. Ce que je souhaite avant tout
+     souligner ici, c'est que la situation d'un site Web aujourd'hui
+     est complexe.
+
+
+   S'il fallait tenter une analogie, l'on pourrait comparer un site
+   Web à un grain de sable d'une plage. La situation paraîtrait
+   désespérante s'il n'existait pas des méthodes et des outils
+   permettant de se distinguer de l'ensemble.
+
+** Deux types d'activités sur le Web 
+
+   Il existe deux cas de figure essentiels sur le Web :
+   + Les entreprises ayant pignon sur rue et qui se servent du Web
+     comme outil de promotion et de vente, complémentaire à leur
+     activité principale, telles la Fnac, Décathlon, les 3 Suisses, le
+     BHV
+   + Les /pure players/ : on désigne ainsi des sociétés qui n'existent
+     que sur Internet telles que PriceMinister, Leboncoin, Uber,
+     Airbnb ou Meetic.
+
+
+   La possibilité d'être un /pure player/ permet à tout un chacun de
+   démarrer une activité sur le Web. Il n'est nullement nécessaire
+   d'avoir un ou plusieurs magasins en ville, une équipe de vendeurs
+   qui sillonne les villages de France, un entrepôt où stocker des
+   marchandises. eBay est un bon exemple de site qui se contente de
+   jouer les intermédiaires entre vendeur et acheteur et qui n'a donc
+   aucun stock quelconque à gérer. Plus généralement, chacun peut
+   démarrer une activité depuis chez soi. Il est d'ailleurs probable
+   que si vous lisez ce livre, vous vous situiez dans la catégorie des
+   /pure players/.
+
+   Quelle que soit la situation, que vous gériez une TPE ou une grosse
+   entreprise avec des centaines d'enseignes, que vous soyez un
+   auto-entrepreneur ou encore un artiste désireux de faire connaître
+   ses oeuvres, vous devez faire en sorte que l'internaute puisse
+   trouver votre site.
+
+   Plusieurs méthodes sont disponibles, dont la publicité, les
+   promotions sur les réseaux sociaux, sur des forums spécialisés. Le
+   présent livre aborde celle du référencement naturel.
+
+** Le référencement naturel
+
+   La méthode que nous abordons dans ce livre est le Référencement
+   Naturel. Elle consiste en un ensemble de techniques visant à ce
+   que, parmi les dizaines de milliers d'offres disponibles, la vôtre
+   puisse se distinguer.
+
+   Toute une profession s'est développée autour de cette activité que
+   l'on appelle en anglais SEO ou /Search Engine Optimization/ -
+   optimisation d'un site pour les moteurs de recherche. Ce métier
+   consiste à faire en sorte qu'un site apparaisse le plus haut
+   possible dans les résultats de Google ou d'un autre moteur de
+   recherche, en résultat d'une requête donnée.
+
+   Les expressions SEO ou référencement naturel sont
+   interchangeables. Elles désignent une même pratique.
+
+   Une façon rapide mais coûteuse de pratiquer le référencement
+   naturel consiste à vous adresser à une société spécialisée. Pour
+   quelques milliers d'euros, elle va alors pratiquer diverses actions
+   relatives à votre site. Elle vous conseillera aussi très
+   probablement d'en modifier certains éléments.
+
+   Ce livre vous propose d'appliquer ces mêmes recettes sans que cela
+   ne vous coûte un maigre centime !
+
+   Et oui ! Si vous pouvez y consacrer une petite demi-heure par jour
+   (on n'a rien sans rien...) le référencement naturel a l'avantage de
+   ne rien coûter - même si, à divers endroits de ce livre, nous
+   suggérons quelques solutions payantes pour renforcer vos actions de
+   promotion. 
+
+   L'avantage de ce livre, c'est que je vais vous donner ici certains
+   liens de services gratuits qui vont vous faire gagner un temps
+   précieux et aussi économiser des centaines d'euros.
+
+   Idéalement, il vous faudra de temps en temps débourser quelques
+   dizaines d'euros, pas plus, pour obtenir certains services bien
+   pratiques. En tout cas, vous dépenserez bien moins que si vous
+   aviez fait appel à une société spécialisée.
+
+** Quelle est ma légitimité ?
+** Comment est organisé ce livre ?
+
+   Ce livre est constitué de six parties. Si la 1ère est quelque peu
+   << théorique >> - il importe de bien comprendre ce qu'est le
+   référencement naturel si on souhaite le pratiquer à bon escient -
+   les autres sont extrêmement pratiques. Vous allez devoir mettre à
+   jour votre site Web, utiliser divers services pour faire connaître
+   vos pages, mesurer  l'évolution de votre notoriété, /etc/.
+*** Première partie : comment Google analyse les pages
+    Cette partie traite d'un sujet essentiel : comment présenter une
+    page afin de lui donner le maximum de chances d'être bien vue par
+    Google, Bing et les autres moteurs de recherche. En effet, tout
+    commence à ce niveau.
+
+    Il est important de bien comprendre comment les moteurs de
+    recherches << analysent >> vos pages, et ce qui les amène à
+    considérer qu'un site a de la valeur ou non.
+
+    Cette étape est essentielle. Vous pourriez effectuer toutes les
+    actions de référencement au monde, si Google n'estime pas que
+    votre contenu a de l'importance, il négligera vos pages !
+
+    Nous expliquons aussi ici que le domaine du référencement naturel
+    a fortement évolué. Durant plusieurs années, la clé pour être bien
+    référencé consistait à accumuler des centaines, voire des milliers
+    de liens vers son site. 
+
+    Les règles du jeu ont changé. Cela ne compte plus comme avant et
+    pire encore, si les liens sont mal gérés, ils peuvent être
+    préjudiciables au classement d'un site. Certains ont vu leur site
+    rétrograder du jour au lendemain de la 1ère page à la 12ème page
+    des résultats de Google, car le géant californien a soudain estimé
+    que les liens venant vers une page étaient << bidons >> - ils
+    l'étaient souvent, reconnaissons-le.
+
+    Quelles sont les nouvelles règles du jeu ? Nous l'exposons
+    ici. Avec un message clair : ne croyez pas que vous puissiez <<
+    duper >> Google. Vraiment, ne le croyez pas un seul
+    instant. Google emploie des ingénieurs supérieurement doués et,
+    comme me l'a confirmé un ami travaillant dans le référencement,
+    ils emploient parfois des sous-traitants ayant pour mission de
+    détecter les sites qui abuseraient de certaines techniques peu
+    orthodoxes.
+
+*** Deuxième partie : le référencement naturel << offline >>
+    
+    Une fois que nous avons exposé les nouvelles règles du jeu
+    référencement naturel, nous abordons la partie /offline/ de cette
+    pratique. On pourrait la résumer en une phrase : 
+
+    Comment concevoir ses pages pour Google les aime !
+
+    En réalité, si Google les aime, c'est très probablement parce
+    qu'elles sont utiles aux usagers du Web. Tout simplement. Je vous
+    explique pourquoi, en long et en large.
+
+    Donc, les conseils indiqués ici vont le plus souvent améliorer le
+    confort du visiteur de votre site.
+
+    Nous allons voir ici des points tels que : 
+    + Quelle quantité de texte mettre ?
+    + Comment le présenter ?
+    + Faut-il mettre des images ?
+    + Est-ce que le temps de chargement des pages compte ? Si oui,
+      comment les accélérer ?
+    + Est-il nécessaire qu'un site soit compatible avec les téléphones
+      mobiles et si oui, comment faire ?
+*** Troisième partie : le référencement naturel << online >>
+    Une fois que l'on a créé une page et qu'elle a été mise en ligne,
+    diverses actions permettent de la faire monter dans Google.
+
+    Il est nécessaire en premier lieu d'informer les moteurs de
+    recherche que votre page existe. Pour ce faire, divers outils
+    existent et nous vous les présentons.
+
+    Nous abordons ensuite des points comme les fameux << liens >>
+    évoqués plus haut. Avoir des liens vers son site n'est pas une
+    mauvaise chose en soi, si tant est qu'ils soient judicieux et
+    idéalement, proviennent de domaines que Google considère comme
+    importants. Un seul lien provenant d'un journal comme /Le Monde/ a
+    plus d'impact que des milliers de liens venant de blogs indiens ou
+    taïwanais !
+
+*** Quatrième partie : donner du poids à sa page
+    Aux yeux de Google, à tout moment, votre page a un << poids >>, un
+    niveau d'autorité. L'équivalent d'une note sur 10 ou sur 100. Un
+    site qui a un poids de niveau 67 a relativement plus de chances de
+    voir ses pages classées qu'un site de niveau 44. C'est aussi
+    simple que ça en théorie, même si, au risque de me répéter,
+    l'équation globale est bien plus complexe.
+
+    Quoi qu'il en soit, il importe de faire en sorte que ce poids
+    augmente régulièrement. Pour ce faire, il existe de nombreuses
+    techniques. Elles peuvent prendre beaucoup de temps, mais l'enjeu
+    en vaut la chandelle.
+
+    Nous abordons le domaine des réseaux sociaux, et comme vous
+    pourrez le voir, il n'est pas aussi essentiel qu'on pourrait le
+    croire, pour ce qui est du poids en question. Il est avant tout
+    important pour amener des visites vers vos pages, et dans cette
+    mesure, il peut ainsi, de façon indirecte, améliorer votre
+    référencement. 
+
+    Nous abordons ensuite YouTube et expliquons quelle est son
+    importance. Pour faire simple, Google a racheté YouTube et donc,
+    Google aime YouTube. Il va donc falloir créer des vidéos et les
+    faire pointer vers vos pages.
+
+    D'autres facteurs plus méconnus ont leur importance comme les PBN
+    ou /Private Blog Networks/ (réseaux de blogs privés), les articles
+    et communiqués de presse, /etc/.
+
+*** Cinquième partie : une action à long terme
+    Nous en rêverions tous. Hélas, ce n'est pas le cas. On ne peut
+    espérer faire des actions de référencement naturel un jour, et
+    pouvoir s'endormir totalement dessus. Dans de nombreux cas, le SEO
+    nécessite une action régulière.
+
+    Il se trouve que de nouveaux concurrents apparaissent, que les
+    règles de Google changent peu à peu, ne serait-ce que de façon
+    homéopathique, et aussi que Google apprécie les sites dont le
+    contenu évolue régulièrement, que de nouvelles opportunités de
+    promotion apparaissent.
+
+    Il sera donc nécessaire de mettre à jour vos pages. Toutefois,
+    nous allons vous donner ici une belle astuce pour amener vos pages
+    à évoluer sans le moindre effort.
+
+    Cette partie présente également de nombreux outils de mesure d'un
+    site, des outils qui peuvent vous permettre d'en améliorer
+    certains points. Chaque bonification de vos pages peut faire
+    monter sa note globale dans Google ou dans des sites d'évaluation
+    reconnus comme Majestic, et augmenter les chances qu'elles soient
+    bien classées.
+
+*** Sixième partie : les dix commandements
+    Il existe une dizaine de choses à faire et surtout à ne pas
+    faire - sous aucun prétexte si l'on veut réussir son référencement
+    naturel. Il est bon de les avoir en tête à tout moment.
+* Comment Google analyse les pages
+** Faire venir les internautes vers votre site
+   Le Web a démarré de façon expérimentale en 1994 pour ce qui est des
+   pays francophones et comme sur toute terre inconnue, il a fallu
+   apprendre sur le tas. La surprise a été au rendez-vous.
+
+   Qui pouvait prédire que les utilisateurs préféreraient la sobriété
+   spartiate de la page d'accueil de Google à l'aspect << kiosque à
+   journaux >> de portails tels que Yahoo!, alors que la plupart des
+   experts de l'époque voulaient voir là l'avenir du Web ?
+
+   Comment pouvait-on prédire que, pour un même service, telle suite
+   de mots allait séduire en masse les utilisateurs alors que telle
+   autre les laisserait indifférents ? C'est pourtant ce qu'a
+   découvert Google en lançant Gmail. La séquence : << Tapez un nom >>
+   obtenait beaucoup plus de réactions que << Inscrivez-vous >> !
+
+*** Plus d'un milliard de sites Web, et moi, et moi et moi...
+    En mai 1994, lorsque les Français ou les Belges ont découvert
+    Internet, les utilisateurs devaient se contenter en tout et pour
+    tout d'environ 2 500 sites, dont une dizaine tout au plus étaient
+    en langue française !
+
+    À cette époque, se faire connaître n'était pas un souci, les
+    magazines << tendance >> s'empressaient de communiquer à leurs
+    lecteurs les bonnes adresses du Web, qu'il fallait soigneusement
+    taper sans faire de faute.
+
+    Cette situation s'est prolongée durant quelques années et il est
+    probable que certains responsables de sites Web regardent avec
+    nostalgie l'époque où seul Pizza Hut répondait à l'appel lorsqu'on
+    tapait << pizza >>. Et où Travelprice devait se battre avec deux
+    autres voyagistes pour la vente de billet d'avion.
+
+    Aujourd'hui, la situation est radicalement différente. Depuis
+    octobre 2014, on compte plus d'un milliard de sites Web dans le
+    monde. Et au début de l'année 2018, on en dénombre plus de 1,3
+    milliard. Si vous voulez en avoir le coeur net, allez sur la page
+    Internet Live Stats[fn:1], vous pourrez voir le compteur évoluer à
+    chaque seconde.
+
+    /Quid/ de la France ? Il est assez difficile d'obtenir des
+    chiffres précis au niveau d'un pays donné. On sait toutefois qu'au
+    1er janvier 2013, on recensait déjà plus de 2,7 millions de sites
+    avec l'extension .fr (France)
+
+    Il est n'est pas facile de se distinguer au milieu d'un tel océan
+    de données. Aujourd'hui pour une requête sur un moteur de
+    recherche, l'on obtient couramment des dizaines de milliers de
+    réponses.
+
+    Pour corser le problème, un grand nombre d'études font ressortir
+    un fait majeur. 
+
+    /La majorité des internautes ne vont pas au-delà de la 1ère page
+    de résultats d'un moteur de recherche tel que Google !/
+
+    Ce chiffre est confirmé par l'agence Chitika[fn:2] qui nous montre
+    que les pourcentages _diminuent_ rapidement :
+    + 91,5% des internautes ne vont pas au-delà de la page 1 de Google
+    + 4,8% seulement consultent des résultats de la page 2 de Google
+    + 1,1% consultent des sites affichés sur la page 3
+
+
+    Dire qu'il y a une prime aux premiers résultats affichés par
+    Google est donc une lapalissade.
+
+    Mieux encore, Chitika nous apprend (étude publiée en juin 2013)
+    que les tout premiers résultats récoltent le maximum de visites :
+
+    | Position sur la 1ère page de Google | Trafic obtenu en moyenne |
+    |-------------------------------------+--------------------------|
+    |                                   1 | 32,5%                    |
+    |-------------------------------------+--------------------------|
+    |                                   2 | 17,6%                    |
+    |-------------------------------------+--------------------------|
+    |                                   3 | 11,4%                    |
+    |-------------------------------------+--------------------------|
+    |                                   4 | 8,1%                     |
+    |-------------------------------------+--------------------------|
+    |                                   5 | 6,1%                     |
+    |-------------------------------------+--------------------------|
+    |                                   6 | 4,4%                     |
+    |-------------------------------------+--------------------------|
+    |                                   7 | 3,5%                     |
+    |-------------------------------------+--------------------------|
+    |                                   8 | 3,1%                     |
+    |-------------------------------------+--------------------------|
+    |                                   9 | 2,6%                     |
+    |-------------------------------------+--------------------------|
+    |                                  10 | 2,4%                     |
+    |-------------------------------------+--------------------------|
+    |                                  11 | 1,0%                     |
+    |-------------------------------------+--------------------------|
+    |                                  12 | 0,8%                     |
+    |-------------------------------------+--------------------------|
+    |                                  13 | 0,7%                     |
+    |-------------------------------------+--------------------------|
+    |                                  14 | 0,6%                     |
+    |-------------------------------------+--------------------------|
+    |                                  15 | 0,4%                     |
+    |-------------------------------------+--------------------------|
+    
+    Conclusion : un travail de référencement doit faire en sorte de
+    positionner votre site sur la 1ère page des résultats d'un moteur
+    de recherche et mieux encore, le plus haut possible. Plus facile à
+    dire qu'à faire. Pourtant, on peut y arriver et je peux en
+    témoigner.
+
+    Toutefois, autant le dire : arriver sur la page 1 de Google va
+    demander bien des actions. Des actions sur le contenu et la forme
+    du site lui-même, puis des actions visant à améliorer la notoriété
+    et le << poids >> du site (sa valeur aux yeux de Google et autres
+    moteurs de recherche).
+
+    Il est possible d'y arriver dans un grand nombre de cas, et c'est
+    ce que nous verrons tout au long de ce livre.
+
+*** En matière de référencement, chacun a sa chance
+    En réalité, la beauté de la chose, c'est que, à quelques
+    exceptions près, vous pouvez bel et bien, sur certaines requêtes,
+    alors que vous avez opéré depuis chez vous sur votre ordinateur,
+    concurrencer des sites de grosses entreprises !
+    
+    Un référencement naturel bien fait consiste à préparer un site de
+    façon à ce qu'il présente un contenu d'une très grande qualité, et
+    ensuite à faire en sorte qu'il soit identifié comme tel par les
+    moteurs de recherche.
+
+*** Les deux types de référencements : payant et naturel     
+    Avant d'aller plus loin, il importe de différencier les deux types
+    de référencements principaux :
+    + les mots-clés de type publicitaire, pour lesquels on paye Google
+      ou Bing afin d'apparaître sur la première page
+    + les mots-clés << gratuits >> liés au référencement naturel, le
+      sujet du présent livre
+*** Les liens commerciaux ou AdWords
+    Si vous souhaitez apparaître sans attendre dans tous les premiers
+    résultats de Google ou Bing, vous pouvez choisir d'acheter des <<
+    liens commerciaux/payants >> (on parlait autrefoisd de << liens
+    sponsorisés >>).
+
+    Dans ce cas de figure, vous achetez à Google ce que l'on appelle
+    des AdWords ou séries de mots-clés.
+
+    Les liens payants se distinguent des liens naturels de deux
+    façons :
+    + la mention << Annonce >> figure sous le titre du lien
+    + ils apparaissent en tout premiers, au-dessus des liens issus du
+      référencement naturel
+
+
+    Comment cela se passe-t-il dans la pratique ? Chaque fois qu'un
+    internaute clique sur l'un de ces quatres liens, une commission
+    est versée par le site correspondant à Google.
+
+    C'est ce système des AdWords qui a fait la fortune de Google. Pour
+    mémoire, Google, une société apparue fin 1998, pesait déjà 90
+    milliards de dollars au début de 2017. C'est une croissance
+    économique qui dépasse celle de toute autre entreprise dans
+    l'Histoire. Or cette expansion est avant tout due au système des
+    AdWords.
+
+    Il y a deux raisons à cela. En premier lieu, imaginez le nombre de
+    combinaisons qu'un vendeur de billets d'avion doit acheter à
+    Google pour apparaître ainsi sur la page 1 de Google.
+
+    | Rang | Site           | Nombre d'AdWords |
+    |------+----------------+------------------|
+    |    1 | Amazon         | 913 341          |
+    |------+----------------+------------------|
+    |    2 | eBay           | 736 756          |
+    |------+----------------+------------------|
+    |    3 | target.com     | 488 981          |
+    |------+----------------+------------------|
+    |    4 | bizrate.com    | 338 051          |
+    |------+----------------+------------------|
+    |    5 | shopzilla.com  | 235 573          |
+    |------+----------------+------------------|
+    |    6 | dartsearch.com | 229 153          |
+    |------+----------------+------------------|
+    |    7 | nextag.com     | 205 731          |
+    |------+----------------+------------------|
+    |    8 | Glimpse.com    | 204 335          |
+    |------+----------------+------------------|
+    |    9 | yahoo.com      | 156 287          |
+    |------+----------------+------------------|
+    |   10 | pronto.com     | 153 880          |
+    |------+----------------+------------------|
+   
+    La même étude par SEOBook estimait qu'au moins 55 annonceurs
+    dépensaient alors plus de 1 million de dollars par mois en
+    AdWords. Ainsi :
+
+    + eBay dépensait 9,7 millions de dollars en AdWords
+    + Amazon en dépensait 9,5 millions
+    + Expedia 8,8 millions
+
+      
+    Pas moins de 422 entreprises basées en Amérique déboursaient
+    entre 100 000 et 1 million de dollars par mois dans les AdWords.
+
+    Etant donné que les mots-clés sont vendus aux enchères, on peut
+    être sûr que les sommes rapportées ici n'ont fait qu'augmenter
+    depuis !
+*** Le référencement naturel
+    Chaque fois qu'un site est affiché par Google en réponse à une
+    requête (et qu'il n'y a pas la mention << Annonce >>), il s'agit
+    d'un lien naturel.
+**** La source n°1 de trafic
+    Le référencement naturel a de nombreux atouts. Le fait qu'il soit
+    gratuit en est un, mais ce n'est pas tout. Il consistitue la
+    source principale de visites vers un site.
+
+    En juillet 2014, Groupon Director[fn:3] a publié une enquête dont
+    il est ressorti que les principales sources de trafic vers un site
+    étaient les suivantes :
+    + référencement naturel 64%
+     lien depuis un autre site : 15%
+    + liens payants : 6%
+    + réseaux sociaux : 2%
+    
+    
+    Une enquête publiée par Search Engine Land en janvier 2016 et
+    concentrée sur l'importance relative des visites issues du
+    référencement naturel et du référencement payant donne les
+    chiffres suivants :
+    + référencement naturel : 94,95%
+    + liens payants : 5,05%
+
+      
+    Il est possible que ces chiffres évoluent au fil des années et une
+    enquête récente fait ressortir que les liens payants seraient en
+    train de prendre davantage d'importance.
+
+    En attendant, un fait ressort : la domination du référencement
+    naturel est sans appel.
+
+    /L'immense majorité des visites vers un site Web est due au
+    référencement naturel./
+
+**** Des requêtes de plus en plus longues
+     Le tout premier réflexe d'un internaute lorsqu'il cherche un
+     appartement à louer, de la gelée royale venant d'un élevage
+     d'abeilles de sa région ou encore une perceuse est de poser une
+     question sur un moteur de recherche.
+
+     Or, de nos jours, chacun a sa chance en matière de référencement
+     naturel, car les requêtes tapées par les internautes sont de plus
+     en plus longues. En 1998, la moyenne était d'environ un mot
+     tapé. Aujourd'hui, il est fréquent de voir des requêtes de ce
+     type : 
+     + Quel est le prix moyen d'un panneau solaire ?
+     + Qui a gagné la bataille de Marignan ?
+     + Acheter du miel en Picardie 
+
+
+     Eh oui ! Un internaute tape de plus en plus de mots dans l'espoir
+     de trouver ce qu'il désire. En fait, plus les années passent, et
+     plus il inscrit un grand nombre de termes afin d'être sûr de
+     trouver du premier coup ce qu'il cherche. L'avantage c'est que,
+     dans une certaine mesure, cela augmente vos chances d'apparaître
+     en réponse à une requête donnée - si tant est que vos pages Web
+     aient été conçues comme il se doit.
+*** Qu'est-ce qui fait venir les internautes chez vous ?
+    Il existe une erreur que la plupart des créateurs de site commise
+    à leurs débuts. Pour la rendre plus claire, je vais parler de mon
+    cas personnel.
+
+    
+** Les règles ont changé
+*** Google et son PageRank
+    
+** Pour séduire Google, il faut séduire les internautes
+* Le référencement naturel << offline >>
+** Optimiser un site pour le référencement
+** La description de la page
+** Rendre son site compatible avec les plates-formes mobiles
+** Facteurs divers
+* Le référencement naturel << online >>
+** Faire connaître son site aux moteurs de recherche
+** Comment Google perçoit-il vos pages ?
+** Les liens venant de sites externes
+* Donner du poids à votre page
+** Les réseaux sociaux
+** YouTube
+** Autres sources de liens
+* Une action à long terme 
+** Un contenu évolutif et interactif
+** Analyser et améliorer les performances d'un site
+* Les dix commandements
+** Dix principes incontournables
+
+* Footnotes
+
+[fn:3] [[https://searchenginewatch.com/sew/study/2355020/organic-search-accounts-for-up-to-64-of-website-traffic-study][searchenginewatch.com]]
+
+[fn:2] [[https://chitika.com/2013/06/07/the-value-of-google-result-positioning-2/]]
+
+[fn:1] [[https://www.internetlivestats.com/total-number-of-websites/]]
