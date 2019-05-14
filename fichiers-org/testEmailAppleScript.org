@@ -1,0 +1,37 @@
+[[http://www.gonsie.com/blorg/emailer.html]]
+
+#+NAME: script
+#+BEGIN_SRC apples :tangle email.scpt
+on run argv
+	set varName to item 1 of argv
+	set varEmail to item 2 of argv
+	set varBody to "Hello " & varName & ",
+
+   Blah blah blah. Lor ipsum, etc.
+
+   Sincerely,
+   Emacsfreeman"
+	
+	tell application "Mail"
+		set theMessage to make new outgoing message with properties {subject:"Email", content:varBody, visible:true}
+		tell theMessage
+			make new to recipient with properties {name:varName, address:varEmail}
+			#send
+		end tell
+	end tell
+end run
+#+END_SRC
+
+#+NAME: data
+| Name        | Email                               |
+|-------------+-------------------------------------|
+| Mr. Richman | becomefreerichman@gamil.com         |
+| Mr. LGSP    | laurent.garnier.superprof@gmail.com |
+
+#+BEGIN_SRC bash :var name=data[,0] email=data[,1]
+for i in `seq 0 0`; do
+oascript email.scpt "${name[$i]}" "${email[$i]}"
+done
+#+END_SRC
+
+

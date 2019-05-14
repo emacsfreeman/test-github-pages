@@ -1,0 +1,77 @@
+#+TITLE: Onglets du jeudi 02 mai 2019
+#+AUTHOR: Laurent Garnier
+
+* Firefox
+
+  1. Comprendre et développer un Chatbot : Messagerie instantanée,
+     paiements en ligne, intelligence artificielle... - Exemples avec
+     Node.js Ed 1 (Bibli)
+  2. Node.js : Apprendre par la pratique Ed 1 (Bibli)
+  3. Git par la pratque : A book apart n°17 Ed. 1 (Bibli)
+  4. Mémento Git à 100% Ed. 2
+  5. JavaScript pour les kids : Dès 10 ans Ed. 1 (Bibli)
+  6. [[https://automatetheboringstuff.com/]]
+  7. [[https://www.youtube.com/watch?v=-OvRVlqKebI&list=PL2-dafEMk2A5_Fcpl3FHOjo2Gfios3b5o][Siraj Raval]]
+  8. [[https://learn.freecodecamp.org/responsive-web-design/basic-css][freeCodeCamp]]
+  9. [[http://bonsaiden.github.io/JavaScript-Garden/]]
+ 10. [[https://repl.it/site/docs/repls/intro]]
+ 11. [[https://assets.digitalocean.com/books/python/how-to-code-in-python.pdf]]
+ 12. [[https://www.digitalocean.com/community/tutorials/how-to-use-git-a-reference-guide][Git DigitOcean]]
+ 13. [[https://github.com/emacsfreeman/test-github-pages/blob/master/traductions/digitalOcean/how2useTheJSDevConsole.org][JS Console]]
+ 14. [[https://twitter.com/lisaironcutter]]
+ 15. [[https://lisatagliaferri.org/]]
+ 16. [[https://www.youtube.com/channel/UCW5YeuERMmlnqo4oq8vwUpg/playlists][The Net Ninja]]
+ 17. [[https://www.youtube.com/watch?v=DZp6rxrtcYw][Hangman from scratch]]
+ 18. [[https://www.youtube.com/user/cs50tv/videos]]
+ 19. [[https://www.quackit.com/scripting/]]
+ 20. [[https://eloquentjavascript.net/Eloquent_JavaScript.pdf]]
+ 21. [[https://www.programiz.com/cpp-programming/strings]]
+ 22. [[https://www.youtube.com/results?search_query=CS+106X]]
+ 23. [[https://ivanontech.teachable.com/courses/287053/lectures/5208293]]
+ 
+* Safari
+
+  1. [[https://www.howtostudykorean.com]]
+  2. [[https://www.youtube.com/watch?v=zAS1nXFqBM8][15 Books Steve Jobs Thought Everyone Should Read]]
+  3. [[https://youtu.be/mX9wZj5bGcU][15 SIMPLE Steps To Change Your Life Immediately]]
+  4. [[https://coinmarketcap.com/currencies/stellar/]]
+
+* Chrome
+  
+  1. [[https://www.learncpp.com/cpp-tutorial/55-while-statements/]]
+  2. [[https://www.learncpp.com/cpp-tutorial/57-for-statements/]]
+  3. [[https://ivanontech.teachable.com/courses/287053/lectures/5290098]]
+  4. [[https://developer.wordpress.org/]]
+  5. [[https://www.eduonix.com/dashboard/create-ethereum-blockchain-applications-using-solidity][Solidity]]
+  6. [[https://www.eduonix.com/dashboard/hyperledger-fabric-and-composer-first-practical-blockchain][Hyperledger]]
+  7. [[https://www.eduonix.com/dashboard]]
+  8. [[https://www.udemy.com/certified-blockchain-developer-cbd/learn/lecture/8883774?start=0#overview][Study material for Certified Blockchain Developer (CBD)]]
+  9. [[https://www.udemy.com/ethereum-dapp/learn/lecture/6960772#overview][Ethereum : Decentralized Application Design & Development]]
+ 10. [[https://www.udemy.com/ethereum-masterclass/learn/lecture/7777210#overview][Ethereum Developer Masterclass : Build Real World Projects]]
+ 11. [[https://www.udemy.com/ethereum-and-solidity-the-complete-developers-guide/learn/lecture/8953532?start=0#overview][Ethereum and Solidity: The Complete Developer's Guide]]
+ 12. [[https://www.udemy.com/getting-started-with-ethereum-solidity-development/learn/lecture/7126902?start=15#overview][Become a Blockchain Developer with Ethereum and Solidity]]
+ 13. [[https://nomadlist.com/affordable-cities-with-fast-internet]]
+ 14. [[http://docs.traveldeveloper.com/dmx-tddocs/freelance-business-plan/]]
+ 15. [[https://www.udemy.com/the-complete-travel-developer-course-become-a-digital-nomad/learn/lecture/9546726#overview][Travel Developer Course - Work Remotely as a Digital Nomad]]
+ 16. [[https://www.udemy.com/build-blockchain/learn/lecture/9314214#overview][Build a Blockchain and a Cryptocurrency from Scratch]]
+ 17. [[https://www.udemy.com/home/my-courses/search/?q=blockchain%2520developer][udemy]]
+
+
+* Brave
+
+  1. [[https://github.com/emacsfreeman/test-github-pages/blob/master/python/python4dummies/part4/chap16/chap16.org][Python Email]]
+  2. [[https://emacs.cafe/]]
+  3. [[https://www.youtube.com/channel/UCyZyNVYEN-54HPYkVVHnRTA/videos][Filip Martinsson]]
+  4. [[chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://s3.amazonaws.com/beacon.cnd/b6851e38494bcd3d.pdf?t=1554486814][Crypto Trader]]
+  5. [[chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://s3.amazonaws.com/beacon.cnd/39f1637708267c10.pdf?t=1552579845][Le guide ultime]]
+  6. [[https://www.youtube.com/watch?v=Wezh1i-HY60][Développer une blockchain en JavaScript]]
+  7. [[https://nomadlist.com/]]
+  8. [[https://www.youtube.com/user/schafer5/about]]
+  9. [[https://www.youtube.com/watch?v=QGy6M8HZSC4&list=PL-osiE80TeTvviVL0pJGX5mZCo7CAvIuf&index=3][Overview of Online Learning Resources]]
+ 10. [[https://www.youtube.com/watch?v=HVsySz-h9r4&list=PL-osiE80TeTuRUfjRe54Eea17-YfnOOAx][Git Tutorial for Beginners: Command-Line Fundamentals]]
+ 11. [[https://www.youtube.com/watch?v=xaWlS9HtWYw&list=PL-osiE80TeTsKOdPrKeSOp4rN3mza8VHN][SQL Tutorial for Beginners 1]]
+ 12. [[https://www.youtube.com/watch?v=j6vKLJxAKfw&list=PL-osiE80TeTvGhHkpvfmKWOiIPF8UVy6c][Linux/Mac Terminal Tutorial]]
+ 13. [[https://coreyms.com/]]
+ 14. [[http://www.lephpfacile.com/cours/15-modifier-des-donnees-de-votre-base][lephpfacile]]
+ 15. [[https://youtu.be/vLnPwxZdW4Y][C++]]
+

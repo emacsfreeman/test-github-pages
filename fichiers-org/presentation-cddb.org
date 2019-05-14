@@ -1,0 +1,117 @@
+#+TITLE: Présentation de la formation CDDB 
+#+AUTHOR: Laurent Garnier
+#+BEAMER_HEADER: \author{\texorpdfstring{Laurent Garnier\newline\url{cours-laurent@tutanota.com}}{Laurent Garnier}}
+#+BEAMER_HEADER: \subtitle{Comment Devenir Développeur Blockchain}
+#+BEAMER_HEADER: \titlegraphic{\includegraphics[width=3cm, height=3cm]{gnu}}
+
+#+OPTIONS: toc:t h:2 num:t date:nil
+#+LATEX_HEADER: \usepackage[francais]{babel}
+#+LATEX_HEADER: \hypersetup{colorlinks = true}
+
+
+* Itinéraire général
+
+
+** Le Web 1.0
+   
+   Dans cette formation nous allons partir de zéro et voir ensemble de
+   nombreuses technologies. Tout d'abord nous commencerons par les
+   technologies du Web 1.0 à savoir HTML, CSS et JavaScript.
+
+
+   Nous verrons également quelques bibliothèques et frameworks pour
+   CSS (Twitter Bootstrap) et JavaScript (jQuery, Angular, React,
+   Node...).
+
+
+   Nous approfondirons ensuite les connaissances fondamentales en
+   JavaScript (avoir suivi la formation [[http://bit.ly/podia-js0h][JavaScript de Zéro à Héros]] est
+   un plus). 
+
+
+
+
+
+** Le Web 2.0
+
+   Nous passerons ensuite au Web 2.0 avec Node.js qui est un framework
+   permettant d'utiliser le langage JavaScript côté serveur. 
+
+
+   Les gens ayant suivis la formation FSD Node.js seront avantagés
+   mais tout sera étudié à partir de zéro donc pas d'inquiétude si
+   vous ne connaissez pas encore Node.js.
+
+
+
+** Les langages bas niveau
+
+   Ensuite nous étudierons les langages C et C++ (historiquement C++
+   est le langage qui a été utilisé par Satoshi Nakamoto pour bâtir la
+   blockchain Bitcoin). Cela demandera du temps et de la patience
+   parce que C et C++ sont des langages assez bas niveau (donc proches
+   de la machine) et nécessitent donc pas mal d'efforts.
+
+
+
+   Avec le langage C++ nous approfondirons les aspects spécifiques de
+   la POO (Programmation Orientée Objet). 
+
+
+
+
+** Le Web 3.0
+
+   Après avoir bien approfondies les connaissances en C++ il sera
+   temps de s'occuper enfin du Web 3.0 qui est l'objectif majeur de
+   cette formation.
+
+
+   Nous introduirons les spécificités du Web 3.0 et de la
+   programmation décentralisée. Pour ce faire nous étudierons le
+   fonctionnement de Git, outil incontournable du développeur.
+
+
+   Ensuite nous entamerons l'étude des smart contrats Ethereum. Puis
+   on s'occupera des Dapps.
+
+
+   On verra par la suite les tokens, crowdsales et les airdrops.
+
+   On poursuivra notre étude en programmant avec la blockchain
+   EOS. EOS est le grand rival d'Ethereum et cela permettra de se
+   différencier des autres formations qui se focalisent uniquement sur
+   Solidity et Ethereum.
+
+
+   Enfin on étudiera Hyperledger Fabric et Composer.
+
+
+* Comment profiter au maximum de la formation ?
+** Les bonnes pratiques
+
+  Il est important de participer activement durant toute la formation
+  ce qui signifie entre autre :
+
+   + de poser des questions à la communauté
+   + de répondre aux questions des autres membres de la communauté
+   + de partager les ressources annexes utiles à l'apprentissage
+   + de travailler en collaboration avec le maximum de membres de la communauté
+
+
+* Philosophie de la formation 
+** Code d'honneur
+
+  Cette formation est très longue parce que j'ai décidé de prendre le
+  temps de bien ancrer, décortiquer et analyser les notions en
+  profondeur. 
+
+
+  Au-delà des connaissances, qui sont hélas périssables, c'est plutôt
+  un état d'esprit (mindset en anglais), une vision de la technologie,
+  une vision de l'apprentissage, une vision du monde et une vision des
+  sociétés humaines que je souhaite partager avec celles et ceux qui
+  décideront de prendre leur destin en main en faisant partie
+  intégrante de cette communauté de bâtisseurs.
+
+

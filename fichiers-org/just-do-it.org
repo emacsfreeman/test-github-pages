@@ -1,0 +1,431 @@
+#+TITLE: Just do it
+#+AUTHOR: Laurent Garnier
+
+* Command line
+  + [[https://www.learnenough.com/command-line-tutorial/basics][Learn Enough Command Line to Be Dangerous]]
+  + [[http://conqueringthecommandline.com/book]]
+  + [[https://www.learnenough.com/git-tutorial/getting_started]]
+  + [[https://www.learnenough.com/text-editor-tutorial/vim]]
+* HTML
+  + [[https://www.learnenough.com/html-tutorial/html_intro]]
+* CSS
+  + [[https://www.learnenough.com/css-and-layout-tutorial/introduction]]
+
+* Django FSD
+  + [[https://www.udemy.com/python-and-django-full-stack-web-developer-bootcamp/learn/lecture/6598774?start=0#overview][Jose Portilla]]
+  + [[https://www.eduonix.com/dashboard/Learn-Django-and-Python-Development-By-Building-Projects][Eduonix]]
+  + [[https://www.udemy.com/coding-for-entrepreneurs/learn/lecture/466386?start=0#overview][Justin Mitchel]]
+  + [[https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md#django][Free ebook on GitHub]]
+  + [[https://pythonprogramming.net/django-web-development-python-tutorial/][PythonProgramming]]
+  + [[https://openclassrooms.com/fr/courses/1871271-developpez-votre-site-web-avec-le-framework-django][OpenClassrooms]]
+  + [[https://docs.python.org/3/tutorial/index.html]]
+  + [[https://learnxinyminutes.com/docs/python3/]]
+  + [[https://www.djangoproject.com/]]
+  
+* PHP FSD
+  + [[https://www.grafikart.fr/formations/php][Grafikart]]
+  + [[https://www.php.net/docs.php]]
+  + [[https://www.udemy.com/the-complete-web-developer-course-2/learn/lecture/4712506?start=105#overview][Rob Percival]]
+  + [[https://www.eduonix.com/dashboard/the-full-stack-web-development][Eduonix]]
+  + [[https://www.udemy.com/oop-php-object-oriented-programing-with-project-1-course/learn/lecture/3351282?start=0#overview][Edwin Diaz]]
+  + [[https://www.udemy.com/formation-developpeur-web/learn/lecture/5133946?start=75#overview][John Codeur]]
+  + [[https://youtu.be/KibbYf9avko][freeCodeCamp WordPress 4:27]]
+  + [[https://www.youtube.com/watch?v=OK_JCtrrv-c][FreeCodeCamp]] 4:36 => 1:15
+  + [[https://www.youtube.com/watch?v=7lMXMLeawug&list=PLrSOXFDHBtfFuZttC17M-jNpKnzUL5Adc][FormationVidéo]]
+  + [[https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md#php][Free ebook on GitHub]]
+  + [[https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql][OpenClassrooms]]
+  + [[https://www.udemy.com/become-a-wordpress-developer-php-javascript/learn/lecture/7148936?start=1110#overview][WordPress Dev]]
+  + [[https://openclassrooms.com/fr/courses/1891206-propulsez-votre-site-avec-wordpress][WP OC]]
+* Rails FSD
+** freeCodeCamp
+   + [[https://youtu.be/t_ispmWmdjY][Ruby Programming Language - Full Course 4:02]] 43'
+** Harry JMG
+    + [[https://learnwith.harryjmg.fr/formation/index/]]
+    + ID : laurent.garnier.superprof@gmail.com
+    + MdP : 6bd79ae6
+    + Discord : [[https://discord.gg/zKQKGcG]]
+** Autres
+  + [[https://www.learnenough.com/ruby-tutorial/hello_world]]
+  + [[https://www.railstutorial.org/book]]
+  + [[https://www.learnenough.com/action-cable-tutorial]]
+  + [[https://www.learnenough.com/dev-environment-tutorial]]
+  + [[https://www.youtube.com/watch?v=hE-ruL0_bxc][What's new on Rails 6]]
+  + [[https://www.youtube.com/watch?v=wYc9HYUAoCQ][Creating a Basic Ruby Gem 9']]
+  + [[https://launchschool.com/books/ruby/read/basics#strings][Ruby book]]
+  + [[http://neurogami.com/content/neurogami-10_minutes_to_your_first_Ruby_app/][Ten minutes]]
+  + [[https://pine.fm/LearnToProgram]]
+  + [[https://www.udemy.com/the-complete-ruby-on-rails-developer-course/learn/lecture/3846474?start=0#overview][Rob Percival]]
+  + [[https://www.udemy.com/professional-rails-5-development-course/learn/lecture/6270422?start=0#overview][Jordan Hudgens]]
+  + [[https://www.udemy.com/rails-5-masterclass/learn/lecture/7769510?start=0#overview][Muhamad Saprudin]]
+  + [[https://www.udemy.com/rubyrailsreactredux/learn/lecture/8273890?start=0#overview][John Bura]]
+  + [[https://www.udemy.com/learn-ruby-on-rails-from-scratch-build-image-sharing-app/learn/lecture/7854710#overview][Skill Tree]]
+  + [[https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md#ruby-on-rails][Free ebook on GitHub]]
+  + [[https://repl.it/@ComputerCode/DodgerblueValuableCallbacks]]
+  + [[https://learnxinyminutes.com/docs/ruby/]]
+  + [[https://repl.it/@ComputerCode/MagentaTotalDatabase]]
+  
+* Node FSD
+  + [[https://www.learnenough.com/javascript-tutorial/hello_world][Learn Enough JS to Be Dangerous]]
+  + [[https://youtu.be/RLtyhwFtXQA][Full Tutorial for Beginners 2:48]]
+  + [[https://www.udemy.com/the-complete-nodejs-developer-course-2/learn/lecture/13728822?start=405#overview][Rob Percival]]
+  + [[https://www.udemy.com/the-web-developer-bootcamp/learn/lecture/3861190?start=0#overview][Colt Steele]]
+  + [[https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md#nodejs][GitHub free ebooks]]
+  + [[https://drive.google.com/drive/folders/1B-eWVHXw6roKhQWpRkiNNwHtb-66Gzif][JavaScriptHandbook]]
+  + [[https://drive.google.com/drive/folders/1EC4Id7Z6dbCHNw2jr1T4VHiQlSvJIP7I][Node.jsHandbook]]
+  + [[https://www.udemy.com/build-a-blockchain-in-javascript/learn/lecture/10399428#overview][Blockchain avec JS]]
+  + [[https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md#angularjs][Angular.js]]
+  + [[https://web.archive.org/web/20140621124403/https://leanpub.com/express/read][Express.js]]
+  + [[https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md#meteor][Meteor]]
+  + [[https://www.udemy.com/node-with-react-fullstack-web-development/learn/lecture/7593644?start=0#overview][React]]
+  + [[https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md#react][React on GitHub]]
+  + [[https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md#react-native][React native]]
+* Blockchain developer
+  + [[https://ivanontech.teachable.com/courses/enrolled/374702][Ivan on Tech Bundle]]
+  + [[https://www.eduonix.com/dashboard/create-ethereum-blockchain-applications-using-solidity][Eduonix]]
+  + [[https://www.udemy.com/getting-started-with-ethereum-solidity-development/learn/lecture/7126902?start=0#overview][Sebastien Arbogast]]
+  + [[https://www.udemy.com/hyperledger/learn/lecture/7841030?start=0#overview][Hyperledger]]
+  + [[https://www.udemy.com/ethereum-and-solidity-the-complete-developers-guide/learn/lecture/8953532?start=0#overview][Stephen Grider]]
+  + [[https://www.coinapi.io/]]
+  + [[https://www.coindesk.com/api]]
+  + [[https://developers.coinbase.com/docs/wallet/guides/price-data]]
+  + [[https://documenter.getpostman.com/view/1559645/RVnYDKD5]]
+  + [[https://codeburst.io/how-i-built-an-interactive-30-day-bitcoin-price-graph-with-react-and-an-api-6fe551c2ab1d][React]]
+* Blockchain
+  + [[https://hackernoon.com/how-to-create-your-own-cryptocurrency-tips-to-get-started-947ba92f79f9][Hackernoon]]
+** JS
+   + [[https://youtu.be/rNvK9natbcM][Beginner Blockchain: Creating a Blockchain Chat App With JS]] 1:04:26
+   + [[https://www.youtube.com/watch?v=JV56skXpTyw][Building a Blockchain in JavaScript Part 1 : 15']]
+   + [[https://www.youtube.com/watch?v=XSJXrCSQaWw][Building a Blockchain in JavaScript Part 2 : 19']]
+   + [[https://www.youtube.com/watch?v=L6X7BqRZ96s][Let's Create a Blockchain on Node.js 28']]
+   + [[https://www.youtube.com/watch?v=Wezh1i-HY60][Développer une blockchain en JavaScript 33']]
+   + [[https://youtu.be/Ym4AP59_3Jw][Fabriquer sa propre Blockchain avec Node JS 36']]
+   + [[https://www.youtube.com/watch?v=rNvK9natbcM][Creating a Blockchain Chat App With Javascript 1:04]] 
+   + [[https://www.youtube.com/watch?v=zVqczFZr124&list=PLzvRQMJ9HDiTqZmbtFisdXFxul5k0F-Q4][Building a blockchain with JavaScript 4 videos]]
+** Python
+   + [[https://www.youtube.com/watch?v=MViBvQXQ3mM][Simple Blockchain in 5 Minutes]]
+   + [[https://youtu.be/b81Ib_oYbFk][Simple Blockchain in Python with Mining 7']]
+   + [[https://www.youtube.com/watch?v=4q8cYgsbSFE][Building tiny block-chain with python part 1 : 38']]
+   + [[https://www.youtube.com/watch?v=q070RhjuHFU][Building tiny block-chain with python part 2 15']]
+   + [[https://www.youtube.com/watch?v=XirNZ9QqwFg][Part 3 30']]
+   + [[https://www.youtube.com/watch?v=IyyxpkEM9Lk][Part 4 48']]
+
+** Ruby
+   + [[https://youtu.be/3Fy8PShxHMU][Building a Blockchain From Scratch Part 1 : 32']]
+   + [[https://youtu.be/0QBE9RoL4-8][Building a Blockchain From Scratch Part 2 : 20']]
+   + [[https://youtu.be/NP49OQkW53c][Building a Blockchain From Scratch Part 3 : 8']]
+   + [[https://www.youtube.com/watch?v=xAHTddYzzdU][How to build a blockchain in Ruby 1:14]]
+   + [[https://www.youtube.com/watch?v=SvfluWtb8a0][Codez votre propre blockchain sous Ruby 1:34]]
+   + [[https://www.youtube.com/watch?v=3aJI1ABdjQk][A mini-cryptocurrency in Ruby 2:30]]
+   + [[https://www.youtube.com/watch?v=pXRk0VnNx7o&list=PLjItgYqIzJ9X7mGIhhCAwWoIUhRIAqBKX][Exploring Ethereum with Web3 4 videos]]
+   + [[https://github.com/alexanderdavidpan/cryptocompare]]
+** Ethereum
+   + [[https://www.youtube.com/watch?v=6GFOwXM69TQ][Make your own lottery with Ethereum 7']]
+   + [[https://www.youtube.com/watch?v=HT84tmymPaQ][Make your own cryptocurrency 10']]
+   + [[https://www.youtube.com/watch?v=0phCtYMx2Ac][Building and Deploying Ethereum Smart Contracts With Solidity and
+     JavaScript 23']]
+   + [[https://www.youtube.com/watch?v=_iIxC8ziZNM][Smart Contracts in JavaScript 24']]
+   + [[https://www.youtube.com/watch?v=9FYGSYZSJYg][Tuto dapp with Solidity, Truffle, Web3 and JS 36']]
+   + [[https://youtu.be/gSQXq2_j-mw][A Guide to Building Your First Dapp 37']]
+   + [[https://www.youtube.com/watch?v=xBA9IywgCeI][Deploying Your First Smart Contract 39']]
+   + [[https://www.youtube.com/watch?v=XdrScruyYtk][Solidity Tutorial 43']]
+* Apps
+** JS
+   + [[https://www.youtube.com/watch?v=76IANst0jwc][Infinite Scrolling with jQuery 5']]
+   + [[https://youtu.be/VT674-wB6-Q][Chatkit command line 27']]
+   + [[https://youtu.be/a-JKj7m2LIo][Clone Slack React 48:22]]
+   + [[https://youtu.be/9sWEecNUW-o][YouTube App 1:07]]
+   + [[https://youtu.be/x_fHXt9V3zQ][Chat App React, Redux 1:24]]
+   + [[https://youtu.be/m_HJ3juuFvo][Budget App 1:31]]
+   + [[https://youtu.be/jFNHerJqvFw][React Chat App 1:34]]
+** Messenger
+   + [[https://www.youtube.com/watch?v=iyg_fk36p0Y&list=PLBOh8f9FoHHjz91tWQ5AtBoVwOVhP1Di7][Make Your Own Instant Messenger 9 videos]]
+** PHP
+   + [[https://www.youtube.com/watch?v=8v3BgAfpge8][How To Create A Login Page Part 1 : 46']]
+   + [[https://www.youtube.com/watch?v=yQm2RPViQ3M][How To Create A Login Page Part 2 : 40']]
+   + [[https://www.youtube.com/watch?v=-o2LQxIurOA][How To Create A Login Page Part 3 : 1:16]]
+   + [[https://www.youtube.com/watch?v=y6lTgj3CbYU&list=PLBOh8f9FoHHi7pLdzDtflJ5l3iNu13jm0][Make Your Own URL Shrotener 5 videos]]
+   + [[https://www.youtube.com/watch?v=2RRSw7Ycv0c&list=PLBOh8f9FoHHjdsAWwUjKk-QOlmBw-0Bvr][Make Your Own Web Crawler 7 videos]]
+   + [[https://www.youtube.com/watch?v=E0K9-0COv-M&list=PLBOh8f9FoHHhSQvHymWKA06r5v7pnYglW][Make Your Own Search Engine 6 videos]]
+   + [[https://www.youtube.com/watch?v=6ADiz3Dj_nQ&list=PLBOh8f9FoHHhRk0Fyus5MMeBsQ_qwlAzG][New Social Network 50 videos]]
+** Python
+   + [[https://www.youtube.com/watch?v=7LnzShl_MxY][Send SMS Messages with Python 3']]
+   + [[https://www.youtube.com/watch?v=5uVXbb1ymVs][Simple Python Countdown 5']]
+   + [[https://www.youtube.com/watch?v=D0SLpD7JvZI][Simple Server in Python]] 6'
+   + [[https://www.youtube.com/watch?v=D0SLpD7JvZI][Simple Python Chat Server 8']]
+   + [[https://www.youtube.com/watch?v=Rvfs6Xx3Kww][P2P Chat App in Python 10']]
+   + [[https://youtu.be/2KeV42YaPes][Build an email subscription form with Django and Mailchimp 21']]
+   + [[https://youtu.be/lWA0GgUN8kg][Wheather App in Flask 25']]
+   + [[https://youtu.be/qCQGV7F7CUc][Weather App 28']]
+   + [[https://youtu.be/ovql0Ui3n_I][To-Do App Django 35']]
+   + [[https://youtu.be/-FWuNnCe73g][Flask Social network 37']]
+   + [[https://www.youtube.com/watch?v=vutyTx7IaAI][Flask Email and Password Reset 42']]
+   + [[https://youtu.be/zu2PBUHMEew][Video Subscription Website : 2:37]]
+   + [[https://www.youtube.com/watch?v=X367yDYmogo&list=PLLRM7ROnmA9Hl9U5JYWVJHoZ-1uRsBZ_X][Build a School System 5 videos]]
+   + [[https://www.youtube.com/watch?v=Wv5jlmJs2sU&list=PLLRM7ROnmA9EnQmnfTgUzCfzbbnc-oEbZ][Build a chat App 8 videos]]
+   + [[https://www.youtube.com/watch?v=Hh49BXmHxX8&list=PLBOh8f9FoHHg7Ed_4yKhIbq4lIJAlonn8][Make Your Own Calculator in Python 5 videos]]
+   + [[https://www.youtube.com/watch?v=ndGw375nTqI&list=PLBOh8f9FoHHjtZJFAYKQRT_sRunC5M0tA][Make Your Own Instagram 10 videos]]
+** Ruby
+   + [[https://www.youtube.com/watch?v=CuQJhpzO5WY][Creating a Simple Slack Bot 10']]
+   + [[https://youtu.be/8i5JFLfbWkE][Project Management Part 1 : 13']]
+   + [[https://youtu.be/RpyzUdxZolY][Project Management Part 2 : 44']]
+   + [[https://youtu.be/Qx7rFpiXCdg][Project Management Part 3 : 22']]
+   + [[https://youtu.be/TwoafJC7vlw][Online Shop Part 1 : 36']]
+   + [[https://youtu.be/Hq2MraUlmFg][Online Shop Part 2 : 13']]
+   + [[https://youtu.be/q4ciKOT1oHs][Online Shop Part 3 : 9']]
+   + [[https://youtu.be/orDmqI-dlCo][Online Shop Part 4 : 14']]
+   + [[https://youtu.be/HfV8WP28QFk][Online Shop Part 5 : 10']]
+   + [[https://youtu.be/wbZ6yrVxScM][Rails app blog 1:37]]
+   + [[https://www.youtube.com/watch?v=LmW-dgfKcLc][Programming a Bitcoin Trading Bot Part 1 : 46']]
+   + [[https://www.youtube.com/watch?v=48BFHfA6pd4][Programming a Bitcoin Trading Bot Part 2 : 43']]
+   + [[https://scotch.io/@fatosmorina/build-a-cryptocurrency-comparison-site-using-ruby-on-rails-and-tdd][Build a Cryptocurrency Comparison Site Ruby on Rails]]
+* Dapps
+** Ruby
+   + [[https://www.nopio.com/blog/blockchain-app-ruby/]]
+   + [[https://yukimotopress.github.io/blockchains]]
+* Game
+** HTML 5
+   + [[https://repl.it/talk/learn/Space-shooter-with-HTML5-and-Nodejs/8236]]
+   + [[https://repl.it/talk/learn/How-To-Make-A-Puzzle-Platformer-In-HTML5-And-Javascript/7584][Puzzle Platform]]
+   + [[https://repl.it/talk/learn/Making-a-Phaser-Game-with-HTML5-and-JavaScript/7593][Phaser Game]]
+** JS  
+   + [[https://staging.repl.it/talk/learn/Build-an-ML-app-with-just-a-little-JavaScript/10372][AI Game]]
+   + [[https://repl.it/talk/learn/Javascript-Games-Lesson-1-GuessIt/9494][GuessIt]]
+   + [[https://repl.it/talk/learn/Javascript-Games-Tutorial-2-Awari/9631][Awari]]
+   + [[https://repl.it/talk/learn/JavaScript-Games-Tutorial-3-the-Canvas/11299][Canvas]]
+   + [[https://youtu.be/8X_Nmmvobb0][Angular Game of Life]] 18'
+   + [[https://youtu.be/ZniVgo8U7ek][Vanilla Memory Card Game 34']]
+   + [[https://youtu.be/PM0_Er3SvFQ][Game of Life 54']] React
+   + [[https://youtu.be/n_ec3eowFLQ][Simon Game 1:03]]
+   + [[https://youtu.be/3EMxBkqC4z0][Intro to Game Dev 1:16]]
+   + [[https://youtu.be/jaVNP3nIAv0][Rock Paper Scissors 1:27]]
+   + [[https://youtu.be/bRlvGoWz6Ig][Snake Functional Programming 1:32]]
+   + [[https://youtu.be/H9CSWMxJx84][Asteroids 2:45]]
+   + [[https://youtu.be/aXwCrtAo4Wc][Pool part 1 : 59']]
+   + [[https://youtu.be/Am8rT9xICRs][Pool Part 2 : 38']]
+   + [[https://youtu.be/2cGHkBeGpeU][Beat Asteroids Using Neural Network 1:53]]
+   + [[https://youtu.be/w-OKdSHRlfA][Platformer Game 2:42]]
+** Python
+   + [[https://repl.it/talk/learn/A-Starter-Guide-to-Pygame/11741]]
+   + [[https://repl.it/talk/learn/Cave-Commander/7029]]
+   + [[https://repl.it/talk/learn/How-to-draw-Pixel-Art-on-Python-with-Turtle/7556][Pixel Art]]
+   + [[https://repl.it/talk/learn/Game-Tutorial-Tetris/9041]]
+   + [[https://repl.it/talk/learn/Game-Tutorial-SSSnake/8923]]
+   + [[https://repl.it/talk/learn/Game-Tutorial-Space-Invaders/9550]]
+   + [[https://youtu.be/NIG4BZ8VpF4][AI SNES Street Fighter II 30']]
+   + [[https://youtu.be/C6jJg9Zan7w][Python Game Pong 44']]
+   + [[https://youtu.be/CD4qAhfFuLo][Snake 49']]
+   + [[https://youtu.be/XpYz-q1lxu8][Pygame 1:05]]
+   + [[https://youtu.be/8392NJjj8s0][Connect Four 1:26]]
+   + [[https://youtu.be/McoDjOCb2Zo][Online Multiplayer 2:21]]
+   + [[https://www.youtube.com/watch?v=HvjsMrR51lg][Creating an Online Chess Game 11:55]]
+** Ruby
+   + [[https://youtu.be/2UVhYHBT_1o][Snake game with Ruby 2D : 36']]
+   + 
+** PHP
+   + [[https://www.youtube.com/watch?v=5ztzRnzcCfs][Snake 4']]
+   + [[https://www.youtube.com/watch?v=TTNioc-N9eo][Dice Roll 5']]
+   + [[https://www.youtube.com/watch?v=dIWqqUgEXqc][Coding game 6']]
+   + [[https://www.youtube.com/watch?v=Xx6ugBFpIlQ][Simple script 6']]
+   + [[https://www.youtube.com/watch?v=r9MP_Gy5r4Y][Mad libs 7']]
+   + [[https://www.youtube.com/watch?v=DofXOOZ2LAg][Save Game]] 7'
+   + [[https://www.youtube.com/watch?v=r91yPViqRX0][Hangman 23']]
+   + [[https://www.youtube.com/watch?v=DbLgzWKR-LE][Tic Tac Toe 15']]
+   + [[https://youtu.be/ECWlfcRSXX0][Tic Tac Toe Part 2 : 16']]
+   + [[https://i.ytimg.com/vi/Pjg95ruR5o8/hqdefault.jpg?sqp=-oaymwEjCPYBEIoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCQmrsSbfjBuBsqHLLreCqu7HtqBg][Tic Tac Toe Part 3 : 9']]
+   + [[https://www.youtube.com/watch?v=cCVIUExIel0][Tic Tac Toe 15']]
+   + [[https://youtu.be/4Fou2GhALdM][Dollar Words Game Part 1 : 16']]
+   + [[https://www.youtube.com/watch?v=rpFjqQOsVdE][Dollar Words Game Part 2 : 15']]
+   + [[https://www.youtube.com/watch?v=dLUMVZ2gCBY][Game4Dummies 40']]
+   + [[https://www.youtube.com/watch?v=fmhCKLzhCaA][dice game 3:15]]
+* Hacking
+   + [[https://youtu.be/qDYwcIf0LZw][Google CTF 2018 4:00]]
+   + [[https://youtu.be/fDeLtKUxTmM][The Complete Ethical Hacking Course for 2019 7:46]]
+   + [[https://youtu.be/_PsLZ4WSaV4][How to Hack in 2019 12:00]]
+** JavaScript
+   + [[https://www.youtube.com/watch?v=5uiwVHz-ni4][How to hack twitter account JS 2']]
+   + [[https://www.youtube.com/watch?v=kXgZnNU1L2k][Hacking Any Site Through JS 4']]
+   + [[https://www.youtube.com/watch?v=7rnXM8b3Gjw][How to Hack Website with JS 4']]
+   + [[https://youtu.be/eymxlggL9EQ][Website Hacking 6']]
+   + [[https://www.youtube.com/watch?v=WNplnuJSswA][Hacking the Brain with JS 6']]
+   + [[https://www.youtube.com/watch?v=Pavl4MYFfSw][JS injection 8']]
+   + [[https://www.youtube.com/watch?v=zrYyh4YuJVI][Hacking a Website & Mining Monero with JS 8']]
+   + [[https://www.youtube.com/watch?v=hOtZhNb4TKg][JS Security 9']]
+   + [[https://www.youtube.com/watch?v=lKMivLY-ER0][Hacking Websites with JS 9']]
+   + [[https://www.youtube.com/watch?v=gBHHSDJQNME][Hacking JS Games 9']]
+   + [[https://www.youtube.com/watch?v=kwVfYG2BnR0][JS DOM Hacking]] 12'
+   + [[https://www.youtube.com/watch?v=A4Fa-x24Gs0][Web Hacking JS 14']]
+   + [[https://www.youtube.com/watch?v=RyaM_hqsMsY][8 useful JS hacks 16']]
+   + [[https://www.youtube.com/watch?v=0dgmeTy7X3I][Worst JavaScript Flaws That Hackers Love 23']]
+   + [[https://www.youtube.com/watch?v=vyGDsV7i74o][Hacking and Customising JS 33']]
+   + [[https://youtu.be/Vxpm_wrCm7M][jQuery 34']]
+** Python  
+   + [[https://www.youtube.com/watch?v=sqsY7mRRrG4][Extractor Emails in Python 2']]
+   + [[https://www.youtube.com/watch?v=rYEZN49_Lh4][Email Bomber 4']]
+   + [[https://youtu.be/TbMKwl11itQ][Keylogger]] 11'
+   + [[https://www.youtube.com/watch?v=LQ27txwruG4][Keylogger 22']]
+   + [[https://www.youtube.com/watch?v=9R0Zg3MCpUo][Create an Email Bomber 42']]
+   + [[https://youtu.be/uIkxsBgkpj8][Improve Cybersecurity Skills with CTFs 4:45]]
+** Ruby
+   + [[https://www.youtube.com/watch?v=Qp8XQ6EkSkc&t=489s][Hacking with Ruby 36']]
+   + [[https://www.youtube.com/watch?v=JbWnuAmqwz0][Hacking on Ruby on Rails 1:06]]
+* Scraping
+** Ruby  
+   + [[https://www.youtube.com/watch?v=Sw7dRmrYbL4&list=PLjItgYqIzJ9Wj23QSk-CxPElDiz9DUfCF][7 videos]]
+** Python
+   + [[https://www.youtube.com/watch?v=SZwe5IP2uUs][Scraping 6']]
+* Emailing
+** PHP
+   + [[https://www.youtube.com/watch?v=U13smZvdArI][Send Emails with PHP & Gmail 4']]
+   + [[https://www.youtube.com/watch?v=RPOTM9431SU][How to Send Email in PHP 7']]
+   + [[https://www.youtube.com/watch?v=YtNraQxUTM0][PHP Mailer 8']]
+   + [[https://www.youtube.com/watch?v=jug2lv21_bM][Send Mail With Attachment in PHP 9']]
+   + [[https://www.youtube.com/watch?v=k02_BevpFD4][PHP How to Send Email Using PHP 15']]
+   + [[https://www.youtube.com/watch?v=1CkBsGhux9U][HTML/PHP Contact Form Tuto 27']]
+** Python  
+
+   + [[https://www.youtube.com/watch?v=nKNqNrdUtZU][Amazon]] 3'
+   + [[https://www.youtube.com/watch?v=NMU6t-vtumk][Simple Mailing 4']]
+   + [[https://www.youtube.com/watch?v=YPiHBtddefI][How to Send Emails in Python 4']]
+   + [[https://www.youtube.com/watch?v=WMFVxXuyw74][Sending sms using Python Programming 6']]
+   + [[https://www.youtube.com/watch?v=qHyE4YAFIv0][How to send mass emails in python | Bulk email sender 6']]
+   + [[https://www.youtube.com/watch?v=X7DWErkNVJs][Sending Emails in Django 8']]
+   + [[https://www.youtube.com/watch?v=etfECjhaP-g][Sending Emails in Flask Apps 8']]
+   + [[https://www.youtube.com/watch?v=mP_Ln-Z9-XY][Sending an Email in Python via Gmail 9']]
+   + [[https://www.youtube.com/watch?v=bbPwv0TP2UQ][Convert Email in Python 10']]
+   + [[https://www.youtube.com/watch?v=I0eQA9Pb4tU][HTML and Plain Text Emails through Python and Gmail 10']]
+   + [[https://www.youtube.com/watch?v=qrJcblhVFzs][Sending E-mails 14']]
+   + [[https://www.youtube.com/watch?v=bXRYJEKjqIM&t=87s][How to Send Emails in Python 20']]
+   + [[https://www.youtube.com/watch?v=QY0iQpX0LDU][how to create unlimited email accounts with python 21']]
+   + [[https://www.youtube.com/watch?v=3DRy2aqusl0][Building API Email Alert 27']]
+   + [[https://www.youtube.com/watch?v=YVgj9ngUlaY][Gmail API 28']]
+   + [[https://www.youtube.com/watch?v=e-OZeAHFpkw][How to Send Emails in Python using IMAP 29']]
+   + [[https://www.youtube.com/watch?v=JRCJ6RtE3xU][How to Send Emails 31']]
+   + [[https://www.youtube.com/watch?v=yqm6MBt-yfY][Python script monitor, email, and reboot 46']]
+** Ruby
+   + [[https://www.youtube.com/watch?v=Wyvk3E0Qir4][Incoming Emails with Action Mailbox 1']]
+   + [[https://www.youtube.com/watch?v=yHO8ssT1rHE][Foundation for Email 2']]
+   + [[https://www.youtube.com/watch?v=e1bb0vzKwys][Sending and Receiving SMS with Ruby and Sinatra 5']]
+   + [[https://youtu.be/ZUXYE4kMaWs][Sending Emails 5']]
+   + [[https://www.youtube.com/watch?v=gsfJAlyLiKw][Rails API: Configuring the Mailer 6']]
+   + [[https://www.youtube.com/watch?v=INPqBOerfTw][Rails sending welcome email user gem devise action mailer 8']]
+   + [[https://www.youtube.com/watch?v=IY8v3MQoU3g][gem 'gibbon' connect your ruby on rails to mailchimp 9']]
+   + [[https://www.youtube.com/watch?v=gubB8VWR3AU][GoRails Notification 20']]
+   + [[https://www.youtube.com/watch?v=2zSog4aoP-s][Mailers 20']]
+   + [[https://youtu.be/9eFXEzOPRNs][How to Create, Preview, and Send Email from Rails 21']]
+   
+* Challenges
+** Ruby  
+   + [[http://rubyquiz.com/]]
+   + [[https://edabit.com/challenges/ruby]]
+   + [[https://thoughtbot.com/upcase/ruby-challenges]]
+   + [[https://github.com/lewagon/ruby-101-challenges]]
+   + [[https://www.hackerrank.com/domains/ruby]]
+   + [[https://www.probytes.net/blog/web-app-ideas/]]
+   + 
+* Bot
+** Crypto trading
+   + [[https://blockonomi.com/bitcoin-trading-bots/][March 2019]]
+   + [[https://www.devteam.space/blog/how-to-build-a-crypto-trading-bot/][DevTeam]]
+   + [[https://bravenewcoin.com/insights/cryptocurrency-trading-bots][Brave New Coin]]
+   + [[https://bitcoinexchangeguide.com/best-bitcoin-trading-bots/]]
+   + [[https://captainaltcoin.com/best-bitcoin-trading-bots/]]
+*** Node
+    + [[https://github.com/DeviaVir/zenbot]]
+    + [[https://www.codementor.io/liveedutvcontentlead/how-to-build-a-simple-cryptocurrency-trading-bot-in-node-js-jkxtypp5x][May 2018]]
+    + [[https://blog.education-ecosystem.com/project-how-to-build-an-advanced-cryptocurrency-trading-bot-in-node-js/][April 2018]]
+    + 
+*** Python
+    + [[https://codeburst.io/how-to-make-your-own-trading-bot-83b5c6e35036][Nov 2017]]
+    + [[https://medium.com/@BlockchainEng/how-to-build-an-automated-cryptocurrency-trading-bot-on-binance-with-python-2cd9b5874e44][Apr 2018]]
+    + [[https://www.youtube.com/watch?v=fpqzXgZjSqM][Poloniex 14']]
+** Chat bot
+*** Ruby
+    + [[https://revs.runtime-revolution.com/how-to-build-a-ruby-slackbot-bc7115b4eeaf][Ruby]] (slack)
+    + [[https://github.com/slack-ruby/slack-ruby-bot][GitHub]] (slack)
+    + [[https://youtu.be/47EdyDP28wY][Messenger Bot Part 1 : 11']]
+    + [[https://www.youtube.com/watch?v=CCNKJHtDumg][Messenger Bot Part 2 : 13']]
+    + [[https://www.sitepoint.com/quickly-create-a-telegram-bot-in-ruby/][Telegram Bot]]
+    + [[https://www.driftingruby.com/episodes/creating-a-simple-slack-bot][Slack Bot]]
+    + [[https://github.com/7even/vkontakte_api][VK bot]]
+*** JS
+    + [[https://www.codementor.io/garethdwyer/building-a-discord-bot-with-node-js-and-repl-it-mm46r1u8y][Discord Bot Node and Repl.it]]
+*** Python
+    + [[https://www.codementor.io/garethdwyer/building-a-discord-bot-with-python-and-repl-it-miblcwejz][Discord Bot Python and Repl.it]]
+* Tracking
+  + [[https://www.youtube.com/watch?v=S25s6_27k9o]]
+** PHP
+   + [[https://www.youtube.com/watch?v=KILXJkmBLu0][PHP API 13']]
+** Python  
+   + [[https://www.youtube.com/watch?v=WyOYwfIgPDQ]] 7'
+   + [[https://www.youtube.com/watch?v=y6vNieekK9Q][Getting Data 12']]
+** Ruby
+   + [[https://www.youtube.com/watch?v=78ykllPF_MA][Building an Ethereum Wallet With Ruby Part 2 : 18']]
+* Job interview
+** The Muse
+   + [[https://www.themuse.com/advice/5-tech-skills-that-will-help-your-career-no-matter-what-you-do][5 Tech Skills That Will Help Your Career]]
+   + [[https://www.themuse.com/]]
+** Flexjobs
+   + [[https://www.flexjobs.com/]]
+   + [[https://flexjob.fr/]]
+   + [[https://twitter.com/flexjobs]]
+   + [[https://www.youtube.com/FlexJobs]]
+   + [[https://fr-fr.facebook.com/flexjobs/]]
+
+** We work remotely
+   + [[https://weworkremotely.com/]]
+   + [[https://www.producthunt.com/alternatives/we-work-remotely]]
+
+** Behance
+   + [[https://www.behance.net/]]
+   + [[https://www.facebook.com/Behance]]
+   + [[https://twitter.com/Behance]]
+
+** Creative Circle
+   + [[https://www.creativecircle.com/]]
+   + [[https://www.facebook.com/The-Creative-Circle-1900797220133026/]]
+   + [[https://www.youtube.com/user/creativecirclevideos]]
+   + [[https://twitter.com/Creative_Circle]]
+
+** Aquent
+   + [[https://aquent.fr/]]
+   + [[https://aquent.fr/find-work/]]
+   + [[https://twitter.com/Aquent]]
+   + [[https://aquent.com/]]
+
+** Vitamine T
+   + [[http://www.groupevitaminet.com/]]
+   + [[http://www.groupevitaminet.com/le-groupe-vitamine-t/offres-emploi/]]
+   + [[https://fr-fr.facebook.com/groupevitaminet/]]
+   + [[https://twitter.com/groupevitamineT]]
+
+** Robert Half
+
+   + [[https://www.roberthalf.fr/]]
+   + [[https://www.roberthalf.com/]]
+   + [[https://www.societe.com/societe/robert-half-international-france-388358905.html]]
+   + [[https://twitter.com/roberthalf]]
+   + [[https://fr-fr.facebook.com/roberthalf/]]
+
+** Meetup
+
+   + [[https://www.meetup.com/fr-FR/]]
+   + [[https://www.meetup.com/]]
+
+** Twitter 
+
+   + [[https://twitter.com/?lang=fr]]
+   + [[https://twitter.com/]]
+
+** Slack
+
+   + [[https://slack.com/]]
+   + [[https://slacklist.info/]]
+
+** WordCamp Central
+
+   + [[https://central.wordcamp.org/]]
+   + [[https://wordcamp.fr/]]
+   + [[https://wpmarmite.com/glossaire/wordcamp/]]
+   + [[https://2019.paris.wordcamp.org/]]
+   + [[https://2019.london.wordcamp.org/]]
+   + [[https://2019.us.wordcamp.org/]]

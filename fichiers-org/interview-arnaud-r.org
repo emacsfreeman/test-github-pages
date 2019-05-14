@@ -1,0 +1,11 @@
+#+TITLE: Interview Arnaud R
+#+AUTHOR: Laurent Garnier
+
+* Formations
+
+  + freeCodeCamp
+  + pluralsight.com
+  + [[https://github.com/Aina261]]
+  + [[https://www.wf3.fr/]]
+  + [[https://www.numericall.fr/]]
+  + [[https://egghead.io/]]

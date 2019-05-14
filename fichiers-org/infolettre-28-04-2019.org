@@ -1,0 +1,191 @@
+Bonjour,
+
+ 
+ je t'apprends rien en te disant que le monde part en couilles. Désolé pour mon langage mais à un moment donné il faut appeler un chat un chat.
+
+
+Par contre, je te rassure tout de suite j'ai plein de solutions pour toi alors ne t'inquiète pas, ça va bien se passer.
+
+
+Dans la vie il y a deux catégories de gens, ceux qui savent utiliser internet et ceux qui se font utiliser par certains des premiers.
+
+
+Internet est un outil et avec des outils on peut faire du bien mais on peut aussi faire du mal.
+
+
+Je vais pas te faire un cours de morale.
+
+
+J'ai pas de boule de cristal mais j'ai pas l'impression que la situation en France et dans les pays occidentaux en général ne soit en phase d'amélioration.
+
+
+De toute façon, toi et moi on y peut rien.
+
+
+Je suis pas président et toi non plus.
+
+
+Par contre, toi et moi on SAIT utiliser internet mais on pèse pas grand chose face aux GAFAM...
+
+
+Mon but n'est pas de les remplacer (du moins pas tout de suite), mon but c'est de créer une VRAIE communauté de codeurs.
+
+
+Je cherche pas des vaches à lait je cherche des partenaires, des bâtisseurs...
+
+
+
+Le mieux c'est que je me laisse la parole à moi-même. 
+
+
+Cette phrase peut paraître ultra-narcissique mais tu vas comprendre dans quelques instants.
+
+
+
+En attendant il faut que je t'explique comment ça va se passer pendant au moins un an.
+
+
+
+Je vais devoir te raconter vite fait ma vie perso.
+
+
+
+T'inquiète pas je vais faire bref.
+
+
+
+À partir du 10 mai je vais être SDF, littéralement SDF
+
+
+
+Alors pour YouTube j'ai pas encore décidé si tu seras inclus dans ma diète ou si tu pourras consulter mon contenu.
+
+
+
+Quoiqu'il en soit la newsletter redeviendra quotidienne parce que je pense sincèrement que notre salut viendra de l'écrit.
+
+
+
+En effet, je pense que la vidéo nous a perdu en distraction alors que l'écrit permet de (ou oblige à)  se concentrer et c'est précisément ce genre de faculté qui est nécessaire pour coder.
+
+
+Du coup j'accorderai beaucoup d'importance à l'écrit à l'avenir et je te recommande dans faire autant afin de reprendre la maîtrise de ton attention et de ta concentration.
+
+
+À partir d'aujourd'hui je lance mon programme le plus complet jamais proposé sur le web (si tu trouves mieux fais le moi savoir ça m'intéresse).
+
+
+
+Le prix de départ est ridiculement bas parce qu'il va doubler chaque semaine.
+
+
+
+Il s'agit d'une super-pré-vente parce que le contenu ne sera pas accessible avant le 1er juin et je pense très probablement que la formation encore encore en construction après cette date parce qu'elle sera mise à jour tout au long de l'année.
+
+
+Chaque semaine le prix doublera et le nombre des bonus augmentera.
+
+
+L'intérêt de rentrer tôt est évident concernant le prix mais quel que soit le moment où tu rentreras tu pourras utiliser tes liens d'affiliations.
+
+
+L'objectif est de créer une communauté de bâtisseurs. 
+
+
+D'ailleurs les gens qui m'avaient acheté la formation FSD sur système vous aurez droit à tous les bonus Web quel que soit votre moment d'entrée (je vous en parlerais plus en détails sur Telegram).
+
+
+Ce qu'il faut bien comprendre c'est que les gens qui rentreront dans la formation avant le 1er juin auront la possibilité d'être ambassadeurs.
+
+
+Un ambassadeur bénéficie de tous les bonus auxquels ses affiliés ont droit.
+
+
+En clair, si grâce à un de tes liens affiliés tu fais une vente alors tu auras droit aux même bonus que ton client/partenaire.
+
+
+Sans plus attendre voici le programme :
+
+Avant toute chose il faut savoir 3 choses fondamentales :
+Le prix de la formation va doubler chaque semaine donc plus tu attendras, plus tu paieras cher
+La formation est en construction et sera complétée au fur et à mesure
+Le nombre de bonus augmentera chaque semaine
+
+Voici la présentation générale de la formation Comment Devenir Développeur Blockchain (CDDB), bonne lecture (après le texte de présentation il y a une astuce qui te permettra de gagner un revenu passif).
+
+
+Itinéraire général
+
+
+Le Web 1.0
+Dans cette formation nous allons partir de zéro et voir ensemble de nombreuses technologies. Tout d'abord nous commencerons par les technologies du Web 1.0 à savoir HTML, CSS et JavaScript.
+
+Nous verrons également quelques bibliothèques et frameworks pour CSS (Twitter Bootstrap) et JavaScript (jQuery, Angular, React, Node...).
+
+Nous approfondirons ensuite les connaissances fondamentales en JavaScript (avoir suivi la formation JavaScript de Zéro à Héros est un plus). 
+
+
+Pour acheter la formation il suffit de cliquer ici.
+
+
+Le Web 2.0
+Nous passerons ensuite au Web 2.0 avec Node.js qui est un framework permettant d'utiliser le langage JavaScript côté serveur. 
+
+Les gens ayant suivis la formation FSD Node.js seront avantagés mais tout sera étudié à partir de zéro donc pas d'inquiétude si vous ne connaissez pas encore Node.js.
+
+
+Ensuite nous étudierons les langages C et C++ (historiquement C++ est le langage qui a été utilisé par Satoshi Nakamoto pour bâtir la blockchain Bitcoin). Cela demandera du temps et de la patience parce que C et C++ sont des langages assez bas niveau (donc proches de la machine) et nécessitent donc pas mal d'efforts.
+
+
+Avec le langage C++ nous approfondirons les aspects spécifiques de la POO (Programmation Orientée Objet). 
+
+
+Pour acheter la formation il suffit de cliquer ici.
+
+
+Le Web 3.0
+Après avoir bien approfondies les connaissances en C++ il sera temps de s'occuper enfin du Web 3.0 qui est l'objectif majeur de cette formation.
+
+Nous introduirons les spécificités du Web 3.0 et de la programmation décentralisée. Pour ce faire nous étudierons le fonctionnement de Git, outil incontournable du développeur.
+
+Ensuite nous entamerons l'étude des smart contrats Ethereum. Puis on s'occupera des Dapps.
+
+On verra par la suite les tokens, crowdsales et les airdrops.
+
+On poursuivra notre étude en programmant avec la blockchain EOS. EOS est le grand rival d'Ethereum et cela permettra de se différencier des autres formations qui se focalisent uniquement sur Solidity et Ethereum.
+
+Enfin on étudiera Hyperledger Fabric et Composer.
+
+
+Pour acheter la formation il suffit de cliquer ici.
+
+
+Comment profiter au maximum de la formation ?
+
+Il est important de participer activement durant toute la formation ce qui signifie entre autre :
+de poser des questions à la communauté
+de répondre aux questions des autres membres de la communauté
+de partager les ressources annexes utiles à l'apprentissage
+de travailler en collaboration avec le maximum de membres de la communauté
+
+
+Pour acheter la formation il suffit de cliquer ici.
+
+
+Philosophie de la formation 
+
+Cette formation est très longue parce que j'ai décidé de prendre le temps de bien ancrer, décortiquer et analyser les notions en profondeur. 
+
+Au-delà des connaissances, qui sont hélas périssables, c'est plutôt un état d'esprit (mindset en anglais), une vision de la technologie, une vision de l'apprentissage, une vision du monde et une vision des sociétés humaines que je souhaite partager avec celles et ceux qui décideront de prendre leur destin en main en faisant partie intégrante de cette communauté de bâtisseurs.
+
+
+Pour acheter la formation il suffit de cliquer ici.
+
+
+Astuce
+
+Petite astuce pour toi qui lis ce courriel, si tu achètes la formation alors tu pourras toucher une commission en utilisant ton lien d'affiliation. En clair, dès lors que tu seras membre de la formation tu pourras utiliser des liens spéciaux pour promouvoir mes formations et toucher des commissions sur chaque vente qui passeront par tes liens. En clair tu peux gagner de l'argent juste en vendant mes produits.
+
+Pour acheter la formation il suffit de cliquer ici.
+
+Bonne journée ou soirée selon l'heure à laquelle tu liras ce courriel.

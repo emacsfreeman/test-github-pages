@@ -1,0 +1,29 @@
+#+TITLE: Live du lundi 15 avril 2019
+#+AUTHOR: Laurent Garnier
+
+* Zcash
+
+  + [[https://z.cash/fr/]]
+
+* Locktrip
+
+  + [[https://locktrip.com/]]
+
+* Cryptocribs
+
+  + [[https://www.cryptocribs.com/]]
+
+* News
+  
+  + FMI crypto
+  + Wikileaks on IPFS
+  + Craig Wright Drama
+
+
+* Les offres spéciales pour les formations
+
+  1. Python de Zéro à Héros : [[http://bit.ly/python-de-0-a-heros]] 
+  2. JavaScript de Zéro à Héros : [[http://bit.ly/js0h-podia]]
+  3. Comment Découvrir la Blockchain Sans Se Ruiner :
+    [[http://bit.ly/cdbssr-podia]]
+  4. Apprends à Coder 1 Blockchain avec Python : [[http://bit.ly/acbp-podia]]
