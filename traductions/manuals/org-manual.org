@@ -3316,9 +3316,389 @@ touches méta-curseur ont des fonctionnalités différentes.
 
 
 * Balises
+
+  Un excellent moyen d'implémenter des étiquettes et des contextes
+  pour des informations de corrélation croisée consiste à attribuer
+  des titres à des titres. Le mode Org prend largement en charge les
+  tags.
+
+  Chaque titre peut contenir une liste de balises; ils se produisent à
+  la fin du titre. Les étiquettes sont des mots normaux contenant des
+  lettres, des chiffres, '=_=' et '=@='. Les étiquettes doivent être
+  précédées et suivies de deux points, par exemple,
+  '=:work:='. Plusieurs balises peuvent être spécifiées, comme dans
+  '=:work:urgent:='. Les étiquettes par défaut apparaissent en gras
+  avec la même couleur que le titre. Vous pouvez spécifier des faces
+  spéciales pour des tags spécifiques à l'aide de la variable
+  =org-tag-faces=, de la même manière que pour les mots clés TODO (voir
+  Section 5.2.6 [Faces pour les mots clés TODO], page 51).
+
+** Balise d'héritage  
+
+   Les balises font usage de la structure hiérarchique des arbres de
+   contour. Si un en-tête a une balise donnée, tous les sous-en-têtes
+   en héritent également. Par exemple, dans la liste
+   #+BEGIN_SRC org
+   * Meeting with the French group    :work:
+   ** Summary by Frank                :boss:notes:
+   *** TODO Prepare slides for him    :action:
+   #+END_SRC
+   le titre final comporte les balises «work», «boss», «notes» et
+   «action», même si le titre final n’est pas explicitement marqué
+   avec ces balises. Vous pouvez également définir des balises dont
+   toutes les entrées d'un fichier doivent hériter, comme si ces
+   balises étaient définies dans un niveau hypothétique zéro entourant
+   l'intégralité du fichier. Utilisez une ligne comme celle-ci[fn:53]
+   #+BEGIN_SRC org
+   #+FILETAGS: :Peter:Boss:Secret:
+   #+END_SRC
+   Pour limiter l'héritage des tags à des tags spécifiques ou pour le
+   désactiver complètement, utilisez les variables
+   =org-use-tag-inheritanceandorg-tags-exclude-from-inheritance=.
+
+   Lorsqu'un titre correspond lors d'une recherche de balises alors
+   que l'héritage de balises est activé, tous les sous-niveaux du même
+   arbre (pour un formulaire de correspondance simple) correspondent
+   également[fn:54]. La liste des correspondances peut alors devenir très
+   longue. Si vous souhaitez uniquement que les premières balises
+   correspondent dans une sous-arborescence, configurez la variable
+   =org-tags-match-list-sublevels= (non recommandé).
+
+   L'héritage de balises est pertinent lorsque la recherche dans
+   l'agenda tente de faire correspondre une balise, que ce soit dans
+   les types de balises ou dans les types de tâches à exécuter. Dans
+   d'autres types d'agenda, =org-use-tag-inheritance= n'a aucun
+   effet. Néanmoins, vous souhaiterez peut-être que vos balises soient
+   correctement définies dans l'agenda, afin que le filtrage des
+   balises fonctionne correctement, avec les balises
+   héritées. Définissez =org-agenda-use-tag-inheritance= pour contrôler
+   ceci : la valeur par défaut inclut tous les types d'agenda, mais
+   définir cette option sur nil peut réellement accélérer la
+   génération d'agenda.
+
+** Congigurer les balises
+
+   Les étiquettes peuvent simplement être saisies dans la mémoire
+   tampon à la fin d'un titre. Après deux points, =M-TAB= propose de
+   compléter les étiquettes. Il existe également une commande spéciale
+   pour l'insertion de balises :
+   + =C-c C-q= (=org-set-tags-command=) :: Entrez de nouveaux tags
+        pour le titre actuel. Le mode Org propose soit la
+        finalisation, soit une interface spéciale à touche unique pour
+        la définition des tags, voir ci-dessous. Après avoir appuyé
+        sur =RET=, les balises sont insérées et alignées sur la colonne
+        =org-tags-column=. Lorsqu'elle est appelée avec un préfixe =C-u=,
+        toutes les balises du tampon actuel sont alignées sur cette
+        colonne, histoire de rendre les choses plus agréables. Les
+        tags sont automatiquement réalignés après les changements
+        d’état de promotion, de rétrogradation et d’État (voir Section
+        5.1 [Généralités sur TODO], page 45).
+   + =C-c C-c= (=org-set-tags-command=) :: Lorsque le point est dans
+        un titre, cela fait la même chose que =C-c C-q=.
+   
+
+   Org prend en charge l'insertion de balises basée sur une liste de
+   balises. Par défaut, cette liste est construite dynamiquement et
+   contient toutes les balises actuellement utilisées dans le
+   tampon[fn:55]. Vous pouvez également spécifier globalement une liste
+   complète de balises avec la variable org-tag-alist. Enfin, vous
+   pouvez définir les balises par défaut pour un fichier donné à
+   l’aide du mot clé "TAGS", comme
+   #+BEGIN_SRC org
+   #+TAGS: @work @home @tennisclub
+   #+TAGS: laptop car pc sailboat
+   #+END_SRC
+   Si vous avez défini globalement votre jeu de balises préféré à
+   l’aide de la variable =org-tag-alist=, mais souhaitez utiliser une
+   liste de balises dynamique dans un fichier spécifique, ajoutez un
+   mot clé '=TAGS=' vide à ce fichier :
+   #+BEGIN_SRC org
+   #+TAGS:
+   #+END_SRC
+   Si vous souhaitez utiliser un jeu de balises préféré dans chaque
+   fichier, en plus de ceux définis fichier par fichier par le mot clé
+   "TAGS", vous pouvez spécifier une liste de balises avec la variable
+   =org-tag-persistent-alist=. Vous pouvez désactiver cette fonction
+   sur une base par fichier en ajoutant un mot-clé '=STARTUP=' à ce
+   fichier :
+   #+BEGIN_SRC org
+   #+STARTUP: noptag
+   #+END_SRC
+   Par défaut, le mode Org utilise les fonctions d’achèvement standard
+   du mini-tampon pour la saisie des tags. Cependant, il implémente
+   également une autre méthode de sélection de balises, plus rapide,
+   appelée sélection rapide de balises. Elle vous permet de
+   sélectionner et de désélectionner les balises en appuyant
+   simplement sur une touche. Pour que cela fonctionne correctement,
+   vous devez attribuer des lettres uniques à la plupart de vos
+   balises couramment utilisées. Vous pouvez le faire globalement en
+   configurant la variable =org-tag-alist= dans votre fichier init
+   Emacs. Par exemple, vous pouvez avoir besoin de baliser de nombreux
+   éléments dans différents fichiers avec '=@home='. Dans ce cas, vous
+   pouvez définir quelque chose comme :
+   #+BEGIN_SRC emacs_lisp
+   (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h) ("laptop" . ?l)))
+   #+END_SRC
+   Si la balise ne concerne que le fichier sur lequel vous travaillez,
+   vous pouvez alors définir le mot clé '=TAGS=' comme suit :
+   #+BEGIN_SRC org
+   #+TAGS: @work(w) @home(h) @tennisclub(t) laptop(l) pc(p)
+   #+END_SRC
+   L'interface des balises affiche les balises disponibles dans une
+   fenêtre de démarrage. Si vous souhaitez commencer une nouvelle
+   ligne après une étiquette spécifique, insérez '=\n=' dans la liste
+   des étiquettes.
+   #+BEGIN_SRC org
+   #+TAGS: @work(w) @home(h) @tennisclub(t) \n laptop(l) pc(p)
+   #+END_SRC
+   ou écrivez-les en deux lignes :
+   #+BEGIN_SRC org
+   #+TAGS: @work(w) @home(h) @tennisclub(t)
+   #+TAGS: laptop(l) pc(p)
+   #+END_SRC
+   Vous pouvez également regrouper des balises qui s’excluent
+   mutuellement en utilisant des accolades, comme dans :
+   #+BEGIN_SRC org
+   #+TAGS: { @work(w) @home(h) @tennisclub(t) } laptop(l) pc(p)
+   #+END_SRC
+
+   vous indiquez qu’au plus un de '=@work=', '=@home=' et '=@tennisclub='
+   doit être sélectionné. Plusieurs de ces groupes sont autorisés.
+
+   N'oubliez pas d'appuyer sur =C-c C-c= avec un point dans l'une de ces
+   lignes pour activer les modifications. Pour définir ces groupes
+   mutuellement exclusifs dans la variable =org-tags-alist=, vous devez
+   utiliser les tags =:startgroup= et =:endgroup= au lieu des
+   accolades. De même, vous pouvez utiliser =:newline= pour indiquer un
+   saut de ligne. L'exemple précédent serait défini globalement par la
+   configuration suivante :
+   #+BEGIN_SRC emacs_lisp
+   (setq org-tag-alist '((:startgroup . nil)
+                         ("@work" . ?w) ("@home" . ?h)
+			 ("@tennisclub" . ?t)
+			 (:endgroup . nil)
+			 ("laptop" . ?l) ("pc" . ?p)))
+   #+END_SRC
+   Si au moins une étiquette possède une touche de sélection, appuyez
+   ensuite sur C-c. C-c vous présente automatiquement une interface
+   spéciale avec la liste des étiquettes héritées, les étiquettes du
+   titre actuel et une liste de toutes les étiquettes valides avec les
+   touches correspondantes[fn:56].
+
+   Appuyer sur les touches attribuées aux étiquettes les ajoute ou les
+   supprime de la liste des étiquettes de la ligne courante. La
+   sélection d'une étiquette dans un groupe d'étiquettes mutuellement
+   exclusives désactive toute autre étiquette de ce groupe.
+
+   Dans cette interface, vous pouvez également utiliser les touches
+   spéciales suivantes :
+   + =TAB= :: Entrez une étiquette dans le mini-tampon, même si
+              l'étiquette ne figure pas dans la liste prédéfinie. Vous
+              pouvez compléter toutes les balises présentes dans le
+              tampon. Vous pouvez également ajouter plusieurs tags:
+              séparez-les simplement par une virgule.
+   + =SPC= :: Effacer toutes les balises pour cette ligne.
+   + =RET= :: Accepter le jeu modifié.
+   + =C-g= :: Abandonner sans installer les modifications.
+   + =q= :: Si =q= n'est pas assigné à une balise, elle échoue comme
+            =C-g=
+   + =!= :: Désactiver les groupes de balises mutuellement
+            exclusives. Utilisez ceci pour (exceptionnellement)
+            assigner plusieurs tags d'un tel groupe
+   + =C-c= :: Basculez la sortie automatique après le prochain
+              changement (voir ci-dessous). Si vous utilisez le mode
+              expert, le premier =C-c= affiche la fenêtre de
+              sélection.
+
+
+
+   Cette méthode vous permet d’attribuer des étiquettes à un titre
+   avec très peu de clés. Avec la configuration ci-dessus, vous pouvez
+   effacer les balises actuelles et définir les balises '=@home=',
+   '=laptop=' et '=pc=' avec les touches suivantes uniquement : =C-C
+   C-C SPC h l p RET=. Le passage de '=@home=' à '=@work=' se ferait
+   avec =C-c C-c w RET= ou alternativement avec =C-c C-c C-c
+   w=. L’ajout de la balise non prédéfinie peut être effectué
+   avec =C-c C-c TAB sarah RET=.
+
+   Si vous constatez que la plupart du temps, il vous suffit d'appuyer
+   sur une seule touche pour modifier votre liste d'étiquettes,
+   définissez la variable =org-fast-tag-selection-single-key=. Ensuite,
+   vous n'avez plus besoin d'appuyer sur =RET= pour quitter la sélection
+   rapide d'étiquettes, elle se ferme après le premier changement. Si
+   vous avez parfois besoin de plus de touches, appuyez sur =C-c= pour
+   désactiver la sortie automatique pour le processus de sélection de
+   balises en cours (en fait : démarrez la sélection avec =C-c C-c C-c=
+   au lieu de =C-c C-c=). Si vous définissez la variable sur expert en
+   valeur, la fenêtre spéciale n'est même pas affichée pour la
+   sélection d'étiquettes à clé unique, elle n'apparaît que lorsque
+   vous appuyez sur un =C-c= supplémentaire.
+
+
+
+** Hiérarchie de balise
+
+   Les balises peuvent être définies dans des hiérarchies. Une balise
+   peut être définie en tant que balise de groupe pour un ensemble
+   d’autres balises. La balise de groupe peut être considérée comme le
+   «terme plus large» pour son ensemble de balises. La définition de
+   plusieurs balises de groupe et leur imbrication créent une
+   hiérarchie de balises.
+
+   Un cas d'utilisation consiste à créer une taxonomie de termes
+   (balises) pouvant être utilisée pour classifier des nœuds dans un
+   document ou un ensemble de documents.
+
+   Lorsque vous recherchez une étiquette de groupe, elle renvoie des
+   correspondances pour tous les membres du groupe et de ses
+   sous-groupes. Dans une vue de l'agenda, le filtrage par balise de
+   groupe affiche ou masque les titres étiquetés avec au moins l'un
+   des membres du groupe ou de l'un de ses sous-groupes. Cela rend les
+   recherches et les filtres de balises encore plus flexibles
+
+   Vous pouvez définir des balises de groupe en utilisant des crochets
+   et en insérant un signe deux-points entre la balise de groupe et
+   les balises associées. Notez que tous les espaces sont obligatoires
+   pour que l'organisation puisse analyser cette ligne correctement :
+
+   #+BEGIN_SRC org
+   #+TAGS: [ GTD : Control Persp ]
+   #+END_SRC
+
+   Dans cet exemple, '=GTD=' correspond à la balise de groupe et est
+   associé à deux autres balises: '=Control=', '=Persp='. Définir
+   '=Control=' et '=Persp=' en tant que balises de groupe crée une
+   hiérarchie de balises :
+   #+BEGIN_SRC org
+   #+TAGS: [ Control : Context Task ]
+   #+TAGS: [ Persp : Vision Goal AOF Project ]
+   #+END_SRC
+
+   Cela peut être considéré conceptuellement comme une hiérarchie de
+   tags :
+
+   + '=GTD='
+     + '=Persp='
+       + '=Vision='
+       + '=Goal='
+       + '=AOF='
+       + '=Project='
+     + '=Control='
+       + '=Context='
+       + '=Task='
+      
+  
+   Vous pouvez utiliser le mot clé =:startgrouptag=, =:grouptagsand=
+   et =:endgrouptag= directement lors de la définition de
+   =org-tag-alist= directement :
+
+   #+BEGIN_SRC emacs_lisp
+   (setq org-tag-alist '((:startgrouptag)
+                         ("GTD")
+			 (:grouptags)
+			 ("Control")
+			 ("Persp")
+			 (:endgrouptag)
+			 (:startgrouptag)
+			 ("Control")
+			 (:grouptags)
+			 ("Context")
+			 ("Task")
+			 (:endgrouptag)))
+   #+END_SRC
+   Les étiquettes d'un groupe peuvent être mutuellement exclusives si
+   vous utilisez la même syntaxe de groupe que celle utilisée pour
+   regrouper des étiquettes mutuellement exclusives. en utilisant des
+   accolades.
+   #+BEGIN_SRC org
+   #+TAGS: { Context : @Home @Work @Call }
+   #+END_SRC
+  Lorsque vous définissez =org-tag-alist=, vous pouvez utiliser
+  =:startgroup= et =:endgroup= au lieu de =:startgroup= tag et =:endgroup= tag
+  pour rendre les balises mutuellement exclusives.
+
+  En outre, les membres d'une balise de groupe peuvent également être
+  des expressions régulières, ce qui permet de créer une structure de
+  balise plus dynamique et basée sur des règles. Les expressions
+  régulières du groupe doivent être spécifiées entre accolades. Voici
+  un exemple développé :
+  #+BEGIN_SRC org
+  #+TAGS: [ Vision : {V@.+} ]
+  #+TAGS: [ Goal : {G@.+} ]
+  #+TAGS: [ AOF : {AOF@.+} ]
+  #+TAGS: [ Project : {P@.+} ]
+  #+END_SRC
+
+  La recherche de la balise «Projet» répertorie désormais toutes les
+  balises, y compris les correspondances d’expressions régulières de
+  '=P @.+=', Ainsi que les recherches de balises sur '=Vision=',
+  '=Objectif=' et '=AOF='. Par exemple, cela fonctionnerait bien pour un
+  projet étiqueté avec un identifiant de projet commun, par exemple
+  '=P@2014_OrgTags='.
+
+  Si vous souhaitez ignorer temporairement les balises de groupe,
+  activez la prise en charge des balises de groupe avec
+  =org-toggle-tags-groups=, lié à =C-c C-x q=. Si vous souhaitez
+  désactiver complètement les groupes de balises, définissez les
+  balises =org-group-tags= sur =nil=.
+
+** Recherche de balise  
+
+   Une fois qu'un système de balises a été mis en place, il peut être
+   utilisé pour collecter des informations connexes sur des listes non
+   spécialisées.
+
+   + =C-c / m= ou =C-c \= (=org-match-sparse-tree=) :: Créez un arbre
+        clairsemé avec tous les titres correspondant à une recherche
+        de balises. Avec un argument de préfixe =C-u=, ignorez les
+        titres qui ne sont pas une ligne TODO.
+   + =M-x org-agenda m= (=org-tags-view=) :: Créez une liste globale
+        de correspondances de balises à partir de tous les fichiers
+        d'agenda. Voir section 10.3.3 [Correspondance entre balises et
+        propriétés], page 107.
+   + =M-x org-agenda M= (=org-tags-view=) :: Créez une liste globale
+        de correspondances de balises à partir de tous les fichiers de
+        l'agenda, mais vérifiez uniquement les éléments TODO et forcez
+        la vérification des sous-éléments (voir
+        option =org-tags-match-list-sublevels=).
   
 
+   Ces commandes invitent toutes à rechercher une chaîne de
+   correspondance permettant à la logique booléenne de base telle que
+   '=+boss+urgent-project1=' de rechercher les entrées avec les
+   balises '=boss=' et '=urgent=', mais pas '=project1=' ou
+   '=Kathy|Sally=' entrées qui sont étiquetées, comme '=Kathy=' ou
+   '=Sally='. La syntaxe complète de la chaîne de recherche est riche
+   et permet également de faire correspondre des mots-clés, des
+   niveaux d'entrée et des propriétés TODO. Pour une description
+   complète avec de nombreux exemples, voir Section 10.3.3 [Balises et
+   propriétés correspondantes], page 107.
+
+
+
+* Propriétés et colonnes
+
+
 * Footnotes
+
+[fn:56] Les clés sont automatiquement attribuées aux étiquettes qui
+n'ont pas de clés configurées.
+ 
+
+[fn:55] Pour étendre cette liste par défaut à toutes les balises
+utilisées dans tous les fichiers de l'agenda (voir Chapitre 10 [Vues
+de l'agenda], page 108), personnalisez la variable
+=org-complete-tags-always-offer-all-agenda-tags=.
+ 
+
+[fn:54] Cela n'est vrai que si la recherche ne comporte pas de tests
+plus complexes, y compris les propriétés (voir Section 7.3 [Recherches
+de propriétés], page 67).
+ 
+
+[fn:53] Comme avec tous ces paramètres dans la mémoire tampon, appuyer
+sur =C-c C-c= active tous les changements de ligne.
+ 
 
 [fn:52] =C-u C-c C-c= sur le premier élément d'une liste sans case à
 cocher ajoute des cases à cocher au reste de la liste.
