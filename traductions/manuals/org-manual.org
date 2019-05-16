@@ -2529,8 +2529,862 @@ touches méta-curseur ont des fonctionnalités différentes.
    recherche, car la seule identification unique d'une entrée
    Bib\TEX{} est la clé de citation.
 
+   Si vous rencontrez un tel problème, vous pouvez écrire des
+   fonctions personnalisées pour définir la chaîne rightsearch pour un
+   type de fichier particulier et effectuer la recherche de la chaîne
+   dans le fichier. À l’aide de =add-hook=, ces fonctions doivent être
+   ajoutées aux fonctions hook, =org-create-file-search-functions= et
+   =org-execute-file-search-functions=. Voir la docstring pour ces
+   variables pour plus d'informations. Org utilise en fait ce
+   mécanisme pour les fichiers de base de données Bib\TEX{} et vous
+   pouvez utiliser le code correspondant comme exemple
+   d'implémentation. Voir le fichier '=org-bibtex.el='.
+
+* Eléments TODO
+  
+  Le mode Org ne conserve pas les listes TODO en tant que documents
+  distincts[fn:37]. Au lieu de cela, les éléments TODO font partie
+  intégrante du fichier de notes, car les éléments TODO apparaissent
+  généralement lors de la prise de notes! Avec le mode Org, marquez
+  simplement toute entrée dans un arbre comme étant un élément
+  TODO. De cette manière, les informations ne sont pas dupliquées et
+  l'ensemble du contexte dans lequel l'élément TODO a émergé est
+  toujours présent.
+
+  Bien sûr, cette technique de gestion des éléments TODO les disperse
+  dans votre fichier de notes. Le mode Org compense cela en
+  fournissant des méthodes pour vous donner un aperçu de toutes les
+  choses que vous devez faire.
+
+** Fonctionnalité TODO de base
+
+   Tout titre devient un élément TODO lorsqu'il commence par le mot
+   «TODO», par exemple :
+   #+BEGIN_SRC org
+   *** TODO Write letter to Sam Fortune
+   #+END_SRC
+   Les commandes les plus importantes pour travailler avec les entrées
+   TODO sont :
+   + =C-c C-t= (=org-todo=) :: Faire pivoter l'état TODO de l'élément
+        en cours parmi
+	#+BEGIN_CENTER
+	(unmarked) -> TODO -> DONE -> (unmarked)
+        #+END_CENTER
+
+	Si les mots clés TODO ont des clés d'accès rapide (voir
+        Section 5.2.4 [Accès rapide à TODOstates], page 48), demandez
+        un mot clé TODO via l'interface de sélection rapide; Il s'agit
+        du comportement par défaut lorsque =org-use-fast-todo-selection=
+        est non nul.
+
+	La même rotation peut également être effectuée «à distance» à
+        partir du tampon de l'ordre du jour à l'aide de la touche de
+        commande =t= (voir Section 10.5 [Commandes de l'ordre du jour],
+        page 118).
+   + =C-u C-c C-t= :: Lorsque les mots clés TODO n'ont pas de clé de
+                      sélection, sélectionnez un mot clé spécifique à
+                      l'aide de la complétion. sinon, forcez le
+                      passage cyclique des états TODO sans
+                      invite. Lorsque l’option
+                      =org-use-fast-todo-selection= est définie sur
+                      préfixe, utilisez l’interface de sélection
+                      rapide.
+   + =S-RIGHT S-LEFT= :: Sélectionnez l'état TODO suivant / précédent,
+        semblable au cycle. Utile surtout si plus de deux états TODO
+        sont possibles (voir Section 5.2 [Extensions TODO], page
+        46). Voir également la section 15.12.2 [Conflicts], page 239
+        pour une discussion de l'interaction avec le mode
+        décalage-sélection-mode. Voir aussi la variable
+        =org-treat-S-curseur-todo-selection-as-change-state=.
+   + =C-c / t= (=org-show-todo-tree=) :: Affichez les éléments TODO
+        dans l’arbre Asparse (voir Section 2.5 [Arbres fragmentés],
+        page 11). Plie tout le tampon, mais affiche tous les éléments
+        TODO (avec l’état non DONE) et la hiérarchie des en-têtes qui
+        les surmonte. Avec un argument préfixe ou en utilisant =C-c /
+        T=, recherchez un TODO spécifique. Vous êtes invité à entrer
+        le mot-clé. Vous pouvez également fournir une liste de mots-clés
+        tels que '=KWD1 | KWD2 | ...=' pour répertorier les entrées
+        correspondant à l'un de ces mots-clés. Avec un argument de
+        préfixe numérique N, affichez l’arborescence du mot-clé Nth
+        dans la variable =org-todo-keywords=. Avec deux arguments de
+        préfixe, trouvez tous les états TODO, non terminé et terminé.
+   + =M-x org-agenda t= (=org-todo-list=) :: Afficher la liste globale
+        TODO. Collecte les éléments TODO (avec les états non-DONE) de
+        tous les fichiers de l'ordre du jour (voir Chapitre 10 [Vues
+        de l'agenda], page 108) dans un seul tampon. Le nouveau tampon
+        est en mode Org Agenda, qui fournit des commandes permettant
+        d'examiner et de manipuler les entrées TODO à partir du
+        nouveau tampon (voir Section 10.5 [Commandes de l'ordre du
+        jour], page 118). Voir Section 10.3.2 [Liste globale des
+        tâches à effectuer], page 106, pour plus d'informations.
+   + =S-M-RET= (=org-insert-todo-heading=) :: Insérez une nouvelle
+        entrée TODO sous celle actuelle.
+
+
+
+   Changer un état TODO peut aussi déclencher des changements de
+   tags. Voir la docstring de l'option =org-todo-state-tags-triggers=
+   pour plus de détails.
+
+	
+
+** Utilisation étendue des mots clés TODO
+
+   Par défaut, les entrées TODO marquées ont l'un des deux états
+   suivants: TODO et DONE. Orgmode vous permet de classer les éléments
+   TODO de manière plus complexe avec des mots clés TODO (stockés
+   dans =org-todo-keywords=). Avec une configuration spéciale, le système
+   de mots-clés TODO peut fonctionner différemment dans différents
+   fichiers.
+
+   Notez que les balises sont un autre moyen de classer les titres en
+   général et les éléments TODO en particulier (voir Chapitre 6
+   [Balises], page 57).
+*** Mots-clés TODO en tant qu'états de flux de travail
+
+    Vous pouvez utiliser les mots-clés TODO pour indiquer différents
+    états séquentiels dans le processus de travail sur un élément, par
+    exemple[fn:38] :
+    #+BEGIN_SRC emacs_lisp
+    (setq org-todo-keywords
+          '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
+    #+END_SRC
+    La barre verticale sépare les mots-clés TODO (états qui
+    nécessitent une action) des états DONE (qui ne nécessitent aucune
+    action supplémentaire). Si vous ne fournissez pas la barre de
+    séparation, le dernier état est utilisé comme état DONE.
+    
+    Avec cette configuration, la commande =C-c-t-cycle= passe une entrée
+    de "=TODO=" à "=FEEDBACK=", puis à "=VERIFY=", et enfin à "=DONE=" et
+    "=DELEGATED=". Vous pouvez également utiliser un argument de préfixe
+    numérique pour sélectionner rapidement un état spécifique. Par
+    exemple, =C-3 C-C C-t= change immédiatement l’état en
+    "=VERIFY=". Ou vous pouvez utiliser =S-LEFT= pour revenir en arrière
+    dans la séquence. Si vous définissez de nombreux mots-clés, vous
+    pouvez utiliser l'achèvement dans la mémoire tampon (voir Section
+    15.1 [Achèvement], page 242) ou même un schéma de sélection
+    spécial à une touche (voir Section 5.2.4 [Accès rapide aux états
+    TODO], page 48). d'insérer ces mots dans le tampon. La
+    modification d'un état TODO peut être enregistrée avec un
+    horodatage, voir Section 5.3.2 [Suivi des modifications d'état
+    TODO], page 50, pour en savoir plus.
+
+*** TODO mots-clés en tant que types    
+
+    La deuxième possibilité consiste à utiliser des mots clés TODO
+    pour indiquer différents types d'éléments d'action. Par exemple,
+    vous voudrez peut-être indiquer que les éléments sont pour
+    “travail” ou “domicile”. Ou bien, lorsque vous travaillez avec
+    plusieurs personnes sur un même projet, vous pouvez attribuer des
+    éléments d'action directement à des personnes, en utilisant leurs
+    noms en tant que mots clés TODO. Ce serait mis en place comme
+    ceci :
+    #+BEGIN_SRC emacs_lisp
+    (setq org-todo-keywords '((type "Fred" "Sara" "Lucy" "|" "DONE")))
+    #+END_SRC
+    Dans ce cas, des mots-clés différents n'indiquent pas une
+    séquence, mais des types différents. Le flux de travail normal
+    consiste donc à attribuer une tâche à une personne, puis à la
+    marquer comme DONE. Le mode Org prend en charge ce style en
+    adaptant le fonctionnement de la commande =C-c C-t=[fn:39]. Lorsqu'il est
+    utilisé plusieurs fois de suite, il parcourt encore tous les noms,
+    afin de sélectionner d'abord le bon type pour une tâche. Mais si
+    vous revenez à l’objet après un certain temps et exécutez =C-c C-t=
+    à nouveau, il passera directement de n’importe quel nom à
+    '=DONE='. Utilisez des arguments de préfixe ou de complétion pour
+    sélectionner rapidement un nom spécifique. Vous pouvez également
+    examiner les éléments d'un type TODO spécifique dans une
+    arborescence clairsemée en utilisant un préfixe numérique =C-c /
+    t=. Par exemple, pour voir tout ce que Lucy doit faire, utilisez
+    =C-3 C-c / t=. Pour rassembler les éléments de Lucy de tous les
+    fichiers de l’agenda dans un seul tampon, vous devez également
+    utiliser l’argument du préfixe numérique lors de la création de la
+    liste globale TODO : =C-3 M-x org-agenda t=.
+
+
+*** Plusieurs ensembles de mots clés dans un fichier
+
+    Parfois, vous pouvez utiliser différents ensembles de mots clés
+    TODO en parallèle. Par exemple, vous souhaiterez peut-être
+    disposer du TODO / DONE de base, mais également d'un flux de
+    travail pour la correction des bogues et d'un état distinct
+    indiquant qu'un élément a été annulé. Il n'est donc pas DONE, mais
+    aucune action n'est requise. Votre configuration ressemblerait
+    alors à ceci :
+    #+BEGIN_SRC emacs_lisp
+    (setq org-todo-keywords
+          '((sequence "TODO" "|" "DONE")
+	    (sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED")
+	    (sequence "|" "CANCELED")))
+    #+END_SRC
+    Les mots-clés doivent tous être différents. Cela aide le mode Org
+    à déterminer quelle sous-séquence doit être utilisée pour une
+    entrée donnée. Dans cette configuration, =C-c C-t= ne fonctionne que
+    dans une sous-séquence et passe donc de '=DONE=' à (rien) à '=TODO='
+    et de '=FIXED=' à (rien) à '=REPORT='. Par conséquent, vous avez
+    besoin d'un mécanisme pour sélectionner initialement la séquence
+    correcte. En plus de la saisie d'un mot clé ou de l'achèvement
+    (voir Section 15.1 [Achèvement], page 242), vous pouvez également
+    appliquer les commandes suivantes :
+    
+    + =C-u C-u C-c C-t= ::
+    + =C-S-RIGHT= ::
+    + =C-S-LEFT= :: Ces touches permettent de passer d’une
+                    sous-séquence à une autre. Dans l'exemple
+                    ci-dessus, =C-u C-C C-t= ou =C-S-RIGHT= passerait de
+                    '=TODO=' ou '=DONE=' à '=REPORT=', et n'importe lequel
+                    des mots de la deuxième rangée à '=CANCELED='. Notez
+                    que la liaison =C-S-= est en conflit avec le mode
+                    =shift-selection-mode= (voir Section 15.12.2
+                    [Conflicts], page 239).
+    + =S-RIGHT= ::
+    + =S-LEFT= :: =S-LEFT= et =S-RIGHT= parcourent tous les mots-clés de
+                  toutes les sous-séquences. Ainsi, par exemple,
+                  =S-RIGHT= passerait de '=DONE=' à '=REPORT=' dans
+                  l'exemple ci-dessus. Pour une discussion sur
+                  l'interaction avec le mode =shift-selection-mode=, voir
+                  Section 15.12.2 [Conflits], page 239.
+
+
+
+*** Accès rapide aux états TODO
+
+    Si vous souhaitez modifier rapidement une entrée dans un état TODO
+    arbitraire au lieu de passer d'un état à l'autre, vous pouvez
+    configurer des clés pour un accès à une seule lettre aux
+    états. Ceci est fait en ajoutant le caractère de sélection après
+    chaque mot clé, entre parenthèses[fn:40]. Par exemple :
+    #+BEGIN_SRC emacs_lisp
+    (setq org-todo-keywords
+          '((sequence "TODO(t)" "|" "DONE(d)")
+	    (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+	    (sequence "|" "CANCELED(c)")))
+    #+END_SRC
+    Si vous appuyez ensuite sur C-c C-t puis sur la touche de
+    sélection, l'entrée passe dans cet état. SPC peut être utilisé
+    pour supprimer tout mot clé TODO d'une entrée[fn:41].
+
+*** Configuration de mots-clés pour des fichiers individuels
+
+    Il peut être très utile d’utiliser différents aspects du mécanisme
+    TODO dans différents fichiers. Pour les paramètres de fichier
+    locaux, vous devez ajouter des lignes spéciales au fichier qui
+    définissent les mots-clés et l'interprétation pour ce fichier
+    uniquement. Par exemple, pour définir l'un des deux exemples
+    décrits ci-dessus, vous devez utiliser l'une des lignes suivantes,
+    en commençant par la colonne zéro, n'importe où dans le fichier :
+
+    #+BEGIN_SRC org
+    #+TODO: TODO FEEDBACK VERIFY | DONE CANCELED
+    #+END_SRC
+    Vous pouvez également écrire '=#+SEQ_TODO=' pour expliquer
+    explicitement l’interprétation, mais cela signifie la même chose
+    que '=#+TODO=', ou
+    #+BEGIN_SRC org
+    #+TYP_TODO: Fred Sara Lucy Mike | DONE
+    #+END_SRC
+    Une configuration pour utiliser plusieurs ensembles en parallèle
+    serait :
+    #+BEGIN_SRC org
+    #+TODO: TODO | DONE
+    #+TODO: REPORT BUG KNOWNCAUSE | FIXED
+    #+TODO: | CANCELED
+    #+END_SRC
+    Pour vous assurer que vous utilisez le mot-clé correct, entrez
+    '=#+=' dans la mémoire tampon, puis utilisez =M-TAB= pour le
+    compléter (voir Section 15.1 [Achèvement], page 242).
+
+    N'oubliez pas que les mots-clés après la barre verticale - ou le
+    dernier mot si aucune barre n'y figure - doivent toujours
+    signifier que l'élément est FAIT, bien que vous puissiez utiliser
+    un mot différent. Après avoir modifié l'une de ces lignes,
+    utilisez C-c C-c avec un point toujours dans la ligne pour faire
+    connaître les modifications au mode Org mode[fn:42].
+
+
+*** Faces pour les mots clés TODO
+
+    Le mode Org met en surbrillance les mots-clés TODO avec des faces
+    spéciales: =org-todo= pour les mots-clés indiquant qu'un élément
+    doit encore être traité, et org-done pour les mots-clés indiquant
+    qu'un élément est terminé. Si vous utilisez plus de deux états
+    différents, vous pouvez utiliser des visages spéciaux pour
+    certains d'entre eux. Cela peut être fait en utilisant la variable
+    =org-todo-keyword-faces=. Par exemple :
+    #+BEGIN_SRC emacs_lisp
+    (setq org-todo-keyword-faces
+          '(("TODO"   .  org-warning) ("STARTED"   .   "yellow")
+	    ("CANCELED"  .  (:foreground "blue" :weight bold))))
+    #+END_SRC
+    Bien que l’utilisation d’une liste avec les propriétés de visage
+    comme indiqué pour '=CANCELED=' fonctionne, cela ne semble pas
+    toujours être le cas. Si nécessaire, définissez un visage spécial
+    et utilisez-le. Une chaîne est interprétée comme une couleur. La
+    variable =org-faces-easy-properties= détermine si cette couleur est
+    interprétée comme une couleur de premier plan ou d'arrière-plan.
+
+    
+
+*** Dépendances TODO
+
+    La structure des fichiers Org (hiérarchie et listes) facilite la
+    définition des dépendances TODO. En règle générale, une tâche TODO
+    parent ne doit pas être marquée DONE tant que toutes les tâches
+    secondaires de TODO, tâches d’enfants, ne sont pas marquées comme
+    DONE. Parfois, il y a une séquence logique de (sous-) tâches, de
+    sorte qu'une sous-tâche ne puisse pas être exécutée avant que tous
+    les frères et sœurs au-dessus de celle-ci aient été marqués
+    DONE. Si vous personnalisez la variable
+    =org-enforce-todo-dependencies=, Org empêche les entrées de changer
+    d'état en DONE tant qu'elles ont des enfants TODO non DONE. De
+    plus, si une entrée a une propriété '=ORDERED=', chacun de ses
+    enfants TODO est bloqué jusqu’à ce que tous les frères et soeurs
+    précédents soient marqués DONE. Voici un exemple :
+    #+BEGIN_SRC org
+    * TODO Blocked until (two) is done
+    ** DONE one
+    ** TODO two
+
+    * Parent
+    :PROPERTIES:
+    :ORDERED: t
+    :END:
+    ** TODO a
+    ** TODO b, needs to wait for (a)
+    ** TODO c, needs to wait for (a) and (b)
+    #+END_SRC
+    Vous pouvez vous assurer qu’une entrée n’est jamais bloquée en
+    utilisant la propriété '=NOBLOCKING=' (voir Chapitre 7 [Propriétés
+    et colonnes], page 62):
+    #+BEGIN_SRC org
+    * This entry is never blocked
+    :PROPERTIES:
+    :NOBLOCKING: t
+    :END:
+    #+END_SRC
+    
+    + =C-c C-x o= (=org-toggle-ordered-property=) :: Basculez la
+         propriété '=ORDERED=' de l’entrée actuelle. Une propriété est
+         utilisée pour ce comportement car il doit être local à
+         l'entrée actuelle et ne pas être hérité des entrées ci-dessus
+         comme une balise (voir Chapitre 6 [Balises], page
+         57). Toutefois, si vous souhaitez suivre la valeur de cette
+         propriété avec une balise pour une meilleure visibilité,
+         personnalisez la variable =org-track-orders-property-with-tag=.
+    + =C-u C-u C-u C-c C-t= :: Changer l'état TODO, indépendamment de
+         tout blocage d'état.
+
+	 
+    Si vous définissez la variable =org-agenda-dim-blocage-tasks=, les
+    entrées TODO qui ne peuvent pas être marquées DONE en raison
+    d'enfants non marqués sont affichées dans une police grisée ou
+    même rendues invisibles dans les vues de l'agenda (voir Chapitre
+    10 [Vues de l'agenda], page 108).
+
+    Vous pouvez également bloquer les modifications d'états TODO à
+    l'aide des cases à cocher (voir Section 5.6 [Boîtes à cocher],
+    page 56). Si vous définissez la variable
+    =org-enforce-todo-checkbox-dependencies=, une entrée dont les cases
+    à cocher sont décochées ne peut pas basculer sur DONE.
+
+    Si vous avez besoin de structures de dépendance plus complexes,
+    par exemple des dépendances entre des entrées de différents arbres
+    ou fichiers, consultez le module fourni '=org-depend.el='.
+
+    
+
+
+** Enregistrement de progrès
+
+   Le mode Org peut enregistrer automatiquement un horodatage et
+   éventuellement une note lorsque vous marquez un élément TODO comme
+   DONE, ou même chaque fois que vous modifiez l'état d'un élément
+   TODO. Ce système est hautement configurable, les paramètres peuvent
+   être définis mot par mot et localisés dans un fichier ou même un
+   sous-arbre. Pour plus d’informations sur l’horodatage du temps de
+   travail d’une tâche, reportez-vous à la Section 8.4 [Heure de
+   travail de l'horloge], page 79.
+*** Eléments de fermeture
+
+    La consignation la plus élémentaire consiste à garder trace du
+    moment où un élément TODO particulier a été marqué DONE. Ceci peut
+    être réalisé avec[fn:43]
+    #+BEGIN_SRC emacs_lisp
+    (setq org-log-done 'time)
+    #+END_SRC
+    Ensuite, chaque fois que vous passez une entrée d’un état TODO
+    (non terminé) à l’un des états DONE, une ligne '=CLOSED:
+    [timestamp]=' est insérée juste après le titre. Si vous
+    reconvertissez l'entrée dans un élément TODO en répétant le cycle
+    de l'état, cette ligne est supprimée. Si vous remettez l'entrée
+    dans un état autre que TODO (en appuyant sur =C-c C-t SPC=, par
+    exemple), cette ligne est également supprimée, sauf si vous
+    définissez =org-closed-keep-no-todo= à non-=nil=. Si vous voulez
+    enregistrer une note avec l’horodatage, utilisez[fn:44]
+    #+BEGIN_SRC emacs_lisp
+    (setq org-log-done 'note)
+    #+END_SRC
+    Une note vous est ensuite demandée. Cette note est stockée sous
+    l’entrée avec un en-tête '=Closing Note='.
+
+*** Suivi des changements d'état TODO
+
+    Lorsque des mots clés TODO sont utilisés en tant qu'états de flux
+    de travail (voir Section 5.2.1 [* États de flux de travail], page
+    48), vous souhaiterez peut-être garder une trace du moment où un
+    changement d'état a eu lieu et peut-être prendre note de ce
+    changement. Vous pouvez enregistrer uniquement un horodatage ou
+    une note horodatée. Ces enregistrements sont insérés après le
+    titre en tant que liste détaillée, la plus récente en
+    premier[fn:45]. Lorsque vous prenez beaucoup de notes, vous pouvez les
+    placer dans un tiroir (voir Section 2.7 [Tiroirs], page
+    16). Personnalisez la variable =org-log-in-tiroir= pour obtenir ce
+    comportement. Le tiroir recommandé à cet effet s’appelle
+    '=LOGBOOK='[fn:46]. Vous pouvez également remplacer le réglage de cette variable
+    pour un sous-arbre en définissant une propriété
+    '=LOG_INTO_DRAWER='.
+
+    Comme il est normalement trop important d’enregistrer une note
+    pour chaque état, le mode Org attend la configuration mot-clé par
+    mot-clé. Pour ce faire, ajoutez des marqueurs spéciaux '=!=' (Pour
+    un horodatage) ou '=@=' (pour une note avec horodatage) entre
+    parenthèses après chaque mot clé. Par exemple, avec le réglage
+    #+BEGIN_SRC emacs_lisp
+    (setq org-todo-keywords
+          '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
+    #+END_SRC
+    pour enregistrer un horodatage sans note pour les mots-clés TODO
+    configurés avec '=@=', tapez simplement =C-c C-c= pour entrer une note
+    vide lorsque vous y êtes invité.
+    
+    Vous définissez non seulement des mots-clés TODO globaux et des
+    clés d’accès rapide, mais vous demandez également qu’une heure
+    soit enregistrée lorsque l’entrée est définie sur '=DONE=', et
+    qu’une note est enregistrée lors du basculement sur '=WAIT=' ou
+    '=CANCELED='[fn:47]. Le réglage de '=WAIT=' est encore plus
+    spécial : le '=!=' situé après la barre oblique signifie qu'en
+    plus de la note prise en entrant dans l'état, un horodatage doit
+    être enregistré en quittant l'état '=WAIT=', si et seulement si
+    l'état cible ne configure pas la journalisation pour la
+    saisie. Donc, cela n’a aucun effet lors du passage de '=WAIT=' à
+    '=DONE=', car '=DONE=' est configuré pour enregistrer un horodatage
+    uniquement. Mais lors du passage de '=WAIT=' à '=TODO=', le paramètre
+    '=/!=' Dans le paramètre '=WAIT=' déclenche maintenant un horodatage
+    même si '=TODO=' n’a pas de journalisation configurée.
+
+    Vous pouvez utiliser exactement la même syntaxe pour définir les
+    préférences de journalisation locales dans un tampon :
+    #+BEGIN_SRC org
+    #+TODO: TODO(t) WAIT(w@/!) | DONE(d!) CANCELED(c@)
+    #+END_SRC
+    Afin de définir des paramètres de journalisation locaux à un
+    sous-arbre ou à un seul élément, définissez la propriété '=LOGGING='
+    dans cette entrée. Toute propriété '=LOGGING=' non vide réinitialise
+    tous les paramètres de journalisation tonil. Vous pouvez ensuite
+    activer la journalisation pour cette arborescence spécifique à
+    l’aide de mots clés '=STARTUP=' tels que '=lognotedone=' ou
+    '=logrepeat=', ainsi que l'ajout de paramètres spécifiques à l'état
+    tels que '=TODO(!)='. Par exemple :
+    #+BEGIN_SRC org
+    * TODO Log each state with only a time
+      :PROPERTIES:
+      :LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)
+      :END:
+    * TODO Only log when switching to WAIT, and when repeating
+      :PROPERTIES:
+      :LOGGING: WAIT(@) logrepeat
+      :END:
+    * TODO No logging at all
+      :PROPERTIES:
+      :LOGGING: nil
+      :END:
+    #+END_SRC
+    
+
+
+
+*** Suivre vos habitudes
+    Org a la capacité de suivre la cohérence d'une catégorie spéciale
+    de TODO, appelée «habitudes». Pour utiliser les habitudes, vous
+    devez activer le module des =habits= en personnalisant la
+    variable =org-modules=.
+
+    Une habitudes a les propriétés suivantes :
+    1. L'habitude est un élément TODO, avec un mot-clé TODO
+       représentant un état ouvert.
+    2. La propriété '=STYLE=' est configurée à la valeur '=habit='
+       (voir le Chapitre 7 [Propriétés et Colonnes], page 62).
+    3. Le TODO a une date planifiée, généralement avec un intervalle
+       de répétition de style '=.+='. Un style '=++=' peut être approprié
+       pour les habitudes soumises à des contraintes de temps, par
+       exemple, il doit être effectué le week-end, ou un style '=+='
+       pour une habitude inhabituelle pouvant avoir un arriéré, par
+       exemple des rapports hebdomadaires.
+    4. Le TODO peut également avoir des plages minimales et maximales
+       spécifiées à l’aide de la syntaxe '=.+2d/3d=', qui indique
+       que vous souhaitez exécuter la tâche au moins tous les trois
+       jours, mais au maximum tous les deux jours.
+    5. La journalisation d'état pour l'état DONE est activée (voir la
+       section 5.3.2 [Suivi des statechanges TODO], page 52), afin que
+       les données historiques soient représentées dans le graphique
+       de cohérence. S'il n'est pas activé, il ne s'agit pas d'une
+       erreur, mais les graphiques de cohérence n'ont aucune
+       signification.
+
+       
+
+    Pour vous donner une idée de l’application des règles ci-dessus,
+    voici une habitude avec une certaine histoire :
+    #+BEGIN_SRC org
+    ** TODO Shave
+       SCHEDULED: <2009-10-17 Sat .+2d/4d>
+       :PROPERTIES:
+       :STYLE:   habit
+       :LAST_REPEAT: [2009-10-19 Mon 00:36]
+       :END:
+       - State "DONE"     from "TODO"         [2009-10-15 Thu]
+       - State "DONE"     from "TODO"         [2009-10-12 Mon]
+       - State "DONE"     from "TODO"         [2009-10-10 Sat]
+       - State "DONE"     from "TODO"         [2009-10-04 Sun]
+       - State "DONE"     from "TODO"         [2009-10-02 Fri]
+       - State "DONE"     from "TODO"         [2009-10-29 Tue]
+       - State "DONE"     from "TODO"         [2009-10-25 Fri]
+       - State "DONE"     from "TODO"         [2009-10-19 Sat]
+       - State "DONE"     from "TODO"         [2009-10-16 Wed]
+       - State "DONE"     from "TODO"         [2009-10-12 Sat]
+    #+END_SRC
+    Ce que cette habitude dit, c’est : Je veux me raser au plus tous
+    les 2 jours - à la date programmée '=SCHEDULED=' et à l’intervalle répété - et
+    au moins tous les 4 jours. Si nous sommes aujourd'hui le 15,
+    l'habitude apparaît pour la première fois à l'ordre du jour (voir
+    Chapitre 10 [Vues de l'agenda], page 102) le 17 octobre, après
+    l'expiration du délai minimum de 2 jours, et sera disponible à
+    partir du 19 octobre, après quatre jours se sont écoulés.
+    
+    Ce qui est vraiment utile à propos des habitudes, c’est qu’elles
+    sont affichées avec un graphique de cohérence, pour montrer à quel
+    point vous avez été cohérent dans l’exécution de cette tâche. Ce
+    graphique montre chaque jour que la tâche a été effectuée au cours
+    des trois dernières semaines, avec des couleurs pour chaque
+    jour. Les couleurs utilisées sont :
+    + Bleu si la tâche n'était pas finie ce jour-là
+    + Vert si la tâche aurait pu être faite ce jour-là
+    + Jaune si la tâche devait être retardée le lendemain
+    + Rouge si la tâche devait être retardée ce jour-là
+
+
+    
+    En plus de colorier chaque jour, le jour est également marqué d'un
+    astérisque si la tâche a été réellement effectuée ce jour-là et
+    d'un point d'exclamation indiquant où se trouve le jour actuel
+    dans le graphique.
+
+    Plusieurs variables de configuration peuvent être utilisées pour
+    modifier le mode d'affichage des habitudes dans l'agenda.
+
+
+    + =org-habit-graph-column= :: La colonne tampon dans laquelle le
+         graphe de cohérence doit être tracé. Ceci écrase tout texte
+         de cette colonne. Il est donc judicieux de garder les titres
+         de vos habitudes brefs et précis.
+    + =org-habit-preceding-days= :: La quantité d'historique, dans les
+         jours précédant aujourd'hui, à afficher dans les graphiques
+         de cohérence. 
+    + =org-habit-following-days= :: Le nombre de jours après
+         aujourd'hui qui apparaissent dans les graphiques de cohérence.
+    + =org-habit-show-habits-only-for-today= :: Si non-=nil=,
+         n’indiquez que les habitudes dans la vue de l’agenda du
+         jour. La valeur par défaut est =t=.
+
+
+    
+    Enfin, si vous appuyez sur =K= dans le tampon d’agenda, les
+    habitudes sont temporairement désactivées et ne s'affichent pas du
+    tout. Appuyez à nouveau sur =K= pour les ramener. Ils sont également
+    soumis au filtrage de balises, si vous avez des habitudes à ne pas
+    utiliser, par exemple, dans certains contextes.
+
+    
+
+** Priorités
+   
+   Si vous utilisez fréquemment le mode Org, vous risquez de vous
+   retrouver avec suffisamment d'éléments TODO pour qu'il soit logique
+   de les hiérarchiser. La priorité peut être faite en plaçant un
+   /cookie de priorité/ dans le titre d'un élément TODO, comme ceci.
+
+   #+BEGIN_SRC org
+   *** TODO [#A] Write letter to Sam Fortune
+   #+END_SRC
+
+   Par défaut, le mode Org prend en charge trois priorités : '=A=', '=B='
+   et '=C='. '=A=' est la priorité la plus élevée. Une entrée sans cookie
+   est traitée comme équivalente si elle avait la priorité '=B='. Les
+   priorités ne font la différence que pour le tri dans l'ordre du
+   jour (voir la section 10.3.1 [Agenda hebdomadaire / quotidien],
+   page 104); en dehors de l'agenda, ils n'ont aucune signification
+   inhérente au mode Org. Les cookies sont affichés avec le visage
+   défini par la variable =org-priority-faces=, qui peut être
+   personnalisé.
+
+   Les priorités peuvent être attachées à n’importe quel noeud de
+   contour; ils n'ont pas besoin d'être des objets TODO.
+
+
+   + =C-c=, (=org-priority=) :: Définissez la priorité du titre
+        actuel. La commande demande un caractère de priorité '=A=', '=B='
+        ou '=C='. Lorsque vous appuyez sur =SPC=, le cookie prioritaire,
+        s'il en existe un, est supprimé du titre. Les priorités
+        peuvent également être modifiées “à distance” à partir du
+        tampon de l'ordre du jour à l'aide de la commande, (voir
+        Section 10.5 [Commandes de l'ordre du jour], page 118).
+   + =S-UP= (=org-priority-up=) ::
+   + =S-DOWN= (=org-priority-down=) :: Augmenter / diminuer la
+        priorité du titre actuel[fn:48]. Notez que ces touches servent
+        également à modifier les horodatages (voir Section 8.2
+        [Création d’horodatages], page 72). Voir également la Section
+        15.12.2 [Conflicts], page 239, pour une discussion de
+        l'interaction avec le mode =shift-selection-mode=.
+
+
+   Vous pouvez modifier la plage de priorités autorisées en
+   définissant les variables =org-highest-priority=,
+   =org-lowest-priority=, et =org-default-priority=.  Pour un tampon
+   individuel, vous pouvez définir ces valeurs (la plus élevée, la
+   plus faible, la valeur par défaut) comme ceci (veuillez vous
+   assurer que la priorité la plus élevée est antérieure à l'alphabet
+   à la priorité la plus basse) : 
+   #+BEGIN_SRC org
+   #+PRIORITIES: A C B
+   #+END_SRC
+
+	
+
+** Décomposer les tâches en sous-tâches
+   
+   Il est souvent conseillé de décomposer de grandes tâches en
+   sous-tâches plus petites et gérables. Vous pouvez le faire en
+   créant une arborescence hiérarchique sous un élément TODO, avec des
+   sous-tâches détaillées sur l’arbre[fn:49]. Pour conserver un aperçu de
+   la fraction de sous-tâches déjà marquées DONE, insérez soit '=[ / ]=',
+   soit '=[ % ]=' n’importe où dans le titre. Ces cookies sont mis à jour
+   chaque fois que le statut TODO d'un enfant change ou lorsque vous
+   appuyez sur =C-c C-c= sur le cookie. Par exemple :
+   #+BEGIN_SRC org
+   * Organize Party [33%]
+   ** TODO Call people [1/2]
+   *** TODO Peter
+   *** DONE Sarah
+   ** TODO Buy food
+   ** DONE Talk to neighbor
+   #+END_SRC
+
+   Si un en-tête comporte à la fois des cases à cocher et des enfants
+   à TODO en dessous, la signification du cookie statistique devient
+   ambiguë. Définissez la propriété '=COOKIE_DATA=' sur '=checkbox='
+   ou '=todo=' pour résoudre ce problème.
+
+   Si vous souhaitez que le cookie de statistiques compte toutes les
+   entrées TODO dans la sous-arborescence (pas uniquement les enfants
+   directs), configurez la variable
+   =org-hierarchical-todo-statistics=. Pour ce faire, utilisez le mot
+   '=recursive=' dans la valeur de la propriété '=COOKIE_DATA=' pour un
+   seul sous-arbre.
+   #+BEGIN_SRC org
+   * Parent capturing statistics [2/20]
+     :PROPERTIES:
+     :COOKIE_DATA: todo recursive
+     :END:
+   #+END_SRC
+
+   Si vous souhaitez qu'une entrée TODO passe automatiquement à DONE
+   lorsque tous les enfants sont terminés, vous pouvez utiliser la
+   configuration suivante :
+   #+BEGIN_SRC emacs_lisp
+   (defun org-summary-todo (n-done n-not-done)
+     "Switch entry to DONE when all subentries are done, to TODO otherwise."
+     (let (org-log-done org-log-states)   ; turn off logging
+       (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+   #+END_SRC
+
+   Une autre possibilité consiste à utiliser des cases à cocher pour
+   identifier (une hiérarchie) un grand nombre de tâches subordonnées
+   (voir Section 5.6 [Cases à cocher], page 56).
+
+** Cases à cocher
+
+   Chaque élément d’une liste simple[fn:50] (voir Section 2.6 [Listes
+   simples], page 12) peut être transformé en une case à cocher en le
+   commençant par la chaîne '=[ ]='. Cette fonctionnalité est similaire
+   aux éléments TODO (voir Chapitre 5 [Eléments TODO], page 45), mais
+   elle est plus légère. Les cases à cocher ne sont pas incluses dans
+   la liste globale TODO; elles permettent donc de diviser une tâche
+   en plusieurs étapes simples. Ou vous pouvez les utiliser dans une
+   liste de courses. Pour activer une case à cocher, utilisez =C-c C-c=
+   ou utilisez la souris (grâce à '=org-mouse.el=' de Piotr
+   Zielinski).
+
+   Voici un exemple de liste de cases à cocher :
+   #+BEGIN_SRC org
+   * TODO Organize party [2/4]
+     - [-] call people [1/3]
+       - [ ] Peter
+       - [X] Sarah
+       - [ ] Sam
+     - [X] order food
+     - [ ] think about what music to play
+     - [X] talk to the neighbors
+   #+END_SRC
+
+   Les cases à cocher fonctionnent de manière hiérarchique, donc si un
+   élément de case à cocher a des enfants qui sont des cases à cocher,
+   le basculement de l'une des cases à cocher permet à la case à
+   cocher parent de refléter si aucun, certains ou tous les enfants
+   n'est coché.
+
+   Les '=[ 2/4 ]=' et '=[ 1/3 ]=' dans les première et deuxième lignes sont
+   des cookies indiquant le nombre de cases à cocher présentes dans
+   cette entrée et le nombre total de cases à cocher présentes. Cela
+   peut vous donner une idée du nombre de cases à cocher, même sans
+   ouvrir une entrée pliée. Les cookies peuvent être placés dans un
+   titre ou dans (la première ligne) d'un élément de liste
+   simple. Chaque cookie recouvre les cases des enfants directs
+   structurellement en dessous du titre / élément sur lequel le cookie
+   apparaît[fn:51]. Vous devez insérer le cookie vous-même en tapant
+   '=[ / ]=' ou '=[ % ]='. Avec '=[ / ]=', vous obtenez un résultat '=n sur m=', comme
+   dans les exemples ci-dessus. Avec '=[ % ]=', vous obtenez des
+   informations sur le pourcentage de cases à cocher cochées (dans
+   l'exemple ci-dessus, il s'agirait respectivement de '=[ 50% ]=' et
+   '=[ 33% ]='). Dans un titre, un cookie peut compter les cases à cocher
+   situées sous l'en-tête ou les états TODO des enfants, et affiche ce
+   qui a été modifié en dernier. Définissez la propriété '=COOKIE_DATA='
+   sur '=checkbox=' ou '=todo=' pour résoudre ce problème.
+
+   Si le nœud hiérarchique actuel a une propriété '=ORDERED=', les cases
+   à cocher doivent être cochées dans l’ordre, et une erreur est
+   générée si vous essayez de cocher une case alors que des cases non
+   cochées sont cochées dessus.
+
+   Les commandes suivantes fonctionnent avec les cases à cocher :
+   + =C-c C-c= (=org-toggle-checkbox=) :: Basculer le statut de la
+        case à cocher ou, avec l’argument du préfixe, la présence de
+        la case à cocher au point. Avec un seul argument de préfixe,
+        ajoutez une case à cocher vide ou supprimez currentone[fn:52]. Avec
+        un argument à double préfixe, définissez-le sur '=[ - ]=',
+        considéré comme un état intermédiaire.
+   + =C-c C-x C-b= (=org-toggle-checkbox=) :: Basculez l’état de la
+        case à cocher ou, avec l’argument de préfixe, la case de
+        présence au point. Avec l’argument à double préfixe,
+        définissez-le sur '=[ - ]=', considéré comme un état
+        intermédiaire.
+	+ S'il existe une région active, cochez la première case de la
+          région et définissez toutes les cases restantes sur le même
+          statut que la première. Avec un argument préfixe, ajoutez ou
+          supprimez la case à cocher pour tous les éléments de la
+          région.
+        + Si le point est dans un titre, activez les cases à cocher
+          dans la région entre ce titre et le suivant, afin que la
+          sous-arborescence ne soit pas entière.
+        + S'il n'y a pas de région active, il suffit de cocher la case
+          au point. 
+   + =M-S-RET= (=org-insert-todo-heading=) :: Insérer un nouvel
+        élément avec une case à cocher. Ceci ne fonctionne que si le
+        point est déjà dans un élément de la liste simple (voir Section
+        2.6 [Listes simples], page 12)
+   + =C-c C-x o= (=org-toggle-ordered-property=) :: Basculez la
+        propriété '=ORDERED=' de l’entrée pour choisir si les cases à
+        cocher doivent être cochées dans l’ordre. Une propriété est
+        utilisée pour ce problème car elle doit être locale à l'entrée
+        actuelle et ne pas être héritée comme une balise. Toutefois,
+        si vous souhaitez suivre la valeur de cette propriété avec une
+        balise pour une meilleure visibilité, personnalisez
+        =org-track-orders-property-with-tag=.
+   + =C-c #= (=org-update-statistics-cookies=) :: Mettez à jour le
+        cookie de statistiques dans l'entrée de plan actuelle. Appelé
+        avec un préfixe =C-u=, met à jour le fichier entier. Les cookies
+        statistiques des cases à cocher sont mis à jour
+        automatiquement si vous activez les cases à cocher avec
+        =C-c C-c= et en crée de nouvelles avec =M-S-RET=. Les cookies de
+        statistiques TODO sont mis à jour lors de la modification des
+        états TODO. Si vous supprimez des boîtes / des entrées ou si
+        vous les ajoutez / modifiez à la main, utilisez cette commande
+        pour rétablir la synchronisation.
+
+
+
+
+* Balises
+  
 
 * Footnotes
+
+[fn:52] =C-u C-c C-c= sur le premier élément d'une liste sans case à
+cocher ajoute des cases à cocher au reste de la liste.
+ 
+
+[fn:51] Définissez la variable =org-hierarchical-checkbox-statistics= si
+vous souhaitez que ces cookies comptent toutes les cases à cocher
+situées sous le cookie, et pas uniquement celles appartenant aux
+enfants directs.
+ 
+
+[fn:50] À l'exception des listes de description. Mais vous pouvez
+l'autoriser en modifiant les règles =org-list-automatic-rules= en
+conséquence.
+ 
+
+[fn:49] Pour que les sous-tâches ne figurent pas dans la liste globale
+TODO, reportez-vous à l'option =org-agenda-todo-list-sublevels=.
+ 
+
+[fn:48] Voir aussi l'option =org-priority-start-cycle-with-default=. 
+
+[fn:47] Il est possible que le mode Org enregistre deux horodatages
+lorsque vous utilisez la consignation =org-log-done= et la modification
+des modifications d'état. Cependant, il ne demande jamais deux notes:
+si vous avez configuré les deux, la note d'enregistrement de
+changement d'état est prioritaire et annule la note de clôture.
+ 
+
+[fn:46] Remarquez que le tiroir '=LOGBOOK=' est déplié lorsque =SPC=
+est pressée dans l'agenda pour montrer une entrée--utiliser =C-u SPC=
+pour le garder plié ici. 
+
+[fn:45] Voir la variable =org-log-states-order-reversed=. 
+
+[fn:44] Le paramètre correspondant dans la mémoire tampon est: '=#+STARTUP: lognotedone='. 
+
+[fn:43] Le paramètre correspondant dans la mémoire tampon est: '=#+STARTUP: logdone='. 
+
+[fn:42] Le mode Org n'analyse ces lignes que lorsque le mode Org est
+activé après la consultation d'un fichier. =C-c C-c= avec un point dans
+une ligne commençant par '=# +=' est simplement un redémarrage du mode
+Org pour le tampon actuel.
+ 
+
+[fn:41] Vérifiez également la variable
+=org-fast-tag-selection-include-todo=, elle vous permet de modifier
+l'état TODO via l'interface des balises (voir Section 6.2 [Définition
+des balises], page 57), au cas où vous voudriez mélanger les deux
+concepts. . Notez que cela signifie que vous devez définir des clés
+uniques pour les deux ensembles de mots-clés.
+ 
+
+[fn:40] Tous les caractères sont autorisés à l'exception de '=@=', '=^='
+et '=!=', Qui ont ici une signification particulière.
+ 
+
+[fn:39] Ceci est également vrai pour la commande =t= dans le tampon d'agenda. 
+
+[fn:38] La modification de la variable =org-todo-keywords= n'entre en
+vigueur qu'après le redémarrage du mode Org dans un tampon.
+ 
+
+[fn:37] Bien sûr, vous pouvez créer un document qui ne contient que de
+longues listes d’objets TODO, mais cela n’est pas nécessaire.
+ 
 
 [fn:36] Pour assurer la compatibilité ascendante, les numéros de ligne
 peuvent également suivre un simple deux-points.
