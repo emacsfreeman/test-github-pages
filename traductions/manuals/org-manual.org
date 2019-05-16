@@ -2267,8 +2267,293 @@ touches méta-curseur ont des fonctionnalités différentes.
         et fonctionne même si l'entrée est déplacée de fichier à
         fichier. Plus tard, lors de l'insertion de lien, vous devez
         décider lequel utilisé. 
-   + Email/News clients : VM, Rmail, Wanderlust, MH-E, Gnus :: 
+   + Email/News clients : VM, Rmail, Wanderlust, MH-E, Gnus :: Presque
+        tous les clients de messagerie Emacs sont supportés. Le lien
+        pointe vers le currentarticle ou, dans certains tampons Gnus,
+        vers le groupe. La description est construite selon le
+        variable =org-email-link-description-format=. Par défaut, il
+        fait référence au destinataire et au sujet, éventuellement
+        tronqué.
+   + Navigateurs Web : W3, [[https://en.wikipedia.org/wiki/W3m][W3M]] et [[https://en.wikipedia.org/wiki/Eww_(web_browser)][EWW]] :: Ici, le lien est l'URL
+        actuelle, avec le titre de la page comme description. 
+   + Contacts : BBDB :: Les liens créés dans un tampon BBDB pointent
+        vers l'entrée actuelle.
+   + Chat : IRC :: Pour les liens IRC, si variable =org-irc-link-to-logs=
+                   est non-=nil=, créez un lien de style '=file=' vers
+                   le point approprié dans les journaux de la
+                   conversation en cours. Sinon, stockez un lien de
+                   style '=irc=' vers l'utilisateur / le canal / le
+                   serveur sous le point.
+   + Autres fichiers :: Pour tout autre fichier, le lien pointe vers
+        le fichier, avec une chaîne de recherche (voir Section 4.8
+        [Options de recherche], page 45) pointant vers le contenu de
+        la ligne en cours. S'il y a une région active, les mots
+        sélectionnés constituent la base de la chaîne de
+        recherche. Vous pouvez écrire des fonctions Lisp
+        personnalisées pour sélectionner la chaîne de recherche et
+        effectuer la recherche de types de fichiers particuliers (voir
+        Section 4.9 [Recherches personnalisées], page 44). Vous pouvez
+        également définir des liens dédiés vers d'autres
+        fichiers. Voir la section A.3 [Ajout de types de lien
+        hypertexte], page 244.
+   + Vue de l'agenda :: Lorsque le point est dans une vue de l'agenda,
+        le lien créé pointe vers l'entrée référencée par la ligne en
+        cours.
+   
+
+
+   À partir d'un tampon d'Org, les commandes suivantes
+   permettent de créer, de naviguer ou, plus généralement, d'agir sur
+   des liens.
+
+   + =C-c C-l= (=org-insert-link=) :: Insérer un lien[fn:32]. Ceci invite à
+        insérer un lien dans la mémoire tampon. Vous pouvez simplement
+        taper un lien, en utilisant du texte pour un lien interne, ou
+        l’un des types de lien préfixés dans les exemples
+        ci-dessus. Le lien est inséré dans la mémoire tampon avec un
+        texte descriptif[fn:33]. Si du texte a été sélectionné à ce
+        moment-là, il devient la description par défaut.
+   + /Insérer des liens stockés/ :: Tous les liens stockés au cours de
+        la session en cours font partie de l'historique de cette
+        invite, vous pouvez donc y accéder avec =UP= et =DOWN= (ou =M-p=,
+        =M-n=).
+   + /Assistance à l'achèvement/ :: La complétion avec =TAB= vous aide à
+        insérer des préfixes de lien valides, tels que '=http=' ou
+        '=ftp=', y compris les préfixes définis par des abréviations de
+        lien (voir Section 4.7 [Abréviations de lien], page 42). Si
+        vous appuyez sur =RET= après avoir inséré uniquement le préfixe,
+        Org propose un support de complément spécifique pour certains
+        types de lien[fn:34]. Par exemple, si vous saisissez =file
+        RET= - accès alternatif : =C-u C-c C-l=, voir ci-dessous - Org
+        vous permet de compléter le nom du fichier et, après =b b d b
+        RET=, vous pouvez compléter les noms des contacts.
+   + =C-u C-c C-l= :: Lorsque =C-c C-l= est appelé avec un argument de
+                      préfixe =C-u=, insérez un lien vers un
+                      fichier. Vous pouvez utiliser la complétion de
+                      nom de fichier pour sélectionner le nom du
+                      fichier. Le chemin d'accès au fichier est inséré
+                      par rapport au répertoire du fichier Org actuel,
+                      si le fichier lié se trouve dans le répertoire
+                      actuel ou dans l'un de ses sous-répertoires, ou
+                      si le chemin est écrit par rapport au répertoire
+                      actuel à l'aide de '=../=' . Sinon, un chemin
+                      absolu est utilisé, si possible avec "=~ /=" pour
+                      votre répertoire personnel. Vous pouvez forcer
+                      un chemin absolu avec deux préfixes =C-u=.
+   + =C-c C-l= (avec point sur le lien existant) :: Lorsque le point
+        se trouve sur un lien existant, =C-c C-l= vous permet d’éditer
+        les parties lien et description du lien.
+   + =C-c C-o= (=org-open-at-point=) :: Ouvrir le lien au point. Ceci
+        lance un navigateur Web pour l'URL (using =browse-url-at-point=),
+        exécutez VM/MH-E/Wanderlust/Rmail/Gnus/BBDB pour les
+        liens correspondants et exécutez la commande dans un lien
+        shell. Lorsque point est sur un lien interne, cette commande
+        exécute la recherche correspondante. Lorsque le point se
+        trouve sur la partie balises d'un titre, il crée la vue des
+        balises correspondante (voir Section 10.3.3 [Balises et
+        propriétés correspondantes], page 112). Si le point est sur un
+        horodatage, il compile l'ordre du jour pour cette date. De
+        plus, il visite des fichiers texte et distants sous forme de
+        liens de '=file=' avec Emacs et sélectionne une application
+        appropriée pour les fichiers locaux non-texte. La
+        classification des fichiers est basée sur une extension de
+        fichier uniquement. Voir l'option =org-file-apps=. Si vous
+        souhaitez remplacer l'application par défaut et visiter le
+        fichier avec Emacs, utilisez un préfixe =C-u=. Si vous voulez
+        éviter d'ouvrir dans Emacs, utilisez un préfixe =C-u C-u=. Si le
+        point est sur un titre, mais pas sur un lien, offrez tous les
+        liens dans le titre et le texte de saisie. Si vous souhaitez
+        configurer la configuration de la trame pour les liens
+        suivants, personnalisez =org-link-frame-setup=.
+   + =RET= :: Lorsque =org-return-follow-link= est défini, =RET= suit
+              également le lien au point.
+   + =mouse-2= ou =mouse-1= :: Sur les liens, =mouse-1= et =mouse-2=
+        ouvre le liens comme =C-c C-o= le fait.
+   + =mouse-3= :: Comme =mouse-2=, mais force les liens de fichiers à
+                  être ouvert avec Emacs, et les liens internes à être
+                  affichés dans une autre fenêtre[fn:35].
+   + =C-c %= (=org-mark-ring-push=) :: Poussez la position actuelle
+        sur l'anneau de marque Org pour pouvoir revenir
+        facilement. Les commandes suivant un lien interne le font
+        automatiquement.
+   + =C-c &= (=org-mark-ring-goto=) :: Revenir à une position
+        enregistrée. Une position est enregistrée par les commandes
+        qui suivent les liens internes et par =C-c%=. En utilisant cette
+        commande plusieurs fois, la succession indirecte se déplace
+        dans un anneau de positions précédemment enregistrées.
+   + =C-c C-x C-n= (=org-next-link=) :: 
+   + =C-c C-x C-p= (=org-previous-link=) :: Avancer / reculer jusqu'au
+        prochain lien dans la mémoire tampon. À la limite du tampon,
+        la recherche échoue une fois, puis tourne autour. Les
+        raccourcis clavier pour cela sont vraiment trop longs; vous
+        voudrez peut-être lier ceci également à =M-n= et =M-p=.
+	#+BEGIN_SRC emacs_lisp
+	(add-hook 'org-load-hook
+	          (lambda ()
+		     (define-key org-mode-map "\M-n" 'org-next-link)
+                     (define-key org-mode-map "\M-p" 'org-previous-link)))
+        #+END_SRC
+
+
+   
+** Utilisation de lien en dehors de Org 
+   Vous pouvez insérer et suivre des liens qui ont la syntaxe Org non
+   seulement dans Org, mais dans n’importe quel tampon Emacs. Pour
+   cela, Org fournit deux fonctions: =org-insert-link-global= et
+   =org-open-at-point-global=.
+
+   Vous voudrez peut-être les lier à des clés disponibles
+   globalement. Voir la section 1.3 [Activation], page 2 pour des
+   conseils.
+
+** Abréviations de liens
+   Une longue URL peut être fastidieuse à taper et souvent, de
+   nombreux liens similaires sont nécessaires dans un document. Pour
+   cela, vous pouvez utiliser des abréviations de lien. Un lien abrégé
+   ressemble à ceci
+   #+BEGIN_SRC org
+   [[linkword:tag][description]]
+   #+END_SRC
+   où la balise est facultative. Le mot de lien doit être un mot,
+   commençant par une lettre, suivi de lettres, de chiffres, de «-» et
+   de «_». Les abréviations sont résolues en fonction des informations
+   de la variable =org-link-abbrev-alist= qui relie les mots-liens au
+   texte de remplacement. Voici un exemple :
+   #+BEGIN_SRC emacs_lisp
+   (setq org-link-abbrev-alist
+         '(("bugzilla"  . "http://10.1.2.9/bugzilla/show_bug.cgi?id=")
+	   ("url-to-ja" . "http://translate.google.fr/translate?sl=en&tl=ja&u=%h")   
+	   ("google"    . "http://www.google.com/search?q=")
+           ("gmap"      . "http://maps.google.com/maps?q=%s")
+           ("omap"      . "http://nominatim.openstreetmap.org/search?q=%s&polygon=1")
+           ("ads"       . "http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?author=%s&db")
+   #+END_SRC
+   Si le texte de remplacement contient la chaîne '=% s=', elle est
+   remplacée par la balise. L’utilisation de '=% h=' au lieu de '=% s='
+   pour coder la balise (voir l’exemple ci-dessus, où nous devons
+   coder le paramètre URL). L’utilisation de '=%= (=my-function=)' passe
+   la balise à une fonction Lisp personnalisée et la remplace par la
+   chaîne résultante.
+
+   Si le texte de remplacement ne contient aucun spécificateur, il est
+   simplement ajouté à la chaîne afin de créer le lien.
+
+   Au lieu d'une chaîne, vous pouvez également spécifier une fonction
+   Lisp pour créer le lien. Une telle fonction sera appelée avec la
+   balise comme seul argument.
+
+   Avec le paramètre ci-dessus, vous pouvez créer un lien vers un
+   bogue spécifique avec '=[[bugzilla: 129]]=, recherchez sur le Web
+   "OrgMode" avec '=[[google: OrgMode]]=', affichez l'emplacement de la
+   carte de Free Software Foundation '=[[gmap: 51 Franklin Street,
+   Boston]]=' ou du bureau de Carsten '=[[omap: Science Park 904,
+   Amsterdam, Pays-Bas]]=' et découvrez ce que fait Orgauthor à côté
+   du piratage d'Emacs avec '=[[annonces: Dominik , C]]='.
+
+   Si vous avez besoin d’abréviations spéciales pour un seul tampon
+   d’organisation, vous pouvez les définir dans le fichier avec
+   #+BEGIN_SRC org
+   #+LINK: bugzilla  http://10.1.2.9/bugzilla/show_bug.cgi?id=
+   #+LINK: google    http://www.google.com/search?q=%s
+   #+END_SRC
+   L’achèvement dans la mémoire tampon (voirSection 15.1 [Achèvement],
+   page 242) peut être utilisé après le '=[=' pour compléter les
+   abréviations de lien. Vous pouvez également définir une fonction
+   Lisp qui implémente un support spécial (par exemple, achèvement)
+   pour l'insertion d'un tel lien avec =C-c C-l=. Une telle fonction ne
+   doit accepter aucun argument et doit renvoyer le lien complet avec
+   un préfixe. Vous pouvez définir la fonction d'achèvement de liaison
+   comme suit :
+   #+BEGIN_SRC emacs_lisp
+   (org-link-set-parameter "type" :complete #'some-completion-function)
+   #+END_SRC
+   
+
+** Options de recherche dans les liens de fichiers
+
+   Les liens de fichiers peuvent contenir des informations
+   supplémentaires permettant à Emacs d'accéder à un emplacement
+   particulier du fichier lors du suivi d'un lien. Cela peut être un
+   numéro de ligne ou une option de recherche après un double point
+   double[fn:36]. Par exemple, lorsque la commande =org-store-link= crée un
+   lien (voir Section 4.5 [Gestion des liens], page 39) vers un
+   fichier, elle code les mots de la ligne actuelle sous forme de
+   chaîne de recherche pouvant être utilisée pour rechercher cette
+   ligne. revenir plus tard en suivant le lien avec =C-c C-o=.
+
+   Voici la syntaxe des différentes manières d’attacher une recherche
+   à un lien de fichier, ensemble avec des explications pour chacune
+   d’elles :
+   #+BEGIN_SRC org
+   [[file:~/code/main.c::255]]
+   [[file:~/xx.org::My Target]]
+   [[file:~/xx.org::*My Target]]
+   [[file:~/xx.org::#my-custom-id]]
+   [[file:~/xx.org::/regexp/]]
+   #+END_SRC
+   + '=255=' :: Saute à la ligne 255
+   + '=My Target=' :: Recherchez une cible de lien '=<< Ma cible >>=' ou
+                      faites une recherche textuelle sur '=ma cible=',
+                      similaire à la recherche dans les liens
+                      internes, voir Section 4.2 [Liens internes],
+                      page 37. En exportation HTML (voir Section 12.9
+                      [HTML Export], page 151), un tel lien de fichier
+                      devient une référence HTML à l'ancre nommée
+                      correspondante dans le fichier lié.
+   + '=*My Target=' :: Dans un fichier Org, limiter la recherche aux
+                       titres. 
+   + '=#my-custom-id=' :: Lien vers un en-tête avec une propriété
+        '=CUSTOM_ID='
+   + '=/REGEXP/=' :: Effectuez une recherche d'expression régulière
+                     pour REGEXP. Ceci utilise la commande Emacs pour
+                     lister toutes les correspondances dans une
+                     fenêtre séparée. Si le fichier cible est en mode
+                     Org, =org-occur= est utilisé pour créer un
+                     arbre fragmenté avec les correspondances.
+   
+
+   En cas de dégénérescence, un lien de fichier avec un nom de fichier
+   vide peut être utilisé pour rechercher le fichier en cours. Par
+   exemple, '=[[fichier ::: me trouver]]=' effectue une recherche sur "me
+   trouver" dans le fichier actuel, comme le ferait '=[[me
+   trouver]]='.
+
+
+** Recherches personnalisées
+
+   Le mécanisme par défaut de création de chaînes de recherche et de
+   recherche réelle liée à un lien de fichier peut ne pas fonctionner
+   correctement dans tous les cas. Par exemple, les fichiers de base
+   de données Bib\TEX{} comportent de nombreuses entrées comme
+   ~year="1993"~, ce qui ne donnerait pas de bonnes chaînes de
+   recherche, car la seule identification unique d'une entrée
+   Bib\TEX{} est la clé de citation.
+
+
 * Footnotes
+
+[fn:36] Pour assurer la compatibilité ascendante, les numéros de ligne
+peuvent également suivre un simple deux-points.
+ 
+
+[fn:35] Voir la variable =org-display-internal-with-indirect-buffer=. 
+
+[fn:34] Cela fonctionne si une fonction a été définie dans la
+propriété =:complete= d'un lien dans =org-link-parameters=.
+ 
+
+[fn:33] Après l'insertion d'un lien stocké, le lien sera supprimé de
+la liste des liens stockés. Pour le conserver dans la liste pour une
+utilisation ultérieure, utilisez un triple argument préfixé =C-u= à =C-c C-l=
+ou configurez l'option =org-keep-storage-link-after-insertion=.
+ 
+
+[fn:32] Notez qu'il n'est pas nécessaire d'utiliser cette commande
+pour insérer un lien. Les liens dans Org sont en texte brut et vous
+pouvez les taper ou les coller directement dans la mémoire tampon. En
+utilisant cette commande, les liens sont automatiquement placés entre
+doubles crochets et le texte descriptif facultatif vous sera demandé.
+ 
 
 [fn:29] La bibliothèque Org Id doit d'abord être chargée, soit via
 =org-customize=, soit en activant =id= dans =org-modules=, ou en
