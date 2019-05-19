@@ -15,54 +15,750 @@
 * Hello world
 
   #+BEGIN_SRC php
-  <?php
   print('Hello ');
   echo "World\n";
-  ?>
   #+END_SRC
 
-* Types et variables  
+* Type et variables
+** Booléens
 
   #+BEGIN_SRC php
-  <?php
   // Boolean
   $boolean = true;
+  echo $boolean;
   $boplean = false;
+  echo $boolean;
+  #+END_SRC
 
+** Entiers
+
+  #+BEGIN_SRC php
   // Integers
   $int1 = 1;
   $int2 = -1;
   $int3 = 012; // octal
   $int4 = 0x1F; // hexadecimal
   $int5 = 0b10101; // binaire
+  #+END_SRC
 
+** Flottant (décimaux)
+
+  #+BEGIN_SRC php
   $// Floats (ou doubles)
   $float = 1.234;
   $float = 1.2e3;
   $float = 5E-10;
+  #+END_SRC
 
-  // Suppression de variable
+** Suppression de variable
+
+  #+BEGIN_SRC php
   unset($int1);
+  #+END_SRC
+
   
-  // Arithmetic
+** Arithmetic
+
+  #+BEGIN_SRC php
   $sum        = 0 + 1; //1
   $difference = 5 - 3; // 2
   $product    = 3 * 1; // 3
   $quotient   = 8 / 2; // 4
+  #+END_SRC
 
-  // Raccourcis arithmetic
+** Raccourcis arithmetic
+
+  #+BEGIN_SRC php
   $number = 0;
   $number += 2; // ajoute 2 équivalent de $number = $number + 2;
   $number -= 1; // enlève 1 équivalent de $number = $number - 1;
   $number *= 3; // multiplie par 3, équivalent de $number = $number * 3;
   $number /= 3; // divise par 3, équivalent de $number = $number / 3;
-
   
   $number = 0;
   echo $number++; //  affiche 1 (incrémente après évaluation)
   echo ++$number; // affiche 3 (incrémente avant évaluation)
+  #+END_SRC
+
+** Chaînes de caractères (string)  
   
+  #+BEGIN_SRC php
   // les chaînes doivent êtres entre guillemets simples
   $single_quotes = '$String';
-  ?>
+  
+  // éviter les guillemets doubles sauf pour l'interpolation de variables
+  $double_quotes = "Ceci est un $single_quotes.";
+
+  // échappement
+  $escaped   = "Ceci contient un \t caractère de tabulation.";
+  $unescaped = 'Ceci contient juste un slash et un t : \t';
+
+  // Entourer une variable avec des accolades si nécessaire
+  $number = 0.01;
+  $bitcoins = "J'ai {$number} bitcoins.";
+  $oranges = "J'ai ${number} oranges.";
+  $dollars = "J'ai $${number} à la banque.";
+
+  // Multi-ligne
+  $nowdoc = <<<'END'
+  Multi
+  ligne
+  END;
+
+  // Interpolation multi-lignes
+  $heredoc = <<<END
+  Multi ligne
+  $single_quotes
+  END;
+
+  // Concaténation de chaînes avec .
+  echo 'Cette chaîne ' . 'est concaténée';
+
+  // Les chaînes peuvent être passées en tant que paramètres à echo
+  echo 'Multiple', 'Parameters', 'Valid';
+  #+END_SRC
+** Constantes
+
+   #+BEGIN_SRC php
+   define("PI", 3.14159);
+   echo PI;
+   echo 'π vaut environ ' . PI;
+   #+END_SRC
+
+
+   
+** Tableaux (arrays)
+
+   #+BEGIN_SRC php
+   // avec toutes les versions
+   $associative = array('Un' => 1, 'Deux' => 2, 'Three' => 3);
+
+   // Avec les versions supérieures à PHP 5.4
+   $associative = ['Un' => 1, 'Deux' => 2, 'Trois' => 3];
+
+   echo $associative['Un'];
+
+   // Ajouter un élément à un tableau associatif
+   $associative['Quatre'] = 4;
+
+   // Liste
+   $array = ['Un', 'Deux', 'Trois'];
+   echo $array[0]; 
+
+   // Ajoute un élément à la fin de la liste
+   $array[] = 'Quatre';
+   // ou 
+   array_push($array, 'Cinq');
+
+   // Retire un élément du tableau
+   unset($array[3]);
+   #+END_SRC
+* Sorties
+  
+  #+BEGIN_SRC php
+  echo('Hello World!');
+  print('Hello World!');
+
+  echo 'Hello World';
+  print 'Hello World';
+
+  $paragraph = 'paragraph';
+
+  echo 100;
+  echo $paragraph;
+
+  <p><?= $paragraph ?></p>
+
+  $x = 1;
+  $y = 2;
+  $x = $y;
+  $z = &$y;
+
+  echo $x;
+  echo $z;
+  $y = 0;
+  echo $x;
+  echo $z;
+
+  var_dump($z);
+
+  print_r($array);
+  #+END_SRC
+* Logique
+
+  #+BEGIN_SRC php
+  $a = 0;
+  $b = '0';
+  $c = '1';
+  $d = '1';
+
+  assert($a == $b);
+  assert($c != $a);
+  assert($c <> $a);
+  assert($a < $c);
+  assert($c > $b);
+  assert($a <= $b);
+  assert($c >= $d);
+
+  assert($c === $d);
+  assert($a !== $d);
+  assert(1 === '1');
+  assert(1 !== '1');
+
+  $a = 100;
+  $b = 1000;
+
+  echo $a <=> $a;
+  echo $a <=> $b;
+  echo $b <=> $a;
+
+  $integer = 1;
+  echo $integer + $integer;
+
+  $string = '1';
+  echo $string + $string;
+  
+  $string = 'one';
+  echo $string + $string;
+
+  $boolean = (boolean) 1;
+
+  $zero = 0;
+  $boolean = (boolean) $zero;
+
+  $integer = 5;
+  $string = strval($integer);
+
+  $var = null;
+  #+END_SRC
+* Structures de contrôle
+
+  #+BEGIN_SRC php
+  if (true) 
+  {
+    print 'Je suis affiché';
+  }
+
+  if (false)
+  {
+    print 'I don\'t';
+  } 
+  else 
+  {
+     print 'Je suis affiché';
+  }
+  
+  if (false)
+  {
+     print 'Pas affiché';
+  }
+  elseif (true)
+  {
+     print 'Affiché';
+  }
+
+  // Opérateur ternaire
+  print (false ? 'Pas affiché' : 'Affiché');
+  
+  // Raccourci
+  $x = false;
+  print($x ?: 'Affiché');
+
+  $a = null;
+  $b = 'Affiché';
+  echo $a ?? 'a pas défini';
+  echo $b ?? 'b pas défini';
+
+  $x = 0;
+  if ($x === '0')
+  {
+    print 'Pas affiché';
+  }
+  elseif ($x == '1')
+  {
+    print 'Pas affiché';
+  }
+  else
+  {
+    print 'Affiché';
+  }
+
+
+  // Alternatif pour les modèles
+  <?php if ($x): ?>
+  Ceci est affiché si le test est vrai.
+  <?php else: ?>
+  Ceci est affiché sinon.
+  <?php endif; ?>
+
+  // switch
+  switch ($x) 
+  {
+    case '0':
+        print 'Switch fait de la coercition de type';
+	break;
+    case 'two':
+    case 'three':
+        // fait quelque chose si $variable est 'two' ou 'three'
+         break;
+    default:
+         // fait quelque chose  
+  }
+
+  // While
+  $i = 0;
+  while ($i < 5)
+  {
+     echo $i++;
+  }
+  
+  echo "\n";
+
+  $i = 0;
+  do 
+  {
+    echo $i++;
+  } 
+  while ($i < 5);
+
+  echo "\n";
+
+  for ($x = 0; $x < 10; $x++) 
+  {
+    echo $x;
+  }
+
+  echo "\n";
+
+  $wheels = ['bicycle' => 2, 'car' => 4];
+
+  // Boucles Foreach
+  foreach ($wheels as $wheel_count)
+  {
+    echo $wheel_count;
+  }
+
+  echo "\n";
+
+  foreach ($wheels as $vehicle => $wheel_count)
+  {
+    echo "Un véhicule a $wheel_count roues";
+  }
+
+  echo "\n";
+
+  $i = 0;
+  while ($i < 5)
+  {
+    if ($i === 3)
+    {
+      break;
+    }
+    echo $i++;
+  }
+
+  for ($i = 0; $i < 5; $i++)
+  {
+     if ($i === 3)
+     {
+        continue;
+     }
+     echo $i;
+  }
+  #+END_SRC
+* Fonctions
+
+  #+BEGIN_SRC php
+  function ma_fonction() 
+  { 
+    return 'Hello'; 
+  }
+
+  echo ma_fonction();
+
+  function add($x, $y = 1)
+  {
+     $result = $x + $y;
+     return $result;
+  }
+
+  echo add(4);
+  echo add(4, 2);
+
+  $inc = function($x) {
+    return $x + 1;
+  };
+
+  echo $inc(3);
+
+  function foo ($x, $y, $z) 
+  {
+    echo "$x - $y - $z";
+  }
+
+  function bar ($x, $y) 
+  {
+     return function ($z) use ($x, $y) 
+     {
+       foo($x, $y, $z);
+     };
+  }
+
+  $bar = bar('A', 'B');
+  $bar('C');
+
+  $function_name = 'add';
+  echo $function_name(1, 2);
+
+  function parameters() 
+  {
+    $numargs = func_num_args();
+    if ($numargs > 0) 
+    {
+      echo func_get_arg(0) . ' | ';
+    }
+    $args_array = func_get_args();
+    foreach ($args_array as $key => $arg)
+    {
+      echo $key . ' - ' . $arg . ' | ';
+    }
+  }
+
+  parameters('Hello', 'World');
+
+  function variable($word, ...$list)
+  {
+     echo $word . " || ";
+     foreach ($list as $item)
+     {
+        echo $item . ' | ';
+     }
+  }
+
+  variable("Separate", "Hello", "World");
+  #+END_SRC
+* Includes
+  
+  #+BEGIN_SRC php
+  include 'mon-fichier.php';
+
+  include_once 'mon-fichier.php';
+
+  require 'mon-fichier.php';
+  require_once 'mon-fichier.php;
+
+  // Contenu de mon-fichier.php
+  <?php return 'Tout ce que tu veux.'; ?>
+
+  $value = include 'mon-fichier.php';
+  #+END_SRC
+* Classes
+
+  #+BEGIN_SRC php
+  class MyClass
+  {
+     const MY_CONST = 'value';
+     
+     static $staticVar = 'static';
+
+     // variables statiques et leur visibilité
+     public static $publicStaticVar = 'publicStatic';
+     
+     // accessible uniquement dans la classe
+     private static $privateStaticVar = 'privateStatic';
+
+     // accessible depuis la classe et les sous-classes
+     protected static $protectedStaticVar = 'protectedStatic';
+
+     // les propriétés doivent déclarer leur visibilité
+     public $property = 'public';
+     public $instanceProp;
+     protected $prot = 'protected';
+     private $priv = 'private';
+
+     public function __construct($instanceProp)
+     {
+        $this->instanceProp = $instanceProp;
+     }
+
+     public function maMethod()
+     {
+        print 'MyClass';
+     }
+
+     // le mot-clé final empêche la réécriture
+     final function youCannotOverrideMe() {}
+
+     // méthodes magiques 
+     // que faire si un objet est traité comme une chaîne ?
+     public function __toString()
+     {
+        return $property;
+     }
+
+     // opposé de __construct()
+     // appelé lorsque l'objet n'est plus référencé
+     public function __destruct()
+     {
+        print "Destroying";
+     }
+
+     public static function myStaticMethod()
+     {
+        print 'Je suis statique';
+     }
+  }
+
+  // les constantes de classes sont toujours accessibles statiquement
+  echo MyClass::MY_CONST;
+
+  echo MyClass::$staticVar;
+  MyClass::myStaticMethod();
+
+  $my_class = new MyClass('An instance property');
+  
+  // l'accès aux membres se fait avec ->
+  echo $my_class->property;
+  echo $my_class->instanceProp;
+  $my_class->myMethod();
+
+  // extension de classe
+  class MyOtherClass extends MyClass
+  {
+    function printProtectedProperty()
+    {
+      echo $this->prot;
+    }
+
+    // Override a method
+    function myMethod()
+    {
+      parent::myMethod();
+      print ' > MyOtherClass';
+    }
+  }
+
+  $my_other_class = new MyOtherClass('Instance prop');
+  $my_other_class->printProtectedProperty();
+  $my_other_class->myMethod();
+
+  final class YouCannotExtendMe {}
+
+  // getters and setters
+  class MyMapClass
+  {
+    private $property;
+    
+    public function __get($key)
+    {
+      return $this->$key;
+    }
+
+    public function __set($key, $value)
+    {
+      $this->$key = $value;
+    }
+  }
+
+  $x = new MyMapClass();
+  echo $x->property;
+  $x->property = 'Something';
+
+  // interface
+  interface InterfaceOne
+  {
+    public function doSomething();
+  }
+
+  interface InterfaceTwo
+  {
+    public function doSomethingElse();
+  }
+
+  // interfaces can be extended
+  interface InterfaceThree extends InterfaceTwo
+  {
+     public function doAnotherContract();
+  }
+
+  abstract class MyAbstractClass implements InterfaceOne
+  {
+     public $x = 'doSomething';
+  }
+  
+  class MyConcreteClass extends MyAbstractClass implements InterfaceTwo
+  {
+    public function doSomething()
+    {
+      echo $x;
+    }
+
+    public function doSomethingElse()
+    {
+      echo 'doSomethingElse';
+    }
+  }
+
+  // des classes peuvent implémenter plus qu'une interface
+  class SomeOtherClass implements InterfaceOne, InterfaceTwo
+  {
+    public function doSomething()
+    {
+      echo 'doSomething';
+    }
+
+    public function doSomethingElse()
+    {
+      echo 'doSomethingElse';
+    }
+  }
+  #+END_SRC
+* Traits
+  
+  #+BEGIN_SRC php
+  trait MyTrait 
+  {
+    public function myTraitMethod()
+    {
+      print 'I have MyTrait';
+    }
+  }
+
+  class MyTraitfulClass
+  {
+    use MyTrait;
+  }
+
+  $cls = new MyTraitfulClass();
+  $cls->myTraitMethod();
+  #+END_SRC
+* Espaces de noms
+
+  #+BEGIN_SRC php
+  // Cette section est séparée, parce qu'une déclaration d'espace de nom 
+  // doit être la première instruction dans un fichier
+  
+  $cls = new \MyClass();
+  
+  namespace My\Namespace;
+
+  class MyClass {}
+
+  // depuis un autre fichier
+  $cls = new My\Namespace\MyClass;
+
+  // ou avec d'autre espace de nom
+  namespace My\Other\Namespace;
+
+  use My\Namespace\MyClass;
+
+  $cls = new MyClass();
+
+  // ou avec un alias
+  namespace My\Other\Namespace;
+
+  use My\Namespace as SomeOtherNamespace;
+
+  $cls = new SomeOtherNamespace\MyClass();
+  #+END_SRC
+* Late Static Binding
+
+  #+BEING_SRC php
+  class ParentClass
+  {
+     public static function who()
+     {
+        echo "I'm a " . __CLASS__ . "\n";
+     }
+
+     public static function test()
+     {
+        // self se réfère à la classe où la méthode est définie
+	self::who();
+	// static se réfère à la classe dans laquelle la méthode est
+       // invoquée
+       static::who();
+     }
+  }
+
+  ParentClass::test();
+  
+  class ChildClass extends ParentClass
+  {
+    public static function who()
+    {
+      echo "But I'm " . __CLASS__ . "\n";
+    }
+  }
+
+  ChildClass::test();
+  #+END_SRC
+* Constantes magiques
+  
+  #+BEGIN_SRC php
+  // Obtenir le nom de la classe actuelle, doit être utilisé dans une
+  // déclaration de classe
+  echo "Current class name is " . __CLASS__;
+
+  // obtenir le chemin absolu d'un répertoire ou fichier
+  echo "Current directory is " . __DIR__;
+
+  // usage typique
+  require __DIR__ . '/vendor/autoload.php';
+
+  // obtenir le chemin complet d'un fichier
+  echo "Current file path is " . __FILE__;
+
+  // obtenir le nom de la fonction actuelle
+  echo "Current function name is " . __FUNCTION__;
+
+  // obtenir le nombre de ligne
+  echo "Current line number is " . __LINE__;
+
+  // obtenir le nom de la méthode actuelle
+  echo "Current method is " . __METHOD__;
+
+  // obtenir le nom de l'espace de nom actuel
+  echo "Current namespace is " . __NAMESPACE__;
+
+  // Obtenir le nom du trait courant 
+  echo "Current trait is " . __TRAIT__;
+  #+END_SRC
+* Gestion d'erreur
+
+  #+BEGIN_SRC php
+  try 
+  {
+     // Do something
+  } 
+  catch (Exception $e)
+  {
+    // Handle exception
+  }
+
+  try
+  {
+    // Do something
+    catch (\Exception $e)
+    {
+      // Handle exception
+    }
+  }
+
+  // exceptions personnalisées
+  class MyException extends Exception {}
+
+  try 
+  {
+    $condition = true;
+    
+    if ($condition)
+    {
+      throw new MyException('Something just happened');
+    }
+  }
+  catch (MyException $e)
+  {
+    // Handle my exception
+  }
   #+END_SRC
