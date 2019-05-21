@@ -3314,7 +3314,6 @@ touches méta-curseur ont des fonctionnalités différentes.
 
 
 
-
 * Balises
 
   Un excellent moyen d'implémenter des étiquettes et des contextes
@@ -3675,9 +3674,154 @@ touches méta-curseur ont des fonctionnalités différentes.
    propriétés correspondantes], page 107.
 
 
-
 * Propriétés et colonnes
+  
+  Une propriété est une paire clé-valeur associée à une entrée. Les
+  propriétés peuvent être définies de manière à ce qu'elles soient
+  associées à une seule entrée, à toutes les entrées d'une
+  arborescence ou à toutes les entrées d'un fichier Org.
 
+  Il existe deux applications principales pour les propriétés en mode
+  Org. Premièrement, les propriétés sont des liketags, mais avec une
+  valeur. Imaginez que vous mainteniez un fichier dans lequel vous
+  documentez des bogues et des versions planifiées d'un logiciel. Au
+  lieu d'utiliser des balises telles que '=release_1=', '=release_2=',
+  vous pouvez utiliser une propriété, telle que '=Release=', qui, dans
+  différents sous-arbres, a des valeurs différentes, telles que "1.0"
+  ou "2.0". Deuxièmement, vous pouvez utiliser des propriétés pour
+  implémenter des fonctionnalités de base de données (très basiques)
+  dans un tampon d’organisation. Imaginez que vous gardiez une trace
+  de vos CD de musique, où les propriétés pourraient être des choses
+  telles que l'album, l'artiste, la date de sortie, le nombre de
+  pistes, etc.
+
+  Les propriétés peuvent être facilement modifiées et visualisées en
+  vue colonne (voir Section 7.5 [Vue Colonne], page 65).
+
+** Syntaxe de propriété
+
+   Les propriétés sont des paires clé-valeur. Lorsqu'elles sont
+   associées à une entrée unique ou à un arbre, elles doivent être
+   insérées dans un tiroir spécial (voir Section 2.7 [Tiroirs],
+   page 16) avec le même nom '=PROPERTIES=', qui doit se trouver juste
+   en dessous d'un titre, ainsi que sa ligne de planification (voir
+   Section 8.3 [Dates limites et calendrier], page 75) le cas
+   échéant. Chaque propriété est spécifiée sur une seule ligne, avec
+   la clé (entourée de deux points) en premier, puis la valeur qui la
+   suit. Les clés ne sont pas sensibles à la casse. Voici un exemple :
+
+   #+BEGIN_SRC org-mode
+   * CD collection
+   ** Classic
+   *** Goldberg Variations
+       :PROPERTIES:
+       :Title:     Goldberg Variations
+       :Composer:  J.S. Bach
+       :Artist:    Glenn Gould
+       :Publisher: Deutsche Grammophon
+       :NDisks:    1
+       :END:
+   #+END_SRC
+
+   Selon la valeur de =org-use-property-inheritance=, une propriété définie
+   de cette manière est associée à une seule entrée ou à la
+   sous-arborescence définie par l'entrée, voir Section 7.4 [Héritage
+   de propriété], page 67.
+
+   Vous pouvez définir les valeurs autorisées pour une propriété
+   particulière '=Xyz=' en définissant une propriété '=Xyz_ALL='. Cette
+   propriété spéciale est /héritée/. Par conséquent, si vous la
+   définissez dans une entrée de niveau 1, elle s'applique à
+   l'ensemble de l'arborescence. Lorsque les valeurs autorisées sont
+   définies, la définition de la propriété correspondante devient plus
+   facile et est moins sujette aux erreurs de frappe. Pour l'exemple
+   avec la collection de CD, nous pouvons prédéfinir les éditeurs et
+   le nombre de disques dans une boîte comme ceci :
+
+   #+BEGIN_SRC org-mode
+   * CD collection
+     :PROPERTIES:
+     :NDisks_ALL:   1 2 3 4
+     :Publisher_ALL:  "Deutsche Grammophon" Philips EMI
+     :END:
+   #+END_SRC
+
+   Si vous souhaitez définir des propriétés pouvant être héritées par
+   toute entrée d'un fichier, utilisez une ligne comme celle-ci :
+
+   #+BEGIN_SRC org-mode
+   #+PROPERTY: NDisks_ALL 1 2 3 4
+   #+END_SRC
+
+   Si vous souhaitez ajouter une valeur à une propriété existante,
+   ajoutez un '=+=' au nom de la propriété. Il en résulte que la
+   propriété '=var=' a la valeur '~foo = 1 bar = 2~'.
+
+   #+BEGIN_SRC org-mode
+   #+PROPERTY: var foo=1
+   #+PROPERTY: var+ bar=2
+   #+END_SRC
+
+   Il est également possible d'ajouter aux valeurs des propriétés
+   héritées. Ce qui suit donne la propriété '=Genres=' ayant la valeur
+   '=Classic Baroque=' sous le sous-arbre '=Goldberg Variations='.
+
+   #+BEGIN_SRC org-mode
+   * CD collection
+   ** Classic
+       :PROPERTIES:
+       :Genres: Classic
+       :END:
+   *** Goldberg Variations
+       :PROPERTIES:
+       :Title:     Goldberg Variations
+       :Composer:  J.S. Bach
+       :Artist:    Glenn Gould
+       :Publisher: Deutsche Grammophon
+       :NDisks:    1
+       :Genres+:   Baroque
+       :END:
+   #+END_SRC
+
+   Notez qu'une propriété ne peut avoir qu'une seule entrée par
+   tiroir.
+
+   Les valeurs de propriété définies avec global
+   variable =org-global-properties= peuvent être héritées par toutes les
+   entrées de tous les fichiers Org.
+
+   Les commandes suivantes facilitent l'utilisation des propriétés :
+
+   + =M-TAB= (=pcomplete=) :: Après deux points dans une ligne,
+        complétez les clés de propriété. Toutes les clés utilisées
+        dans le fichier actuel sont proposées comme compléments
+        possibles.
+   + =C-c C-x p= (=org-set-property=) :: Définir une propriété. Cela
+        demande un nom de propriété et une valeur. Si nécessaire, le
+        tiroir de propriété est également créé.
+   + =C-u M-x org-insert-drawer= :: Insérer un tiroir de propriété
+        dans l'entrée actuelle. Le tiroir est inséré tôt dans
+        l'entrée, mais après les lignes contenant des informations de
+        planification telles que les délais.
+   + =C-c C-c= (=org-property-action=) :: Avec un point dans un tiroir
+        de propriétés, cela exécute des commandes de propriétés.
+   + =C-c C-c s= (=org-set-property=) :: Définir une propriété dans
+        l'entrée actuelle. La propriété et la valeur peuvent être
+        insérées en complétant. 
+   + =S-RIGHT= (=org-property-next-allowed-values=) ::
+   + =S-LEFT= (=org-property-previous-allowed-value=) :: Change de
+        propriété au point sur la valeur autorisée suivante /
+        précédente.
+   + =C-c C-c d= (=org-delete-property=) :: Supprimer une propriété de
+        l'entrée actuelle. 
+   + =C-c C-c D= (=org-delete-property-globally=) :: Supprimer
+        globalement une propriété de toutes les entrées du fichier en
+        cours.
+   + =C-c C-c c= (=org-compute-property-at-point=) :: Calculez la
+        propriété au point en utilisant l'opérateur et la portée de la
+        définition de format la plus proche.
+
+** Propriétés spéciales
 
 * Footnotes
 
