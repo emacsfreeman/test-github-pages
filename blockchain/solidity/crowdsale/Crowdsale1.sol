@@ -14,8 +14,8 @@ contract Crowdsale {
     uint public tokenPrice;
     FilipCoin public token;
     mapping(address => uint) public balanceOf;
-    bool fundingGoalReached = False;
-    bool crowdSaleClosed = °;
+    bool fundingGoalReached = false;
+    bool crowdSaleClosed = false;
 
     /**
      * Constructor
