@@ -36,7 +36,7 @@ contract Crowdsale {
         fundingGoal = goalInEther;
         crowdSaleDeadline = now + durationInMinutes * 1 minutes; 
         tokenPrice = tokenPriceInEther * 1 ether;
-        token = FilipCoin("address");
+        token = FilipCoin(addressOfToken);
 
     }
 
