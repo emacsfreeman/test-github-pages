@@ -1,11 +1,11 @@
-pragma solidity 0.5.1;
+pragma solidity ^0.4.18;
 
 // ----------------------------------------------------------------------------
 // FilipCoin token contract
 //
-// Deployed to : 0xb444ac4E8B3120288496DF516176f9cD2c83c17C
-// Symbol      : FILIPCOIN 
-// Name        : FILIPCOIN 
+// Deployed to : 0xe9d60730a1E72BD4f42991Ccc8a60dDBe49ecd26
+// Symbol      : FILIPCOIN
+// Name        : FILIPCOIN
 // Total supply: 100000000
 // Decimals    : 18
 //
@@ -117,8 +117,8 @@ contract FilipCoin is ERC20Interface, Owned, SafeMath {
         name = "FilipCoin";
         decimals = 18;
         _totalSupply = 100000000000000000000000000;
-        balances[0xb444ac4E8B3120288496DF516176f9cD2c83c17C] = _totalSupply;
-        Transfer(address(0), 0xb444ac4E8B3120288496DF516176f9cD2c83c17C, _totalSupply);
+        balances[0xe9d60730a1E72BD4f42991Ccc8a60dDBe49ecd26] = _totalSupply;
+        Transfer(address(0), 0xe9d60730a1E72BD4f42991Ccc8a60dDBe49ecd26, _totalSupply);
     }
 
 
