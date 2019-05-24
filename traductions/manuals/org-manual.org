@@ -3313,7 +3313,6 @@ touches méta-curseur ont des fonctionnalités différentes.
         pour rétablir la synchronisation.
 
 
-
 * Balises
 
   Un excellent moyen d'implémenter des étiquettes et des contextes
@@ -3673,7 +3672,6 @@ touches méta-curseur ont des fonctionnalités différentes.
    complète avec de nombreux exemples, voir Section 10.3.3 [Balises et
    propriétés correspondantes], page 107.
 
-
 * Propriétés et colonnes
   
   Une propriété est une paire clé-valeur associée à une entrée. Les
@@ -3822,8 +3820,468 @@ touches méta-curseur ont des fonctionnalités différentes.
         définition de format la plus proche.
 
 ** Propriétés spéciales
+   
+   Les propriétés spéciales fournissent une méthode d'accès
+   alternative aux fonctionnalités du mode Org, telles que l'état TODO
+   ou la priorité d'une entrée, décrites dans les chapitres
+   précédents. Cette interface existe afin que vous puissiez inclure
+   ces états dans une vue de colonne (voir Section 7.5 [Vue de
+   colonne], page 67), ou les utiliser dans des requêtes. Les noms de
+   propriété suivants sont spéciaux et ne doivent pas être utilisés
+   comme clés dans le tiroir de propriétés :
+
+   + '=ALLTAGS=' :: Tous les tags, y compris ceux hérités
+   + '=BLOCKED=' :: =t= si la tâche est actuellement bloquée par des
+                    enfants ou des frères et soeurs.
+   + '=CATEGORY=' :: La catégorie d'une entrée.
+   + '=CLOCKSUM=' :: La somme des intervalles CLOCK dans la
+                     sous-arborescence. =org-clock-sum= doit être
+                     exécuté en premier pour calculer les valeurs dans
+                     le tampon actuel.
+   + '=CLOCKSUM_T=' :: La somme des intervalles CLOCK dans la
+                       sous-arborescence de today. =org-clock-sum-today=
+                       doit être exécutée en premier pour calculer les
+                       valeurs dans le tampon actuel.
+   + '=CLOSED=' :: Quand cette entrée a-t-elle été fermée ?
+   + '=DEADLINE=' :: La chaîne de date limite, sans les crochets
+                     angulaires.
+   + '=FILE=' :: Le nom du fichier dans lequel se trouve l'entrée.
+   + '=ITEM=' :: Le titre de l'entrée.
+   + '=PRIORITY=' :: La priorité de l'entrée, une chaîne avec une
+                     seule lettre. 
+   + '=SCHEDULED=' :: L'horodatage de planification, sans les crochets
+                      angulaires. 
+   + '=TAGS=' :: Les balises définies directement dans le titre. 
+   + '=TIMESTAMP=' :: Le premier horodatage sans mot clé dans
+                      l'entrée.
+   + '=TIMESTAMP_IA=' :: Le premier horodatage inactif dans l'entrée.
+   + '=TODO=' :: Le mot clé TODO de l'entrée.
+
+** Propriété de recherches
+
+   Pour créer des arbres clairsemés et des listes spéciales avec une
+   sélection basée sur les propriétés, les mêmes commandes sont
+   utilisées que pour la recherche de balises (voir Section 6.4
+   [Recherches de balises], page 61).
+
+   + =C-c / m= ou =C-c \= (=org-match-sparse-tree=) :: Créez un arbre
+        fragmenté avec toutes les entrées correspondantes. Avec un
+        argument =C-u= prefixé, ignorez les titres qui ne sont pas une
+        ligne TODO.
+   + =M-x org-agenda m=, =org-tags-view= :: Créez une liste globale de
+        correspondances de balises/propriétés à partir de tous les
+        fichiers d'agenda.
+   + =M-x org-agenda M= (=org-tags-view=) :: Créez une liste globale
+        des correspondances de balises à partir de tous les fichiers
+        de l'agenda, mais vérifiez uniquement les éléments TODO et
+        imposez la vérification des sous-éléments (voir
+        option =org-tags-match-list-sublevels=).
+
+
+   La syntaxe de la chaîne de recherche est décrite à la Section
+   10.3.3 [Balises et propriétés correspondantes, page 107.
+
+
+   Il existe également une commande spéciale pour créer des arbres
+   clairsemés basés sur une propriété unique :
+
+   + =C-c / p= :: Créez un arbre fragmenté basé sur la valeur d'une
+                  propriété. Cela demande d'abord le nom d'une
+                  propriété, puis une valeur. Un arbre clairsemé est
+                  créé avec tous les entrées qui définissent cette
+                  propriété avec la valeur donnée. Si vous mettez la
+                  valeur entre accolades, elle est interprétée comme
+                  une expression régulière et comparée aux valeurs de
+                  la propriété.
+
+** Héritage des propriétés		  
+
+   La structure hiérarchique des documents Org se prête à un modèle
+   d'héritage de propriétés: si le parent d'un arbre a une propriété
+   donnée, les enfants peuvent en hériter. Le mode Org ne l’active pas
+   par défaut, car il peut ralentir considérablement les recherches de
+   propriétés et n’est souvent pas nécessaire. Toutefois, si vous
+   trouvez l'héritage utile, vous pouvez l'activer en définissant la
+   variable =org-use-property-inheritance=. Il peut être défini sur =t= pour
+   que toutes les propriétés héritées du parent, une liste des
+   propriétés à hériter ou une expression régulière correspondant aux
+   propriétés héritées. Si une propriété a la valeur =nil=, cela est
+   interprété comme une non-définition explicite de la propriété, de
+   sorte que la recherche d'héritage s'arrête à cette valeur et
+   renvoie la valeur =nil=.
+
+   Le mode Org a quelques propriétés pour lesquelles l'héritage est
+   codé en dur, au moins pour les applications spéciales pour
+   lesquelles ils sont utilisés :
+
+   + =COLUMNS= :: La propriété '=COLUMNS=' définit le format de la vue
+                  colonne (voir Section 7.5 [Vue Colonne], page
+                  67). Il est hérité en ce sens que le niveau où une
+                  propriété '=COLUMNS=' est définie est utilisé comme
+                  point de départ pour une table de vue colonne,
+                  indépendamment de l’emplacement dans la
+                  sous-arborescence à partir duquel la vue colonnes a
+                  été activée.
+   + =CATEGORY= :: Pour la vue agenda, une catégorie définie via une
+                   propriété '=CATEGORY=' s’applique à la
+                   sous-arborescence. 
+   + =ARCHIVE= :: Pour l’archivage, la propriété '=ARCHIVE=' peut
+                  définir l’emplacement de l’archive pour l’ensemble
+                  du sous-arbre (voirSection 9.6.1 [Déplacement de
+                  sous-arbres], page 108).
+   + =LOGGING= :: La propriété '=LOGGING=' peut définir les paramètres
+                  de journalisation d’une entrée ou d’un sous-arbre
+                  (voirSection 5.3.2 [Suivi des modifications de
+                  l’État TODO], page 52).
+
+
+
+
+
+** Vue en colonne
+
+   La /vue par colonnes/ est un excellent moyen de visualiser et de
+   modifier les propriétés dans une arborescence. En vue colonne,
+   chaque nœud hiérarchique est transformé en une ligne de
+   tableau. Les colonnes de cette table permettent d'accéder aux
+   propriétés des entrées. Le mode Org implémente les colonnes en
+   superposant une structure tabulaire au titre de chaque
+   élément. Bien que les titres aient été transformés en une ligne de
+   tableau, vous pouvez toujours modifier la visibilité de
+   l'arborescence. Par exemple, vous obtenez un tableau compact en
+   basculant vers la vue «contenu» - =S-TAB S-TAB=, ou tout simplement =c=
+   lorsque la vue colonne est active - mais vous pouvez toujours
+   ouvrir, lire et modifier l'entrée sous chaque titre. Ou bien, vous
+   pouvez passer en vue colonne après avoir exécuté une commande
+   d'arborescence fragmentée et obtenir ainsi un tableau uniquement
+   pour les éléments sélectionnés. La vue des colonnes fonctionne
+   également dans les tampons de l'ordre du jour (voir Chapitre 10
+   [Vues de l'agenda], page 108), où les requêtes ont collecté des
+   éléments sélectionnés, éventuellement à partir d'un certain nombre
+   de fichiers.
+
+*** Définir des colonnes
+
+    Pour configurer une vue de colonne, vous devez d'abord définir les
+    colonnes. Ceci est fait en définissant une ligne de format de
+    colonne.
+
+**** Portée des définitions de colonne    
+
+     Pour définir un format de colonne pour une entrée de fichier,
+     utiliser une ligne comme :
+
+     #+BEGIN_SRC org-mode
+     #+COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
+     #+END_SRC
+
+     Pour spécifier un format qui ne s'applique qu'à une arborescence
+     spécifique, ajoutez une propriété '=COLUMNS=' au nœud supérieur de
+     cette arborescence, par exemple :
+
+     #+BEGIN_SRC org-mode
+     ** Top node for columns view
+        :PROPERTIES:
+	:COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
+	:END:
+     #+END_SRC
+
+
+     Si une propriété '=COLUMNS=' est présente dans une entrée, elle
+     définit des colonnes pour l’entrée elle-même et pour l’ensemble
+     du sous-arbre situé en dessous. Comme la définition de colonne
+     fait partie de la structure hiérarchique du document, vous pouvez
+     définir des colonnes de niveau 1 suffisamment générales pour tous
+     les sous-niveaux, et des colonnes plus spécifiques plus bas,
+     lorsque vous modifiez une partie plus profonde de l'arborescence.
+
+
+**** Attributs de colonne
+
+     Une définition de colonne définit les attributs d'une colonne. La
+     définition générale ressemble à ceci : 
+     #+BEGIN_SRC org-mode
+     %[WIDTH]PROPERTY[(TITLE)][{SUMMARY-TYPE}]
+     #+END_SRC
+
+     À l'exception du signe de pourcentage et du nom de la propriété,
+     tous les éléments sont facultatifs. Les différentes parties ont
+     la signification suivante : 
+
+     + WIDTH :: Un entier spécifiant la largeur de la colonne en
+                caractères. Si omis, la largeur est déterminée
+                automatiquement.
+     + PROPERTY :: La propriété qui devrait être modifiée dans cette
+                   colonne. Les propriétés spéciales représentant les
+                   métadonnées sont également autorisées ici (voir
+                   Section 7.2 [Propriétés spéciales], page 67).
+     + TITLE :: Le texte d'en-tête de la colonne. Si omis, le nom de
+                la propriété est utilisé. 
+     + SUMMARY-TYPE :: Le type de résumé. Si spécifié, les valeurs de
+                       colonne pour les nœuds parents sont calculées à
+                       partir des enfants[fn:57]
+
+		       Les types de résumé pris en charge sont :
+
+		       + '=+=' :: Sum numbers in this column.
+                       + '=+;%.1f=' :: Comme '=+=', mais formate le
+                                       résultat avec '=%.1f='.
+                       + '=$=' :: Dévise, court pour '=+;%.2f='.
+                       + '=min=' :: Plus petit nombre de colonnes.
+		       + '=max=' :: Plus grand nombre.
+                       + '=mean=' :: Moyenne arithmétique de nombres.
+                       + '=X=' :: Statut de case à cocher, '=[X]=' si
+                                  tous les enfants sont '=[X]='.
+                       + '=X/=' :: Statut de case à cocher, '=[n/m]='.
+                       + '=X%=' :: Statut de case à cocher, '=[n%]='.
+                       + '=:=' :: Somme de temps, HH:MM, les nombres
+                                  entiers sont des heures.
+                       + '=:min=' :: Plus petite valeur de temps dans
+                                     une colonne.
+                       + '=:max=' :: Plus grande valeur de temps.
+                       + '=:mean=' :: Moyenne arithmétique de valeurs
+                                      de temps.
+                       + '=@min=' :: Âge minimum[fn:58] (en
+                                     jours/heures/minutes/secondes). 
+                       + '=@max=' :: Âge maximum (en
+                                     jours/heures/minutes/secondes).
+                       + '=@mean=' :: Moyenne arithmétique des âges
+                                      (en
+                                      jours/heures/minutes/secondes).
+		       + '=est+=' :: Ajouter des estimations basses-hautes.
+		       
+                       Vous pouvez aussi définir des types de résumé
+                       en configuratn =org-columns-summary-types=.
+
+		       
+     Le type de résumé '=est+=' nécessite des explications
+     supplémentaires. Il est utilisé pour combiner des estimations,
+     exprimées sous la forme de fourchettes basses-hautes. Par
+     exemple, au lieu d'estimer qu'une tâche particulière prend 5
+     jours, vous pouvez estimer qu'elle est de 5 à 6 jours si vous
+     êtes assez sûr de savoir combien de travail il vous faut, ou de 1
+     à 10 jours si vous ne savez pas vraiment ce dont vous avez
+     besoin. être fait. La moyenne des deux fourchettes est de 5,5
+     jours, mais la première représente une livraison plus prévisible.
+
+
+     Lorsque vous combinez un ensemble d'estimations de ce type, le
+     simple fait d'ajouter des bas et des hauts produit un résultat
+     irréaliste. Au lieu de cela, '=est+=' ajoute la moyenne
+     statistique et la variance des sous-tâches, générant une
+     estimation finale à partir de la somme. Par exemple, supposons
+     que vous ayez dix tâches, chacune d'entre elles étant estimée à
+     0,5 à 2 jours de travail. Une addition directe produit une
+     estimation de 5 à 20 jours, représentant ce à quoi s'attendre si
+     tout se passe extrêmement bien ou très mal. En revanche, '=est+='
+     estime le travail complet de manière plus réaliste, à 10-15 jours.
+
+     
+     Voici un exemple de définition complète des colonnes, avec les
+     valeurs autorisées[fn:59].
+
+     #+BEGIN_SRC org-mode
+     :COLUMNS: %25ITEM %9Approved(Approved?){X} %Owner %11Status \
+                       %10Time_Estimate{:} %CLOCKSUM %CLOCKSUM_T
+     :Owner_ALL:    Tammy Mark Karl Lisa Don
+     :Status_ALL:   "In progress" "Not started yet" "Finished" ""
+     :Approved_ALL: "[ ]" "[X]"
+     #+END_SRC
+
+
+     La première colonne, '=%25ITEM=', désigne les 25 premiers
+     caractères de l’article lui-même, c’est-à-dire du titre. Vous
+     devez probablement toujours toujours commencer la définition de
+     colonne avec le spécificateur '=ITEM='. Les autres spécificateurs
+     créent des colonnes '=Owner=' avec une liste de noms
+     autorisés, pour "Statut" avec quatre valeurs possibles
+     différentes et pour le champ '=Approved='. . Quand aucune largeur
+     n’est donnée après le caractère '=%=', la colonne est exactement
+     aussi large qu’elle doit être pour pouvoir afficher toutes les
+     valeurs. La colonne '=Approved=' a un titre modifié ('=Approved?=',
+     Avec un point d'interrogation). Des résumés sont créés pour la
+     colonne '=Time_Estimate=' en ajoutant des expressions de durée
+     telle que HH:MM et pour la colonne '=Approved=' en fournissant le
+     statut '=[X]=' si tous les enfants ont été vérifiés. Les colonnes
+     '=CLOCKSUM=' et '=CLOCKSUM_T=' sont spéciales, elles répertorient les
+     sommes des intervalles CLOCK dans la sous-arborescence, pour
+     toutes les horloges ou pour aujourd’hui.
+
+
+
+**** Utiliser la vue en colonne
+
+***** Activer ou désactiver la vue en colonne
+
+     + =C-c C-x C-c= (=org-columns=) :: Activer la vue colonne. Si
+          point est avant le premier titre du fichier, la vue en
+          colonnes est activée pour l’ensemble du fichier, à l’aide de
+          la définition '=#+COLUMNS='. Si vous pointez quelque part
+          dans le contour, cette commande cherche dans la hiérarchie,
+          jusqu’à un point donné, une propriété '=COLUMNS=' qui définit
+          un format. Lorsque celle-ci est trouvée, la table de vue des
+          colonnes est établie pour l’arbre à partir de l’entrée
+          contenant la propriété '=COLUMNS='. Si aucune propriété de ce
+          type n’est trouvée, le format provient de la ligne
+          '=#+COLUMNS=' ou de la variable =org-columns-default-format=,
+          et la vue colonne est établie pour l’entrée actuelle et son
+          sous-arbre.
+     + =r= ou =g= (=org-columns-redo=) :: Recréez la vue colonne pour
+          inclure les modifications récentes apportées dans la mémoire
+          tampon.
+     + =q= (=org-columns-quit=) :: Sort de la vue en colonne
+
+***** Editer des valeurs
+
+      + =LEFT, RIGHT, UP, DOWN= :: Déplacez-vous dans la vue colonne
+           d'un champ à l'autre.
+      + =1..9,0= :: Sélectionnez directement la Nième valeur
+                    autorisée, 0 sélectionne la 10ème valeur.
+      + =n= ou =S-RIGHT= (=org-columns-next-allowed-value=) ::
+      + =p= ou =S-LEFT= (=org-columns-previous-allowed-value=) ::
+           Basculer vers la valeur autorisée suivante / précédente du
+           champ. Pour cela, vous devez avoir spécifié les valeurs
+           autorisées pour une propriété.
+      + =e= (=org-columns-edit-value=) :: Editez la propriété au
+           point. Pour les propriétés spéciales, cela appelle la même
+           interface que celle que vous utilisez normalement pour
+           modifier cette propriété. Par exemple, l’interface de
+           complétion de tags ou de sélection rapide apparaît lors de
+           la modification d’une propriété '=TAGS='.
+      + =C-c C-c= (=org-columns-set-tags-or-toggle=) :: Quand il y a
+           une case à cocher au point, basculez-la.
+      + =v= (=org-columns-show-value=) :: Afficher la valeur complète
+           de cette propriété. Ceci est utile si la largeur de la
+           colonne est inférieure à celle de la valeur.
+      + =a= (=org-columns-edit-allowed=) :: Editez la liste des
+           valeurs autorisées pour cette propriété. Si la liste est
+           trouvée dans la hiérarchie, les valeurs modifiées y sont
+           stockées. Si aucune liste n'est trouvée, la nouvelle valeur
+           est stockée dans la première entrée faisant partie de la
+           vue de colonne actuelle.
+
+
+
+***** Modifier la vue en colonne à la volée
+
+      + =<= (=org-columns-narrow=) ::
+      + =>= (=org-columns-widen=) :: Rendre la colonne plus
+           étroite/plus large d'un caractère.
+      + =S-M-RIGHT= (=org-columns-new=) :: Insérer une nouvelle
+           colonne, à gauche de la colonne actuelle.
+      + =S-M-LEFT= (=org-columns-delete=) :: Supprime la colonne
+           actuelle.
+
+
+
+**** Capture de la vue de colonne
+
+     Comme la vue colonne est simplement une superposition sur une
+     mémoire tampon, elle ne peut pas être exportée ou imprimée
+     directement. Si vous souhaitez capturer une vue de colonne,
+     utilisez un bloc dynamique ‘columnview’ (reportez-vous à la
+     Section A.6 [Blocs dynamiques], page 262). Le cadre de ce bloc
+     ressemble à ceci :
+
+     #+BEGIN_SRC org-mode
+     * The column view
+     #+BEGIN: columnview :hlines 1 :id "label"
+
+     #+END:
+     #+END_SRC
+     Ce bloc dynamique a les paramètres suivants :
+     + '=:id=' :: C'est le paramètre le plus important. La vue en
+                  colonnes est une fonctionnalité souvent localisée
+                  dans un certain (sous) arbre, et le bloc de capture
+                  peut se trouver à un emplacement différent du
+                  fichier. Pour identifier l’arbre dont vous souhaitez
+                  capturer la vue, vous pouvez utiliser quatre
+                  valeurs :
+
+		  + '=local=' :: Utilisez l'arbre dans lequel se
+                   trouve le bloc de capture 
+                  + '=global=' :: Créer une vue globale, incluant tous
+                                  les en-têtes du fichier. 
+                  + '=file:FILENAME=' :: Exécuter une vue de colonne
+                       en haut du fichier FILENAME. 
+                  + '=LABEL=' :: Appelez la vue colonne de
+                                 l’arborescence qui a une propriété
+                                 '=ID=' avec la valeur LABEL. Vous
+                                 pouvez utiliser =M-x org-id-copy= pour
+                                 créer un identifiant global unique
+                                 pour l'entrée actuelle et le copier
+                                 dans le kill-ring.
+     + '=:hlines=' :: Lorsque =t=, insérez une ligne après chaque
+                      ligne. Quand un nombre N, insère une hline avant
+                      chaque titre de niveau ~<= N~.
+     + '=:vlines=' :: Lorsque non-=nil=, force les groupes de colonnes à
+                      obtenir des lignes verticales. 
+     + '=:maxlevel=' :: Lorsque défini sur un nombre, ne capturez pas
+                        les entrées inférieures à ce niveau.
+     + '=:skip-empty-rows=' :: Lorsque la valeur est non-nil, ignorez
+          les lignes où le seul spécificateur non vide de la vue en
+          colonne est '=ITEM='.
+     + '=:indent=' :: Lorsque la valeur est non-=nil=, indentez chaque
+                      champ '=ITEM=' en fonction de son niveau.
+     + '=:format=' :: Spécifiez un attribut de colonne (voir Section
+                      7.5.1.2 [Attributs de colonne], page 66) pour le
+                      bloc dynamique.
+
+
+     Les commandes suivantes insèrent ou mettent à jour le bloc
+     dynamique :
+
+     + =C-c C-x i= (=org-insert-columns-dblock=) :: Insérer un bloc
+          dynamique capturant une vue de colonne. Demander la portée
+          ou l'ID de la vue
+     + =C-c C-c C-c C-x C-u= (=org-dblock-update=) :: Mettre à jour le
+          bloc dynamique au point. Le point doit être dans la ligne
+          '=#+BEGIN=' du bloc dynamique.
+     + =C-u C-c C-x C-u= (=org-update-all-dblocks=) :: Mettez à jour
+          tous les blocs dynamiques (reportez-vous à la Section A.6
+          [Blocs dynamiques], page 249). Ceci est utile si vous avez
+          plusieurs blocs de table d’horloge, blocs de capture de
+          colonne ou autres blocs dynamiques dans un tampon.
+
+
+     Vous pouvez ajouter des formules à la table de la vue colonne et
+     des instructions de traçage devant la table. Celles-ci survivent
+     à la mise à jour du bloc. S'il existe un mot clé '=TBLFM=' après la
+     table, celle-ci est automatiquement recalculée après une mise à
+     jour.
+
+     Un autre moyen de capturer et de traiter les valeurs de propriété
+     dans une table est fourni par '=org-collector.el=' d’Eric Schulte,
+     qui est un package contribué[fn:60]. Il fournit une API générale pour
+     collecter les propriétés des entrées d'une certaine étendue et
+     des expressions Lisp arbitraires pour traiter ces valeurs avant
+     de les insérer dans une table ou un bloc dynamique.
+
+
+	  
+
 
 * Footnotes
+
+[fn:60] Les paquetages contribués ne font pas partie d'Emacs, mais
+sont distribués avec la distribution principale d'Org - visitez
+https://orgmode.org.
+ 
+
+[fn:59] Veuillez noter que la définition des '=COLUMNS=' doit figurer
+sur une seule ligne; il est emballé ici uniquement à cause des
+contraintes de formatage.
+ 
+
+[fn:58] Un âge peut être défini comme une durée, en utilisant des
+unités définies dans des unités =org-duration-units=, par exemple,
+'=3d 1h='. Si une valeur de la colonne est en tant que telle, le résumé est
+également exprimé en tant que durée.
+ 
+
+[fn:57] Si plusieurs types de résumé s'appliquent à la même propriété,
+les valeurs parentes sont calculées en fonction du premier d'entre
+eux.  
 
 [fn:56] Les clés sont automatiquement attribuées aux étiquettes qui
 n'ont pas de clés configurées.
