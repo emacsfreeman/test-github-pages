@@ -4259,9 +4259,608 @@ touches méta-curseur ont des fonctionnalités différentes.
 
 
 	  
+* Dates et heures
+  
+  Pour faciliter la planification de projet, les éléments TODO peuvent
+  être étiquetés avec une date et/ou une heure. La chaîne
+  spécialement formatée contenant les informations de date et heure
+  est appelée un horodatage en mode Org. Cela peut paraître un peu
+  déroutant car l’horodatage est souvent utilisé pour indiquer quand
+  quelque chose a été créé ou modifié. Cependant, en mode Org, ce
+  terme est utilisé dans un sens beaucoup plus large.
+
+** Horodatages, délais et calendrier
+
+   Un horodatage est une spécification d'une date (éventuellement avec
+   une heure ou une plage d'heures) dans un format spécial,
+   '=<2003-09-16 Tue>=' ou '=<2003-09-16 Tue 09:39>=' ou
+   '=<2003-09-16 Tue 12:00-12:30>='[fn:61]. Un horodatage peut apparaître
+   n'importe où dans le titre ou le corps d'une entrée d'arbre Org. En
+   raison de sa présence, les entrées sont affichées à des dates
+   spécifiques dans l'ordre du jour (voir la section 10.3.1 [Agenda
+   hebdomadaire / quotidien], page 104). Nous distinguons :
+
+   + Horodatage simple; Un événement; Rendez-vous :: Un horodatage
+        simple attribue simplement une date/heure à un
+        élément. C'est comme écrire un rendez-vous ou un événement
+        dans un agenda papier. Dans l’affichage de l’agenda, le titre
+        d’une entrée associée à un horodatage simple est affiché
+        exactement à cette date.
+	#+BEGIN_SRC org-mode
+	* Meet Peter at the movies
+	  <2006-11-01 Wed 19:15>
+        * Discussion on climate change
+	  <2006-11-02 Thu 20:00-22:00>
+	#+END_SRC
+   + Horodatage avec intervalle de répétition :: Un horodatage peut
+        contenir un /intervalle de répéteur/, indiquant qu'il s'applique
+        non seulement à la date donnée, mais encore et encore après un
+        certain intervalle de N jours (j), semaines (w), mois (m) ou
+        années (y). Ce qui suit apparaît dans l'ordre du jour chaque
+        mercredi :
+	#+BEGIN_SRC org-mode
+	* Pick up Sam at school
+	  <2007-05-16 Wed 12:30 +1w>
+	#+END_SRC
+   + Entrées sexp de style journal intime :: Pour des spécifications
+        de date plus complexes, le mode Org prend en charge
+        l’utilisation des entrées spéciales de journal sexuel
+        implémentées dans le package agenda / agenda Emacs[fn:62]. Par
+        exemple, avec heure optionnelle : 
+	#+BEGIN_SRC org-mode
+	* 22:00-23:00 The nerd meeting on every 2nd Thursday of the month
+	  <%%(diary-float t 4 2)>
+	#+END_SRC
+   + Plage horaire / date :: Deux horodatages connectés par ‘=--=’
+        désignent une plage. Le titre est affiché le premier et le
+        dernier jour de la plage, ainsi que toutes les dates affichées
+        et comprises dans la plage. Voici un exemple :
+	#+BEGIN_SRC org-mode
+	** Meeting in Amsterdam
+	   <2004-08-23 Mon>--<2004-08-26 Thu>
+	#+END_SRC
+   + Horodatage inactif :: Tout comme un horodatage ordinaire, mais
+        avec des crochets au lieu d'angles. Ces horodatages sont
+        inactifs en ce sens qu'ils ne déclenchent pas la saisie d'une
+        entrée dans l'ordre du jour.
+	#+BEGIN_SRC org-mode
+	* Gillian comes late for the fifth time
+	  [2006-11-01 Wed]
+	#+END_SRC
+
+	
+	
+
+** Créer des horodatages
+
+   Pour que le mode Org reconnaisse les horodatages, ils doivent être
+   au format spécifique. Toutes les commandes répertoriées ci-dessous
+   produisent des horodatages au format correct.
+
+   + =C-c .= (=org-time-stamp=) :: Demander une date et insérer un
+        horodatage correspondant. Lorsque le point correspond à un
+        horodatage existant dans le tampon, la commande permet de
+        modifier cet horodatage au lieu d'en insérer un
+        nouveau. Lorsque cette commande est utilisée deux fois de
+        suite, une plage de temps est insérée.
+	
+	Lorsqu'il est appelé avec un argument préfixe, utilisez le
+        format alternatif contenant la date et l'heure. La durée par
+        défaut peut être arrondie à des multiples de 5 minutes. Voir
+        l'option =org-time-stamp-rounding-minutes=.
+
+	Avec deux arguments de préfixe, insérez un horodatage actif
+        avec l'heure actuelle sans le demander.
+   + =C-c != (=org-time-stamp-inactive=) :: Comme =C-c .=, Mais insérez
+        un horodatage inactif qui ne provoque pas une entrée d'agenda.
+   + =C-c C-c= :: Normalisez l'horodatage, insérez ou corrigez le nom
+                  du jour s'il est manquant ou incorrect.
+   + =C-c <= (=org-date-from-calendar=) :: Insérez un horodatage
+        correspondant à la date du point dans le calendrier.
+   + =C-c >= (=org-goto-calendar=) :: Accédez au calendrier Emacs pour
+        la date actuelle. S'il y a un horodatage dans la ligne en
+        cours, passez à la date correspondante.
+   + =C-c C-o= (=org-open-at-point=) :: Accédez à l'ordre du jour pour
+        la date indiquée par l'horodatage ou par un intervalle précis
+        (voir Section 10.3.1 [Agenda hebdomadaire / quotidien], page
+        104).
+   + =S-LEFT= (=org-timestamp-down-day=) ::
+   + =S-RIGHT= (=org-timestamp-up-day=) :: Changer la date au point
+        par un jour. Ces raccourcis clavier sont en conflit avec les
+        modes de sélection de sélections et les modes associés (voir
+        Section 15.12.2 [Conflicts], page 239).
+   + =S-UP= (=org-timestamp-up=) ::
+   + =S-DOWN= (=org-timestamp-down=) :: Au début ou entre parenthèses
+        d'un horodatage, modifiez son type. Avec l’horodatage, changez
+        l’article sous le point. Le point peut être sur une année,
+        mois, jour, heure ou minute. Lorsque l’horodatage contient une
+        plage de temps du type '=15:30-16:30=', la modification de la
+        première heure décale également la seconde, décalant ainsi le
+        bloc de temps d’une longueur constante. Pour changer la
+        longueur, modifiez la deuxième fois. Notez que si un point est
+        dans un titre et non pas à un horodatage, ces mêmes clés
+        modifient la priorité d'un élément (voir Section 5.4
+        [Priorités], page 55). Les raccourcis clavier sont également
+        en conflit avec la sélection des équipes et les modes associés
+        (voir Section 15.12.2 [Conflicts], page 239).
+   + =C-c C-y= (=org-evaluate-time-range=) :: Évaluez une plage de
+        temps en calculant la différence entre début et fin. Avec un
+        argument de préfixe, insérez le résultat après la plage de
+        temps (dans une table: dans la colonne suivante).
+
+*** L'invite de date / heure
+
+    Lorsque le mode Org demande une date/heure, la valeur par défaut
+    est affichée au format date/heure par défaut et l'invite semble
+    donc demander un format spécifique. Mais il accepte en fait les
+    informations de date/heure dans divers formats. En règle
+    générale, les informations doivent commencer au début de la
+    chaîne. Le mode Org recherche toutes les informations qu'il
+    contient et déduit tout ce que vous n'avez pas spécifié à partir
+    de la date et de l'heure par défaut. La valeur par défaut est
+    généralement la date et l'heure actuelles, mais lors de la
+    modification d'un horodatage existant ou lors de la saisie du
+    deuxième tampon d'une plage, il provient du tampon dans la mémoire
+    tampon. Lorsque vous saisissez des informations, le mode Org
+    suppose que la plupart du temps, vous souhaitez entrer une date
+    dans le futur : si vous omettez le mois/année et que le jour/mois
+    donné est avant aujourd'hui, il suppose que vous entendez une
+    date future[fn:63]. Si la date a été automatiquement décalée dans le futur,
+    l’invite de temps l’affiche avec '~(=> F)~'.
+
+    Par exemple, supposons qu’aujourd’hui soit le *13 juin 2006*. Voici
+    comment différentes entrées sont interprétées. Les éléments
+    renseignés par le mode Org sont en *gras*.
+
+    | '=3-2-5='        | \Rightarrow 2003-02-05                                    |
+    | '=2/5/3='        | \Rightarrow 2003-02-05                                    |
+    | '=14='           | \Rightarrow *2006-06*-14                                  |
+    | '=12='           | \Rightarrow *2006-07*-12                                  |
+    | '=2/5='          | \Rightarrow *2007*-02-05                                  |
+    | '=Fri='          | \Rightarrow nearest Friday (date par défaut ou plus tard) |
+    | '=sep 15='       | \Rightarrow *2006*-09-15                                  |
+    | '=feb 15='       | \Rightarrow *2007*-02-15                                  |
+    | '=sep 12 9'      | \Rightarrow 2009-09-12                                    |
+    | '=12:45='        | \Rightarrow *2006-06-13* 12:45                            |
+    | '=22 sept 0:34=' | \Rightarrow *2006*-09-22 0:34                             |
+    | '=w4='           | \Rightarrow ISO week of the current year *2006*           |
+    | '=2012 w4 fri='  | \Rightarrow Friday of ISO week 4 in 2012                  |
+    | '=2012-w04-5='   | \Rightarrow Pareil qu'au-dessus                           |
+
+    La fonction comprend les abréviations anglaises des mois et des
+    jours de la semaine. Si vous souhaitez utiliser des noms non
+    abrégés et / ou d'autres langues, configurez les variables
+    =parse-time-months= et =parse-time-weekdays=.
+
+    Toutes les dates ne peuvent pas être représentées dans une
+    implémentation Emacs donnée. Par défaut, le mode Org impose des
+    dates dans la plage de compatibilité 1970–2037, qui fonctionne
+    pour toutes les implémentations Emacs. Si vous souhaitez utiliser
+    des dates en dehors de cette plage, lisez la docstring de la
+    variable =org-read-date-force-compatible-dates=.
+
+    Vous pouvez spécifier une plage de temps en donnant les heures de
+    début et de fin ou en donnant une heure de début et une durée (au
+    format HH:MM). Utilisez un ou deux tirets comme séparateur dans
+    le premier cas et utilisez '=+=' comme séparateur dans le dernier
+    cas, par exemple :
+
+    | '=11am-1:15pm='  | \Rightarrow 11:00-13:15         |
+    | '=11am--1:15pm=' | \Rightarrow pareil qu'au-dessus |
+    | '=11am+2:15='    | \Rightarrow pareil qu'au-dessus |
+
+    Parallèlement à l'invite du mini-tampon, un calendrier est
+    affiché[fn:64]. Lorsque vous quittez l'invite de date, soit en cliquant
+    sur une date dans le calendrier, soit en appuyant sur =RET=, la date
+    sélectionnée dans le calendrier est combinée aux informations
+    saisies à l'invite. Vous pouvez contrôler le calendrier
+    entièrement à partir du mini-tampon :
+
+    | =RET=       | Choisir la date au point du calendrier           |
+    | =mouse-1=   | Sélectionnez la date en cliquant dessus          |
+    | =S-RIGHT=   | Un jour en avant                                 |
+    | =S-LEFT=    | Un jour en arrière                               |
+    | =S-DOWN=    | Une semaine en avant                             |
+    | =S-UP=      | Une semaine en arrière                           |
+    | =M-S-RIGHT= | Un mois en avant                                 |
+    | =M-S-LEFT=  | Un mois en arrière                               |
+    | =>=         | Faire défiler le calendrier d'un mois            |
+    | =<=         | Faire défiler le calendrier d'un mois en arrière |
+    | =M-v=       | Faire défiler le calendrier de 3 mois            |
+    | =C-v=       | Faire défiler le calendrier de 3 mois en arrière |
+    
+
+    Les actions de l'invite de date / heure peuvent sembler complexes,
+    mais je vous assure qu'elles grandiront et que vous commencerez à
+    vous ennuyer à peu près de toute autre manière de saisir une date
+    / heure. Pour vous aider à comprendre ce qui se passe,
+    l'interprétation actuelle de votre entrée est affichée en direct
+    dans le mini-tampon[fn:65].
+
+*** Format horaire personnalisé
+
+    Le mode Org utilise la notation ISO standard pour les dates et les
+    heures telle que définie dans ISO 8601.Si vous ne vous y habituez
+    pas et avez besoin d'une autre représentation de la date et de
+    l'heure pour vous satisfaire, vous pouvez l'obtenir en
+    personnalisant les variables =org-display-custom-times= et
+    =org-time-stamp-custom-formats=.
+
+    + =C-c C-x C-t= (=org-toggle-time-stamp-overlays=) :: Basculer
+         l'affichage des formats personnalisés pour les dates et les
+         heures.
+
+
+    Le mode Org nécessite le format par défaut pour la
+    numérisation. Par conséquent, le format de date / heure
+    personnalisé ne remplace pas le format par défaut. Au lieu de
+    cela, il est placé sur le format par défaut en utilisant les
+    propriétés du texte. Cela a les conséquences suivantes :
+
+    + Vous ne pouvez plus placer de point sur un horodatage, mais
+      avant ou après.
+    + Les touches =S-UP= et =S-DOWN= ne peuvent plus être utilisées pour
+      ajuster chaque composant d'un horodatage. Si le point est au
+      début du tampon, =S-UP= et =S-DOWN= le modifient d'un jour, comme
+      =S-LEFT S-RIGHT=. À la fin du tampon, changez l'heure d'une
+      minute.
+    + Si l'horodatage contient une plage de temps d'horloge ou un
+      répéteur, ceux-ci ne sont pas superposés, mais restent dans la
+      mémoire tampon tels qu'ils étaient.
+    + Lorsque vous supprimez un horodatage caractère par caractère, il
+      ne disparaît de la mémoire tampon que lorsque tous les
+      caractères (invisibles) appartenant à l'horodatage ISO ont été
+      supprimés.
+    + Si le format d'horodatage personnalisé est plus long que le
+      format par défaut et que vous utilisez des intables de dates,
+      l'alignement des tableaux sera perturbé. Si le format
+      personnalisé est plus court, les choses fonctionnent comme prévu.
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+** Délais et calendrier
+
+   Un horodatage peut être précédé de mots-clés spéciaux pour
+   faciliter la planification. L'horodatage et le mot-clé doivent être
+   positionnés immédiatement après la tâche à laquelle ils font
+   référence.
+
+   + '=DEADLINE=' :: Signification: la tâche (très probablement un
+                     élément TODO, mais pas nécessairement) est censée
+                     être terminée à cette date.
+		     À la date limite, la tâche est répertoriée dans
+                     l'ordre du jour. En outre, l'ordre du jour
+                     d'aujourd'hui comporte un avertissement
+                     concernant le délai imminent ou non respecté, qui
+                     commence =org-deadline-warning-days= avant
+                     l'échéance et se poursuit jusqu'à ce que l'entrée
+                     soit marquée DONE. Un exemple :
+
+		     #+BEGIN_SRC org-mode
+		     *** TODO write article about the Earth for the Guide 
+		         DEADLINE: <2004-02-29 Sun>
+			 The editor in charge is [[bbdb:Ford Prefect]]
+		     #+END_SRC
+		     Vous pouvez spécifier un délai différent pour les
+                     avertissements pour des délais spécifiques à
+                     l'aide de la syntaxe suivante. Voici un exemple
+                     avec une période d’avertissement de 5 jours
+                     '=DEADLINE: <2004-02-29 Sun -5d>='. Cet
+                     avertissement est désactivé si la tâche est
+                     planifiée et que vous définissez
+                     =org-agenda-skip-deadline-prewarning-if-scheduled= sur
+                     =t=.
+   + '=SCHEDULED=' :: Signification: vous envisagez de commencer à
+                      travailler sur cette tâche à la date
+                      indiquée. Le titre est répertorié sous la date
+                      indiquée6. En outre, un rappel indiquant que la
+                      date planifiée est passée est présent dans la
+                      compilation d’aujourd’hui, jusqu’à ce que
+                      l’entrée soit marquée DONE, c’est-à-dire que la
+                      tâche est automatiquement transférée jusqu’à son
+                      achèvement.
+		      #+BEGIN_SRC org-mode
+		      *** TODO Call Trillian for a date on New Years Eve.
+		          SCHEDULED: <2004-12-25 Sat>
+		      #+END_SRC
+		     Si vous souhaitez différer l’affichage de cette
+                      tâche dans l’ordre du jour, utilisez
+                      '=SCHEDULED: <2004-12-25 Sam -2d>=': la tâche
+                      est toujours programmée le 25 mais sera affichée
+                      deux jours plus tard. Si la tâche contient un
+                      répéteur, le délai est considéré comme affectant
+                      toutes les occurrences. si vous souhaitez que le
+                      délai n’affecte que la première occurrence planifiée
+                      de la tâche, utilisez plutôt '=--2d='. Voir
+                      =org-scheded-delay-days= et
+                      =org-agenda-skip-scheduled-delay-if-date-time=
+                      pour plus d'informations sur la manière de
+                      contrôler cela globalement ou par agenda.
+
+		      *Important :* la planification d'un élément en mode
+                      Org ne doit pas être comprise de la même façon
+                      que nous planifions la planification d'une
+                      réunion. Fixer une date pour une réunion n’est
+                      qu’un simple rendez-vous; vous devez marquer
+                      cette entrée avec un horodatage simple pour que
+                      cet élément soit affiché à la date à laquelle il
+                      s’applique. C'est un malentendu fréquent chez
+                      les utilisateurs de l'organisation. En mode Org,
+                      la planification signifie définir une date à
+                      laquelle vous souhaitez commencer à travailler
+                      sur un élément d'action.
+
+
+   Vous pouvez utiliser des horodatages avec des répéteurs pour la
+   planification et les entrées de délai. Le mode Org émet des
+   avertissements précoces et tardifs en partant du principe que
+   l'horodatage représente l'instance la plus ancienne du
+   répéteur. Cependant, l’utilisation des entrées de journal S-exp
+   comme :
+   #+BEGIN_SRC org-mode
+   <%%(diary-float t 42)>
+   #+END_SRC
+
+   dans l'horaire et les délais, les horodatages sont limités. Le mode
+   organisation n'en sait pas assez sur les composants internes de
+   chaque fonction S-exp pour émettre des avertissements précoces et
+   tardifs. Cependant, il affiche l'élément chaque jour où l'entrée
+   S-exp correspond.
+
+*** Insertion de délais ou d'horaires
+
+    Les commandes suivantes vous permettent d’insérer rapidement une
+    date limite ou de planifier un élément[fn:66] :
+
+    + =C-c C-d= (=org-deadline=) :: Insérer le mot clé "DEADLINE" avec
+         un tampon. L'insertion a lieu dans la ligne directement après
+         le titre. Supprimez tout horodatage «CLOSED». Lorsqu’un
+         préfixe est ajouté, supprimez également toute échéance
+         existante de l’entrée. Selon la variableorg-log-redeadline,
+         prenez note lorsque vous modifiez une échéance
+         existante[fn:67].
+    + =C-c C-s= (=org-schedule=) :: Insérer le mot clé "PLANIFIE" avec
+         un tampon. L'insertion se produit dans la ligne directement
+         après le titre. Supprimez tout horodatage «CLOSED». Lorsqu'il
+         est appelé avec un argument préfixe, supprimez également la
+         date de planification de l'entrée. En fonction de la variable
+         org-log-replanification, prenez une note lorsque vous
+         modifiez une heure de planification existante[fn:68].
+    + =C-c C-x C-k= (=org-mark-entry-for-agenda-action=) :: Marquer
+         l'entrée actuelle pour l'action de l'agenda Après avoir
+         marqué l’entrée de cette manière, vous pouvez ouvrir l’agenda
+         ou le calendrier pour trouver une date appropriée. Avec un
+         point sur la date sélectionnée, appuyez sur =k s= ou =k d=
+         pour planifier l’élément marqué.
+    + =C-c / d= (=org-check-deadlines=) :: Créez un arbre clairsemé
+         avec toutes les échéances en retard ou devenant exigibles
+         dans les =org-deadline-warning-days=. Avec le préfixe =C-u=,
+         affichez toutes les échéances du fichier. Avec un préfixe
+         numérique, vérifiez ce nombre de jours. Par exemple, =C-1 C-c
+         / d= affiche toutes les échéances pour demain.
+    + =C-c / b= (=org-check-before-date=) :: Arbre fragmenté pour les
+         échéances et les éléments planifiés avant une date donnée. 
+    + =C-c / a= (=org-check-after-date=) :: Arbre fragmenté pour les
+         échéances et les éléments planifiés après une date donnée.
+
+
+    Notez que =org-schedule= et =org-schedule= permettent de définir la
+    date en indiquant une heure relative. Par exemple, '=+1d=' définit
+    la date au lendemain après aujourd'hui et '=--1w=' à la semaine
+    précédente horodatage.
+
+
+*** Tâches répétées
+    
+    Certaines tâches doivent être répétées encore et encore. Le mode
+    Org permet d’organiser de telles tâches à l’aide d’un répéteur
+    dans un '=DEADLINE=', un '=SCHEDULED=' ou un horodatage simple[fn:69]. Dans
+    l'exemple suivant : 
+    #+BEGIN_SRC org-mode
+    ** TODO Pay the rent
+       DEADLINE: <2005-10-01 Sat +1m>
+    #+END_SRC
+    le '=+1m=' est un répéteur; L’interprétation voulue est que la
+    tâche a une date-limite '=<2005-10-01>=' et se répète tous les (un)
+    mois à compter de ce moment. Vous pouvez utiliser des cookies
+    chaque année, tous les mois, toutes les semaines, tous les jours
+    et toutes les heures en utilisant les lettres '=y=', '=w=', '=m=', '=d='
+    et '=h='. Si vous avez besoin à la fois d'un répéteur et d'une
+    période d'alerte spéciale dans une entrée d'échéance, le délai de
+    traitement doit être la première priorité et la période
+    d'avertissement doit être respectée 
+   #+BEGIN_SRC org-mode
+   DEADLINE: <2005-10-01 Sat +1m -3d>
+   #+END_SRC
+
+   Les dates limites et les éléments planifiés produisent des entrées
+   dans l'ordre du jour lorsqu'elles sont en retard, il est donc
+   important de pouvoir marquer une telle entrée comme étant DONE une
+   fois que vous l'avez fait. Lorsque vous marquez un '=DEADLINE=' ou un
+   '=SCHEDULED=' avec le mot-clé TODO '=DONE=', il ne produit plus
+   d’entrées dans l’agenda. Le problème, c’est toutefois que la
+   prochaine instance de l’entrée répétée ne sera pas active. Le mode
+   Org traite cela de la manière suivante: lorsque vous essayez de
+   marquer une telle entrée DONE, en utilisant =C-c C-t=, il décale la
+   date de base de l'horodatage répété de l'intervalle de répéteur et
+   rétablit immédiatement l'état d'entrée à TODO[fn:70]. Dans l'exemple
+   ci-dessus, définir l'état sur DONE changera la date comme suit :
+   #+BEGIN_SRC org-mode
+   ** TODO Pay the rent
+      DEADLINE: <2005-11-01 Tue +1m>
+   #+END_SRC
+
+   Pour marquer une tâche avec un répéteur comme étant DONE, utilisez
+   =C-- 1 C-c C-t=, c’est-à-dire =org-todo= avec un argument de préfixe
+   numérique égal à '=-1='.
+
+   Un horodatage[fn:71] est ajouté sous la date limite, pour conserver une
+   trace de votre action réelle sur l'instance précédente de cette
+   date limite.
+
+   En conséquence du décalage de la date de base, cette entrée n'est
+   plus visible dans l'agenda lors de la vérification des dates
+   antérieures, mais toutes les instances futures seront visibles.
+
+   Avec le cookie '=+1m=', le décalage de date est toujours exactement
+   d’un mois. Donc, si vous n'avez pas payé le loyer depuis trois
+   mois, en marquant cette entrée, DONE conserve toujours le délai de
+   retard. En fonction de la tâche, cela peut ne pas être la meilleure
+   façon de la gérer. Par exemple, si vous avez oublié d'appeler votre
+   père pendant 3 semaines, cela n'a aucun sens de le contacter 3 fois
+   par jour pour le compenser. Enfin, il y a des tâches comme changer
+   les piles qui doivent toujours se répéter un certain temps après la
+   dernière fois. Pour ces tâches, le mode Org dispose de répéteurs
+   spéciaux '=++=' et '=.+='. Par exemple :
+   #+BEGIN_SRC org-mode
+   ** TODO Call Father
+      DEADLINE: <2008-02-10 Sun ++1w>
+      Marking this DONE shifts the date by at least one week, but also 
+      by as many weeks as it takes to get this date into the future.
+      However, it stays on a Sunday, even if you called and marked it 
+      done on Saturday.
+   
+   ** TODO Empty kitchen trash
+      DEADLINE: <2008-02-08 Fri 20:00 ++1d>
+      Marking this DONE shifts the date by at least one day, and also
+      by as many days as it takes to get the timestamp into the future.
+      Since there is a time in the timestamp, the next deadline in the 
+      future will be on today's date if you complete task before 20:00.
+
+   ** TODO Check the batteries in the smoke detectors
+      DEADLINE: <2005-11-01 Tue .+1m>
+      Marking this DONE will shift the date to one month after today.
+   #+END_SRC
+
+   Vous pouvez avoir à la fois des informations de planification et de
+   délai pour une tâche spécifique. Si le répéteur est défini pour les
+   informations de planification uniquement, vous souhaitez
+   probablement que le répéteur soit ignoré après la date limite. Si
+   tel est le cas, définissez la variable
+   =org-agenda-skip-scheduled-if-deadline-is-shown= à
+   =repeated-after-deadline=. Cependant, toute information de
+   planification sans répéteur n'est plus pertinente une fois la tâche
+   terminée et est donc supprimée lors de la répétition de la
+   tâche. Si vous souhaitez que les informations de planification et
+   d’échéance soient répétées après le même intervalle, définissez le
+   même répéteur pour les deux horodatages.
+
+   Une alternative à l'utilisation d'un répéteur consiste à créer un
+   certain nombre de copies d'un sous-arbre de tâche, avec des dates
+   décalées dans chaque copie. La commande =C-c C-x c= a été créée à cet
+   effet; il est décrit à la Section 2.4 [Modification de la
+   structure], page 9.
+
+
+
+
+** Horaire de travail
+   
+   Le mode Org vous permet de chronométrer le temps que vous passez à
+   des tâches spécifiques dans un projet. Lorsque vous commencez à
+   travailler sur un élément, vous pouvez démarrer l'horloge. Lorsque
+   vous arrêtez de travailler sur cette tâche ou lorsque vous marquez
+   la tâche comme terminée, l'horloge est arrêtée et l'intervalle de
+   temps correspondant est enregistré. Il calcule également le temps
+   total passé sur chaque sous-arbre13 d'un projet. Et il se souvient
+   d'un historique ou de tâches récemment enregistrées, ce qui vous
+   permet de passer rapidement d'un certain nombre de tâches à votre
+   temps.
+
+   Pour sauvegarder l'historique des horloges lors des sessions Emacs,
+   utilisez :
+
+   #+BEGIN_SRC emacs-lisp
+   (setq org-clock-persist 'history)
+   (org-clock-persistence-insinuate)
+   #+END_SRC
+   
+   Lorsque vous vous lancez dans une nouvelle tâche après avoir repris
+   Emacs, l'horloge incomplète[fn:72] est récupérée (voir [Résolution du
+   temps d'inactivité (1)], page 86) et vous êtes invité à choisir une
+   solution.
 
 
 * Footnotes
+
+[fn:72] Pour reprendre l’horloge en supposant que vous avez travaillé
+sur cette tâche en dehors d’Emacs, utilisez '=(setq org-clock-persist t)='.
+ 
+
+[fn:71] Vous pouvez changer cela en utilisant l’option =org-log-repeat=
+ou les options '=logrepeat=', '=lognoterepeat=' et
+'=nologrepeat=' de '=STARTUP='. Avec '=lognoterepeat=', vous serez
+également invité à fournir une note.
+ 
+
+[fn:70] En fait, l'état cible provient de la propriété
+'=REPEAT_TO_STATE=' de la séquence, de la variable
+=org-todo-repeat-to-state= s'il s'agit d'une chaîne, de l'état précédent
+du TODO si =org-todo-repeat-to-state= est =t=, ou le premier état de la
+séquence d'état TODO.
+ 
+
+[fn:69] Org ne répète pas les horodatages inactifs. Voir Section 8.1
+[Horodatages], page 71.
+ 
+
+[fn:68] Notez les options '=STARTUP=' correspondantes '=logreschedule=',
+'=lognotereschedule=' et '=nologreschedule='.
+ 
+
+[fn:67] Notez les options '=STARTUP=' correspondantes '=logredeadline=',
+'=lognoteredeadline=' et '=nologredeadline='.
+ 
+
+[fn:66] Les dates '=SCHEDULED=' et '=DEADLINE=' sont insérées sur la
+ligne juste en dessous du titre. Ne mettez aucun texte entre cette
+ligne et le titre.
+ 
+
+[fn:65] Si vous trouvez cela gênant, éteignez l'écran avec
+=org-read-date-display-live=.
+ 
+
+[fn:64] Si vous n'avez pas besoin ou ne voulez pas du calendrier,
+configurez la variable =org-popup-calendar-for-date-prompt=.
+ 
+
+[fn:63] Voir la variable =org-read-date-prefer-future=. Vous pouvez
+définir cette variable sur le symbole =time= pour créer même un temps
+avant maintenant décaler la date à demain.  
+
+[fn:62] Lorsque vous travaillez avec les fonctions sexp du journal
+standard, vous devez faire très attention à l'ordre des arguments. Cet
+ordre dépend évidemment de la variable =calendar-date-style=. Par
+exemple, pour spécifier une date le 12 décembre 2005, l’appel pourrait
+ressembler à '=(diary-date 12 1 2005)=' ou '=(diary-date 1 12 2005)=' ou
+'=(diary-date 2005 12 1)=', en fonction des paramètres. Cela a été
+source de beaucoup de confusion. Les utilisateurs du mode Org peuvent
+recourir à des versions spéciales de ces fonctions, telles que
+=org-date= ou =org-birthday=.Ces-ci fonctionnent exactement comme les
+fonctions =diary-=, mais avec un ordre ISO stable des arguments (année,
+mois, jour), le cas échéant, indépendamment de la valeur de
+=calendar-date-style=.
+ 
+
+[fn:61] Le format de date d'organisation est inspiré du format de date
+/ heure standard ISO 8601. Pour utiliser un format alternatif, voir
+Section 8.2.2 [Format d'heure personnalisée], page 75. Le nom du jour
+est facultatif lorsque vous tapez la date vous-même. Cependant, toute
+date insérée ou modifiée par Org ajoute ce nom de jour pour faciliter
+la lecture.
+ 
 
 [fn:60] Les paquetages contribués ne font pas partie d'Emacs, mais
 sont distribués avec la distribution principale d'Org - visitez
