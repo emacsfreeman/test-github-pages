@@ -13,7 +13,11 @@ app.get('/blockchain', function (req, res)
 app.post('/transaction', function(req, res) 
 {
 	console.log(req.body);
-	res.send(`The amount of the transaction is ${req.body.amount} bitcoins.);
+	/* 
+		attention à bien utiliser les accents graves `${}` pour 
+		l'interpolation et non les guillemets simples ''
+	*/
+	res.send(`The amount of the transaction is ${req.body.amount} bitcoins.`);
 });
 
 app.get('/mine', function(req, res) {
