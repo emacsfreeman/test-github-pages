@@ -1,0 +1,81 @@
+[debug] [2019-05-25T23:24:49.643Z] ----------------------------------------------------------------------
+[debug] [2019-05-25T23:24:49.647Z] Command:       /usr/local/Cellar/node/12.3.1/bin/node /usr/local/bin/firebase serve
+[debug] [2019-05-25T23:24:49.647Z] CLI Version:   6.10.0
+[debug] [2019-05-25T23:24:49.647Z] Platform:      darwin
+[debug] [2019-05-25T23:24:49.647Z] Node Version:  v12.3.1
+[debug] [2019-05-25T23:24:49.656Z] Time:          Sun May 26 2019 01:24:49 GMT+0200 (heure d’été d’Europe centrale)
+[debug] [2019-05-25T23:24:49.656Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-05-25T23:24:49.674Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-05-25T23:24:49.674Z] > authorizing via signed-in user
+[debug] [2019-05-25T23:24:49.674Z] [iam] checking project telegrambot-version1 for permissions ["firebase.projects.get"]
+[debug] [2019-05-25T23:24:49.677Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/telegrambot-version1:testIamPermissions  
+
+[debug] [2019-05-25T23:24:50.602Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-25T23:24:50.606Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/telegrambot-version1  
+ 
+[debug] [2019-05-25T23:24:51.509Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/laurentgarnier/telegramBot'...
+[info] 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "12"
+[debug] [2019-05-25T23:24:51.527Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/68378942997:getServerAppConfig  
+ 
+[debug] [2019-05-25T23:24:51.750Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: Emulator started at http://localhost:5000
+[info] i  functions: Watching "/Users/laurentgarnier/telegramBot/functions" for Cloud Functions...
+[debug] [2019-05-25T23:24:52.097Z] Functions runtime initialized.
+[debug] [2019-05-25T23:24:52.097Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-05-25T23:24:52.922Z] firebase-admin has been stubbed.
+[warn] ⚠  /Users/laurentgarnier/telegramBot/functions/index.js:22
+    `The current weather in ${query} is C: ${current.current.temp_c} F:${current.current.temp_f}`
+                                                                                               ^^
+
+SyntaxError: missing ) after argument list
+    at Module._compile (internal/modules/cjs/loader.js:718:23)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:785:10)
+    at Module.load (internal/modules/cjs/loader.js:641:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:556:12)
+    at Module.require (internal/modules/cjs/loader.js:681:19)
+    at require (internal/modules/cjs/helpers.js:16:16)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:459:29
+    at Generator.next (<anonymous>)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:7:71
+    at new Promise (<anonymous>)
+[warn] ⚠  Your function was killed because it raised an unhandled error.
+[debug] [2019-05-25T23:26:08.934Z] File /Users/laurentgarnier/telegramBot/functions/index.js changed, reloading triggers
+[debug] [2019-05-25T23:26:10.752Z] Functions runtime initialized.
+[debug] [2019-05-25T23:26:10.752Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-05-25T23:26:11.439Z] firebase-admin has been stubbed.
+[info] i  functions: HTTP trigger initialized at http://localhost:5000/telegrambot-version1/us-central1/helloWorld
+[debug] [2019-05-25T23:26:17.383Z] ----------------------------------------------------------------------
+[debug] [2019-05-25T23:26:17.386Z] Command:       /usr/local/Cellar/node/12.3.1/bin/node /usr/local/bin/firebase serve
+[debug] [2019-05-25T23:26:17.386Z] CLI Version:   6.10.0
+[debug] [2019-05-25T23:26:17.386Z] Platform:      darwin
+[debug] [2019-05-25T23:26:17.386Z] Node Version:  v12.3.1
+[debug] [2019-05-25T23:26:17.387Z] Time:          Sun May 26 2019 01:26:17 GMT+0200 (heure d’été d’Europe centrale)
+[debug] [2019-05-25T23:26:17.387Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-05-25T23:26:17.409Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-05-25T23:26:17.409Z] > authorizing via signed-in user
+[debug] [2019-05-25T23:26:17.409Z] [iam] checking project telegrambot-version1 for permissions ["firebase.projects.get"]
+[debug] [2019-05-25T23:26:17.412Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/telegrambot-version1:testIamPermissions  
+
+[debug] [2019-05-25T23:26:18.175Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-25T23:26:18.176Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/telegrambot-version1  
+ 
+[debug] [2019-05-25T23:26:19.075Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/laurentgarnier/telegramBot'...
+[info] 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "12"
+[debug] [2019-05-25T23:26:19.089Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/68378942997:getServerAppConfig  
+ 
+[debug] [2019-05-25T23:26:19.276Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: Emulator started at http://localhost:5000
+[info] i  functions: Watching "/Users/laurentgarnier/telegramBot/functions" for Cloud Functions...
+[debug] [2019-05-25T23:26:19.510Z] Functions runtime initialized.
+[debug] [2019-05-25T23:26:19.510Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-05-25T23:26:20.203Z] firebase-admin has been stubbed.
+[info] i  functions: HTTP trigger initialized at http://localhost:5000/telegrambot-version1/us-central1/helloWorld
+[info] >  Failed to fetch updates. Waiting: 1s request to https://api.telegram.org/bot796122815:AAHJ_u6zZl6q-OOtsUWAxoa06b_MszWKWCA/getUpdates?offset=74673347&limit=100&timeout=30 failed, reason: read ECONNRESET
