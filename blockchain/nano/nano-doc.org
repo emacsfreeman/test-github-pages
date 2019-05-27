@@ -3,6 +3,7 @@
 
 * La source ultime
 
-  [[https://github.com/nanocurrency/nano-docs]]
+  + [[https://github.com/nanocurrency/nano-docs]]
+  + [[https://www.nanode.co/docs]]
   
   
