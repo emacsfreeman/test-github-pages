@@ -8,7 +8,17 @@ $(document).ready(function () {
 	var common = nem.model.objects.create("common")("password", "5d533ad1c22fb6237b0ed3471a7ed41a845119543ca4fb7baf47711c4c2549e8");
 	var mosaicDefinitions = nem.model.objects.get("mosaicDefinitionMetaDataPair");
 
+	var savedScores = JSON.parse(window.localStorage.getItem('random-game-highscore'));
 	var scores = {};
+
+	if (savedScores !== null)
+	{
+		scores = savedScores;
+	}
+	else
+	{
+		scores = {};
+	}
 
   function roll() {
 		var random = Math.floor(Math.random() * 1000001);
@@ -21,6 +31,7 @@ $(document).ready(function () {
 		var result = $('#result').html();
 		if (!(result => 0)) return alert("You need to roll the dice first!");
 		scores[address] = result;
+		window.localStorage.setItem('random-game-highscore', JSON.stringify(scores));
 		updateScoringTable();
   }
 
