@@ -8,6 +8,8 @@ $(document).ready(function () {
 	var common = nem.model.objects.create("common")("password", "5d533ad1c22fb6237b0ed3471a7ed41a845119543ca4fb7baf47711c4c2549e8");
 	var mosaicDefinitions = nem.model.objects.get("mosaicDefinitionMetaDataPair");
 
+	var scores = {};
+
   function roll() {
 		var random = Math.floor(Math.random() * 1000001);
 		console.log(random);
@@ -15,10 +17,28 @@ $(document).ready(function () {
   }
 
   function save() {
+		var address = nem.model.address.clean($('#address').val());
+		var result = $('#result').html();
+		if (!(result => 0)) return alert("You need to roll the dice first!");
+		scores[address] = result;
+		updateScoringTable();
   }
 
 	function updateScoringTable(){
-
+		var list = [];
+		for (var key in scores)
+		{
+			if (scores.hasOwnProperty(key))
+			{
+				list.push(key + ": " + scores[key]);
+			}
+		}
+		var highscoreTable = $('#highscoreTable');
+		highscoreTable.html('');
+		$.each(list, function(i){
+			var li = $('<li/>').appendTo(highscoreTable);
+			var text = $('<span/>').text(list[i]).appendTo(li);
+		});
 	}
 
 
