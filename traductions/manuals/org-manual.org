@@ -3312,7 +3312,6 @@ touches méta-curseur ont des fonctionnalités différentes.
         vous les ajoutez / modifiez à la main, utilisez cette commande
         pour rétablir la synchronisation.
 
-
 * Balises
 
   Un excellent moyen d'implémenter des étiquettes et des contextes
@@ -4258,7 +4257,6 @@ touches méta-curseur ont des fonctionnalités différentes.
      de les insérer dans une table ou un bloc dynamique.
 
 
-	  
 * Dates et heures
   
   Pour faciliter la planification de projet, les éléments TODO peuvent
@@ -4791,8 +4789,127 @@ touches méta-curseur ont des fonctionnalités différentes.
    temps d'inactivité (1)], page 86) et vous êtes invité à choisir une
    solution.
 
+*** Commandes de pointage   
+
+    + =C-c C-x C-i= (=org-clock-in=) :: Démarrer l'horloge sur
+         l'élément en cours (clock-in). Ceci insère le mot-clé CLOCK
+         avec un horodatage. S'il ne s'agit pas du premier
+         chronométrage de cet élément, les multiples lignes CLOCK sont
+         regroupées dans un tiroir '=LOGBOOK=' (voir aussi
+         la variable =org-clock-into-drawer=). Vous pouvez également
+         remplacer le réglage de thisvariable pour un sous-arbre en
+         définissant une propriété '=CLOCK_INTO_DRAWER=' ou
+         '=LOG_INTO_DRAWER='. Lorsqu'il est appelé avec un argument
+         =C-u= préfixe, sélectionnez la tâche dans une liste de tâches
+         récemment synchronisées. Avec deux préfixes supérieurs de
+         =C-u C-u=, chronométrez dans la tâche à un point et marquez-la
+         comme tâche par défaut; la tâche par défaut est toujours
+         disponible avec letterletter lors du choix d’une tâche de
+         pointage. Avec trois préfixes ascendants =C-u C-u C-u=, effectuez
+         un chronométrage continu en démarrant l'horloge lorsque la
+         dernière horloge s'est arrêtée.
+
+	 Pendant que l'horloge est en marche, Org indique le temps
+         d'horloge actuel dans la modélisation, ainsi que le titre de
+         la tâche. Le temps indiqué est toujours chronométré pour
+         cette tâche et ses enfants. Si la tâche comporte une
+         estimation de l'effort (voir Section 8.5 [Estimations de
+         l'effort], page 86), la ligne de mode affiche le temps
+         d'horloge en cours par rapport à elle[fn:73]. Si la tâche est
+         répétitive (voir Section 8.3.2 [Tâches répétées], page 80),
+         n’affiche que le temps écoulé depuis la dernière
+         réinitialisation de la tâche[fn:74]. Vous pouvez exercer un
+         contrôle accru sur le temps d’affichage avec la propriété
+         '=CLOCK_MODELINE_TOTAL='. Il peut avoir les valeurs '=current='
+         pour n’indiquer que l’instance de synchronisation actuelle,
+         '=today=' pour afficher tous les temps chronométrés sur
+         cette tâche aujourd’hui (voir également la variable
+         =org-extension-today-until=, =all= inclue tous les
+         temps, ou =auto= qui est celle par défaut[fn:75]. En cliquant avec
+         =mouse-1=, sur l'entrée de ligne de mode ouvre un menu
+         avec des options de pointage.
+    + =C-c C-x C-o= (=org-clock-out=) :: Arrêtez l'horloge
+         (clock-out). Cela insère un autre horodatage au même endroit
+         que celui où l'horloge a été démarrée pour la dernière
+         fois. Il calcule également directement le temps résultant et
+         l’insère après la plage de temps sous la forme
+         '~=>HH:MM~'. Voir la variable =org-log-note-horloge-out= pour la
+         possibilité d'enregistrer une note supplémentaire avec
+         l'horodatage de sortie[fn:76]
+    + =C-c C-x C-x= (=org-clock-in-last=) :: Re-chronométrez la
+         dernière tâche pointée. Avec un argument de préfixe =C-u=,
+         sélectionnez la tâche dans l'historique de l'horloge. Avec
+         deux préfixes =C-u=, forcez l'horloge continue en démarrant
+         l'horloge lorsque la dernière horloge s'est arrêtée.
+    + =C-c C-x C-e= (=org-clock-modify-effort-estimate=) :: Mettez à
+         jour l'estimation de l'effort pour la tâche d'horloge en
+         cours.
+    + =C-c C-c= ou =C-c C-y= (=org-evaluate-time-range=) :: Recalculez
+         l'intervalle de temps après avoir modifié l'un des
+         horodatages. Cela n'est nécessaire que si vous modifiez les
+         horodatages directement. Si vous les changez avec les touches
+         =S- <cursor>=, la mise à jour est automatique.
+    + =C-S-UP= (=org-clock-timestamps-up=) ::
+    + =C-S-DOWN= (=org-clock-timestamps-down=) :: Sur les lignes de
+         journal CLOCK, augmentez / diminuez les deux horodatages afin
+         que la durée de l'horloge conserve la même valeur.
+    + =S-M-UP= (=org-timestamp-up=) :: 
+    + =S-M-DOWN= (=org-timestamp-down=) :: Sur les lignes du journal
+         '=CLOCK=', augmentez / diminuez l’horodatage au point et celui
+         de l’horodatage précédent ou suivant de la même durée. Par
+         exemple, si vous tapez =S-M-UP= pour augmenter un horodatage
+         horodaté de cinq minutes, l’horodatage horodaté de la
+         prochaine horloge est augmenté de cinq minutes.
+    + =C-c C-t= (=org-todo=) :: Le passage de l'état TODO d'un élément
+         à DONE arrête automatiquement l'horloge si ce dernier est en
+         cours d'exécution.
+    + =C-c C-x C-q= (=org-clock-cancel=) :: Annuler l'horloge en
+         cours. Ceci est utile si une horloge a été démarrée par
+         erreur ou si vous avez fini par travailler sur autre chose.
+    + =C-c C-x C-j= (=org-clock-goto=) :: Passez au titre de la tâche
+         actuellement cadencée. Avec un argument de préfixe =C-u=,
+         sélectionnez la tâche cible dans une liste de tâches
+         récemment synchronisées.
+    + =C-c C-x C-d= (=org-clock-display=) :: Affiche les résumés de
+         temps pour chaque sous-arbre dans la mémoire tampon
+         actuelle. Cela place les incrustations à la fin de chaque
+         titre, indiquant le temps total enregistré sous cette
+         rubrique, y compris la durée de toutes les
+         sous-positions. Vous pouvez utiliser le cycle de visibilité
+         pour étudier l’arbre, mais les superpositions disparaissent
+         lorsque vous modifiez le tampon (voir la variable
+         =org-remove-highlight-with-change=) ou appuyez sur =C-c C-c=
+
+
+    La touche =l= peut être utilisée dans l’agenda (voir Section 10.3.1
+    [Agenda hebdomadaire / quotidien], page 104) pour indiquer les
+    tâches exécutées ou clôturées au cours d’une journée.
+
+
+    *Important :* Notez que =org-clock-out= et =org-clock-in-last= peuvent
+    avoir une liaison de clé globale et ne pas modifier la disposition
+    de la fenêtre.
+
+
+
+
+*** La table de l'horloge
 
 * Footnotes
+
+[fn:76] Le paramètre correspondant dans la mémoire tampon est le
+suivant: '=#+STARTUP: lognoteclock-out='.
+ 
+
+[fn:75] Voir aussi la variable =org-clock-mode-line-total=. 
+
+[fn:74] La dernière réinitialisation de la tâche est enregistrée par
+la propriété '=LAST_REPEAT='.
+ 
+
+[fn:73] Pour ajouter une estimation de l'effort «à la volée», reliez
+une fonction à =org-clock-in-prepare-hook=.
+ 
 
 [fn:72] Pour reprendre l’horloge en supposant que vous avez travaillé
 sur cette tâche en dehors d’Emacs, utilisez '=(setq org-clock-persist t)='.
@@ -5120,5 +5237,7 @@ rubriques indentées de moins de 30 étoiles.
 de minimiser le travail que les modérateurs de la liste ont à faire. 
 
 [fn:1] Si vous n'utilisez pas le verrouillage de police de façon
-permanente, activez-le dans le tampon Org avec '(=add-hook 'org-mode-hook 'turn-on-font-lock=)'.
+permanente, activez-le dans le tampon Org avec '(=add-hook
+'org-mode-hook 'turn-on-font-lock=)'.
+
  
