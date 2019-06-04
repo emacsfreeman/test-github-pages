@@ -1,6 +1,10 @@
 #+TITLE: Défi 30 Jours Sans YouTube #3 : 5 Raisons pour lesquelles Python est populaire dans les projets Bitcoin en 2019
 #+AUTHOR: Laurent Garnier
 
+* Le Blog
+
+  L'article plus complet sur le blog [[https://computercode.fr/defi-30-jours-sans-youtube-3-5-raisons-pour-lesquelles-python-est-populaire-dans-les-projets-bitcoin-en-2019/][https://computercode.fr]]
+  
 * Source
 
   + [[https://rubikscode.net/2019/05/20/5-reasons-why-python-is-popular-in-bitcoin-projects-in-2019/?subscribe=success#blog_subscription-5][rubikscode.net]]
