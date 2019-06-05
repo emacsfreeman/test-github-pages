@@ -1,0 +1,355 @@
+#+TITLE: Est-ce que l'analyse technique fonctionne ?
+#+AUTHOR: Laurent Garnier
+
+* Intro
+  
+  Je retarde la rédaction de cet article depuis quelque temps déjà,
+  simplement à cause du nombre de sous-arguments qui surviennent
+  lorsque l'on essaie de déterminer si l'analyse technique fonctionne.
+
+  Je vais essayer de garder mes arguments aussi simples et pertinents
+  que possible. Cet article vise principalement :
+
+  + Ceux qui ont entendu le terme analyse technique mais ne savent pas
+    ce qu’elle implique
+  + Ceux qui connaissent bien la pratique mais restent sceptiques
+
+    
+  C’est à ce stade que je dois souligner que je ne reprends absolument
+  pas une doctrine orthodoxe sur ce que l’analyse technique est et
+  n’est pas (s’il en existait une). Ce sont mes opinions personnelles
+  et une façon de penser à l’analyse technique qui ont fait de moi un
+  meilleur négociant (/trader/ en anglais).
+
+  De plus, je tiens simplement à préciser ma position : je suis avant
+  tout un négociant technique. Par conséquent, ma position implicite
+  est que l’analyse technique «fonctionne» (à définir ultérieurement).
+
+* Grandes linges  
+
+  + Section 1 :: Qu'est-ce que l'analyse technique ?
+  + Section 2 :: Que faut-il faire pour que ça "marche" ?
+  + Section 3 :: Est-ce que toute anlayse technique est égale ?
+  + Section 4 :: Complémentaire pas contradictoire
+  + Section 5 :: Conclusion
+
+* Section 1--Qu'est-ce que l'analyse technique ?
+
+  Quand on essaie de définir l'analyse technique, c'est presque plus
+  simple de le faire par la négative (décrivant ce que ce n'est pas)
+  contrairement à donner une définition positive.
+
+  Je la définie ainsi : *l'analyse technique est la pratique
+  d'analyser l'historique du prix d'un instrument afin de faire des
+  prévisions exploitables aux risques définis concernant son futur
+  prix.*
+
+  C'est une définition assez humble de l'analyse technique. La
+  confusion et le désaccord au sujet de la définition sont également
+  compréhensibles dans la mesure où il n’est pas rare que les
+  définitions se concentrent uniquement sur l’élément de prévision des
+  prix.
+
+  Par exemple, Wikipedia définit l’analyse technique comme «[[https://en.wikipedia.org/wiki/Technical_analysis][une
+  méthode d’analyse permettant de prévoir l’orientation des prix grâce
+  à l’étude des données de marché passées…]]»
+
+  Bien que cela soit vrai, je dirais que les qualificatifs «pouvant
+  donner lieu à une action, définis en fonction du risque» sont
+  importants.
+
+  L'argument est assez simple: une prévision de prix en soi est
+  rarement suffisante pour justifier un bon commerce basé sur des
+  critères techniques. Il ne suffit pas d’indiquer simplement si l’on
+  est haussier / baissier et de mettre fin à l’analyse, car cela
+  donnerait à penser qu’il faut prendre un trade directionnel dans
+  cette direction et voir ce qui se passe.
+
+  Au lieu de cela, la plupart des traders définiront également un
+  objectif (où ils souhaitent prendre un profit ou fermer leur
+  transaction) et un stop loss (où ils souhaitent sortir de la
+  position perdante pour éviter de nouvelles pertes).
+
+  Ainsi, en ajoutant des paramètres supplémentaires (les paramètres de
+  base étant la cible et l’arrêt), une simple prévision de prix se
+  transforme en une transaction pouvant être définie et régie par le
+  risque.
+
+  Donc, compte tenu de ce principe, qu’est-ce que l’analyse technique
+  ?
+
+  Je dirais : 
+
+  + L'analyse technique *N'EST PAS* une analyse de l'historique des prix
+    pour acquérir une connaissance du prix futur d'un instrument.
+  + Analyse technique *EST* un outil de gestion des risques pouvant être
+    utilisé pour dériver des configurations commerciales
+    probabilistes, donnant lieu à une action et définies en fonction
+    du risque d'un instrument.
+
+  En combinant tous ces principes, j’estime que l’utilité de l’analyse
+  technique se résume comme suit : *l’analyse technique est un outil
+  probabiliste de gestion des risques qui peut i) générer de nouvelles
+  idées commerciales ii) convertir les prévisions de prix en
+  transactions exploitables.*
+
+  S'il y a un élément de ma (mes) définition (s) qui ne devrait pas
+  être sujet à controverse, c'est le principe selon lequel l'analyse
+  technique est probabiliste et non une science exacte.
+
+  Les traders techniques, qu'ils soient discrétionnaires ou utilisent
+  une sorte de stratégie automatisée, recherchent de meilleures
+  chances et que leur configuration les rend rentables par rapport à
+  suffisamment de transactions.
+
+  L'analyse technique n'est pas une méthode permettant de déduire
+  logiquement le prix futur d'un instrument.
+
+* Section 2 : Que faut-il faire pour que ça "marche" ?
+
+  Lorsque vous déterminez si l’analyse technique fonctionne, il faut
+  bien sûr déterminer ce que «fonctionne».
+
+  Je crois que c'est la source de beaucoup de confusion.
+
+  De nombreux articles analysant l’analyse technique comparent le
+  commerçant de détail moyen aux négociants travaillant dans des
+  sociétés et bureaux professionnels, des sociétés de négoce à haute
+  fréquence, etc.
+
+  L’argument va dans le sens suivant: la concurrence des commerçants
+  de détail se compose d’entreprises disposant de meilleures
+  technologies, de meilleurs spreads, de personnes plus intelligentes,
+  d’une exécution plus rapide, etc. une chance de gagner de l'argent.
+
+  Je pense qu’établir une comparaison entre un commerçant de détail et
+  une entreprise / un bureau spécialisé est inutile (et peut-être même
+  duplique).
+
+  Cela suppose que, pour que le commerçant de détail puisse gagner de
+  l'argent, il doit d'une manière ou d'une autre surperformer les
+  professionnels. Cette hypothèse est implicite dans la comparaison,
+  et elle est erronée.
+
+  Simplement: tout le commerçant au détail doit se concentrer sur son
+  propre commerce et sa propre rentabilité. Peu importe la façon dont
+  la «compétition» se comporte par rapport à vous, tant que vous
+  atteignez les objectifs raisonnables que vous avez définis.
+
+  Maintenant, pour répondre à la question: comment savoir si l'analyse
+  technique fonctionne ?
+
+  Eh bien, revoyons notre définition et évaluons si l’analyse
+  technique réussit à atteindre ces objectifs.
+
+  #+BEGIN_QUOTE
+  L’analyse technique consiste à analyser l’historique des prix d’un
+  instrument afin de faire des prévisions exploitables et définies en
+  fonction du risque de son prix futur.
+  #+END_QUOTE
+
+  Il s'agit d'un ensemble de critères relativement simples à
+  satisfaire.
+
+  Nous ne demandons pas si l'analyse technique peut prédire
+  l'avenir. Nous ne demandons pas non plus si l’analyse technique
+  signifie que les commerçants de détail peuvent bodybag des sociétés
+  de négoce professionnelles.
+
+  Le test est beaucoup plus simple: l'analyse technique peut-elle
+  générer des configurations commerciales définies en fonction du
+  risque ?
+
+  Dans mon esprit, la réponse est «oui».
+
+  Lorsque les techniciens cartographient leurs niveaux / vagues /
+  indicateurs - quels que soient les nombreux outils qu'ils
+  utilisent - l'objectif est essentiellement le même: identifier et
+  exécuter une configuration de transaction offrant un risque
+  asymétrique : Récompense.
+
+  Deux autres arguments me viennent à l’esprit (que je ne peux que
+  souligner, c’est déjà trop long) :
+
+  1. Il existe de nombreux traders professionnels (des individus qui
+     sont payés pour échanger de l’argent d’autres personnes) qui
+     utilisent des techniques pour leurs échanges d’une manière ou
+     d’une autre. Je dis cela afin de ne pas créer un faux dilemme
+     dans lequel les garçons et les filles à la maison utilisent
+     l’analyse technique, et tous les professionnels ont une stratégie
+     automatisée qui leur permet de faire le gros du travail. Ce n'est
+     pas le cas.
+  2. Les stratégies automatisées ne sont pas dépourvues d'analyse
+     technique, même au niveau professionnel. Bien que la machine
+     exécute sans faille et sans aucun remords la stratégie qu’elle
+     est programmée pour exécuter, elle nécessite toujours des
+     entrées. Par exemple, si mon fonds théorique négocie une
+     stratégie automatisée de suivi de tendance, je dois encore
+     définir la tendance et préciser les conditions dans lesquelles
+     prendre une position longue. Les machines ne s'exécutent pas
+     d'elles-mêmes - elles exécutent la stratégie pour laquelle elles
+     ont été programmées, et cette programmation inclut souvent des
+     paramètres basés sur l'analyse technique, par exemple. moyennes
+     mobiles.
+
+
+  Je voudrais conclure ainsi: l’analyse technique «fonctionne» car les
+  exigences auxquelles elle doit satisfaire pour que cela soit vrai ne
+  sont pas déraisonnablement élevées. Il n’a pas à prédire l’avenir,
+  pas plus que les professionnels mieux équipés. Tant que cela aide
+  les traders à identifier et à échanger le risque asymétrique:
+  récompenser les configurations d'échanges, cela fonctionne.
+
+* Section 3 : Est-ce que toute anlayse technique est égale ?
+
+  Non.
+
+  Cependant, je voudrais faire une distinction critique : 
+
+  + Je soutiens qu'un trader qui est plus systématique et sélectif
+    avec ses propres transactions a plus de chances de réussir qu'un
+    trader qui ne l'est pas
+  + Je ne prétends pas (pour les besoins de cet article) que certains
+    systèmes et stratégies sont meilleurs que d'autres
+
+
+  Qu'est-ce que je veux dire quand je dis que toutes les analyses
+  techniques ne sont pas égales ?
+
+  Il existe une différence entre un trader avec discipline, patience
+  et un ensemble de règles de trading et de configurations qui donnent
+  une attente statistiquement positive par rapport à celui qui affiche
+  un graphique à tout moment et cherche à éliminer tout ce qui
+  ressemble à une tendance haussière de BabyPips.
+
+  Il s’agit là d’une distinction importante, car de nombreuses
+  critiques de l’analyse technique reposent sur des tableaux de
+  balises au laser caricaturés et des joueurs directionnels fous
+  plutôt que sur de bons négociants techniques dotés d’un avantage
+  statistique.
+
+  Cette prémisse concerne la question plus générale de la manière
+  suivante: quand on se demande si l’analyse technique fonctionne, il
+  est trop facile d’utiliser le plus petit dénominateur commun et de
+  choisir les extrêmes; les gens qui jouent essentiellement. L'analyse
+  technique est beaucoup plus susceptible de fonctionner si vous le
+  faites correctement et le prenez au sérieux - comme le font la
+  plupart des bons traders techniques !
+  
+  Ainsi, lorsque l’on avance que l’analyse technique ne fonctionne
+  pas, le cas le plus convaincant sera celui qui peut expliquer les
+  décennies de succès des négociants techniques (détaillants et
+  professionnels) au lieu de renverser un homme de paille aux dépens
+  d’un amateur.
+
+  L'outil est aussi bon que son utilisateur. Il n’est pas rare de voir
+  deux traders avoir les mêmes niveaux / structures indiqués sur leurs
+  cartes. En réalité, les échanger et gérer les risques, cependant,
+  sont totalement différents.
+
+  Est-il vraiment juste de blâmer le commerce technique dans son
+  ensemble si un individu manque de discipline pour l'appliquer
+  correctement ?
+
+  Je soumets humblement que la réponse à cette question est «non».
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+* Section 4 : Complémentaire pas contradictoire
+
+  Le débat est souvent décrit comme une analyse technique «versus» une
+  analyse fondamentale, ce qui constitue une dichotomie malheureuse
+  (et inutile).
+
+  Cela tient souvent au fait que de nombreux opérateurs spécialisés
+  dans le domaine technique (en particulier sur les marchés de la
+  crypto-monnaie) considèrent les fondamentaux comme secondaires /
+  inutiles / déjà pris en compte dans / un meme, 'Tout ce dont tu as
+  besoin c'est le tableau, mon frère'.
+
+  Comme le sous-titre l'indique, une bonne stratégie d'investissement
+  (à mon avis) est susceptible d'utiliser les deux, le cas échéant.
+
+  Par exemple, supposons que votre recherche fondamentale sur un
+  instrument suggère que celui-ci est susceptible de s’apprécier à
+  court et à moyen terme. C’est une prévision basée sur une analyse
+  fondamentale. Par la suite, à l'aide d'une analyse technique, vous
+  pouvez rechercher une configuration de transaction pouvant être
+  définie et à risque, conforme à vos prévisions haussières.
+
+  Inversement, vous pouvez créer une liste de surveillance des
+  instruments basée sur la recherche fondamentale (par exemple, les
+  crypto-devises qui n'ont pas encore quitté l'arnaque), puis
+  rechercher des entrées techniques sur ces actifs en fonction de
+  l'orientation de votre thèse.
+
+  Le problème est le suivant: il ne faut pas nécessairement choisir
+  l’un ou l’autre, pas plus que je ne pense qu’ils doivent
+  nécessairement concurrencer / écraser l’autre.
+
+  Jouez avec vos atouts et soyez au moins vaguement conscient de
+  «l’autre côté» pour vous donner une image plus complète du marché
+  que vous négociez.
+
+  
+* Section 5 : Conclusion
+
+  Quelle meilleure façon de terminer qu'avec une liste ?
+
+  + L'analyse technique est un outil de gestion des risques pouvant
+    être utilisé pour dériver des configurations de négociation
+    probabilistes, donnant lieu à une action et définies en fonction
+    du risque d'un instrument.
+  + L'analyse technique ne consiste pas à connaître / déduire le prix
+    futur d'un instrument.
+  + L’analyse technique n’a pas pour but de surpasser les bureaux et
+    les entreprises professionnelles, mais de savoir si elle peut
+    aider un opérateur à se démarquer et à s’attendre à une espérance
+    positive sur le ou les marchés qu’elle négocie.
+  + Toutes les analyses techniques ne sont pas égales - il est
+    beaucoup plus susceptible de fonctionner pour une personne qui la
+    prend au sérieux (disciplinée, systématique, etc.) que pour une
+    personne qui prend juste un coup de main.
+  + Ne vous laissez pas entraîner dans l’argument technique contre les
+    principes fondamentaux - concentrez-vous sur celui qui vous
+    convient le mieux et maîtrisez au moins de manière élémentaire
+    l’autre.
+
+
+  Il n’ya pas beaucoup de sujets passionnants que je n’ai pas abordés
+  (pourquoi / comment les niveaux techniques et les outils sont-ils
+  respectés par le marché, ce qui modifie les prix, etc.), mais nous
+  les garderons pour un autre article.
+
+  À votre santé !
+
+* Réseaux sociaux
+
+  Suivez moi sur [[https://twitter.com/CryptoCred][Twitter]] pour des graphiques, des astuces et des memes.
+
+  Suivez mon [[https://t.me/cryptocredta][Telegram]] pour des descriptions plus détaillées et des
+  livestreams.
+
+  [[https://docs.google.com/document/d/15c3rN15rkXldY8Te3GDG4NG7noaaoikydOoZQlElwXw/preview][Etudiez l'analyse technique gratuitement]]
+  
+* Notes du traducteur
+
+  J'espère que cette traduction t'a plu, tu peux retrouver l'article
+  original [[https://medium.com/@cryptocreddy/does-technical-analysis-work-fa90413a8328][ici]].
+
+  Tu peux retrouver cette traduction sur mon blog [[https://whealthyhuman.fr]]
+
+  Où sur Medium [[medium.com/@emacsfreeman]]
+
+  
