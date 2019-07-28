@@ -1,0 +1,235 @@
+#+TITLE: Implémentation de la preuve de participation (Proof of Stake) Part 2
+#+AUTHOR: Laurent Garnier
+
+Retrouvez l'article original en anglais sur [[https://medium.com/coinmonks/implementing-proof-of-stake-part-2-748156d5c85e][Coinmonks]] et l'auteur
+[[https://medium.com/@kashishkhullar][Kashish Khullar]]. 
+
+Cet article présente une implémentation simple de l'algorithme de
+preuve de participation en node.js.
+
+
+#+begin_center
+[[./bitcoin-wiki.png]]
+#+end_center
+
+Dans la publication précédente, nous avons fait une introduction à la
+preuve de participation, comment ça marche et aussi parlé de sa
+conception et de l'architecture du code que nous allons implémenter.
+
+Dans cette publication, nous commencerons à coder.
+
+* Pré-requis
+
+  1. [[https://nodejs.org/en/download/?source=post_page---------------------------][Node.js]] et [[https://www.npmjs.com/?source=post_page---------------------------][NPM]]
+  2. [[https://code.visualstudio.com/download?source=post_page---------------------------][Visual Studio Code]] (avec le thème sombre)
+  3. [[https://www.getpostman.com/?source=post_page---------------------------][Postman]] ou toute autre application pour interagir avec les API
+     HTTP
+
+
+  *C'est tout.*
+
+* Codons
+
+  On va commencer par créer le répertoire racine de notre
+  projet. Donnez un nom à votre projet. Disons POSchain.
+
+  #+begin_src sh
+    mkdir poschain
+    cd poschain
+  #+end_src
+
+  Créer un nouveau projet
+
+  #+begin_src sh
+    npm init -y
+  #+end_src
+
+  Nous avons besoin d'un paquet appelé nodemon pour exécuter notre
+  serveur de développement et recharger notre serveur à chaque fois
+  que nous sauvegardons. Cet outil nous épargne de nombreux maux de
+  tête.
+
+  OK. Avançons
+
+* Le bloc
+
+  Une blockchain est faite de blocs alors créons la classe
+  Block. Cette classe a ses propriétés principales :
+
+  + timestamp :: (horodatage) le temps de création du bloc en
+                 millisecondes
+  + lastHash :: (dernier hash) hash du dernier bloc de la chaîne
+  + hash :: hash du bloc actuel
+  + data :: données dans le bloc ou les transactions
+  + validator :: l'adresse du gars qui a fait ce bloc
+  + signature :: le hash du bloc chiffré, signé par le validateur
+  
+		 
+  Alors créez un nouveau fichier =block.js= dans votre répertoire
+  racine et créez une classe avec ces propriétés.
+
+  #+begin_src js
+    class Block {
+	constructor(timestamp, lastHash, hash, data, validator, signature) {
+	    this.timestamp = timestamp;
+	    this.lastHash = lastHash;
+	    this.hash = hash;
+	    this.data = data;
+	    this.validator = validator;
+	    this.signature = signature;
+	}
+
+	toString() {
+	    return `Block -
+		Timestamp : ${this.timestamp}
+		Last Hash : ${this.lastHash}
+		Hash      : ${this.hash}
+		Data      : ${this.data}
+		Validator : ${this.validator}
+		Signature : ${this.signature}`;
+	}
+    }
+  #+end_src
+  
+  Aussi, ajoutez une fonction =toString()= qui affichera les détails
+  du bloc dans un format lisible.
+
+  Puisqu'il n'y a pas de blocs au début de la chaîne, les blockchains
+  ont le concept de bloc de génèse (Genesis block). Le bloc de génèse
+  sert de point d'origine de la blockchain. C'est un bloc codé en dur
+  avec des valeurs débiles pour l'horodatage, lastHash, hash et des
+  valeurs de données.
+
+  Ajoutons une fonction statique =genesis()= à notre classe Block avec
+  des valeurs codées en dur. Cette fonction créera un nouveau bloc
+  avec des valeurs débiles. C'est statique parce qu'on ne souhaite pas
+  créer une instance pour appeler cette fonction.
+
+  #+begin_src js
+    static genesis() {
+	return new this(`genesis time`, "----", "genesis-hash", []);
+    }
+  #+end_src
+
+  La prochaine chose que nous ajouterons à notre classe Block est la
+  capacité de créer un nouveau bloc basé sur les données et le dernier
+  hash. Appelons-la =createBlock()=.
+
+  Cette fonction statique =createBlock()= prend actuellement 2
+  arguments, le lastBlock, et les données, et basée sur ces deux
+  éléments elle génère un nouveau bloc. Beaucoup de fonctions dans
+  tout ce projet seront statiques.
+
+  Pour générer une valeur de hash nous avons besoin du paquet appelé
+  =crypto-js=. Installons-le.
+
+  #+begin_src sh
+    npm i crypto-js --save
+  #+end_src
+
+  Importer la fonction sha-256 depuis ce module.
+
+  #+begin_src js
+    const SHA256 = require('crypto-js/sha256');
+  #+end_src
+  
+  Nous n'utiliserons pas la fonction de hash directement, au lieu de
+  ça, nous créerons une fonction séparée puisque nous l'utiliserons à
+  nouveau plus tard.
+
+  #+begin_src js
+    static hash(timestamp, lastHash, data) {
+	return SHA256(`${timestamp}${lastHash}${data}`).toString();
+    }
+  #+end_src
+
+  Créons une fonction =createBlock()= utilisant tous les trucs au
+  dessus.
+
+  #+begin_src js
+    static createBlock(lastBlock, data) {
+	let hash;
+	let timestamp = Date.now();
+	const lastHash = lastBlock.hash;
+	hash = Block.hash(timestamp, lastHash, data);
+
+	return new this(timestamp, lastHash, hash, data);
+    }
+  #+end_src
+
+  Dans les tutoriels à venir, nous ajouterons plus tard le validateur
+  et la signature lorsque nous implémenterons un portefeuille
+  (/wallet/).
+
+* La blockchain
+
+  Créer un fichier =blockchain.js= dans le répertoire racine. Pour
+  créer une classe Blockchain nous devons importer la classe Block.
+
+  Dans le constructeur, nous donnerons un bloc initial à la
+  chaîne. Ici, nous utiliserons la fonction statique genesis que nous
+  avons créé pour notre chaîne.
+
+  #+begin_src js
+    const Block = require('./block');
+
+    class Blockchain{
+	constructor(){
+	    this.chain = [Block.genesis()];
+	}
+    }
+
+    module.exports = Blockchain;
+  #+end_src
+
+  Ensuite, donnons à notre classe Blockchain la capacité d'ajouter
+  plus de blocs à la chaîne en créant une fonction =addBlock(data)=. 
+
+  Ici, nous utiliserons notre fonction =createBlock()= pour créer un
+  nouveau bloc et l'ajouter ensuite à la chaîne. Nous accéderons au
+  dernier block de la chaîne et après appellerons la fonction
+  =createBlock()= en utilisant les données passées à =addBlock()=.
+
+  #+begin_src js
+    addBlock(data){
+	const block = Block.createBlock(this.chain[this.chain.length-1], data);
+	this.chain.push(block);
+
+	return block;
+    }
+  #+end_src
+
+  Voici à quoi notre fichier blockchain.js ressemble maintenant :
+
+  #+begin_src js
+    const Block = require('./block');
+
+    class Blockchain{
+	constructor(){
+	    this.chain = [Block.genesis()];
+	}
+
+	addBlock(block) {
+	    const block = Block.createBlock(this.chain[this.chain.length-1], data);
+	    this.chain.push(block);
+
+	    return block;
+	}
+    }
+
+    module.exports = Blockchain;
+  #+end_src
+
+  Cool.
+
+  Ensuite, nous ajouterons plus de fonctionnalités à la blockchain
+  pour accepter plusieurs contributeurs.
+
+   Merci pour votre lecture. *Dans la prochaine partie, nous
+ commencerons à écrire du code. J'espère que vous avez apprécié cette
+ courte intro. Si vous trouvez ceci aidant lancez une série
+ d'applaudissements.
+
+ /Si vous avez la moindre question sur la blockchain, ethereum ou le
+ monde en généraln laissez un commentaire. :)/
+
