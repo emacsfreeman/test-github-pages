@@ -1,0 +1,159 @@
+#+TITLE: Implémentation de la preuve de participation (Proof of Stake) Part 1
+#+AUTHOR: Laurent Garnier
+
+Cet article présente une implémentation simple de l'algorithme de
+consensus preuve de participation avec node.js
+
+#+begin_center
+[[./bitcoin-wiki.png]]
+#+end_center
+
+* Preuve de participation 
+
+  La preuve de participation ou /Proof of Stake/ (PoS), comme la
+  preuve de travail ou /Proof of Work/ (PoW), est un algorithme de
+  consensus de blockchain. Bien qu'il soit remarquablement différent
+  dans la façon dont il fonctionne. De nombreuses blockchains utilise
+  cet algorithme en production et bientôt Ethereum aussi avec sa
+  version de PoS appelée Casper.
+
+  Afin d'ajouter de nouveaux blocs à la blockchain, un algorithme est
+  requis pour décider quel noeud a l'habilitation pour ajouter un bloc
+  à la blockchain. Ainsi, c'est le but premier de tout algorithme de
+  consensus. 
+
+* Fonctionnement
+
+  Dans la preuve de participation, les mineurs/validateurs sont
+  obligés de bloquer leurs jetons afin d'être choisis en tant que
+  prochains créateurs de bloc. Par conséquent, le mineur qui bloque le
+  plus de sa monnaie a la plus grande chance d'être choisi comme
+  meneur et de créer le prochain bloc. Certaines solutions blockchain
+  ne suivent pas un tel principe et choisissent plutôt un mineur au
+  hasard.
+
+  Si un mineur est attrapé en train de tricher ou de tempérer avec un
+  bloc, il perd tout son argent bloqué. Ainsi, une telle restriction
+  force les mineurs à être honnête.
+
+  Considérez cet exemple :
+
+  #+begin_src javascript
+    let stakedCoins = {
+	"address-1" : 10
+	"address-2" : 70
+	"address-3" : 50
+	"address-4" : 20
+    }
+
+    let leader = Object.keys(balances).reduce((a, b) => balances[a] > balances[b] ? a :b)
+
+    // leader = address-2
+  #+end_src
+
+  C'était un exemple simple dans lequel l'adresse qui bloque le plus
+  de jetons est choisie comme meneur.
+
+  Comparée à la preuve de travail, où les mineurs sont en compétitions
+  avec les autres en termes de puissance de calcul, ici ils le sont en
+  termes d'argent.
+
+  Casper est l'implémentation PoS d'Ethereum dans laquelle les
+  validateurs doivent déposer des jetons dans un contrat intelligent
+  afin de proposer un bloc. Tout tricheur, si attrapé, perd tous les
+  jetons bloqués.
+
+* Avantages
+
+  #+begin_quote
+  Avec la PoS, une personne avec un ordinateur portable peut devenir
+  un validateur.
+  #+end_quote
+
+  La preuve de participation réduira significativement la consommation
+  d'électricité en comparaison avec la preuve de travail et par
+  conséquent est plus en accord avec le développement
+  durable. Deuxièmement, le temps gaspillé du processus de minage sera
+  remplacé par un temps de calcul constant. Cela améliorera la vitesse
+  du réseau dans son ensemble.
+
+  #+begin_quote
+  Les attaques résulteront de pertes au lieu de gains.
+  #+end_quote
+
+  Au lieu de gagner depuis les attaques, l'attaque perdra en fait de
+  la valeur.
+
+  Puisqu'avec PoS, la triche engendre la perte d'argent, les attaques
+  deviennent très chères et par conséquent empêchent la création de
+  branches alternatives;
+
+* Inconvénients
+
+  #+begin_quote
+  Un mineur avec 51% de la valeur du réseau détiendra le réseau.
+  #+end_quote
+
+  Avec le protocole PoS, un mineur qui détient 51% du total de jetons
+  sera toujours choisi comme meneur. Par conséquent, la
+  décentralisation de la blockchain devient futile si un seul noeud
+  crée toujours les blocs. C'est cependant improbable qu'un noeud
+  puisse détenir 51% de tous les jetons.
+
+  /De nombreuses blockchains, cependant, ont des protocoles en place
+  pour empêcher cette situation. Avec la tendance à être élu comme
+  meneur se réduit avec le temps ou l'argent avec lequel le validateur
+  a bloqué des jetons le plus longtemps devient le meneur./
+
+* Structure  
+
+  Nous allons implémenter la structure suivante en node.js :
+
+  [[./basic-struct-of-pos.png]]
+
+
+  1. Si un noeud du réseau veut devenir validateur alors il soummet
+     d'abord une taxe de validation.
+  2. Lorsque la transaction est confirmée il peut alors bloquer de
+     l'argent pour entrer en compétition avec les autres validateurs.
+  3. Pendant ce temps, chaque noeud est responsable de la diffusion
+     des transactions qu'ils reçoivent des clients.
+  4. Lorsqu'un nombre suffisant de transactions est crée, les
+     validateurs élisent un meneur avec le maximum d'argent bloqué. Le
+     meneur élu crée alors un bloc et le diffuse dans le réseau.
+  5. Chaque noeud valide le bloc, exécute toutes les transactions dans
+     le bloc et ajoute le bloc dans la chaîne.
+  6. Le bloc a aussi une transaction spéciale de récompense. Le meneur
+     pour un tour donné récupère les frais de transactions présents
+     dans le bloc comme une récompense.
+
+
+* Conception
+
+  Avant de commencer à coder analysons ce que nous avons à bâtir.
+
+  Ci-dessous il y a les classes dans notre code que nous ferons à
+  partir de l'aperçu ci-dessus :
+
+  1. La classe Block
+  2. La classe Blockchain
+  3. Le modèle Account
+  4. La classe Validator
+  5. Le modèle Stake
+  6. La classe Transaction
+  7. La classe Transaction-pool
+  8. Le Wallet
+  9. Le serveur P2P
+ 10. Les API
+
+
+ Plus tard nous en ajouterons plus mais celles-là semble bien pour une
+ meilleure compréhension. Avançons.
+
+ Merci pour votre lecture. *Dans la prochaine partie, nous
+ commencerons à écrire du code. J'espère que vous avez apprécié cette
+ courte intro. Si vous trouvez ceci aidant lancez une série
+ d'applaudissements.
+
+ /Si vous avez la moindre question sur la blockchain, ethereum ou le
+ monde en généraln laissez un commentaire. :)/
