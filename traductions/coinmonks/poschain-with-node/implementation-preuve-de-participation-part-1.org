@@ -1,6 +1,8 @@
 #+TITLE: Implémentation de la preuve de participation (Proof of Stake) Part 1
 #+AUTHOR: Laurent Garnier
 
+Retrouvez l'article original en anglais sur [[https://medium.com/coinmonks/implementing-proof-of-stake-e26fa5fb8716][Coinmonks]] et son auteur [[https://medium.com/@kashishkhullar][Kashish Khullar]].
+
 Cet article présente une implémentation simple de l'algorithme de
 consensus preuve de participation avec node.js
 
