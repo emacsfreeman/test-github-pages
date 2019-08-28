@@ -1,0 +1,23 @@
+#+TITLE: Mon titre
+#+AUTHOR: Laurent Garnier
+
+* Section
+** Sous-section
+
+   Une équation $\lVert x\rVert_{2} = \sqrt{x^2+y^2}$
+** Autre sous-section
+   
+   #+ATTR_LATEX: :width 100px :height 75px
+   [[./docker.png]]
+
+* Autre section
+** Sous-section
+
+   1. Sites utiles
+      + [[http://json.parser.online.fr/][JSON Parser]]
+      + [[https://www.freeformatter.com/java-dotnet-escape.html#ad-output][Formatter]]
+   2. Autres trucs sympa
+
+      + [[https://orgmode.org/]]
+
+
